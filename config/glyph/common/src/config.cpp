@@ -166,7 +166,22 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
     publish_boot_state(outcome, display_ready);
 }
 
-void request_mode_destination(CommunicationBackendId backend, size_t mode_index, const Config &) {
+void request_mode_destination(CommunicationBackendId backend, size_t mode_index, const Config &live) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (mode_index < live.game_mode_configs_count && live.game_mode_configs[mode_index].managed_format) {
+        // The mailbox has a single menu-core producer. Execute the same checked
+        // destination transaction here on core0 for a physical activation chord.
+        size_t selected = 0, route = 0;
+        const uint32_t id = live.game_mode_configs[mode_index].ultimate_profile_id;
+        if (profile_selection::Persist(persistence, profile_store, ConfigWriteCandidate(), backend,
+                                       id, mode_index, selected, route) != ModeDestinationResult::Saved) return;
+        watchdog_hw->scratch[0] = route + 1;
+        watchdog_hw->scratch[1] = selected + 1;
+        watchdog_hw->scratch[2] = kCommittedModeDestination;
+        reboot_firmware();
+        return;
+    }
+#endif
     size_t backend_index = 0;
     const ModeDestinationResult result = persist_mode_destination(
         persistence, ConfigWriteCandidate(), backend, mode_index, backend_index);
@@ -183,8 +198,10 @@ __attribute__((noinline)) void service_profile_selection() {
     const uint32_t id = profile_selection::Pending();
     if (!id) return;
     size_t mode_index = 0, backend_index = 0;
+    const auto requested = profile_selection::RequestedBackend();
+    const auto backend = requested == COMMS_BACKEND_UNSPECIFIED ? backends[0]->BackendId() : requested;
     const auto result = profile_selection::Persist(persistence, profile_store,
-        ConfigWriteCandidate(), backends[0]->BackendId(), id, current_mode_index,
+        ConfigWriteCandidate(), backend, id, current_mode_index,
         mode_index, backend_index);
     if (result == ModeDestinationResult::Saved) {
         watchdog_hw->scratch[0] = backend_index + 1;

@@ -2,6 +2,7 @@
 // Formatting/seeding is confined to mode `seed`. Modes execute/inspect consume
 // exactly 512 KiB raw NOR images; neither formats nor recreates namespace files.
 #include "ProfileStore.cpp"
+#include "core/ProfileSelection.hpp"
 #include "glyph_config_validation.hpp"
 #include "comms/ConfiguratorBackend.hpp"
 #include <lfs.h>
@@ -249,6 +250,50 @@ if(!std::strcmp(argv[1],"wire-requests")){
 #if defined(GLYPH_BOOT_PROBE)
  if(!std::strcmp(argv[1],"boot"))return boot_probe::run(argv[3]);
 #endif
+if (!std::strcmp(argv[1], "select-profile") || !std::strcmp(argv[1], "boot-selected-profile")) {
+    need(argc==7,"selection NOR ID OUTDIR BACKEND EXPECTED_RESULT");
+    const auto id = std::strtoul(argv[3],nullptr,10);
+    const auto backend = static_cast<CommunicationBackendId>(std::strtoul(argv[5],nullptr,10));
+    const bool expected = std::atoi(argv[6]) != 0;
+    static Config live;
+    need(persistence.LoadConfigChecked(live)==Persistence::LoadResult::Loaded,"load exact durable Config");
+    const bool ready = profile_store.Begin(live.ultimate_profile_store_incarnation,live.ultimate_profile_root_format);
+    profile_selection::Target targets[30]{};
+    const auto count = profile_selection::BuildTargets(live,profile_store,backend,targets,30);
+    std::ofstream list(path("targets.txt"));
+    for(size_t i=0;i<count;++i)list<<targets[i].profile_id<<" "<<unsigned(targets[i].mode_index)<<"\n";
+    list.close();
+    const auto before=nor;
+    if (!std::strcmp(argv[1],"select-profile")) {
+        size_t mode=0,route=0;
+        auto result=profile_selection::Persist(persistence,profile_store,ConfigWriteCandidate(),backend,id,
+                                               SIZE_MAX,mode,route);
+        need((result==ModeDestinationResult::Saved)==expected,"checked selection disposition");
+        need(expected || before==nor,"refusal made no writes");
+        need(!profile_store.ActiveId(),"selection made no live activation");
+    } else {
+        need(ready && expected,"fresh process normal boot");
+        const auto route=profile_selection::IsUsb(backend)?live.default_usb_backend_config:live.default_backend_config;
+        need(route && route<=live.communication_backend_configs_count,"checked durable route");
+        const auto &saved=live.communication_backend_configs[route-1];
+        need(saved.backend_id==backend && saved.default_mode_config &&
+             saved.default_mode_config<=live.game_mode_configs_count,"exact durable destination");
+        const auto &row=live.game_mode_configs[saved.default_mode_config-1];
+        volatile uint32_t scratch[3]={route,saved.default_mode_config,kCommittedModeDestination};
+        CommunicationBackendConfig consumed{};
+        need(consume_committed_mode_destination(scratch,true,live,consumed) && consumed.backend_id==backend &&
+             consumed.default_mode_config==saved.default_mode_config && scratch[2]==0,"single-use reboot destination");
+        ProfileStore::Status status{};
+        const auto *wrapper=profile_store.Activate(row.ultimate_profile_id,&status);
+        need(row.ultimate_profile_id==id && profile_store.ActiveId()==id && wrapper &&
+             status==ProfileStore::Status::Ok && profile_store.ActiveNativeView() &&
+             ultimate_native::ContextMatches(*profile_store.ActiveNativeView(),row),"active native identity and exact preprocessing");
+        const auto &view=*profile_store.ActiveNativeView();
+        output(path("active-native.bin"),Bytes(view.body,view.body+view.body_length));
+        need(before==nor,"boot and activation made no writes");
+    }
+    dump_files(path("namespace.bin"));output(path("after.nor"),nor);no_handles();shutdown();return 0;
+}
 if(!std::strcmp(argv[1],"migration-diagnostic")){
  const auto before=nor;const auto p=programs,e=erases;
  static size_t seen,selected;seen=0;selected=std::strtoull(argv[3],nullptr,10);

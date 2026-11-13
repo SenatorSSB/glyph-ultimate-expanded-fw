@@ -35,7 +35,11 @@ def main():
         ui=t/'include/comms';ui.mkdir(parents=True)
         s=(ROOT/'tools/fixtures/config_menu_host/include/comms/IntegratedDisplay.hpp').read_text()
         s='\n'.join(x for x in s.splitlines() if not x.startswith(('enum Button','enum DashboardOption')))+'\n'
-        (ui/'IntegratedDisplay.hpp').write_text(s)
+        s=s.replace('void setCursor(int, int) {}', 'int y=0; std::string name,plate; void setCursor(int,int next){y=next;}')
+        s=s.replace('void print(char) {}', 'void print(char c){if(y==10 || y==18 || y==26) name+=c;}')
+        s=s.replace('void print(const char *) {}', 'void print(const char *s){if(y==39)plate=s;}')
+        s=s.replace('void fillRect(int, int, int, int, int) {}','void fillRect(int x,int,int,int,int){if(x==1)name.clear();}')
+        (ui/'IntegratedDisplay.hpp').write_text('#include <string>\n'+s)
         resets=(ROOT/'tools/fixtures/config_menu_host/include/reboot.hpp').read_text()
         resets=resets.replace('struct WatchdogStub', 'inline unsigned firmware_reboots=0,bootloader_reboots=0,disconnects=0;\nstruct WatchdogStub')
         resets=resets.replace('inline void reboot_firmware() {}','inline void reboot_firmware() {++firmware_reboots;}')
@@ -49,6 +53,10 @@ def main():
             command += [x for p in includes for x in ['-I',p]]
             command += [ROOT/'tools/fixtures/controller_profile_selector/metadata_menu.cpp',ROOT/'src/core/profile_selection.cpp','-o',exe]
             run(command);print(abi,run([exe]),end='')
+            managed=command.copy()
+            managed.insert(1,'-DGLYPH_PACKAGE_V1=1')
+            managed[-4]=ROOT/'tools/fixtures/controller_profile_selector/managed_menu.cpp'
+            run(managed);print(abi,run([exe]),end='')
             deps=ROOT/'tools/fixtures/gp_config021_persisted_recovery'
             host=ROOT/'tools/fixtures/profile_store_config_persistence_host'
             inc=[host/'include',deps/'include',ROOT/'HAL/pico/include',ROOT/'include',g,NANOPB,deps/'dependencies']

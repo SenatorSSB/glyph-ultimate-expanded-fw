@@ -76,7 +76,7 @@ void sm_config_set_in_shift(pio_sm_config*,bool,bool,uint){}
 void sm_config_set_clkdiv(pio_sm_config*,float){}
 constexpr int clk_sys=0;
 uint clock_get_hz(int){return 125000000;}
-enum CommunicationBackendId {COMMS_BACKEND_GAMECUBE};
+enum CommunicationBackendId {COMMS_BACKEND_UNSPECIFIED, COMMS_BACKEND_GAMECUBE};
 enum class InputScanSpeed {SLOW,MEDIUM,FAST};
 unsigned fast_scans=0;
 std::function<void()> on_fast_scan;

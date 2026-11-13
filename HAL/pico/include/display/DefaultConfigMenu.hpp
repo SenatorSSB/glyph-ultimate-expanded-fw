@@ -8,6 +8,9 @@ class DefaultConfigMenu : public ConfigMenu {
   public:
     DefaultConfigMenu(Config &config, CommunicationBackend **backends, size_t backends_count);
     ~DefaultConfigMenu();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    void UpdateDisplay(IntegratedDisplay *, Adafruit_GFX &) override;
+#endif
     void HandleControls(IntegratedDisplay *, const DisplayControls &, Button) override;
 
   protected:
