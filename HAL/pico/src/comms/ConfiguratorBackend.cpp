@@ -702,7 +702,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::HandlePackageRequest(size_t 
         return RespondPackage();
     }
     if (!profile_store.DispatchPackage(phase, package_response)) return false;
-    if (package_response.protocol_version != 3 ||
+    if (package_response.protocol_version != phase.request.protocol_version ||
         package_response.request_token != phase.request.request_token) return false;
     if (phase.request.operation == PackageOperation_CREATE_PACKAGE &&
         package_response.status == PROFILE_STORE_OK &&

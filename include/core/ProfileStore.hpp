@@ -219,6 +219,7 @@ class ProfileStore {
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
     friend class GlyphPackageSourceReader;
     bool BeginPackageObservation(bool recovery);
+    bool PrepareLifecycleTransaction(glyph_package::EnvelopePhase &, PackageResponse &);
     bool PreparePackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &);
     bool ObservePackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &);
     bool BeginPackageWriteScope();

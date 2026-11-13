@@ -120,9 +120,12 @@ unsigned SelectedObservedRoot(const ClassificationWorkspace &w) {
 // to removing only the canonical token field from the admitted raw request.
 // This pure noinline frame ends before any persistent operation.
 __attribute__((noinline)) bool PackageCreateDigest(const glyph_package::EnvelopePhase &phase,uint8_t out[32]) {
-    if(phase.request.operation!=PackageOperation_CREATE_PACKAGE||!phase.package.seen)return false;
+    const bool lifecycle=glyph_package::LifecycleOperation(phase.request.operation);
+    if(!lifecycle && (phase.request.operation!=PackageOperation_CREATE_PACKAGE||!phase.package.seen))return false;
     PackageEnvelope semantic=phase.request;semantic.request_token=0;
-    Sha256 hash;static constexpr char domain[]="Glyph.Package.Create.v1";hash.Update(domain,sizeof(domain));
+    Sha256 hash;static constexpr char domain[]="Glyph.Package.Create.v1";static constexpr char lifecycle_domain[]="Glyph.Package.Lifecycle.v2";
+    if(lifecycle)hash.Update(lifecycle_domain,sizeof(lifecycle_domain));
+    else hash.Update(domain,sizeof(domain));
     pb_ostream_t stream{};stream.state=&hash;stream.max_size=SIZE_MAX;
     stream.callback=[](pb_ostream_t *s,const pb_byte_t *bytes,size_t size)->bool {
         static_cast<Sha256 *>(s->state)->Update(bytes,size);return true;
@@ -179,7 +182,7 @@ void ObservedPackageResponse(PackageResponse &r, const Classification &c,
 }
 void IntentReceipt(PackageResponse &r,const IntentFacts &i,const ClassificationWorkspace &w,
                    Logical logical) {
-    r.profile_id=i.id; r.profile_revision=1; r.transaction_operation=15;
+    r.profile_id=i.id; r.profile_revision=i.revision; r.transaction_operation=i.operation;
     r.has_row_index=true; r.row_index=i.row; r.rgb_index=i.rgb;
     r.has_semantic_digest=r.has_config_sha=r.has_record_sha=true;
     std::memcpy(r.semantic_digest,i.digest,32);
@@ -216,7 +219,7 @@ __attribute__((noinline)) bool QueryObservedPackage(NamespaceReader &reader,cons
         const auto &root=w.roots[k]; if(!root.present)continue;
         if(Get64(root.prefix+24)==token) {
             matched=true;
-            const bool package=root.intent.operation==15&&root.intent.token==token;
+            const bool package=root.intent.operation&&root.intent.token==token;
             conflict|=!package||std::memcmp(root.prefix+32,digest,32);
         }
     }
@@ -224,7 +227,7 @@ __attribute__((noinline)) bool QueryObservedPackage(NamespaceReader &reader,cons
         matched=true; conflict=true; // operation10 can never be package15
     }
     const auto &intent=w.roots[2].intent;
-    if(intent.operation==15&&intent.token==token) {
+    if(intent.operation&&intent.token==token) {
         matched=true; conflict|=std::memcmp(intent.digest,digest,32)!=0;
     }
     const RootFacts *installed_root=nullptr;
@@ -252,11 +255,12 @@ __attribute__((noinline)) bool QueryObservedPackage(NamespaceReader &reader,cons
         for(size_t j=0;j<Get16(installed_root->prefix+6);++j) {
             const auto *entry=installed_root->prefix+320+j*56;
             if(!entry[53]||Get32(entry)!=Get32(record+12))continue;
-            if(Get32(record+16)!=1||Get32(record+72)+1!=entry[54]||Get32(record+76)!=entry[55])return false;
+            if(Get32(record+16)!=Get32(entry+4))continue;
             if(installed&&r.profile_id!=Get32(record+12))return false;
             installed=true;
-            r.profile_id=Get32(record+12); r.profile_revision=1; r.transaction_operation=15;
-            r.has_row_index=true; r.row_index=Get32(record+72); r.rgb_index=Get32(record+76);
+            r.profile_id=Get32(record+12); r.profile_revision=Get32(record+16);
+            r.transaction_operation=Get32(record+116)==1?15:Get32(record+116)>>16;
+            r.has_row_index=true; r.row_index=entry[54]-1; r.rgb_index=entry[55];
             r.has_semantic_digest=r.has_config_sha=r.has_record_sha=true;
             std::memcpy(r.semantic_digest,record+40,32); std::memcpy(r.config_sha,w.current.sha,32);
             HashBytes(record,object.bytes,r.record_sha);
@@ -265,8 +269,15 @@ __attribute__((noinline)) bool QueryObservedPackage(NamespaceReader &reader,cons
     }
     if(reader.ObservationFailed())return false;
     if(conflict) { ClearPackageReceipt(r); r.status=ProfileStoreStatus_PROFILE_STORE_CONFLICT; return true; }
-    if(intent.operation==15&&intent.token==token) {
+    if(intent.operation&&intent.token==token) {
         IntentReceipt(r,intent,w,c.logical); return true;
+    }
+    for(unsigned k=0;k<2;++k) {
+        const auto &old=w.roots[k].intent;
+        if(old.operation>=17 && old.token==token && old.terminal==3) {
+            IntentReceipt(r,old,w,Logical::Committed);
+            return true;
+        }
     }
     if(installed) {
         r.logical=PackageLogicalDisposition_COMMITTED;
@@ -294,6 +305,8 @@ bool PackageWriteAuthorized(void *context,PackageStorageFence::WriteKind kind,ui
                             CheckedStorage::Operation operation,const char *path,const char *destination) {
     const auto &call=*static_cast<const PackageCallState *>(context);
     if(kind!=PackageStorageFence::WriteKind::Package||!call.owner||call.token!=token||!token)return false;
+    if(call.phase==PackageWritePhase::Garbage)
+        return operation==CheckedStorage::Operation::Remove && !destination && SamePath(path,prepared_record.path);
     const char *temporary=nullptr,*final=nullptr;
     switch(call.phase) {
     case PackageWritePhase::Control: temporary=kControlTemp; final=kControl; break;
@@ -480,12 +493,15 @@ __attribute__((noinline)) bool PackageProtectedBytes(NamespaceReader &reader,Cla
         else ProfileStorePaths::RecordPath(path,sizeof(path),id,revision);
         size_t extent=0; const auto state=reader.Extent(path,extent);
         if(state==Probe::Error)return false;
-        if(state==Probe::Absent)return false;
+        if(state==Probe::Absent) {
+            const auto &latest=w.roots[2].intent;
+            if(!managed||latest.operation<17||latest.terminal!=3||id!=latest.id||
+               revision+1!=latest.revision)return false;
+        }
     }
     return !reader.ObservationFailed();
 }
-void AppendPackageRow(Config &config,const PackageBody &body,uint32_t id) {
-    auto &row=config.game_mode_configs[config.game_mode_configs_count++];
+void SetPackageRow(GameModeConfig &row,const PackageBody &body,uint32_t id) {
     std::memset(&row,0,sizeof(row));
     const auto &source=body.row;
     row.mode_id=GameModeId_MODE_ULTIMATE;
@@ -496,6 +512,10 @@ void AppendPackageRow(Config &config,const PackageBody &body,uint32_t id) {
 #undef COPY_REPEATED
     row.layout_plate=source.layout_plate;
     row.ultimate_profile_id=id; row.ultimate_profile_engine=1; row.managed_format=1;
+}
+void AppendPackageRow(Config &config,const PackageBody &body,uint32_t id) {
+    auto &row=config.game_mode_configs[config.game_mode_configs_count++];
+    SetPackageRow(row,body,id);
     if(body.has_rgb) { config.rgb_configs[config.rgb_configs_count++]=body.rgb; row.rgb_config=config.rgb_configs_count; }
     config.ultimate_profile_root_format=3; config.managed_format=1; ++config.managed_sequence;
 }
@@ -528,9 +548,9 @@ __attribute__((noinline)) bool ComputePackageAggregate(NamespaceReader &reader,C
             else { HashBytes(nullptr,0,w.digest); UpdateAggregateHash(hash,w.digest,32); }
             HashBytes(prepared_record.record,prepared_record.n,w.record_sha); UpdateAggregateHash(hash,w.record_sha,32);
         } else {
-            if(!reader.Row(kPackageCurrent,entry[54]-1,w.row))return false;
-            UpdateAggregateHash(hash,w.row.sha,32);
-            if(entry[55]) { if(!reader.Rgb(kPackageCurrent,entry[55]-1,w.digest))return false; }
+            if(!HashMessage(GameModeConfig_fields,&candidate.game_mode_configs[entry[54]-1],w.digest))return false;
+            UpdateAggregateHash(hash,w.digest,32);
+            if(entry[55]) { if(!HashMessage(RgbConfig_fields,&candidate.rgb_configs[entry[55]-1],w.digest))return false; }
             else HashBytes(nullptr,0,w.digest);
             UpdateAggregateHash(hash,w.digest,32);
             char path[32]; size_t extent=0;
@@ -636,6 +656,12 @@ bool ProfileStore::DispatchPackage(glyph_package::EnvelopePhase &phase,PackageRe
 __attribute__((noinline)) bool ProfileStore::PreparePackageDispatch() {
     auto &in=prepared_create_owner.package;
     in.respond=true; InitPackageResponse(*in.response,in.phase->request.request_token);
+    if(in.phase->request.protocol_version==4) {
+        in.response->protocol_version=4;
+        in.response->capability_version=2;
+        in.response->supported_receipt_format=2;
+        in.response->capability_bits=511;
+    }
     if(package_owner_live)return false;
     package_owner_live=true;
     if(!ObservePackageTransaction(*in.phase,*in.response))return false;
@@ -699,6 +725,7 @@ __attribute__((noinline)) bool ProfileStore::ObservePackageTransaction(glyph_pac
     ReleasePackageReader();
     return true;
 }
+#include "ProfileStoreLifecycle.inc"
 bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
     auto &reader=PackageReader(*this,persistence);
     auto &work=PackageWorkspace();
@@ -707,6 +734,8 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     if(!DecodeDirectory(work.roots[selected].prefix,3908,_directory,work.roots[selected].format==3)) {
         UnavailablePackageResponse(response); EndClassifierOwner(); return false;
     }
+    if(glyph_package::LifecycleOperation(phase.request.operation))
+        return PrepareLifecycleTransaction(phase,response);
     response.status=ProfileStoreStatus_PROFILE_STORE_FULL;
     if(_directory->count>=64||work.current.rows>=30||work.current.rgbs>30||
        _directory->high_water_id==UINT32_MAX||classification.generation==UINT32_MAX||
@@ -863,7 +892,7 @@ bool ProfileStore::PublishPackageTransaction() {
 
     if(!package_call.owner->BeginPackageWriteScope())return false;
     bool success=PreparePackageControl(1,package_call.storage)&&ExecuteSegmentedPublication();
-    if(success) {
+    if(success && Get32(initialization_owner.intent+8)!=20) {
         package_call.phase=PackageWritePhase::Record;
         publication_owner.legacy={package_call.storage,prepared_record.temp,prepared_record.path,
             prepared_record.record,prepared_record.n,Kind::Record,&_last_io_stage};
@@ -878,6 +907,7 @@ bool ProfileStore::PublishPackageTransaction() {
     if(success)success=package_call.owner->PublishPackageConfigStage();
     if(success) { Put32(initialization_owner.intent+12,4);
         success=PreparePackageControl(2,package_call.storage)&&ExecuteSegmentedPublication(); }
+    if(success && Get32(initialization_owner.intent+8)>=17)success=RetirePreviousPackageRecord();
     if(success) { Put32(initialization_owner.intent+12,5); Put32(initialization_owner.intent+16,3);
         success=PreparePackageRoot(package_call.storage)&&ExecuteSegmentedPublication(); }
     if(success)success=PreparePackageControl(3,package_call.storage)&&ExecuteSegmentedPublication();
@@ -1043,7 +1073,7 @@ bool ProfileStore::BeginOrdinaryStoreWrite(const TransactionIdentity *identity,u
         if(identity) {
             const auto &latest=w.roots[selected];
             const bool raw_receipt=identity->SameRequest(_directory->last_identity)&&
-                !(latest.intent.operation==15&&latest.intent.token==identity->token);
+                !(latest.intent.operation&&latest.intent.token==identity->token);
             valid=valid&&identity->token&&(identity->token>state.high_token||raw_receipt);
         }
         for(size_t i=0;i<_directory->count&&valid;++i)
