@@ -1,5 +1,8 @@
 #include "display/DefaultConfigMenu.hpp"
 #include "display/ConfigMenuAssets/GlyphMenuBitmaps.h"
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+#include "display/PlateLabel.hpp"
+#endif
 #include "core/Persistence.hpp"
 #include "core/config_utils.hpp"
 #include "core/mode_selection.hpp"
@@ -19,12 +22,16 @@ DefaultConfigMenu::DefaultConfigMenu(
     MenuPage::MenuItem *usb_backend_options =
         new MenuPage::MenuItem[config.communication_backend_configs_count];
 
+    const auto *primary = _backends_count && _backends ? _backends[0] : nullptr;
+    // The checked Config permits a backend without a default mode.
+    auto *active_mode = primary ? _backends[0]->CurrentGameMode() : nullptr;
+    const auto *active_config = active_mode ? active_mode->GetConfig() : nullptr;
     size_t usb_backend_options_count = 0;
     for (size_t i = 0; i < config.communication_backend_configs_count; i++) {
         CommunicationBackendConfig &backend_config = config.communication_backend_configs[i];
         MenuPage::MenuItem &current_option = usb_backend_options[usb_backend_options_count];
 
-        if(_backends[0]->CurrentGameMode()->GetConfig()->keyboard_mode_config != 0) {
+        if(active_config && active_config->keyboard_mode_config != 0) {
             if(backend_config.backend_id != COMMS_BACKEND_DINPUT) {
                 continue;
             }
@@ -34,6 +41,10 @@ DefaultConfigMenu::DefaultConfigMenu(
             continue;
         }
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        if (active_config && active_config->managed_format &&
+            !profile_selection::Eligible(*active_config, backend_config.backend_id)) continue;
+#endif
         strlcpy(
             current_option.text,
             backend_name(backend_config.backend_id),
@@ -49,13 +60,17 @@ DefaultConfigMenu::DefaultConfigMenu(
         .items_count = usb_backend_options_count,
     };
 
-    /* The visible list is unchanged; only its bounded metadata source differs. */
-    const auto backend = _backends_count && _backends[0] ? _backends[0]->BackendId() : COMMS_BACKEND_UNSPECIFIED;
+    /* The Profile page belongs to the executing backend. */
+    const auto backend = primary ? _backends[0]->BackendId() : COMMS_BACKEND_UNSPECIFIED;
     // Configurator is the only live store writer. Its display is the remapper,
     // so it must never enumerate the directory concurrently with that writer.
     const bool browse = backend != COMMS_BACKEND_CONFIGURATOR && backend != COMMS_BACKEND_UNSPECIFIED;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    const size_t capacity = browse && config.game_mode_configs_count <= 30 ? config.game_mode_configs_count : 0;
+#else
     const size_t capacity = browse && config.game_mode_configs_count <= 30 && profile_store.Count() <= ProfileStore::kMaxEntries
         ? config.game_mode_configs_count + profile_store.Count() : 0;
+#endif
     _profile_targets = capacity ? new (std::nothrow) profile_selection::Target[capacity] : nullptr;
     _gamemode_options_page = {};
     _gamemode_options_page.items_count = profile_selection::BuildTargets(
@@ -252,6 +267,30 @@ void DefaultConfigMenu::HandleControls(IntegratedDisplay *display, const Display
     ConfigMenu::HandleControls(display, controls, button);
 }
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+void DefaultConfigMenu::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &display) {
+    ConfigMenu::UpdateDisplay(instance, display);
+    if (_current_menu_page != &_gamemode_options_page || !_profile_targets ||
+        _highlighted_menu_item >= _gamemode_options_page.items_count) return;
+    const auto &target = _profile_targets[_highlighted_menu_item];
+    if (!target.profile_id || target.mode_index >= _config.game_mode_configs_count) return;
+    // Reuse the left title area for the selected profile's full display name
+    // and plate. The right-hand scrolling list stays visible.
+    display.fillRect(1, 2, 74, 41, 0);
+    const auto *entry = profile_selection::FindEntry(profile_store, target.profile_id);
+    if (entry) {
+        // A glyph advances at most six pixels in Font4x7Fixed. Three lines
+        // fit all 32 package name bytes even at that maximum width.
+        for (size_t i = 0; i < sizeof(entry->name) && entry->name[i]; ++i) {
+            if (i % 12 == 0) display.setCursor(2, 10 + 8 * (i / 12));
+            display.print(entry->name[i]);
+        }
+    }
+    display.setCursor(2, 39);
+    display.print(dashboard_plate_label(_config.game_mode_configs[target.mode_index].layout_plate));
+}
+#endif
+
 const MenuPage::MenuItem *DefaultConfigMenu::ResolveItem(MenuPage *page, size_t index) {
     if (page != &_gamemode_options_page) return ConfigMenu::ResolveItem(page, index);
     if (!_profile_targets || index >= page->items_count) return nullptr;
@@ -365,6 +404,14 @@ void DefaultConfigMenu::SetUsbBackend(
 
     for(size_t i = 0; i < config.game_mode_configs_count; i++) {
         if(current_config == &config.game_mode_configs[i]) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+            if (current_config->managed_format) {
+                const auto route = config.communication_backend_configs[backend_config_index].backend_id;
+                if (profile_selection::IsUsb(route) && profile_selection::Eligible(*current_config, route))
+                    profile_selection::Request(current_config->ultimate_profile_id, route);
+                return;
+            }
+#endif
             tud_disconnect();
             delay(500);
             watchdog_hw->scratch[1] = i + 1;
