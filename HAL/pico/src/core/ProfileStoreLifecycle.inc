@@ -79,6 +79,7 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     auto &reader=PackageReader(*this,persistence);
     auto &work=PackageWorkspace();
     const auto &state=work.classification;
+    const auto selected=SelectedObservedRoot(work);
     const auto &request=phase.request;
     auto refuse=[&](ProfileStoreStatus status) {
         if(reader.ObservationFailed())UnavailablePackageResponse(response);
@@ -157,6 +158,8 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
         } else target.rank=request.replacement_rank;
     }
     ++candidate.managed_sequence;++_next->generation;++_next->package_sequence;
+    if(removing || candidate.rgb_configs_count<work.current.rgbs)
+        _next->compaction_sequence=_next->package_sequence;
     response.profile_id=old.id;response.profile_revision=old.revision+1;
     response.row_index=row;response.rgb_index=removing?old.owned_rgb1:target.owned_rgb1;
     _next->last_result={Status::Ok,old.id,old.revision+1,_next->generation};
@@ -194,7 +197,6 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     if(!reader.Config(kPackageCurrent,8191,work.prior)||!work.prior.source_valid||
        std::memcmp(work.prior.sha,work.current.sha,32)||!RecheckPackageBaselineRoots(reader,work))
         return refuse(ProfileStoreStatus_PROFILE_STORE_CONFLICT);
-    const auto selected=SelectedObservedRoot(work);
     if(updating)initialization_owner.body.~PackageBody();
     ConstructPackageIntent(work,state,response,work.roots[selected].sha,_directory->high_water_id);
     auto *intent=initialization_owner.intent;

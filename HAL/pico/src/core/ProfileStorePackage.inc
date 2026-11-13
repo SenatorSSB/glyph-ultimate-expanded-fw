@@ -463,7 +463,7 @@ bool ProtectedReference(const ClassificationWorkspace &w,size_t ordinal,uint32_t
     } else if(slot<130) {
         const size_t i=slot-128; if(i>=Get32(root.prefix+84))return false;
         id=Get32(root.prefix+120+i*4); revision=Get32(root.prefix+128+i*4);
-    } else if(root.intent.operation) { id=root.intent.id; revision=root.intent.revision; managed=true; }
+    } else if(root.intent.operation && root.intent.operation!=20) { id=root.intent.id; revision=root.intent.revision; managed=true; }
     return id&&revision;
 }
 __attribute__((noinline)) bool PackageProtectedBytes(NamespaceReader &reader,ClassificationWorkspace &w,
