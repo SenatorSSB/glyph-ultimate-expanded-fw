@@ -76,11 +76,11 @@ void sm_config_set_in_shift(pio_sm_config*,bool,bool,uint){}
 void sm_config_set_clkdiv(pio_sm_config*,float){}
 constexpr int clk_sys=0;
 uint clock_get_hz(int){return 125000000;}
-enum CommunicationBackendId {COMMS_BACKEND_UNSPECIFIED, COMMS_BACKEND_GAMECUBE};
+enum CommunicationBackendId {COMMS_BACKEND_UNSPECIFIED, COMMS_BACKEND_GAMECUBE, COMMS_BACKEND_XINPUT};
 enum class InputScanSpeed {SLOW,MEDIUM,FAST};
 unsigned fast_scans=0;
 std::function<void()> on_fast_scan;
-struct InputState {};
+struct InputState { uint64_t buttons=0; };
 struct InputSource {};
 struct Outputs {bool a=1,b=0,x=1,y=0,buttonR=1,triggerLDigital=1,triggerRDigital=0,start=1;
  bool dpadLeft=1,dpadRight=0,dpadDown=1,dpadUp=0;

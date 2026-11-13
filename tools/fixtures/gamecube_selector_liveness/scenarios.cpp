@@ -66,6 +66,34 @@ int main(){try {
  }
  reset();auto b=backend();event(600,[]{incoming({0x40,3,0});});b.SendReport();
  require(now_us>=600&&pauses==0&&updates==1,"repeated idle timeouts without pending never pause/yield/fake command");
+ #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+ reset();auto chord=backend();CommunicationBackend *routes[]={&chord};
+ managed_chord_rows=2;chord_rows=2;mode_activation_masks[0]=1;mode_activation_masks[1]=2;
+ config.game_mode_configs[1].managed_format=1;inputs.buttons=3;
+ require(!managed_chord_held(inputs.buttons),"ordinary first matching row preserves chord precedence");
+ inputs.buttons=0;on_fast_scan=[] { if(fast_scans==3)inputs.buttons=2; };
+ chord.SendReport();on_fast_scan={};
+ require(!hw.enabled&&!updates&&tx.empty()&&fast_scans>=3,"absent console admits newly sampled managed chord without mailbox request");
+ mode_chord_consumed=true;require(!managed_chord_held(2),"held chord is consumed only once");
+ require(!managed_chord_held(0)&&managed_chord_held(2),"FAST release permits a subsequent chord");
+ static unsigned committed=0;auto managed=[](size_t row){require(row==1,"correct pending row");++committed;};
+ auto ordinary=[](size_t){throw std::runtime_error("wrong operation");};
+ pending_chord_row1=2;hw.enabled=true;hw.ctrl=1;hw.pc=joybus_offset_write;tx_end=now_us+110;
+ application_chord_gate(routes,managed,ordinary);
+ require(!committed&&pending_chord_row1==2,"queued TX cannot write a managed chord");
+ const auto ends=tx_end;inputs.buttons=0;chord.SendReport();application_chord_gate(routes,managed,ordinary);
+ require(now_us>=ends&&committed==1&&!pending_chord_row1&&!hw.enabled,"released input remains queued until TX drains");
+ pending_chord_row1=2;hw.enabled=true;hw.ctrl=1;hw.marker=true;
+ application_chord_gate(routes,managed,ordinary);
+ require(committed==1&&pending_chord_row1==2,"partial byte prohibits persistence");
+ struct UsbBackend:CommunicationBackend {using CommunicationBackend::CommunicationBackend;
+     CommunicationBackendId BackendId() override {return COMMS_BACKEND_XINPUT;}};
+ static InputState usb_inputs;UsbBackend usb(usb_inputs,nullptr,0);routes[0]=&usb;
+ application_chord_gate(routes,managed,ordinary);
+ require(committed==2&&!pending_chord_row1,"USB consumes managed chord directly");
+ std::cout<<"managed chord wake, first-match priority, hold/release, queued TX, partial byte and USB admission PASS\n";
+ managed_chord_rows=0;chord_rows=0;inputs.buttons=0;
+ #endif
  reset();auto menu=backend();on_fast_scan=[]{if(fast_scans==3)request();};menu.SendReport();on_fast_scan={};
  require(fast_scans>=3&&pending()==1001&&!hw.enabled&&tx.empty()&&now_us<200,"absent host still refreshes FAST inputs so menu can produce request");
  reset();auto active=backend();event(1,[]{hw.marker=true;request();});event(140,[]{incoming({0x40,3,0});});active.SendReport();
