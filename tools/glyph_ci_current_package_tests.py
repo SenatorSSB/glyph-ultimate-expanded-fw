@@ -20,6 +20,7 @@ TRANSACTION = ROOT / "tools/fixtures/glyph_package_v1/transaction"
 sys.path.insert(0, str(TRANSACTION))
 from build import build
 from run import dump_namespace, load_namespace
+from storage_fence_regressions import response as decode_status
 
 
 def active_authority():
@@ -48,7 +49,7 @@ def offline_source_tools():
         subprocess.run([sys.executable, str(script), option], cwd=ROOT, check=True)
 
 
-def positive_create(temp, invoke):
+def current_messages(temp):
     schema = ROOT / "schema/haybox"
     subprocess.run([sys.executable, "-m", "grpc_tools.protoc", "-I" + str(schema),
                     "--python_out=" + str(temp), str(schema / "config.proto"),
@@ -56,7 +57,12 @@ def positive_create(temp, invoke):
     sys.path.insert(0, str(temp))
     import package_pb2 as package
     import config_pb2 as cfg
+    return package, cfg
 
+
+
+def positive_create(temp, invoke, messages):
+    package, cfg = messages
     incarnation = 42
     revision = 1
     config = cfg.Config(ultimate_profile_root_format=2, ultimate_profile_store_format=1,
@@ -137,6 +143,8 @@ def positive_create(temp, invoke):
 
 
 def run_package(temp):
+    messages = current_messages(temp)
+    package, cfg = messages
     binary = build(ROOT, temp / "build", framework=os.environ.get("GLYPH_ARDUINOPICO_FRAMEWORK"), boot_probe=True)
     def invoke(*args, stdin=None):
         return subprocess.check_output([str(binary), *map(str, args)], input=stdin, text=True,
@@ -174,9 +182,12 @@ def run_package(temp):
         defaults = case / "defaults.pb"
         defaults.write_bytes(old)
         invoke("boot", case / "seed.nor", defaults, boot)
-        assert (boot / "status.cobs").stat().st_size > 0
-        assert json.loads((boot / "boot.json").read_text())["outcome"] != 0
-    positive_create(temp, invoke)
+        boot_result = json.loads((boot / "boot.json").read_text())
+        assert boot_result["outcome"] == 6 and boot_result["recovery_visible"]
+        assert boot_result["backend_initializations"] == 0 and boot_result["unchanged"]
+        status = decode_status((boot / "status.cobs").read_bytes(), cfg.ProfileStoreResponse)
+        assert status.status == cfg.PROFILE_STORE_IO_FAILURE and status.recovery_flags, status
+    positive_create(temp, invoke, messages)
     print("Current package wire, historical Config fault injection, startup/STATUS and intact LittleFS recovery passed")
 
 
