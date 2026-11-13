@@ -131,6 +131,19 @@ def validate(text: str, fixture: dict[str, object]) -> None:
         )
     except WorkflowStepError as exc:
         raise WorkflowError(str(exc)) from exc
+    current = parse_jobs(text)
+    if "current_host" not in current or current[validation_job].needs != "current_host":
+        raise WorkflowError("current host tests must gate validation and publication")
+    host_steps = [step for step in current["current_host"].steps if step.name == "Current host regressions"]
+    if len(host_steps) != 1 or host_steps[0].fields != {"run"}:
+        raise WorkflowError("missing unconditional current host regression step")
+    required_host = fixture["current_host_checks"]
+    actual_host = executable_lines(host_steps[0].run)
+    # Additional candidate tests may be appended as separate simple commands.
+    if (actual_host[:len(required_host)] != required_host or
+            any(not re.fullmatch(r"python3 tools/[a-zA-Z0-9_/]+\.py", command)
+                for command in actual_host)):
+        raise WorkflowError("current host tests missing, reordered or concealed")
     required_classifier = (
         '    - name: Classify firmware build inputs\n'
         '      id: inputs\n'
