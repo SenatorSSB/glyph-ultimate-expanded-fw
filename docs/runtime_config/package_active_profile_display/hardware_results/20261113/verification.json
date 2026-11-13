@@ -1,0 +1,76 @@
+{
+  "result": "PASS_OFFLINE_EVIDENCE_INTEGRITY",
+  "hardware_outcome": "INCONCLUSIVE_TERMINAL_STOP",
+  "private_files": 84,
+  "private_bytes": 62257,
+  "private_inventory_sha256": "7fa7637fcd562d17f196e46b91152e21a0ea110382b0b8ae81b3582af36acb55",
+  "raw_exchange_correspondences_verified": 10,
+  "exact_read_only_operation_table": [
+    [
+      10,
+      null,
+      null,
+      null
+    ],
+    [
+      9,
+      3,
+      1,
+      null
+    ],
+    [
+      3,
+      null,
+      null,
+      null
+    ],
+    [
+      9,
+      2,
+      2,
+      null
+    ],
+    [
+      9,
+      2,
+      2,
+      null
+    ],
+    [
+      9,
+      2,
+      2,
+      null
+    ],
+    [
+      9,
+      2,
+      2,
+      null
+    ],
+    [
+      9,
+      2,
+      3,
+      1
+    ],
+    [
+      9,
+      2,
+      3,
+      3
+    ],
+    [
+      9,
+      2,
+      3,
+      4
+    ]
+  ],
+  "raw_Config_and_27_directory_entries": "MATCH_APPROVED_BASELINE",
+  "sole_port_closed": true,
+  "false_stage_PASS_absent": true,
+  "later_stage_directories_absent": true,
+  "new_device_operations": 0,
+  "source_rebuilds": 0
+}

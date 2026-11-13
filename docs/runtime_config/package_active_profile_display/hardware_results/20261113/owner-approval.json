@@ -1,0 +1,10 @@
+{
+  "source": "Direct owner message in this chat; visible text transcribed without Markdown line-continuation formatting; no cryptographic signature claimed",
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v1",
+  "packet_publication_sha": "3cc98ae42092ac249d0183919c3ed1091dcd0f13",
+  "packet_sha256": "b9a14463a65a6901a499836c0e879f5a4b34e8111976199dcd6d59d7b1a3774b",
+  "preparation_manifest_sha256": "90bb909c7d2f22c3e3cd9802deb490cb4d87fb0d5f45eb52ab6e60e2be366c86",
+  "owner_approval_visible_text_sha256": "d072331826afb4c51b405395a510eb05e338ae4a46984bb3d72925db2462a02a",
+  "installation_actor": "owner only; installation never reached",
+  "publication_authority": "Exact hardware results only; stop for inspection; no canonical Glyph merge or Senscope source repin"
+}
