@@ -26,7 +26,8 @@ uint32_t Sequence(const RootFacts &r){return r.format==3?Get32(r.prefix+300):0;}
 size_t Count(const RootFacts &r){return Get16(r.prefix+6);}
 const uint8_t *Entry(const RootFacts &r,size_t i){return r.prefix+320+i*56;}
 bool Marked(const ConfigFacts &c){return c.root_format==3||c.managed_format||c.sequence||c.any_row_marker;}
-void ReadIntentFacts(const uint8_t *p,IntentFacts &i){
+// SHA and digest decoding finish before any other root or Config is opened.
+__attribute__((noinline)) void ReadIntentFacts(const uint8_t *p,IntentFacts &i){
 #define U(name,offset) i.name=Get32(p+offset)
  U(operation,8);U(phase,12);U(terminal,16);U(flags,20);U(incarnation,64);U(id,68);U(revision,72);U(baseline_generation,76);U(generation,80);U(sequence,84);U(baseline_crc,88);U(final_crc,92);U(row,96);U(rgb,100);U(record_bytes,360);U(config_bytes,364);U(baseline_sequence,368);U(baseline_rows,372);U(final_rows,376);U(baseline_rgbs,380);U(final_rgbs,384);U(baseline_high_id,396);U(old_revision,400);U(old_row,404);U(old_rgb,408);
 #undef U
@@ -124,7 +125,7 @@ class Classifier {
   for(unsigned i=0;i<2;++i)if(Get32(p+2608+i*4)>Get32(p+16))return false;
   return true;
  }
- bool LoadRoot(const char *path,RootFacts &r,uint8_t *owner,bool control){
+ __attribute__((noinline)) bool LoadRoot(const char *path,RootFacts &r,uint8_t *owner,bool control){
   size_t n=0;if(reader.Extent(path,n)!=Probe::Present)return false;
   const size_t lead=control?16:0;r.prefix=owner+lead;
   if(n<lead+8||!reader.Read(path,0,owner,lead+8))return false;
