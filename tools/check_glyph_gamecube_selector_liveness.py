@@ -133,7 +133,7 @@ struct {struct {uint32_t managed_format=0;} game_mode_configs[30];} config;
 bool all_buttons_held(const uint64_t &buttons,uint64_t mask){return mask && (buttons&mask)==mask;}
 ''' + sensed + '\n' + pending
         begin=config.index('    if (pending_chord_row1) {',config.index('void loop()'))
-        end=config.index('    mark_first_mode_ready();',begin)
+        end=config.index('    for (size_t i = 0; i < backend_count; i++)',begin)
         chord_gate='void application_chord_gate(CommunicationBackend **backends, void (*persist_managed_chord)(size_t), void (*persist_ordinary_chord)(size_t)) {\n'+config[begin:end]+'}\n'
     parts = [defs,(FIX/'hardware.cpp').read_text(),source('include/gamecube_definitions.h'),
              source('include/joybus.h'), sdk, source('include/GamecubeConsole.hpp'),
