@@ -65,7 +65,9 @@ def original_proof(root, parent):
             "from glyph_c023_campaign_transition import authenticate,replay_covered_checker_paths;"
             "p=authenticate(Path.cwd());print(json.dumps(dict(contract=p['contract'],candidate=p['candidate'],object_roots=sorted(p['object_roots']),covered=sorted(replay_covered_checker_paths(Path.cwd())))))")
     result = subprocess.run([sys.executable, "-I", "-B", "-c", code], cwd=frozen,
-                            check=True, capture_output=True, text=True)
+                            capture_output=True, text=True)
+    if result.returncode:
+        raise ValueError("C023 historical classifier failed: " + result.stderr.strip())
     proof = json.loads(result.stdout)
     proof["object_roots"] = frozenset(proof["object_roots"])
     return proof

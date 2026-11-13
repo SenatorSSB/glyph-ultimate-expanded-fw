@@ -6230,6 +6230,54 @@
       "path": "tools/check_glyph_ultimate_preservation_hardware_result.py",
       "reason": "HARDWARE_RESULT_EVIDENCE",
       "detail": "historical preservation hardware-result package outside the current aggregate lane"
+    },
+    {
+      "id": "gp_config023_usb_index_validation",
+      "path": "tools/check_glyph_gp_config023_usb_index_validation.py",
+      "reason": "DUPLICATE_COVERAGE",
+      "detail": "The required C023 wrapper executes this exact checker on its original candidate and requires both ABI sanitizer results and all 4096 index cases."
+    },
+    {
+      "id": "accepted_character_profiles",
+      "path": "tools/check_glyph_accepted_character_profiles.py",
+      "reason": "REQUIRES_NONCANONICAL_ARGUMENT",
+      "detail": "Exact accepted character history requires a report destination and historical per-profile commits."
+    },
+    {
+      "id": "liveness_resource_safety",
+      "path": "tools/check_glyph_liveness_resource_safety.py",
+      "reason": "REQUIRES_NONCANONICAL_ARGUMENT",
+      "detail": "Resource analysis consumes the ELF, map and target resource records from a selected build."
+    },
+    {
+      "id": "native_target_metrics",
+      "path": "tools/check_glyph_native_target_metrics.py",
+      "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE",
+      "detail": "ARM layout and compiler metrics belong to the exact target resource build gate."
+    },
+    {
+      "id": "profile_store_directory_stack",
+      "path": "tools/check_glyph_profile_store_directory_stack.py",
+      "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE",
+      "detail": "Target stack composition requires the installed ARM toolchain and framework libraries."
+    },
+    {
+      "id": "stage_c_ultimate_profiles",
+      "path": "tools/check_glyph_stage_c_ultimate_profiles.py",
+      "reason": "SUPERSEDED_CONTRACT",
+      "detail": "Stage C schema v3 tests its historic legacy architecture and source ABI, preceding the native evaluator."
+    },
+    {
+      "id": "profile_native_ultimate",
+      "path": "tools/check_glyph_profile_native_ultimate.py",
+      "reason": "REQUIRES_NONCANONICAL_ARGUMENT",
+      "detail": "Separate native differential suite requires resolved target packages for its compiled dual-enum and storage proofs."
+    },
+    {
+      "id": "profile_store_production_tool",
+      "path": "tools/check_glyph_profile_store_production_tool.py",
+      "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE",
+      "detail": "Dedicated acceptance-operator checks use offline request fakes and a Python protobuf generator. The Linux host job exercises these separately."
     }
   ]
 }

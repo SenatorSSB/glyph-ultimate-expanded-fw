@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   validation:
+    needs: current_host
     outputs:
       firmware: ${{ steps.inputs.outputs.firmware }}
     runs-on: ubuntu-latest
@@ -111,4 +112,42 @@ jobs:
       with:
         name: Glyph_FW
         path: ${{ env.PIO_ENV }}
-    
+
+  current_host:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out source code (actions/checkout v4.4.0)
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        fetch-depth: 0
+
+    - name: Install offline host test dependencies
+      run: |
+        python3 -m venv "$RUNNER_TEMP/host-python"
+        "$RUNNER_TEMP/host-python/bin/pip" install grpcio-tools
+        echo "$RUNNER_TEMP/host-python/bin" >> "$GITHUB_PATH"
+        mkdir "$RUNNER_TEMP/host-clang"
+        ln -s /usr/bin/clang "$RUNNER_TEMP/host-clang/cc"
+        ln -s /usr/bin/clang++ "$RUNNER_TEMP/host-clang/c++"
+        echo "$RUNNER_TEMP/host-clang" >> "$GITHUB_PATH"
+        mkdir -p .pio/libdeps/glyph_mk6
+        git init -q .pio/libdeps/glyph_mk6/Nanopb
+        git -C .pio/libdeps/glyph_mk6/Nanopb fetch --depth=1 https://github.com/nanopb/nanopb.git cad3c18ef15a663e30e3e43e3a752b66378adec1
+        git -C .pio/libdeps/glyph_mk6/Nanopb checkout --detach FETCH_HEAD
+        test "$(git -C .pio/libdeps/glyph_mk6/Nanopb rev-parse HEAD)" = cad3c18ef15a663e30e3e43e3a752b66378adec1
+
+    - name: Current host regressions
+      run: |
+        python3 tools/test_glyph_ci_build_inputs.py
+        python3 tools/check_glyph_checker_census.py
+        python3 tools/check_glyph_runtime_config_validation_health.py
+        python3 tools/check_glyph_build_input_provenance_inventory.py
+        python3 tools/check_glyph_build_input_non_selector_configuration.py
+        python3 tools/check_glyph_build_input_resolution_observations.py
+        python3 tools/check_glyph_runtime_config_validation_publication_workflow.py
+        python3 tools/check_glyph_artifact_postprocessor_workflow.py
+        python3 tools/check_glyph_active_profile_display.py
+        python3 tools/check_glyph_controller_profile_selector.py
+        python3 tools/check_glyph_profile_store_selection_recovery.py
+        python3 tools/check_glyph_profile_store_config_persistence.py
+        python3 tools/check_glyph_profile_store_production_tool.py

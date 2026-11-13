@@ -30,7 +30,7 @@
     },
     {
       "path": ".github/workflows/build.yml",
-      "sha256": "b29b84fe9c2f9ff9585913ca92022cd3ee531967f9f288f14975d320284d5d00",
+      "sha256": "d2954d24b0343dda8febfcb4f8006086357909fe0947584be35d32b4f87e5490",
       "events": [
         "push",
         "pull_request"
