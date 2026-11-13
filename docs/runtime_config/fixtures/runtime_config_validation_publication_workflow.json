@@ -30,7 +30,7 @@
     },
     {
       "path": ".github/workflows/build.yml",
-      "sha256": "97e8970d77658af99512383094993b9a56ca921b926aaf036b30fb7e85799de5",
+      "sha256": "b29b84fe9c2f9ff9585913ca92022cd3ee531967f9f288f14975d320284d5d00",
       "events": [
         "push",
         "pull_request"
@@ -297,6 +297,16 @@
       "id": "setup_continuation_duplicate",
       "old": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json",
       "new": "    - name: Duplicate comparison operation\n      run: |\n        git fetch \\\n          --no-tags origin configurator\n\n    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json"
+    },
+    {
+      "id": "substituted_build_classifier",
+      "old": "tools/glyph_ci_build_inputs.py",
+      "new": "tools/unrelated.py"
+    },
+    {
+      "id": "inverted_build_condition",
+      "old": "if: needs.validation.outputs.firmware == 'true'",
+      "new": "if: needs.validation.outputs.firmware == 'false'"
     }
   ]
 }

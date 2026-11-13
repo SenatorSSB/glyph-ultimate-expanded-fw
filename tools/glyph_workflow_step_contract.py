@@ -152,7 +152,7 @@ def parse_jobs(text: str) -> dict[str, Job]:
                             step.with_fields[nested_key] = _scalar(nested_value, f"with.{nested_key}")
                             i += 1
                         continue
-                    elif key in {"name", "if", "env", "shell", "working-directory"}:
+                    elif key in {"name", "id", "if", "env", "shell", "working-directory"}:
                         scalar = _scalar(value, key)
                         if key == "if":
                             step.condition = scalar
@@ -172,6 +172,12 @@ def parse_jobs(text: str) -> dict[str, Job]:
             if current.continue_on_error is not None:
                 raise WorkflowStepError("duplicate continue-on-error")
             current.continue_on_error = _scalar(value, "continue-on-error")
+        elif key == "if" and current.name == "build" and value == "needs.validation.outputs.firmware == 'true'":
+            pass
+        elif key == "outputs" and current.name == "validation":
+            if value is not None or i + 1 >= len(lines) or lines[i + 1] != "      firmware: ${{ steps.inputs.outputs.firmware }}":
+                raise WorkflowStepError("unsupported build eligibility output")
+            i += 1
         elif key in {"runs-on", "env", "strategy", "permissions"}:
             # These mappings are outside the contract; reject scalar shorthand.
             if value is not None and key in {"env", "strategy", "permissions"}:
