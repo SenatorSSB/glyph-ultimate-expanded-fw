@@ -851,6 +851,11 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         ('gp_config023_usb_index_validation', ['python3', 'tools/check_glyph_c023_proof_replay.py']),
         ('gp_val039_c022_transition', ['python3', 'tools/test_glyph_c022_campaign_transition.py']),
     ))
+    if package_scope.package_lineage(ROOT):
+        # Current checker_context exercises synthetic branch scope and source
+        # guardrails. Its package path never consumes C020/C024 replay roots.
+        campaign_consumers = [(identity, command) for identity, command in campaign_consumers
+                              if identity != "checker_context"]
     if any(entry['applicability'] == 'current'
            and entry['id'] == identity and entry['command'] == command
            for entry in selected for identity, command in campaign_consumers):

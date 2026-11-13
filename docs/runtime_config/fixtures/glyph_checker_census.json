@@ -14731,7 +14731,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 108746,
+      "file_size_bytes": 110076,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -14764,7 +14764,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1775,
+      "line_count": 1800,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -14833,6 +14833,7 @@
         "tools/link.py",
         "tools/other.py",
         "tools/test_glyph_c022_campaign_transition.py",
+        "tools/unknown.py",
         "tools/untracked.py"
       ],
       "runtime_config_relevance_signals": [
@@ -14844,7 +14845,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "a45d9bba00da71dd3352a805ce50698c3e2fdb666063bcbdd0a0137662e24490",
+      "sha256": "9a227815e395566918231a37d498fd539f75b3f3a969f3f6c1d1c3b7a0b7155c",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
