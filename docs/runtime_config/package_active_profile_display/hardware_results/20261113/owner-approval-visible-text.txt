@@ -1,0 +1,21 @@
+I approve execution of GLYPH-DISPLAY-9E69188D-HW-v1 only, as published at Glyph commit 3cc98ae42092ac249d0183919c3ed1091dcd0f13.
+
+Packet SHA-256:
+b9a14463a65a6901a499836c0e879f5a4b34e8111976199dcd6d59d7b1a3774b
+
+Preparation manifest SHA-256:
+90bb909c7d2f22c3e3cd9802deb490cb4d87fb0d5f45eb52ab6e60e2be366c86
+
+Built source:
+9e69188d857138a3884bcbe243f22188815e9355
+
+UF2 SHA-256:
+da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc
+
+UF2 size: 1,296,896 bytes.
+
+Follow the exact packet’s admission, operation limits, preservation checks and terminal uncertainty rules. I will perform the physical controller and manual installation steps.
+
+No rebuild, substitution, CREATE, profile mutation, reference rewrite, managed activation, retry, recovery or rollback. Stop on any mismatch or uncertainty.
+
+Retain and publish the exact hardware results, then stop for inspection. This approval does not authorize a Glyph canonical merge or Senscope source repin.

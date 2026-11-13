@@ -1,0 +1,21 @@
+{
+  "result": "PASS_OFFLINE_TERMINAL_EVIDENCE_INTEGRITY",
+  "manifest_sha256": "6fe82428094c6108358abda29f04bb2b714d26944d12fd4d23e7db94c8ea73bf",
+  "executor_sha256": "05f1eb49649cfb75f8edfee10dfd620fcc5d9c2fb17e60a7a815496271d45d06",
+  "sealed_v2_and_inherited_originals": "ALL_HASHES_MATCH",
+  "before_copy": "ALL_FILES_BYTE_EQUAL_TO_V2",
+  "authority_and_readiness_event": "MATCH_RETAINED_RECEIPTS",
+  "actual_OS_target_serial_digest_matches": true,
+  "actual_OS_target_vid": "0x2e8a",
+  "actual_OS_target_pid": "0x000a",
+  "required_XInput_vid": "0x0738",
+  "required_XInput_pid": "0x4726",
+  "new_port_opens": 0,
+  "new_controller_requests": 0,
+  "terminal_marker": "RETAINED",
+  "later_stages": "ABSENT",
+  "private_files": 251,
+  "private_bytes": 262756,
+  "inventory_sha256": "b9f61efc5c822ae9dec68b3ef57cd52fbca43b35cd776788f9148eb777f0c788",
+  "verifier_device_access": false
+}

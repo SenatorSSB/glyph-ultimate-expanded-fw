@@ -1,0 +1,28 @@
+{
+  "result": "DONE_FOCUSED_INDEPENDENT_COMBINED_ACCEPTANCE_REVIEW",
+  "reviewer": "/root/v2_final_review",
+  "reviewed_files": {
+    "README.md": "aea137433bf8e7cdc1dbbe86cbc707b5a4453ff31d5675e55da0bc855f659058",
+    "exchange-verification.json": "2bddb6fea3c841aed9ca974c984dd59940a643772b48b5f7963c6bf3997d97d4",
+    "private-originals-inventory.json": "d74b713416fe18f0c69a932e15e72f3a9df022558bd0346979b2a1d55fc17d37",
+    "summary.json": "d10651534768ee330baa9fefa22fa1fa890fd00e3ba2b2b4ce89402d6067b966",
+    "verification.json": "65cbcf77f6f77a91adfa2cb8963012f778209e9555cddaa28db8acd2056b9c88"
+  },
+  "verification": "All derived records reproduced exactly read-only.",
+  "new_exchanges": 36,
+  "inherited_exchanges": 34,
+  "new_sessions_closed": 3,
+  "strict_native53_identities": 2,
+  "Config_directory_all27_wrappers": "BYTE_EQUAL",
+  "private_files": 529,
+  "private_bytes": 533189,
+  "InputViewer_name": "NOT_VISIBLE_NOT_VERIFIED",
+  "visible_viewer_name_PASS": false,
+  "installation_correspondence": "OWNER_REPORTED; NO_MACHINE_BUILD_ATTESTATION",
+  "final_observation_timing": "HONESTLY_RECORDED_BEFORE_FINAL_READ_ONLY_IDENTITY",
+  "prior_evidence": "UNCHANGED",
+  "privacy": "PASS",
+  "material_findings": [],
+  "device_access": false,
+  "publication_scope": "Source-free combined scoped result only; stop for supervisor inspection."
+}

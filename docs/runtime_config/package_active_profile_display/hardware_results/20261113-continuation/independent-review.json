@@ -1,0 +1,26 @@
+{
+  "result": "DONE_FOCUSED_INDEPENDENT_RESULT_REVIEW",
+  "reviewer": "/root/v2_final_review",
+  "reviewed_files": {
+    "README.md": "8fd9ac24aa10ea64f87a9eb1e7a4a2083afeca85f01b7a203d6914c0ae76bd8c",
+    "private-originals-inventory.json": "b9f61efc5c822ae9dec68b3ef57cd52fbca43b35cd776788f9148eb777f0c788",
+    "summary.json": "f0af6d6bf2201de14a8902921794b205807ab0a859833ab15ab022bf5b8bd029",
+    "verification.json": "381fdaf954765f83d14c3740eb5f7c3cfbf4859323ffb7fb54610295050ce3bd"
+  },
+  "verification": "Inventory and verification records reproduced exactly read-only.",
+  "private_files": 251,
+  "private_bytes": 262756,
+  "inherited_exchanges": 34,
+  "new_requests": 0,
+  "new_serial_opens": 0,
+  "target_digest_match": true,
+  "observed_vid_pid": "2e8a:000a",
+  "required_vid_pid": "0738:4726",
+  "terminal_before_ownership_or_open": true,
+  "inherited_originals": "UNCHANGED",
+  "privacy": "PASS",
+  "material_findings": [],
+  "limits": "Runtime backend, machine build attestation, root cause and post-install acceptance remain unproven.",
+  "device_access": false,
+  "publication_scope": "Source-free combined partial result only; then stop for inspection."
+}

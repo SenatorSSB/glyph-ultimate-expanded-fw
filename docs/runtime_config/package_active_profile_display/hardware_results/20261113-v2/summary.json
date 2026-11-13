@@ -1,0 +1,157 @@
+{
+  "result": "INCONCLUSIVE",
+  "outcome": "HARDWARE_ACCEPTANCE_INCOMPLETE",
+  "episode_terminal": true,
+  "resumption_or_retry_authorized": false,
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v2",
+  "packet_publication_sha": "2b9bfeff666245e5d593fcb7ce809f0877d58086",
+  "packet_sha256": "42a9cff1101953cf739cde28f6c8160426f7cebb69476aa2008294ee1daf0348",
+  "preparation_manifest_sha256": "ca1f8d60a783d2ed4299643e22763ae5715c7515d380f4335365297b73030ebb",
+  "executor_sha256": "7dd1b996f370f2faaf710f5b51e6bc868d9504a028c3af6d9f5dcff6e0c910b3",
+  "built_source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "source_tree": "cd0d8408b1c8b808a3a41529259b57c0896e2f7c",
+  "uf2_sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+  "uf2_bytes": 1296896,
+  "sealed_dependencies": "Exact approved PREPARATION_MANIFEST.json at packet_publication_sha, independently checked offline unchanged after terminal stop.",
+  "stage_results": {
+    "pre_snapshot": "PASS_34_EXCHANGES_27_PAYLOADS_COMPLETE_PORT_CLOSED",
+    "install": "TERMINAL_GUARD_NO_PASS",
+    "first_xinput_boot": "NOT_ATTEMPTED",
+    "display": "NOT_ATTEMPTED",
+    "post_snapshot": "NOT_ATTEMPTED",
+    "final_xinput_boot": "NOT_ATTEMPTED",
+    "finish": "NOT_ATTEMPTED"
+  },
+  "stop": {
+    "classification": "REQUIRED_OWNER_INSTALLATION_CUSTODY_FIELD_NOT_SUPPLIED",
+    "field": "fresh_volume_path",
+    "actual_value": "",
+    "owner_report": "Owner declined to supply the volume path, stating the installation worked normally.",
+    "sealed_error": "ValueError('manual install/copy outcome uncertain')",
+    "source": "Approved executor.py:474-478 requires a nonempty fresh_volume_path alongside single-copy/same-unit/unambiguous result.",
+    "meaning": "The missing required field prevents packet admission. This is not an observed copy failure or firmware/display defect. No substitute path was invented and no additional controller/volume access was used to reconstruct it."
+  },
+  "owner_installation_report": {
+    "single_BOOTSEL_and_exact_UF2_copy_to_same_unit": true,
+    "copy_success": true,
+    "reenumeration_unambiguous": true,
+    "boot_wait": "Ordinary waiting, approximately 5-10 seconds, per owner. No additional copy/reset/reconnect reported.",
+    "default_XInput_ready_exclusive": true,
+    "attribution": "Owner replies to call_d6099d0633ff468193bcb28130ee206d and call_e98f368d94464759b0bf874168d8ac27; original text retained privately.",
+    "runtime_build_attestation": false,
+    "packet_install_acceptance": "NOT_PASSED"
+  },
+  "observations": {
+    "dashboard": "Owner spontaneously reported a visible profile name and Unknown Plate; exact name/backend not confirmed under the display stage.",
+    "InputViewer": "NOT_TESTED",
+    "default53_runtime_identity": "NOT_TESTED",
+    "managed54_activation_or_display": "NOT_TESTED",
+    "known_plate_physical_cases": "NOT_TESTED",
+    "gameplay": "NOT_TESTED",
+    "boot_wait_cause": "UNPROVEN; owner comparison is not a source-backed cause diagnosis."
+  },
+  "baseline": {
+    "route": "heldRT2 per fresh owner confirmation; menu remains normal route",
+    "identity": "configurator / primary_backend8",
+    "store_incarnation": 1,
+    "store_generation": 229,
+    "config_crc32": 1599895773,
+    "transaction_token_high_water": "17293822569102712133",
+    "config_sha256": "913e9db4e3809b36f101ede84b6019c7fa60c3d52e3c94e97254ae95d82e8d42",
+    "directory_sha256": "80dbc10ee89d4bde3223f5c3daa4e9852b39ed731d290e9bce53f104253ae85a",
+    "directory_count": 27,
+    "all27_payloads": "READ_AND_VALIDATED",
+    "ID4": {
+      "directory_payload_version": 1,
+      "payload_schema_version": 3,
+      "revision": 1,
+      "sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "bytes": 3047,
+      "validation": {
+        "schema": 3,
+        "engine": "legacy"
+      }
+    },
+    "ID53": {
+      "directory_payload_version": 5,
+      "payload_schema_version": 5,
+      "revision": 1,
+      "sha256": "72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87",
+      "bytes": 2187,
+      "validation": {
+        "schema": 5,
+        "encoding": 1,
+        "engine_abi": 1,
+        "engine": "native_abi1",
+        "body_bytes": 2182
+      }
+    },
+    "managed54": {
+      "directory_payload_version": 5,
+      "payload_schema_version": 5,
+      "revision": 1,
+      "sha256": "72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87",
+      "bytes": 2187,
+      "validation": {
+        "schema": 5,
+        "encoding": 1,
+        "engine_abi": 1,
+        "engine": "native_abi1",
+        "body_bytes": 2182
+      }
+    }
+  },
+  "operations": {
+    "serial_sessions_opened": 1,
+    "serial_sessions_closed": 1,
+    "controller_exchanges": 34,
+    "identity": 1,
+    "protocol3_STATUS": 1,
+    "GET_CONFIG": 1,
+    "LIST": 4,
+    "READ": 27,
+    "owner_reported_bootloader_entries": 1,
+    "owner_reported_exact_manual_installs": 1,
+    "host_flashes": 0,
+    "post_install_controller_exchanges": 0,
+    "CREATE": 0,
+    "QUERY_PACKAGE": 0,
+    "protocol2_STATUS": 0,
+    "profile_mutations": 0,
+    "reference_rewrites": 0,
+    "managed_activation": 0,
+    "saved_default_changes": 0,
+    "retry": 0,
+    "recovery": 0,
+    "rollback": 0,
+    "additional_flash": 0,
+    "firmware_rebuilds": 0
+  },
+  "preservation": {
+    "pre_install_Config_and_directory": "MATCH_APPROVED_BASELINE",
+    "pre_install_all27": "COMPLETE",
+    "post_install_snapshot": "NOT_ATTEMPTED",
+    "full_before_after_preservation": "NOT_PROVEN",
+    "managed54": "PRESENT_AND_READ_PRE_INSTALL; NO_SELECTION_OR_MUTATION_PERFORMED; POST_INSTALL_PRESERVATION_NOT_PROVEN",
+    "raw_NOR_or_filesystem": "NOT_CLAIMED"
+  },
+  "settlement": {
+    "pre_snapshot_port_closed": true,
+    "install_stage_opened_no_port": true,
+    "terminal_marker_retained": true,
+    "no_further_device_access": true
+  },
+  "private_capture": {
+    "inventory_sha256": "ad01cb794a20470421eb27af3587752ec2b06069172058f6d7bffdb42cb04589",
+    "files": 251,
+    "bytes": 265275,
+    "privacy": "Only hashes and bounded observations are published; raw USB records, device paths, response/profile bodies and original events remain private owner-local."
+  },
+  "preserved_refs": {
+    "v1_terminal": "75f83c4c11929b4b839b3a369c1cb7a40f0f1fa9",
+    "candidate": "2b9bfeff666245e5d593fcb7ce809f0877d58086",
+    "Glyph_configurator": "d31a5edd433beca0354e4595c26d0c4b69c085e8",
+    "Senscope_main": "acf22010522ac5b2b17392e977d692195d39e154"
+  },
+  "followup": "Publish exact source-free partial result and stop for inspection. V2 is terminal; no resume/retry, extra flash, canonical merge or source repin follows."
+}

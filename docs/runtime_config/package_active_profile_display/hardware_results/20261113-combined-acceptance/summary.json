@@ -1,0 +1,165 @@
+{
+  "result": "PASS_DASHBOARD_IDENTITY_AND_API_PRESERVATION_WITH_VIEWER_NAME_UNVERIFIED",
+  "acceptance_scope": "COMPLETE_UNDER_OWNER_CORRECTED_SCOPE; NOT_A_VISIBLE_INPUT_VIEWER_NAME_PASS",
+  "source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "source_tree": "cd0d8408b1c8b808a3a41529259b57c0896e2f7c",
+  "UF2": {
+    "sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+    "bytes": 1296896,
+    "custody": "Retained owner-local source/artifact-addressed firmware.uf2; unchanged, no rebuild/substitution."
+  },
+  "execution_lineage": {
+    "original_packet_publication": "2b9bfeff666245e5d593fcb7ce809f0877d58086",
+    "v2_terminal_result": "183f62096415fe2baa77d478a20c5e98c5e37dc5",
+    "zero_request_admission_result": "7b23770bf36946c0b94377c15bf69c1314587396",
+    "reviewed_admission_adapter": "abfb0d62395cc07d1135224c0f9e4c76446e02b5",
+    "adapter_manifest_sha256": "fc44f1b3b175f7c14af7e9210727d2eb24a5f3892922003103ef7a0679df8f10",
+    "adapter_executor_sha256": "b9527a3dc3d45fcbe4221b57ae83996d1b9b58b0ebaa51874b46b099b161ae1f",
+    "reviewed_visual_scope": "286fd3b792bddb71559538b10fe57fae860d643b",
+    "visual_manifest_sha256": "7382d3ab0dcc73b4c130fda2a72bdf0984c7e2814dd867c2f32f8fa5f1c8b756",
+    "visual_processor_sha256": "c89a2f475a5a021cc9bbd6ea71e11f4d83c6d9414a3a6f5bca16e40faadb1bb7"
+  },
+  "inherited_evidence": {
+    "before_snapshot": "Complete v2 pre_snapshot; all original hashes checked; copied byte-equal and not repeated.",
+    "exchanges": 34,
+    "profiles_read": 27,
+    "sessions_closed": 1,
+    "owner_single_exact_installation": "Accepted prospectively by owner correction. Original v2 install guard remains terminal without PASS; no record rewritten.",
+    "machine_build_attestation": false
+  },
+  "prospective_owner_corrections": {
+    "volume_path": "Optional metadata, not collected or invented.",
+    "USB_admission": "For this named workflow only, source pair0738:4726 and observed2e8a:000a allowed with expected serial digest, one target/no competitor, clear ownership and actual owner XInput screen. No universal backend inference or alternate protocol probe.",
+    "InputViewer_name": "Owner rejects visible-name prerequisite and reports name not visible. Record NOT_VISIBLE_NOT_VERIFIED; no claimed original visible-name PASS or universal firmware-history claim."
+  },
+  "new_observed_checks": {
+    "first_runtime_identity": {
+      "protocol_version": 1,
+      "token": 1857250596564701152,
+      "status": "persisted",
+      "primary_backend": 2,
+      "context_row": 3,
+      "requested_reference": 53,
+      "incarnation": 1,
+      "active_id": 53,
+      "active_revision": 1,
+      "schema_version": 5,
+      "payload_sha256": "b3275bc2f3b8ac574bb15e43e62bd7fa8660273a70baacd9e68ba207aa9c97fb",
+      "viewer_records": 0
+    },
+    "dashboard": {
+      "name": "KazTest5",
+      "plate": "Unknown Plate",
+      "backend": "XInput",
+      "responsive": true,
+      "basis": "Actual owner confirmation call_5dbf8cfdd0134f738eed219ae4200228."
+    },
+    "InputViewer": {
+      "navigation_and_return": "OWNER_CONFIRMED",
+      "name": "NOT_VISIBLE_NOT_VERIFIED",
+      "visible_name_PASS": false,
+      "basis": "Owner initial visual report plus scope clarification call_31fc8cf7830740b689e6a4b97fd7ae1e."
+    },
+    "preservation_snapshot": {
+      "result": "PASS_34_EXCHANGES",
+      "route": "Normal menu Configurator entry; owner same-unit/no-change/exclusive readiness confirmed.",
+      "Config": "BYTE_EQUAL",
+      "directory": "BYTE_EQUAL_27_ENTRIES",
+      "every_raw_wrapper": "BYTE_EQUAL_ALL27",
+      "directory_metadata_and_decoded_schema": "SEPARATELY_UNCHANGED",
+      "store_incarnation": 1,
+      "store_generation": 229,
+      "saved_Config_generation_crc32": 1599895773,
+      "transaction_token_high_water": "17293822569102712133"
+    },
+    "final_runtime_identity": {
+      "protocol_version": 1,
+      "token": 14699400217546659515,
+      "status": "persisted",
+      "primary_backend": 2,
+      "context_row": 3,
+      "requested_reference": 53,
+      "incarnation": 1,
+      "active_id": 53,
+      "active_revision": 1,
+      "schema_version": 5,
+      "payload_sha256": "b3275bc2f3b8ac574bb15e43e62bd7fa8660273a70baacd9e68ba207aa9c97fb",
+      "viewer_records": 1
+    },
+    "final_dashboard": {
+      "name": "KazTest5",
+      "plate": "Unknown Plate",
+      "backend": "XInput",
+      "responsive": true,
+      "basis": "Actual owner final default-boot confirmation call_8363351cb4484399939c85bc0e48ca34.",
+      "timing": "Observation supplied immediately before final read-only identity; identity then settled and closed, with no further physical action."
+    }
+  },
+  "proof_boundaries": {
+    "executing_record": "Both strict responses persisted/backend2/row3/ref53/active53/rev1/schema5 with inherited runtime payload digest. This is execution identity evidence, not installed Git-SHA attestation.",
+    "installation_correspondence": "Owner-reported exact single installation plus immutable retained artifact custody; no machine build attestation.",
+    "API_preservation": "Exact saved Config/directory/profile wrapper equality; not a raw filesystem/NOR or zero-write claim.",
+    "USB_descriptor": "Observed2e8a:000a admitted by bounded owner permission; strict response independently proves backend2.",
+    "serial_viewer_records": "Transport stream record counts do not prove miniscreen Input Viewer name visibility."
+  },
+  "preservation_digests": {
+    "Config_sha256": "913e9db4e3809b36f101ede84b6019c7fa60c3d52e3c94e97254ae95d82e8d42",
+    "ordered_directory_domain_sha256": "80dbc10ee89d4bde3223f5c3daa4e9852b39ed731d290e9bce53f104253ae85a",
+    "native53_raw_wrapper_sha256": "72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87",
+    "native53_runtime_domain_sha256": "b3275bc2f3b8ac574bb15e43e62bd7fa8660273a70baacd9e68ba207aa9c97fb",
+    "legacy4_directory_payload_version": 1,
+    "legacy4_decoded_payload_schema": 3,
+    "legacy4_wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+    "managed54": "Exact metadata and raw wrapper preserved; never selected/activated."
+  },
+  "counts": {
+    "new_controller_exchanges": 36,
+    "first_XInput": 1,
+    "post_snapshot": 34,
+    "final_XInput": 1,
+    "inherited_before_exchanges": 34,
+    "combined_accepted_exchanges": 70,
+    "new_sessions_opened_and_closed": 3,
+    "inherited_before_sessions_closed": 1,
+    "new_installs": 0,
+    "inherited_owner_reported_exact_installs": 1,
+    "additional_flash": 0,
+    "new_pre_install_snapshots": 0,
+    "CREATE": 0,
+    "profile_mutations": 0,
+    "reference_rewrites": 0,
+    "saved_default_changes": 0,
+    "managed_activation": 0,
+    "retry_after_transport_uncertainty": 0,
+    "recovery": 0,
+    "rollback": 0,
+    "firmware_rebuilds": 0
+  },
+  "limitations": {
+    "InputViewer_visible_name": "NOT_VISIBLE_NOT_VERIFIED",
+    "managed_logical_profile_display_or_activation": "PHYSICALLY_NOT_TESTED; HOST_CASES_ONLY",
+    "known_plate_physical_display": "NOT_TESTED; Unknown Plate is the actual tested row value.",
+    "gameplay": "NOT_TESTED",
+    "Nunchuk": "NOT_TESTED",
+    "root_cause_of_prior_boot_delay_or_hidden_viewer_name": "UNPROVEN"
+  },
+  "settlement": {
+    "all3_new_ports_closed_before_PASS": true,
+    "finish_recorded": true,
+    "terminal_marker_present": false,
+    "further_device_access": "NONE; workflow ended"
+  },
+  "verification": {
+    "offline_actual_admission_tests": 12,
+    "offline_visual_processor_tests": 6,
+    "focused_independent_implementation_reviews": "DONE",
+    "capture_correspondences_verified": 36,
+    "older_seals_and_private_originals": "ALL_MATCH",
+    "private_files": 529,
+    "private_bytes": 533189,
+    "private_inventory_sha256": "d74b713416fe18f0c69a932e15e72f3a9df022558bd0346979b2a1d55fc17d37",
+    "raw_privacy": "Raw OS/serial identities, ports, full profile/Config captures and original events remain owner-local; public files contain bounded facts/hashes only."
+  },
+  "integration": "SOURCE_FREE_RESULT_ONLY; NO_GLYPH_CANONICAL_MERGE; NO_SENSCOPE_REPIN; CI_DEFERRED",
+  "followup": "Stop for supervisor inspection. No next campaign or source-authority promotion is implied."
+}
