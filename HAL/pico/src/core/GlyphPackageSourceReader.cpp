@@ -59,7 +59,8 @@ __attribute__((noinline)) bool HashMessage(const pb_msgdesc_t *fields,const void
     hash.Final(out);return true;
 }
 
-bool ExtractConfigFacts(const ::Config &config,package_storage::ConfigFacts &facts){
+// Field extraction is complete before the full candidate is encoded.
+__attribute__((noinline)) bool ExtractConfigFacts(const ::Config &config,package_storage::ConfigFacts &facts){
     facts.rows=config.game_mode_configs_count;facts.rgbs=config.rgb_configs_count;
     facts.store_format=config.ultimate_profile_store_format;facts.incarnation=config.ultimate_profile_store_incarnation;
     facts.root_format=config.ultimate_profile_root_format;facts.managed_format=config.managed_format;facts.sequence=config.managed_sequence;
