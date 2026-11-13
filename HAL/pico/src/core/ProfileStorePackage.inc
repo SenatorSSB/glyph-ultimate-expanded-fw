@@ -665,6 +665,10 @@ __attribute__((noinline)) bool ProfileStore::PreparePackageDispatch() {
         in.response->capability_version=2;
         in.response->supported_receipt_format=2;
         in.response->capability_bits=511;
+        in.response->max_lifecycle_request_bytes=4580;
+        in.response->max_lifecycle_frame_bytes=4601;
+        in.response->max_response_bytes=241;
+        in.response->max_response_frame_bytes=244;
     }
     if(package_owner_live)return false;
     package_owner_live=true;

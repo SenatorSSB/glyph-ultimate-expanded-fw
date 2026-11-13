@@ -71,4 +71,6 @@ message PackageResponse {
  uint32 capability_bits = 238;
  uint32 max_package_body_bytes = 239;
  uint32 record_publication_generation = 240;
+ uint32 max_lifecycle_request_bytes = 241;
+ uint32 max_lifecycle_frame_bytes = 242;
 }

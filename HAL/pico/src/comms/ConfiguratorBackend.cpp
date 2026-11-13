@@ -740,9 +740,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::RefreshPackageConfig() {
 // Encoding scratch is not retained through any persistent writer call.
 __attribute__((noinline)) bool ConfiguratorBackend::RespondPackage() {
     auto &package_response = response_owner.package;
-    constexpr size_t kPackageResponseLimit = 228;
-    static_assert(kPackageResponseLimit + 1 + 2 == 231,
-                  "raw command229 (<254) plus COBS code/delimiter2");
+    // v4 adds at most four revision bytes, one capability byte and two
+    // four-byte bounds to the v3 proof. Both raw response sizes fit one
+    // COBS block, including command 9.
+    const size_t kPackageResponseLimit = package_response.protocol_version==4 ? 241 : 228;
     auto output = pb_ostream_from_buffer(frame, kPackageResponseLimit);
     if (!pb_encode(&output, PackageResponse_fields, &package_response)) return false;
     return WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
