@@ -30,6 +30,9 @@ bool Request(uint32_t id);
 bool Request(uint32_t id, CommunicationBackendId route);
 CommunicationBackendId RequestedBackend();
 uint32_t Pending();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+uint32_t GamecubeSelectionPending();
+#endif
 void Complete();
 
 // No additional Config/profile owner. The compact Config's unused embedded

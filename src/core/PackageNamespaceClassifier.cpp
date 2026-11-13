@@ -26,7 +26,8 @@ uint32_t Sequence(const RootFacts &r){return r.format==3?Get32(r.prefix+300):0;}
 size_t Count(const RootFacts &r){return Get16(r.prefix+6);}
 const uint8_t *Entry(const RootFacts &r,size_t i){return r.prefix+320+i*56;}
 bool Marked(const ConfigFacts &c){return c.root_format==3||c.managed_format||c.sequence||c.any_row_marker;}
-void ReadIntentFacts(const uint8_t *p,IntentFacts &i){
+// SHA and digest decoding finish before any other root or Config is opened.
+__attribute__((noinline)) void ReadIntentFacts(const uint8_t *p,IntentFacts &i){
 #define U(name,offset) i.name=Get32(p+offset)
  U(operation,8);U(phase,12);U(terminal,16);U(flags,20);U(incarnation,64);U(id,68);U(revision,72);U(baseline_generation,76);U(generation,80);U(sequence,84);U(baseline_crc,88);U(final_crc,92);U(row,96);U(rgb,100);U(record_bytes,360);U(config_bytes,364);U(baseline_sequence,368);U(baseline_rows,372);U(final_rows,376);U(baseline_rgbs,380);U(final_rgbs,384);U(baseline_high_id,396);U(old_revision,400);U(old_row,404);U(old_rgb,408);
 #undef U
@@ -124,7 +125,7 @@ class Classifier {
   for(unsigned i=0;i<2;++i)if(Get32(p+2608+i*4)>Get32(p+16))return false;
   return true;
  }
- bool LoadRoot(const char *path,RootFacts &r,uint8_t *owner,bool control){
+ __attribute__((noinline)) bool LoadRoot(const char *path,RootFacts &r,uint8_t *owner,bool control){
   size_t n=0;if(reader.Extent(path,n)!=Probe::Present)return false;
   const size_t lead=control?16:0;r.prefix=owner+lead;
   if(n<lead+8||!reader.Read(path,0,owner,lead+8))return false;
@@ -501,8 +502,25 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   }
   if(!w.current.body_bytes||!Migration(*run_state.selected,w.current)||w.current.reference_token==Token(*run_state.selected))return result;
   if((intent.terminal!=3||run_state.baseline_prior)&&(!Eq(w.current.sha,intent.final_config)||w.current.crc!=intent.final_crc||w.current.body_bytes!=intent.config_bytes))return result;
+  run_state.next_phase=4; return result;
+ }
+ // The bounded file comparator and storage observation have separate call
+ // frames. The proof order and exclusive read-only classification are retained.
+ __attribute__((noinline)) void RunProjection(){
+  auto &run_state=w.run;
+  run_state.next_phase=0;
+  const auto &intent=w.roots[2].intent;
   if(run_state.baseline_prior && !(intent.operation==15 ? reader.AppendConfig(kPrior,kCurrent) :
-      reader.LifecycleConfig(kPrior,kCurrent,intent)))return result;
+      reader.LifecycleConfig(kPrior,kCurrent,intent)))return;
+  run_state.next_phase=5;
+ }
+ __attribute__((noinline)) Classification &RunInstalled(){
+  auto &result=w.classification;
+  auto &run_state=w.run; run_state.next_phase=0;
+  const auto &control=w.roots[2];
+  const auto &intent=control.intent;
+  auto *path=reinterpret_cast<char*>(w.read_chunk);
+  size_t n=0;
   bool superseded_present=false;
   if(LifecycleOperation(intent.operation)){
    if(!RecordPath(path,32,intent.id,intent.old_revision,false))return result;
@@ -562,6 +580,8 @@ void ClassifyNamespaceInto(NamespaceReader &reader,const ClassifierOwners &owner
  if(owners.work.run.next_phase==1)classifier.RunRoots();
  if(owners.work.run.next_phase==2)classifier.RunBaseline();
  if(owners.work.run.next_phase==3)classifier.RunFinal();
+ if(owners.work.run.next_phase==4)classifier.RunProjection();
+ if(owners.work.run.next_phase==5)classifier.RunInstalled();
  FinishClassification(reader,owners);
  reader.EndClassification();
 }

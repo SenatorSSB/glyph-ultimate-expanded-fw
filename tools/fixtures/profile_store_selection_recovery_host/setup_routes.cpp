@@ -80,6 +80,8 @@ void normalize_legacy_glyph_rgb_noops(Config &){}
 // extraction exercises startup refusal/routes only.
 void service_profile_selection() {}
 void mark_first_mode_ready() {}
+uint8_t pending_chord_row1=0;
+void persist_ordinary_chord(size_t){++ordinary_reports;}
 void request_mode_destination(CommunicationBackendId,size_t,const Config &){}
 void set_mode_destination_selector(void(*)(CommunicationBackendId,size_t,const Config &)){}
 void setup_mode_activation_bindings(GameModeConfig *,size_t,uint64_t){}

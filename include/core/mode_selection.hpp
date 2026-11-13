@@ -17,6 +17,11 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
 // Chords request a durable destination; activation is initialization-only.
 using ModeDestinationSelector = void (*)(CommunicationBackendId, size_t, const Config &);
 void set_mode_destination_selector(ModeDestinationSelector selector);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+// Core0 FAST sample, no storage or action. A true result only requests a safe
+// receiver pause; the ordinary loop consumes and validates the chord.
+bool managed_chord_held(uint64_t buttons);
+#endif
 void setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t mode_configs_count,
                                     uint64_t boot_buttons = 0);
 

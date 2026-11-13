@@ -93,7 +93,7 @@ void time_boot_stage(boot_diagnostics::Stage stage) {
     default: break;
     }
 }
-void mark_first_mode_ready() {
+__attribute__((noinline)) void mark_first_mode_ready() {
     // Single writer (core0); no lock, calls to millis or backend queries on
     // subsequent frames. Mode binding precedes entry to backend report service.
     static bool recorded=false;
@@ -197,30 +197,36 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
     publish_boot_state(outcome, display_ready);
 }
 
-void request_mode_destination(CommunicationBackendId backend, size_t mode_index, const Config &live) {
-#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
-    if (mode_index < live.game_mode_configs_count && live.game_mode_configs[mode_index].managed_format) {
-        // The mailbox has a single menu-core producer. Execute the same checked
-        // destination transaction here on core0 for a physical activation chord.
-        size_t selected = 0, route = 0;
-        const uint32_t id = live.game_mode_configs[mode_index].ultimate_profile_id;
-        if (profile_selection::Persist(persistence, profile_store, ConfigWriteCandidate(), backend,
-                                       id, mode_index, selected, route) != ModeDestinationResult::Saved) return;
-        watchdog_hw->scratch[0] = route + 1;
-        watchdog_hw->scratch[1] = selected + 1;
-        watchdog_hw->scratch[2] = kCommittedModeDestination;
-        reboot_firmware();
-        return;
-    }
-#endif
-    size_t backend_index = 0;
-    const ModeDestinationResult result = persist_mode_destination(
-        persistence, ConfigWriteCandidate(), backend, mode_index, backend_index);
-    if (result != ModeDestinationResult::Saved) return;
+// select_mode consumes a chord once and returns before core0 performs any file
+// I/O. Both phases run in the same loop iteration with the same live backend.
+uint8_t pending_chord_row1 = 0;
+void request_mode_destination(CommunicationBackendId, size_t mode_index, const Config &live) {
+    if (!pending_chord_row1 && mode_index < live.game_mode_configs_count &&
+        mode_index < sizeof(live.game_mode_configs) / sizeof(live.game_mode_configs[0]))
+        pending_chord_row1 = static_cast<uint8_t>(mode_index + 1);
+}
+__attribute__((noinline)) void commit_mode_destination(size_t backend_index, size_t mode_index) {
     watchdog_hw->scratch[0] = backend_index + 1;
     watchdog_hw->scratch[1] = mode_index + 1;
     watchdog_hw->scratch[2] = kCommittedModeDestination;
     reboot_firmware();
+}
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+__attribute__((noinline)) void persist_managed_chord(size_t mode_index) {
+    const auto backend = backends[0]->BackendId();
+    if (backend == COMMS_BACKEND_CONFIGURATOR || backend == COMMS_BACKEND_UNSPECIFIED) return;
+    size_t selected = 0, route = 0;
+    const auto id = config.game_mode_configs[mode_index].ultimate_profile_id;
+    if (profile_selection::Persist(persistence, profile_store, ConfigWriteCandidate(), backend,
+                                   id, mode_index, selected, route) == ModeDestinationResult::Saved)
+        commit_mode_destination(route, selected);
+}
+#endif
+__attribute__((noinline)) void persist_ordinary_chord(size_t mode_index) {
+    size_t route = 0;
+    if (persist_mode_destination(persistence, ConfigWriteCandidate(), backends[0]->BackendId(),
+                                 mode_index, route) == ModeDestinationResult::Saved)
+        commit_mode_destination(route, mode_index);
 }
 
 // Called only by core0, outside output generation. Never lend candidate state
@@ -265,6 +271,11 @@ void enter_recovery_configurator() {
 
 }  // namespace
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+uint32_t profile_selection::GamecubeSelectionPending() {
+    return Pending() || pending_chord_row1 || managed_chord_held(inputs.buttons);
+}
+#endif
 
 __attribute__((noinline)) bool PrepareBootDisplay() {
     // Create GPIO input source and use it to read button states for checking button holds.
@@ -463,6 +474,22 @@ void loop() {
         service_profile_selection();
     }
     select_mode(backends, backend_count, config);
+    if (pending_chord_row1) {
+        const size_t row = pending_chord_row1 - 1;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        if (config.game_mode_configs[row].managed_format) {
+            if (backends[0]->BackendId() != COMMS_BACKEND_GAMECUBE ||
+                static_cast<GamecubeBackend *>(backends[0])->SelectionIdleAdmitted()) {
+                pending_chord_row1 = 0;
+                persist_managed_chord(row);
+            }
+        } else
+#endif
+        {
+            pending_chord_row1 = 0;
+            persist_ordinary_chord(row);
+        }
+    }
     mark_first_mode_ready();
 
     for (size_t i = 0; i < backend_count; i++) {

@@ -114,14 +114,35 @@ def aggregate(old=False, bridge=False):
     gate='void application_service_gate(CommunicationBackend **backends, void (*service_profile_selection)()) {\n'+config[gate_start:gate_end]+'}\n'
     if not old:
         assert 'profile_selection::Pending' not in gate, 'empty-mailbox race may bypass receiver admission'
+    managed_helpers = ''
+    chord_gate = ''
+    if not old and not bridge:
+        defs += '\n#define GLYPH_PACKAGE_V1 1\n'
+        mode = (ROOT / 'src/core/mode_selection.cpp').read_text()
+        sensed = mode[mode.index('bool managed_chord_held('):mode.index('\n#endif', mode.index('bool managed_chord_held('))]
+        pending = config[config.index('uint32_t profile_selection::GamecubeSelectionPending()'):config.index('\n#endif', config.index('uint32_t profile_selection::GamecubeSelectionPending()'))]
+        managed_helpers = '''
+namespace profile_selection { uint32_t GamecubeSelectionPending(); }
+uint8_t pending_chord_row1=0;
+uint32_t managed_chord_rows=0;
+size_t chord_rows=0;
+uint64_t mode_activation_masks[30]{};
+bool mode_chord_consumed=false;
+extern InputState inputs;
+struct {struct {uint32_t managed_format=0;} game_mode_configs[30];} config;
+bool all_buttons_held(const uint64_t &buttons,uint64_t mask){return mask && (buttons&mask)==mask;}
+''' + sensed + '\n' + pending
+        begin=config.index('    if (pending_chord_row1) {',config.index('void loop()'))
+        end=config.index('    mark_first_mode_ready();',begin)
+        chord_gate='void application_chord_gate(CommunicationBackend **backends, void (*persist_managed_chord)(size_t), void (*persist_ordinary_chord)(size_t)) {\n'+config[begin:end]+'}\n'
     parts = [defs,(FIX/'hardware.cpp').read_text(),source('include/gamecube_definitions.h'),
              source('include/joybus.h'), sdk, source('include/GamecubeConsole.hpp'),
-             mailbox,old_source('HAL/pico/include/comms/GamecubeBackend.hpp') if old else
+             mailbox+managed_helpers,old_source('HAL/pico/include/comms/GamecubeBackend.hpp') if old else
              (ROOT/'HAL/pico/include/comms/GamecubeBackend.hpp').read_text(),
              source('src/joybus.c'),source('src/GamecubeConsole.cpp'),
              old_source('HAL/pico/src/comms/GamecubeBackend.cpp') if old else
              (ROOT/'HAL/pico/src/comms/GamecubeBackend.cpp').read_text(),
-             '' if old else gate,(FIX/'scenarios.cpp').read_text()]
+             '' if old else gate+chord_gate,(FIX/'scenarios.cpp').read_text()]
     if bridge:
         # Separate namespace avoids coupling the peripheral doubles to Config,
         # Persistence, enums and private globals in the existing service fixture.
