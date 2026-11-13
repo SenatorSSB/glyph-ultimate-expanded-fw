@@ -26,6 +26,7 @@ class GlyphPackageSourceReader final : public package_storage::NamespaceReader {
     bool Rgb(const char *, size_t, uint8_t[32]) override;
     bool Native(const char *, size_t, const uint8_t *, size_t) override;
     bool LegacyProfile(const uint8_t *, size_t) override;
+    bool LifecycleConfig(const char *, const char *, const package_storage::IntentFacts &) override;
     bool AppendConfig(const char *, const char *) override;
     // Internal candidate only; exact canonical hash/CRC/extent plus configured
     // source predicate. Does not load or overwrite either Config workspace.

@@ -434,7 +434,7 @@ struct ProfileStore::Directory {
     TransactionResult last_result{};
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
     uint8_t managed_aggregate[32]{};
-    uint32_t managed_format = 0, package_sequence = 0;
+    uint32_t managed_format = 0, package_sequence = 0, compaction_sequence = 0;
 #endif
     size_t count = 0;
     Entry entries[kMaxEntries]{};
@@ -513,6 +513,7 @@ namespace {
             std::memcpy(wire + 264, d.managed_aggregate, 32);
             Put32(wire + 296, d.managed_format);
             Put32(wire + 300, d.package_sequence);
+            Put32(wire + 304, d.compaction_sequence);
         }
 #endif
         for (size_t i = 0; i < d.count; ++i) {
@@ -543,6 +544,7 @@ namespace {
             std::memcpy(d->managed_aggregate, wire + 264, 32);
             d->managed_format = Get32(wire + 296);
             d->package_sequence = Get32(wire + 300);
+            d->compaction_sequence = Get32(wire + 304);
         }
 #endif
         d->count = Get16(wire + 6);
@@ -1287,7 +1289,7 @@ bool ProfileStore::ReadProfile(
     auto *wire = ProfileReadWire();
     const int managed_index = Find(id);
     const bool managed = managed_index >= 0 && _directory->entries[managed_index].managed_format;
-    if (managed && (!_package_visible || PackageStorageFence::MutationFenced() || rev != 1 ||
+    if (managed && (!_package_visible || PackageStorageFence::MutationFenced() || rev != _directory->entries[managed_index].revision ||
         !package_storage::RecordPath(path, sizeof(path), id, rev, false))) return false;
 #else
     static uint8_t wire[kMaxRecordWireBytes];
@@ -1307,8 +1309,9 @@ bool ProfileStore::ReadProfile(
     if (managed) {
         const auto &entry = _directory->entries[managed_index];
         if (!package_storage::RecordValid(wire, n) || Get32(wire + 8) != Incarnation() ||
-            Get32(wire + 12) != id || Get32(wire + 72) + 1 != entry.owned_row1 ||
-            Get32(wire + 76) != entry.owned_rgb1) return false;
+            Get32(wire + 12) != id || Get32(wire + 16) != entry.revision ||
+            !package_storage::RecordSlotsMatch(wire, entry.owned_row1, entry.owned_rgb1,
+                                              _directory->compaction_sequence)) return false;
         out = UltimateProfile_init_default;
         return ultimate_native::DecodeProfile(wire + 128, n - 128, out, read_lease) && ValidateProfile(out);
     }
