@@ -1,5 +1,42 @@
 # Glyph Current State
 
+## Accepted package firmware and dashboard integration — 2026-11-13
+
+This owner-authorized integration joins the package-aware source lineage
+286fd3b792bddb71559538b10fe57fae860d643b and scoped hardware result
+f24b7abe2af6f9bb5994f2baa51e1fd6c7ae6df5. Every tracked input outside docs/
+matches exact tested source9e69188d857138a3884bcbe243f22188815e9355, including
+build configuration, schemas, host tools and fixtures. The preserved UF2 is
+1296896bytes, SHA-256
+da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc.
+No rebuild, substitute artifact or new controller action is part of integration.
+
+Two hardware episodes have distinct scope. Parent c439's accepted episode proves
+one managed54 CREATE, exact native readback/receipt and preservation of the26
+prior entries, old Config rows/unrelated fields, RGB/defaults/backend destinations;
+it does not prove activation or gameplay. This9e build separately passes actual
+**KazTest5 / Unknown Plate / XInput** dashboard observation, strict executing
+native53/revision1/schema5 identity before and after, and API-level preservation
+of saved Config, all27 directory entries and all27 raw wrappers. The latter uses
+34 inherited before exchanges plus36 newly observed read-only exchanges.
+
+Exact installation correspondence is accepted owner-reported single-UF2 custody,
+not machine build attestation. Input Viewer naming is **NOT_VISIBLE / NOT_VERIFIED**;
+only its navigation/return is owner-confirmed. Managed activation/display and
+known-plate physical cases remain **NOT_TESTED**. No new gameplay, Nunchuk,
+raw-NOR/filesystem preservation or zero-write claim follows.
+
+Ordinary managed-profile selection remains protected and outstanding. Builder
+must still preserve the selected plate as part of each complete target package
+through local/portable persistence, preview, installation and exact readback;
+this integration neither completes that Builder work nor changes neutral Profile
+schema. Senscope source authority is unchanged. CI maintenance stays deferred;
+known validation CI is red, not a claimed green gate.
+
+See [integration correspondence, review and publication scope](runtime_config/package_active_profile_display/integration_20261113/README.md).
+The preparation snapshots below retain their historical timing; their pending
+hardware/integration statements do not override this accepted integration record.
+
 ## Package-aware display and plate direction — 2026-11-12
 
 The owner-authorized display repair targets package-aware candidate c439b7c6,

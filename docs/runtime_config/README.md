@@ -1,5 +1,8 @@
 # Runtime Config Docs
 
+Current accepted package/dashboard integration: [exact tested source and scoped hardware evidence](package_active_profile_display/integration_20261113/README.md).
+Historical candidate packets remain unchanged; current scope includes unverified Input Viewer naming and outstanding managed selection/Builder plate persistence.
+
 Status label: CURRENT.
 
 [Character profile menu preparation](character_profile_menu/README.md) records

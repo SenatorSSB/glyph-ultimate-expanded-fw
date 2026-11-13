@@ -1,0 +1,118 @@
+{
+  "result": "PASS_FOCUSED_INTEGRATION_CHECKS",
+  "fresh_canonical": "d31a5edd433beca0354e4595c26d0c4b69c085e8",
+  "exact_tested_source": "9e69188d857138a3884bcbe243f22188815e9355",
+  "source_equivalence": "ALL1225_TRACKED_PATHS_OUTSIDE_DOCS_IDENTICAL",
+  "full_delta_from_canonical": "90 non-doc paths; entire package implementation plus nine-path display delta atop c439",
+  "checks": {
+    "display": {
+      "command": "tools/check_glyph_active_profile_display.py",
+      "result": "PASS",
+      "file": "docs/runtime_config/package_active_profile_display/integration_20261113/evidence/display.log.gz",
+      "uncompressed_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455",
+      "compressed_sha256": "166fd1592cef5fca0224d69c9071221bf58f1b38f25a04b8be1e0bf04852bc06"
+    },
+    "package": {
+      "command": "tools/check_glyph_package_components.py --corpus <unchanged B1R2 corpus> --littlefs <retained SDK LittleFS>",
+      "result": "PASS",
+      "file": "docs/runtime_config/package_active_profile_display/integration_20261113/evidence/package.log.gz",
+      "uncompressed_sha256": "9c9cdfd230972af8785c1b6be6bcc0b93c28beeef9ef189460fb7c3917a2601c",
+      "compressed_sha256": "4a791fcbdeaae4bdb7ad07c36958673178af4f07a71bdf839594442ecebbbb77"
+    },
+    "selector": {
+      "command": "tools/check_glyph_controller_profile_selector.py",
+      "result": "PASS",
+      "file": "docs/runtime_config/package_active_profile_display/integration_20261113/evidence/selector.log.gz",
+      "uncompressed_sha256": "deb54042f1c012739bbe539904d83baa509bcf230bf76030f803bae45502a24b",
+      "compressed_sha256": "628d8b659bd8ae94e02175d335ae1cc33c3d7efb0f72d407ba4c1f6a5fdef7a9"
+    },
+    "recovery": {
+      "command": "tools/check_glyph_profile_store_selection_recovery.py",
+      "result": "PASS",
+      "file": "docs/runtime_config/package_active_profile_display/integration_20261113/evidence/recovery.log.gz",
+      "uncompressed_sha256": "5f76c524ac7562b7892ecf5559dee7efcff92874a514b34331df89d2bc7ef7fc",
+      "compressed_sha256": "c63fb4972f7b94c83c839e46b9a961f11910bcfef7b7a8d12792d47d1f00252d"
+    },
+    "persistence": {
+      "command": "tools/check_glyph_profile_store_config_persistence.py",
+      "result": "PASS",
+      "file": "docs/runtime_config/package_active_profile_display/integration_20261113/evidence/persistence.log.gz",
+      "uncompressed_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84",
+      "compressed_sha256": "6c52ac77ca34a58a1615e8a727ab463fcebb42c3f93bc5058330309b352fa425"
+    },
+    "navigation": {
+      "command": "python3 tools/check_glyph_docs_navigation.py",
+      "result": "PASS",
+      "file": "docs/runtime_config/package_active_profile_display/integration_20261113/evidence/navigation.log.gz",
+      "uncompressed_sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206",
+      "compressed_sha256": "deecbd7ebf94fa9301159ac1306be4de7e0dcdad7ef79bae102c477585fef300"
+    }
+  },
+  "host_dependencies": "Existing pinned Nanopb linked into ignored .pio for host tests; immutable B1R2 corpus and retained SDK LittleFS reused; temporary host outputs only. No firmware build or dependency download.",
+  "retained_artifacts": {
+    "firmware.elf": {
+      "sha256": "30e5c15b61d4e2b1822aa521cf7e53ffbab9cfe568f63f792047069f965929ff",
+      "bytes": 5759256,
+      "result": "UNCHANGED_RETAINED_REGULAR_FILE"
+    },
+    "firmware.bin": {
+      "sha256": "8f9f60a2e5bdacd59c8f97a29d00cfcc6387c72005e042a967bf5891ef93b834",
+      "bytes": 648420,
+      "result": "UNCHANGED_RETAINED_REGULAR_FILE"
+    },
+    "firmware.uf2": {
+      "sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+      "bytes": 1296896,
+      "result": "UNCHANGED_RETAINED_REGULAR_FILE"
+    },
+    "firmware.map": {
+      "sha256": "8b9bb82ec6a6a67e9ff94f241b4bb58e1254bf5ce0b7583aad55a77a034f2f00",
+      "bytes": 4712138,
+      "result": "UNCHANGED_RETAINED_REGULAR_FILE"
+    }
+  },
+  "private_originals": {
+    "20261113": {
+      "files": 84,
+      "bytes": 62257,
+      "result": "ALL_ORIGINALS_UNCHANGED"
+    },
+    "20261113-v2": {
+      "files": 251,
+      "bytes": 265275,
+      "result": "ALL_ORIGINALS_UNCHANGED"
+    },
+    "20261113-continuation": {
+      "files": 251,
+      "bytes": 262756,
+      "result": "ALL_ORIGINALS_UNCHANGED"
+    },
+    "20261113-combined-acceptance": {
+      "files": 529,
+      "bytes": 533189,
+      "result": "ALL_ORIGINALS_UNCHANGED"
+    }
+  },
+  "CI": {
+    "accepted_lineage_commit": "286fd3b792bddb71559538b10fe57fae860d643b",
+    "validation": "FAILURE",
+    "build": "SKIPPED",
+    "validation_job": "https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/actions/runs/43405063593/job/131817277577",
+    "build_job": "https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/actions/runs/43405063593/job/131817394926",
+    "maintenance": "DEFERRED_BY_OWNER; NO_CHECK_OR_PROTECTION_CHANGED",
+    "aggregate_PASS_claimed": false
+  },
+  "branch_protection_observation": {
+    "endpoint": "repos/SenatorSSB/glyph-ultimate-expanded-fw/branches/configurator/protection",
+    "HTTP": 404,
+    "message": "Branch not protected",
+    "publication_blocker_observed": false
+  },
+  "initial_recording_setup_issue": "Direct importlib custody-helper load lacked tools on sys.path; corrected by ordinary tools import. No firmware/source change and no artifact/private-original mutation.",
+  "docs_navigation": "PASS",
+  "diff_check": "PASS",
+  "firmware_builds": 0,
+  "controller_access": false,
+  "host_hardware_executors_run": false,
+  "Senscope_source_repins": 0
+}

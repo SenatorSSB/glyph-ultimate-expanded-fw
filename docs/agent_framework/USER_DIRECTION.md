@@ -630,3 +630,25 @@ small candidate-specific hardware display proposal separating host-tested manage
 cases from physically reachable cases. No flash, controller access, installed
 profile mutation, configurator merge or Senscope source-authority repin is
 authorized. Hardware acceptance requires a separate owner-approved step.
+
+
+## Canonical package and dashboard integration — 2026-11-13
+
+Direct owner directive authorizes canonical Glyph integration of accepted source
+286fd3b792bddb71559538b10fe57fae860d643b and combined result
+f24b7abe2af6f9bb5994f2baa51e1fd6c7ae6df5 after full tracked non-documentation
+source equivalence and focused independent integration review. Exact tested
+source9e69188d857138a3884bcbe243f22188815e9355 / retained UF2
+SHA256da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc /
+1296896bytes remain the authority. No firmware behavior change, controller access,
+rebuild, artifact substitution or Senscope source repin is authorized.
+
+Keep parent c439 CREATE/readback/preservation distinct from9e dashboard/executing
+identity/API-preservation PASS. Installation is owner-reported, not machine build
+attestation. Input Viewer name is NOT_VISIBLE/NOT_VERIFIED; managed activation/
+display and known-plate physical cases NOT_TESTED. Ordinary managed selection and
+Builder plate persistence remain outstanding; neutral Profile schema unchanged.
+Preserve all historical packets, terminal records, originals and retained artifacts.
+CI maintenance remains deferred; report known red status, never disable checks,
+change protections or treat red as green. Publish reviewed integration normally
+without force-push, verify live configurator, then stop.
