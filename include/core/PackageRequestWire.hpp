@@ -306,6 +306,7 @@ inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &p
         const unsigned tag=unsigned(key>>3),type=unsigned(key&7);
         wire::Rule rule;
         if(tag<=previous||!wire::RuleFor(wire::Message::Envelope,tag,rule))return false;
+        if(phase.request.protocol_version==3 && tag>26)return false;
         previous=tag;
         if(rule.kind==wire::Kind::Scalar) {
             if(type||!wire::Varint(bytes,size,at,value)||(!value&&tag!=30)||
@@ -313,7 +314,7 @@ inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &p
             switch(tag) {
             case 1:phase.request.protocol_version=uint32_t(value);break;
             case 2:phase.request.request_token=value;break;
-            case 3:if(value!=1&&(value<15||value>20))return false;
+            case 3:if((value!=1&&(value<15||value>20)) || (phase.request.protocol_version==3 && value>16))return false;
                 phase.request.operation=static_cast<PackageOperation>(value);break;
             case 21:phase.request.expected_store_incarnation=uint32_t(value);break;
             default:break;
@@ -323,6 +324,7 @@ inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &p
             at+=size_t(value);
         }
     }
+    if(phase.request.protocol_version==3 && size>4564)return false;
     return (phase.request.protocol_version==3||phase.request.protocol_version==4)&&phase.request.request_token&&
         (phase.request.operation==PackageOperation_PACKAGE_STATUS||
          ((phase.request.operation==PackageOperation_CREATE_PACKAGE||phase.request.operation==PackageOperation_QUERY_PACKAGE||LifecycleOperation(phase.request.operation))&&
