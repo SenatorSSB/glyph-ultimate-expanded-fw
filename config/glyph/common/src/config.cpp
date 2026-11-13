@@ -93,7 +93,7 @@ void time_boot_stage(boot_diagnostics::Stage stage) {
     default: break;
     }
 }
-void mark_first_mode_ready() {
+__attribute__((noinline)) void mark_first_mode_ready() {
     // Single writer (core0); no lock, calls to millis or backend queries on
     // subsequent frames. Mode binding precedes entry to backend report service.
     static bool recorded=false;
