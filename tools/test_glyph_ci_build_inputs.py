@@ -75,9 +75,13 @@ class FirmwareInputs(unittest.TestCase):
                 maintenance = root / "tools/glyph_ci_build_inputs.py"
                 maintenance.write_text("maintenance\n")
                 commit()
-                scope.verify_current_package(root)
+                self.assertEqual(scope.verify_current_package(root)["status"], "EXACT_INPUTS_OUTSIDE_CI_MAINTENANCE")
                 source.write_text("changed\n")
                 commit()
+                result = scope.current_package_comparison(root)
+                self.assertEqual(result["outside_maintenance_paths"], ["src/controller.cpp"])
+                self.assertFalse(result["new_hardware_acceptance"])
+                self.assertEqual(result["status"], "CHANGED_INPUTS_HARDWARE_PENDING")
                 with self.assertRaisesRegex(ValueError, "src/controller.cpp"):
                     scope.verify_current_package(root)
                 source.write_text("accepted\n")

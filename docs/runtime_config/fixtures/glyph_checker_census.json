@@ -1548,7 +1548,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 37940,
+      "file_size_bytes": 39571,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1577,7 +1577,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 697,
+      "line_count": 730,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1629,6 +1629,7 @@
         "docs/runtime_config/runtime_config_webserial_device_write_source_authority.md",
         "include/committed.hpp",
         "include/core/config_button_validation.hpp",
+        "src/added.cpp",
         "src/committed.cpp",
         "src/configurator_only.cpp",
         "src/gp_val037_guard_negative.cpp",
@@ -1637,6 +1638,7 @@
         "src/renamed.cpp",
         "src/staged.cpp",
         "src/unstaged.cpp",
+        "tools/changed.py",
         "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
         "tools/glyph_campaign_transition.py",
         "tools/glyph_hardware_correspondence.py",
@@ -1651,7 +1653,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "493802cdeebe892ac014e9c6f21c3f96e82f94a193e161178c9945cc83126699",
+      "sha256": "5861a89bb3dd813e3cbe76e9d91d9af9cbc9b65e465d5580d151d0cbde6eb7fa",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

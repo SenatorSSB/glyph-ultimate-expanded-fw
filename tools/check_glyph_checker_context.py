@@ -98,8 +98,7 @@ def campaign_guard_tests() -> None:
         run(root, "config", "user.email", "guard-control@example.invalid")
         run(root, "branch", "-f", "configurator", ADOPTION)
         guard_main(root, False)
-        for relative in (GUARD, "tools/glyph_campaign_transition.py", "tools/glyph_hardware_correspondence.py",
-                         *[str(p.relative_to(source)) for p in sorted((source / "tools").glob("glyph_c*_campaign_transition.py"))]):
+        for relative in (GUARD, "tools/glyph_campaign_transition.py", "tools/glyph_hardware_correspondence.py"):
             shutil.copyfile(source / relative, root / relative)
         # This disposable control is the pre-transition baseline, even when the
         # test itself runs from an accepted-phase repository. Never transplant
@@ -472,6 +471,36 @@ def campaign_protected_scope_tests() -> None:
           "protected source, executable mode, unknown metadata and alias negatives per main")
 
 
+def current_package_guard_tests():
+    import check_glyph_runtime_config_webserial_device_write_source_authority as guard
+
+    def rejected(check, *args):
+        try:
+            check(*args)
+        except guard.WebSerialSourceAuthorityError:
+            return
+        raise AssertionError("source authority negative accepted: " + check.__name__)
+
+    source = guard.DOC.read_text()
+    for phrase in (*guard.REQUIRED_PHRASES, *guard.REQUIRED_REFERENCES):
+        rejected(guard.require_phrases, source.replace(phrase, ""))
+    rejected(guard.ensure_flag_false, source + "\nDEVICE_WRITE_IMPLEMENTATION_ALLOWED_BY_SOURCE_AUDIT=true")
+    for claim in ("WebSerial/device write is implemented", "Runtime-loaded config is implemented",
+                  "Firmware flashing automation is implemented", "Hardware validation is claimed"):
+        rejected(guard.ensure_no_positive_claims, source + "\n" + claim)
+    with tempfile.TemporaryDirectory(prefix="glyph-current-guard-") as directory:
+        root = Path(directory)
+        for marker in guard.FORBIDDEN_SOURCE_MARKERS:
+            write(root, "src/added.cpp", marker)
+            with patch.object(guard, "REPO_ROOT", root):
+                rejected(guard.ensure_no_runtime_write_symbols_added)
+        for marker in guard.FLASHING_MARKERS:
+            write(root, "tools/changed.py", marker)
+            with patch.object(guard, "REPO_ROOT", root):
+                rejected(guard.ensure_no_flashing_automation_changed, ["tools/changed.py"])
+    print("current package WebSerial document, source markers and flashing guards passed")
+
+
 def main() -> int:
     with tempfile.TemporaryDirectory(prefix="glyph-checker-context-") as directory:
         root = fresh_repo(Path(directory))
@@ -666,8 +695,12 @@ def main() -> int:
         "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
         "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
     ), PROTECTED_SCOPE_MAINS[:3], "gp_val041", detached=True)
-    campaign_guard_tests()
-    campaign_protected_scope_tests()
+    from glyph_ci_package_scope import package_lineage
+    if package_lineage(Path(__file__).resolve().parents[1]):
+        current_package_guard_tests()
+    else:
+        campaign_guard_tests()
+        campaign_protected_scope_tests()
 
     case_ids = (
         "CTX-01-valid-feature-branch",
