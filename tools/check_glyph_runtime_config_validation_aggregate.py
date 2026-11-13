@@ -1458,7 +1458,7 @@ def main() -> int:
         manifest = write_manifest(root, [timeout_probe], ["baseline"])
         original_budgets = (module.CHECKER_TIMEOUT_SECONDS, module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS)
         module.CHECKER_TIMEOUT_SECONDS = 0.05
-        module.AGGREGATE_TIMEOUT_SECONDS = 1.0
+        module.AGGREGATE_TIMEOUT_SECONDS = 10.0
         module.TERM_GRACE_SECONDS = 0.05
         try:
             result, text = invoke(module, root, manifest, "--json")

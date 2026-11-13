@@ -4,13 +4,11 @@
 from __future__ import annotations
 
 import json
-import io
 import hashlib
 import os
 import subprocess
 import sys
 import shutil
-import tarfile
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -116,37 +114,28 @@ def canonical_snapshot() -> tuple[str, str, str, str]:
 
 
 def temporary_repository(branch: str) -> tempfile.TemporaryDirectory[str]:
-    archive = subprocess.run(
-        ["git", "archive", "--format=tar", "HEAD"],
-        cwd=REPO_ROOT,
-        capture_output=True,
-        check=True,
-    ).stdout
     directory = tempfile.TemporaryDirectory(prefix="glyph_candidate_generation_")
     root = Path(directory.name)
-    with tarfile.open(fileobj=io.BytesIO(archive), mode="r:") as tar:
-        tar.extractall(root)
-    tracked = subprocess.run(
-        ["git", "ls-files", "-z"], cwd=REPO_ROOT, capture_output=True, check=True
-    ).stdout.split(b"\0")
-    for raw_path in tracked:
-        if not raw_path:
-            continue
-        relative = Path(raw_path.decode())
-        source = REPO_ROOT / relative
-        destination = root / relative
+    subprocess.run(["git", "clone", "--local", "--no-hardlinks", "--no-checkout", str(REPO_ROOT), str(root)],
+                   check=True, capture_output=True)
+    subprocess.run(["git", "remote", "remove", "origin"], cwd=root, check=True)
+    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True).strip()
+    subprocess.run(["git", "switch", "-C", branch, revision], cwd=root, capture_output=True, check=True)
+    # Preserve deliberately edited tracked input bytes in direct developer runs.
+    dirty = subprocess.check_output(["git", "diff", "--name-only", "-z", "HEAD"], cwd=REPO_ROOT)
+    for relative in filter(None, dirty.decode().split("\0")):
+        source, target = REPO_ROOT / relative, root / relative
+        if target.exists() or target.is_symlink():
+            target.unlink()
         if source.is_symlink():
-            destination.unlink(missing_ok=True)
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.symlink_to(source.readlink())
+            target.symlink_to(source.readlink())
         elif source.is_file():
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source, destination)
-    subprocess.run(["git", "init", "-b", branch], cwd=root, capture_output=True, text=True, check=True)
-    subprocess.run(["git", "config", "user.name", "Glyph checker"], cwd=root, check=True)
-    subprocess.run(["git", "config", "user.email", "glyph-checker@example.invalid"], cwd=root, check=True)
-    subprocess.run(["git", "add", "--all"], cwd=root, check=True)
-    subprocess.run(["git", "commit", "-m", "controlled checker snapshot"], cwd=root, capture_output=True, check=True)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
+    if dirty:
+        subprocess.run(["git", "add", "-A"], cwd=root, check=True)
+        subprocess.run(["git", "-c", "user.name=Glyph checker", "-c", "user.email=glyph-checker@example.invalid",
+                        "commit", "-m", "controlled checker snapshot"], cwd=root, check=True, capture_output=True)
     if tracked_bytes_snapshot(root) != tracked_bytes_snapshot(REPO_ROOT):
         directory.cleanup()
         fail("temporary repository does not match exact tracked stage-0 bytes")

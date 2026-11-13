@@ -1,5 +1,5 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "categories": [
     "baseline",
     "source_sync",
@@ -23,8 +23,8 @@
         "transition035"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "transition035"
@@ -261,9 +261,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config019_usb_name_selection",
@@ -275,8 +275,8 @@
         "usb019"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "usb019"
@@ -522,9 +522,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_kbd_001_keyboard_pipeline",
@@ -536,8 +536,8 @@
         "kbd001"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "kbd001"
@@ -781,9 +781,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_val034_c014_transition",
@@ -793,8 +793,8 @@
         "tools/test_glyph_c014_campaign_transition.py"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_repository_only",
       "source_dependencies": [
@@ -811,9 +811,9 @@
         "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
         "docs/runtime_config/gp_val041_usb_name_current_acceptance.md"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "Finite014 candidate and accepted source chain, predecessor020 preservation, separate source-free processor and actual integration guards, immutable source/mode/path/history negatives. Synthetic tests confer no hardware acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current package source correspondence, read-only WebSerial guards and stage-zero package input boundary tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config014_modifier_capacity",
@@ -825,8 +825,8 @@
         "modifier014"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "modifier014"
@@ -1064,9 +1064,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config_007_transaction_stage_schema",
@@ -1098,8 +1098,8 @@
         "tools/check_glyph_config_010_mode_activation_capacity.py"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_file_only",
       "source_dependencies": [
@@ -1120,9 +1120,9 @@
         "config/glyph/env.ini",
         "docs/agent_framework/GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-CONFIG-010 exact-production mode-selection sanitizer coverage and authenticated generated-capacity correspondence for current clean checkouts; no schema, persistence, device, Nunchuk, or hardware claim"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current Nanopb schema generation, decoder, bounded RGB/button/mode validation, selector and target build. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config_012_button_mask_characterization",
@@ -1134,8 +1134,8 @@
         "button012"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "button012"
@@ -1382,9 +1382,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config_013_usb_default_characterization",
@@ -1396,8 +1396,8 @@
         "usb013"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "usb013"
@@ -1645,9 +1645,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config020_button_validation",
@@ -1659,8 +1659,8 @@
         "button020"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_only",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "button020"
@@ -1911,9 +1911,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_prov_014_decoder_closure",
@@ -1923,8 +1923,8 @@
         "tools/check_glyph_gp_prov_014_decoder_closure.py"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
@@ -1938,9 +1938,9 @@
         "tools/fixtures/mode_selection_host/generated/nanopb.library.json",
         "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-PROV-014 exact observed Nanopb 0.4.92 decoder/generator closure for one configurator snapshot; optional explicit clean-resolution byte verification, no future pin or decoder behavior claim"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current Nanopb schema generation, decoder, bounded RGB/button/mode validation, selector and target build. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config_010_integration_semantic_correspondence",
@@ -1950,8 +1950,8 @@
         "tools/check_glyph_config_010_integration_semantic_correspondence.py"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
@@ -1964,9 +1964,9 @@
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "proves accepted GP-CONFIG-010 mode-selection bytes, 28-table baseline and finite reviewed descendant scope; --historical retains exact integration-candidate identity proof"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "configurator_setconfig_transaction",
@@ -1978,8 +1978,8 @@
         "transaction005"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "transaction005"
@@ -2229,9 +2229,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "current_config_persistence_recovery_research",
@@ -2243,8 +2243,8 @@
         "persistence"
       ],
       "category": "baseline",
-      "applicability": "current",
-      "branch_policy": "content_only",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "persistence"
@@ -2486,9 +2486,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "getconfig_raw_load_characterization",
@@ -2500,8 +2500,8 @@
         "raw_get"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "raw_get"
@@ -2751,9 +2751,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "neopixel_null_sendreport_characterization",
@@ -2765,8 +2765,8 @@
         "neopixel016_017"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "neopixel016_017"
@@ -3008,9 +3008,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "setconfig_runtime_rebinding_characterization",
@@ -3022,8 +3022,8 @@
         "rebind008"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "rebind008"
@@ -3262,9 +3262,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "config_menu_invalid_state_characterization",
@@ -3276,8 +3276,8 @@
         "menu009"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "menu009"
@@ -3529,9 +3529,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "custom_modifier_cache_characterization",
@@ -3543,8 +3543,8 @@
         "modifier011"
       ],
       "category": "configurator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "modifier011"
@@ -3794,9 +3794,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "runtime_config_storage_fallback",
@@ -4074,8 +4074,8 @@
         "tools/check_glyph_identity_runtime_table_source_sync.py"
       ],
       "category": "source_sync",
-      "applicability": "current",
-      "branch_policy": "content_only",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
@@ -4084,9 +4084,9 @@
         "docs/runtime_config/fixtures/generated_adapter_correspondence.json",
         "tools/extract_glyph_identity_runtime_tables.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "current bridge and generated adapter correspondence match source"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "runtime_semantics_evaluator_bridge",
@@ -4096,8 +4096,8 @@
         "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py"
       ],
       "category": "source_sync",
-      "applicability": "current",
-      "branch_policy": "content_only",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
@@ -4114,9 +4114,9 @@
         "docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json",
         "tools/extract_glyph_identity_runtime_tables.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "current evaluator bridge and four current authority documents match the source-derived 28-table corpus"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "current_x1_regression_subset",
@@ -4264,8 +4264,8 @@
         "tools/check_glyph_generated_source_owned_generator_contract.py"
       ],
       "category": "generator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_repository_only",
       "source_dependencies": [
@@ -4275,9 +4275,9 @@
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "inert generator contract"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "generated_baseline_artifact",
@@ -4287,8 +4287,8 @@
         "tools/check_glyph_generated_source_owned_baseline_artifact.py"
       ],
       "category": "generator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
@@ -4301,9 +4301,9 @@
         "tools/glyph_campaign_transition.py",
         "tools/glyph_checker_context.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "active compile-time table-content source through UltimateIdentityRuntimeTables.hpp; source-owned active-view publication remains unchanged"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "artifact_install",
@@ -4313,8 +4313,8 @@
         "tools/check_glyph_generated_source_owned_artifact_install.py"
       ],
       "category": "generator",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_file_only",
       "source_dependencies": [
@@ -4326,9 +4326,9 @@
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "inert install contract"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "source_authority_intake",
@@ -4383,8 +4383,8 @@
         "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
       ],
       "category": "coordinate_native",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_file_only",
       "source_dependencies": [
@@ -4393,9 +4393,9 @@
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "offline coordinate profile contract"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "table_symbol_map",
@@ -4405,16 +4405,16 @@
         "tools/check_glyph_source_owned_table_symbol_map.py"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_only",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
         "src/modes/Ultimate.cpp"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "active publication boundary"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current native oracle, 28 tables, two ABIs and actual source mutation controls. Original proof remains at its recorded milestone."
     },
     {
       "id": "candidate_diff",
@@ -4478,8 +4478,8 @@
         "tools/check_glyph_docs_agent_surface.py"
       ],
       "category": "docs",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
@@ -4490,9 +4490,9 @@
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "agent-facing documentation boundary"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current package source correspondence, read-only WebSerial guards and stage-zero package input boundary tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "agent_framework",
@@ -4639,8 +4639,8 @@
         "--campaign-transition"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--campaign-transition"
       ],
@@ -4658,9 +4658,9 @@
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-037 authenticated campaign actual-main guard; legacy Step15 separately retained"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current package source correspondence, read-only WebSerial guards and stage-zero package input boundary tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config017_neopixel_repaired_current",
@@ -4672,8 +4672,8 @@
         "neopixel016_017"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "neopixel016_017"
@@ -4914,9 +4914,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config021_persisted_recovery",
@@ -4928,8 +4928,8 @@
         "recovery021"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "recovery021"
@@ -5183,9 +5183,9 @@
         "tools/test_glyph_c021_campaign_transition.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_val038_c021_transition",
@@ -5197,8 +5197,8 @@
         "transition038"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [
         "--consumer",
         "transition038"
@@ -5445,9 +5445,9 @@
         "tools/run_glyph_runtime_config_validation.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "GP-VAL-039 preserves this unchanged predecessor observation at its authenticated immutable root. The separately mandatory C022 current proof executes the changed RGB wrapper/default boundary; this lane claims no new controller acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config022_rgb_target_validation",
@@ -5457,8 +5457,8 @@
         "tools/check_glyph_c022_proof_replay.py"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_file_only",
       "source_dependencies": [
@@ -5680,9 +5680,9 @@
         "tools/run_glyph_runtime_config_validation.py",
         "tools/test_glyph_c022_campaign_transition.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "Authenticated immutable C022 host proof under both enum layouts, complete209input closure, real decoder/SET/load/startup/static/dynamic consumers and negative controls. Native exact mode/blob admission resolves only the retained original CLI predicate failure; no target build or hardware acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current two-ABI configuration/selector, persisted recovery, NeoPixel null/recovery, native mutation and actual LittleFS package tests. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_config023_usb_index_validation",
@@ -5715,8 +5715,8 @@
         "tools/check_glyph_gp_config024_usb_profile_identity.py"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_file_only",
       "source_dependencies": [
@@ -5732,9 +5732,9 @@
         "tools/fixtures/gp_config024_usb_profile_identity/include/host_stubs.hpp",
         "tools/fixtures/gp_config024_usb_profile_identity/main.cpp"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "Compile and run the exact SetUsbBackend body in both host enum modes with sanitizers; prove count/extent-safe refusal has no effects and matched Config row pointer identity selects exactly one row while preserving all other selector behavior."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current Nanopb schema generation, decoder, bounded RGB/button/mode validation, selector and target build. Original proof remains at its recorded milestone."
     },
     {
       "id": "gp_val039_c022_transition",
@@ -5744,8 +5744,8 @@
         "tools/test_glyph_c022_campaign_transition.py"
       ],
       "category": "candidate_safety",
-      "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "temporary_file_only",
       "source_dependencies": [
@@ -5967,9 +5967,9 @@
         "tools/prepare_glyph_gp_config022_compatibility.py",
         "tools/run_glyph_runtime_config_validation.py"
       ],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "Finite exact C022/E source transition, native accepted021 predecessor, protected checker bodies, current/index/live custody and pending genuineM/F/R/E/I chronology. Actual isolated negatives and separately labelled synthetic future lifecycle controls; no hardware acceptance."
+      "load_bearing": false,
+      "historical": true,
+      "reason": "Closed pre-package campaign contract. Current replacement: current package source correspondence, read-only WebSerial guards and stage-zero package input boundary tests. Original proof remains at its recorded milestone."
     }
   ],
   "strong_signal_exclusions": [

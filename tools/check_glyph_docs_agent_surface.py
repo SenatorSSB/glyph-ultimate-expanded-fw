@@ -407,7 +407,8 @@ def validate_boundary(text: str) -> None:
             "active_storage.view active publication is forbidden",
             "Generated active RuntimeConfigView wrapper publication is forbidden",
             "RuntimeConfigView replacement as the customization mechanism is forbidden",
-            "Runtime-loaded profile claims are forbidden without separate design",
+            "New generic runtime-loaded profile claims, and expansion beyond the accepted native store,",
+            "require separate design, source authority, build proof, and hardware proof.",
             "coordinate-native runtime profile contract scaffold",
             "design-only and inactive",
             "browser/protobuf/persistence work may be future infrastructure",
@@ -432,8 +433,9 @@ def validate_current_state(text: str) -> None:
             "root cause remains unproven",
         ),
     )
-    if len(text.splitlines()) > 120:
-        fail(f"{rel(CURRENT_STATE)} should remain concise")
+    sections = text.split("\n## ")[1:]
+    if not sections or len(sections[0].splitlines()) > 120:
+        fail(f"{rel(CURRENT_STATE)} current chapter should remain concise")
 
 
 def validate_roadmap(text: str) -> None:

@@ -12,7 +12,7 @@
     {
       "path": ".github/workflows/build.yml",
       "git_mode": "100644",
-      "sha256": "2763b069acbedcc588502522ca0239498c6789bb124f115b960cd19b350e67dd"
+      "sha256": "b3cfd8e76bb35d765c078d0e1658c3290c6f4e9fc8a3c8535f89e26b83ac9a1a"
     },
     {
       "path": "builder_scripts/arduino_pico.py",

@@ -142,6 +142,20 @@ jobs:
         git -C .pio/libdeps/glyph_mk6/Nanopb checkout --detach FETCH_HEAD
         test "$(git -C .pio/libdeps/glyph_mk6/Nanopb rev-parse HEAD)" = cad3c18ef15a663e30e3e43e3a752b66378adec1
 
+    - name: Resolve immutable public package test dependencies
+      run: |
+        git init -q "$RUNNER_TEMP/framework"
+        git -C "$RUNNER_TEMP/framework" fetch --depth=1 https://github.com/earlephilhower/arduino-pico.git 32e74d024e5e3ee5e7ec9593f5a4101641c61897
+        git -C "$RUNNER_TEMP/framework" checkout --detach FETCH_HEAD
+        test "$(git -C "$RUNNER_TEMP/framework" rev-parse HEAD)" = 32e74d024e5e3ee5e7ec9593f5a4101641c61897
+        git -C "$RUNNER_TEMP/framework" submodule update --init --depth=1 libraries/LittleFS/lib/littlefs
+        test "$(git -C "$RUNNER_TEMP/framework/libraries/LittleFS/lib/littlefs" rev-parse HEAD)" = 6a53d76e90af33f0656333c1db09bd337fa75d23
+        echo "GLYPH_ARDUINOPICO_FRAMEWORK=$RUNNER_TEMP/framework" >> "$GITHUB_ENV"
+        git init -q .pio/libdeps/glyph_mk6/PacketIO
+        git -C .pio/libdeps/glyph_mk6/PacketIO fetch --depth=1 https://github.com/eric-wieser/packet-io.git bb8387bf2d0ca9b87c141ee32992a42ce6be3b0b
+        git -C .pio/libdeps/glyph_mk6/PacketIO checkout --detach FETCH_HEAD
+        test "$(git -C .pio/libdeps/glyph_mk6/PacketIO rev-parse HEAD)" = bb8387bf2d0ca9b87c141ee32992a42ce6be3b0b
+
     - name: Current host regressions
       run: |
         python3 tools/test_glyph_ci_build_inputs.py
@@ -157,3 +171,6 @@ jobs:
         python3 tools/check_glyph_profile_store_selection_recovery.py
         python3 tools/check_glyph_profile_store_config_persistence.py
         python3 tools/check_glyph_profile_store_production_tool.py
+        python3 tools/check_glyph_profile_store_littlefs_host.py
+        python3 tools/glyph_ci_current_firmware.py
+        python3 tools/glyph_ci_current_package_tests.py
