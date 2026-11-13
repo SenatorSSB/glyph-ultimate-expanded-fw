@@ -1,0 +1,31 @@
+{
+  "result": "DONE_FOCUSED_INDEPENDENT_INTEGRATION_REVIEW",
+  "reviewer": "/root/v2_final_review",
+  "reviewed_candidate": "29a72ceb2d235f3908c4ab2b8a77919984b031be",
+  "reporting_qualification_rechecked_at": "08c76127d5abc5fc76446b8818218ddec0c32550",
+  "fresh_canonical_required": "d31a5edd433beca0354e4595c26d0c4b69c085e8",
+  "tracked_non_doc_inputs_verified": 1225,
+  "changed_non_doc_paths_from_canonical": 90,
+  "historical_documents_preserved": 6124,
+  "later_host_docs_scripts_preserved": 12,
+  "source_join_and_evidence_ancestry": "PASS_GENUINE_MERGES",
+  "retained_artifacts": 4,
+  "private_inventories": 4,
+  "validation_logs": "ALL6_COMPRESSED_AND_UNCOMPRESSED_HASHES_MATCH",
+  "documentation_navigation": "PASS",
+  "integration_docs_whitespace": "PASS",
+  "whole_range_whitespace": "INHERITED_GENERATED_FIXTURE_EXTRA_BLANK_LINE_PRESERVED_EXACTLY",
+  "acceptance_scope": "Parent CREATE distinct from9e dashboard/native53/API-preservation PASS; installation owner-reported; Input Viewer name not visible/unverified; managed/known-plate physical cases untested; selection/Builder plate work outstanding.",
+  "CI": "KNOWN_RED_DEFERRED_NO_BYPASS_OR_PROTECTION_CHANGE",
+  "material_findings": [],
+  "files": {
+    "CORRESPONDENCE.json": "09f651820fc46385b2762e2375fb04ebc8f2590ee06f9fc45912c545856431bc",
+    "README.md": "0ba69cb61851f91fc542632463e69b9a285f5b37ac9055bb706dda2bfef77892",
+    "VALIDATION.json": "248dd5a85af2012887ef0ecc7b8f3b72936206c81e1c401d3757a09a41b364a1",
+    "verify_correspondence.py": "cc9d7ac1a404344d12b4c8ec99e23e880b691ef49c369cdaca1c16b4486ceb7f"
+  },
+  "publication_clearance": "Normal non-force fast-forward after exact fresh canonical check.",
+  "reviewer_device_access": false,
+  "reviewer_firmware_builds": 0,
+  "reviewer_publication": false
+}
