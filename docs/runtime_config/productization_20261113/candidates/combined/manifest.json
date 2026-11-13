@@ -1,0 +1,91 @@
+{
+  "source": "84556d904f067bda5a101e6297689239ecd04aae",
+  "classification": "pre-hardware candidate; physical acceptance pending",
+  "files": {
+    "firmware.bin": {
+      "stored": "firmware.bin.gz",
+      "bytes": 663212,
+      "sha256": "3e9336815f2eb2176601738b9c20af9645a12cb6a2b399ef059c088023546bb9"
+    },
+    "firmware.uf2": {
+      "stored": "firmware.uf2",
+      "bytes": 1326592,
+      "sha256": "6b3fd3e2f71b839e7448ab6b0daa54e5d4f1d6473d0df917849413e3f4227ddb"
+    },
+    "firmware.elf": {
+      "stored": "firmware.elf.gz",
+      "bytes": 5763636,
+      "sha256": "4fd3e2a0cea3246115a31f41195ed1df0ba7294cc98a08b9c7711327c36a0f8f"
+    },
+    "firmware.map": {
+      "stored": "firmware.map.gz",
+      "bytes": 3805905,
+      "sha256": "49d5e22b9930d143ce31db931adf3834908569004e8cf8eb34de4f10e16b6ed1"
+    },
+    "build.log": {
+      "stored": "build.log.gz",
+      "bytes": 47660,
+      "sha256": "e3d79d7aa85d9673d5a7530bd7b93110fde8804dd74055e498391491b430d963"
+    },
+    "resource/summary.json": {
+      "stored": "summary.json.gz",
+      "bytes": 3473,
+      "sha256": "27863258cb929376499e7de2a3bb294d6a5f4282387f31f8658553c5a31199e4"
+    },
+    "resource/startup.json": {
+      "stored": "startup.json.gz",
+      "bytes": 1691,
+      "sha256": "c3c191e3e95a8a4bb25b9dda1a71948cc56fb9b7cee7f7a8d5355177992c9852"
+    },
+    "resource/display-stack-result.json": {
+      "stored": "display-stack-result.json.gz",
+      "bytes": 586,
+      "sha256": "d905d79fbfbe2e1fd2926e3798514dd2a80b719f874812ecb67c7d51f2ed0ea3"
+    },
+    "resource/functions.json": {
+      "stored": "functions.json.gz",
+      "bytes": 3407271,
+      "sha256": "928a8a4d2640a0f5f94f41f1531983df7569181ca98adc1be2d2ff4b1a6a062e"
+    },
+    "resource/vtables.json": {
+      "stored": "vtables.json.gz",
+      "bytes": 381549,
+      "sha256": "df4ea77735140f52e4264405222158cc6ab41ff3e45377512e06d8d704eb296a"
+    },
+    "combined.json": {
+      "stored": "combined.json.gz",
+      "bytes": 60579,
+      "sha256": "b47477f9be8ccabcef82dc53cbb283cdca4896d5b9b1d5fc622675b3c832be68"
+    },
+    "productization-84556d90-selector-verified.log": {
+      "stored": "productization-84556d90-selector-verified.log.gz",
+      "bytes": 3380,
+      "sha256": "a4e3442f4162f69bba698e2b973cf33130a8596e2e0aacc9e041902e1befef48"
+    },
+    "productization-84556d90-boot_detection_regressions.log": {
+      "stored": "productization-84556d90-boot_detection_regressions.log.gz",
+      "bytes": 735,
+      "sha256": "83fe4f24fde857945661b71d9670a283381321cebfc344fcd5858eda604a0928"
+    },
+    "productization-84556d90-historical_config_regressions.log": {
+      "stored": "productization-84556d90-historical_config_regressions.log.gz",
+      "bytes": 124,
+      "sha256": "f13f0155eaae592b322fa8e240d30b5950abc4146a079c8c561e1fecc4cd3f53"
+    },
+    "productization-84556d90-storage_fence_regressions.log": {
+      "stored": "productization-84556d90-storage_fence_regressions.log.gz",
+      "bytes": 87,
+      "sha256": "f662d1226b1e8ab95a6e04a87e1f4f7404298d7b687253f1cfe12825848fc09b"
+    },
+    "productization-84556d90-wire-bounds.log": {
+      "stored": "productization-84556d90-wire-bounds.log.gz",
+      "bytes": 93,
+      "sha256": "b1c05ef09f41a3f12c1a86f644a13857bc02f45806431c353dff6367e32d1c69"
+    },
+    "productization-host-84556d90.log": {
+      "stored": "productization-host-84556d90.log.gz",
+      "bytes": 978,
+      "sha256": "151db2bbe366b2a63de9d17b53c02b7c37935efb114a979d635b9d50dc9a0db8"
+    }
+  }
+}
