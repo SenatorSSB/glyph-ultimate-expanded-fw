@@ -128,6 +128,37 @@ def main():
     def record_name(key, revision):
         return f"/ultpkg-{key:08x}-{revision:08x}.bin"
 
+    def negative_transport(label, requests):
+        folder = out / label
+        folder.mkdir(exist_ok=True)
+        (folder / "batch.bin").write_bytes(batch(requests))
+        invoke("transport", nor, folder / "batch.bin", folder)
+        summary = json.loads((folder / "transport.json").read_text())
+        assert summary["unchanged"] and summary["programs"] == summary["erases"] == 0
+        assert (folder / "after.nor").read_bytes() == nor.read_bytes()
+
+    # Malformed or unsupported wire shapes must never cause a device write.
+    malformed = []
+    rename = request(disk, 18, 301, 1, 1, replacement_name="Ibis")
+    for field, value in [("protocol_version", 3), ("replacement_name", ""), ("replacement_name", "x"*18),
+                         ("target_id", 0), ("expected_revision", 0), ("replacement_rank", 7),
+                         ("package_body", b"not a body")]:
+        altered = pb.PackageEnvelope.FromString(packed(rename))
+        setattr(altered, field, value)
+        malformed.append(packed(altered))
+    malformed.append(packed(rename) + b"\xe0\x01\x01")
+    negative_transport("malformed-wire", malformed)
+    for idx, name in enumerate(("mismatch", "plate", "context")):
+        package = make_body("Wrong")
+        if name == "mismatch":
+            package.row.name = "Different"
+        elif name == "plate":
+            package.row.layout_plate = cfg.LAYOUT_PLATE_UNSPECIFIED
+        else:
+            package.row.button_remapping[0].activates = cfg.BTN_RF3
+        invalid = request(disk, 17, 301 + idx, 1, 1, package_body=packed(package))
+        response, same = operate(nor, invalid, out / ("invalid-" + name))
+        assert response.status != 1 and same == disk
     key = 1
     operations = [(18, {"replacement_name": "Ibis"}), (19, {"replacement_rank": 0}),
                   (17, {"package_body": packed(make_body("Updated", False))}),
@@ -135,6 +166,25 @@ def main():
     report = []
     for n, (op, fields) in enumerate(operations, start=1):
         rev = n
+        if op == 20:
+            # Ordinary saved defaults may refer to a surviving later row. Seed
+            # checked canonical Config bytes, preserving its exact prior. This
+            # uses synthetic NOR only and verifies reindexing against a real save.
+            config = cfg.Config.FromString(disk["/config-v2.bin"][8:])
+            config.communication_backend_configs[0].default_mode_config = 3
+            disk = {**disk, "/config-v2.prev":disk["/config-v2.bin"], "/config-v2.bin":wrap(packed(config))}
+            dump_namespace(disk, out / "survivor-default.bin")
+            nor = out / "survivor-default.nor"
+            invoke("seed", out / "survivor-default.bin", nor)
+            default_config = cfg.Config.FromString(packed(config))
+            default_config.communication_backend_configs[0].default_mode_config = 2
+            default_disk = {**disk, "/config-v2.bin":wrap(packed(default_config))}
+            dump_namespace(default_disk, out / "target-default.bin")
+            default_nor = out / "target-default.nor"
+            invoke("seed", out / "target-default.bin", default_nor)
+            denied, unchanged = operate(default_nor, request(default_disk, 20, 999, key, rev),
+                                        out / "saved-default-refused")
+            assert denied.status == 6 and unchanged == default_disk
         before, original = disk, nor
         req = request(disk, op, 300+n*10, key, rev, **fields)
         folder = out / f"op-{n}-{op}"
@@ -149,7 +199,6 @@ def main():
         old_config = cfg.Config.FromString(before["/config-v2.bin"][8:])
         expected = cfg.Config.FromString(packed(old_config))
         expected.managed_sequence += 1
-        old_row = old_config.game_mode_configs[1]
         target = expected.game_mode_configs[1]
         if op == 18:
             target.name = fields["replacement_name"]
@@ -204,6 +253,14 @@ def main():
         replayed, replay_disk = operate(nor, req, replay)
         assert replayed.status == 1 and replayed.semantic_digest == res.semantic_digest and replay_disk == disk
         assert (replay / "unwound.nor").read_bytes() == nor.read_bytes()
+        conflict = pb.PackageEnvelope.FromString(packed(req))
+        conflict.expected_revision += 1
+        denied, unchanged = operate(nor, conflict, folder / "token-conflict")
+        assert denied.status == 6 and unchanged == disk
+        # Distinguish a valid fresh state guard with a wrong package revision.
+        denied, unchanged = operate(original, request(before, op, req.request_token+2, key, rev+1, **fields),
+                                    folder / "wrong-revision")
+        assert denied.status == 6 and unchanged == before
         stale = pb.PackageEnvelope.FromString(packed(req))
         stale.request_token += 1
         refused, unchanged = operate(nor, stale, folder / "stale")
