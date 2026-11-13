@@ -1,0 +1,78 @@
+{
+  "source": "7d1f6a3ba99627e88dfdaf404e08ff816902ccfc",
+  "lane": "startup",
+  "elf_sha256": "885d500ea5a331f2929e55b1ca08c2a6c284f71ce92424fb315c686e5b9a82d0",
+  "baseline_sha256": "98e3dadd1af9d61d277a4eae3d5722a9b0bb13664ec5f50191715f53e00b627e",
+  "changed": {
+    "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)": [
+      40,
+      48
+    ],
+    "GlyphPackageSourceReader::ObjectAt(unsigned int, package_storage::NamespaceObject&, bool&)": [
+      56,
+      72
+    ],
+    "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)": [
+      56,
+      56
+    ],
+    "GlyphPackageSourceReader::Native(char const*, unsigned int, unsigned char const*, unsigned int)": [
+      40,
+      24
+    ],
+    "GlyphPackageSourceReader::Rgb(char const*, unsigned int, unsigned char*)": [
+      32,
+      48
+    ],
+    "loop": [
+      32,
+      32
+    ],
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)": [
+      8,
+      8
+    ],
+    "package_storage::(anonymous namespace)::Classifier::Run() [clone .constprop.0] [clone .isra.0]": [
+      128,
+      128
+    ],
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      24,
+      40
+    ],
+    "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)": [
+      32,
+      40
+    ]
+  },
+  "added": [
+    "(anonymous namespace)::SelectConfig(char const*, Persistence::PackageConfigFile&)",
+    "(anonymous namespace)::boot_times",
+    "(anonymous namespace)::mark_first_mode_ready()",
+    "GlyphPackageSourceReader::BeginClassification()",
+    "GlyphPackageSourceReader::EndClassification()",
+    "GlyphPackageSourceReader::MaterializeProjection(char const*)",
+    "arduino::Print::print(unsigned long, int)",
+    "boot_timing::Snapshot()",
+    "package_storage::NamespaceReader::BeginClassification()",
+    "package_storage::NamespaceReader::EndClassification()",
+    "transfer_dashboard()"
+  ],
+  "removed": [
+    "setup1::{lambda()#2}::_FUN()"
+  ],
+  "affected_routes": {
+    "arbitrary_config.Classifier::Run()": 2016,
+    "arbitrary_config.Classifier::RunRoots()": 1992,
+    "owned_compact.GlyphPackageSourceReader::Native(": 2016,
+    "owned_compact.GlyphPackageSourceReader::Row(": 2008,
+    "existing_physical_append_stat": 2044,
+    "prepare_aggregate": 1988,
+    "classify_directory": 1612,
+    "ordinary_loop_time_capture": 568
+  },
+  "maximum_affected": 2044,
+  "inherited_legacy_SET_stage": 2048,
+  "limit": 2048,
+  "hardware": false
+}
