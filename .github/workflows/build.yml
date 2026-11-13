@@ -33,6 +33,9 @@ jobs:
         fi
         test -n "$GLYPH_CHECKER_BASE"
         git rev-parse --verify "$GLYPH_CHECKER_BASE"
+        if ! git show-ref --verify --quiet refs/heads/configurator; then
+          git branch configurator refs/remotes/origin/configurator
+        fi
 
     - name: Run current runtime-config validation
       run: python3 tools/run_glyph_runtime_config_validation.py --json

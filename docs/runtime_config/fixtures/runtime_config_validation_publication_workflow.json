@@ -30,7 +30,7 @@
     },
     {
       "path": ".github/workflows/build.yml",
-      "sha256": "f76678a6a5c5dfc88949e0932fd238b2b63e763963643c4737113e5877ad43bd",
+      "sha256": "2763b069acbedcc588502522ca0239498c6789bb124f115b960cd19b350e67dd",
       "events": [
         "push",
         "pull_request"
@@ -86,7 +86,10 @@
       "git fetch --no-tags origin \"configurator:refs/remotes/origin/configurator\"",
       "fi",
       "test -n \"$GLYPH_CHECKER_BASE\"",
-      "git rev-parse --verify \"$GLYPH_CHECKER_BASE\""
+      "git rev-parse --verify \"$GLYPH_CHECKER_BASE\"",
+      "if ! git show-ref --verify --quiet refs/heads/configurator; then",
+      "git branch configurator refs/remotes/origin/configurator",
+      "fi"
     ]
   },
   "required_events": [
