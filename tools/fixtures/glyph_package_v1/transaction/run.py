@@ -2,7 +2,7 @@
 """Portable actual-source publication cuts and exact raw-NOR restart proofs."""
 from pathlib import Path
 import argparse,hashlib,json,os,struct,subprocess,sys,zlib
-from build import build
+from build import build, verify_build
 
 def dump_namespace(disk,path):
  b=bytearray(struct.pack('<I',len(disk)))
@@ -24,6 +24,9 @@ def main():
  if a.limit is not None and a.limit<1:ap.error('--limit must be positive')
  if a.start<0:ap.error('--start must be nonnegative')
  out=a.out.resolve();out.mkdir(parents=True,exist_ok=True);corpus=a.corpus.resolve();sys.dont_write_bytecode=True
+ binary=out/'build/package-fault-harness'
+ if not a.no_build:binary=build(a.repo,out/'build',a.framework,a.nanopb)
+ fingerprint=verify_build(a.repo,out/'build')
  sys.path[:0]=[str(corpus/'proof'),str(corpus/'wire'),str(corpus.parents[1]/'tools/research')]
  import glyph_package_storage as m
  import functools
@@ -36,12 +39,6 @@ def main():
  from source_native_oracle import SourceNativeOracle
  from strict import response as strict_response
  oracle=SourceNativeOracle(corpus/'wire');m.CONFIG_VALIDATOR=oracle.check_config;m.NATIVE_VALIDATOR=oracle.check;m.LEGACY_PROFILE_VALIDATOR=oracle.check_profile
- binary=out/'build/package-fault-harness'
- if not a.no_build:binary=build(a.repo,out/'build',a.framework,a.nanopb)
- manifest=json.loads((out/'build/source-manifest.json').read_text());fingerprint=manifest['fingerprint']
- for name,wanted in manifest['files'].items():
-  p=Path(name) if Path(name).is_absolute() else a.repo/name
-  if hashlib.sha256(p.read_bytes()).hexdigest()!=wanted:raise RuntimeError('source/tool changed since build: '+str(p))
  (out/'results.jsonl').write_text('')
  env={**os.environ,'UBSAN_OPTIONS':'halt_on_error=1:print_stacktrace=1','ASAN_OPTIONS':'detect_leaks=0'}
  def run(*args):
