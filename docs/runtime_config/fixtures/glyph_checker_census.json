@@ -2993,14 +2993,14 @@
       },
       "checker_id": "controller_profile_selector",
       "defines_main": true,
-      "file_size_bytes": 4969,
+      "file_size_bytes": 5678,
       "hard_coded_branch_like_strings": [],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 64,
+      "line_count": 72,
       "parse_error": null,
       "path": "tools/check_glyph_controller_profile_selector.py",
       "potential_branch_identity_signals": [],
@@ -3022,13 +3022,14 @@
         "tools/fixtures/config_menu_host/include",
         "tools/fixtures/config_menu_host/include/comms/IntegratedDisplay.hpp",
         "tools/fixtures/config_menu_host/include/reboot.hpp",
+        "tools/fixtures/controller_profile_selector/managed_menu.cpp",
         "tools/fixtures/controller_profile_selector/metadata_menu.cpp",
         "tools/fixtures/controller_profile_selector/selection_persistence.cpp",
         "tools/fixtures/gp_config021_persisted_recovery",
         "tools/fixtures/profile_store_config_persistence_host"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "1d9789240fb6c572f04b38fef54cc9422324370ecf3e2cd7c1375d9446ed277b",
+      "sha256": "d57e514a7b89e6f8389fecbaa0106da5b9c5eb8d3c5bd8e9871922ad4b50c50b",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -5575,7 +5576,7 @@
       },
       "checker_id": "gamecube_selector_liveness",
       "defines_main": true,
-      "file_size_bytes": 9111,
+      "file_size_bytes": 10470,
       "hard_coded_branch_like_strings": [
         "failed-candidate"
       ],
@@ -5584,7 +5585,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 184,
+      "line_count": 205,
       "parse_error": null,
       "path": "tools/check_glyph_gamecube_selector_liveness.py",
       "potential_branch_identity_signals": [
@@ -5606,6 +5607,7 @@
         "lib/glyph-joybus-pio/src/joybus.pio",
         "src/GamecubeConsole.cpp",
         "src/config.cpp",
+        "src/core/mode_selection.cpp",
         "src/core/profile_selection.cpp",
         "src/joybus.c",
         "src/joybus.pio",
@@ -5613,7 +5615,7 @@
         "tools/fixtures/gamecube_selector_liveness"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "3f57b54e5ad664121d91e2aba48f32bab0b049d889fbf472df3a46d9a7fc385f",
+      "sha256": "80fb72bebfde19a34f08c53fe117385bc4b69081252915f4e6e05519a496085f",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
