@@ -3,6 +3,8 @@
 #include "core/CommunicationBackend.hpp"
 #include "core/state.hpp"
 
+#include <hardware/timer.h>
+
 #include <Adafruit_TinyUSB.h>
 #include <TUCompositeHID.hpp>
 
@@ -115,13 +117,19 @@ void NintendoSwitchBackend::SendReport() {
     ScanInputs(InputScanSpeed::SLOW);
     ScanInputs(InputScanSpeed::MEDIUM);
 
-    while (!TUCompositeHID::_usb_hid.ready()) {
+    // Allow one requested HID poll interval before servicing the rest of the loop.
+    const absolute_time_t deadline = make_timeout_time_us(1000);
+    bool ready;
+    while (!(ready = TUCompositeHID::_usb_hid.ready()) && !time_reached(deadline)) {
         tight_loop_contents();
     }
 
     ScanInputs(InputScanSpeed::FAST);
 
     UpdateOutputs();
+    if (!ready) {
+        return;
+    }
 
     // Digital outputs
     _report.y = _outputs.y;
@@ -149,7 +157,10 @@ void NintendoSwitchBackend::SendReport() {
     _report.hat =
         GetHatPosition(_outputs.dpadLeft, _outputs.dpadRight, _outputs.dpadDown, _outputs.dpadUp);
 
-    TUCompositeHID::_usb_hid.sendReport(_report_id, &_report, sizeof(switch_gamepad_report_t));
+    // The host may have disconnected or suspended during the fast scan.
+    if (TUCompositeHID::_usb_hid.ready()) {
+        TUCompositeHID::_usb_hid.sendReport(_report_id, &_report, sizeof(switch_gamepad_report_t));
+    }
 }
 
 switch_gamepad_hat_t NintendoSwitchBackend::GetHatPosition(
