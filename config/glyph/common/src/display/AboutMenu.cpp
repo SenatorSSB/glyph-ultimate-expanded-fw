@@ -1,4 +1,5 @@
 #include "display/AboutMenu.hpp"
+#include "core/BootTiming.hpp"
 #include "display/ConfigMenuAssets/GlyphMenuBitmaps.h"
 #include "display/Font4x7Fixed.h"
 #include "icons/menubases.hpp"
@@ -42,8 +43,18 @@ void AboutMenu::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &display
     display.print("Device: ");
     display.print(DEVICE_NAME);
 
-    // display.setCursor(2, 37);
-    // display.print("User Name: ");
-    // display.print("something");
+    const auto timing=boot_timing::Snapshot();
+    auto interval=[&display](uint32_t ms){
+        if(ms==UINT32_MAX)display.print("-");
+        else display.print(ms);
+    };
+    display.setCursor(2, 38);
+    display.print("Store "); interval(timing.store_ms);
+    display.print("  Backend "); interval(timing.backend_ms);
+    display.setCursor(2, 48);
+    display.print("Ready "); interval(timing.first_mode_ready_ms);
+    display.print("  Screen "); interval(timing.first_dashboard_ms);
+    display.setCursor(2, 58);
+    display.print("Boot timing (ms)");
 
 }

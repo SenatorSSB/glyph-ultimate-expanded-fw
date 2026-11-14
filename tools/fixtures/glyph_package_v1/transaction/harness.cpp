@@ -2,10 +2,12 @@
 // Formatting/seeding is confined to mode `seed`. Modes execute/inspect consume
 // exactly 512 KiB raw NOR images; neither formats nor recreates namespace files.
 #include "ProfileStore.cpp"
+#include "core/ProfileSelection.hpp"
 #include "glyph_config_validation.hpp"
 #include "comms/ConfiguratorBackend.hpp"
 #include <lfs.h>
 #include <algorithm>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -246,9 +248,78 @@ if(!std::strcmp(argv[1],"wire-requests")){
   need(files()==all,"seed exact namespace");no_handles();output(argv[3],nor);shutdown();return 0;
  }
  need(argc>=5,"execute|inspect NOR REQUESTS OUTDIR");output_dir=argv[4];mount_image(argv[2]);need(persistence.SetValidator(validate_glyph_config),"configured actual source validator");
+ if(!std::strcmp(argv[1],"startup-work")){
+  // Observe the actual package classifier, including the mounted NOR callbacks.
+  // Measure only Begin, after Arduino facade setup and saved Config load.
+  Config saved=Config_init_default;
+  need(persistence.LoadConfigChecked(saved)==Persistence::LoadResult::Loaded,"load saved Config for classifier benchmark");
+  const auto before=nor;const auto before_reads=reads,before_programs=programs,before_erases=erases;
+  static size_t operations[unsigned(CheckedStorage::Operation::Enumerate)+1]{};
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char*){
+   if(phase==CheckedStorage::Phase::Before)++operations[unsigned(op)];
+   return CheckedStorage::Fault::None;
+  });
+  const auto start=std::chrono::steady_clock::now();
+  const bool ready=profile_store.Begin(saved.ultimate_profile_store_incarnation,saved.ultimate_profile_root_format);
+  const auto us=std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now()-start).count();
+  CheckedStorage::SetFaultHook(nullptr);
+  need(ready&&!profile_store.IsReadOnlyRecovery(),"healthy startup required");
+  need(nor==before&&programs==before_programs&&erases==before_erases,"benchmark observation must be read-only");
+  no_handles();
+  std::cout<<"{\"enumerations\":"<<operations[unsigned(CheckedStorage::Operation::Enumerate)]
+    <<",\"opens\":"<<operations[unsigned(CheckedStorage::Operation::OpenRead)]
+    <<",\"seeks\":"<<operations[unsigned(CheckedStorage::Operation::Seek)]
+    <<",\"reads\":"<<operations[unsigned(CheckedStorage::Operation::Read)]
+    <<",\"nor_reads\":"<<(reads-before_reads)<<",\"host_us\":"<<us<<"}\n";
+  shutdown();return 0;
+ }
 #if defined(GLYPH_BOOT_PROBE)
  if(!std::strcmp(argv[1],"boot"))return boot_probe::run(argv[3]);
 #endif
+if (!std::strcmp(argv[1], "select-profile") || !std::strcmp(argv[1], "boot-selected-profile")) {
+    need(argc==7,"selection NOR ID OUTDIR BACKEND EXPECTED_RESULT");
+    const auto id = std::strtoul(argv[3],nullptr,10);
+    const auto backend = static_cast<CommunicationBackendId>(std::strtoul(argv[5],nullptr,10));
+    const bool expected = std::atoi(argv[6]) != 0;
+    static Config live;
+    need(persistence.LoadConfigChecked(live)==Persistence::LoadResult::Loaded,"load exact durable Config");
+    const bool ready = profile_store.Begin(live.ultimate_profile_store_incarnation,live.ultimate_profile_root_format);
+    profile_selection::Target targets[30]{};
+    const auto count = profile_selection::BuildTargets(live,profile_store,backend,targets,30);
+    std::ofstream list(path("targets.txt"));
+    for(size_t i=0;i<count;++i)list<<targets[i].profile_id<<" "<<unsigned(targets[i].mode_index)<<"\n";
+    list.close();
+    const auto before=nor;
+    if (!std::strcmp(argv[1],"select-profile")) {
+        size_t mode=0,route=0;
+        auto result=profile_selection::Persist(persistence,profile_store,ConfigWriteCandidate(),backend,id,
+                                               SIZE_MAX,mode,route);
+        need((result==ModeDestinationResult::Saved)==expected,"checked selection disposition");
+        need(expected || before==nor,"refusal made no writes");
+        need(!profile_store.ActiveId(),"selection made no live activation");
+    } else {
+        need(ready && expected,"fresh process normal boot");
+        const auto route=profile_selection::IsUsb(backend)?live.default_usb_backend_config:live.default_backend_config;
+        need(route && route<=live.communication_backend_configs_count,"checked durable route");
+        const auto &saved=live.communication_backend_configs[route-1];
+        need(saved.backend_id==backend && saved.default_mode_config &&
+             saved.default_mode_config<=live.game_mode_configs_count,"exact durable destination");
+        const auto &row=live.game_mode_configs[saved.default_mode_config-1];
+        volatile uint32_t scratch[3]={route,saved.default_mode_config,kCommittedModeDestination};
+        CommunicationBackendConfig consumed{};
+        need(consume_committed_mode_destination(scratch,true,live,consumed) && consumed.backend_id==backend &&
+             consumed.default_mode_config==saved.default_mode_config && scratch[2]==0,"single-use reboot destination");
+        ProfileStore::Status status{};
+        const auto *wrapper=profile_store.Activate(row.ultimate_profile_id,&status);
+        need(row.ultimate_profile_id==id && profile_store.ActiveId()==id && wrapper &&
+             status==ProfileStore::Status::Ok && profile_store.ActiveNativeView() &&
+             ultimate_native::ContextMatches(*profile_store.ActiveNativeView(),row),"active native identity and exact preprocessing");
+        const auto &view=*profile_store.ActiveNativeView();
+        output(path("active-native.bin"),Bytes(view.body,view.body+view.body_length));
+        need(before==nor,"boot and activation made no writes");
+    }
+    dump_files(path("namespace.bin"));output(path("after.nor"),nor);no_handles();shutdown();return 0;
+}
 if(!std::strcmp(argv[1],"migration-diagnostic")){
  const auto before=nor;const auto p=programs,e=erases;
  static size_t seen,selected;seen=0;selected=std::strtoull(argv[3],nullptr,10);
@@ -348,14 +419,15 @@ if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")
 }
 
  if(!std::strcmp(argv[1],"execute")){
-  need(argc==6,"execute NOR CREATE OUTDIR FAULT_INDEX(-1none)");target=std::strtoll(argv[5],nullptr,10);const auto bytes=input(argv[3]);
-  glyph_package::EnvelopePhase header{};need(glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),header),"canonical CREATE fixture");const auto inc=header.request.expected_store_incarnation;const auto token=header.request.request_token;uint8_t semantic[32];need(PackageCreateDigest(header,semantic),"independent query identity preparation");header.Release();
+  need(argc==6||argc==7,"execute NOR REQUEST OUTDIR FAULT_INDEX(-1none) [ACTIVE_ID]");target=std::strtoll(argv[5],nullptr,10);const auto bytes=input(argv[3]);
+  glyph_package::EnvelopePhase header{};need(glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),header),"canonical CREATE fixture");const auto inc=header.request.expected_store_incarnation;const auto token=header.request.request_token;const auto protocol=header.request.protocol_version;uint8_t semantic[32];need(PackageCreateDigest(header,semantic),"independent query identity preparation");header.Release();
   const auto boot=nor;profile_store.Begin(inc,0);need(nor==boot,"ordinary creation boot readonly");
-  CheckedStorage::SetFaultHook(hook);trace_enabled=true;PackageResponse result{};need(dispatch(bytes,result),"CREATE dispatch");trace_enabled=false;CheckedStorage::SetFaultHook(nullptr);response(result,"response");
+  if(argc==7){ProfileStore::Status status{};need(profile_store.Activate(std::strtoul(argv[6],nullptr,10),&status)&&status==ProfileStore::Status::Ok,"execute active precondition");}
+  CheckedStorage::SetFaultHook(hook);trace_enabled=true;PackageResponse result{};need(dispatch(bytes,result),"package dispatch");trace_enabled=false;CheckedStorage::SetFaultHook(nullptr);response(result,"response");
   if(fault_hit){const auto after_error=nor;const auto p=programs,e=erases;
    need(PackageStorageFence::MutationFenced(),"every admitted publication failure remains same-boot fenced");
-   PackageEnvelope query=PackageEnvelope_init_zero;query.protocol_version=3;query.request_token=token;query.operation=PackageOperation_QUERY_PACKAGE;query.expected_store_incarnation=inc;query.has_expected_digest=true;std::memcpy(query.expected_digest,semantic,32);PackageResponse observed{};need(dispatch(encoded_envelope(query),observed),"sameboot QUERY after failure");need(observed.write_fenced&&observed.storage_floor==PackageStorageFloor_FLOOR_UNRESOLVED,"sameboot QUERY cannot clear a sticky fence");response(observed,"sameboot-query");
-   PackageEnvelope status=PackageEnvelope_init_zero;status.protocol_version=3;status.request_token=1;status.operation=PackageOperation_PACKAGE_STATUS;need(dispatch(encoded_envelope(status),observed),"sameboot STATUS after failure");need(observed.status==ProfileStoreStatus_PROFILE_STORE_COMMIT_UNKNOWN&&observed.logical==PackageLogicalDisposition_LOGICAL_NONE&&observed.write_fenced&&observed.storage_floor==PackageStorageFloor_FLOOR_UNRESOLVED,"sameboot STATUS cannot clear sticky fence");response(observed,"sameboot-status");
+   PackageEnvelope query=PackageEnvelope_init_zero;query.protocol_version=protocol;query.request_token=token;query.operation=PackageOperation_QUERY_PACKAGE;query.expected_store_incarnation=inc;query.has_expected_digest=true;std::memcpy(query.expected_digest,semantic,32);PackageResponse observed{};need(dispatch(encoded_envelope(query),observed),"sameboot QUERY after failure");need(observed.write_fenced&&observed.storage_floor==PackageStorageFloor_FLOOR_UNRESOLVED,"sameboot QUERY cannot clear a sticky fence");response(observed,"sameboot-query");
+   PackageEnvelope status=PackageEnvelope_init_zero;status.protocol_version=protocol;status.request_token=1;status.operation=PackageOperation_PACKAGE_STATUS;need(dispatch(encoded_envelope(status),observed),"sameboot STATUS after failure");need(observed.status==ProfileStoreStatus_PROFILE_STORE_COMMIT_UNKNOWN&&observed.logical==PackageLogicalDisposition_LOGICAL_NONE&&observed.write_fenced&&observed.storage_floor==PackageStorageFloor_FLOOR_UNRESOLVED,"sameboot STATUS cannot clear sticky fence");response(observed,"sameboot-status");
    need(nor==after_error&&programs==p&&erases==e,"sameboot failure inspection is write-free");}
   trace();output(path("unwound.nor"),nor);dump_files(path("namespace.bin"));
   const bool unchanged=!fault_hit||cut==nor;summary(unchanged,false,0);shutdown();return 0;

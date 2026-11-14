@@ -462,7 +462,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::FinalizeSetConfig(bool saved
 
     // Reference receipts are firmware-owned. A whole-Config client cannot
     // forge a successful transaction receipt or erase its query evidence.
-    _config = candidate;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (!_package_reboot_pending)
+#endif
+        _config = candidate;
 
     WritePacket(CMD_SUCCESS, nullptr, 0);
     return true;
@@ -702,8 +705,11 @@ __attribute__((noinline)) bool ConfiguratorBackend::HandlePackageRequest(size_t 
         return RespondPackage();
     }
     if (!profile_store.DispatchPackage(phase, package_response)) return false;
-    if (package_response.protocol_version != 3 ||
+    if (package_response.protocol_version != phase.request.protocol_version ||
         package_response.request_token != phase.request.request_token) return false;
+    if (glyph_package::LifecycleOperation(phase.request.operation) &&
+        package_response.logical == PackageLogicalDisposition_COMMITTED)
+        _package_reboot_pending = true;
     if (phase.request.operation == PackageOperation_CREATE_PACKAGE &&
         package_response.status == PROFILE_STORE_OK &&
         package_response.logical == PackageLogicalDisposition_COMMITTED &&
@@ -725,15 +731,19 @@ __attribute__((noinline)) bool ConfiguratorBackend::RefreshPackageConfig() {
         persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current, candidate, facts, valid) != Persistence::LoadResult::Loaded ||
         !valid || facts.crc != observed.config_generation ||
         std::memcmp(facts.sha, observed.config_sha, sizeof(facts.sha))) return false;
-    _config = candidate;
+    // Runtime mode objects retain pointers into _config. Following lifecycle
+    // compaction or replacement even a later CREATE must leave those rows
+    // untouched until boot. GET_CONFIG always streams the persisted image.
+    if (!_package_reboot_pending) _config = candidate;
     return true;
 }
 // Encoding scratch is not retained through any persistent writer call.
 __attribute__((noinline)) bool ConfiguratorBackend::RespondPackage() {
     auto &package_response = response_owner.package;
-    constexpr size_t kPackageResponseLimit = 228;
-    static_assert(kPackageResponseLimit + 1 + 2 == 231,
-                  "raw command229 (<254) plus COBS code/delimiter2");
+    // v4 adds at most four revision bytes, one capability byte and two
+    // four-byte bounds to the v3 proof. Both raw response sizes fit one
+    // COBS block, including command 9.
+    const size_t kPackageResponseLimit = package_response.protocol_version==4 ? 241 : 228;
     auto output = pb_ostream_from_buffer(frame, kPackageResponseLimit);
     if (!pb_encode(&output, PackageResponse_fields, &package_response)) return false;
     return WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);

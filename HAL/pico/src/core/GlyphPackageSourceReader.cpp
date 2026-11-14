@@ -16,22 +16,21 @@ namespace {
 using package_storage::Get32;
 using package_storage::RecordValid;
 struct EnumerationSelection {
-    size_t wanted, seen;
-    package_storage::NamespaceObject *out;
-    bool found;
+    size_t first, capacity, seen;
+    package_storage::NamespaceObject *objects;
+    size_t count;
 };
 bool SelectObject(void *context,const CheckedStorage::Entry &entry) {
     auto &selection=*static_cast<EnumerationSelection *>(context);
-    if(selection.seen==selection.wanted){
-        // Same-mount name_max31; reserve slash/NUL without truncating a name.
+    if(selection.seen>=selection.first && selection.count<selection.capacity){
         size_t n=0;while(n<sizeof(entry.name)&&entry.name[n])++n;
         if(!n||n>31||n==sizeof(entry.name))return false;
-        selection.out->path[0]='/';
-        std::memcpy(selection.out->path+1,entry.name,n);
-        selection.out->path[n+1]=0;
-        selection.out->bytes=entry.bytes;
-        selection.out->directory=entry.directory;
-        selection.found=true;
+        auto &object=selection.objects[selection.count++];
+        object.path[0]='/';
+        std::memcpy(object.path+1,entry.name,n);
+        object.path[n+1]=0;
+        object.bytes=entry.bytes;
+        object.directory=entry.directory;
     }
     if(selection.seen==SIZE_MAX)return false;
     ++selection.seen;
@@ -60,7 +59,8 @@ __attribute__((noinline)) bool HashMessage(const pb_msgdesc_t *fields,const void
     hash.Final(out);return true;
 }
 
-bool ExtractConfigFacts(const ::Config &config,package_storage::ConfigFacts &facts){
+// Field extraction is complete before the full candidate is encoded.
+__attribute__((noinline)) bool ExtractConfigFacts(const ::Config &config,package_storage::ConfigFacts &facts){
     facts.rows=config.game_mode_configs_count;facts.rgbs=config.rgb_configs_count;
     facts.store_format=config.ultimate_profile_store_format;facts.incarnation=config.ultimate_profile_store_incarnation;
     facts.root_format=config.ultimate_profile_root_format;facts.managed_format=config.managed_format;facts.sequence=config.managed_sequence;
@@ -231,12 +231,29 @@ GlyphPackageSourceReader::GlyphPackageSourceReader(ProfileStore &store,Persisten
 GlyphPackageSourceReader::~GlyphPackageSourceReader(){ClearProfileLease();}
 bool GlyphPackageSourceReader::MountedAndConfigured()const{return _persistence.IsAvailable()&&PackageStorageFence::Available();}
 bool GlyphPackageSourceReader::ObservationFailed()const{return _failed;}
+void GlyphPackageSourceReader::BeginClassification(){
+    _classifying=true; _page_valid=false; _materialized=false;
+}
+void GlyphPackageSourceReader::EndClassification(){
+    _classifying=false; _page_valid=false; _materialized=false;
+}
 __attribute__((noinline)) bool GlyphPackageSourceReader::ObjectAt(size_t index,package_storage::NamespaceObject &out,bool &eof){
     out={};eof=false;
-    EnumerationSelection selection{index,0,&out,false};
-    const auto result=CheckedStorage::Enumerate("/",SelectObject,&selection);
-    if(!result){_failed=true;return false;}
-    eof=!selection.found;return true;
+    if(!_classifying){
+        EnumerationSelection one{index,1,0,&out,0};
+        if(!CheckedStorage::Enumerate("/",SelectObject,&one)){_failed=true;return false;}
+        eof=!one.count;return true;
+    }
+    if(_page_valid && index>=_total){eof=true;return true;}
+    if(!_page_valid || index<_first || index-_first>=_count){
+        const size_t start=index-index%kDirectoryPage;
+        EnumerationSelection page{start,kDirectoryPage,0,_objects,0};
+        if(!CheckedStorage::Enumerate("/",SelectObject,&page) ||
+           (_page_valid && _total!=page.seen)){_failed=true;return false;}
+        _first=start;_count=page.count;_total=page.seen;_page_valid=true;
+    }
+    if(index>=_total){eof=true;return true;}
+    out=_objects[index-_first];return true;
 }
 __attribute__((noinline)) package_storage::Probe GlyphPackageSourceReader::Extent(const char *path,size_t &bytes){
     bytes=0;const auto result=CheckedStorage::Stat(path,&bytes);
@@ -249,7 +266,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Read(const char *path,s
     CheckedStorage::File file;
     auto result=CheckedStorage::Open(file,path,false,CheckedStorage::Kind::Root);
     bool ok=bool(result);
-    if(ok)ok=bool(CheckedStorage::Seek(file,offset));
+    if(ok&&offset)ok=bool(CheckedStorage::Seek(file,offset));
     if(ok){result=CheckedStorage::Read(file,out,bytes);ok=bool(result)&&result.bytes==bytes;}
     // Failed/lost-open acknowledgement may still own a native handle under a
     // different test adapter; exactly one checked close is mandatory if owned.
@@ -259,6 +276,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Read(const char *path,s
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::LoadNamedConfig(
     const char *path,uint32_t maximum,uint8_t *sha,uint32_t *crc,uint32_t *bytes,bool *source_valid){
+    _materialized=false;
     if(!SelectConfig(path,_config_file))return false;
     _config_facts={}; _config_valid=false;
     _config_outputs={sha,crc,bytes,source_valid,maximum};
@@ -266,6 +284,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::LoadNamedConfig(
         _config_facts,_config_valid,_config_outputs.maximum);
     if(result==Persistence::LoadResult::StorageFailure)_failed=true;
     if(result!=Persistence::LoadResult::Loaded||_config_facts.bytes>_config_outputs.maximum)return false;
+    _materialized=_classifying;
     if(_config_outputs.sha)std::memcpy(_config_outputs.sha,_config_facts.sha,32);
     if(_config_outputs.crc)*_config_outputs.crc=_config_facts.crc;
     if(_config_outputs.bytes)*_config_outputs.bytes=_config_facts.bytes;
@@ -279,14 +298,20 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Config(const char *path
     return ExtractConfigFacts(_persistence.PackageConfigScratch(),facts);
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::HistoricalRetainedConfig(){
-    _config_valid=false;
+    _materialized=false; _config_valid=false;
     const auto result=_persistence.ObserveHistoricalRetainedConfig(_config_facts,_config_valid);
     if(result==Persistence::LoadResult::StorageFailure)_failed=true;
     return result==Persistence::LoadResult::Loaded&&_config_valid&&!_failed;
 }
+bool GlyphPackageSourceReader::MaterializeProjection(const char *path){
+    Persistence::PackageConfigFile file;
+    if(_materialized && SelectConfig(path,file) && file==_config_file)
+        return _config_facts.bytes<=8191;
+    return LoadNamedConfig(path,8191);
+}
 __attribute__((noinline)) bool GlyphPackageSourceReader::Row(const char *path,size_t index,package_storage::RowFacts &facts){
     std::memset(static_cast<void *>(&facts),0,sizeof(facts));
-    if(!LoadNamedConfig(path,8191))return false;
+    if(!MaterializeProjection(path))return false;
     const auto &config=_persistence.PackageConfigScratch();
     if(index>=config.game_mode_configs_count||index>=sizeof(config.game_mode_configs)/sizeof(config.game_mode_configs[0]))return false;
     const auto &row=config.game_mode_configs[index];
@@ -294,7 +319,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Row(const char *path,si
     return HashMessage(GameModeConfig_fields,&row,facts.sha);
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::Rgb(const char *path,size_t index,uint8_t sha[32]){
-    if(!LoadNamedConfig(path,8191))return false;
+    if(!MaterializeProjection(path))return false;
     const auto &config=_persistence.PackageConfigScratch();
     if(index>=config.rgb_configs_count||index>=sizeof(config.rgb_configs)/sizeof(config.rgb_configs[0]))return false;
     return HashMessage(RgbConfig_fields,&config.rgb_configs[index],sha);
@@ -323,7 +348,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Native(const char *path
     ClearProfileLease();
     if(!RecordValid(record,bytes))return false;
     _native_record=record; _native_bytes=bytes; _native_index=index;
-    if(!LoadNamedConfig(path,8191)||!_config_valid)return false;
+    if(!MaterializeProjection(path)||!_config_valid)return false;
     return ValidateMaterializedNative();
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::ValidateMaterializedNative(){
@@ -332,7 +357,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::ValidateMaterializedNat
     const auto &config=_persistence.PackageConfigScratch();
     if(index>=config.game_mode_configs_count||index>=sizeof(config.game_mode_configs)/sizeof(config.game_mode_configs[0]))return false;
     const auto &row=config.game_mode_configs[index];
-    if(!ProfileStoreNameValid(row.name,sizeof(row.name))||row.mode_id!=MODE_ULTIMATE||row.ultimate_profile_id!=Get32(record+12)||row.ultimate_profile_engine!=1||row.managed_format!=1||row.ultimate_profile_config||row.custom_mode_config||row.keyboard_mode_config||row.rgb_config!=Get32(record+76)||Get32(record+72)!=index)return false;
+    if(!ProfileStoreNameValid(row.name,sizeof(row.name))||row.mode_id!=MODE_ULTIMATE||row.ultimate_profile_id!=Get32(record+12)||row.ultimate_profile_engine!=1||row.managed_format!=1||row.ultimate_profile_config||row.custom_mode_config||row.keyboard_mode_config)return false;
     const bool valid=ultimate_native::DecodeProfile(record+128,bytes-128,_store._candidate_profile,_profile_lease)&&
         _store._candidate_profile.schema_version==ultimate_native::kSchema&&ValidateCandidateProfile()&&
         ultimate_native::ContextMatches(ultimate_native::CandidateView(),row)&&CanonicalCandidateProfile(record+128,bytes-128);
@@ -367,5 +392,75 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::AppendConfig(const char
     if(second.game_mode_configs_count!=unsigned(old.rows)+1||second.rgb_configs_count>30||(second.rgb_configs_count!=old.rgbs&&second.rgb_configs_count!=unsigned(old.rgbs)+1)||second.ultimate_profile_root_format!=3||second.managed_format!=1||second.managed_sequence!=old.sequence+1)return false;
     const AppendShape next{uint8_t(second.game_mode_configs_count),uint8_t(second.rgb_configs_count),3,1,second.managed_sequence};
     return CompareAppendFiles(_failed,baseline,current,old,next,old_bytes,old_crc,next_bytes,next_crc);
+}
+#endif
+
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+namespace {
+// Project each side of the operation to the very same canonical Config. The
+// actual publisher and decoder are independent of this read-only verification.
+// All edits live in the reader's scratch and the next LoadNamedConfig replaces
+// them. Do not touch ConfigWriteCandidate, which may hold a pending save.
+bool ProjectLifecycleConfig(::Config &c, const package_storage::IntentFacts &i, bool before) {
+    const bool erase = i.operation == 20;
+    if (c.ultimate_profiles_count ||
+        c.game_mode_configs_count != (before ? i.baseline_rows : i.final_rows) ||
+        c.rgb_configs_count != (before ? i.baseline_rgbs : i.final_rgbs) ||
+        c.managed_sequence != (before ? i.baseline_sequence : i.sequence) ||
+        c.managed_format != 1 || c.ultimate_profile_root_format != 3) return false;
+    if (before && erase) {
+        if (c.profile_reference_token && (c.profile_reference_result_mode_index >= i.row ||
+                                          c.profile_reference_result_id == i.id)) return false;
+        for (size_t j = 0; j < c.communication_backend_configs_count; ++j) {
+            auto &dest = c.communication_backend_configs[j].default_mode_config;
+            if (dest == i.row + 1) return false;
+            if (dest > i.row + 1) --dest;
+        }
+    }
+    if (before || !erase) {
+        if (i.row >= c.game_mode_configs_count) return false;
+        auto &target = c.game_mode_configs[i.row];
+        const uint32_t rgb = before ? i.old_rgb : i.rgb;
+        if (target.managed_format != 1 || target.ultimate_profile_id != i.id ||
+            target.rgb_config != rgb || target.mode_id != MODE_ULTIMATE) return false;
+        if (i.operation == 17 || erase) {
+            // Remove the owned row and RGB on both sides, accounting for
+            // dense references on every other row. No other field is elided.
+            if (rgb) {
+                if (rgb > c.rgb_configs_count) return false;
+                for (size_t k = 0; k < c.game_mode_configs_count; ++k) {
+                    if (k == i.row) continue;
+                    auto &other = c.game_mode_configs[k].rgb_config;
+                    if (other == rgb) return false;
+                    if (other > rgb) --other;
+                }
+                for (size_t k = rgb; k < c.rgb_configs_count; ++k)
+                    c.rgb_configs[k - 1] = c.rgb_configs[k];
+                --c.rgb_configs_count;
+            }
+            for (size_t k = i.row + 1; k < c.game_mode_configs_count; ++k)
+                c.game_mode_configs[k - 1] = c.game_mode_configs[k];
+            --c.game_mode_configs_count;
+        } else if (i.operation == 18) {
+            target.name[0] = 0;
+        }
+    }
+    c.managed_sequence = i.baseline_sequence;
+    return true;
+}
+}
+
+__attribute__((noinline)) bool GlyphPackageSourceReader::LifecycleConfig(const char *prior,
+        const char *current, const package_storage::IntentFacts &intent) {
+    uint8_t before[32], after[32];
+    auto &c = _persistence.PackageConfigScratch();
+    const bool matches=LoadNamedConfig(prior,8191) && _config_valid && ProjectLifecycleConfig(c,intent,true) &&
+        HashMessage(Config_fields,&c,before) && LoadNamedConfig(current,8191) && _config_valid &&
+        ProjectLifecycleConfig(c,intent,false) && HashMessage(Config_fields,&c,after) &&
+        !std::memcmp(before,after,32);
+    // Projection deliberately edited the materialized scratch. Later Row/Native
+    // observations must obtain the exact file again even in this same lease.
+    _materialized=false;
+    return matches;
 }
 #endif

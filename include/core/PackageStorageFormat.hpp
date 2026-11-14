@@ -44,7 +44,13 @@ struct RecordIdentity {
     uint64_t token;
     const uint8_t *digest; // 32 bytes
     const uint8_t *baseline_config_sha; // 32 bytes
+    uint32_t revision = 1, receipt_format = 1, operation = 15;
 };
+constexpr bool LifecycleOperation(uint32_t operation) { return operation >= 17 && operation <= 20; }
+bool LifecycleRootChange(const uint8_t *baseline, const uint8_t *next, uint32_t operation,
+                         uint32_t id, uint32_t old_revision, uint32_t old_row,
+                         uint32_t old_rgb, uint32_t new_rgb);
+bool RecordSlotsMatch(const uint8_t *record, uint8_t row1, uint8_t rgb1, uint32_t compaction_sequence);
 bool RecordValid(const uint8_t *record, size_t bytes);
 bool RecordMatchesIntent(const uint8_t *record, size_t bytes, const uint8_t intent[kIntentBytes]);
 bool MakeRecordHeader(uint8_t header[kRecordHeaderBytes], const uint8_t *body,
@@ -55,7 +61,8 @@ struct AdmissionArithmetic {
     uint64_t used, free, total, protected_bytes, token, high_token;
     uint32_t rows, rgbs, count, high_id, generation, sequence;
     uint32_t namespace_files, config_bytes, record_bytes;
-    bool with_rgb;
+    bool with_rgb; // for lifecycle, true only when allocating a new RGB slot
+    uint32_t operation = 15;
 };
 // Arithmetic is NOT admission authority. Only exact namespace/classification/
 // source-validator binding may populate these values and acquire write scope.

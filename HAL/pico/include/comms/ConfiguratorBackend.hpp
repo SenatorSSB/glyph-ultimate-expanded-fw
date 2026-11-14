@@ -105,6 +105,9 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool _recovery_config_invalid = false;
     bool _recovery_storage_available = true;
     bool _reference_unknown = false;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    bool _package_reboot_pending = false;
+#endif
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     ProfileStoreRxDiagnostics _rx, _last_profile_rx;
 #endif

@@ -47,7 +47,23 @@ size_t current_mode_index = SIZE_MAX;
 namespace {
 ModeDestinationSelector destination_selector = nullptr;
 bool mode_chord_consumed = false;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+uint32_t managed_chord_rows = 0;
+size_t chord_rows = 0;
+#endif
 }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+bool managed_chord_held(uint64_t buttons) {
+    if (!managed_chord_rows) return false;
+    for (size_t row = 0; row < chord_rows; ++row) {
+        if (all_buttons_held(buttons, mode_activation_masks[row]))
+            return !mode_chord_consumed && (managed_chord_rows & (uint32_t(1) << row));
+    }
+    // FAST input samples also observe a release while the console is absent.
+    mode_chord_consumed = false;
+    return false;
+}
+#endif
 void set_mode_destination_selector(ModeDestinationSelector selector) {
     destination_selector = selector;
 }
@@ -253,12 +269,20 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
 void setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t mode_configs_count,
                                     uint64_t boot_buttons) {
     mode_chord_consumed = false;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    managed_chord_rows = 0;
+    chord_rows = mode_configs_count <= kModeActivationMaskCapacity ? mode_configs_count : 0;
+#endif
     // Build bit masks for checking for matching button holds.
     if (mode_configs_count > kModeActivationMaskCapacity) {
         return;
     }
 
     for (size_t i = 0; i < mode_configs_count; i++) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        if (mode_configs[i].managed_format == 1 && mode_configs[i].activation_binding_count)
+            managed_chord_rows |= uint32_t(1) << i;
+#endif
         mode_activation_masks[i] = make_button_mask(
             mode_configs[i].activation_binding,
             mode_configs[i].activation_binding_count

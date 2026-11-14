@@ -5,13 +5,17 @@ namespace profile_selection {
 namespace {
 // Loads/stores only: no ARMv6-M atomic RMW helper or second mailbox owner.
 std::atomic<uint32_t> pending_id{0};
+CommunicationBackendId requested_backend = COMMS_BACKEND_UNSPECIFIED;
 }
-bool Request(uint32_t id) {
+bool Request(uint32_t id, CommunicationBackendId route) {
     if (!id || pending_id.load(std::memory_order_acquire)) return false;
+    requested_backend = route;
     pending_id.store(id, std::memory_order_release);
     return true;
 }
+bool Request(uint32_t id) { return Request(id, COMMS_BACKEND_UNSPECIFIED); }
 uint32_t Pending() { return pending_id.load(std::memory_order_acquire); }
+CommunicationBackendId RequestedBackend() { return requested_backend; }
 void Complete() { pending_id.store(0, std::memory_order_release); }
 
 bool IsUsb(CommunicationBackendId backend) {
@@ -39,11 +43,61 @@ const ProfileStore::Entry *FindEntry(const ProfileStore &store, uint32_t id) {
     }
     return nullptr;
 }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+bool BoundPair(const Config &config, const ProfileStore::Entry &entry, size_t row, CommunicationBackendId backend) {
+    if (config.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
+        row >= config.game_mode_configs_count || config.game_mode_configs_count > 30 ||
+        !entry.id || entry.payload_version != ultimate_native::kSchema) return false;
+    const auto &mode = config.game_mode_configs[row];
+    if (mode.mode_id != MODE_ULTIMATE || mode.ultimate_profile_engine != 1 ||
+        mode.ultimate_profile_id != entry.id || mode.ultimate_profile_config ||
+        mode.keyboard_mode_config || mode.custom_mode_config || !Eligible(mode, backend)) return false;
+    if (!entry.managed_format) return !mode.managed_format;
+    return entry.managed_format == 1 && mode.managed_format == 1 &&
+        entry.owned_row1 == row + 1 && entry.owned_rgb1 == mode.rgb_config;
+}
+#endif
 size_t BuildTargets(const Config &config, const ProfileStore &store,
     CommunicationBackendId backend, Target *targets, size_t capacity) {
     if (backend == COMMS_BACKEND_CONFIGURATOR || backend == COMMS_BACKEND_UNSPECIFIED) return 0;
     if (!targets || config.game_mode_configs_count > 30 || store.Count() > ProfileStore::kMaxEntries) return 0;
     size_t count = 0;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    // Ordinary non-Ultimate modes precede the logical native profile list.
+    // A raw record without a bound Config row is available to G6 only.
+    for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
+        const auto &mode = config.game_mode_configs[i];
+        if (count == capacity) return count;
+        if (package_ownership::Managed(mode) || !Eligible(mode, backend) ||
+            (mode.mode_id == MODE_ULTIMATE && config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat))
+            continue;
+        targets[count++] = {0, static_cast<uint8_t>(i)};
+    }
+    if (!store.IsReady()) return count;
+    const size_t first_native = count;
+    for (size_t i = 0; i < store.Count() && count < capacity; ++i) {
+        const auto *entry = store.EntryAt(i);
+        if (!entry) continue;
+        size_t row = config.game_mode_configs_count;
+        bool ambiguous = false;
+        for (size_t j = 0; j < config.game_mode_configs_count; ++j) {
+            if (!BoundPair(config, *entry, j, backend)) continue;
+            if (row != config.game_mode_configs_count) { ambiguous = true; break; }
+            row = j;
+        }
+        if (ambiguous || row == config.game_mode_configs_count) continue;
+        size_t at = count;
+        while (at > first_native) {
+            const auto *previous = FindEntry(store, targets[at - 1].profile_id);
+            if (previous->rank <= entry->rank) break;
+            targets[at] = targets[at - 1];
+            --at;
+        }
+        targets[at] = {entry->id, static_cast<uint8_t>(row)};
+        ++count;
+    }
+    return count;
+#else
     bool native = false;
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
         const auto &mode = config.game_mode_configs[i];
@@ -79,5 +133,6 @@ size_t BuildTargets(const Config &config, const ProfileStore &store,
         ++count;
     }
     return count;
+#endif
 }
 } // namespace profile_selection

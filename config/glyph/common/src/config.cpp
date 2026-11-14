@@ -14,6 +14,7 @@
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/PackageOwnership.hpp"
 #include "core/BootDiagnostics.hpp"
+#include "core/BootTiming.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/RuntimeIdentityService.hpp"
 #include "core/state.hpp"
@@ -76,6 +77,33 @@ namespace {
 // SDK runtime initializes .mutex_array before main launches core1. setup1 can
 // therefore acquire this lock even while core0 has not entered setup yet.
 auto_init_mutex(boot_state_mutex);
+
+// Core0 writes the phase times before publishing normal boot. Core1 only
+// consumes them after acquiring that publication. The two later milestones
+// can race with the About page and are published under the same mutex.
+boot_timing::Times boot_times;
+uint32_t boot_start_ms=0, phase_start_ms=0;
+void time_boot_stage(boot_diagnostics::Stage stage) {
+    using Stage=boot_diagnostics::Stage;
+    switch(stage) {
+    case Stage::Enter: boot_start_ms=millis(); break;
+    case Stage::StoreBegin: case Stage::BackendBegin: phase_start_ms=millis(); break;
+    case Stage::StoreReady: boot_times.store_ms=millis()-phase_start_ms; break;
+    case Stage::BackendDone: boot_times.backend_ms=millis()-phase_start_ms; break;
+    default: break;
+    }
+}
+__attribute__((noinline)) void mark_first_mode_ready() {
+    // Single writer (core0); no lock, calls to millis or backend queries on
+    // subsequent frames. Mode binding precedes entry to backend report service.
+    static bool recorded=false;
+    if(recorded || !backends[0]->CurrentGameMode())return;
+    const uint32_t elapsed=millis()-boot_start_ms;
+    mutex_enter_blocking(&boot_state_mutex);
+    boot_times.first_mode_ready_ms=elapsed;
+    mutex_exit(&boot_state_mutex);
+    recorded=true;
+}
 
 enum class BootOutcome {
     Pending,
@@ -144,7 +172,9 @@ void draw_recovery_page(BootOutcome outcome) {
 // End this display/I2C frame before entering any storage or backend phase.
 // Stage numbers describe the current phase, never successful installation.
 __attribute__((noinline)) void show_boot_stage(boot_diagnostics::Stage stage) {
+    time_boot_stage(stage);
     boot_diagnostics::Mark(watchdog_hw->scratch[3],stage);
+#if defined(GLYPH_DEBUG_BOOT_DISPLAY) && GLYPH_DEBUG_BOOT_DISPLAY
     if(!boot_display_ready)return;
     display.clearDisplay();
     display.setFont(nullptr);
@@ -154,6 +184,7 @@ __attribute__((noinline)) void show_boot_stage(boot_diagnostics::Stage stage) {
     display.println("Startup stage");
     display.println(boot_diagnostics::StageCode(watchdog_hw->scratch[3]));
     display.display();
+#endif
 }
 
 void refuse_boot(BootOutcome outcome, bool display_ready) {
@@ -166,15 +197,36 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
     publish_boot_state(outcome, display_ready);
 }
 
-void request_mode_destination(CommunicationBackendId backend, size_t mode_index, const Config &) {
-    size_t backend_index = 0;
-    const ModeDestinationResult result = persist_mode_destination(
-        persistence, ConfigWriteCandidate(), backend, mode_index, backend_index);
-    if (result != ModeDestinationResult::Saved) return;
+// select_mode consumes a chord once and returns before core0 performs any file
+// I/O. Both phases run in the same loop iteration with the same live backend.
+uint8_t pending_chord_row1 = 0;
+void request_mode_destination(CommunicationBackendId, size_t mode_index, const Config &live) {
+    if (!pending_chord_row1 && mode_index < live.game_mode_configs_count &&
+        mode_index < sizeof(live.game_mode_configs) / sizeof(live.game_mode_configs[0]))
+        pending_chord_row1 = static_cast<uint8_t>(mode_index + 1);
+}
+__attribute__((noinline)) void commit_mode_destination(size_t backend_index, size_t mode_index) {
     watchdog_hw->scratch[0] = backend_index + 1;
     watchdog_hw->scratch[1] = mode_index + 1;
     watchdog_hw->scratch[2] = kCommittedModeDestination;
     reboot_firmware();
+}
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+__attribute__((noinline)) void persist_managed_chord(size_t mode_index) {
+    const auto backend = backends[0]->BackendId();
+    if (backend == COMMS_BACKEND_CONFIGURATOR || backend == COMMS_BACKEND_UNSPECIFIED) return;
+    size_t selected = 0, route = 0;
+    const auto id = config.game_mode_configs[mode_index].ultimate_profile_id;
+    if (profile_selection::Persist(persistence, profile_store, ConfigWriteCandidate(), backend,
+                                   id, mode_index, selected, route) == ModeDestinationResult::Saved)
+        commit_mode_destination(route, selected);
+}
+#endif
+__attribute__((noinline)) void persist_ordinary_chord(size_t mode_index) {
+    size_t route = 0;
+    if (persist_mode_destination(persistence, ConfigWriteCandidate(), backends[0]->BackendId(),
+                                 mode_index, route) == ModeDestinationResult::Saved)
+        commit_mode_destination(route, mode_index);
 }
 
 // Called only by core0, outside output generation. Never lend candidate state
@@ -183,8 +235,10 @@ __attribute__((noinline)) void service_profile_selection() {
     const uint32_t id = profile_selection::Pending();
     if (!id) return;
     size_t mode_index = 0, backend_index = 0;
+    const auto requested = profile_selection::RequestedBackend();
+    const auto backend = requested == COMMS_BACKEND_UNSPECIFIED ? backends[0]->BackendId() : requested;
     const auto result = profile_selection::Persist(persistence, profile_store,
-        ConfigWriteCandidate(), backends[0]->BackendId(), id, current_mode_index,
+        ConfigWriteCandidate(), backend, id, current_mode_index,
         mode_index, backend_index);
     if (result == ModeDestinationResult::Saved) {
         watchdog_hw->scratch[0] = backend_index + 1;
@@ -217,6 +271,11 @@ void enter_recovery_configurator() {
 
 }  // namespace
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+uint32_t profile_selection::GamecubeSelectionPending() {
+    return Pending() || pending_chord_row1 || managed_chord_held(inputs.buttons);
+}
+#endif
 
 __attribute__((noinline)) bool PrepareBootDisplay() {
     // Create GPIO input source and use it to read button states for checking button holds.
@@ -415,6 +474,23 @@ void loop() {
         service_profile_selection();
     }
     select_mode(backends, backend_count, config);
+    if (pending_chord_row1) {
+        const size_t row = pending_chord_row1 - 1;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        if (config.game_mode_configs[row].managed_format) {
+            if (backends[0]->BackendId() != COMMS_BACKEND_GAMECUBE ||
+                static_cast<GamecubeBackend *>(backends[0])->SelectionIdleAdmitted()) {
+                pending_chord_row1 = 0;
+                persist_managed_chord(row);
+            }
+        } else
+#endif
+        {
+            pending_chord_row1 = 0;
+            persist_ordinary_chord(row);
+        }
+    }
+    mark_first_mode_ready();
 
     for (size_t i = 0; i < backend_count; i++) {
         backends[i]->SendReport();
@@ -431,6 +507,28 @@ void loop() {
 
 /* Second core handles OLED display */
 IntegratedDisplay *display_backend = nullptr;
+
+boot_timing::Times boot_timing::Snapshot() {
+    mutex_enter_blocking(&boot_state_mutex);
+    const Times times=boot_times;
+    mutex_exit(&boot_state_mutex);
+    return times;
+}
+
+void transfer_dashboard() {
+    display.display();
+    // Only core1 calls this display callback. Capture the first completed
+    // ordinary dashboard transfer, excluding splash/recovery/menu frames.
+    static bool recorded=false;
+    if(recorded || !boot_display_ready || !display_backend)return;
+    const auto mode=display_backend->CurrentDisplayMode();
+    if(mode!=DISPLAY_MODE_BUTTON_HINTS && mode!=DISPLAY_MODE_VIEWER)return;
+    const uint32_t elapsed=millis()-boot_start_ms;
+    mutex_enter_blocking(&boot_state_mutex);
+    boot_times.first_dashboard_ms=elapsed;
+    mutex_exit(&boot_state_mutex);
+    recorded=true;
+}
 
 InputDisplay *input_viewer = nullptr;
 
@@ -493,7 +591,7 @@ void setup1() {
         inputs,
         display,
         []() { display.clearDisplay(); },
-        []() { display.display(); },
+        transfer_dashboard,
         DisplayControls{ .back = BTN_MB1, .down = BTN_MB3, .up = BTN_MB2, .enter = BTN_MB4 },
         display_modes,
         display_modes_count

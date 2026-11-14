@@ -73,24 +73,38 @@ void EmptyIntent(uint8_t *p) {
     std::memcpy(p, "PKI1", 4); Put16(p + 4, 1); Put16(p + 6, kIntentBytes);
 }
 bool IntentValid(const uint8_t *p) {
-    if (!p || !Equal(p, reinterpret_cast<const uint8_t *>("PKI1"), 4) ||
-        Get16(p + 4) != 1 || Get16(p + 6) != kIntentBytes || !Zero(p + 400, 112)) return false;
-    if (!Get32(p + 8)) return Zero(p + 8, kIntentBytes - 8);
+    if (!p || !Equal(p, reinterpret_cast<const uint8_t *>("PKI1"), 4) || Get16(p + 6) != kIntentBytes)
+        return false;
+    const uint32_t format = Get16(p + 4), op = Get32(p + 8);
+    if (!op) return format == 1 && Zero(p + 8, kIntentBytes - 8);
+    const bool create = op == 15, erase = op == 20;
+    if (create ? (format != 1 || !Zero(p + 400, 112)) :
+                 (!LifecycleOperation(op) || format != 2 || (!Zero(p + 476, 36) || Zero(p + 444, 32)))) return false;
     const auto phase = Get32(p + 12), terminal = Get32(p + 16), flags = Get32(p + 20);
-    if (Get32(p + 8) != 15 || phase < 1 || phase > 5 || terminal > 4 || flags > 1 ||
-        bool(flags) != bool(Get32(p + 100))) return false;
-    const auto baseline_id = Get32(p + 396), generation = Get32(p + 76), sequence = Get32(p + 368);
-    if (Get64(p + 24) <= Get64(p + 388) || !Get32(p + 64) || baseline_id == UINT32_MAX ||
-        Get32(p + 68) != baseline_id + 1 || Get32(p + 72) != 1 ||
-        !generation || generation == UINT32_MAX || Get32(p + 80) != generation + 1 ||
-        sequence == UINT32_MAX || Get32(p + 84) != sequence + 1) return false;
-    const auto rows = Get32(p + 372), rgbs = Get32(p + 380);
-    if (rows >= 30 || Get32(p + 96) != rows || Get32(p + 376) != rows + 1 ||
-        rgbs > 30 || rgbs + flags > 30 || Get32(p + 384) != rgbs + flags ||
-        Get32(p + 100) != (flags ? rgbs + 1 : 0)) return false;
+    const auto id = Get32(p + 68), revision = Get32(p + 72), generation = Get32(p + 76);
+    const auto sequence = Get32(p + 368), baseline_id = Get32(p + 396);
+    if (phase < 1 || phase > 5 || terminal > 4 || ((phase == 5) != (terminal == 3)) ||
+        flags > 1 || flags != bool(Get32(p + 100)) || Get64(p + 24) <= Get64(p + 388) ||
+        !Get32(p + 64) || !id || !generation || generation == UINT32_MAX ||
+        Get32(p + 80) != generation + 1 || sequence == UINT32_MAX || Get32(p + 84) != sequence + 1)
+        return false;
+    const auto rows = Get32(p + 372), rgbs = Get32(p + 380), row = Get32(p + 96), rgb = Get32(p + 100);
+    const auto final_rows = Get32(p + 376), final_rgbs = Get32(p + 384);
     const auto record = Get32(p + 360), config = Get32(p + 364);
-    return record > kRecordHeaderBytes && record <= kRecordMaxBytes && config &&
-        config <= kConfigBodyMaxBytes && ((phase == 5) == (terminal == 3));
+    if (rgbs > 30 || rows > 30 || final_rgbs > 30 || final_rows > 30 || !config ||
+        config > kConfigBodyMaxBytes || (!erase && (record <= kRecordHeaderBytes || record > kRecordMaxBytes)))
+        return false;
+    if (create) return baseline_id != UINT32_MAX && id == baseline_id + 1 && revision == 1 &&
+        row == rows && final_rows == rows + 1 && final_rgbs == rgbs + flags && rgb == (flags ? rgbs + 1 : 0);
+    const auto old_revision = Get32(p + 400), old_row = Get32(p + 404), old_rgb = Get32(p + 408);
+    if (!sequence || id > baseline_id || !old_revision || old_revision == UINT32_MAX ||
+        revision != old_revision + 1 || old_row >= rows || row != old_row || old_rgb > rgbs ||
+        Zero(p + 412, 32) || final_rows != rows - unsigned(erase)) return false;
+    if (erase) return rgb == old_rgb && final_rgbs == rgbs - unsigned(old_rgb != 0) &&
+        !record && Zero(p + 168, 96) && Zero(p + 328, 32);
+    if (op != 17 && rgb != old_rgb) return false;
+    const uint32_t expected_rgb = rgb && !old_rgb ? rgbs + 1 : (rgb ? old_rgb : 0);
+    return rgb == expected_rgb && final_rgbs == rgbs - unsigned(old_rgb != 0) + unsigned(rgb != 0);
 }
 bool SourcePrefixValid(const uint8_t *p) {
     if (!p || Get32(p) != 0x32534450u || Get16(p + 6) > 64 || !Get32(p + 12) ||
@@ -110,12 +124,13 @@ bool SourcePrefixValid(const uint8_t *p) {
 bool RootValid(const RootView &r) {
     if (!r.prefix || !r.intent || !r.trailer || !SourcePrefixValid(r.prefix) ||
         Get16(r.prefix + 4) != 3 || Get32(r.prefix + 296) != 1 ||
-        !Zero(r.prefix + 304, 16) || RootCrc(r) != Get32(r.trailer) || !IntentValid(r.intent)) return false;
+        (Get32(r.prefix + 304) > Get32(r.prefix + 300) || !Zero(r.prefix + 308, 12)) || RootCrc(r) != Get32(r.trailer) || !IntentValid(r.intent)) return false;
     uint32_t rows = 0, rgbs = 0;
-    bool intended_entry = false;
+    bool intended_entry = false, has_target = false;
     const auto count = Get16(r.prefix + 6);
     for (size_t i = 0; i < count; ++i) {
         const auto *e = Entry(r, i);
+        has_target |= Get32(e) == Get32(r.intent + 68);
         if (e[53] > 1) return false;
         if (!e[53]) { if (e[54] || e[55]) return false; continue; }
         if (Get32(e + 12) != 5 || Get32(e + 8) || !e[54] || e[54] > 30 || e[55] > 30) return false;
@@ -128,13 +143,13 @@ bool RootValid(const RootView &r) {
     }
     if (!Zero(r.prefix + 320 + count * 56, kRootPrefixBytes - 320 - count * 56)) return false;
     if (!Get32(r.intent + 8)) return true;
-    if (!intended_entry || Get32(r.prefix + 12) != Get32(r.intent + 64) ||
+    if ((Get32(r.intent + 8) == 20 ? has_target : !intended_entry) || Get32(r.prefix + 12) != Get32(r.intent + 64) ||
         Get32(r.prefix + 300) != Get32(r.intent + 84) || !Equal(r.prefix + 264, r.intent + 296, 32) ||
         Get32(r.prefix + 8) < Get32(r.intent + 80)) return false;
     if (Get32(r.prefix + 8) == Get32(r.intent + 80))
-        return Get32(r.prefix + 16) == Get32(r.intent + 68) && Get64(r.prefix + 24) == Get64(r.intent + 24) &&
+        return Get32(r.prefix + 16) == Get32(r.intent + (Get32(r.intent + 8) == 15 ? 68 : 396)) && Get64(r.prefix + 24) == Get64(r.intent + 24) &&
             Equal(r.prefix + 32, r.intent + 32, 32) && !Get32(r.prefix + 64) &&
-            Get32(r.prefix + 68) == Get32(r.intent + 68) && Get32(r.prefix + 72) == 1 &&
+            Get32(r.prefix + 68) == Get32(r.intent + 68) && Get32(r.prefix + 72) == Get32(r.intent + 72) &&
             Get32(r.prefix + 76) == Get32(r.intent + 80);
     return Get32(r.intent + 12) == 5 && Get32(r.intent + 16) == 3 &&
         Get64(r.prefix + 24) > Get64(r.intent + 24) && !Zero(r.prefix + 32, 32) &&
@@ -170,6 +185,36 @@ bool SameImmutableIntent(const uint8_t *a, const uint8_t *b) {
     // Only phase/terminal (12..19) are mutable checkpoints.
     return Equal(a, b, 12) && Equal(a + 20, b + 20, kIntentBytes - 20);
 }
+// Compare the complete directory in publication order. Only the target metadata
+// and the exact one-slot left shifts caused by dense compaction may differ.
+bool LifecycleRootChange(const uint8_t *old, const uint8_t *next, uint32_t op,
+                         uint32_t id, uint32_t revision, uint32_t row, uint32_t rgb, uint32_t new_rgb) {
+    const bool erase = op == 20, drop_rgb = rgb && (erase || !new_rgb);
+    size_t out = 0;
+    bool found = false;
+    const uint32_t compaction = (erase || drop_rgb) ? Get32(next + 300) : Get32(old + 304);
+    if (Get32(next + 304) != compaction || Get16(next + 6) + unsigned(erase) != Get16(old + 6) ||
+        Get32(next + 16) != Get32(old + 16)) return false;
+    for (size_t i = 0; i < Get16(old + 6); ++i) {
+        const auto *a = old + 320 + 56 * i;
+        if (Get32(a) == id) {
+            if (found || a[53] != 1 || Get32(a + 4) != revision || a[54] != row + 1 || a[55] != rgb)
+                return false;
+            found = true;
+            if (erase) continue;
+            const auto *b = next + 320 + 56 * out++;
+            if (Get32(b) != id || Get32(b + 4) != revision + 1 || !Equal(a + 8, b + 8, 8) ||
+                b[53] != 1 || b[54] != a[54] || b[55] != new_rgb) return false;
+            if (op == 18 && Get32(a + 16) != Get32(b + 16)) return false;
+            if (op == 19 && !Equal(a + 20, b + 20, 33)) return false;
+        } else {
+            const auto *b = next + 320 + 56 * out++;
+            if (!Equal(a, b, 54) || b[54] != a[54] - unsigned(erase && a[54] > row + 1) ||
+                b[55] != a[55] - unsigned(drop_rgb && a[55] > rgb)) return false;
+        }
+    }
+    return found && out == Get16(next + 6);
+}
 bool RootPairValid(const RootView &a, const RootView &b, unsigned &selected) {
     if (!RootValid(a) || !RootValid(b) || Get32(a.prefix + 12) != Get32(b.prefix + 12)) return false;
     selected = Get32(b.prefix + 8) > Get32(a.prefix + 8) ? 1 : 0;
@@ -179,6 +224,11 @@ bool RootPairValid(const RootView &a, const RootView &b, unsigned &selected) {
         Get64(current.prefix + 24) < Get64(prior.prefix + 24) || Get32(current.prefix + 300) < Get32(prior.prefix + 300)) return false;
     if (g == pg) return SameRoot(a, b);
     if ((Get32(a.prefix + 8) & 1u) != 0 || (Get32(b.prefix + 8) & 1u) != 1) return false;
+    const auto *intent = current.intent;
+    if (LifecycleOperation(Get32(intent + 8)) && g == Get32(intent + 80))
+        return LifecycleRootChange(prior.prefix, current.prefix, Get32(intent + 8), Get32(intent + 68),
+                                   Get32(intent + 400), Get32(intent + 404), Get32(intent + 408), Get32(intent + 100));
+    if (Get32(current.prefix + 304) != Get32(prior.prefix + 304)) return false;
     for (size_t i = 0; i < Get16(prior.prefix + 6); ++i) {
         const auto *e = Entry(prior, i); if (!e[53]) continue;
         bool found = false;
@@ -188,11 +238,21 @@ bool RootPairValid(const RootView &a, const RootView &b, unsigned &selected) {
     }
     return true;
 }
+bool RecordSlotsMatch(const uint8_t *record, uint8_t row1, uint8_t rgb1, uint32_t compaction_sequence) {
+    const uint32_t original_row1 = Get32(record + 72) + 1, original_rgb1 = Get32(record + 76);
+    if (Get32(record + 124) >= compaction_sequence)
+        return original_row1 == row1 && original_rgb1 == rgb1;
+    // An untouched survivor retains its receipt indices at publication. Dense
+    // removals can only move existing slots left, never create or drop its RGB.
+    return row1 && row1 <= original_row1 && rgb1 <= original_rgb1 && bool(rgb1) == bool(original_rgb1);
+}
 bool RecordValid(const uint8_t *p, size_t n) {
     if (!p || n <= kRecordHeaderBytes || n > kRecordMaxBytes || Get32(p) != 0x31525055u ||
         Get16(p + 4) != 2 || Get16(p + 6) != 2 || !Get32(p + 8) || !Get32(p + 12) ||
-        Get32(p + 16) != 1 || Get32(p + 20) != n - kRecordHeaderBytes || !Get64(p + 32) ||
-        Get32(p + 72) >= 30 || Get32(p + 76) > 30 || Get32(p + 116) != 1 ||
+        !Get32(p + 16) || Get32(p + 20) != n - kRecordHeaderBytes || !Get64(p + 32) ||
+        Get32(p + 72) >= 30 || Get32(p + 76) > 30 ||
+        (Get32(p + 16) == 1 ? Get32(p + 116) != 1 :
+         (Get16(p + 116) != 2 || Get16(p + 118) < 17 || Get16(p + 118) > 19)) ||
         !Get32(p + 120) || !Get32(p + 124) || Crc32(p, 24) != Get32(p + 24) ||
         Crc32(p + kRecordHeaderBytes, n - kRecordHeaderBytes) != Get32(p + 28)) return false;
     uint32_t crc = ~0u;
@@ -202,6 +262,8 @@ bool RecordValid(const uint8_t *p, size_t n) {
 bool RecordMatchesIntent(const uint8_t *p, size_t n, const uint8_t *intent) {
     if (!IntentValid(intent) || !Get32(intent + 8) || !RecordValid(p, n) || n != Get32(intent + 360) ||
         Get32(p + 8) != Get32(intent + 64) || Get32(p + 12) != Get32(intent + 68) ||
+        Get32(p + 16) != Get32(intent + 72) ||
+        (Get16(p + 116) == 2 && Get16(p + 118) != Get32(intent + 8)) ||
         Get64(p + 32) != Get64(intent + 24) || !Equal(p + 40, intent + 32, 32) ||
         Get32(p + 72) != Get32(intent + 96) || Get32(p + 76) != Get32(intent + 100) ||
         !Equal(p + 80, intent + 104, 32) || Get32(p + 120) != Get32(intent + 80) ||
@@ -215,12 +277,14 @@ bool RecordMatchesIntent(const uint8_t *p, size_t n, const uint8_t *intent) {
 bool MakeRecordHeader(uint8_t *p, const uint8_t *body, size_t n, const RecordIdentity &v) {
     if (!p || !body || !n || n > 3341 || !v.incarnation || !v.id || !v.token || v.row >= 30 ||
         v.rgb > 30 || !v.generation || !v.sequence || !v.digest || !v.baseline_config_sha) return false;
+    if (!v.revision || (v.revision == 1 ? (v.receipt_format != 1 || v.operation != 15) :
+        (v.receipt_format != 2 || v.operation < 17 || v.operation > 19))) return false;
     std::memset(p, 0, kRecordHeaderBytes);
     Put32(p, 0x31525055u); Put16(p + 4, 2); Put16(p + 6, 2);
-    Put32(p + 8, v.incarnation); Put32(p + 12, v.id); Put32(p + 16, 1); Put32(p + 20, n);
+    Put32(p + 8, v.incarnation); Put32(p + 12, v.id); Put32(p + 16, v.revision); Put32(p + 20, n);
     Put32(p + 24, Crc32(p, 24)); Put32(p + 28, Crc32(body, n)); Put64(p + 32, v.token);
     std::memcpy(p + 40, v.digest, 32); Put32(p + 72, v.row); Put32(p + 76, v.rgb);
-    std::memcpy(p + 80, v.baseline_config_sha, 32); Put32(p + 116, 1);
+    std::memcpy(p + 80, v.baseline_config_sha, 32); Put16(p + 116, v.receipt_format); Put16(p + 118, v.receipt_format == 2 ? v.operation : 0);
     Put32(p + 120, v.generation); Put32(p + 124, v.sequence); Put32(p + 112, Crc32(p, kRecordHeaderBytes));
     return true;
 }
@@ -237,10 +301,12 @@ bool FileCharge(uint64_t bytes, uint64_t &charged) {
 }
 bool AdmissionNeed(const AdmissionArithmetic &v, uint64_t &needed) {
     needed = 0;
-    if (v.rows >= 30 || v.rgbs > 30 || (v.with_rgb && v.rgbs == 30) || v.count >= 64 ||
-        v.high_id == UINT32_MAX || !v.generation || v.generation == UINT32_MAX || v.sequence == UINT32_MAX ||
+    const bool create = v.operation == 15, erase = v.operation == 20;
+    if ((!create && !LifecycleOperation(v.operation)) || v.rows > 30 || v.rgbs > 30 || v.count > 64 ||
+        (create && (v.rows == 30 || v.count == 64 || v.high_id == UINT32_MAX)) ||
+        (!create && (!v.rows || !v.count || !v.high_id)) || (v.with_rgb && v.rgbs == 30) || !v.generation || v.generation == UINT32_MAX || v.sequence == UINT32_MAX ||
         v.token <= v.high_token || !v.config_bytes || v.config_bytes > kConfigBodyMaxBytes ||
-        v.record_bytes <= kRecordHeaderBytes || v.record_bytes > kRecordMaxBytes || v.namespace_files > 256 ||
+        (erase ? v.record_bytes != 0 : v.record_bytes <= kRecordHeaderBytes) || v.record_bytes > kRecordMaxBytes || v.namespace_files > 256 ||
         v.total != 524288 || v.used % 4096 || v.free % 4096) return false;
     uint64_t sum, record, root, config, config_file, names, metadata, staging;
     if (!Add(v.used, v.free, sum) || sum != v.total || !FileCharge(v.record_bytes, record) ||

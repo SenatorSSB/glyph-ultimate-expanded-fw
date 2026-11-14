@@ -55,6 +55,7 @@ def main():
         results.append(r)
         (a.out/'results.json').write_text(json.dumps(results,indent=2)+'\n')
         assert r['outcome']==(1 if normal else 6),(name,r)
+        if normal:assert r['splash'] and not r['recovery_visible'],(name,r)
         if a.require_visible and not normal:assert r['recovery_visible'] and not r['splash'],(name,r)
     print(json.dumps({'cases':len(results),'normal':sum(x['expected_normal'] for x in results),
         'recovery':sum(not x['expected_normal'] for x in results),'visible_required':a.require_visible,

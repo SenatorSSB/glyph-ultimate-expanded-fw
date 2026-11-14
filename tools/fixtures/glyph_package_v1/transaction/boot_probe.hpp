@@ -4,6 +4,7 @@
 #include "core/RecoveryInitialization.hpp"
 #include "core/PackageOwnership.hpp"
 #include "core/BootDiagnostics.hpp"
+#include "core/BootTiming.hpp"
 namespace boot_probe {
 Config config = Config_init_default;
 InputState inputs{};
@@ -15,6 +16,8 @@ enum class BootOutcome {Pending,Normal,StoredConfigRejected,StorageFailure,
 struct BootSnapshot {BootOutcome outcome=BootOutcome::Pending;bool display_ready=false;} state;
 unsigned publications=0,backend_initializations=0;
 bool splash=true,recovery_visible=false;
+boot_timing::Times boot_times;
+uint32_t boot_start_ms=0, phase_start_ms=0;
 bool boot_display_ready=false;
 constexpr unsigned SSD1306_WHITE=1;
 struct Display {
