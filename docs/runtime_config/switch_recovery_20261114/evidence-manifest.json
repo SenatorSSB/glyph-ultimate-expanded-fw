@@ -1,0 +1,88 @@
+{
+  "firmwareSourceUnchanged": "0b9ef3afd1834ac7832871bca0651b67147840a2",
+  "evidenceParent": "4a5fa494194c366f8a78e324fcdfdb560dd454c5",
+  "deviceAccess": false,
+  "operatorTests": 55,
+  "baselineSource": "Retained private Stage-H snapshot; reverified without controller access",
+  "hostProof": "Synthetic managed-root3 actual production SET_CONFIG4->1; all protected namespace files exact",
+  "limits": "No hardware validation or current-live-state observation; source patch and artifact unchanged",
+  "files": {
+    "README.md": {
+      "bytes": 9252,
+      "sha256": "d65d9a164ad55097bdd4175303aae0311a3768edd653e42f46edd5d04700890c"
+    },
+    "baseline-result.json": {
+      "bytes": 1214,
+      "sha256": "46398fadd83cf4b20b0adc30d71958e9df5970775bddce875fc30345d1708358"
+    },
+    "exact-pair-validator.log.gz": {
+      "bytes": 29,
+      "sha256": "c4890ab39d03ea9ff7d2f5394d803e9d366d3b98eaaa85ab53168c06c273b13f"
+    },
+    "operator-tests.log.gz": {
+      "bytes": 821,
+      "sha256": "f5dcfb33ef409557477ba15f6d8eba660c9b9c24cc8ef9e2fde8a3d6c9f29cf9"
+    },
+    "pins.json": {
+      "bytes": 95750,
+      "sha256": "37d5417fc07c2ed4a74fd158914a897ec705a83924d0a2886ed5329f02272daa"
+    },
+    "production-build-log.json.gz": {
+      "bytes": 1789,
+      "sha256": "3cfed56bf417768ed5a4361fd23e167ee357a74264462658cb11e96a8a65820e"
+    },
+    "production-build-manifest.json.gz": {
+      "bytes": 7327,
+      "sha256": "3be10518e8bb9febb1dd371c15ba808de589716da91c75daebba57a39fe49921"
+    },
+    "production-commands.json": {
+      "bytes": 831,
+      "sha256": "2de17b4e921269ae156679c2c3ebf3751da2401516fba9f52313a7a4d72ef9ac"
+    },
+    "production-inputs.json.gz": {
+      "bytes": 14603,
+      "sha256": "06dabc223f30e7a74deb11679e76c7572e7121c5b22263f4d526c3e61b39e0ad"
+    },
+    "production-result.json": {
+      "bytes": 1396,
+      "sha256": "d7e71515819890eeecbd8c7a714d194954cd80f2c1ac70134b802151c31ef220"
+    },
+    "synthetic-setconfig-host-harness.cpp.gz": {
+      "bytes": 14197,
+      "sha256": "32f9583e37ad7362867d2769190a6b249d2da7033a9d6707ba5905c744c061b2"
+    },
+    "synthetic-xinput.namespace.gz": {
+      "bytes": 1550,
+      "sha256": "9687f404e53dc13a656ff5a4972b47b0a919f85448b3a69ca9910071d64bb6b8"
+    },
+    "../../../tools/glyph_switch_recovery.py": {
+      "bytes": 28215,
+      "sha256": "9b1f2f7fe325c43133481395c8e4dd0551766f37a45fb9e4d1aaf15e8d805525"
+    },
+    "../../../tools/test_glyph_switch_recovery.py": {
+      "bytes": 21864,
+      "sha256": "6097e12d3e60b5ba4fad5a89701f520f2a506ceef36c48e4305f90ad12931694"
+    },
+    "../../../tools/check_switch_recovery_baseline.py": {
+      "bytes": 4403,
+      "sha256": "c36451e1f2ca074aa971c870f07d67818f94c1ce6858946de50d609e1e6e4b8e"
+    },
+    "../../../tools/check_switch_recovery_setconfig.py": {
+      "bytes": 7814,
+      "sha256": "20492ec640abeb69710fea515242f08e0d6e98fb049b16ceec01e08a6739b44e"
+    },
+    "independent-tests.log.gz": {
+      "bytes": 820,
+      "sha256": "8ab5f3afd6f6849ed8a11e724506f40a591b5598e1c0f6fa512b1f6a2512816c"
+    },
+    "review.md": {
+      "bytes": 2363,
+      "sha256": "59800c167aac5200a8abcd09346514ba76f13c1e700eaeffb85f3fe311aa64da"
+    },
+    "../switch_readiness_20261114/physical-proposal.md": {
+      "bytes": 5661,
+      "sha256": "d7990e76594a04a3094c43359824bc6490bf1d50395fdc41f46bd7159f93713d"
+    }
+  },
+  "independentReview": "PASS; two findings repaired and re-reviewed;55/55 independent tests"
+}

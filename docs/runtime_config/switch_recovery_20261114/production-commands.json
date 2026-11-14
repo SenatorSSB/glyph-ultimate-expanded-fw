@@ -1,0 +1,25 @@
+[
+  {
+    "argv": [
+      "/private/tmp/glyph-switch-recovery-evidence/production-4-to-1/build/package-fault-harness",
+      "seed",
+      "/private/tmp/glyph-switch-recovery-evidence/production-4-to-1/seed.namespace",
+      "/private/tmp/glyph-switch-recovery-evidence/production-4-to-1/seed.nor"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/glyph-switch-recovery-evidence/production-4-to-1/build/package-fault-harness",
+      "set-config-transport",
+      "/private/tmp/glyph-switch-recovery-evidence/production-4-to-1/seed.nor",
+      "/private/tmp/glyph-switch-recovery-evidence/production-4-to-1/one-set-request.bin",
+      "/private/tmp/glyph-switch-recovery-evidence/production-4-to-1/episode"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

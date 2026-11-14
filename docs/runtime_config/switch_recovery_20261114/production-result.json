@@ -1,0 +1,43 @@
+{
+  "result": "PASS",
+  "kind": "Synthetic managed-root3 actual production SET_CONFIG host proof",
+  "configDelta": {
+    "field": "default_usb_backend_config",
+    "before": 4,
+    "after": 1
+  },
+  "configBeforeSha256": "137b2cce183b46d76e5cbbfc9248a516e8817da0d8a7302d91e42ab394b17154",
+  "configTargetSha256": "5f01a826d88c1619c1c47a6a621737d5db5bf86b8ebb07d227b3cb4149594df4",
+  "setConfigRequests": 1,
+  "ack": "Exact empty CMD_SUCCESS6",
+  "allProtectedNamespaceFilesExact": [
+    "/keep.bin",
+    "/ultimate-v2-0.bin",
+    "/ultimate-v2-1.bin",
+    "/ultimate-v2.ctrl",
+    "/ultpkg-00000002-00000001.bin",
+    "/ultpkg-00000003-00000001.bin"
+  ],
+  "configPriorExactOldCurrent": true,
+  "liveAndSavedConfigExactTarget": true,
+  "productionInputs": 296,
+  "compiledProduction": [
+    "ConfiguratorBackend",
+    "PacketIO",
+    "Persistence",
+    "ProfileStore",
+    "Configured Glyph validators",
+    "LittleFS"
+  ],
+  "substitutions": [
+    "Host-only input/output stream",
+    "Synthetic NOR/LittleFS mount",
+    "Platform-only host facades"
+  ],
+  "limits": [
+    "Synthetic namespace does not reconstruct current physical flash",
+    "Separate exact Stage-H368B Config-pair source-validator proof remains necessary",
+    "No physical durability, receiver, installed-image attestation or timing claim",
+    "No firmware source changes or firmware build; no serial/device access"
+  ]
+}

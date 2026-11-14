@@ -1,0 +1,30 @@
+{
+  "ConfigRows": 4,
+  "RGBObjects": 0,
+  "baselineSnapshotSha256": "2087b17b429da7a657288218f9f83297e653e987c45668c2a3ecc35aac344933",
+  "configBytes": 368,
+  "configDifference": {
+    "byteOffset0": 263,
+    "field": "default_usb_backend_config",
+    "switch": 4,
+    "xinput": 1
+  },
+  "currentSha256": "b4f242caec602cdc75718ad9805bc847de456f1298ed5be82f632fdb89180028",
+  "deviceAccess": false,
+  "hostBinarySha256": "d11772d31b25451ba8fd72abe51240b73865c789cce997149f6d109979542aca",
+  "hostInputs": 134,
+  "managedSequence": 6,
+  "originalConfigRowsReferencesSelectorsRGBAndReceiptsExact": true,
+  "originalDirectoryAndWrappersExact": true,
+  "originalLedgerFilesVerified": 812,
+  "physicalState": "Retained Stage-H evidence only; current live state not observed in this invocation",
+  "productionExactPairParserAndSemanticValidator": "both 0 1 0",
+  "profiles": 27,
+  "result": "PASS",
+  "source": "0b9ef3afd1834ac7832871bca0651b67147840a2",
+  "storeGeneration": 234,
+  "storeIncarnation": 1,
+  "targetSha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+  "transactionHighWater": "17293822569102712138",
+  "uf2": "6eb992cda7392b6fb5a52ab48989ef10c94fc97ec77fd733360a863e55cd8a83"
+}
