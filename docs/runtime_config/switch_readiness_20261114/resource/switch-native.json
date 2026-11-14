@@ -1,0 +1,21 @@
+{
+  "scope": "Retained native.frame selected-input/source/mode predicate only; conservative inherited dispatch reserve and IRQ included. No hardware measurement.",
+  "predicate": "Only native Evaluate virtual target UpdateDirections64, smaller than Conditions72+Value8. Selected input-source/mode targets fixed.",
+  "archive_baseline": 976,
+  "previous_backend_reserve": 24,
+  "new_switch_frame": 32,
+  "IRQ": 408,
+  "components": {
+    "main": 48,
+    "loop": 32,
+    "NintendoSwitchBackend::SendReport()": 32,
+    "CommunicationBackend::UpdateOutputs()": 24,
+    "ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)": 112,
+    "Ultimate::UpdatePreprocessedOutputs(ResolvedInputContext const&, _OutputState&, _CommunicationBackendId)": 16,
+    "ultimate_native::Evaluate(ultimate_native::PreparedView const&, ResolvedInputContext const&, ControllerMode&, _OutputState&)": 232,
+    "ultimate_native::(anonymous namespace)::Conditions(unsigned char, unsigned char, ResolvedInputContext const&, ultimate_native::FrameState&)": 72,
+    "ultimate_native::(anonymous namespace)::Value(unsigned short, ResolvedInputContext const&, ultimate_native::FrameState const&) [clone .part.0]": 8
+  },
+  "conditional_total": 984,
+  "margin": 1064
+}

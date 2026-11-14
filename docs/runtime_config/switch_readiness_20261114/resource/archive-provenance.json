@@ -1,0 +1,14 @@
+{
+  "core0_script": {
+    "source": "Glyph a1d6c7866e34dcbc8248638ff69cb6902d6eb8f8 docs/runtime_config/productization_20261113/resources/compose.py",
+    "sha256": "80ec855184bc16560fb030d54c556d0d83bb10dc661a715a6efaba53a4738389"
+  },
+  "core1_script": {
+    "source": "Senscope e3bfb9eafd0defe48d1a2a10733146c14e768c57 docs/project/goal-runs/glyph-productization-20261113/replay-display-stack.py",
+    "sha256": "cba215a70f00cde815d4af5fd2b6adca472faf9ecd714392f22f3c99681e98ad"
+  },
+  "baseline_archive": {
+    "source": "Senscope e3bfb9eafd0defe48d1a2a10733146c14e768c57 docs/project/goal-runs/exact-legacy-migration-proof-diagnosis/evidence/target-and-resource-evidence.tar.gz",
+    "sha256": "039f7517b0d373a43b3332346b43e3704d5fca332dbf47a3fdb8992b6ac46553"
+  }
+}

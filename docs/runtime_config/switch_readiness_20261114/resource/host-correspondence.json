@@ -1,0 +1,8 @@
+{
+  "firmware_source": "0b9ef3afd1834ac7832871bca0651b67147840a2",
+  "source_manifest_files_checked": 137,
+  "sanitizers": true,
+  "harness_binary_sha256": "fbb0cafff735eb6798e1163b1fc9dc6fefde4a3775e76b2e84de345f058b402a",
+  "selection_and_lifecycle_config_corpus_git_tree": "395a827f5561afa034607fe72095b991babec646",
+  "hardware_operations": 0
+}

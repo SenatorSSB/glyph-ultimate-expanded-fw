@@ -1,0 +1,141 @@
+{
+  "source": "0b9ef3afd1834ac7832871bca0651b67147840a2",
+  "parent": "84556d904f067bda5a101e6297689239ecd04aae",
+  "files": {
+    "firmware.elf": {
+      "bytes": 5763636,
+      "sha256": "43b3b7b0630d66d0b17266580e2cd6be0862cd9059694cf805b1c90d5b21fd1f",
+      "stored": "firmware.elf.gz"
+    },
+    "firmware.bin": {
+      "bytes": 663324,
+      "sha256": "664a9b4af14f6447fd72eb333cefeacf5cd80bdc7166fad987ecc253f2ad1ccf",
+      "stored": "firmware.bin.gz"
+    },
+    "firmware.uf2": {
+      "bytes": 1327104,
+      "sha256": "6eb992cda7392b6fb5a52ab48989ef10c94fc97ec77fd733360a863e55cd8a83",
+      "stored": "firmware.uf2.gz"
+    },
+    "firmware.map": {
+      "bytes": 3927295,
+      "sha256": "3f609d2ff713edb96b4eb56ae58d62889d56c563726eff0ebe2353a7593d5d0d",
+      "stored": "firmware.map.gz"
+    },
+    "switch-host.log": {
+      "bytes": 16456,
+      "sha256": "42bc9cb1350d8c477a852a5962a1d832d1c57a987c17d19c712489e140493f00",
+      "stored": "switch-host.log.gz"
+    },
+    "build.log": {
+      "bytes": 48813,
+      "sha256": "a2669f3d5a551a434f7481640f3b1930cb335203ee22ea9b29f66c373d37ba4b",
+      "stored": "build.log.gz"
+    },
+    "build-precommit.log": {
+      "bytes": 1679,
+      "sha256": "53a94fda365c7f4721c3c674607d355da55dddfa20ac746d40424abbccdbc1fb",
+      "stored": "build-precommit.log.gz"
+    },
+    "independent-mutants.log": {
+      "bytes": 34645,
+      "sha256": "5a238228406e842f652347a762e5770b9f150565f188be62aef006eac3e45c9b",
+      "stored": "independent-mutants.log.gz"
+    },
+    "independent-wire.log": {
+      "bytes": 15178,
+      "sha256": "94e43c691b03b7e00694b9338ccd10d1d1f93dad6cb90412e2274f1a1676607d",
+      "stored": "independent-wire.log.gz"
+    },
+    "independent-liveness.log": {
+      "bytes": 16456,
+      "sha256": "87033b5a8b95de9406552369e2b3436c12f8fdf5df130867a63fb3ac00e85dac",
+      "stored": "independent-liveness.log.gz"
+    },
+    "independent-wire.py": {
+      "bytes": 2662,
+      "sha256": "07378ad3537910682dce946a98e3967bf79f3b2aa15bfebf48e39a2b34d8fb4b",
+      "stored": "independent-wire.py.gz"
+    },
+    "boot.log": {
+      "bytes": 735,
+      "sha256": "83fe4f24fde857945661b71d9670a283381321cebfc344fcd5858eda604a0928",
+      "stored": "boot.log.gz"
+    },
+    "cdc.log": {
+      "bytes": 343,
+      "sha256": "a00778a7f8b7b5b6d7685d29f762423c917e4dc06248f8341bd40f8aa55dd684",
+      "stored": "cdc.log.gz"
+    },
+    "bounds.log": {
+      "bytes": 93,
+      "sha256": "b1c05ef09f41a3f12c1a86f644a13857bc02f45806431c353dff6367e32d1c69",
+      "stored": "bounds.log.gz"
+    },
+    "host.log": {
+      "bytes": 4779,
+      "sha256": "11879f2afe666e064cff9ef521cf119a2f205bd1382b3031c17b1d340e252a19",
+      "stored": "host.log.gz"
+    },
+    "selector-rerun.log": {
+      "bytes": 2858,
+      "sha256": "94fb2173244758122f416fbf0a48bba465b58b9c41e353b3bfb06dfd278cff17",
+      "stored": "selector-rerun.log.gz"
+    },
+    "check-target.py": {
+      "bytes": 806,
+      "sha256": "2a530259b55d56a0be335f2c04db9e1c467c374aff0287724887429e4077d116",
+      "stored": "check-target.py.gz"
+    },
+    "target.log": {
+      "bytes": 190,
+      "sha256": "d5870fdb5f55124c8b9cb91e7a12392c12f8f513526bc5a89156e5baca09ba41",
+      "stored": "target.log.gz"
+    },
+    "resource.log": {
+      "bytes": 2768,
+      "sha256": "961ba5032078ebc0d5f4b660d6277c48bf19665f2675671f41f01722b1e98efd",
+      "stored": "resource.log.gz"
+    },
+    "compare.py": {
+      "bytes": 1845,
+      "sha256": "88925f6de7a15e0ddfeae52dd3bf4e65eafd21f927297295431f25929541dc4f",
+      "stored": "compare.py.gz"
+    },
+    "replay-display-stack.py": {
+      "bytes": 5515,
+      "sha256": "cba215a70f00cde815d4af5fd2b6adca472faf9ecd714392f22f3c99681e98ad",
+      "stored": "replay-display-stack.py.gz"
+    },
+    "resource/summary.json": {
+      "bytes": 3462,
+      "sha256": "a76cda3b6059c280c2d28b2e88b46f7b51b2c76231e739fcef4486c921452b88",
+      "stored": "resource/summary.json.gz"
+    },
+    "resource/display-stack-result.json": {
+      "bytes": 586,
+      "sha256": "f28825495d1bdc621d0d27dedee94ed315032198a0afb80dd0b7b6766b490c1c",
+      "stored": "resource/display-stack-result.json.gz"
+    },
+    "resource/functions.json": {
+      "bytes": 3407882,
+      "sha256": "bca4901c189a5bb05af0205f92670c5125bd10252280093104d9fb8a2317ff86",
+      "stored": "resource/functions.json.gz"
+    },
+    "resource/vtables.json": {
+      "bytes": 381549,
+      "sha256": "e6c619206a7f98ba0bd807afe5c733dfba953a1f939600133b3d4afd1d6ba756",
+      "stored": "resource/vtables.json.gz"
+    },
+    "resource/core0.json": {
+      "bytes": 60579,
+      "sha256": "eb659320e23e2315c33d7ad9f2b76cb7c06f38bc89907b753281e025d2f8294b",
+      "stored": "resource/core0.json.gz"
+    },
+    "resource/compare.json": {
+      "bytes": 2862,
+      "sha256": "603587125bd59987882a94976607d115f8ea0aa29c69853f6ab34f1f652fbcc9",
+      "stored": "resource/compare.json.gz"
+    }
+  }
+}
