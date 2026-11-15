@@ -125,7 +125,7 @@ def main() -> int:
         pending = 'if (outcome == BootOutcome::Pending) outcome = read_boot_state().outcome;'
         assert loop.count(pending) == 1
         missed_transition = app_case('missed_transition', loop_source=loop.replace(pending, ''))
-        assert 'boot snapshot lock count' in run([str(missed_transition), 'loop_gate'], expected=1)
+        assert 'boot gate service trace' in run([str(missed_transition), 'loop_gate'], expected=1)
         old_routes = app_case('old_auto_routes',old_auto=True)
         failure = run([str(old_routes),'automatic'],expected=1)
         assert 'automatic failures must run recovery transport' in failure

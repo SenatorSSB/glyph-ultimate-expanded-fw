@@ -763,7 +763,8 @@ size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
     return config_file.close();
 }
 
-bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *failure) {
+// Release the CRC buffer before callers resume decoding, hashing, or publication.
+__attribute__((noinline)) bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *failure) {
     if (failure != nullptr) {
         *failure = LoadResult::Rejected;
     }

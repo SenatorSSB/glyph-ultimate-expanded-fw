@@ -124,8 +124,8 @@ void check_loop_gate(bool baseline) {
         snapshots = serial_reports = 0;
         services.clear();
         loop();
-        require(!boot_state_mutex && snapshots == locks, "boot snapshot lock count");
         require(services == trace && serial_reports == recovery_calls, "boot gate service trace");
+        require(!boot_state_mutex && snapshots == locks, "boot snapshot lock count");
     };
     using B = BootOutcome;
     const unsigned terminal_reads = baseline ? 2 : 1;
@@ -133,8 +133,8 @@ void check_loop_gate(bool baseline) {
     check(B::RecoveryConfigurator, B::Pending, 1, "", 1);
     for (auto refused : {B::StoredConfigRejected, B::StorageFailure, B::DefaultsRejected, B::StartupConfigRejected})
         check(refused, B::Pending, terminal_reads, "", 0);
-    check(B::Pending, B::Pending, 2, "", 0);
     check(B::Pending, B::Normal, 2, "SDMRRIK", 0);
+    check(B::Pending, B::Pending, 2, "", 0);
     check(B::Pending, B::RecoveryConfigurator, 2, "", 0);
     // Recovery which became visible at the second gate is serviced next iteration.
     loop();
