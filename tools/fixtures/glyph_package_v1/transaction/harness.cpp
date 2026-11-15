@@ -248,6 +248,58 @@ if(!std::strcmp(argv[1],"wire-requests")){
   need(files()==all,"seed exact namespace");no_handles();output(argv[3],nor);shutdown();return 0;
  }
  need(argc>=5,"execute|inspect NOR REQUESTS OUTDIR");output_dir=argv[4];mount_image(argv[2]);need(persistence.SetValidator(validate_glyph_config),"configured actual source validator");
+ if(!std::strcmp(argv[1],"config-load-outcome")){
+  const auto before=nor;const auto p=programs,e=erases;
+  Config saved=Config_init_default;const auto result=persistence.LoadConfigChecked(saved);
+  need(nor==before&&programs==p&&erases==e,"Config outcome read-only");no_handles();
+  std::cout<<unsigned(result)<<"\n";shutdown();return 0;
+ }
+ if(!std::strcmp(argv[1],"config-load-faults")){
+  const auto before=nor;const auto p=programs,e=erases;
+  static size_t seen=0,selected=SIZE_MAX;static bool short_mode=false;
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char*){
+   if(op!=CheckedStorage::Operation::Read)return CheckedStorage::Fault::None;
+   if(!short_mode && phase==CheckedStorage::Phase::Before && seen++==selected)return CheckedStorage::Fault::Fail;
+   if(short_mode && phase==CheckedStorage::Phase::After && seen++==selected){
+    auto *file=reinterpret_cast<lfs_file_t*>(fs.mlist);
+    need(file && file->type==LFS_TYPE_REG,"Config short-read handle");
+    need(lfs_file_seek(&fs,file,0,LFS_SEEK_END)>=0,"Config short-read seek");
+   }
+   return CheckedStorage::Fault::None;
+  });
+  Config saved=Config_init_default;
+  need(persistence.LoadConfigChecked(saved)==Persistence::LoadResult::Loaded,"Config census");
+  const size_t seams=seen;size_t failed=0,short_failed=0,short_loaded=0;
+  for(size_t i=0;i<seams;++i){seen=0;selected=i;short_mode=false;
+   const auto result=persistence.LoadConfigChecked(saved);
+   need(seen>i,"Config failure reached");need(result==Persistence::LoadResult::StorageFailure,"Config failure disposition");++failed;
+   no_handles();need(nor==before&&programs==p&&erases==e,"Config fault read-only");
+  }
+  for(size_t i=0;i<seams;++i){seen=0;selected=i;short_mode=true;
+   const auto result=persistence.LoadConfigChecked(saved);
+   need(seen>i,"Config short-read reached");
+   need(result==Persistence::LoadResult::StorageFailure||result==Persistence::LoadResult::Loaded,"Config short-read disposition");
+   if(result==Persistence::LoadResult::StorageFailure)++short_failed;else ++short_loaded;
+   no_handles();need(nor==before&&programs==p&&erases==e,"Config short read-only");
+  }
+  CheckedStorage::SetFaultHook(nullptr);
+  std::cout<<"{\"seams\":"<<seams<<",\"failed\":"<<failed<<",\"short_failed\":"<<short_failed<<",\"short_loaded\":"<<short_loaded<<"}\n";
+  shutdown();return 0;
+ }
+ if(!std::strcmp(argv[1],"config-load-work")){
+  const auto before=nor;const auto p=programs,e=erases,r=reads;
+  static size_t count=0;count=0;
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char*){
+   if(op==CheckedStorage::Operation::Read&&phase==CheckedStorage::Phase::Before)++count;
+   return CheckedStorage::Fault::None;
+  });
+  Config saved=Config_init_default;const auto result=persistence.LoadConfigChecked(saved);
+  CheckedStorage::SetFaultHook(nullptr);
+  need(result==Persistence::LoadResult::Loaded,"healthy Config load");
+  need(nor==before&&programs==p&&erases==e,"Config load read-only");no_handles();
+  std::cout<<"{\"checked_reads\":"<<count<<",\"nor_reads\":"<<reads-r<<"}\n";
+  shutdown();return 0;
+ }
  if(!std::strcmp(argv[1],"startup-work")){
   // Observe the actual package classifier, including the mounted NOR callbacks.
   // Measure only Begin, after Arduino facade setup and saved Config load.
