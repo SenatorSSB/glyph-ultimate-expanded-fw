@@ -234,6 +234,31 @@ constexpr const char *get_stick_string(uint8_t center, uint8_t value) {
     return ":p";
 }
 
+// Font4x7Fixed has no right overhang. Its advances bound every visible pixel.
+static void draw_profile_label(Adafruit_GFX &display, const char *label, size_t limit) {
+    constexpr unsigned label_width = 78 - 12;
+    const unsigned ellipsis_width = 3 * pgm_read_byte(&Font4x7FixedGlyphs['.' - ' '].xAdvance);
+    size_t end = 0;
+    size_t prefix = 0;
+    unsigned width = 0;
+    while (end < limit && label[end]) {
+        const uint8_t c = static_cast<uint8_t>(label[end++]);
+        if (c < ' ' || c > '~') continue;
+        width += pgm_read_byte(&Font4x7FixedGlyphs[c - ' '].xAdvance);
+        if (width > label_width) break;
+        if (width + ellipsis_width <= label_width) prefix = end;
+    }
+    const bool truncated = width > label_width;
+    const size_t visible = truncated ? prefix : end;
+    for (size_t i = 0; i < visible; ++i) {
+        const uint8_t c = static_cast<uint8_t>(label[i]);
+        if (c >= ' ' && c <= '~') display.write(c);
+    }
+    if (truncated) {
+        for (unsigned i = 0; i < 3; ++i) display.write('.');
+    }
+}
+
 void MenuButtonHints::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &display) {
     InputState &inputs = instance->GetInputs();
     uint8_t font_width = instance->font_width;
@@ -261,15 +286,7 @@ void MenuButtonHints::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &d
         // controls cannot be allowed to move the cursor into another field.
         const char *label = current_profile_label(instance->CurrentGameMode(), _backend_id);
         const size_t limit = label == mode_config.name ? sizeof(mode_config.name) : 32;
-        unsigned width = 0;
-        for (size_t i = 0; i < limit && label[i]; ++i) {
-            const uint8_t c = static_cast<uint8_t>(label[i]);
-            if (c < 0x20 || c > 0x7e) continue;
-            const unsigned advance = pgm_read_byte(&Font4x7FixedGlyphs[c - 0x20].xAdvance);
-            if (width + advance > 66) break;
-            display.write(c);
-            width += advance;
-        }
+        draw_profile_label(display, label, limit);
 
         display.setCursor(12, 30);
         display.print(dashboard_plate_label(mode_config.layout_plate));

@@ -30,7 +30,7 @@ struct Led {template<unsigned,unsigned>void addLeds(unsigned *,unsigned){}void s
 constexpr unsigned OLED_SDA=0,OLED_SCL=1,SSD1306_SWITCHCAPVCC=1,NEOPIXEL=1,LED_PIN=2,LED_COUNT=1;unsigned bootloaderRGB[1]={};const uint8_t Bitmap_Update[1]={},Bitmap_Glyph_Splashscreen[1]={};
 struct BootloaderRequest{};
 void reboot_bootloader(){++bootloader;throw BootloaderRequest{};}
-enum class BootOutcome {Pending,Normal,StorageFailure,DefaultsRejected,StartupConfigRejected,RecoveryConfigurator};
+enum class BootOutcome {Pending,Normal,StoredConfigRejected,StorageFailure,DefaultsRejected,StartupConfigRejected,RecoveryConfigurator};
 struct BootSnapshot {BootOutcome outcome=BootOutcome::Pending;bool display_ready=false;}boot_state;
 bool boot_display_ready=false;
 void draw_recovery_page(BootOutcome) {throw std::runtime_error("headless recovery display use");}
@@ -131,7 +131,7 @@ void check_loop_gate(bool baseline) {
     const unsigned terminal_reads = baseline ? 2 : 1;
     check(B::Normal, B::Pending, terminal_reads, "SDMRRIK", 0);
     check(B::RecoveryConfigurator, B::Pending, 1, "", 1);
-    for (auto refused : {B::StorageFailure, B::DefaultsRejected, B::StartupConfigRejected})
+    for (auto refused : {B::StoredConfigRejected, B::StorageFailure, B::DefaultsRejected, B::StartupConfigRejected})
         check(refused, B::Pending, terminal_reads, "", 0);
     check(B::Pending, B::Pending, 2, "", 0);
     check(B::Pending, B::Normal, 2, "SDMRRIK", 0);
@@ -147,7 +147,7 @@ void check_loop_gate(bool baseline) {
     check(B::Normal, B::Pending, terminal_reads, "", 0);
     backends = nullptr;
     check(B::Normal, B::Pending, terminal_reads, "", 0);
-    for (auto terminal : {B::Normal, B::StorageFailure, B::DefaultsRejected,
+    for (auto terminal : {B::Normal, B::StoredConfigRejected, B::StorageFailure, B::DefaultsRejected,
                           B::StartupConfigRejected, B::RecoveryConfigurator}) {
         boot_state = {B::Pending, false};
         publish_boot_state(terminal, true);

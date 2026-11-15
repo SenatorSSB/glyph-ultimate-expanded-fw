@@ -107,13 +107,20 @@ int main(int argc,char **argv) {
  assert(pixels.dashboard_pixels==short_pixels);
  std::memset(entries[1].name,'L',32);entries[1].name[32]=0;
  dashboard.UpdateDisplay(&screen,pixels);
- assert(pixels.dashboard_text=="LLLLLLLLLLLLLLLL" && pixels.dashboard_max_x<78);
+ assert(pixels.dashboard_text=="LLLLLLLLLLLLLL..." && pixels.dashboard_max_x<78);
  pixels.setFont(pixels.dashboard_font);pixels.setCursor(12,20);
  for(int i=0;i<32;++i) pixels.write('L');
  assert(pixels.dashboard_max_x>=78); // Negative control: old unrestricted draw.
  std::memset(entries[1].name,'W',32);entries[1].name[32]=0;
  dashboard.UpdateDisplay(&screen,pixels);
- assert(pixels.dashboard_text=="WWWWWWWWWWWWW" && pixels.dashboard_max_x<78);
+ assert(pixels.dashboard_text=="WWWWWWWWWWW..." && pixels.dashboard_max_x<78);
+ // Sixteen L advances and one space fill the 66-pixel name region exactly.
+ std::strcpy(entries[1].name,"LLLLLLLLLLLLLLLL ");
+ dashboard.UpdateDisplay(&screen,pixels);
+ assert(pixels.dashboard_text=="LLLLLLLLLLLLLLLL " && pixels.dashboard_max_x<78);
+ std::strcat(entries[1].name,"L");
+ dashboard.UpdateDisplay(&screen,pixels);
+ assert(pixels.dashboard_text=="LLLLLLLLLLLLLL..." && pixels.dashboard_max_x<78);
  std::strcpy(entries[1].name,"A\xC3\xA9\nB");
  dashboard.UpdateDisplay(&screen,pixels);
  assert(pixels.dashboard_text=="AB" && pixels.dashboard_max_x<78);
