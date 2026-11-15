@@ -255,7 +255,21 @@ void MenuButtonHints::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &d
         const GameModeConfig &mode_config = *instance->CurrentGameMode()->GetConfig();
         /* profile info */
         display.setCursor(12, 20);
-        display.print(current_profile_label(instance->CurrentGameMode(), _backend_id));
+        // Keep the label left of the live stick values. The custom font has
+        // variable advances, so a character count alone cannot bound it.
+        // Unsupported bytes are ignored just as Adafruit_GFX ignores them;
+        // controls cannot be allowed to move the cursor into another field.
+        const char *label = current_profile_label(instance->CurrentGameMode(), _backend_id);
+        const size_t limit = label == mode_config.name ? sizeof(mode_config.name) : 32;
+        unsigned width = 0;
+        for (size_t i = 0; i < limit && label[i]; ++i) {
+            const uint8_t c = static_cast<uint8_t>(label[i]);
+            if (c < 0x20 || c > 0x7e) continue;
+            const unsigned advance = pgm_read_byte(&Font4x7FixedGlyphs[c - 0x20].xAdvance);
+            if (width + advance > 66) break;
+            display.write(c);
+            width += advance;
+        }
 
         display.setCursor(12, 30);
         display.print(dashboard_plate_label(mode_config.layout_plate));

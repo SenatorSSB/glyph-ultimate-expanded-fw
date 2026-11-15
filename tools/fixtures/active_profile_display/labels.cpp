@@ -94,6 +94,30 @@ int main(int argc,char **argv) {
  entries[1].payload_version=3;expect("Ultimate Runtime");entries[1].payload_version=5;
  entries[1].name[0]=0;expect("Ultimate Runtime");std::memset(entries[1].name,'x',sizeof(entries[1].name));expect("Ultimate Runtime");std::strcpy(entries[1].name,"Kazuya");
  std::memset(entries[1].name,'L',32);entries[1].name[32]=0;expect("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");std::strcpy(entries[1].name,"Kazuya");
+ // Compare the original unrestricted production-font draw against the actual
+ // dashboard path using the same size-1 bitmap renderer and font bytes.
+ dashboard.UpdateDisplay(&screen,pixels);
+ for(unsigned i=0;i<95;++i) {
+  auto glyph=pixels.dashboard_font->glyph[i];
+  assert(glyph.x>=0 && glyph.x+glyph.w<=glyph.xAdvance);
+ }
+ auto short_pixels=pixels.dashboard_pixels;
+ pixels.setFont(pixels.dashboard_font);pixels.setCursor(12,20);
+ for(char c:std::string("Kazuya")) pixels.write(c);
+ assert(pixels.dashboard_pixels==short_pixels);
+ std::memset(entries[1].name,'L',32);entries[1].name[32]=0;
+ dashboard.UpdateDisplay(&screen,pixels);
+ assert(pixels.dashboard_text=="LLLLLLLLLLLLLLLL" && pixels.dashboard_max_x<78);
+ pixels.setFont(pixels.dashboard_font);pixels.setCursor(12,20);
+ for(int i=0;i<32;++i) pixels.write('L');
+ assert(pixels.dashboard_max_x>=78); // Negative control: old unrestricted draw.
+ std::memset(entries[1].name,'W',32);entries[1].name[32]=0;
+ dashboard.UpdateDisplay(&screen,pixels);
+ assert(pixels.dashboard_text=="WWWWWWWWWWWWW" && pixels.dashboard_max_x<78);
+ std::strcpy(entries[1].name,"A\xC3\xA9\nB");
+ dashboard.UpdateDisplay(&screen,pixels);
+ assert(pixels.dashboard_text=="AB" && pixels.dashboard_max_x<78);
+ std::strcpy(entries[1].name,"Kazuya");
  ready=false;expect("Ultimate Runtime");ready=true;recovery=true;expect("Ultimate Runtime");recovery=false;
  // Failed activation leaves an old store ID but actual native execution fails.
  ultimate_mode.SetConfig(mc,nullptr,nullptr);expect("Ultimate Runtime");
