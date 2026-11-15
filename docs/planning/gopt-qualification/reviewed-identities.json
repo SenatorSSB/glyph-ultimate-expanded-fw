@@ -1,0 +1,16 @@
+{
+  "commit": "55739675e5706ea8799265c4221724ac4f2dce9b",
+  "tree": "87ad82c2302353d50325ff3b8445464b62fc92e9",
+  "host_fingerprint": "ef11fd2a1d86391f4702567fadf90c501a3b2b1daeb6708965d7c04bb7c0bbeb",
+  "files": {
+    "HAL/pico/src/core/Persistence.cpp": "8727612b565922c85d51c8ed11ae6fb443a81b51051eb210c1855450df22f95d",
+    "config/glyph/common/src/config.cpp": "c674fa64018ed215a30fe2a9a98238f5329a385a7ac0eaa06a80358b90ca2a8c",
+    "config/glyph/common/src/display/MenuButtonHints.cpp": "1dc0a5780d1e1ffee6e5e6d24fc62b60605510c675c8a15d278a90d119469bb9",
+    "tools/check_glyph_profile_store_selection_recovery.py": "f6cf6402c8a19dc95e173d685367f0b8fce360f5b5fe5fa19b4fca682efe104e",
+    "tools/fixtures/active_profile_display/include/Adafruit_GFX.h": "e03a7c180c773b084a6b40bf34f4c7565f97d1c30f310ab0bac450f713f59814",
+    "tools/fixtures/active_profile_display/labels.cpp": "670000e3a205bec9359ca48b01d71e5cf0925242a9bd43e397649af16c8a0361",
+    "tools/fixtures/glyph_package_v1/transaction/harness.cpp": "d4f36963b67769b40a3a2954b03ef37b2387b89841d35021ac578f5178d2a862",
+    "tools/fixtures/glyph_package_v1/transaction/startup_work.py": "9c4d19f3b461d7f3357e4618cce79caa18a4ac00972d3439af85b1cb0be57f41",
+    "tools/fixtures/profile_store_selection_recovery_host/setup_routes.cpp": "23e7426f6b37b0743a4505e36f1abfbced5a54685281710a0aac47da4d66504d"
+  }
+}

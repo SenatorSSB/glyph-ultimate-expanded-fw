@@ -1,0 +1,664 @@
+{
+  "source": "55739675e5706ea8799265c4221724ac4f2dce9b",
+  "hosted_run": {
+    "conclusion": "success",
+    "createdAt": "2026-11-15T08:46:04Z",
+    "headSha": "399e06f099a96a4e903cb349fcc7ee03e9d749b2",
+    "jobs": [
+      {
+        "completedAt": "2026-11-15T08:49:23Z",
+        "conclusion": "success",
+        "databaseId": 132756632970,
+        "name": "current_host",
+        "startedAt": "2026-11-15T08:46:06Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-11-15T08:46:08Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-11-15T08:46:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:46:14Z",
+            "conclusion": "success",
+            "name": "Check out source code (actions/checkout v4.4.0)",
+            "number": 2,
+            "startedAt": "2026-11-15T08:46:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:46:20Z",
+            "conclusion": "success",
+            "name": "Install offline host test dependencies",
+            "number": 3,
+            "startedAt": "2026-11-15T08:46:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:46:22Z",
+            "conclusion": "success",
+            "name": "Resolve immutable public package test dependencies",
+            "number": 4,
+            "startedAt": "2026-11-15T08:46:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:49:21Z",
+            "conclusion": "success",
+            "name": "Current host regressions",
+            "number": 5,
+            "startedAt": "2026-11-15T08:46:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:49:22Z",
+            "conclusion": "success",
+            "name": "Post Check out source code (actions/checkout v4.4.0)",
+            "number": 10,
+            "startedAt": "2026-11-15T08:49:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:49:22Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-11-15T08:49:22Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/actions/runs/43696030677/job/132756632970"
+      },
+      {
+        "completedAt": "2026-11-15T08:52:05Z",
+        "conclusion": "success",
+        "databaseId": 132757422148,
+        "name": "validation",
+        "startedAt": "2026-11-15T08:49:25Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-11-15T08:49:26Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-11-15T08:49:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:49:31Z",
+            "conclusion": "success",
+            "name": "Check out source code (actions/checkout v4.4.0)",
+            "number": 2,
+            "startedAt": "2026-11-15T08:49:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:49:32Z",
+            "conclusion": "success",
+            "name": "Fetch historical failed-build object required by C020 replay",
+            "number": 3,
+            "startedAt": "2026-11-15T08:49:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:49:32Z",
+            "conclusion": "success",
+            "name": "Set trusted comparison base",
+            "number": 4,
+            "startedAt": "2026-11-15T08:49:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:52:03Z",
+            "conclusion": "success",
+            "name": "Run current runtime-config validation",
+            "number": 5,
+            "startedAt": "2026-11-15T08:49:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:52:03Z",
+            "conclusion": "success",
+            "name": "Classify firmware build inputs",
+            "number": 6,
+            "startedAt": "2026-11-15T08:52:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:52:03Z",
+            "conclusion": "success",
+            "name": "Post Check out source code (actions/checkout v4.4.0)",
+            "number": 12,
+            "startedAt": "2026-11-15T08:52:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-15T08:52:03Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 13,
+            "startedAt": "2026-11-15T08:52:03Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/actions/runs/43696030677/job/132757422148"
+      },
+      {
+        "completedAt": "2026-11-15T08:52:05Z",
+        "conclusion": "skipped",
+        "databaseId": 132758076484,
+        "name": "build",
+        "startedAt": "2026-11-15T08:52:06Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/actions/runs/43696030677/job/132758076484"
+      }
+    ],
+    "updatedAt": "2026-11-15T08:52:06Z",
+    "url": "https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/actions/runs/43696030677"
+  },
+  "aggregate": {
+    "status": "PASS",
+    "canonical_proof": "MATCH",
+    "census_freshness": {
+      "applicability": "current",
+      "category": "baseline",
+      "id": "checker_census_freshness",
+      "load_bearing": true,
+      "path": "tools/check_glyph_checker_census.py",
+      "status": "PASS"
+    },
+    "aggregate_timeout_seconds": 300.0,
+    "results": [
+      {
+        "applicability": "current",
+        "category": "configurator",
+        "command": [
+          "python3",
+          "tools/check_glyph_gp_config_007_transaction_stage_schema.py"
+        ],
+        "duration_seconds": 0.183,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "gp_config_007_transaction_stage_schema",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_gp_config_007_transaction_stage_schema: PASS; schema=v2 stages=10"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "source_sync",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_storage_fallback.py"
+        ],
+        "duration_seconds": 0.08,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "runtime_config_storage_fallback",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "firmware_flashing_claim=false"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_health.py"
+        ],
+        "duration_seconds": 0.07,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "validation_health",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_runtime_config_validation_health: PASS; census_count=263; manifest_entries=64; baseline=116d34322837fe1f6f724c820b49ccb0d24d6787"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_publication_workflow.py"
+        ],
+        "duration_seconds": 0.228,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "validation_publication_workflow",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_runtime_config_validation_publication_workflow: PASS; cases=missing_pull_request,wrong_validation_command,shallow_checkout,write_permission,missing_dependency,continue_on_error,alternate_unguarded_publication,comment_only_aggregate,inert_aggregate_step,folded_aggregate_shape,aggregate_in_wrong_job,ambiguous_duplicate_step,unsupported_needs_shape,alternate_unguarded_nuker,conditional_validation_or_publication,trailing_success_mask,trailing_exit_success_mask,same_indent_sibling_shell,explicit_shell,explicit_working_directory,explicit_env,explicit_uses,shell_function,heredoc_control_flow,multiline_control_flow,malformed_block_indentation,setup_fetch_masked,setup_duplicate_operation,setup_intervening_ref_mutation,setup_wrong_base_expression,setup_unreachable_branch,setup_trailing_command,setup_duplicate_step,setup_wrong_base_environment,setup_wrong_base_placement,setup_default_shell_override,setup_inline_default_shell_override,setup_continuation_duplicate,substituted_build_classifier,inverted_build_condition,current_host_removed_dependency,current_host_omits_real_package_checks,current_host_tolerates_native_failure"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_artifact_postprocessor_workflow.py"
+        ],
+        "duration_seconds": 0.072,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "artifact_postprocessor_workflow",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_artifact_postprocessor_workflow: PASS"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_provenance_inventory.py"
+        ],
+        "duration_seconds": 0.168,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "build_input_provenance_inventory",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "{\"declaration_files\": 10, \"dependency_resolution\": false, \"firmware_artifact_published\": false, \"glyph_nuker_executed\": false, \"negative_tests\": 14, \"network_access\": false, \"platformio_invoked\": false, \"positive_tests\": 16, \"runtime_behavior_changed\": false, \"selectors\": 70, \"status\": \"PASS\", \"unresolved_claims\": 10}"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_resolution_observations.py"
+        ],
+        "duration_seconds": 0.073,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "build_input_resolution_observations",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_build_input_resolution_observations: PASS; records=44; direct=42; derived=2; base=8c04262c66613d46b933b1b739c01c575cb0c580"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_prebuild_git_identity.py"
+        ],
+        "duration_seconds": 0.353,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "prebuild_git_identity",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [
+          "hint: Disable this message with \"git config set advice.addEmbeddedRepo false\""
+        ],
+        "stdout_summary": [
+          "pre-build Git identity contract: PASS"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_non_selector_configuration.py"
+        ],
+        "duration_seconds": 0.064,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "build_input_non_selector_configuration",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "PASS: declared non-selector configuration census"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_nuker_source_lineage.py"
+        ],
+        "duration_seconds": 0.058,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "nuker_source_lineage",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_nuker_source_lineage: PASS; bounded source lineage not found"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_checker_context.py"
+        ],
+        "duration_seconds": 3.622,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "checker_context",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_checker_context: PASS; cases=CTX-01-valid-feature-branch,CTX-02-renamed-feature-branch,CTX-03-committed-src-rejected,CTX-04-staged-src-rejected,CTX-05-unstaged-src-rejected,CTX-06-committed-include-rejected,CTX-07-mixed-safe-protected-rejected,CTX-08-case-variant-protected-rejected,CTX-09-wrong-merge-base-rejected,CTX-10-base-not-ancestor-rejected,CTX-11-detached-explicit-base-accepted,CTX-12-detached-missing-base-rejected,CTX-13-configurator-content-accepted,CTX-14-checker-allowlist-rejected,CTX-15-unauthorized-authority-paths-rejected,CTX-16-exact-role-scoped-queue-path-accepted,CTX-17-control-plane-near-match-rejected,CTX-18-historical-exact-branch-remains-specific"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_aggregate.py"
+        ],
+        "duration_seconds": 53.035,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "validation_aggregate_adversarial",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_runtime_config_validation_aggregate: PASS; cases=AGG-13-dependency-path-and-policy-boundaries,AGG-14-direct-helper-import-required,AGG-15-untracked-directory-symlink-duplicate-rejected,AGG-01-failing-load-bearing-fails,AGG-02-full-records-all,AGG-03-fail-fast-first-failure,AGG-18-isolated-mutation-rejected,AGG-19-process-timeout-fails-closed,AGG-20-environment-and-branch-isolation,AGG-21-explicit-base-override,AGG-04-category-filter-exact,AGG-05-unknown-category-rejected,AGG-17-zero-result-category-rejected,AGG-16-command-interpreter-path-arguments-and-target-contract,AGG-06-unexpected-success-exit-mismatch-fails,AGG-07-unsafe-not-executed,AGG-08-missing-checker-rejected,AGG-09-duplicate-id-rejected,AGG-10-historical-current-rejected,AGG-11-unclassified-strong-signal-rejected,AGG-22-safety-signal-classes-require-classification,AGG-12-census-freshness-added-removed-renamed-byte-drift,AGG-23-reserved-current-tuple-load-and-preflight-negatives,AGG-24-reserved-mode-stage-dependency-and-dirty-negatives,ISO-20-exact-current-argument-dispatch-and-failure-proofs,ISO-21-repaired-authenticated-proof-roots-and-malformed-rejection,ISO-22-repaired-catalog-not-root-authority,ISO-23-repaired-exact-argv-and-authentication-setup-failure,ISO-24-014-exact-current-consumers-and-authenticated-roots,ISO-25-014-malformed-roots-and-catalog-self-authority-rejected,AGG-25-039-exact-command-typed-tuple-and-mode-controls,ISO-26-039-all-exact-consumer-roots-and-near-miss-rejection,ISO-27-039-malformed-roots-catalog-self-authority-and-inert-dispatch,ISO-01-staged-unstaged-untracked-hidden-dirty-refused-with-final-proof,ISO-02-exact-environment-ignored-exclusion-closed-refs-tag-ambiguity,ISO-03-all-isolated-mutation-dimensions-stop,ISO-04-feature-configurator-detached-context,ISO-05-local-object-transport-real-ref-and-expected-base,ISO-06-exact-self-test-id-command-pairs,ISO-07-closed-historical-ref-and-object-failures,ISO-08-child-kill-whole-preflight-deadline-and-owned-acquisition,ISO-09-setup-failure-census-and-canonical-mutation-proof,ISO-10-stalled-census-setup-final-proof-interrupted,ISO-11-whitespace-newline-file-name-fingerprints,ISO-12-invoking-python-binding-and-unusable-identity-failure,ISO-12-exact-local-configurator-ref,ISO-13-source-enumerated-queue-roots-and-off-head-transfer,ISO-14-catalog-schema-identity-and-local-object-failures,ISO-15-exact-config-010-selection-and-local-failure,ISO-16-config-010-omission-substitution-bounded-closure-and-no-ref,current-package-required-command-and-classification-negatives"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "source_sync",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_source_sync.py"
+        ],
+        "duration_seconds": 0.046,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "source_sync",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "final_table=kLt1LowMagnitudeTable"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "generator",
+        "command": [
+          "python3",
+          "tools/check_glyph_source_owned_generator_modes.py"
+        ],
+        "duration_seconds": 0.164,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "generator_modes",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "}"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "generator",
+        "command": [
+          "python3",
+          "tools/check_glyph_source_owned_overlay_preserve.py"
+        ],
+        "duration_seconds": 0.077,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "overlay_preserve",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "}"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "intake",
+        "command": [
+          "python3",
+          "tools/check_glyph_source_owned_source_authority_intake.py"
+        ],
+        "duration_seconds": 3.501,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "source_authority_intake",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "{\"active_source_changed\": false, \"hardware_candidate_created\": false, \"negative_tests\": 104, \"positive_tests\": 21, \"status\": \"PASS\"}"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "generator",
+        "command": [
+          "python3",
+          "tools/check_glyph_source_owned_cpp_preview.py"
+        ],
+        "duration_seconds": 0.134,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "source_owned_cpp_preview",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "{\"active_source_changed\": false, \"hardware_candidate_created\": false, \"negative_tests\": 7, \"positive_tests\": 4, \"status\": \"PASS\"}"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "candidate_safety",
+        "command": [
+          "python3",
+          "tools/check_glyph_source_owned_candidate_generation_diff.py"
+        ],
+        "duration_seconds": 0.117,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "candidate_diff",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "}"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "candidate_safety",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_activation_alternatives.py"
+        ],
+        "duration_seconds": 0.027,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "activation_alternatives",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "webserial_device_write_implemented=false"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "docs",
+        "command": [
+          "python3",
+          "tools/check_glyph_docs_navigation.py"
+        ],
+        "duration_seconds": 0.037,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "docs_navigation",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "- docs/project/ACTIVE_AGENT_QUEUE.md"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "agent_framework",
+        "command": [
+          "python3",
+          "tools/check_glyph_agent_framework_docs.py"
+        ],
+        "duration_seconds": 4.701,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "agent_framework",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_agent_framework_docs: PASS"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "agent_framework",
+        "command": [
+          "python3",
+          "tools/check_glyph_hardware_artifact_custody.py"
+        ],
+        "duration_seconds": 0.159,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "hardware_artifact_custody",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "real_firmware_artifact=NOT_CREATED_OR_READ"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "agent_framework",
+        "command": [
+          "python3",
+          "tools/check_glyph_agentic_sequence_protocol.py"
+        ],
+        "duration_seconds": 0.029,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "agentic_sequence",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_agentic_sequence_protocol; status=PASS; user_intervention_gates=8; hardware_status=not_new_hardware_result"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "candidate_safety",
+        "command": [
+          "python3",
+          "tools/check_glyph_source_owned_candidate_generation.py"
+        ],
+        "duration_seconds": 19.159,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "candidate_generation",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "- allowed target path: src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "candidate_safety",
+        "command": [
+          "python3",
+          "tools/check_glyph_c023_proof_replay.py"
+        ],
+        "duration_seconds": 11.1,
+        "exit_code": 0,
+        "failure_kind": null,
+        "historical_execution_source": "b404453ef22cc994eec54338b8a23c3ba61df808",
+        "id": "gp_config023_usb_index_validation",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "firmware build and hardware acceptance: NOT_CLAIMED"
+        ],
+        "timeout_seconds": 120.0
+      }
+    ],
+    "strong_signal_exclusions": 51
+  },
+  "canonical": "2bcb5104054f64d8b9c1af9dd1be4a974112f8ec",
+  "review_delta": [
+    "docs/planning/GOPT_CANDIDATE_REVIEW.md"
+  ],
+  "published_artifacts": 0,
+  "exact_source_push_runs": 0
+}

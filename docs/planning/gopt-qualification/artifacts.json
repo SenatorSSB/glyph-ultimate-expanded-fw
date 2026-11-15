@@ -1,0 +1,32 @@
+{
+  "source": "55739675e5706ea8799265c4221724ac4f2dce9b",
+  "tree": "87ad82c2302353d50325ff3b8445464b62fc92e9",
+  "artifacts": {
+    "firmware.uf2": {
+      "bytes": 1325056,
+      "sha256": "63cb30b4fc905fdd34421051cb373c1e98040b631934587b8b466a09b11848a4"
+    },
+    "firmware.bin": {
+      "bytes": 662516,
+      "sha256": "69a4ebc1f6ad941a0e5247dd9571e365a7b8c33512996735952a9d3c700fa2d7"
+    },
+    "firmware.map": {
+      "bytes": 3927334,
+      "sha256": "b53db2eeb9235f3930b3807ffc560b889f4c605ed5aaa86e7b1c88afece845ff"
+    },
+    "firmware.elf": {
+      "bytes": 5763656,
+      "sha256": "53b53879b203ca2ef77de346352d1763cb89970560577fd3074a743a9eecfb0b"
+    }
+  },
+  "ordered_rp2040_blocks": 2588,
+  "source_sha_in_binary": true,
+  "elf_objcopy_matches_bin": true,
+  "custody": {
+    "mode": "local content-addressed custody",
+    "path": "local_backups/hardware-artifacts/55739675e5706ea8799265c4221724ac4f2dce9b/63cb30b4fc905fdd34421051cb373c1e98040b631934587b8b466a09b11848a4/firmware.uf2",
+    "preserve": "PASS",
+    "pre_handoff_readback": "PASS",
+    "physical_result": "HARDWARE_TEST_REQUIRED"
+  }
+}

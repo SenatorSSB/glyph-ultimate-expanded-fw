@@ -1,0 +1,218 @@
+{
+  "changed": {
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "old": [
+        48,
+        [
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::setFont(GFXfont const*)",
+          "Adafruit_GFX::setTextSize(unsigned char)",
+          "CommunicationBackend::GetInputs()",
+          "CommunicationBackend::GetOutputs()",
+          "InputMode::GetConfig()",
+          "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)",
+          "arduino::Print::print(char const*)",
+          "arduino::Print::print(int, int)",
+          "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)",
+          "current_profile_label(InputMode const*, _CommunicationBackendId)"
+        ],
+        [],
+        [
+          "blx\tr3",
+          "blx\tr7"
+        ]
+      ],
+      "new": [
+        64,
+        [
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::setFont(GFXfont const*)",
+          "Adafruit_GFX::setTextSize(unsigned char)",
+          "CommunicationBackend::GetInputs()",
+          "CommunicationBackend::GetOutputs()",
+          "InputMode::GetConfig()",
+          "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)",
+          "arduino::Print::print(char const*)",
+          "arduino::Print::print(int, int)",
+          "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)",
+          "current_profile_label(InputMode const*, _CommunicationBackendId)"
+        ],
+        [],
+        [
+          "blx\tr3",
+          "blx\tr5"
+        ]
+      ]
+    },
+    "Persistence::CheckCaptureInput()": {
+      "old": [
+        272,
+        [
+          "CRC32::CRC32()",
+          "CRC32::finalize() const",
+          "CRC32::update(unsigned char const&)",
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)",
+          "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        []
+      ],
+      "new": [
+        264,
+        [
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        []
+      ]
+    },
+    "Persistence::CheckSavedConfig()": {
+      "old": [
+        264,
+        [
+          "CRC32::CRC32()",
+          "CRC32::finalize() const",
+          "CRC32::update(unsigned char const&)",
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)",
+          "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        []
+      ],
+      "new": [
+        264,
+        [
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        []
+      ]
+    },
+    "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)": {
+      "old": [
+        72,
+        [
+          "CRC32::CRC32()",
+          "CRC32::finalize() const",
+          "CRC32::update(unsigned char const&)",
+          "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)",
+          "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)",
+          "__wrap___aeabi_memcpy"
+        ],
+        [],
+        [
+          "blx\tr3"
+        ]
+      ],
+      "new": [
+        96,
+        [
+          "CRC32::CRC32()",
+          "CRC32::finalize() const",
+          "CRC32::update(unsigned char const&)",
+          "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)",
+          "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)",
+          "__wrap___aeabi_memcpy"
+        ],
+        [],
+        []
+      ]
+    },
+    "Persistence::LoadConfigRaw(arduino::Print&, bool)": {
+      "old": [
+        272,
+        [
+          "CRC32::CRC32()",
+          "CRC32::finalize() const",
+          "CRC32::update(unsigned char const&)",
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)",
+          "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "CheckedStorage::Write(CheckedStorage::File&, void const*, unsigned int)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        [
+          "blx\tr2",
+          "blx\tr3"
+        ]
+      ],
+      "new": [
+        264,
+        [
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)",
+          "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "CheckedStorage::Write(CheckedStorage::File&, void const*, unsigned int)",
+          "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        [
+          "blx\tr2",
+          "blx\tr3"
+        ]
+      ]
+    },
+    "Persistence::ValidateLegacySource()": {
+      "old": [
+        264,
+        [
+          "CRC32::CRC32()",
+          "CRC32::finalize() const",
+          "CRC32::update(unsigned char const&)",
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)",
+          "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        []
+      ],
+      "new": [
+        248,
+        [
+          "CheckedStorage::Close(CheckedStorage::File&)",
+          "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)",
+          "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)",
+          "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)",
+          "__wrap___aeabi_memcpy",
+          "__wrap_memset"
+        ],
+        [],
+        []
+      ]
+    }
+  },
+  "added": [],
+  "removed": []
+}

@@ -1,0 +1,57 @@
+{
+  "canonical": "2bcb5104054f64d8b9c1af9dd1be4a974112f8ec",
+  "compared_scopes": [
+    "HAL",
+    "src",
+    "include",
+    "lib",
+    "config",
+    "schema",
+    "builder_scripts",
+    "platformio.ini"
+  ],
+  "base_entries": 323,
+  "final_entries": 323,
+  "base_ls_tree_sha256": "a07b919f9324a6031305db6ea660334271060024bff6ddb319bc7f0723b72214",
+  "final_ls_tree_sha256": "1c1d8fff494fcefff2333858ecf600a5c6591e1e144ac2eba9e6baf9c514c3d3",
+  "changed": [
+    "HAL/pico/src/core/Persistence.cpp",
+    "config/glyph/common/src/config.cpp",
+    "config/glyph/common/src/display/MenuButtonHints.cpp"
+  ],
+  "dependency_files_compared": 545,
+  "candidate_dependency_files": 545,
+  "dependency_differences": [
+    "Nanopb/generator/proto/__pycache__/__init__.cpython-314.pyc",
+    "Nanopb/generator/proto/__pycache__/_utils.cpython-314.pyc",
+    "Nanopb/generator/proto/__pycache__/nanopb_pb2.cpython-314.pyc"
+  ],
+  "dependency_hashes_sha256": "16a398821b07ec8da7260abd8d60d4c0b05124a2ba18aa351b1477665868fd3b",
+  "bytecode_comparison": [
+    {
+      "file": "Nanopb/generator/proto/__pycache__/__init__.cpython-314.pyc",
+      "same_code_and_constants_after_filename_normalization": true,
+      "same_marshaled_payload": false,
+      "header_only": false
+    },
+    {
+      "file": "Nanopb/generator/proto/__pycache__/_utils.cpython-314.pyc",
+      "same_code_and_constants_after_filename_normalization": true,
+      "same_marshaled_payload": false,
+      "header_only": false
+    },
+    {
+      "file": "Nanopb/generator/proto/__pycache__/nanopb_pb2.cpython-314.pyc",
+      "same_code_and_constants_after_filename_normalization": true,
+      "same_marshaled_payload": false,
+      "header_only": false
+    }
+  ],
+  "platform_pins": {
+    "platforms/raspberrypi": "5e87ae34ca025274df25b3303e9e9cb6c120123c",
+    "packages/framework-arduinopico": "32e74d024e5e3ee5e7ec9593f5a4101641c61897",
+    "packages/framework-arduinopico/libraries/LittleFS/lib/littlefs": "6a53d76e90af33f0656333c1db09bd337fa75d23"
+  },
+  "toolchain_version": "arm-none-eabi-g++ (GCC) 12.3.0",
+  "platformio_version": "PlatformIO Core, version 6.1.19"
+}

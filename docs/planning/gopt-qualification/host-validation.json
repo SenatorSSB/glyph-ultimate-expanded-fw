@@ -1,0 +1,382 @@
+{
+  "current-host": [
+    {
+      "name": "test_glyph_ci_build_inputs",
+      "exit": 0,
+      "seconds": 1.195,
+      "log_sha256": "012be2d21ce068893c2f9f49a21ffff99e47626e2a88affe14f6d4f9f5c92abf",
+      "command": [
+        "$PYTHON",
+        "tools/test_glyph_ci_build_inputs.py"
+      ]
+    },
+    {
+      "name": "check_glyph_checker_census",
+      "exit": 0,
+      "seconds": 2.397,
+      "log_sha256": "a257684b1b78d3be59144ab9ed8f65151628f820892dd6bc81c7065d8e1cdc85",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_checker_census.py"
+      ]
+    },
+    {
+      "name": "check_glyph_runtime_config_validation_health",
+      "exit": 0,
+      "seconds": 0.054,
+      "log_sha256": "5e55363dcc161a8c17176e6a04890513f914140bd3229db5ef5c4b2eb8e745a4",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_runtime_config_validation_health.py"
+      ]
+    },
+    {
+      "name": "check_glyph_build_input_provenance_inventory",
+      "exit": 0,
+      "seconds": 0.115,
+      "log_sha256": "2961f7c7de3a3165822a876cd9267ee520c7fcb758f464c0d01db212164862be",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_build_input_provenance_inventory.py"
+      ]
+    },
+    {
+      "name": "check_glyph_build_input_non_selector_configuration",
+      "exit": 0,
+      "seconds": 0.167,
+      "log_sha256": "cab8538225e1af92d6c8648b4c9edd64a897673c49d3cb93b9de341aa3b05992",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_build_input_non_selector_configuration.py"
+      ]
+    },
+    {
+      "name": "check_glyph_build_input_resolution_observations",
+      "exit": 0,
+      "seconds": 0.135,
+      "log_sha256": "192d4575ad25057f8fe2ae2630ec7c23160b485c248306486a18cc4da6828df5",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_build_input_resolution_observations.py"
+      ]
+    },
+    {
+      "name": "check_glyph_runtime_config_validation_publication_workflow",
+      "exit": 0,
+      "seconds": 0.08,
+      "log_sha256": "b0d0b83b4c74aa27eff3233034483f05393b53c5bce509c8b143577e2951017b",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_runtime_config_validation_publication_workflow.py"
+      ]
+    },
+    {
+      "name": "check_glyph_artifact_postprocessor_workflow",
+      "exit": 0,
+      "seconds": 0.058,
+      "log_sha256": "c65cd851b158384d80245af2b21df22110036dfda95fe79a0203607b1a4f769a",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_artifact_postprocessor_workflow.py"
+      ]
+    },
+    {
+      "name": "check_glyph_active_profile_display",
+      "exit": 0,
+      "seconds": 9.409,
+      "log_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_active_profile_display.py"
+      ]
+    },
+    {
+      "name": "check_glyph_controller_profile_selector",
+      "exit": 0,
+      "seconds": 17.537,
+      "log_sha256": "84a93938097e2a9774553358a182b520aad23169f8dea404c639296961f86e57",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_controller_profile_selector.py"
+      ]
+    },
+    {
+      "name": "check_glyph_profile_store_selection_recovery",
+      "exit": 0,
+      "seconds": 5.439,
+      "log_sha256": "ffa65e204825c1f659eeab94ac0f9447b969c6ee441e3e0e7960aadc95fe5f7c",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_profile_store_selection_recovery.py"
+      ]
+    },
+    {
+      "name": "check_glyph_profile_store_config_persistence",
+      "exit": 0,
+      "seconds": 2.745,
+      "log_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_profile_store_config_persistence.py"
+      ]
+    },
+    {
+      "name": "check_glyph_profile_store_production_tool",
+      "exit": 0,
+      "seconds": 0.772,
+      "log_sha256": "98837db2a64bc8154d99963e7db66a388138854e5512d72d34ad85cbeaa26e81",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_profile_store_production_tool.py"
+      ]
+    },
+    {
+      "name": "check_glyph_profile_store_littlefs_host",
+      "exit": 0,
+      "seconds": 0.951,
+      "log_sha256": "fd494947956a356c5bfffa4d3e063b01ab1c67478a9ded22328722bd1af83b4c",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_profile_store_littlefs_host.py"
+      ]
+    },
+    {
+      "name": "glyph_ci_current_firmware",
+      "exit": 0,
+      "seconds": 85.436,
+      "log_sha256": "ed6a4e3bc827c197acb367294ec8fa897d645d517fb21dfe15cece1738d90242",
+      "command": [
+        "$PYTHON",
+        "tools/glyph_ci_current_firmware.py"
+      ]
+    },
+    {
+      "name": "glyph_ci_current_package_tests",
+      "exit": 0,
+      "seconds": 16.328,
+      "log_sha256": "b60da2cb83e70bf950a6db3661b72bee1b5bf0592b56319e118add8653e56e02",
+      "command": [
+        "$PYTHON",
+        "tools/glyph_ci_current_package_tests.py"
+      ]
+    },
+    {
+      "name": "test_glyph_hardware_correspondence",
+      "exit": 0,
+      "seconds": 50.188,
+      "log_sha256": "0713ffd7359b392bd1e877d18cea7c56040d23235e2e65baa20652641b203da4",
+      "command": [
+        "$PYTHON",
+        "tools/test_glyph_hardware_correspondence.py"
+      ]
+    },
+    {
+      "name": "test_glyph_docs_agent_surface_integration",
+      "exit": 0,
+      "seconds": 8.324,
+      "log_sha256": "0679c4d844d6a93dad3b7c9d2f97d6b126a181deb70adbc780609ec970f07d16",
+      "command": [
+        "$PYTHON",
+        "tools/test_glyph_docs_agent_surface_integration.py"
+      ]
+    },
+    {
+      "name": "check_glyph_gamecube_selector_liveness",
+      "exit": 0,
+      "seconds": 24.843,
+      "log_sha256": "94fb2173244758122f416fbf0a48bba465b58b9c41e353b3bfb06dfd278cff17",
+      "command": [
+        "$PYTHON",
+        "tools/check_glyph_gamecube_selector_liveness.py"
+      ]
+    },
+    {
+      "name": "check_switch_readiness",
+      "exit": 0,
+      "seconds": 3.373,
+      "log_sha256": "c68efd76202ba4c9560cf6bc28255ae2d5e40af8d755feba2f6eba3fd3aada18",
+      "command": [
+        "$PYTHON",
+        "tools/check_switch_readiness.py"
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "name": "build",
+      "exit": 0,
+      "seconds": 10.945,
+      "log_sha256": "e38acbbd9c1a1d94b33eb04430377e99149240bb4398afe3f636ac4959d24866",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/build.py",
+        "--repo",
+        "$CHECKOUT",
+        "--boot-probe",
+        "--out",
+        "$TRANSACTION_OUT/build"
+      ]
+    },
+    {
+      "name": "lifecycle_regressions",
+      "exit": 0,
+      "seconds": 13.217,
+      "log_sha256": "46a8bb3703e27f37fa69bf370119c0bf4b701fc1d6bdb58ea44f926d38a1d756",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/lifecycle_regressions.py",
+        "--corpus",
+        "$CORPUS",
+        "--binary",
+        "$TRANSACTION_OUT/build/package-fault-harness",
+        "--out",
+        "$TRANSACTION_OUT/lifecycle_regressions"
+      ]
+    },
+    {
+      "name": "managed_selection",
+      "exit": 0,
+      "seconds": 0.97,
+      "log_sha256": "c6e0210edaa50102bced8d71b758e44e4f15b87bcb2a51a67bc7f12290bcfc1f",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/managed_selection.py",
+        "--corpus",
+        "$CORPUS",
+        "--binary",
+        "$TRANSACTION_OUT/build/package-fault-harness",
+        "--out",
+        "$TRANSACTION_OUT/managed_selection"
+      ]
+    },
+    {
+      "name": "startup_work",
+      "exit": 0,
+      "seconds": 0.626,
+      "log_sha256": "5a61a43171d2a999f573c5c13b3291e131cd5e8fb29c0547e3ea05d51d82d704",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/startup_work.py",
+        "--corpus",
+        "$CORPUS",
+        "--binary",
+        "$TRANSACTION_OUT/build/package-fault-harness"
+      ]
+    },
+    {
+      "name": "boot_regressions",
+      "exit": 0,
+      "seconds": 3.49,
+      "log_sha256": "713522f283cbdf7160a1f78c6b93586a99536f05084b8f0c2829ad79929b47f7",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/boot_regressions.py",
+        "--corpus",
+        "$CORPUS",
+        "--binary",
+        "$TRANSACTION_OUT/build/package-fault-harness",
+        "--out",
+        "$TRANSACTION_OUT/boot_regressions",
+        "--require-visible"
+      ]
+    },
+    {
+      "name": "regressions",
+      "exit": 0,
+      "seconds": 5.348,
+      "log_sha256": "17d98e3b25b53a5ac44f7d418c050a77809fa4e772d22ed705d2cf7b8e6ec26e",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/regressions.py",
+        "--corpus",
+        "$CORPUS",
+        "--binary",
+        "$TRANSACTION_OUT/build/package-fault-harness",
+        "--repo",
+        "$CHECKOUT",
+        "--out",
+        "$TRANSACTION_OUT/regressions"
+      ]
+    },
+    {
+      "name": "historical_config_regressions",
+      "exit": 0,
+      "seconds": 3.769,
+      "log_sha256": "f13f0155eaae592b322fa8e240d30b5950abc4146a079c8c561e1fecc4cd3f53",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/historical_config_regressions.py",
+        "--corpus",
+        "$CORPUS",
+        "--binary",
+        "$TRANSACTION_OUT/build/package-fault-harness",
+        "--out",
+        "$TRANSACTION_OUT/historical_config_regressions"
+      ]
+    },
+    {
+      "name": "storage_fence_regressions",
+      "exit": 0,
+      "seconds": 2.939,
+      "log_sha256": "f662d1226b1e8ab95a6e04a87e1f4f7404298d7b687253f1cfe12825848fc09b",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/storage_fence_regressions.py",
+        "--corpus",
+        "$CORPUS",
+        "--binary",
+        "$TRANSACTION_OUT/build/package-fault-harness",
+        "--out",
+        "$TRANSACTION_OUT/storage_fence_regressions"
+      ]
+    }
+  ],
+  "bounds": [
+    {
+      "name": "lifecycle_bounds",
+      "exit": 0,
+      "seconds": 0.219,
+      "log_sha256": "b1c05ef09f41a3f12c1a86f644a13857bc02f45806431c353dff6367e32d1c69",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/lifecycle_bounds.py"
+      ]
+    },
+    {
+      "name": "boot_detection",
+      "exit": 0,
+      "seconds": 1.485,
+      "log_sha256": "83fe4f24fde857945661b71d9670a283381321cebfc344fcd5858eda604a0928",
+      "command": [
+        "$PYTHON",
+        "tools/fixtures/glyph_package_v1/transaction/boot_detection_regressions.py",
+        "--repo",
+        "$CHECKOUT",
+        "--out",
+        "$BOUND_OUT/boot_detection"
+      ]
+    }
+  ],
+  "startup": {
+    "enumerations": 24,
+    "opens": 104,
+    "seeks": 218,
+    "reads": 1616,
+    "nor_reads": 13438,
+    "config_load": {
+      "checked_reads": 124,
+      "nor_reads": 153
+    },
+    "config_faults": {
+      "seams": 124,
+      "failed": 124,
+      "short_failed": 121,
+      "short_loaded": 3
+    },
+    "host_median_us": 7442,
+    "fixture_sha256": "251a9a7cc1c1c3242be170605e651074e198e12d9c02a9ca5da3336d53a99580"
+  },
+  "transaction_build_fingerprint": "cab98d48367a2d69e9bee4a2d51f11cb6e6f3cf135987d264f6b18177aead466",
+  "cache_manifest_tests": 5,
+  "source": "55739675e5706ea8799265c4221724ac4f2dce9b"
+}

@@ -1,0 +1,570 @@
+{
+  "routes": [
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::CaptureLegacySource(unsigned char*)",
+        "Persistence::PrepareCaptureSource(unsigned char*)",
+        "Persistence::CheckCaptureInput()",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1540
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::HandleGetConfig()",
+        "Persistence::CheckSavedConfig()",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1484
+    },
+    {
+      "path": [
+        "setup",
+        "InitializeBootBackends()",
+        "(anonymous namespace)::enter_recovery_configurator()",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1292
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "(anonymous namespace)::enter_recovery_configurator()",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1316
+    },
+    {
+      "path": [
+        "setup",
+        "(anonymous namespace)::enter_recovery_configurator()",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1236
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_ordinary_chord(unsigned int)",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1252
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::PrepareDecodedSetConfig()",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1236
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1228
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_managed_chord(unsigned int)",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1276
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::service_profile_selection()",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1276
+    },
+    {
+      "path": [
+        "setup",
+        "Persistence::LoadConfigChecked(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1196
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "Persistence::ReconcileConfig(_Config&)",
+        "Persistence::InitializeReadConfigCandidate(CheckedStorageFile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1228
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::HandleGetConfig()",
+        "Persistence::LoadConfigRaw(arduino::Print&, bool)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1484
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1228
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1276
+    },
+    {
+      "path": [
+        "setup",
+        "InitializeBootBackends()",
+        "initialize_backends(CommunicationBackend**&, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&, void (*)(_CommunicationBackendConfig&, _InputState const&, _Config&), void (*)(_CommunicationBackendConfig&, _Config const&), _CommunicationBackendId (*)(Pinout const&), unsigned int (*)(CommunicationBackend**&, CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&), void (*)(CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&))",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1276
+    },
+    {
+      "path": [
+        "setup",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1196
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_ordinary_chord(unsigned int)",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1260
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::ExecuteProfileStoreMutation()",
+        "ConfiguratorBackend::PerformCheckedReference()",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1316
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_managed_chord(unsigned int)",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1284
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::service_profile_selection()",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::PublishStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1284
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "ProfileStore::ImportLegacyStream(_Config const&, unsigned char const*, bool (*)(void*, unsigned int, _UltimateProfile&), void*, unsigned long*, unsigned int)",
+        "ProfileStore::ExecuteLegacyImport()",
+        "ProfileStore::PrepareImportedLegacyRecord(bool (*)(void*, unsigned int, _UltimateProfile&), void*, unsigned int)",
+        "MigrateBootLegacyConfiguration()::{lambda(void*, unsigned int, _UltimateProfile&)#1}::_FUN(void*, unsigned int, _UltimateProfile&)",
+        "Persistence::ReadLegacyProfile(unsigned int, _UltimateProfile&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1348
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::CaptureLegacySource(unsigned char*)",
+        "Persistence::PrepareCaptureSource(unsigned char*)",
+        "Persistence::LegacySourceIdentity(unsigned char*)",
+        "Persistence::ValidateLegacySource()",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1532
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::CaptureLegacySource(unsigned char*)",
+        "Persistence::ExecuteCaptureSource(unsigned char*)",
+        "Persistence::VerifyPublishCapturedSource(unsigned char*)",
+        "Persistence::LegacySourceIdentity(unsigned char*)",
+        "Persistence::ValidateLegacySource()",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1556
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_ordinary_chord(unsigned int)",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyExpectedConfigGeneration(unsigned long long)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1260
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::ExecuteProfileStoreMutation()",
+        "ConfiguratorBackend::PerformCheckedReference()",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyExpectedConfigGeneration(unsigned long long)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1316
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_managed_chord(unsigned int)",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyExpectedConfigGeneration(unsigned long long)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1284
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::service_profile_selection()",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyExpectedConfigGeneration(unsigned long long)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1284
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1228
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1276
+    },
+    {
+      "path": [
+        "setup",
+        "InitializeBootBackends()",
+        "initialize_backends(CommunicationBackend**&, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&, void (*)(_CommunicationBackendConfig&, _InputState const&, _Config&), void (*)(_CommunicationBackendConfig&, _Config const&), _CommunicationBackendId (*)(Pinout const&), unsigned int (*)(CommunicationBackend**&, CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&), void (*)(CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&))",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1276
+    },
+    {
+      "path": [
+        "setup",
+        "Persistence::SaveConfig(_Config&)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1196
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_ordinary_chord(unsigned int)",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1260
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::ExecuteProfileStoreMutation()",
+        "ConfiguratorBackend::PerformCheckedReference()",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1316
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::persist_managed_chord(unsigned int)",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1284
+    },
+    {
+      "path": [
+        "loop",
+        "(anonymous namespace)::service_profile_selection()",
+        "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+        "Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1284
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::HandlePackageRequest(unsigned int)",
+        "ProfileStore::DispatchPackage(glyph_package::EnvelopePhase&, _PackageResponse&)",
+        "ProfileStore::PublishPackageTransaction() [clone .part.0]",
+        "ProfileStore::PublishPackageConfigStage()",
+        "Persistence::PublishPreparedPackageConfig()",
+        "Persistence::VerifyPackageSave()",
+        "Persistence::VerifyStagedConfig(_Config&)",
+        "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1300
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::CaptureLegacySource(unsigned char*)",
+        "Persistence::PrepareCaptureSource(unsigned char*)",
+        "Persistence::LegacySourceIdentity(unsigned char*)",
+        "Persistence::ValidateLegacySource()"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1436
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::CaptureLegacySource(unsigned char*)",
+        "Persistence::ExecuteCaptureSource(unsigned char*)",
+        "Persistence::VerifyPublishCapturedSource(unsigned char*)",
+        "Persistence::LegacySourceIdentity(unsigned char*)",
+        "Persistence::ValidateLegacySource()"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1460
+    },
+    {
+      "path": [
+        "setup",
+        "MigrateBootLegacyConfiguration()",
+        "Persistence::CaptureLegacySource(unsigned char*)",
+        "Persistence::PrepareCaptureSource(unsigned char*)",
+        "Persistence::CheckCaptureInput()"
+      ],
+      "outer_prefix": 48,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1444
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::HandleGetConfig()",
+        "Persistence::CheckSavedConfig()"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1388
+    },
+    {
+      "path": [
+        "ConfiguratorBackend::SendReport()",
+        "ConfiguratorBackend::HandleGetConfig()",
+        "Persistence::LoadConfigRaw(arduino::Print&, bool)"
+      ],
+      "outer_prefix": 80,
+      "checked_lower_subtree": 540,
+      "IRQ": 408,
+      "total": 1388
+    }
+  ],
+  "unclosed": [],
+  "assumption": "Exact baseline checked read/seek/stat/open subtree upper540 unchanged; all paths carry conservative physical IRQ408; returned phase siblings max-compose."
+}
