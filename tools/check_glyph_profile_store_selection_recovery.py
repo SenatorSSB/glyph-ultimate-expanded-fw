@@ -88,7 +88,7 @@ def main() -> int:
         phases = '\n'.join(function_body(app, name, 'bool') for name in (
             'PrepareBootDisplay', 'MigrateBootLegacyConfiguration', 'InitializeBootBackends'))
         loop = function_body(app,'loop')
-        def app_case(name: str, old_manual: bool=False, old_auto: bool=False) -> Path:
+        def app_case(name: str, old_manual: bool=False, old_auto: bool=False, loop_source: str=loop) -> Path:
             directory = temp/name; directory.mkdir()
             rec = recovery
             boot = setup
@@ -102,7 +102,10 @@ def main() -> int:
                 boot = boot.replace(anchor, 'if (load_result != Persistence::LoadResult::Loaded) {\n        refuse_boot(BootOutcome::StorageFailure, display_ready);',1)
             ownership = (ROOT/'include/core/PackageOwnership.hpp').read_text()
             supported = function_body(ownership, 'SupportedLayout', 'inline bool')
-            (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+phases+'\n'+boot+'\n'+loop+'\n')
+            (directory/'extracted_boot_state.inc').write_text(
+                function_body(app, 'read_boot_state', 'BootSnapshot') + '\n' +
+                function_body(app, 'publish_boot_state') + '\n')
+            (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+phases+'\n'+boot+'\n'+loop_source+'\n')
             exe = directory/'routes'
             run(['c++','-std=c++17','-fshort-enums','-Wall','-Wextra','-Werror',
                  '-Wno-missing-field-initializers','-fsanitize=address,undefined','-fno-omit-frame-pointer',
@@ -111,8 +114,18 @@ def main() -> int:
                  str(HOST/'setup_routes.cpp'),'-o',str(exe)])
             return exe
         routes = app_case('actual_routes')
-        for route in ('ordinary','rt2_deferred','automatic','filesystem','mb1'):
+        for route in ('ordinary','rt2_deferred','automatic','filesystem','mb1','loop_gate'):
             print(run([str(routes),route]),end='')
+        baseline = subprocess.check_output([
+            'git', 'show', '2bcb5104054f64d8b9c1af9dd1be4a974112f8ec:config/glyph/common/src/config.cpp'
+        ], cwd=ROOT, text=True)
+        old_loop = app_case('original_loop', loop_source=function_body(baseline, 'loop'))
+        print(run([str(old_loop), 'baseline_loop_gate']), end='')
+        assert 'boot snapshot lock count' in run([str(old_loop), 'loop_gate'], expected=1)
+        pending = 'if (outcome == BootOutcome::Pending) outcome = read_boot_state().outcome;'
+        assert loop.count(pending) == 1
+        missed_transition = app_case('missed_transition', loop_source=loop.replace(pending, ''))
+        assert 'boot snapshot lock count' in run([str(missed_transition), 'loop_gate'], expected=1)
         old_routes = app_case('old_auto_routes',old_auto=True)
         failure = run([str(old_routes),'automatic'],expected=1)
         assert 'automatic failures must run recovery transport' in failure

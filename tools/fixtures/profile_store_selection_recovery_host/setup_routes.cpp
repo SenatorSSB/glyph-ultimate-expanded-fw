@@ -4,6 +4,7 @@
 #include <cstring>
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include "core/ModeSelectionTransaction.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/ConfigWriteCandidate.hpp"
@@ -16,10 +17,11 @@ struct Matrix {void UpdateInputs(InputState &) {}} matrix_input;
 struct InputSource {};InputSource **input_sources=nullptr;size_t input_source_count=0;
 struct Watchdog {uint32_t scratch[8]={};} watchdog;Watchdog *watchdog_hw=&watchdog;
 static unsigned bootloader=0,normal_initializations=0,ordinary_reports=0,serial_reports=0,store_begins=0,recovery_begins=0;
+static std::string services;
 struct SerialStub {void begin(unsigned){}} Serial;
 // Startup-route proof does not model the identity service. Its actual observer,
 // RX/TX, viewer and output behavior are exercised by the GP-BIND-003 host proof.
-struct IdentityServiceStub {template<class... T>void Poll(T&&...) {}} runtime_identity_service;
+struct IdentityServiceStub {template<class... T>void Poll(T&&...) {services += 'I';}} runtime_identity_service;
 unsigned ultimate_mode=0;
 uint32_t millis(){return 0;}
 struct WireStub {void setSDA(unsigned){}void setSCL(unsigned){}void setClock(unsigned){}void begin(){}} Wire1;
@@ -33,13 +35,28 @@ struct BootSnapshot {BootOutcome outcome=BootOutcome::Pending;bool display_ready
 bool boot_display_ready=false;
 void draw_recovery_page(BootOutcome) {throw std::runtime_error("headless recovery display use");}
 void show_boot_stage(boot_diagnostics::Stage stage) {boot_diagnostics::Mark(watchdog_hw->scratch[3],stage);}
-void publish_boot_state(BootOutcome o,bool d){boot_state={o,d};}
-BootSnapshot read_boot_state(){return boot_state;}
+static bool boot_state_mutex = false;
+static unsigned snapshots = 0;
+static BootOutcome publish_after_unlock = BootOutcome::Pending;
+void mutex_enter_blocking(bool *locked) {
+    require(!*locked, "recursive boot lock");
+    *locked = true;
+}
+void mutex_exit(bool *locked) {
+    require(*locked, "boot unlock without acquire");
+    *locked = false;
+    ++snapshots;
+    if (publish_after_unlock != BootOutcome::Pending) {
+        boot_state = {publish_after_unlock, true};
+        publish_after_unlock = BootOutcome::Pending;
+    }
+}
+#include "extracted_boot_state.inc"
 void refuse_boot(BootOutcome o,bool d){publish_boot_state(o,d);}
-struct Backend {void SendReport(){++ordinary_reports;}InputState &GetInputs(){return inputs;}CommunicationBackendId BackendId(){return COMMS_BACKEND_CONFIGURATOR;}};
+struct Backend {void SendReport(){++ordinary_reports;services += 'R';}InputState &GetInputs(){return inputs;}CommunicationBackendId BackendId(){return COMMS_BACKEND_CONFIGURATOR;}};
 struct GamecubeBackend : Backend {bool SelectionIdleAdmitted(){return true;}};
 Backend **backends=nullptr;size_t backend_count=0;bool failed_detection=false;
-struct Keyboard {void SendReport(InputState &){++ordinary_reports;}};Keyboard *current_kb_mode=nullptr;
+struct Keyboard {void SendReport(InputState &){++ordinary_reports;services += 'K';}};Keyboard *current_kb_mode=nullptr;
 Config config=Config_init_default;
 struct Persistence {
  enum class LoadResult {Loaded,Rejected,StorageFailure};enum class SaveResult {Saved,Conflict,StorageFailure,UnknownOutcome};
@@ -78,20 +95,73 @@ bool validate_glyph_config(const Config &,ConfigValidationError &){return true;}
 void normalize_legacy_glyph_rgb_noops(Config &){}
 // Selector transaction is covered by the dedicated selector fixtures; this
 // extraction exercises startup refusal/routes only.
-void service_profile_selection() {}
-void mark_first_mode_ready() {}
+void service_profile_selection() {services += 'S';}
+void mark_first_mode_ready() {services += 'M';}
 uint8_t pending_chord_row1=0;
 void persist_ordinary_chord(size_t){++ordinary_reports;}
 void request_mode_destination(CommunicationBackendId,size_t,const Config &){}
 void set_mode_destination_selector(void(*)(CommunicationBackendId,size_t,const Config &)){}
 void setup_mode_activation_bindings(GameModeConfig *,size_t,uint64_t){}
-void select_mode(Backend **,size_t,Config &){++ordinary_reports;}
+void select_mode(Backend **,size_t,Config &){++ordinary_reports;services += 'D';}
 bool is_valid_usb_default_index(const Config &){return true;}
 unsigned pinout=0,get_backend_config_default=0,get_usb_backend_config_default=0;
 void detect_console(){}void detect_console_at_boot(){}void init_secondary_backends_glyph(){}
 template<typename... Args>size_t initialize_backends(Args&&...){++normal_initializations;return 0;}
 #include "extracted_setup.inc"
+void check_loop_gate(bool baseline) {
+    Backend first, second;
+    Backend *routes[] = {&first, &second};
+    Keyboard keyboard;
+    ConfiguratorBackend recovery(inputs, input_sources, input_source_count, config, Serial);
+    recovery_configurator = &recovery;
+    current_kb_mode = &keyboard;
+    backends = routes;
+    backend_count = 2;
+    auto check = [&](BootOutcome initial, BootOutcome next, unsigned locks,
+                     const char *trace, unsigned recovery_calls) {
+        boot_state = {initial, true};
+        publish_after_unlock = next;
+        snapshots = serial_reports = 0;
+        services.clear();
+        loop();
+        require(!boot_state_mutex && snapshots == locks, "boot snapshot lock count");
+        require(services == trace && serial_reports == recovery_calls, "boot gate service trace");
+    };
+    using B = BootOutcome;
+    const unsigned terminal_reads = baseline ? 2 : 1;
+    check(B::Normal, B::Pending, terminal_reads, "SDMRRIK", 0);
+    check(B::RecoveryConfigurator, B::Pending, 1, "", 1);
+    for (auto refused : {B::StorageFailure, B::DefaultsRejected, B::StartupConfigRejected})
+        check(refused, B::Pending, terminal_reads, "", 0);
+    check(B::Pending, B::Pending, 2, "", 0);
+    check(B::Pending, B::Normal, 2, "SDMRRIK", 0);
+    check(B::Pending, B::RecoveryConfigurator, 2, "", 0);
+    // Recovery which became visible at the second gate is serviced next iteration.
+    loop();
+    require(serial_reports == 1 && services.empty(), "deferred recovery service");
+    recovery_configurator = nullptr;
+    check(B::RecoveryConfigurator, B::Pending, 1, "", 0);
+    routes[0] = nullptr;
+    check(B::Normal, B::Pending, terminal_reads, "", 0);
+    backend_count = 0;
+    check(B::Normal, B::Pending, terminal_reads, "", 0);
+    backends = nullptr;
+    check(B::Normal, B::Pending, terminal_reads, "", 0);
+    for (auto terminal : {B::Normal, B::StorageFailure, B::DefaultsRejected,
+                          B::StartupConfigRejected, B::RecoveryConfigurator}) {
+        boot_state = {B::Pending, false};
+        publish_boot_state(terminal, true);
+        publish_boot_state(B::Normal, false);
+        require(boot_state.outcome == terminal && boot_state.display_ready,
+                "terminal boot publication changed");
+    }
+}
 int main(int argc,char **argv){try{require(argc==2,"case arg");config.ultimate_profile_store_format=1;config.ultimate_profile_store_incarnation=41;
+ if (!std::strcmp(argv[1],"loop_gate") || !std::strcmp(argv[1],"baseline_loop_gate")) {
+     check_loop_gate(!std::strcmp(argv[1],"baseline_loop_gate"));
+     std::cout << argv[1] << "=PASS\n";
+     return 0;
+ }
  const bool ordinary=std::strcmp(argv[1],"ordinary")==0||std::strcmp(argv[1],"rt2_deferred")==0;
  const bool rt2=std::strcmp(argv[1],"rt2_deferred")==0;
  const bool mb1=std::strcmp(argv[1],"mb1")==0;const bool fs=std::strcmp(argv[1],"filesystem")==0;
