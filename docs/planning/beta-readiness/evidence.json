@@ -1,0 +1,1355 @@
+{
+  "source": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "upstream": "9a78c7eeec87527b68644573e4c29fbdfb543239",
+  "tested_source": "5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c",
+  "tested_uf2_sha256": "de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518",
+  "physical_timing_trials": 0,
+  "owner_observation": "Startup felt very similar to prior observations. No timed readings supplied.",
+  "stage_replay": {
+    "fixture_sha256": "251a9a7cc1c1c3242be170605e651074e198e12d9c02a9ca5da3336d53a99580",
+    "normal_trial_count": 10,
+    "normal_stage_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      0
+    ],
+    "cumulative_elapsed_us_by_trial": [
+      [
+        0,
+        0,
+        1,
+        1,
+        47,
+        47,
+        2188,
+        2188,
+        4332,
+        4332,
+        4332,
+        4332,
+        4332,
+        4332,
+        4332,
+        4332,
+        4332
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        42,
+        42,
+        2257,
+        2257,
+        4464,
+        4464,
+        4464,
+        4464,
+        4464,
+        4464,
+        4464,
+        4464,
+        4465
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        42,
+        42,
+        2181,
+        2181,
+        4290,
+        4290,
+        4290,
+        4290,
+        4290,
+        4290,
+        4290,
+        4290,
+        4291
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        40,
+        40,
+        2150,
+        2150,
+        4261,
+        4261,
+        4261,
+        4261,
+        4261,
+        4261,
+        4261,
+        4261,
+        4261
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        43,
+        43,
+        2296,
+        2296,
+        4505,
+        4505,
+        4505,
+        4505,
+        4505,
+        4506,
+        4506,
+        4506,
+        4506
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        40,
+        40,
+        2138,
+        2138,
+        4246,
+        4247,
+        4247,
+        4247,
+        4247,
+        4247,
+        4247,
+        4247,
+        4247
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        42,
+        42,
+        2335,
+        2335,
+        4635,
+        4635,
+        4635,
+        4635,
+        4635,
+        4635,
+        4635,
+        4635,
+        4635
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        42,
+        43,
+        2176,
+        2177,
+        4293,
+        4293,
+        4294,
+        4294,
+        4294,
+        4294,
+        4294,
+        4294,
+        4294
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        40,
+        40,
+        2171,
+        2171,
+        4305,
+        4305,
+        4305,
+        4305,
+        4305,
+        4305,
+        4305,
+        4305,
+        4305
+      ],
+      [
+        0,
+        0,
+        5,
+        5,
+        45,
+        45,
+        2189,
+        2189,
+        4311,
+        4311,
+        4311,
+        4311,
+        4311,
+        4311,
+        4311,
+        4311,
+        4311
+      ]
+    ],
+    "identical_cumulative_counts": [
+      {
+        "stage": 1,
+        "nor_reads": 0,
+        "enumerations": 0,
+        "opens": 0,
+        "seeks": 0,
+        "reads": 0
+      },
+      {
+        "stage": 2,
+        "nor_reads": 0,
+        "enumerations": 0,
+        "opens": 0,
+        "seeks": 0,
+        "reads": 0
+      },
+      {
+        "stage": 3,
+        "nor_reads": 0,
+        "enumerations": 0,
+        "opens": 0,
+        "seeks": 0,
+        "reads": 0
+      },
+      {
+        "stage": 4,
+        "nor_reads": 0,
+        "enumerations": 0,
+        "opens": 0,
+        "seeks": 0,
+        "reads": 0
+      },
+      {
+        "stage": 5,
+        "nor_reads": 153,
+        "enumerations": 0,
+        "opens": 1,
+        "seeks": 3,
+        "reads": 124
+      },
+      {
+        "stage": 6,
+        "nor_reads": 153,
+        "enumerations": 0,
+        "opens": 1,
+        "seeks": 3,
+        "reads": 124
+      },
+      {
+        "stage": 7,
+        "nor_reads": 13591,
+        "enumerations": 24,
+        "opens": 105,
+        "seeks": 221,
+        "reads": 1740
+      },
+      {
+        "stage": 8,
+        "nor_reads": 13591,
+        "enumerations": 24,
+        "opens": 105,
+        "seeks": 221,
+        "reads": 1740
+      },
+      {
+        "stage": 9,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 10,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 11,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 12,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 13,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 14,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 15,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 16,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      },
+      {
+        "stage": 0,
+        "nor_reads": 27030,
+        "enumerations": 48,
+        "opens": 209,
+        "seeks": 439,
+        "reads": 3356
+      }
+    ],
+    "read_fault_cases": [
+      {
+        "fault_stage": 6,
+        "read_fault_hits": 2,
+        "result": {
+          "outcome": 6,
+          "display_ready": 1,
+          "splash": 0,
+          "recovery_visible": 1,
+          "backend_initializations": 0,
+          "unchanged": true
+        },
+        "stages": [
+          {
+            "stage": 1,
+            "elapsed_us": 0,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 2,
+            "elapsed_us": 0,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 3,
+            "elapsed_us": 1,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 4,
+            "elapsed_us": 1,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 5,
+            "elapsed_us": 39,
+            "nor_reads": 153,
+            "enumerations": 0,
+            "opens": 1,
+            "seeks": 3,
+            "reads": 124
+          },
+          {
+            "stage": 6,
+            "elapsed_us": 39,
+            "nor_reads": 153,
+            "enumerations": 0,
+            "opens": 1,
+            "seeks": 3,
+            "reads": 124
+          },
+          {
+            "stage": 0,
+            "elapsed_us": 212,
+            "nor_reads": 1449,
+            "enumerations": 2,
+            "opens": 8,
+            "seeks": 6,
+            "reads": 254
+          }
+        ]
+      },
+      {
+        "fault_stage": 8,
+        "read_fault_hits": 2,
+        "result": {
+          "outcome": 6,
+          "display_ready": 1,
+          "splash": 0,
+          "recovery_visible": 1,
+          "backend_initializations": 0,
+          "unchanged": true
+        },
+        "stages": [
+          {
+            "stage": 1,
+            "elapsed_us": 0,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 2,
+            "elapsed_us": 0,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 3,
+            "elapsed_us": 1,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 4,
+            "elapsed_us": 1,
+            "nor_reads": 0,
+            "enumerations": 0,
+            "opens": 0,
+            "seeks": 0,
+            "reads": 0
+          },
+          {
+            "stage": 5,
+            "elapsed_us": 40,
+            "nor_reads": 153,
+            "enumerations": 0,
+            "opens": 1,
+            "seeks": 3,
+            "reads": 124
+          },
+          {
+            "stage": 6,
+            "elapsed_us": 40,
+            "nor_reads": 153,
+            "enumerations": 0,
+            "opens": 1,
+            "seeks": 3,
+            "reads": 124
+          },
+          {
+            "stage": 7,
+            "elapsed_us": 2196,
+            "nor_reads": 13591,
+            "enumerations": 24,
+            "opens": 105,
+            "seeks": 221,
+            "reads": 1740
+          },
+          {
+            "stage": 8,
+            "elapsed_us": 2196,
+            "nor_reads": 13591,
+            "enumerations": 24,
+            "opens": 105,
+            "seeks": 221,
+            "reads": 1740
+          },
+          {
+            "stage": 0,
+            "elapsed_us": 2374,
+            "nor_reads": 14888,
+            "enumerations": 26,
+            "opens": 112,
+            "seeks": 224,
+            "reads": 1870
+          }
+        ]
+      }
+    ],
+    "observations_sha256": "ded6f48e20436392a43937c7bcca8faaa4b5090573585b8e7cfa65d360f35d6f"
+  },
+  "begin_scale_trials": [
+    {
+      "raw_profiles": 0,
+      "files": 6,
+      "namespace_sha256": "aa9f8dbf55aa45f098e4521ebd71e07f493fb9cc3e5fddd0d9fd126f775303e3",
+      "enumerations": 1,
+      "opens": 47,
+      "seeks": 214,
+      "reads": 1559,
+      "nor_reads": 2762,
+      "host_us": [
+        689,
+        689,
+        688,
+        694,
+        680,
+        678,
+        695,
+        676,
+        687,
+        685
+      ],
+      "host_median_us": 687.5
+    },
+    {
+      "raw_profiles": 1,
+      "files": 7,
+      "namespace_sha256": "031ac925af2229dbeac502eb12430e09ee22bbc82f8de88ae07cf7b6d81124f5",
+      "enumerations": 1,
+      "opens": 54,
+      "seeks": 218,
+      "reads": 1566,
+      "nor_reads": 3353,
+      "host_us": [
+        735,
+        745,
+        742,
+        707,
+        746,
+        730,
+        746,
+        732,
+        762,
+        744
+      ],
+      "host_median_us": 743.0
+    },
+    {
+      "raw_profiles": 10,
+      "files": 16,
+      "namespace_sha256": "33ef69f41323008ba331eb4a23170f87c8f11083ed2fef76dfb520c706816514",
+      "enumerations": 12,
+      "opens": 72,
+      "seeks": 218,
+      "reads": 1584,
+      "nor_reads": 4627,
+      "host_us": [
+        1148,
+        1158,
+        1105,
+        1083,
+        1109,
+        1146,
+        1121,
+        1113,
+        1083,
+        1060
+      ],
+      "host_median_us": 1111.0
+    },
+    {
+      "raw_profiles": 26,
+      "files": 32,
+      "namespace_sha256": "251a9a7cc1c1c3242be170605e651074e198e12d9c02a9ca5da3336d53a99580",
+      "enumerations": 24,
+      "opens": 104,
+      "seeks": 218,
+      "reads": 1616,
+      "nor_reads": 13438,
+      "host_us": [
+        2279,
+        2345,
+        2421,
+        2355,
+        2345,
+        2308,
+        2300,
+        2211,
+        2269,
+        2300
+      ],
+      "host_median_us": 2304.0
+    },
+    {
+      "raw_profiles": 40,
+      "files": 46,
+      "namespace_sha256": "7702c82abb0cf221c419806ef56379d09d18abbf0d83f5dd996ce47e56efde7f",
+      "enumerations": 36,
+      "opens": 132,
+      "seeks": 218,
+      "reads": 1644,
+      "nor_reads": 31982,
+      "host_us": [
+        3615,
+        3334,
+        3544,
+        3555,
+        3366,
+        3465,
+        3367,
+        3446,
+        3469,
+        3498
+      ],
+      "host_median_us": 3467.0
+    },
+    {
+      "raw_profiles": 62,
+      "files": 68,
+      "namespace_sha256": "3e99ab1a24dd2e6c00b0e9ba11d47ce97d4a3b102ebad03124caddfe59741deb",
+      "enumerations": 54,
+      "opens": 176,
+      "seeks": 218,
+      "reads": 1688,
+      "nor_reads": 61981,
+      "host_us": [
+        6143,
+        5951,
+        6072,
+        6027,
+        5872,
+        5993,
+        6003,
+        5947,
+        5826,
+        5848
+      ],
+      "host_median_us": 5972.0
+    }
+  ],
+  "single_late_observer": {
+    "runs": [
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 125,
+          "single_nor": 353,
+          "single_us": 25,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 122,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 123,
+          "single_nor": 353,
+          "single_us": 25,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 123,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 119,
+          "single_nor": 353,
+          "single_us": 23,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 119,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 116,
+          "single_nor": 353,
+          "single_us": 23,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 116,
+          "single_nor": 353,
+          "single_us": 23,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 118,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 118,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 117,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 117,
+          "single_nor": 353,
+          "single_us": 23,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 118,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 118,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 121,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 121,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 122,
+          "single_nor": 353,
+          "single_us": 25,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 122,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ],
+      [
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 120,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        },
+        {
+          "nor_reads": 1765,
+          "enumerations": 5,
+          "opens": 0,
+          "host_us": 119,
+          "single_nor": 353,
+          "single_us": 24,
+          "single_count": 32,
+          "single_ok": true
+        }
+      ]
+    ],
+    "medians": [
+      {
+        "single_nor": 353.0,
+        "single_us": 24.0,
+        "single_count": 32.0,
+        "nor_reads": 1765.0,
+        "enumerations": 5.0,
+        "host_us": 119.5
+      },
+      {
+        "single_nor": 353.0,
+        "single_us": 24.0,
+        "single_count": 32.0,
+        "nor_reads": 1765.0,
+        "enumerations": 5.0,
+        "host_us": 119.0
+      }
+    ]
+  },
+  "canonical_build": {
+    "command": "pio run -e glyph_mk6",
+    "exit": 0,
+    "log_sha256": "f89038fdcf39324bb5311fcdcaf05b532832ed7f7df918ed1f4f159afd03b96d",
+    "artifacts": {
+      "elf": {
+        "size": 5763716,
+        "sha256": "e55c7c157fdc161bd0cc0636b96bf3299f09a5d2e934b65f5f9760fc600c3a60"
+      },
+      "bin": {
+        "size": 662588,
+        "sha256": "2f0f4c46b27b3751441f7ff1f193b1e3e8caf79d0a571322365cc1ddd942a687"
+      },
+      "uf2": {
+        "size": 1325568,
+        "sha256": "3fb0eb0fab4bc66ebd054b8d334c5b38c3732dfab69355276048396d49e0bef2"
+      },
+      "map": {
+        "size": 3927349,
+        "sha256": "e63970d8ea0eff7404dc825632915d90e3e0ed9ce68d471dc12a4841c8fc4e31"
+      }
+    },
+    "resources": {
+      "flash": 650556,
+      "static": 198888,
+      "heap_capacity": 63060,
+      "stack_reservations": [
+        2048,
+        2048
+      ],
+      "core0_model_peak": 2048,
+      "core0_lifecycle_model": 2044,
+      "core1_setup": 968,
+      "core1_loop": 984,
+      "core1_envelope": 1068,
+      "linked_function_shapes_checked": 3302,
+      "shape_differences": 0
+    },
+    "uf2": {
+      "blocks": 2589,
+      "first_address": "0x10000000",
+      "payload_end_exclusive": "0x100a1d00",
+      "littlefs_start": "0x1017f000",
+      "payload_vs_tested_byte_differences": 34,
+      "reconstructed_bin_plus_padding": true
+    }
+  },
+  "focused": [
+    {
+      "command": "python3 tools/test_glyph_ci_build_inputs.py",
+      "exit": 0,
+      "seconds": 0.878,
+      "log_sha256": "c3617257e4b5b57ac67fea65d8c287f13d5f55713abd0ba3afc847dfe387d3d7"
+    },
+    {
+      "command": "python3 tools/check_glyph_checker_census.py",
+      "exit": 0,
+      "seconds": 2.877,
+      "log_sha256": "a257684b1b78d3be59144ab9ed8f65151628f820892dd6bc81c7065d8e1cdc85"
+    },
+    {
+      "command": "python3 tools/check_glyph_runtime_config_validation_health.py",
+      "exit": 0,
+      "seconds": 0.051,
+      "log_sha256": "5e55363dcc161a8c17176e6a04890513f914140bd3229db5ef5c4b2eb8e745a4"
+    },
+    {
+      "command": "python3 tools/check_glyph_build_input_provenance_inventory.py",
+      "exit": 0,
+      "seconds": 0.13,
+      "log_sha256": "2961f7c7de3a3165822a876cd9267ee520c7fcb758f464c0d01db212164862be"
+    },
+    {
+      "command": "python3 tools/check_glyph_build_input_non_selector_configuration.py",
+      "exit": 0,
+      "seconds": 0.153,
+      "log_sha256": "cab8538225e1af92d6c8648b4c9edd64a897673c49d3cb93b9de341aa3b05992"
+    },
+    {
+      "command": "python3 tools/check_glyph_build_input_resolution_observations.py",
+      "exit": 0,
+      "seconds": 0.138,
+      "log_sha256": "192d4575ad25057f8fe2ae2630ec7c23160b485c248306486a18cc4da6828df5"
+    },
+    {
+      "command": "python3 tools/check_glyph_runtime_config_validation_publication_workflow.py",
+      "exit": 0,
+      "seconds": 0.096,
+      "log_sha256": "b0d0b83b4c74aa27eff3233034483f05393b53c5bce509c8b143577e2951017b"
+    },
+    {
+      "command": "python3 tools/check_glyph_artifact_postprocessor_workflow.py",
+      "exit": 0,
+      "seconds": 0.048,
+      "log_sha256": "c65cd851b158384d80245af2b21df22110036dfda95fe79a0203607b1a4f769a"
+    },
+    {
+      "command": "python3 tools/check_glyph_active_profile_display.py",
+      "exit": 0,
+      "seconds": 8.748,
+      "log_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455"
+    },
+    {
+      "command": "python3 tools/check_glyph_controller_profile_selector.py",
+      "exit": 0,
+      "seconds": 13.601,
+      "log_sha256": "84a93938097e2a9774553358a182b520aad23169f8dea404c639296961f86e57"
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_selection_recovery.py",
+      "exit": 0,
+      "seconds": 5.286,
+      "log_sha256": "dec7977829494e224259c57881118496ebd69cc5321de16526c95e1d4a20e26b"
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_config_persistence.py",
+      "exit": 0,
+      "seconds": 2.503,
+      "log_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_production_tool.py",
+      "exit": 0,
+      "seconds": 0.779,
+      "log_sha256": "07aedc239f7291e953690b0bf43f39ddfdec768202b5e4d5db90a64dc7642b46"
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_littlefs_host.py",
+      "exit": 0,
+      "seconds": 0.866,
+      "log_sha256": "fd494947956a356c5bfffa4d3e063b01ab1c67478a9ded22328722bd1af83b4c"
+    },
+    {
+      "command": "python3 tools/glyph_ci_current_firmware.py",
+      "exit": 0,
+      "seconds": 74.184,
+      "log_sha256": "ed6a4e3bc827c197acb367294ec8fa897d645d517fb21dfe15cece1738d90242"
+    },
+    {
+      "command": "python3 tools/glyph_ci_current_package_tests.py",
+      "exit": 0,
+      "seconds": 15.259,
+      "log_sha256": "b60da2cb83e70bf950a6db3661b72bee1b5bf0592b56319e118add8653e56e02"
+    },
+    {
+      "command": "python3 tools/test_glyph_hardware_correspondence.py",
+      "exit": 0,
+      "seconds": 41.866,
+      "log_sha256": "cbf44a6dd56f17d4394108fa64f473ba2a108de8e4d75491b2a6be408888750e"
+    },
+    {
+      "command": "python3 tools/test_glyph_docs_agent_surface_integration.py",
+      "exit": 0,
+      "seconds": 7.82,
+      "log_sha256": "744289658faa17a0a181cd9a2103f93612a5352734802cecb62b81b0af6e57e2"
+    },
+    {
+      "command": "python3 tools/check_glyph_gamecube_selector_liveness.py",
+      "exit": 0,
+      "seconds": 25.703,
+      "log_sha256": "94fb2173244758122f416fbf0a48bba465b58b9c41e353b3bfb06dfd278cff17"
+    },
+    {
+      "command": "python3 tools/check_switch_readiness.py",
+      "exit": 0,
+      "seconds": 3.22,
+      "log_sha256": "126db2e42dfbef5f3306a6839f4da3a98fc1aeaf80dd99f6630d7bcb78bc6dd1"
+    },
+    {
+      "command": "python3 tools/fixtures/switch_readiness/usb_host/run.py",
+      "exit": 0,
+      "seconds": 1.113,
+      "log_sha256": "a75077a0abb4306a14a47824d5860ab9eceef821cc418df1f2e2134babcb25b7"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/boot_detection_regressions.py --repo . --out <boot-output>",
+      "exit": 0,
+      "seconds": 0.844,
+      "log_sha256": "83fe4f24fde857945661b71d9670a283381321cebfc344fcd5858eda604a0928"
+    }
+  ],
+  "transaction_suite": [
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/build.py --repo . --boot-probe --out <transaction-output>/build",
+      "exit": 0,
+      "seconds": 9.993,
+      "log_sha256": "27852e401714d1008217c2b3f1492936b52b3f890e4cbdb5d726bbe790ab7ccf"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/lifecycle_regressions.py --corpus <corpus> --binary <transaction-output>/build/package-fault-harness --out <transaction-output>/lifecycle_regressions",
+      "exit": 0,
+      "seconds": 11.52,
+      "log_sha256": "46a8bb3703e27f37fa69bf370119c0bf4b701fc1d6bdb58ea44f926d38a1d756"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/managed_selection.py --corpus <corpus> --binary <transaction-output>/build/package-fault-harness --out <transaction-output>/managed_selection",
+      "exit": 0,
+      "seconds": 0.708,
+      "log_sha256": "c6e0210edaa50102bced8d71b758e44e4f15b87bcb2a51a67bc7f12290bcfc1f"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/startup_work.py --corpus <corpus> --binary <transaction-output>/build/package-fault-harness",
+      "exit": 0,
+      "seconds": 0.493,
+      "log_sha256": "e91419404b40bfa92b7d0e90f23958cf1d39101a9825340e6a3e7e1bc890bd0b"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/boot_regressions.py --corpus <corpus> --binary <transaction-output>/build/package-fault-harness --out <transaction-output>/boot_regressions --require-visible",
+      "exit": 0,
+      "seconds": 3.072,
+      "log_sha256": "713522f283cbdf7160a1f78c6b93586a99536f05084b8f0c2829ad79929b47f7"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/regressions.py --corpus <corpus> --binary <transaction-output>/build/package-fault-harness --repo . --out <transaction-output>/regressions",
+      "exit": 0,
+      "seconds": 5.116,
+      "log_sha256": "17d98e3b25b53a5ac44f7d418c050a77809fa4e772d22ed705d2cf7b8e6ec26e"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/historical_config_regressions.py --corpus <corpus> --binary <transaction-output>/build/package-fault-harness --out <transaction-output>/historical_config_regressions",
+      "exit": 0,
+      "seconds": 3.73,
+      "log_sha256": "f13f0155eaae592b322fa8e240d30b5950abc4146a079c8c561e1fecc4cd3f53"
+    },
+    {
+      "command": "python3 tools/fixtures/glyph_package_v1/transaction/storage_fence_regressions.py --corpus <corpus> --binary <transaction-output>/build/package-fault-harness --out <transaction-output>/storage_fence_regressions",
+      "exit": 0,
+      "seconds": 3.202,
+      "log_sha256": "f662d1226b1e8ab95a6e04a87e1f4f7404298d7b687253f1cfe12825848fc09b"
+    }
+  ],
+  "supplemental": [
+    {
+      "command": "python3 tools/check_glyph_runtime_config_validation_aggregate.py",
+      "exit": 0,
+      "log_sha256": "c48aa6966e61774177dc44d0494d842e0c54c3f1a2052616398cb1cfa20553cd"
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_migration_lifecycle.py",
+      "exit": 0,
+      "log_sha256": "202e9822fb9fe980cc4f1d84bec0ed7e55cf19a9199b1ab795c731ef5f8c8d38"
+    }
+  ],
+  "aggregate": {
+    "status": "FAIL",
+    "canonical_proof": "MATCH",
+    "failure_kind": "CHECKER_TIMEOUT",
+    "phase": "checker:validation_aggregate_adversarial",
+    "receipt_sha256": "58f1ab46add25df670fdda31e2b8f989d0b9cd4e56f52cc77b6ab44bea8c9d06",
+    "checks": [
+      {
+        "id": "gp_config_007_transaction_stage_schema",
+        "status": "PASS",
+        "duration_seconds": 0.082,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "runtime_config_storage_fallback",
+        "status": "PASS",
+        "duration_seconds": 0.073,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "validation_health",
+        "status": "PASS",
+        "duration_seconds": 0.062,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "validation_publication_workflow",
+        "status": "PASS",
+        "duration_seconds": 0.126,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "artifact_postprocessor_workflow",
+        "status": "PASS",
+        "duration_seconds": 0.06,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "build_input_provenance_inventory",
+        "status": "PASS",
+        "duration_seconds": 0.125,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "build_input_resolution_observations",
+        "status": "PASS",
+        "duration_seconds": 0.124,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "prebuild_git_identity",
+        "status": "PASS",
+        "duration_seconds": 2.047,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "build_input_non_selector_configuration",
+        "status": "PASS",
+        "duration_seconds": 0.134,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "nuker_source_lineage",
+        "status": "PASS",
+        "duration_seconds": 0.079,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "checker_context",
+        "status": "PASS",
+        "duration_seconds": 23.056,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "validation_aggregate_adversarial",
+        "status": "FAIL",
+        "duration_seconds": 120.003,
+        "failure_kind": "CHECKER_TIMEOUT",
+        "exit": null,
+        "isolated_proof": "MATCH"
+      }
+    ]
+  },
+  "category_baseline_diagnostic": {
+    "status": "FAIL",
+    "canonical_proof": "MATCH",
+    "failure_kind": null,
+    "phase": "checker:validation_aggregate_adversarial",
+    "receipt_sha256": "8ce32d22fe82e7e2894203823383f5d3b89c44663be9ac6d756d4d6f63336015",
+    "checks": [
+      {
+        "id": "validation_health",
+        "status": "PASS",
+        "duration_seconds": 0.201,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "validation_publication_workflow",
+        "status": "PASS",
+        "duration_seconds": 0.239,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "artifact_postprocessor_workflow",
+        "status": "PASS",
+        "duration_seconds": 0.067,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "build_input_provenance_inventory",
+        "status": "PASS",
+        "duration_seconds": 0.174,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "build_input_resolution_observations",
+        "status": "PASS",
+        "duration_seconds": 0.151,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "prebuild_git_identity",
+        "status": "PASS",
+        "duration_seconds": 2.326,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "build_input_non_selector_configuration",
+        "status": "PASS",
+        "duration_seconds": 0.16,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "nuker_source_lineage",
+        "status": "PASS",
+        "duration_seconds": 0.096,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "checker_context",
+        "status": "PASS",
+        "duration_seconds": 27.551,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      },
+      {
+        "id": "validation_aggregate_adversarial",
+        "status": "FAIL",
+        "duration_seconds": 25.143,
+        "failure_kind": null,
+        "exit": null,
+        "isolated_proof": "MATCH"
+      }
+    ]
+  }
+}
