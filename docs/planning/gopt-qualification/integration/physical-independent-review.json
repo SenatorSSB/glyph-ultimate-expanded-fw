@@ -1,0 +1,83 @@
+{
+  "reviewer": "Fresh independent evidence reviewer /root/physical_evidence_review",
+  "date": "2026-11-16",
+  "disposition": "APPROVED bounded sanitized closeout; GOPT PHYSICAL ACCEPTANCE PARTIAL",
+  "source": "55739675e5706ea8799265c4221724ac4f2dce9b",
+  "tree": "87ad82c2302353d50325ff3b8445464b62fc92e9",
+  "tested_uf2_sha256": "63cb30b4fc905fdd34421051cb373c1e98040b631934587b8b466a09b11848a4",
+  "physical_manifest_sha256": "c536f32051b7702f9ce11a849355dc703123c59d549984bdc274ceeb88099705",
+  "verified": {
+    "manifest_files": 2778,
+    "additional_artifacts": 4,
+    "raw_capture_exchanges": 246,
+    "captures": 6,
+    "ordered_original_profiles_preserved": 27,
+    "approved_temporary_Config_delta": "One default-selection byte 3 to 4, then exact original restoration",
+    "approval_packets_and_chronology": "All three immutable plan hashes match and approvals precede corresponding owner outcomes",
+    "UF2_BIN_correspondence": "2588 ordered RP2040 blocks reconstruct retained BIN plus zero padding",
+    "raw_final_identity": "XInput, row 3, profile 53 revision 1/schema 5; independently recomputed domain-separated payload digest matches wrapper",
+    "raw_final_source_metrics": "Exact tested source SHA, complete XInput diagnostic",
+    "original_and_final_Config": "Byte-exact; wrappers, ordered directory metadata, revisions and API-visible storage guards preserved",
+    "report_seals": "Structured report, original text report, readable report and independent final review hashes match"
+  },
+  "GameCube_trials_ms": [
+    [
+      1833,
+      525,
+      4237,
+      4282
+    ],
+    [
+      1833,
+      524,
+      4236,
+      4283
+    ],
+    [
+      1833,
+      524,
+      4236,
+      4283
+    ]
+  ],
+  "GameCube_medians_ms": {
+    "Store": 1833,
+    "Backend": 524,
+    "Ready": 4236,
+    "Screen": 4283
+  },
+  "USB_trials_ms": [
+    [
+      1986,
+      545,
+      4560,
+      4593
+    ],
+    [
+      1985,
+      545,
+      4559,
+      4592
+    ],
+    [
+      1986,
+      545,
+      4560,
+      4593
+    ]
+  ],
+  "timing_limits": "Owner-transcribed About readings: Store/Backend phase durations, Ready/Screen milestones since Arduino setup. External manual timer 4.75 s connection-to-first-visible-Ultimate-response; approximately 4.5 s is owner reaction-adjusted estimate only. Raw external readings not independently itemized by trial. Historical source/Config/conditions differ; no matched causal speedup claim.",
+  "observations": "Owner-reported positive bounded input/gameplay, cold startup, dashboard/menu and final normal state; no independent physical observation or exact gameplay duration proof.",
+  "unfulfilled": [
+    "Distinct-output profile comparison: profiles 53/54 byte-identical",
+    "Profile 27 context mismatch hold remains",
+    "Physical long-name ellipsis",
+    "Arbitrary adapter/console compatibility",
+    "Raw NOR equality, whole installed-image attestation, zero-write or power-loss durability",
+    "Physical stack high-water qualification",
+    "Full firmware release qualification"
+  ],
+  "findings": [],
+  "minor_documentation_note": "Frozen final identity helper says saved-state audit pending; complete final audit actually preceded normal boot and final identity read. Preserve original evidence and explain chronology.",
+  "actions": "Read-only filesystem evidence inspection and offline parsing only; no controller, serial, USB, network, firmware-build, canonical or release operations."
+}

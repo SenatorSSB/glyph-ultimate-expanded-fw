@@ -1,0 +1,8 @@
+{
+  "tested_files": 545,
+  "rebuilt_files": 545,
+  "differences": [],
+  "identical": true,
+  "tested_inventory_sha256": "16a398821b07ec8da7260abd8d60d4c0b05124a2ba18aa351b1477665868fd3b",
+  "rebuilt_inventory_sha256": "16a398821b07ec8da7260abd8d60d4c0b05124a2ba18aa351b1477665868fd3b"
+}

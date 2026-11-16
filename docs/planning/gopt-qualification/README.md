@@ -1,5 +1,8 @@
 # Glyph Mk6 optimization qualification
 
+> Historical host-to-hardware qualification record. See [physical closeout](PHYSICAL_CLOSEOUT.md)
+> for the completed partial acceptance and current integration-preparation limits.
+
 **GLYPH OPTIMIZATION CANDIDATE READY for host-to-hardware handoff. Physical status is HARDWARE_TEST_REQUIRED. Hold public open beta.** The primary qualification target is Super Smash Bros. Ultimate through the GameCube adapter on an identified Glyph Mk6. The result covers one host-built candidate with three reviewed changes.
 
 ## Exact admission and source

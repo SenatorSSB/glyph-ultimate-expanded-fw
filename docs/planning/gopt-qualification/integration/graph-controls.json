@@ -1,0 +1,35 @@
+{
+  "baseline_positive": "PASS",
+  "candidate_positive": "PASS",
+  "negative_controls": [
+    {
+      "control": "Unknown CRC symbol",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "control": "Known malloc inserted under CRC",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "control": "Unknown renderer symbol",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "control": "Unknown loop indirect instruction",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "control": "Changed filesystem frame",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "control": "Removed inherited function",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "control": "Unrecognized added function",
+      "result": "REJECTED_AS_REQUIRED"
+    }
+  ],
+  "count": 7
+}

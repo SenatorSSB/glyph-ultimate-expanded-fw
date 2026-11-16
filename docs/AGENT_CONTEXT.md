@@ -1,5 +1,19 @@
 # Agent Context
 
+## GOPT physical closeout and noncanonical integration preparation — 2026-11-16
+
+GOPT PHYSICAL ACCEPTANCE PARTIAL: the exact retained55739675 candidate and
+UF263cb30b4… passed bounded preservation, startup, final XInput identity and
+owner-reported GameCube/Ultimate observations; no new material defect was found.
+The owner accepts this result for integration preparation. The campaign is closed.
+Distinct-profile output and physical ellipsis remain undemonstrated; profile27's
+inherited context hold remains. Canonical promotion and release require separate
+owner decisions. [Sanitized closeout](planning/gopt-qualification/PHYSICAL_CLOSEOUT.md)
+records exact identities, timings, preservation scope and remaining beta gaps.
+This branch prepares ancestry-preserving integration with exact tested production
+inputs; it does not update canonical configurator or transfer acceptance to rebuilds.
+
+
 ## Accepted package firmware and dashboard integration — 2026-11-13
 
 This owner-authorized integration joins the package-aware source lineage

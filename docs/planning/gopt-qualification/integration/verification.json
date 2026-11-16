@@ -1,0 +1,223 @@
+{
+  "verified_commit": "ea74179498d48d87874dfa7f23f8c102ce5b0c6f",
+  "results": [
+    {
+      "group": "current-host",
+      "name": "test_glyph_ci_build_inputs",
+      "exit": 0,
+      "seconds": 0.931,
+      "log_sha256": "68069cb9f45be5eaf3f8e5102e8e9e4bc8b475d39a5a71e88381742b9b09e929"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_checker_census",
+      "exit": 0,
+      "seconds": 1.777,
+      "log_sha256": "a257684b1b78d3be59144ab9ed8f65151628f820892dd6bc81c7065d8e1cdc85"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_runtime_config_validation_health",
+      "exit": 0,
+      "seconds": 0.041,
+      "log_sha256": "5e55363dcc161a8c17176e6a04890513f914140bd3229db5ef5c4b2eb8e745a4"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_build_input_provenance_inventory",
+      "exit": 0,
+      "seconds": 0.113,
+      "log_sha256": "2961f7c7de3a3165822a876cd9267ee520c7fcb758f464c0d01db212164862be"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_build_input_non_selector_configuration",
+      "exit": 0,
+      "seconds": 0.161,
+      "log_sha256": "cab8538225e1af92d6c8648b4c9edd64a897673c49d3cb93b9de341aa3b05992"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_build_input_resolution_observations",
+      "exit": 0,
+      "seconds": 0.151,
+      "log_sha256": "192d4575ad25057f8fe2ae2630ec7c23160b485c248306486a18cc4da6828df5"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_runtime_config_validation_publication_workflow",
+      "exit": 0,
+      "seconds": 0.081,
+      "log_sha256": "b0d0b83b4c74aa27eff3233034483f05393b53c5bce509c8b143577e2951017b"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_artifact_postprocessor_workflow",
+      "exit": 0,
+      "seconds": 0.05,
+      "log_sha256": "c65cd851b158384d80245af2b21df22110036dfda95fe79a0203607b1a4f769a"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_active_profile_display",
+      "exit": 0,
+      "seconds": 8.369,
+      "log_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_controller_profile_selector",
+      "exit": 0,
+      "seconds": 13.866,
+      "log_sha256": "84a93938097e2a9774553358a182b520aad23169f8dea404c639296961f86e57"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_profile_store_selection_recovery",
+      "exit": 0,
+      "seconds": 5.177,
+      "log_sha256": "ffa65e204825c1f659eeab94ac0f9447b969c6ee441e3e0e7960aadc95fe5f7c"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_profile_store_config_persistence",
+      "exit": 0,
+      "seconds": 2.761,
+      "log_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_profile_store_production_tool",
+      "exit": 0,
+      "seconds": 0.808,
+      "log_sha256": "723463d0b50c145e65d051eb95342db3ff720a0c102e990afda592009553861f"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_profile_store_littlefs_host",
+      "exit": 0,
+      "seconds": 0.902,
+      "log_sha256": "fd494947956a356c5bfffa4d3e063b01ab1c67478a9ded22328722bd1af83b4c"
+    },
+    {
+      "group": "current-host",
+      "name": "glyph_ci_current_firmware",
+      "exit": 0,
+      "seconds": 75.653,
+      "log_sha256": "ed6a4e3bc827c197acb367294ec8fa897d645d517fb21dfe15cece1738d90242"
+    },
+    {
+      "group": "current-host",
+      "name": "glyph_ci_current_package_tests",
+      "exit": 0,
+      "seconds": 15.215,
+      "log_sha256": "b60da2cb83e70bf950a6db3661b72bee1b5bf0592b56319e118add8653e56e02"
+    },
+    {
+      "group": "current-host",
+      "name": "test_glyph_hardware_correspondence",
+      "exit": 0,
+      "seconds": 43.161,
+      "log_sha256": "c0c2d32097579be67d2b9b7e66df2c274a6914056cf684eb420c6e48f4452b4c"
+    },
+    {
+      "group": "current-host",
+      "name": "test_glyph_docs_agent_surface_integration",
+      "exit": 0,
+      "seconds": 7.422,
+      "log_sha256": "a35533891fdc5fe82beb85f161e980a25902060784523a43855ac3f9804f4198"
+    },
+    {
+      "group": "current-host",
+      "name": "check_glyph_gamecube_selector_liveness",
+      "exit": 0,
+      "seconds": 22.366,
+      "log_sha256": "94fb2173244758122f416fbf0a48bba465b58b9c41e353b3bfb06dfd278cff17"
+    },
+    {
+      "group": "current-host",
+      "name": "check_switch_readiness",
+      "exit": 0,
+      "seconds": 4.256,
+      "log_sha256": "3ee5eacd69b8f9d59e9542dc04384be5f892941702ac7ddac300ae5660532226"
+    },
+    {
+      "group": "transactions",
+      "name": "build",
+      "exit": 0,
+      "seconds": 10.117,
+      "log_sha256": "22df33a913892f4481a3053f2f78efc63c71f956512af23dfdef85eb3b97c16d"
+    },
+    {
+      "group": "transactions",
+      "name": "lifecycle_regressions",
+      "exit": 0,
+      "seconds": 11.745,
+      "log_sha256": "46a8bb3703e27f37fa69bf370119c0bf4b701fc1d6bdb58ea44f926d38a1d756"
+    },
+    {
+      "group": "transactions",
+      "name": "managed_selection",
+      "exit": 0,
+      "seconds": 0.697,
+      "log_sha256": "c6e0210edaa50102bced8d71b758e44e4f15b87bcb2a51a67bc7f12290bcfc1f"
+    },
+    {
+      "group": "transactions",
+      "name": "startup_work",
+      "exit": 0,
+      "seconds": 0.529,
+      "log_sha256": "71f5e7f9a6f6dd1c8b40ac47c17b42eec3f726e8cb6bcf8fc6dc7a449c3d8f73"
+    },
+    {
+      "group": "transactions",
+      "name": "boot_regressions",
+      "exit": 0,
+      "seconds": 3.051,
+      "log_sha256": "713522f283cbdf7160a1f78c6b93586a99536f05084b8f0c2829ad79929b47f7"
+    },
+    {
+      "group": "transactions",
+      "name": "regressions",
+      "exit": 0,
+      "seconds": 4.977,
+      "log_sha256": "17d98e3b25b53a5ac44f7d418c050a77809fa4e772d22ed705d2cf7b8e6ec26e"
+    },
+    {
+      "group": "transactions",
+      "name": "historical_config_regressions",
+      "exit": 0,
+      "seconds": 3.747,
+      "log_sha256": "f13f0155eaae592b322fa8e240d30b5950abc4146a079c8c561e1fecc4cd3f53"
+    },
+    {
+      "group": "transactions",
+      "name": "storage_fence_regressions",
+      "exit": 0,
+      "seconds": 3.059,
+      "log_sha256": "f662d1226b1e8ab95a6e04a87e1f4f7404298d7b687253f1cfe12825848fc09b"
+    },
+    {
+      "group": "bounds",
+      "name": "lifecycle_bounds",
+      "exit": 0,
+      "seconds": 0.112,
+      "log_sha256": "b1c05ef09f41a3f12c1a86f644a13857bc02f45806431c353dff6367e32d1c69"
+    },
+    {
+      "group": "bounds",
+      "name": "boot_detection",
+      "exit": 0,
+      "seconds": 1.21,
+      "log_sha256": "83fe4f24fde857945661b71d9670a283381321cebfc344fcd5858eda604a0928"
+    }
+  ],
+  "display_transition_controls": "PASS both ABIs and early-control negative",
+  "build": {
+    "command": "pio run -e glyph_mk6",
+    "result": "PASS clean build",
+    "seconds": 197.38,
+    "log_sha256": "527a77beb66c00b2cf4884266561ca27762de4431384e4c1c1f0077e9bd9ccbf"
+  },
+  "initial_setup_failures": "First host attempt started before dependency population and failed missing Nanopb. After population, all20 reran PASS. Original aggregate preflight refused nested dependency Git checkout; clean validation copy rerun is recorded separately. An initial clean-copy invocation used the wrong working directory and did not run validator. No setup failure is represented as a test PASS."
+}

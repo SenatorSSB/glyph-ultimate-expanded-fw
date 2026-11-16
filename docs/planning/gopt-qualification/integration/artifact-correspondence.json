@@ -1,0 +1,60 @@
+{
+  "built_commit": "ea74179498d48d87874dfa7f23f8c102ce5b0c6f",
+  "old_bin_bytes": 662516,
+  "new_bin_bytes": 662516,
+  "differing_bytes": 34,
+  "spans": [
+    {
+      "offset": 582090,
+      "end_exclusive": 582092,
+      "tested_hex": "3535",
+      "rebuilt_hex": "6561"
+    },
+    {
+      "offset": 582093,
+      "end_exclusive": 582098,
+      "tested_hex": "3339363735",
+      "rebuilt_hex": "3431373934"
+    },
+    {
+      "offset": 583432,
+      "end_exclusive": 583452,
+      "tested_hex": "55739675e5706ea8799265c4221724ac4f2dce9b",
+      "rebuilt_hex": "ea74179498d48d87874dfa7f23f8c102ce5b0c6f"
+    },
+    {
+      "offset": 601744,
+      "end_exclusive": 601746,
+      "tested_hex": "3535",
+      "rebuilt_hex": "6561"
+    },
+    {
+      "offset": 601747,
+      "end_exclusive": 601752,
+      "tested_hex": "3339363735",
+      "rebuilt_hex": "3431373934"
+    }
+  ],
+  "artifacts": {
+    "firmware.elf": {
+      "bytes": 5763656,
+      "sha256": "53d01e0bb5604dbda9536ced0f8405f57e73a915d88f4be95fb8d61dd6838f9b"
+    },
+    "firmware.bin": {
+      "bytes": 662516,
+      "sha256": "81a6d001cb46bec09d61caf4b29069f4d0c131e49939f45330673f9e27684242"
+    },
+    "firmware.uf2": {
+      "bytes": 1325056,
+      "sha256": "a2f59824141979ca4fa01b3646306a91bb81af03c365f7ea739a9ea190814742"
+    },
+    "firmware.map": {
+      "bytes": 3927334,
+      "sha256": "e4d0f54523cf97749fa978c0306b3596bed5a38964a8f924a7e0fde1a791fd1f"
+    }
+  },
+  "ELF_to_BIN": "MATCH",
+  "ordered_UF2_blocks": 2588,
+  "UF2_reconstruction": "Exact rebuilt BIN plus zero padding",
+  "interpretation": "34 differing BIN bytes exclusively two eight-character source labels and one twenty-byte source identity; no other byte differs. Uninstalled rebuilt artifact; no physical acceptance transfer."
+}

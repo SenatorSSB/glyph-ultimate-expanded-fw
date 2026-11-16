@@ -1,5 +1,8 @@
 # Mk6 beta qualification and proposed physical acceptance
 
+> Historical host-to-hardware qualification record. See [physical closeout](PHYSICAL_CLOSEOUT.md)
+> for the completed partial acceptance and current integration-preparation limits.
+
 **Recommendation: hold public open beta.** The primary intended use is Super Smash Bros. Ultimate through the GameCube adapter. USB/XInput is a practical first diagnostic route for advertised version, executing identity and preservation. Passing that route alone cannot qualify the primary use. The minimum proposed qualification configuration is one identified Glyph Mk6, its recorded adapter/receiver and the exact reviewed UF2. Broader device/adapter, console and firmware-version combinations require their own evidence.
 
 | Capability | Existing demonstration | GOPT disposition and remaining evidence |
