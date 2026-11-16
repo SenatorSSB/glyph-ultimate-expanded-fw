@@ -1,0 +1,70 @@
+{
+  "signed_off_by": "GOPT linked-resource bounded worker",
+  "disposition": "PASS_MODELED_SCOPE; no separate GOPT-3 firmware group recommended",
+  "candidate_source": "55739675e5706ea8799265c4221724ac4f2dce9b",
+  "candidate_tree": "87ad82c2302353d50325ff3b8445464b62fc92e9",
+  "scope": "Exact production Mk6 linked image, retained50 core0 routes plus42 CRC ancestor routes and concrete supported core1 display/LED union; inherited source/IRQ/ROM/non-RTOS predicates retained",
+  "unchanged_function_shapes": 3295,
+  "changed_function_shapes": 6,
+  "new_or_removed_functions": 0,
+  "frames": {
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "accepted_frame": 48,
+      "candidate_frame": 64
+    },
+    "Persistence::CheckCaptureInput()": {
+      "accepted_frame": 272,
+      "candidate_frame": 264
+    },
+    "Persistence::CheckSavedConfig()": {
+      "accepted_frame": 264,
+      "candidate_frame": 264
+    },
+    "Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)": {
+      "accepted_frame": 72,
+      "candidate_frame": 96
+    },
+    "Persistence::LoadConfigRaw(arduino::Print&, bool)": {
+      "accepted_frame": 272,
+      "candidate_frame": 264
+    },
+    "Persistence::ValidateLegacySource()": {
+      "accepted_frame": 264,
+      "candidate_frame": 248
+    }
+  },
+  "renderer_subtree": {
+    "bound": 784,
+    "max_path": [
+      "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ]
+  },
+  "core1_outer": 16,
+  "core1_sio_irq": 68,
+  "core1_unknown_edges": [],
+  "sibling_safety": "All formerly inlined CRC wrapper local frames are unchanged or smaller. Reference overload96-byte frame including CRC chunk returns before caller decode/hash/stream/write/rename. All42 CRC ancestor routes explicitly modeled; conservative maximum1556 includes checked lower540 and larger physical IRQ408. Later siblings retain unchanged lower shapes and no larger caller frame. Existing legacy stage-write2048 and lifecycle2044 remain tight inherited envelopes; no margin increase claimed.",
+  "directory_layout": "UNCHANGED; reader/visitor constructors and frames unchanged; retained complete I/O1612 and visitor1188 alternatives",
+  "dynamic_allocation": "No new allocation or whole-static reservation from bounded chunk/local loop/label edits; linked heap capacity unchanged. Allocation success and runtime heap peak NOT_MEASURED.",
+  "gopt3_decision": "SKIP separate speculative storage/stack group. Keep noinline CRC lifetime repair within GOPT-1. No demonstrated resource fault justifies reworking tight storage/transaction boundaries.",
+  "failures_and_repairs": [
+    {
+      "phase": "prequalification script review",
+      "finding": "startswith incorrectly received second string as start index",
+      "resolution": "Corrected tuple in actual runner and source bundle; full candidate and accepted baseline runs passed with the same final scripts. Added seven negative graph controls, all rejected."
+    }
+  ],
+  "remaining_limits": [
+    "Physical stack highwater NOT_MEASURED",
+    "No new hardware acceptance",
+    "No arbitrary corruption/panic/RTOS/all-mode guarantee",
+    "Original linked heap/IRQ/ROM predicate scope retained",
+    "Nunchuk NOT_TESTED",
+    "Separate source/dependency/artifact closure and both-ABI product controls required from qualification owner"
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "first_host_checkout_attempt": {
+    "aggregate_timeout_seconds": 300.0,
+    "canonical_proof": "UNAVAILABLE",
+    "excluded": [],
+    "failure_kind": "SETUP_FAILURE",
+    "message": "unsupported repository path type: .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/",
+    "phase": "preflight",
+    "phase_before_cleanup": "preflight",
+    "results": [],
+    "status": "FAIL"
+  },
+  "clean_isolated_retry": {
+    "status": "FAIL",
+    "phase": "checker:validation_aggregate_adversarial",
+    "canonical_proof": "MATCH",
+    "failure_kind": "CHECKER_TIMEOUT",
+    "aggregate_timeout_seconds": 300.0,
+    "results": [
+      {
+        "applicability": "current",
+        "category": "configurator",
+        "command": [
+          "python3",
+          "tools/check_glyph_gp_config_007_transaction_stage_schema.py"
+        ],
+        "duration_seconds": 0.194,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "gp_config_007_transaction_stage_schema",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_gp_config_007_transaction_stage_schema: PASS; schema=v2 stages=10"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "source_sync",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_storage_fallback.py"
+        ],
+        "duration_seconds": 0.116,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "runtime_config_storage_fallback",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "firmware_flashing_claim=false"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_health.py"
+        ],
+        "duration_seconds": 0.072,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "validation_health",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_runtime_config_validation_health: PASS; census_count=263; manifest_entries=64; baseline=116d34322837fe1f6f724c820b49ccb0d24d6787"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_publication_workflow.py"
+        ],
+        "duration_seconds": 0.201,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "validation_publication_workflow",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_runtime_config_validation_publication_workflow: PASS; cases=missing_pull_request,wrong_validation_command,shallow_checkout,write_permission,missing_dependency,continue_on_error,alternate_unguarded_publication,comment_only_aggregate,inert_aggregate_step,folded_aggregate_shape,aggregate_in_wrong_job,ambiguous_duplicate_step,unsupported_needs_shape,alternate_unguarded_nuker,conditional_validation_or_publication,trailing_success_mask,trailing_exit_success_mask,same_indent_sibling_shell,explicit_shell,explicit_working_directory,explicit_env,explicit_uses,shell_function,heredoc_control_flow,multiline_control_flow,malformed_block_indentation,setup_fetch_masked,setup_duplicate_operation,setup_intervening_ref_mutation,setup_wrong_base_expression,setup_unreachable_branch,setup_trailing_command,setup_duplicate_step,setup_wrong_base_environment,setup_wrong_base_placement,setup_default_shell_override,setup_inline_default_shell_override,setup_continuation_duplicate,substituted_build_classifier,inverted_build_condition,current_host_removed_dependency,current_host_omits_real_package_checks,current_host_tolerates_native_failure"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_artifact_postprocessor_workflow.py"
+        ],
+        "duration_seconds": 0.08,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "artifact_postprocessor_workflow",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_artifact_postprocessor_workflow: PASS"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_provenance_inventory.py"
+        ],
+        "duration_seconds": 0.176,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "build_input_provenance_inventory",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "{\"declaration_files\": 10, \"dependency_resolution\": false, \"firmware_artifact_published\": false, \"glyph_nuker_executed\": false, \"negative_tests\": 14, \"network_access\": false, \"platformio_invoked\": false, \"positive_tests\": 16, \"runtime_behavior_changed\": false, \"selectors\": 70, \"status\": \"PASS\", \"unresolved_claims\": 10}"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_resolution_observations.py"
+        ],
+        "duration_seconds": 0.152,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "build_input_resolution_observations",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_build_input_resolution_observations: PASS; records=44; direct=42; derived=2; base=8c04262c66613d46b933b1b739c01c575cb0c580"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_prebuild_git_identity.py"
+        ],
+        "duration_seconds": 2.411,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "prebuild_git_identity",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [
+          "hint: Disable this message with \"git config set advice.addEmbeddedRepo false\""
+        ],
+        "stdout_summary": [
+          "pre-build Git identity contract: PASS"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_non_selector_configuration.py"
+        ],
+        "duration_seconds": 0.343,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "build_input_non_selector_configuration",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "PASS: declared non-selector configuration census"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_nuker_source_lineage.py"
+        ],
+        "duration_seconds": 0.087,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "nuker_source_lineage",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_nuker_source_lineage: PASS; bounded source lineage not found"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_checker_context.py"
+        ],
+        "duration_seconds": 30.13,
+        "exit_code": 0,
+        "failure_kind": null,
+        "id": "checker_context",
+        "isolated_proof": "MATCH",
+        "status": "PASS",
+        "stderr_summary": [],
+        "stdout_summary": [
+          "glyph_checker_context: PASS; cases=CTX-01-valid-feature-branch,CTX-02-renamed-feature-branch,CTX-03-committed-src-rejected,CTX-04-staged-src-rejected,CTX-05-unstaged-src-rejected,CTX-06-committed-include-rejected,CTX-07-mixed-safe-protected-rejected,CTX-08-case-variant-protected-rejected,CTX-09-wrong-merge-base-rejected,CTX-10-base-not-ancestor-rejected,CTX-11-detached-explicit-base-accepted,CTX-12-detached-missing-base-rejected,CTX-13-configurator-content-accepted,CTX-14-checker-allowlist-rejected,CTX-15-unauthorized-authority-paths-rejected,CTX-16-exact-role-scoped-queue-path-accepted,CTX-17-control-plane-near-match-rejected,CTX-18-historical-exact-branch-remains-specific"
+        ],
+        "timeout_seconds": 120.0
+      },
+      {
+        "applicability": "current",
+        "category": "baseline",
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_aggregate.py"
+        ],
+        "duration_seconds": 120.003,
+        "exit_code": -15,
+        "failure_kind": "CHECKER_TIMEOUT",
+        "id": "validation_aggregate_adversarial",
+        "isolated_proof": "MATCH",
+        "status": "FAIL",
+        "stderr_summary": [],
+        "stdout_summary": [],
+        "timeout_seconds": 120.0
+      }
+    ],
+    "census_freshness": {
+      "applicability": "current",
+      "category": "baseline",
+      "id": "checker_census_freshness",
+      "load_bearing": true,
+      "path": "tools/check_glyph_checker_census.py",
+      "status": "PASS"
+    }
+  }
+}
