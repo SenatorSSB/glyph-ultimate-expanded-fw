@@ -13175,7 +13175,7 @@
       },
       "checker_id": "profile_store_selection_recovery",
       "defines_main": true,
-      "file_size_bytes": 8794,
+      "file_size_bytes": 9802,
       "hard_coded_branch_like_strings": [
         "branch",
         "configurator"
@@ -13183,9 +13183,9 @@
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
+      "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 136,
+      "line_count": 149,
       "parse_error": null,
       "path": "tools/check_glyph_profile_store_selection_recovery.py",
       "potential_branch_identity_signals": [
@@ -13193,6 +13193,7 @@
         "configurator"
       ],
       "potential_mutation_signals": [
+        "subprocess.check_output",
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_profile_store_selection_recovery",
@@ -13207,7 +13208,7 @@
         "tools/fixtures/profile_store_selection_recovery_host"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "a4dc6f6a954828867b5b62ce5b373f7ac64c2e859a51b83546ea661c84cd3499",
+      "sha256": "f6cf6402c8a19dc95e173d685367f0b8fce360f5b5fe5fa19b4fca682efe104e",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

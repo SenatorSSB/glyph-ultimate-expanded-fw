@@ -248,6 +248,99 @@ if(!std::strcmp(argv[1],"wire-requests")){
   need(files()==all,"seed exact namespace");no_handles();output(argv[3],nor);shutdown();return 0;
  }
  need(argc>=5,"execute|inspect NOR REQUESTS OUTDIR");output_dir=argv[4];mount_image(argv[2]);need(persistence.SetValidator(validate_glyph_config),"configured actual source validator");
+ if(!std::strcmp(argv[1],"config-load-outcome")){
+  const auto before=nor;const auto p=programs,e=erases;
+  Config saved=Config_init_default;const auto result=persistence.LoadConfigChecked(saved);
+  need(nor==before&&programs==p&&erases==e,"Config outcome read-only");no_handles();
+  std::cout<<unsigned(result)<<"\n";shutdown();return 0;
+ }
+ if(!std::strcmp(argv[1],"config-load-faults")){
+  const auto before=nor;const auto p=programs,e=erases;
+  static size_t seen=0,selected=SIZE_MAX;static bool short_mode=false;static std::vector<size_t> short_positions;
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char*){
+   if(op!=CheckedStorage::Operation::Read)return CheckedStorage::Fault::None;
+   if(!short_mode && phase==CheckedStorage::Phase::Before && seen++==selected)return CheckedStorage::Fault::Fail;
+   if(short_mode && phase==CheckedStorage::Phase::After && seen++==selected){
+    auto *file=reinterpret_cast<lfs_file_t*>(fs.mlist);
+    need(file && file->type==LFS_TYPE_REG,"Config short-read handle");
+    short_positions.push_back(lfs_file_tell(&fs,file));
+    need(lfs_file_seek(&fs,file,0,LFS_SEEK_END)>=0,"Config short-read seek");
+   }
+   return CheckedStorage::Fault::None;
+  });
+  Config saved=Config_init_default;
+  need(persistence.LoadConfigChecked(saved)==Persistence::LoadResult::Loaded,"Config census");
+  const auto encode=[](const Config &config){size_t n=0;need(pb_get_encoded_size(&n,Config_fields,&config),"Config fault encoded size");Bytes bytes(n);auto stream=pb_ostream_from_buffer(bytes.data(),bytes.size());need(pb_encode(&stream,Config_fields,&config),"Config fault encode");return bytes;};
+  const Bytes expected=encode(saved);
+  Config sentinel=saved;
+  sentinel.rgb_brightness ^= 1;
+  const Bytes untouched=encode(sentinel);
+  need(untouched!=expected,"failure sentinel differs from stored Config");
+  const size_t seams=seen;size_t failed=0,short_failed=0,short_loaded=0;std::vector<size_t> loaded_seams,loaded_positions;
+  for(size_t i=0;i<seams;++i){seen=0;selected=i;short_mode=false;
+   saved=sentinel;
+   const auto result=persistence.LoadConfigChecked(saved);
+   need(seen>i,"Config failure reached");need(result==Persistence::LoadResult::StorageFailure,"Config failure disposition");need(encode(saved)==untouched,"failed load preserves caller");++failed;
+   no_handles();need(nor==before&&programs==p&&erases==e,"Config fault read-only");
+  }
+  for(size_t i=0;i<seams;++i){seen=0;selected=i;short_mode=true;short_positions.clear();
+   saved=sentinel;
+   const auto result=persistence.LoadConfigChecked(saved);
+   need(seen>i,"Config short-read reached");
+   need(result==Persistence::LoadResult::StorageFailure||result==Persistence::LoadResult::Loaded,"Config short-read disposition");
+   need(encode(saved)==(result==Persistence::LoadResult::Loaded ? expected : untouched),"short load publishes only on success");
+   if(result==Persistence::LoadResult::StorageFailure)++short_failed;else {++short_loaded;loaded_seams.push_back(i);loaded_positions.push_back(short_positions.at(0));}
+   no_handles();need(nor==before&&programs==p&&erases==e,"Config short read-only");
+  }
+  // These fixture-specific sites are the final CRC body read, final protobuf
+  // body read, and the final header read. Each is consumed before the cursor
+  // moves and is followed by a seek or close.
+  need(loaded_seams==std::vector<size_t>({7,122,123}) &&
+       loaded_positions==std::vector<size_t>({221,221,8}),"only already-consumed/rewound reads succeed");
+  static size_t target_position=0;static bool partial_hit=false,partial_verified=false;
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char*){
+   if(op!=CheckedStorage::Operation::Read)return CheckedStorage::Fault::None;
+   auto *file=reinterpret_cast<lfs_file_t*>(fs.mlist);
+   need(file && file->type==LFS_TYPE_REG,"partial Config handle");
+   if(phase==CheckedStorage::Phase::After && partial_hit && !partial_verified){
+    need(lfs_file_tell(&fs,file)==lfs_file_size(&fs,file),"exactly one available byte consumed");
+    partial_verified=true;return CheckedStorage::Fault::None;
+   }
+   if(phase==CheckedStorage::Phase::Before && !partial_hit && size_t(lfs_file_tell(&fs,file))==target_position){
+    const auto size=lfs_file_size(&fs,file);need(size>0,"partial Config size");
+    need(lfs_file_seek(&fs,file,size-1,LFS_SEEK_SET)==size-1,"partial Config seek");
+    partial_hit=true;
+   }
+   return CheckedStorage::Fault::None;
+  });
+  // Known fixture body has 213 bytes: first, middle and final CRC chunks each
+  // request more than one byte. Moving to EOF-1 makes LittleFS return one.
+  for(const size_t position : {size_t(8),size_t(104),size_t(200)}){
+   target_position=position;partial_hit=false;partial_verified=false;
+   saved=sentinel;
+   const auto result=persistence.LoadConfigChecked(saved);
+   need(partial_hit&&partial_verified&&result==Persistence::LoadResult::StorageFailure,"positive partial CRC read fails");
+   need(encode(saved)==untouched,"partial load preserves exact caller bytes");
+   no_handles();need(nor==before&&programs==p&&erases==e,"partial load read-only");
+  }
+  CheckedStorage::SetFaultHook(nullptr);
+  std::cout<<"{\"seams\":"<<seams<<",\"failed\":"<<failed<<",\"short_failed\":"<<short_failed<<",\"short_loaded\":"<<short_loaded<<"}\n";
+  shutdown();return 0;
+ }
+ if(!std::strcmp(argv[1],"config-load-work")){
+  const auto before=nor;const auto p=programs,e=erases,r=reads;
+  static size_t count=0;count=0;
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char*){
+   if(op==CheckedStorage::Operation::Read&&phase==CheckedStorage::Phase::Before)++count;
+   return CheckedStorage::Fault::None;
+  });
+  Config saved=Config_init_default;const auto result=persistence.LoadConfigChecked(saved);
+  CheckedStorage::SetFaultHook(nullptr);
+  need(result==Persistence::LoadResult::Loaded,"healthy Config load");
+  need(nor==before&&programs==p&&erases==e,"Config load read-only");no_handles();
+  std::cout<<"{\"checked_reads\":"<<count<<",\"nor_reads\":"<<reads-r<<"}\n";
+  shutdown();return 0;
+ }
  if(!std::strcmp(argv[1],"startup-work")){
   // Observe the actual package classifier, including the mounted NOR callbacks.
   // Measure only Begin, after Arduino facade setup and saved Config load.

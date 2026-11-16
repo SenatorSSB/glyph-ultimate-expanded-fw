@@ -34,6 +34,35 @@ def main():
         namespace, nor = dest / "library.namespace", dest / "library.nor"
         dump_namespace(disk, namespace)
         subprocess.run([args.binary, "seed", namespace, nor], check=True, env=env)
+        load = json.loads(subprocess.check_output(
+            [args.binary, "config-load-work", nor, "-", dest], env=env
+        ))
+        assert load["checked_reads"] <= 150, load
+        faults = json.loads(subprocess.check_output(
+            [args.binary, "config-load-faults", nor, "-", dest], env=env
+        ))
+        assert faults["failed"] == faults["seams"] == load["checked_reads"]
+        assert faults["short_failed"] > 0
+        # A corrupt body, a mismatched header and truncation remain rejections.
+        # Remove any prior so recovery cannot mask the damaged current file.
+        for damage in ("crc", "size", "truncated"):
+            damaged = dict(disk)
+            damaged.pop("/config-v2.prev", None)
+            current = bytearray(damaged["/config-v2.bin"])
+            if damage == "crc":
+                current[-1] ^= 1
+            elif damage == "size":
+                current[0] ^= 1
+            else:
+                del current[-4:]
+            damaged["/config-v2.bin"] = bytes(current)
+            damaged_namespace, damaged_nor = dest / "damaged.namespace", dest / "damaged.nor"
+            dump_namespace(damaged, damaged_namespace)
+            subprocess.run([args.binary, "seed", damaged_namespace, damaged_nor], check=True, env=env)
+            outcome = subprocess.check_output(
+                [args.binary, "config-load-outcome", damaged_nor, "-", dest], env=env, text=True
+            ).strip()
+            assert outcome == "2", (damage, outcome)  # LoadResult::Rejected
         samples = [json.loads(subprocess.check_output(
             [args.binary, "startup-work", nor, "-", dest], env=env
         )) for _ in range(5)]
@@ -46,7 +75,7 @@ def main():
             if counts[key] > limit:
                 raise AssertionError(f"{key} {counts[key]} exceeds fixture budget {limit}")
         print(json.dumps({
-            **counts, "host_median_us": statistics.median(s["host_us"] for s in samples),
+            **counts, "config_load": load, "config_faults": faults, "host_median_us": statistics.median(s["host_us"] for s in samples),
             "fixture_sha256": hashlib.sha256(namespace.read_bytes()).hexdigest()
         }))
 

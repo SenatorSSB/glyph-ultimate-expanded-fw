@@ -461,11 +461,14 @@ void setup() {
 }
 
 void loop() {
-    if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator) {
+    BootOutcome outcome = read_boot_state().outcome;
+    if (outcome == BootOutcome::RecoveryConfigurator) {
         if (recovery_configurator != nullptr) recovery_configurator->SendReport();
         return;
     }
-    if (read_boot_state().outcome != BootOutcome::Normal) return;
+    // Only Pending can change between the recovery and normal-service gates.
+    if (outcome == BootOutcome::Pending) outcome = read_boot_state().outcome;
+    if (outcome != BootOutcome::Normal) return;
     if (backends == nullptr || backend_count == 0 || backends[0] == nullptr) return;
     // GameCube persistence requires the receiver's explicit idle admission,
     // including requests posted before a wait or while a prior report drains.

@@ -763,7 +763,8 @@ size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
     return config_file.close();
 }
 
-bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *failure) {
+// Release the CRC buffer before callers resume decoding, hashing, or publication.
+__attribute__((noinline)) bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *failure) {
     if (failure != nullptr) {
         *failure = LoadResult::Rejected;
     }
@@ -788,13 +789,17 @@ bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *
     }
 
     CRC32 crc;
-    for (size_t i = 0; i < config_size; ++i) {
-        const int value = config_file.read();
-        if (value < 0) {
+    uint8_t chunk[32];
+    size_t remaining = config_size;
+    while (remaining) {
+        const size_t count = remaining < sizeof(chunk) ? remaining : sizeof(chunk);
+        const int bytes = config_file.read(chunk, count);
+        if (bytes != static_cast<int>(count)) {
             if (failure != nullptr) *failure = LoadResult::StorageFailure;
             return false;
         }
-        crc.update((uint8_t)value);
+        crc.update(chunk, count);
+        remaining -= count;
     }
     if (config_file.position() != file_size || config_file.size() != file_size) {
         if (failure != nullptr) *failure = LoadResult::StorageFailure;
