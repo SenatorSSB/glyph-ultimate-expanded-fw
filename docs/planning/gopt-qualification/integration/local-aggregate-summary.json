@@ -1,0 +1,107 @@
+{
+  "verified_commit": "599ca4e7459fd663d95c732176f72af6dd5b836d",
+  "comparison_base": "2bcb5104054f64d8b9c1af9dd1be4a974112f8ec",
+  "status": "FAIL",
+  "failure_kind": "CHECKER_TIMEOUT",
+  "canonical_proof": "MATCH",
+  "census_freshness": {
+    "applicability": "current",
+    "category": "baseline",
+    "id": "checker_census_freshness",
+    "load_bearing": true,
+    "path": "tools/check_glyph_checker_census.py",
+    "status": "PASS"
+  },
+  "raw_receipt_sha256": "ae438a226e7d6094f9d05c1a8668528a03c629db4fb969479bb7b23b45816643",
+  "checks": [
+    {
+      "id": "gp_config_007_transaction_stage_schema",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.173,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "runtime_config_storage_fallback",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.107,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "validation_health",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.063,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "validation_publication_workflow",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.176,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "artifact_postprocessor_workflow",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.073,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "build_input_provenance_inventory",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.15,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "build_input_resolution_observations",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.135,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "prebuild_git_identity",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 1.978,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "build_input_non_selector_configuration",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.135,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "nuker_source_lineage",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 0.079,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "checker_context",
+      "status": "PASS",
+      "failure_kind": null,
+      "duration_seconds": 24.461,
+      "isolated_proof": "MATCH"
+    },
+    {
+      "id": "validation_aggregate_adversarial",
+      "status": "FAIL",
+      "failure_kind": "CHECKER_TIMEOUT",
+      "duration_seconds": 120.004,
+      "isolated_proof": "MATCH"
+    }
+  ],
+  "initial_diagnostics": [
+    "Nested dependency checkout preflight SETUP_FAILURE retained",
+    "Stale-base diagnostic11PASS then adversarialCHECKER_TIMEOUT120 retained; not exact-base proof"
+  ],
+  "disposition": "No full local aggregate PASS claimed; assess against focused proofs and hosted exact-source verification."
+}
