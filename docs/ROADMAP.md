@@ -1,5 +1,26 @@
 # Glyph Roadmap
 
+## Current first-beta qualification scope — 2026-11-17
+
+Live configurator remains 59870835e7cd8e7c52bd3742e4910a7083cd21f5; production/build
+inputs equal tested 5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c. Retain exact tested
+UF2 de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518.
+The [current beta matrix](planning/beta-readiness/MATRIX.md),
+[owner session](planning/beta-readiness/OPERATOR.md) and
+[install contract](planning/beta-readiness/QUALIFICATION.md) supersede broader
+historical qualification recommendations below. GOPT and USB are canonically
+integrated with their exact existing scoped evidence; older preparation/pending
+statements below retain chronology. Required: original Switch/Ultimate and GC
+adapter/Ultimate, minimal Windows XInput and HID/DInput smoke, exact preservation.
+Reuse Switch input PASS; explicit release/neutral supplement and final-image GC
+still pending. No concrete firmware fix identified, no new build/freeze/release.
+Boot optimization deferred; ~4.5 s is owner-observed USB connection→Switch recognition
+on one current setup, including console registration, not internal timing. Switch 2
+excluded; Nunchuk NOT_TESTED. Narrow functioning-valid-store Mk6 manual update only;
+Fresh Install unvalidated/post-beta support hardening and separately authorized.
+Aggregate FAIL/CHECKER_TIMEOUT retained; no full aggregate PASS. No queue amendment.
+
+
 ## GOPT physical closeout and noncanonical integration preparation — 2026-11-16
 
 GOPT PHYSICAL ACCEPTANCE PARTIAL: the exact retained55739675 candidate and

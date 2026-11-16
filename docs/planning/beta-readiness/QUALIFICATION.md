@@ -1,34 +1,65 @@
-# Mk6 beta installation, recovery and physical qualification
+# First-beta installation and recovery contract
 
-## Proposed installation support
+Owner-selected scope, 2026-11-17. [Readiness matrix](MATRIX.md) · [Non-destructive owner session](OPERATOR.md).
+This replaces the audit's broader proposed timing/qualification campaign; the original remains
+in audit commit `7908cac88317bbf0d1dee62ab1f8198bba12b4f3`.
 
-| Situation | Proposed support and evidence |
-| --- | --- |
-| Supported starting state | A functioning Glyph Mk6 with an identified firmware version, readable valid Config and ProfileStore, normal boot and a settled, supported layout. Record the board, source/image identity, exact preinstall snapshot and the chosen upgrade pair. Qualify each advertised starting version. The existing USB acceptance covers one unit and its 27-profile state. |
-| Manual update | Use the identified program-only beta UF2. Verify its size and SHA-256, RP2040 family and payload/erase range clear of LittleFS. Enter the documented programming mode by holding the illuminated Menu button while connecting to a computer. Copy that one verified file only when the intended device appears as RPI-RP2. Wait for automatic disconnect, then boot normally with controls released. |
-| Profile preservation | Require exact saved Config bytes, all ordered directory entries, IDs, revisions, serialized wrappers and stable store counters after installation. Check backend/default references and executing identity separately. A program-only image protects the addressed range during installation. Runtime boot and migration still need before/after readback. The demonstrated guarantee is API-visible state within the tested pair. |
-| Backup | Before installation, keep a private, decodable read-only Config snapshot, complete ordered directory, all raw wrappers/revisions and digests, plus current source/version, UF2 and state counters. Keep the controller-specific backup offline. A supported user export can supplement the snapshot. Snapshot readability establishes evidence for comparison. Full backup restoration is unqualified. |
-| Operational recovery | BOOTSEL/RPI-RP2 establishes access to load a program image. One separately chosen manual reinstall of the **same verified program-only image** can address an interrupted or suspect program copy. Requalify boot, actual input and preservation afterward. This cannot reconstruct damaged profile data. Same-image reinstall is a proposed support path pending a matched trial. |
-| Unreadable or fenced store | Stop the update or stop using the new installation. If the recovery Configurator is reachable, collect read-only status, last boot stage and available Config/directory evidence. Preserve original backups. Leave the fence in place and escalate with the exact source and UF2 digest. |
-| Destructive factory recovery | Official Fresh Install is a plausible separately chosen return to factory operation. Beta/custom → official Fresh Install remains untested. Disclose intentional loss of all previous profiles before the owner selects it. Qualification below applies only if this recovery route is to be advertised. |
-| Other starting states | Blank devices, arbitrary historical/custom schemas, damaged or unsettled storage, other hardware models and unknown images are outside the proposed first-beta installation contract. Firmware still has to refuse or fence these states according to its existing rules. Downgrade with preservation, automatic repair and raw-flash restore have no beta acceptance. |
+The primary supported beta path is a **currently functioning Glyph Mk6 with readable, valid
+Config and ProfileStore**, a known supported starting version/pair, preinstall backup/inventory,
+an exact verified program-only beta UF2, manual BOOTSEL/UF2 installation and postinstall
+Config/ProfileStore preservation verification. Claim only tested pairs and API-visible scope.
+The existing exact installation episode is evidence for one unit/version/library pair, not all
+historical custom firmware. Retain its [physical result](../gusb/PHYSICAL_RESULT.json).
 
-On failed update, **stop at the first discrepancy**. If RPI-RP2 never appears, verify the documented button, known data cable, port and device identity. If the UF2 hash or target differs, do not copy it. If the image was copied, record whether the drive disconnected, the displayed boot stage, firmware identity, active backend/profile and whether the receiver responds. If the same-image reinstall is chosen for a failed program copy, stop after one attempt and collect the same observations. For a readable but changed Config, missing wrapper, recovery page, or unknown write outcome, stop before further boots, selection changes or writes where practical. Preserve before/after evidence for support. Leave destructive recovery to a separate decision.
+Before any later manual install, record unit/source, Config bytes, all ordered profile metadata,
+wrappers/revisions, incarnation/generation/token high-water and recovery/fences. Keep private,
+decodable backups offline. Stop on unreadable, unsettled, unsupported or unexpectedly fenced state.
+Verify retained regular UF2 hash/size, RP2040 family and program range against the filesystem.
+For the retained de793f34 image: 1,325,568 bytes, 2,589 blocks, end 0x100a1d00 exclusive,
+last erase-sector end 0x100a2000; LittleFS starts 0x1017f000. This protects installation address
+separation, not runtime preservation by itself. Rehash immediately before any approved copy.
 
-The retained USB UF2 supplies 2,589 blocks ending at 0x100a1d00 exclusive, with its last erase sector ending at 0x100a2000. LittleFS starts at 0x1017f000. The official v1.0.7 Update and Fresh Install share the same app bytes. The archived Fresh Install also supplies 524,288 zero bytes spanning 0x1017f000 through 0x101ff000 exclusive. Limit Labs describes Update as profile-preserving and Fresh Install as restoring factory profiles. The published guidance and address analysis support the proposed test. [Limit Labs Glyph Resources](https://limitlabs.com/pages/glyph-resources) · [Archived official UF2 analysis](../../project/G12H_UF2_FORMAT_AND_FLASH_RANGE_ANALYSIS.md) · [Tested custom image](../gusb/QUALIFICATION.md)
+For a separately approved install, use physical BOOTSEL and connect the intended unit to the PC;
+verify it is the unique intended RPI-RP2 target, manually copy the one verified UF2, and let it
+restart with controls released. Capture source/version, normal operation and complete postinstall
+readback before selecting routes. No automated flashing, erasure, retry loop or second copy.
+This task prepares instructions and performs no installation.
 
-## Later operator packet
+BOOTSEL is firmware-loading access only. It does not prove profile preservation, filesystem
+recovery or state reconstruction. Backups establish comparison evidence; universal restoration
+is unqualified. If loading/boot/readback fails, record the last completed step, screen/source,
+image hash and available read-only status, retain the backups/fence and stop for a bounded decision.
+Do not improvise repair, downgrade, raw restoration or destructive recovery.
 
-1. **Bind the run.** Write down the full Git SHA, exact UF2 SHA-256/size and source of the image, short device version, Mk6 revision, profile count/incarnation/generation, selected row/record/revision, console model/OS, Ultimate version, GC adapter model/port or PC host/OS/API, cables and power. Photograph dashboard and About separately. Preserve a read-only baseline before any manual installation. A different rebuild opens a separate hardware row.
-2. **Time the chosen beta image.** For each required console route, collect five cold power-on trials, removing all leads/power between trials. For a future performance comparison, collect the same five trials on the still-installed baseline before changing images, when its custody matches the retained 5dfc4cc2 source and de793f34… UF2. This is the production source represented by canonical 59870835. Ordinary beta input qualification can proceed with the host-only baseline; a matched physical speedup claim requires paired observations. Use the same receiver, power-off interval, settled library and selected profile, no startup chord, and record trials individually. Log watchdog/menu reboots and reconnects separately. If an earlier record lacks a measurement, record it as missing.
-3. **Measure usable input.** Use a common video or synchronized capture of power application, controller display and receiver. Record the timestamp resolution. Read About's Store, Backend, Ready and Screen after each run. Ready starts at setup entry and means a bound mode at local report-service entry. Screen ends at first completed ordinary dashboard transfer. Neither proves a received report. For first usable input, use a repeatable post-power sequence of press/release stimuli with timestamps, avoiding any boot-selector chord. An electrical input/report trace can measure the first receiver report directly where available. With video, record the last unacknowledged and first acknowledged stimulus and first visible response; report that interval and stimulus cadence as uncertainty. An already-held control or operator reaction after the splash can bias the comparison.
-4. **Nintendo Switch USB.** Use the currently available original Switch, known USB data path and Ultimate. Verify intended backend/profile, player recognition, left and right stick movements, representative digital buttons, release to neutral and a visible gameplay action. Reconnect once on the same port and repeat a representative press/release. The retained tested image already has owner-confirmed sticks/buttons in Ultimate and full postinstall readback. Retain its scope; fill missing timed/release rows on the chosen beta image.
-5. **GameCube.** Cold boot using the named GC adapter into the same Switch. Record the intended backend/profile. In Ultimate exercise both sticks, representative digital buttons, a configured modifier with a direction and one simultaneous input that distinguishes the selected profile. Verify release/neutral and actual gameplay. The repaired USB image has a GC connection trial; earlier GOPT has scoped owner-reported GC gameplay. The exact beta GC gameplay row needs its own evidence.
-6. **PC receiver regressions.** Both routes have a material shared input difference in the proposed custom-profile scope. Use one XInput-capable Windows receiver (e.g. XInputGetState) and one compatible DirectInput/HID gamepad viewer, on the same PC if possible. Boot into each selected route and identify the actual gamepad collection. Capture changing axes, button and trigger/hat where applicable, one input whose output distinguishes the known custom row, and its return to neutral. Record expected outputs from that profile. A USB device label or firmware diagnostic alone cannot close either row.
-7. **Preservation and verdict.** After each route, use read-only Configurator access to compare the snapshots in the support matrix. Record any deliberately required destination selection as a separate authorized state change with its own before/after baseline. Stop on wrong firmware, store fence, unexpected mutation, wrong backend/profile, missing receiver input or stuck release. Report raw samples, route-specific median/range and delta for Ready, Screen and first usable input. To establish a reduction of at least one second, compare the matched Ready/receiver measurements and report their resolution. Keep Switch 2 outside this packet.
+Not required for first beta: Switch 2, arbitrary old custom firmware, arbitrary downgrade
+compatibility, blank-device provisioning, automatic updater/flashing, automatic repair,
+corrupt-store reconstruction, raw flash restoration or universal profile restoration.
+Normal storage validation/recovery/fencing remains unchanged.
 
-## Optional destructive qualification
+## Later sacrificial-device Fresh Install proposal
 
-Use a sacrificial Mk6 or a state explicitly approved for irreversible loss. Record exact beta source/UF2, readable pre-wipe Config and inventory with recognizable nonfactory names/IDs and a known nonfactory mapping. Save the private evidence. Verify the archived official Fresh Install file is v1.0.7 (9a78c7e), SHA-256 `22fd7f8f29fb33d9cb601187e9503411e5330e72c7297fbce0df710eec8ff200`, size 1,818,112 bytes. Check its range and compare the expected factory inventory with the matching vendor defaults beforehand. The 769,536-byte official Update has SHA-256 `2fe38be67b68b9f8b9cb8be2f338837785e63a3732e0c1c269380f6c48f70c6d` and is a different operation.
+Disposition: **POST-BETA SUPPORT HARDENING**, not a first-beta blocker. The owner selected a
+functioning valid-store update path; destructive recovery is outside that support contract.
+It is plausible but **NOT VALIDATED** and must not be advertised as proven. If the owner later
+adds this recovery promise to the release, require the one-shot test before that promise ships.
+No destructive test is authorized or performed now.
 
-With specific owner consent, manually copy the verified Fresh Install to RPI-RP2, wait for disconnect, then cold boot. Verify official version, factory profile list/default selections and the absence of the previously observed beta profiles using the **official-compatible** UI/readback. Test actual stick, button and release through a known supported receiver and repeat after a power cycle. Record pass/fail separately for loading, normal operation, factory defaults and intentional profile loss. Stop on any mismatch and retain the evidence. A pass supports destructive operational recovery on this board and version pair. No downgrade-preservation or restore claim follows.
+Only after later explicit owner authorization for irreversible loss:
+
+1. Name a sacrificial Mk6, exact beta/custom source and UF2, and record a private pre-wipe
+   inventory/settings with recognizable nonfactory state. Expect **all previous profiles/settings
+   to be wiped**. Keep evidence; restoration is not the goal.
+2. Independently verify the official Limit Labs Fresh Install artifact/version/hash and expected
+   matching factory/default inventory before selecting it. The archived v1.0.7 / 9a78c7e Fresh
+   Install is 1,818,112 bytes, SHA-256 `22fd7f8f29fb33d9cb601187e9503411e5330e72c7297fbce0df710eec8ff200`.
+   Official Update is a different file/operation. Revalidate the chosen official bytes at test time.
+3. Manually load that exact Fresh Install via BOOTSEL once. Observe normal boot, official source/
+   version, expected factory/default state and absence of prior custom profiles/settings through
+   an official-compatible UI/readback.
+4. Check actual stick/button/release on a supported receiver, then normal power-cycle/usability.
+   Record each outcome. Stop on mismatch.
+
+Goal only: **beta/custom state → official Fresh Install → boots normally → expected factory/default
+state → usable controller**. This is intentional erasure, not preservation, downgrade compatibility
+or restoration qualification. [Archived UF2 analysis](../../project/G12H_UF2_FORMAT_AND_FLASH_RANGE_ANALYSIS.md)
+provides historical artifact/range evidence, not a physical custom→factory PASS.

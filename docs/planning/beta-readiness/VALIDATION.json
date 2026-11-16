@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-17",
+  "classification": "DOCS_CHECKER_ONLY",
+  "owner_authority": "Direct owner request in this chat: preserve/publish audit and define first Glyph beta qualification scope; no firmware/boot optimization/release/device action",
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true,
+    "ordinary_probe": "DNS failure, inconclusive",
+    "network_enabled_probe": "PASS"
+  },
+  "live_starting_configurator": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "audit_original_commit": "7908cac88317bbf0d1dee62ab1f8198bba12b4f3",
+  "audit_original_parent": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "audit_original_evidence_sha256": "5c5143bf08de0218c6b94ecfd4e2a0bee70dfafadc73bcd746a159e8bb7a9c8d",
+  "historical_evidence": "Original evidence.json/replay_boot.py/observe_boot.inc unchanged; historical commands not rerun or relabeled as fresh",
+  "source_correspondence": {
+    "tested_source": "5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c",
+    "canonical_source": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+    "audit_source": "7908cac88317bbf0d1dee62ab1f8198bba12b4f3",
+    "all_non_docs_tracked_mode_type_object_entries_equal": true,
+    "entries_per_tree": 1249,
+    "working_changes": "docs only"
+  },
+  "retained_uf2": {
+    "sha256": "de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518",
+    "bytes": 1325568,
+    "regular_not_symlink": true,
+    "rehashed_this_pass": true,
+    "locator_root": "owner primary repository",
+    "relative_locator": "local_backups/hardware-artifacts/5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c/de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518/firmware.uf2",
+    "device_action": false
+  },
+  "current_checks": [
+    {
+      "command": "python3 tools/check_glyph_docs_navigation.py",
+      "result": "PASS",
+      "log_sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+    },
+    {
+      "command": "python3 tools/check_glyph_docs_agent_surface.py",
+      "result": "FAIL",
+      "log_sha256": "8b78520a5dcde1ce7920ec0c52f0f1696f065e23f2bf471c85ea3f8c3dc77407"
+    },
+    {
+      "command": "python3 tools/check_glyph_agent_framework_docs.py",
+      "result": "PASS",
+      "log_sha256": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3"
+    },
+    {
+      "command": "python3 tools/check_glyph_checker_census.py",
+      "result": "PASS",
+      "log_sha256": "a257684b1b78d3be59144ab9ed8f65151628f820892dd6bc81c7065d8e1cdc85"
+    },
+    {
+      "command": "python3 tools/check_glyph_build_input_provenance_inventory.py",
+      "exit": 0,
+      "seconds": 0.158,
+      "log_sha256": "2961f7c7de3a3165822a876cd9267ee520c7fcb758f464c0d01db212164862be",
+      "tail": "{\"declaration_files\": 10, \"dependency_resolution\": false, \"firmware_artifact_published\": false, \"glyph_nuker_executed\": false, \"negative_tests\": 14, \"network_access\": false, \"platformio_invoked\": false, \"positive_tests\": 16, \"runtime_behavior_changed\": false, \"selectors\": 70, \"status\": \"PASS\", \"unresolved_claims\": 10}\n"
+    },
+    {
+      "command": "python3 tools/check_glyph_runtime_config_validation_publication_workflow.py",
+      "exit": 0,
+      "seconds": 0.091,
+      "log_sha256": "b0d0b83b4c74aa27eff3233034483f05393b53c5bce509c8b143577e2951017b",
+      "tail": "explicit_env,explicit_uses,shell_function,heredoc_control_flow,multiline_control_flow,malformed_block_indentation,setup_fetch_masked,setup_duplicate_operation,setup_intervening_ref_mutation,setup_wrong_base_expression,setup_unreachable_branch,setup_trailing_command,setup_duplicate_step,setup_wrong_base_environment,setup_wrong_base_placement,setup_default_shell_override,setup_inline_default_shell_override,setup_continuation_duplicate,substituted_build_classifier,inverted_build_condition,current_host_removed_dependency,current_host_omits_real_package_checks,current_host_tolerates_native_failure\n"
+    }
+  ],
+  "packet_local_links": {
+    "result": "PASS",
+    "checked": 42
+  },
+  "surface_failure": {
+    "candidate": "FAIL: C024 post-integration change outside validation/evidence paths",
+    "clean_canonical_59870835": "same FAIL, clean tracked worktree",
+    "baseline_log_sha256": "35a8bdd63287df73304ef62d26dbb8d05b3aeb19bfd200fe11b871781eb7c6bf",
+    "disposition": "Pre-existing framework context restriction. No checker weakened; no concrete production correspondence or directly affected safety contradiction identified. Fresh independent beta_packet_review agrees Tier3 absent a concrete Tier1/Tier2 contradiction; no checker rerun by reviewer."
+  },
+  "historical_aggregate": {
+    "status": "FAIL",
+    "failure_kind": "CHECKER_TIMEOUT",
+    "canonical_proof": "MATCH",
+    "full_aggregate_pass": false,
+    "fresh_aggregate_run": false
+  },
+  "fresh_build": "NOT_RUN: production/build bytes unchanged",
+  "hardware": "NOT_RUN: owner packet prepared only",
+  "freeze": "NOT_DECLARED",
+  "public_beta_release": "NOT_PERFORMED",
+  "scope_stop": "Owner hardware/session authorization and actual observations remain pending; later destructive test requires separate explicit authorization",
+  "review": {
+    "source_investigation": "audit_source_review: classifications and source correspondence supported; broader timing/test rows identified and narrowed",
+    "post_edit": "APPROVE: beta_packet_review, no blocking findings; exact source/UF2, narrow hardware scope and deferred recovery/timing consistent. Validation ledger outside reviewer scope."
+  },
+  "publication_intent": {
+    "branch": "codex/beta-readiness-5987",
+    "preserve_audit_ancestry": true,
+    "canonical_merge": false,
+    "beta_tag_or_release": false
+  },
+  "telemetry": {
+    "full_chats_created": 0,
+    "internal_workers_requested": 2,
+    "planner_calls": 0,
+    "curator_calls": 0,
+    "hardware_wait_duration": "not started",
+    "observed_model_identity": "UNKNOWN",
+    "workers_requested_model_effort": "gpt-6.1-terra / medium",
+    "direct_return_capability": "VERIFIED by native collaboration source-review completion",
+    "token_usage": "UNKNOWN"
+  }
+}

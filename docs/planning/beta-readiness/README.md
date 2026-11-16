@@ -1,5 +1,24 @@
 # Mk6 beta-readiness audit
 
+## Current first-beta disposition — 2026-11-17
+
+[Current requirements matrix](MATRIX.md) · [Ordered owner test packet](OPERATOR.md) · [Narrow install/recovery contract](QUALIFICATION.md) · [Current validation ledger](VALIDATION.json).
+
+Owner direction defers startup optimization until after beta. No startup firmware candidate,
+new build, freeze or public release is part of this pass. The owner now observes about 4.5seconds
+from USB cable connection to original Nintendo Switch recognition on the current setup, including
+console-side registration. This is one setup's approximate end-to-end observation, not universal
+firmware boot, internal Ready, first-report timing or guaranteed latency. No safe >=1 second target
+was identified. Keep both storage validations and all recovery/fencing. Boot time is not a beta blocker.
+Switch 2 and Nunchuk are excluded (Nunchuk NOT_TESTED). GC final-image gameplay and minimal PC
+smokes remain; reuse exact Switch evidence and supplement explicit missing release coverage.
+
+The original audit 7908cac and evidence.json remain preserved. The sections below are historical
+audit results, not fresh build/test claims or an instruction to perform timing work. Its broader
+qualification packet is superseded by the current documents linked above.
+
+## Preserved audit findings
+
 **The current host replay attributes almost the entire modeled setup cost to two namespace classifications. A late read-fault test rejects the straightforward shortcut.** The host work did not establish a safe reduction of at least one second in cold boot to validated mode or usable input. The retained Switch image remains the hardware reference. [Source correspondence](TRANSPORTS.md) · [Installation, recovery and physical qualification packet](QUALIFICATION.md) · [Measured results and command ledger](evidence.json)
 
 ## Baseline and custody
@@ -62,6 +81,6 @@ The full aggregate at 59870835 passed eleven checks, then timed out after 120.00
 
 ## Disposition
 
-No behavior-changing candidate or candidate UF2 was produced. The executable queue at intake had zero READY and zero PREAUTHORIZED items. The measured smaller opportunity is a possible bounded work order once reader/fence equivalence and the cost on the release hardware are established. The host audit itself did not change queue or firmware authority.
+No behavior-changing candidate or candidate UF2 was produced. The executable queue at intake had zero READY and zero PREAUTHORIZED items. The measured smaller opportunity is deferred post-beta; no performance work order is created. The host audit itself did not change queue or firmware authority.
 
-Beta qualification still needs exact-image input on the scoped routes and installation/preservation on each advertised starting pair. Matched pre/post cold-boot timings are needed for a speedup claim. Destructive recovery needs a physical trial only if it is advertised. A physical phase and final beta decision remain separate. Switch 2 is excluded. [Operator packet and support matrix](QUALIFICATION.md)
+Beta qualification still needs exact-image input on the scoped routes and installation/preservation on each advertised starting pair. Matched pre/post cold-boot timings would be needed for a future speedup claim; none are required for beta. Destructive recovery needs a physical trial only if it is advertised. A physical phase and final beta decision remain separate. Switch 2 is excluded. [Operator packet and support matrix](QUALIFICATION.md)
