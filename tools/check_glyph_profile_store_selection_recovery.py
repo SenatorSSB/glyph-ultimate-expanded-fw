@@ -85,10 +85,11 @@ def main() -> int:
         # Keep the original route assertions and doubles. The same actual
         # setup body now calls returned lifetime phases; include their exact
         # bodies in scratch rather than modeling or flattening their logic.
-        phases = '\n'.join(function_body(app, name, 'bool') for name in (
-            'PrepareBootDisplay', 'MigrateBootLegacyConfiguration', 'InitializeBootBackends'))
+        def boot_phases(source: str) -> str:
+            return '\n'.join(function_body(source, name, 'bool') for name in (
+                'PrepareBootDisplay', 'MigrateBootLegacyConfiguration', 'InitializeBootBackends'))
         loop = function_body(app,'loop')
-        def app_case(name: str, old_manual: bool=False, old_auto: bool=False, loop_source: str=loop) -> Path:
+        def app_case(name: str, old_manual: bool=False, old_auto: bool=False, loop_source: str=loop, phase_source: str=app) -> Path:
             directory = temp/name; directory.mkdir()
             rec = recovery
             boot = setup
@@ -105,17 +106,22 @@ def main() -> int:
             (directory/'extracted_boot_state.inc').write_text(
                 function_body(app, 'read_boot_state', 'BootSnapshot') + '\n' +
                 function_body(app, 'publish_boot_state') + '\n')
-            (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+phases+'\n'+boot+'\n'+loop_source+'\n')
+            (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+boot_phases(phase_source)+'\n'+boot+'\n'+loop_source+'\n')
             exe = directory/'routes'
-            run(['c++','-std=c++17','-fshort-enums','-Wall','-Wextra','-Werror',
+            run(['c++','-std=c++17','-DGLYPH_MK6_SWITCH_USB_REENUMERATION=1','-fshort-enums','-Wall','-Wextra','-Werror',
                  '-Wno-missing-field-initializers','-fsanitize=address,undefined','-fno-omit-frame-pointer',
                  *sum((['-I',str(p)] for p in [directory,generated,nanopb,ROOT/'include']),[]),
                  '-include',str(ROOT/'include/core/NativeTargetMetrics.hpp'),
                  str(HOST/'setup_routes.cpp'),'-o',str(exe)])
             return exe
         routes = app_case('actual_routes')
-        for route in ('ordinary','rt2_deferred','automatic','filesystem','mb1','loop_gate'):
+        for route in ('ordinary','rt2_deferred','automatic','filesystem','mb1','loop_gate','usb_enumeration'):
             print(run([str(routes),route]),end='')
+        parent = subprocess.check_output([
+            'git', 'show', '79475873f2c5f4b84e77bf9f94ab39779ffc69a5:config/glyph/common/src/config.cpp'
+        ], cwd=ROOT, text=True)
+        original_usb = app_case('original_usb', phase_source=parent)
+        assert 'Switch enumeration sequence' in run([str(original_usb), 'usb_enumeration'], expected=1)
         baseline = subprocess.check_output([
             'git', 'show', '2bcb5104054f64d8b9c1af9dd1be4a974112f8ec:config/glyph/common/src/config.cpp'
         ], cwd=ROOT, text=True)
@@ -131,11 +137,9 @@ def main() -> int:
         assert 'automatic failures must run recovery transport' in failure
         # Restore the removed physical branch as an executable negative control.
         matrix = '    matrix_input.UpdateInputs(inputs);'
-        assert matrix in phases
-        original_phases = phases
-        phases = phases.replace(matrix, matrix + '\n    if(inputs.rt2&&!inputs.mb1){enter_recovery_configurator();return false;}',1)
-        retired_routes = app_case('retired_manual_route')
-        phases = original_phases
+        assert matrix in boot_phases(app)
+        retired_manual = app.replace(matrix, matrix + '\n    if(inputs.rt2&&!inputs.mb1){enter_recovery_configurator();return false;}', 1)
+        retired_routes = app_case('retired_manual_route', phase_source=retired_manual)
         failure = run([str(retired_routes),'rt2_deferred'],expected=1)
         assert 'ordinary startup including RT2 alone' in failure
         print('negative_controls_retired_manual_route_automatic_dead_refusal=PASS')

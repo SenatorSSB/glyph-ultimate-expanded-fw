@@ -1,0 +1,12 @@
+#pragma once
+// Single-thread host event queue. Physical reset, tokens, and IRQ delivery are modeled.
+#define CFG_TUSB_MCU OPT_MCU_NONE
+#define CFG_TUSB_OS OPT_OS_NONE
+#define CFG_TUSB_RHPORT0_MODE (OPT_MODE_DEVICE | OPT_MODE_FULL_SPEED)
+#define CFG_TUD_ENABLED 1
+#define CFG_TUD_CDC 1
+#define CFG_TUD_HID 1
+#define CFG_TUD_HID_EP_BUFSIZE 64
+#define CFG_TUD_CDC_RX_BUFSIZE 256
+#define CFG_TUD_CDC_TX_BUFSIZE 256
+#define TUP_DCD_ENDPOINT_MAX 16

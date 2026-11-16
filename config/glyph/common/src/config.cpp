@@ -39,6 +39,9 @@
 #include "img/update.hpp"
 
 #include <Adafruit_SSD1306.h>
+#if defined(GLYPH_MK6_SWITCH_USB_REENUMERATION) && GLYPH_MK6_SWITCH_USB_REENUMERATION
+#include <tusb.h>
+#endif
 #include <config.pb.h>
 #include "hardware/sync.h"
 #include "pico/lock_core.h"
@@ -377,6 +380,17 @@ __attribute__((noinline)) bool InitializeBootBackends() {
         failed_detection = true;
         backend_count = 1;
     }
+
+#if defined(GLYPH_MK6_SWITCH_USB_REENUMERATION) && GLYPH_MK6_SWITCH_USB_REENUMERATION
+    // The core attaches CDC before setup. A host can cache that identity or
+    // configure CDC before the Switch constructor registers its HID endpoint.
+    // Offer the finished descriptors once, after console detection has returned.
+    if (initialized_backend_count > 0 && backends[0]->BackendId() == COMMS_BACKEND_NINTENDO_SWITCH) {
+        tud_disconnect();
+        delay(10);
+        tud_connect();
+    }
+#endif
 
     return true;
 }

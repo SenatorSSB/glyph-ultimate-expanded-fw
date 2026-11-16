@@ -53,7 +53,7 @@ void mutex_exit(bool *locked) {
 }
 #include "extracted_boot_state.inc"
 void refuse_boot(BootOutcome o,bool d){publish_boot_state(o,d);}
-struct Backend {void SendReport(){++ordinary_reports;services += 'R';}InputState &GetInputs(){return inputs;}CommunicationBackendId BackendId(){return COMMS_BACKEND_CONFIGURATOR;}};
+struct Backend {CommunicationBackendId id = COMMS_BACKEND_CONFIGURATOR; void SendReport(){++ordinary_reports;services += 'R';}InputState &GetInputs(){return inputs;}CommunicationBackendId BackendId(){return id;}};
 struct GamecubeBackend : Backend {bool SelectionIdleAdmitted(){return true;}};
 Backend **backends=nullptr;size_t backend_count=0;bool failed_detection=false;
 struct Keyboard {void SendReport(InputState &){++ordinary_reports;services += 'K';}};Keyboard *current_kb_mode=nullptr;
@@ -106,8 +106,36 @@ void select_mode(Backend **,size_t,Config &){++ordinary_reports;services += 'D';
 bool is_valid_usb_default_index(const Config &){return true;}
 unsigned pinout=0,get_backend_config_default=0,get_usb_backend_config_default=0;
 void detect_console(){}void detect_console_at_boot(){}void init_secondary_backends_glyph(){}
-template<typename... Args>size_t initialize_backends(Args&&...){++normal_initializations;return 0;}
+static size_t initialized_count = 0;
+static std::string usb_events;
+template<typename... Args>size_t initialize_backends(Args&&...) {
+    ++normal_initializations;
+    usb_events += "selected ";
+    return initialized_count;
+}
+bool tud_disconnect() { usb_events += "detach "; return true; }
+void delay(unsigned ms) { require(ms == 10, "unexpected re-enumeration interval"); usb_events += "wait "; }
+bool tud_connect() { usb_events += "attach "; return true; }
 #include "extracted_setup.inc"
+void check_usb_enumeration() {
+    Backend primary;
+    Backend *routes[] = {&primary};
+    backends = routes;
+    for (const auto id : {COMMS_BACKEND_GAMECUBE, COMMS_BACKEND_XINPUT, COMMS_BACKEND_CONFIGURATOR,
+                          COMMS_BACKEND_DINPUT, COMMS_BACKEND_NINTENDO_SWITCH}) {
+        primary.id = id;
+        initialized_count = 1;
+        usb_events.clear();
+        require(InitializeBootBackends(), "normal backend initialization");
+        const bool is_switch = id == COMMS_BACKEND_NINTENDO_SWITCH;
+        require(usb_events == (is_switch ? "selected detach wait attach " : "selected "),
+                "Switch enumeration sequence");
+    }
+    initialized_count = 0;
+    usb_events.clear();
+    require(InitializeBootBackends() && usb_events == "selected ", "failed detection re-enumerated");
+}
+
 void check_loop_gate(bool baseline) {
     Backend first, second;
     Backend *routes[] = {&first, &second};
@@ -157,6 +185,11 @@ void check_loop_gate(bool baseline) {
     }
 }
 int main(int argc,char **argv){try{require(argc==2,"case arg");config.ultimate_profile_store_format=1;config.ultimate_profile_store_incarnation=41;
+ if (!std::strcmp(argv[1],"usb_enumeration")) {
+     check_usb_enumeration();
+     std::cout << "final backend USB routing=PASS\n";
+     return 0;
+ }
  if (!std::strcmp(argv[1],"loop_gate") || !std::strcmp(argv[1],"baseline_loop_gate")) {
      check_loop_gate(!std::strcmp(argv[1],"baseline_loop_gate"));
      std::cout << argv[1] << "=PASS\n";
