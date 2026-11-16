@@ -1,0 +1,491 @@
+{
+  "status": "Host qualified for separately authorized physical testing",
+  "canonical": "2bcb5104054f64d8b9c1af9dd1be4a974112f8ec",
+  "base": "79475873f2c5f4b84e77bf9f94ab39779ffc69a5",
+  "source": "5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c",
+  "tree": "f9c68c88eb46469fdd12eeadf22dff24a2bef092",
+  "branch": "codex/glyph-usb-beta-stabilization-20261116",
+  "target_evidence": {
+    "source_and_dependencies": {
+      "base": "79475873f2c5f4b84e77bf9f94ab39779ffc69a5",
+      "source": "5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c",
+      "tree": "f9c68c88eb46469fdd12eeadf22dff24a2bef092",
+      "tracked_production_scopes": [
+        "HAL",
+        "src",
+        "include",
+        "lib",
+        "config",
+        "schema",
+        "builder_scripts",
+        "platformio.ini"
+      ],
+      "changed": [
+        "config/glyph/common/src/config.cpp",
+        "platformio.ini"
+      ],
+      "dependency_files": 545,
+      "dependency_differences": [],
+      "inventory_digest_format": "Sorted compact JSON of relative paths to SHA-256, plus LF",
+      "inventory_digest": "3d4eeb7337e6b7d3f76c88b3e8517f03614ac47f2220470f17499a6353a364a1",
+      "platform_packages": {
+        "platform-raspberrypi": {
+          "commit": "5e87ae34ca025274df25b3303e9e9cb6c120123c",
+          "git_status": ""
+        },
+        "arduino-pico": {
+          "commit": "32e74d024e5e3ee5e7ec9593f5a4101641c61897",
+          "git_status": ""
+        },
+        "Adafruit_TinyUSB_Arduino": {
+          "commit": "e2918652339aa3986f66b32c0a592c1aa72aabc8",
+          "git_status": ""
+        },
+        "Adafruit_TinyUSB_XInput": {
+          "commit": "4b5617b19294e808ce1d950a69e6e5cc96f4ec06",
+          "git_status": "?? library.json",
+          "generated_library_json_sha256": "d8d7d30be4177e9357a8804b3d5e5fbc1ddf73488af15b04c08215d877acbd8d"
+        }
+      },
+      "platformio": "6.1.19",
+      "compiler": "arm-none-eabi-g++ 12.3.0",
+      "tinyusb": "Adafruit 2.3.0 / TinyUSB 0.16.0",
+      "platform_headers_response_file_sha256": "d2cb1a39fee37e0a564d9fad3f3ce3f0f32816fc11339e60c5930a654f152cb9"
+    },
+    "build": {
+      "argv": [
+        "pio",
+        "run",
+        "-e",
+        "glyph_mk6",
+        "-v"
+      ],
+      "clean": true,
+      "status": "SUCCESS",
+      "switch_compiler_line": "arm-none-eabi-g++ -o .pio/build/glyph_mk6/src/HAL/pico/src/comms/NintendoSwitchBackend.cpp.o -c -fno-exceptions -fno-rtti -std=gnu++17 -O3 -Wall -Wstack-usage=1024 -Wno-unused-variable -fstack-usage -Werror=return-type -Wno-psabi -march=armv6-m -mcpu=cortex-m0plus -mthumb -ffunction-sections -fdata-sections -iprefix$FRAMEWORK @$FRAMEWORK/lib/platform_inc.txt -DFIRMWARE_VERSION=\\\"5dfc4cc2\\\" -DGLYPH_NATIVE_TARGET_METRICS=1 -DPLATFORMIO=60119 -DARDUINO_RASPBERRY_PI_PICO -DARDUINO_ARCH_RP2040 -DUSBD_MAX_POWER_MA=500 -DDEVICE_NAME=\\\"glyph_mk6\\\" -DFIRMWARE_NAME=\\\"HayBox\\\" -DUSE_TINYUSB -DCFG_TUSB_CONFIG_FILE=\\\"tusb_config_pico.h\\\" -DNDEBUG -DFASTLED_RP2040_CLOCKLESS_M0_FALLBACK=0 -DFASTLED_RP2040_CLOCKLESS_IRQ_SHARED=0 -DSSD1306_NO_SPLASH -DGLYPH_PACKAGE_V1=1 -DGLYPH_MK6_SWITCH_USB_REENUMERATION=1 -DARDUINO=10810 -DARDUINO_ARCH_RP2040 -DF_CPU=130000000L -DBOARD_NAME=\\\"pico\\\" -DARM_MATH_CM0_FAMILY -DARM_MATH_CM0_PLUS -DTARGET_RP2040 -DPICO_FLASH_SIZE_BYTES=2097152 -DCFG_TUSB_MCU=OPT_MCU_RP2040 -DUSB_VID=0x2e8a -DUSB_PID=0x000a \"-DUSB_MANUFACTURER=\\\"Raspberry Pi\\\"\" -DUSB_PRODUCT=\\\"Pico\\\" -DSERIALUSB_PID=0x000a -DPICO_CYW43_ARCH_THREADSAFE_BACKGROUND=1 -DCYW43_LWIP=1 -DLWIP_IPV4=1 -DLWIP_IGMP=1 -DLWIP_CHECKSUM_CTRL_PER_NETIF=1 -DLWIP_IPV6=0 -DARDUINO_VARIANT=\\\"rpipico\\\" -I. -I$FRAMEWORK/libraries/LittleFS/src -Ilib/glyph-joybus-pio/include -Ilib/glyph-joybus-pio/src -I.pio/libdeps/glyph_mk6/HayBox-proto -Ilib/TUCompositeHID/include -Ilib/TUCompositeHID/src -I.pio/libdeps/glyph_mk6/PCF8575 -I.pio/libdeps/glyph_mk6/CRC32/src -I.pio/libdeps/glyph_mk6/PacketIO/src \"-I.pio/libdeps/glyph_mk6/Adafruit SSD1306\" \"-I.pio/libdeps/glyph_mk6/Adafruit GFX Library\" \"-I.pio/libdeps/glyph_mk6/Adafruit BusIO\" -I.pio/libdeps/glyph_mk6/nanopb-arduino/src -I.pio/libdeps/glyph_mk6/FastLED/src -I.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/include -I.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src -I.pio/libdeps/glyph_mk6/arduino-nunchuk/include -I.pio/libdeps/glyph_mk6/arduino-nunchuk/src -I$FRAMEWORK/libraries/Wire/src -I$FRAMEWORK/libraries/ESP8266SdFat/src -I$FRAMEWORK/libraries/SPI/src -I$FRAMEWORK/libraries/Adafruit_TinyUSB_Arduino/src -I.pio/libdeps/glyph_mk6/nes-pio/include -I.pio/libdeps/glyph_mk6/nes-pio/src -I.pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa -I.pio/libdeps/glyph_mk6/Nanopb -I.pio/build/glyph_mk6/nanopb/generated-src -I.pio/build/glyph_mk6/native_target_metrics -Isrc -Iinclude -IHAL/pico/include -Iconfig/glyph/common/include -Iconfig/glyph/glyph_mk6/include -I$FRAMEWORK/cores/rp2040 -I$FRAMEWORK/cores/rp2040/api/deprecated -I$FRAMEWORK/cores/rp2040/api/deprecated-avr-comp -I$FRAMEWORK/libraries/Adafruit_TinyUSB_Arduino/src/arduino -I$FRAMEWORK/include -I$FRAMEWORK/variants/rpipico HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+      "compiler_line_placeholder": "$FRAMEWORK is the selected Arduino-Pico package directory. Target includes its lib/platform_inc.txt response file.",
+      "report_compiler_probe": {
+        "production": {
+          "layout": [
+            1,
+            1,
+            8,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "vectors": "55150194a76c5700aa2a0894a76c5700000008807f807f00"
+        },
+        "wide_enum_control": {
+          "layout": [
+            4,
+            4,
+            11,
+            1,
+            2,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "vectors": "55150100000094a76c5700aa2a0800000094a76c5700000008000000807f807f00"
+        }
+      },
+      "probe_layout_keys": [
+        "sizeof(enum)",
+        "alignof(enum)",
+        "sizeof(report)",
+        "alignof(report)",
+        "hat",
+        "lx",
+        "ly",
+        "rx",
+        "ry",
+        "vendor"
+      ],
+      "probe_vector_keys": [
+        "alternating buttons and diagonal",
+        "complement and centered hat",
+        "neutral after output evaluation"
+      ],
+      "send_report_linked_call": "0x1001ef64: r1=0, r2=this+32, r3=8 -> Adafruit_USBD_HID::sendReport",
+      "full_log_sha256": "7d466a94da7123a28bac65542b4b8ef3c74f160f9d8f7b19a20c8f38b934253f",
+      "target_layout_probe_source": [
+        "#include \"comms/NintendoSwitchBackend.hpp\"",
+        "#include <cstddef>",
+        "extern \"C\" {",
+        "extern const unsigned char layout[] = {sizeof(switch_gamepad_hat_t), alignof(switch_gamepad_hat_t), sizeof(switch_gamepad_report_t), alignof(switch_gamepad_report_t),",
+        " offsetof(switch_gamepad_report_t,hat),offsetof(switch_gamepad_report_t,lx),offsetof(switch_gamepad_report_t,ly),offsetof(switch_gamepad_report_t,rx),offsetof(switch_gamepad_report_t,ry),offsetof(switch_gamepad_report_t,reserved1)};",
+        "extern const switch_gamepad_report_t vectors[]={",
+        "{true,false,true,false,true,false,true,false,true,false,true,false,true,false,0,SWITCH_HAT_UP_RIGHT,148,167,108,87,0},",
+        "{false,true,false,true,false,true,false,true,false,true,false,true,false,true,0,SWITCH_HAT_CENTERED,148,167,108,87,0},",
+        "{false,false,false,false,false,false,false,false,false,false,false,false,false,false,0,SWITCH_HAT_CENTERED,128,127,128,127,0}",
+        "};",
+        "}"
+      ],
+      "target_layout_probe_method": "Reuse the Switch compile command from the same checkout and package root, changing only source and output to the probe. Repeat with -fno-short-enums. Read layout and vectors symbol bytes from each object."
+    },
+    "descriptor": {
+      "vma": "0x20001758",
+      "bytes": "05010905a101150025013500450175019510050919012910810205012507463b017504950165140939814265009501810126ff0046ff0009300931093209357508950481020600ff0920950181020a212695089102c0",
+      "sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280",
+      "length": 86,
+      "input_bits": [
+        16,
+        4,
+        4,
+        32,
+        8
+      ],
+      "output_bits": [
+        64
+      ],
+      "report_ids": []
+    },
+    "artifacts": {
+      "bin": {
+        "bytes": 662588,
+        "sha256": "a1946475b82797d4784b4e05696f2015610ce2579d2c4ef56febe86c64f93b9e"
+      },
+      "elf": {
+        "bytes": 5763716,
+        "sha256": "626867d8287dd5a93123b0e9accc90685e9547a6cd9ec3d96945e821749318e6"
+      },
+      "uf2": {
+        "bytes": 1325568,
+        "sha256": "de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518"
+      },
+      "map": {
+        "bytes": 3927349,
+        "sha256": "4b795a9ffe1703ffdc4e3ca96f735f98ae755f13e31972f5dc9bc56e0b1fcce6"
+      }
+    },
+    "uf2": {
+      "ordered_rp2040_blocks": 2589,
+      "elf_to_bin_to_uf2_verified": true,
+      "original_sha_in_binary": true,
+      "start": "0x10000000",
+      "binary_end_exclusive": "0x100a1c3c",
+      "payload_end_exclusive": "0x100a1d00",
+      "rounded_erase_sector_end_exclusive": "0x100a2000",
+      "filesystem_start": "0x1017f000",
+      "custody": "PRESERVED_AND_VERIFIED / PRE_HANDOFF_VERIFIED",
+      "private_custody_locator": "local_backups/hardware-artifacts/5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c/de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518/firmware.uf2"
+    },
+    "resources": {
+      "section_static": 198888,
+      "heap_capacity": 63060,
+      "stacks": [
+        2048,
+        2048
+      ],
+      "flash": 650556,
+      "core0_50_routes": 50,
+      "core0_peak": 2048,
+      "core0_lifecycle": 2044,
+      "core1_setup": 968,
+      "core1_loop": 984,
+      "core1_envelope": 1068,
+      "unknown_core1": [],
+      "common": 3301,
+      "new_route_frames": {
+        "sleep_ms": 8,
+        "delay": 8,
+        "tud_disconnect": 8,
+        "tud_connect": 8,
+        "dcd_disconnect": 0,
+        "dcd_connect": 0,
+        "main": 48,
+        "setup": 24,
+        "InitializeBootBackends()": 64
+      },
+      "sleep_ms_prior_bound": 520,
+      "new_delay_route_including_physical_irq": 1072
+    },
+    "resource_delta": {
+      "flash_delta": 72,
+      "static_delta": 0,
+      "heap_capacity_delta": 0,
+      "changed_shape": [
+        "InitializeBootBackends()"
+      ],
+      "frame_before_after": [
+        56,
+        64
+      ],
+      "new_indirect": "All actual backend ID methods are zero-frame leaves.",
+      "added_direct_edges": [
+        "delay",
+        "tud_disconnect",
+        "tud_connect"
+      ],
+      "new_linked_symbol": "tud_connect (8) -> dcd_connect (0)",
+      "removed": [],
+      "boot_detection_1576_plus_8": 1584,
+      "new_delay_with_larger_boot_irq688_and_additional64": 1416,
+      "crc_caller_affected_totals": [
+        1300,
+        1284,
+        1284
+      ],
+      "adjusted_inherited140_subset": {
+        "save.firstRemove.watchdogBackendInit": 1968,
+        "save.stageOpen.watchdogBackendInit": 1792,
+        "save.stageEncode.watchdogBackendInit": 1924,
+        "save.verifyCompare.watchdogBackendInit": 1740,
+        "save.sync.watchdogBackendInit": 1744,
+        "save.publish.watchdogBackendInit": 1936,
+        "watchdog.firstRemove.NES.feasible_composition": 1920,
+        "record.valid.activation": 1812,
+        "record.rejection.activation": 1812
+      },
+      "inherited140_subset_ledger_sha256": "423f580cb4d6853ced6f60c28919b6a8df23047c8fc96a2127ffffeb3ed33809",
+      "physical_highwater": "NOT_MEASURED"
+    },
+    "historical": {
+      "oct": {
+        "source": "1de243c7bada73ba85843018058b4f66a06acdda",
+        "uf2": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+        "elf": "7f81d783420d2f823fdf68d30297c42e5b7354b2d076d7afdf13d01f56ae5096",
+        "descriptor_sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280",
+        "linked_descriptor_length": 86,
+        "linked_descriptor_vma": "0x20001868",
+        "id": 0,
+        "length": 8
+      },
+      "gopt": {
+        "source": "55739675e5706ea8799265c4221724ac4f2dce9b",
+        "uf2": "63cb30b4fc905fdd34421051cb373c1e98040b631934587b8b466a09b11848a4",
+        "elf": "53b53879b203ca2ef77de346352d1763cb89970560577fd3074a743a9eecfb0b",
+        "descriptor_sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280",
+        "linked_descriptor_length": 86,
+        "linked_descriptor_vma": "0x20001758",
+        "id": 0,
+        "length": 8
+      },
+      "base": {
+        "source": "79475873f2c5f4b84e77bf9f94ab39779ffc69a5",
+        "uf2": "96ff24c7a10cea07c30321df70f871478f708476f6dae59744db77ecdc972c7d",
+        "elf": "e9207bb7dafccf10a05b58a18f47a980f3ed0e38f25f6e2e52a2808f1dd113a3",
+        "descriptor_sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280",
+        "linked_descriptor_length": 86,
+        "linked_descriptor_vma": "0x20001758",
+        "id": 0,
+        "length": 8
+      }
+    }
+  },
+  "verification": {
+    "current_host_and_targeted_checks": [
+      {
+        "command": [
+          "python3",
+          "tools/test_glyph_ci_build_inputs.py"
+        ],
+        "exit": 0,
+        "log_sha256": "679f9836954947d4c1891bbe595c9708fdec35885176e47006965f2b551e680b"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_checker_census.py"
+        ],
+        "exit": 0,
+        "log_sha256": "a257684b1b78d3be59144ab9ed8f65151628f820892dd6bc81c7065d8e1cdc85"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_health.py"
+        ],
+        "exit": 0,
+        "log_sha256": "5e55363dcc161a8c17176e6a04890513f914140bd3229db5ef5c4b2eb8e745a4"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_provenance_inventory.py"
+        ],
+        "exit": 0,
+        "log_sha256": "2961f7c7de3a3165822a876cd9267ee520c7fcb758f464c0d01db212164862be"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_non_selector_configuration.py"
+        ],
+        "exit": 0,
+        "log_sha256": "cab8538225e1af92d6c8648b4c9edd64a897673c49d3cb93b9de341aa3b05992"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_build_input_resolution_observations.py"
+        ],
+        "exit": 0,
+        "log_sha256": "192d4575ad25057f8fe2ae2630ec7c23160b485c248306486a18cc4da6828df5"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_runtime_config_validation_publication_workflow.py"
+        ],
+        "exit": 0,
+        "log_sha256": "b0d0b83b4c74aa27eff3233034483f05393b53c5bce509c8b143577e2951017b"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_artifact_postprocessor_workflow.py"
+        ],
+        "exit": 0,
+        "log_sha256": "c65cd851b158384d80245af2b21df22110036dfda95fe79a0203607b1a4f769a"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_active_profile_display.py"
+        ],
+        "exit": 0,
+        "log_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_controller_profile_selector.py"
+        ],
+        "exit": 0,
+        "log_sha256": "84a93938097e2a9774553358a182b520aad23169f8dea404c639296961f86e57"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_profile_store_selection_recovery.py"
+        ],
+        "exit": 0,
+        "log_sha256": "dec7977829494e224259c57881118496ebd69cc5321de16526c95e1d4a20e26b"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_profile_store_config_persistence.py"
+        ],
+        "exit": 0,
+        "log_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_profile_store_production_tool.py"
+        ],
+        "exit": 0,
+        "log_sha256": "735d40e3cdde2dd042272ce9c5f8384c899c97bbc4dab0bf3c835be543930ee1"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_profile_store_littlefs_host.py"
+        ],
+        "exit": 0,
+        "log_sha256": "fd494947956a356c5bfffa4d3e063b01ab1c67478a9ded22328722bd1af83b4c"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/glyph_ci_current_firmware.py"
+        ],
+        "exit": 0,
+        "log_sha256": "ed6a4e3bc827c197acb367294ec8fa897d645d517fb21dfe15cece1738d90242"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/glyph_ci_current_package_tests.py"
+        ],
+        "exit": 0,
+        "log_sha256": "b60da2cb83e70bf950a6db3661b72bee1b5bf0592b56319e118add8653e56e02"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "exit": 0,
+        "log_sha256": "2afa3f673149cd2b7626345806d71570de3d20b597bb4e67ade890f2a78181e1"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/test_glyph_docs_agent_surface_integration.py"
+        ],
+        "exit": 0,
+        "log_sha256": "279f3679788ebec836ca8aeb144a8ffef14bc2aa1ee999ec793dc76592a967ee"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_glyph_gamecube_selector_liveness.py"
+        ],
+        "exit": 0,
+        "log_sha256": "94fb2173244758122f416fbf0a48bba465b58b9c41e353b3bfb06dfd278cff17"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_switch_readiness.py"
+        ],
+        "exit": 0,
+        "log_sha256": "0844220b1ccce8ab65f1a6e2a2c21f9b2f4825329ccb539b50c31b1777e93e8a"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/fixtures/switch_readiness/usb_host/run.py"
+        ],
+        "exit": 0,
+        "log_sha256": "5a222c9727bf4cfa78b8e650bcf6100d986a2f429c485d148fee3c3aad8433c0"
+      },
+      {
+        "command": [
+          "python3",
+          "tools/fixtures/glyph_package_v1/transaction/boot_detection_regressions.py",
+          "--repo",
+          ".",
+          "--out",
+          "<new-output-dir>"
+        ],
+        "exit": 0,
+        "log_sha256": "83fe4f24fde857945661b71d9670a283381321cebfc344fcd5858eda604a0928"
+      }
+    ],
+    "first_run_provenance_failures": [
+      "check_glyph_build_input_provenance_inventory",
+      "check_glyph_build_input_non_selector_configuration"
+    ],
+    "resolution": "Recorded the new Mk6-only flag and INI file identity. Reran all eight current build/provenance checks on 5dfc4cc2. Other working host checks have identical production and fixture inputs across be32927c and 5dfc4cc2.",
+    "aggregate": {
+      "status": "FAIL",
+      "failure_kind": "CHECKER_TIMEOUT",
+      "phase": "checker:validation_aggregate_adversarial",
+      "canonical_proof": "UNAVAILABLE",
+      "cleanup_error": "AGGREGATE_TIMEOUT during disposable cleanup",
+      "final_proof_error": "AGGREGATE_TIMEOUT during git rev-parse --absolute-git-dir",
+      "successful_checks": 11,
+      "census": "PASS",
+      "raw_log_sha256": "a56057da669bfb27d309c33f3f8a6dc5790f7df5f99e8c09043c596431390d64"
+    },
+    "separate_hosted_build": "NOT_RUN",
+    "console_result": "PENDING"
+  },
+  "independent_review": {
+    "source_and_host_review": "Reviewed final-backend selection, RP2040 pull-up and host bus-reset separation, unrelated route exclusion, readiness and publication scope. Re-ran setup parent negative and all three pinned stack replay scenarios.",
+    "already_configured_hid_control": "PASS twice for A with centered sticks across disconnect, host reset, reconfiguration and receipt on EP83. Device unready after reset until configured.",
+    "additional_control_log_sha256": "efcda904c964a10a43cdfa6ff6acba234b45430f78b85e9ae5b2485d73e1a975",
+    "integrated_disposition": "PASS for owner-guided physical testing, 2026-11-16. Reviewer independently rehashed four custody artifacts and reconstructed all 2589 UF2 blocks, confirmed ELF-derived BIN, flash region, caller ID/length and backend guard, reviewed added boot frame against inherited 140-route ledger and inspected host rechecks and aggregate limitations. No material host blocker. Actual console and release pending."
+  }
+}

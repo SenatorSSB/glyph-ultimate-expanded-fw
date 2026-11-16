@@ -2,6 +2,8 @@
 
 The owner observed power and no console input with both USB selections. Start with the installed image. Record the first stage that fails. This packet requires separate owner authorization before controller access, saving a selection, or installing an image.
 
+**Candidate for a later single-install approval.** Source `5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c`, program-only UF2 `de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518`, 1,325,568 bytes. First request observation on the installed image. If the actual dashboard route is XInput, record it and stop before selecting Switch. Use the physical record and current backup to specify the separate saved change, restoration, or installation approval. [Candidate qualification and custody](QUALIFICATION.md)
+
 ## Console check on the installed image
 
 1. Record the console family and model (Switch, OLED, Lite or Switch 2), system version, dock or host accessory, dock power, USB port, cable and any intervening adapter. Use a cable known to transfer data. When available, verify the same host port with a working **wired** controller. Record which parts of the path that control actually tests.
