@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "docs/runtime_config/fixtures/build_input_non_selector_configuration.json"
 DOC = ROOT / "docs/runtime_config/build_input_non_selector_configuration.md"
 SOURCES = {
-    "platformio.ini": ("628543c19816b91c3209f67ce6b75a47976a4c3c", "240fc35d948ccfd8cc0d6d610bdd0a5687a945e13a2014a3ad748f16820ba40f"),
+    "platformio.ini": ("71866b537fdb09637cb154365a4e250e889433cd", "ca563c38241a5e7554b73755c5a49403652a44e763238fdf57893a3a1016291c"),
     "config/glyph/env.ini": ("3b9bb3cfb1c25b72fa34098b05c79e868df9dec9", "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36"),
 }
 SCALARS = {"build_type", "lib_ldf_mode", "debug_tool", "monitor_speed", "board_build.f_cpu", "board_build.filesystem_size", "lib_archive", "upload_protocol"}

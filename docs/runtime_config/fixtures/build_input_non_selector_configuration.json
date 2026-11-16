@@ -4,7 +4,7 @@
   "status": "declared_effective_literal_census_not_platformio_or_compiler_resolution",
   "canonical_environment": "glyph_mk6",
   "source_files": [
-    {"path": "platformio.ini", "git_blob": "628543c19816b91c3209f67ce6b75a47976a4c3c", "sha256": "240fc35d948ccfd8cc0d6d610bdd0a5687a945e13a2014a3ad748f16820ba40f"},
+    {"path": "platformio.ini", "git_blob": "71866b537fdb09637cb154365a4e250e889433cd", "sha256": "ca563c38241a5e7554b73755c5a49403652a44e763238fdf57893a3a1016291c"},
     {"path": "config/glyph/env.ini", "git_blob": "3b9bb3cfb1c25b72fa34098b05c79e868df9dec9", "sha256": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36"}
   ],
   "inheritance_order": ["env", "arduino_pico_base", "glyph_base", "env:glyph_mk6"],
@@ -50,8 +50,9 @@
     {"path": "platformio.ini", "section": "arduino_pico_base", "key": "build_flags", "raw": "    -I HAL/pico/include", "order": 10, "origin": "arduino_pico_base", "value": "-I HAL/pico/include"},
     {"path": "platformio.ini", "section": "arduino_pico_base", "key": "lib_archive", "raw": "lib_archive = no", "order": 1, "origin": "arduino_pico_base", "value": "no"},
     {"path": "platformio.ini", "section": "env:glyph_mk6", "key": "build_flags", "raw": "    -D GLYPH_PACKAGE_V1=1", "order": 1, "origin": "env:glyph_mk6", "value": "-D GLYPH_PACKAGE_V1=1"},
-    {"path": "platformio.ini", "section": "env:glyph_mk6", "key": "build_flags", "raw": "    -fstack-usage", "order": 2, "origin": "env:glyph_mk6", "value": "-fstack-usage"},
-    {"path": "platformio.ini", "section": "env:glyph_mk6", "key": "build_flags", "raw": "    -Wl,-Map,.pio/build/glyph_mk6/firmware.map", "order": 3, "origin": "env:glyph_mk6", "value": "-Wl,-Map,.pio/build/glyph_mk6/firmware.map"},
+    {"path": "platformio.ini", "section": "env:glyph_mk6", "key": "build_flags", "raw": "    -D GLYPH_MK6_SWITCH_USB_REENUMERATION=1", "order": 2, "origin": "env:glyph_mk6", "value": "-D GLYPH_MK6_SWITCH_USB_REENUMERATION=1"},
+    {"path": "platformio.ini", "section": "env:glyph_mk6", "key": "build_flags", "raw": "    -fstack-usage", "order": 3, "origin": "env:glyph_mk6", "value": "-fstack-usage"},
+    {"path": "platformio.ini", "section": "env:glyph_mk6", "key": "build_flags", "raw": "    -Wl,-Map,.pio/build/glyph_mk6/firmware.map", "order": 4, "origin": "env:glyph_mk6", "value": "-Wl,-Map,.pio/build/glyph_mk6/firmware.map"},
     {"path": "config/glyph/env.ini", "section": "glyph_base", "key": "extends", "raw": "extends = arduino_pico_base", "order": 1, "origin": "glyph_base", "value": "arduino_pico_base"},
     {"path": "config/glyph/env.ini", "section": "glyph_base", "key": "upload_protocol", "raw": "upload_protocol = cmsis-dap", "order": 1, "origin": "glyph_base", "value": "cmsis-dap"},
     {"path": "config/glyph/env.ini", "section": "glyph_base", "key": "build_flags", "raw": "    -I config/glyph/common/include", "order": 1, "origin": "glyph_base", "value": "-I config/glyph/common/include"},

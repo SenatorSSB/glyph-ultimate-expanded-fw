@@ -42,7 +42,7 @@
     {
       "path": "platformio.ini",
       "git_mode": "100644",
-      "sha256": "240fc35d948ccfd8cc0d6d610bdd0a5687a945e13a2014a3ad748f16820ba40f"
+      "sha256": "ca563c38241a5e7554b73755c5a49403652a44e763238fdf57893a3a1016291c"
     },
     {
       "path": "scripts/build-glyph-mk6-quiet.sh",

@@ -1012,7 +1012,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "9306943bf0719b06564ebad5c2b6b0687baca06453a383abd981fbca32bf807e",
+      "sha256": "065dce027399c5ee808b553d6ded205335565acd5e2cb58bb877e95639b4d3f9",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
