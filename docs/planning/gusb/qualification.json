@@ -1,5 +1,5 @@
 {
-  "status": "Host qualified for separately authorized physical testing",
+  "status": "Original Nintendo Switch / Ultimate input PASS in owner-tested scope; postinstall preservation PASS; release held",
   "canonical": "2bcb5104054f64d8b9c1af9dd1be4a974112f8ec",
   "base": "79475873f2c5f4b84e77bf9f94ab39779ffc69a5",
   "source": "5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c",
@@ -480,12 +480,13 @@
       "raw_log_sha256": "a56057da669bfb27d309c33f3f8a6dc5790f7df5f99e8c09043c596431390d64"
     },
     "separate_hosted_build": "NOT_RUN",
-    "console_result": "PENDING"
+    "console_result": "PASS for owner-reported sticks and gamepad buttons in Ultimate on original Nintendo Switch; see PHYSICAL_RESULT.json"
   },
   "independent_review": {
     "source_and_host_review": "Reviewed final-backend selection, RP2040 pull-up and host bus-reset separation, unrelated route exclusion, readiness and publication scope. Re-ran setup parent negative and all three pinned stack replay scenarios.",
     "already_configured_hid_control": "PASS twice for A with centered sticks across disconnect, host reset, reconfiguration and receipt on EP83. Device unready after reset until configured.",
     "additional_control_log_sha256": "efcda904c964a10a43cdfa6ff6acba234b45430f78b85e9ae5b2485d73e1a975",
     "integrated_disposition": "PASS for owner-guided physical testing, 2026-11-16. Reviewer independently rehashed four custody artifacts and reconstructed all 2589 UF2 blocks, confirmed ELF-derived BIN, flash region, caller ID/length and backend guard, reviewed added boot frame against inherited 140-route ledger and inspected host rechecks and aggregate limitations. No material host blocker. Actual console and release pending."
-  }
+  },
+  "physical_result": "PHYSICAL_RESULT.json"
 }

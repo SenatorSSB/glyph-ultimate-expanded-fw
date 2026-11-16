@@ -1,0 +1,39 @@
+{
+  "recorded_at_utc": "2026-11-16T21:30:48.972597+00:00",
+  "source": "5dfc4cc26ca27d1de15c80e2a59f9637052f1b5c",
+  "uf2_sha256": "de793f3469e8d88de31fb6f85d50bacd203b13928f1333ae5b291557c84b1518",
+  "installation": "Owner reports flashing the handed-off candidate once; Configurator INFO reports 5dfc4cc2. Installed flash readback unmeasured.",
+  "owner_report": "Flashed and tested on my Switch. It's now reading the inputs normally. I tested the sticks and the other gamepad buttons. All seems good.",
+  "owner_sequence": "Switch test, GameCube connection trial, return to USB Switch, Mac Configurator Mode.",
+  "switch_input": "PASS for owner-reported sticks and gamepad buttons in Ultimate",
+  "console_model": "Original Nintendo Switch, owner confirmed",
+  "test_application": "Super Smash Bros. Ultimate, owner confirmed",
+  "gamecube": "Connection trial reported; no new GameCube gameplay PASS inferred. Prior GOPT scope retained.",
+  "postinstall_readback": {
+    "result": "PASS",
+    "read_only_exchanges": 41,
+    "firmware_version": "5dfc4cc2",
+    "config_bytes_equal_preinstall": true,
+    "all_27_wrappers_and_revisions_equal": true,
+    "ordered_directory_equal": true,
+    "store_incarnation_generation_transaction_high_water_equal": true,
+    "unexpected_recovery_or_fencing": false,
+    "persistent_mutations_by_agent": 0,
+    "saved_usb_selector": 4,
+    "saved_primary_selector": 2
+  },
+  "evidence_sha256": {
+    "result.json": "29dc7be2910b9c7f1ce603322254de38d3a19786ca1d1756f3b32a39d99f0910",
+    "config-comparison.json": "dc48f523eec462fae6bfab2c8eec5720a6c63c494dda80cda17cc8826685564f",
+    "snapshot.json": "6f0bb9079061fd699c79195269ba8a4ef6f0be0c1edc2826d2c2ec809bb798c8",
+    "settlement.json": "48fa47b70e6e098e895719a9f732cd728447893192a003e02188277102e9add2"
+  },
+  "limits": [
+    "Raw profiles and device identifiers retained privately.",
+    "API-visible preservation verified; raw flash restoration unqualified.",
+    "First-input latency, physical stack high-water and USB bus trace unmeasured.",
+    "Fresh install, Windows XInput and Switch 2 acceptance require their own evidence.",
+    "Canonical integration and release require separate owner approval."
+  ],
+  "console_recognition": "Established operationally by working inputs in Ultimate; controller category and icon not separately captured"
+}
