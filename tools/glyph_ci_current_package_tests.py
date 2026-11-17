@@ -1,8 +1,10 @@
 """Offline public source, lineage, package storage, and WebSerial authority regressions."""
+import ast
 import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import struct
 import subprocess
 import sys
@@ -23,6 +25,162 @@ from run import dump_namespace, load_namespace
 from storage_fence_regressions import response as decode_status
 
 
+DEVICE_PATH_MARKERS = ("rpi-rp2", "bootsel", "picoboot", "rp2040", "/dev/", "physicaldrive")
+COPY_CALLS = {"shutil.copy", "shutil.copy2", "shutil.copyfile", "shutil.copytree",
+              "copy.copy", "copy.copy2", "copy.copyfile", "copy.copytree"}
+PROCESS_CALLS = {"subprocess.run", "subprocess.call", "subprocess.check_call",
+                 "subprocess.check_output", "os.system", "os.popen"}
+
+
+def _dotted_name(node):
+    if isinstance(node, ast.Name):
+        return node.id
+    if isinstance(node, ast.Attribute):
+        base = _dotted_name(node.value)
+        return base + "." + node.attr if base else node.attr
+    return ""
+
+
+def _literal_text(node, names):
+    """Return statically visible path/command text without guessing runtime values."""
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    if isinstance(node, ast.Name):
+        return names.get(node.id, "")
+    if isinstance(node, (ast.List, ast.Tuple)):
+        return " ".join(filter(None, (_literal_text(item, names) for item in node.elts)))
+    if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Add, ast.Div)):
+        return _literal_text(node.left, names) + _literal_text(node.right, names)
+    if isinstance(node, ast.Call) and _dotted_name(node.func) in {"str", "Path"} and node.args:
+        return _literal_text(node.args[0], names)
+    return ""
+
+
+def _is_device_path(text):
+    lowered = text.lower()
+    return any(marker in lowered for marker in DEVICE_PATH_MARKERS)
+
+
+def _is_flash_command(command):
+    lowered = command.lower()
+    tokens = re.split(r"\s+", lowered)
+    return (
+        "picotool" in tokens
+        or "openocd" in tokens
+        or ("pio" in tokens or "platformio" in tokens) and "run" in tokens and "upload" in tokens
+        or "uf2" in tokens and "write" in tokens
+        or "dd" in tokens and ("of=/dev/" in lowered or "of=/dev" in lowered)
+    )
+
+
+def current_flashing_automation_reasons(relpath, source):
+    """Classify executable flashing actions, not ordinary host fixture copying.
+
+    Generic copy APIs are rejected only when their statically visible source or
+    destination identifies a bootloader/device path.  Python string literals on
+    their own are deliberately not actions: this keeps regression fixtures and
+    documentation from becoming evidence of a host-initiated device mutation.
+    """
+    suffix = Path(relpath).suffix.lower()
+    if suffix == ".py":
+        try:
+            tree = ast.parse(source, filename=relpath)
+        except SyntaxError as error:
+            return [f"unparseable Python source: {error.msg}"]
+        names = {}
+        aliases = {}
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for imported in node.names:
+                    if imported.asname:
+                        aliases[imported.asname] = imported.name
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                for imported in node.names:
+                    aliases[imported.asname or imported.name] = node.module + "." + imported.name
+            if isinstance(node, (ast.Assign, ast.AnnAssign)):
+                value = _literal_text(node.value, names)
+                targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+                for target in targets:
+                    if isinstance(target, ast.Name) and value:
+                        names[target.id] = value
+        reasons = []
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            name = _dotted_name(node.func)
+            if "." in name:
+                prefix, remainder = name.split(".", 1)
+                name = aliases.get(prefix, prefix) + "." + remainder
+            else:
+                name = aliases.get(name, name)
+            arguments = " ".join(_literal_text(arg, names) for arg in node.args)
+            if name in COPY_CALLS and _is_device_path(arguments):
+                reasons.append(f"device-context copy at line {node.lineno}")
+            elif name in PROCESS_CALLS and _is_flash_command(arguments):
+                reasons.append(f"flashing command at line {node.lineno}")
+            elif (isinstance(node.func, ast.Attribute) and node.func.attr in {"write_bytes", "write_text"}) or name == "open":
+                target = _literal_text(node.func.value, names) if isinstance(node.func, ast.Attribute) else arguments
+                rendered = target + " " + arguments
+                if _is_device_path(rendered) and ".uf2" in rendered.lower():
+                    reasons.append(f"UF2 device write at line {node.lineno}")
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Assign, ast.AnnAssign)):
+                targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+                if any(isinstance(target, ast.Name) and target.id in {"upload_port", "upload_protocol"}
+                       for target in targets):
+                    reasons.append(f"automated upload configuration at line {node.lineno}")
+        return reasons
+    if suffix in {".sh", ".bash", ".zsh", ".ini", ".cfg", ".mk", ".make"} or Path(relpath).name == "Makefile":
+        lowered = source.lower()
+        patterns = (
+            r"\b(?:pio|platformio)\s+run\b[^\n]*(?:-t|--target)\s*upload\b",
+            r"^\s*upload_(?:port|protocol)\s*=",
+            r"\b(?:picotool|openocd)\b",
+            r"\bdd\b[^\n]*\bof=/dev/",
+            r"\buf2\s+write\b",
+        )
+        return ["flashing command or upload configuration"] if any(
+            re.search(pattern, lowered, flags=re.MULTILINE) for pattern in patterns) else []
+    return []
+
+
+def ensure_no_current_flashing_automation(changed):
+    findings = []
+    for relpath in changed:
+        path = ROOT / relpath
+        if path.is_file():
+            for reason in current_flashing_automation_reasons(relpath, path.read_text(encoding="utf-8", errors="ignore")):
+                findings.append(f"{relpath}: {reason}")
+    if findings:
+        raise ValueError("current flashing automation found in changed source: " + "; ".join(findings))
+
+
+def verify_current_flashing_automation_controls():
+    """Focused positive/negative controls for the current semantic guard."""
+    allowed = (
+        'import shutil\nshutil.copytree("fixtures", scratch / "fixture")\n',
+        'import shutil\nshutil.copy("fixture.json", scratch / "fixture.json")\n',
+        'import shutil\nshutil.copy("request.pb", scratch / "request.pb")\n',
+        # Removing the RPI-RP2 destination makes this an ordinary host copy.
+        'import shutil\nshutil.copy("firmware.uf2", scratch / "firmware.uf2")\n',
+    )
+    forbidden = (
+        'import shutil\nshutil.copy("firmware.uf2", "/Volumes/RPI-RP2/firmware.uf2")\n',
+        'import shutil\ntarget = "/Volumes/RPI-RP2"\nshutil.copy("firmware.uf2", target)\n',
+        'import subprocess\nsubprocess.run(["pio", "run", "-t", "upload"], check=True)\n',
+        'import subprocess\nsubprocess.run(["picotool", "load", "firmware.uf2"], check=True)\n',
+        'import subprocess\nsubprocess.run(["openocd", "-f", "flash.cfg"], check=True)\n',
+        'from pathlib import Path\nPath("/Volumes/RPI-RP2/firmware.uf2").write_bytes(image)\n',
+        'upload_port = "/dev/ttyACM0"\n',
+        'upload_protocol = "picotool"\n',
+    )
+    assert all(not current_flashing_automation_reasons("host_fixture.py", source) for source in allowed)
+    assert all(current_flashing_automation_reasons("host_tool.py", source) for source in forbidden)
+    assert current_flashing_automation_reasons("platformio.ini", "upload_port = /dev/ttyACM0\n")
+    assert current_flashing_automation_reasons("flash.sh", "dd if=firmware.uf2 of=/dev/sdb\n")
+    print("Current flashing-automation semantic guard controls passed")
+
+
 def active_authority():
     docs.validate_docs()
     text = authority.read_required(authority.DOC)
@@ -30,9 +188,10 @@ def active_authority():
     authority.ensure_flag_false(text)
     authority.ensure_no_positive_claims(text)
     authority.ensure_no_runtime_write_symbols_added()
+    verify_current_flashing_automation_controls()
     changed = subprocess.check_output(["git", "diff", "--name-only", "--no-renames", "-z",
                                        PACKAGE_BASE, "HEAD"], cwd=ROOT)
-    authority.ensure_no_flashing_automation_changed([path.decode() for path in changed.split(b"\0") if path])
+    ensure_no_current_flashing_automation([path.decode() for path in changed.split(b"\0") if path])
 
 
 def offline_source_tools():
