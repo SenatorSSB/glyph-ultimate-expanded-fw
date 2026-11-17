@@ -7,7 +7,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_PATHS = ("README.md", "docs/README.md", "docs/CURRENT_STATE.md",
-                "docs/ROADMAP.md", "docs/CAPABILITIES.md", "docs/USAGE.md")
+                "docs/ROADMAP.md", "docs/CAPABILITIES.md", "docs/USAGE.md",
+                "docs/PROFILE_SYSTEM.md", "profiles/README.md")
 
 
 class DocsNavigationError(AssertionError):
@@ -114,6 +115,29 @@ def validate_docs(root: Path = REPO_ROOT, overrides: dict[str, str] | None = Non
         require_links(path, docs[path], ("../profiles/README.md",))
     require("docs index", docs["docs/README.md"], ("Players / users", "Profile authors", "Developers",
         "Coding agents", "Historical/evidence research", "## Compact glossary"))
+    for path in ("docs/README.md", "docs/CAPABILITIES.md", "docs/USAGE.md"):
+        require_links(path, docs[path], ("PROFILE_SYSTEM.md",))
+    system, authoring = docs["docs/PROFILE_SYSTEM.md"], docs["profiles/README.md"]
+    require_links("profile system", system, ("../profiles/README.md",))
+    require_links("authoring", authoring, (
+        "../docs/PROFILE_SYSTEM.md", "schema/glyph-native-ultimate-profile.v1.schema.json",
+        "templates/UltimateNativeSeed.v1.profile.json"))
+    require("authoring", authoring, ("LLM authoring contract", "historical v0", "archival"))
+    for path, text in (("profile system", system), ("authoring", authoring)):
+        n = normalize(text)
+        if not re.search(r"(?:key|direction) 5.{0,100}non-center", n):
+            fail(f"{path}: retain the nine-way/non-center key 5 distinction")
+        if not all(str(i) in n for i in range(1, 10)) or "7 8 9 4 5 6 1 2 3" not in n:
+            fail(f"{path}: missing nine-way indexing grid")
+        if not re.search(r"(?:not a complete package|does not (?:create|install) a complete package)", n):
+            fail(f"{path}: retain authoring versus complete-package boundary")
+        unsupported = (
+            r"authoring json is (?:itself )?a complete package",
+            r"(?:supports?|provides?|implements?) arbitrary (?:scripts?|scripting|timers?|macros?)",
+            r"(?:scripts?|timers?|macros?) (?:are|is) supported",
+        )
+        if any(re.search(pattern, n) for pattern in unsupported):
+            fail(f"{path}: unsupported package or scripting claim")
     cap = docs["docs/CAPABILITIES.md"]
     require("capabilities", cap, ("## Mode engines", "## Communication backends", "## Native Ultimate profiles",
         "## Profile and package management", "## Physical qualification", "Keyboard is not a backend"))

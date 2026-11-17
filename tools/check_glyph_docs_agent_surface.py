@@ -486,6 +486,44 @@ def validate_public_doc_surface() -> None:
             fail(f"README: missing public route {target}")
     if "](profiles/ultimate/README.md)" in readme:
         fail("README: v0 golden cannot replace current authoring")
+    # Keep public documentation checks here, independent of historical prose and
+    # without importing the navigation checker into the package manifest graph.
+    for path in ("docs/README.md", "docs/CAPABILITIES.md", "docs/USAGE.md"):
+        if "](PROFILE_SYSTEM.md)" not in read_required(REPO_ROOT / path):
+            fail(f"{path}: missing native system route")
+    system = read_required(REPO_ROOT / "docs/PROFILE_SYSTEM.md")
+    require_phrases("profile system", system, (
+        "Scope and terminology", "Ownership matrix", "Version contracts",
+        "Exact native evaluation flow", "../profiles/README.md"))
+    authoring = read_required(REPO_ROOT / "profiles/README.md")
+    for target in ("../docs/PROFILE_SYSTEM.md",
+                   "schema/glyph-native-ultimate-profile.v1.schema.json",
+                   "templates/UltimateNativeSeed.v1.profile.json"):
+        if f"]({target})" not in authoring:
+            fail(f"authoring: missing current route {target}")
+    require_phrases("authoring", authoring, ("LLM authoring contract", "historical v0", "archival"))
+    for label, text in (("profile system", system), ("authoring", authoring)):
+        n = normalize(text.replace("**", ""))
+        if not re.search(r"(?:key|direction) 5.{0,100}non-center", n):
+            fail(f"{label}: missing non-center key 5 distinction")
+        if "7 8 9 4 5 6 1 2 3" not in n:
+            fail(f"{label}: missing nine-way grid")
+        if not re.search(r"not a complete package|does not (?:create|install) a complete package", n):
+            fail(f"{label}: missing authoring/package boundary")
+        if any(re.search(pattern, n) for pattern in (
+            r"authoring json is (?:itself )?a complete package",
+            r"(?:supports?|provides?|implements?) arbitrary (?:scripts?|scripting|timers?|macros?)",
+            r"(?:scripts?|timers?|macros?) (?:are|is) supported")):
+            fail(f"{label}: unsupported package or scripting claim")
+    # Current hosted package CI calls this documentation consumer. Validate the
+    # actual committed guidance assets through the existing offline authoring
+    # suite as well as checking their documentation routes. No device I/O.
+    import sys
+    result = subprocess.run([sys.executable, str(REPO_ROOT / "tools/test_glyph_native_profile_json_v1.py"), "-v"],
+                            cwd=REPO_ROOT, capture_output=True, text=True, timeout=60)
+    if result.returncode:
+        fail("current authoring guidance assets failed: " + result.stdout + result.stderr)
+
 
 
 def validate_runtime_readme(text: str) -> None:

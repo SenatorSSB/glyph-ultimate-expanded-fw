@@ -3973,7 +3973,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 26498,
+      "file_size_bytes": 29031,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -4010,7 +4010,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 619,
+      "line_count": 657,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -4052,6 +4052,7 @@
         "docs/AGENT_CONTEXT.md",
         "docs/CAPABILITIES.md",
         "docs/CURRENT_STATE.md",
+        "docs/PROFILE_SYSTEM.md",
         "docs/README.md",
         "docs/ROADMAP.md",
         "docs/USAGE.md",
@@ -4098,7 +4099,8 @@
         "tools/install_generated_source_owned_runtime_config.py",
         "tools/manage_source_owned_source_authority_intake.py",
         "tools/prepare_source_owned_candidate_branch.py",
-        "tools/source_owned_source_authority_intake.py"
+        "tools/source_owned_source_authority_intake.py",
+        "tools/test_glyph_native_profile_json_v1.py"
       ],
       "runtime_config_relevance_signals": [
         "activation_alternatives",
@@ -4115,7 +4117,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "b593610691e93394633b2ba0db4e8fdb47cf46863c37b46d2e33983fd8494cbe",
+      "sha256": "1fd91e66626166d0464df565018adabd647f9c240fad1270a4b095a2cdecb1cf",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -4136,7 +4138,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 7318,
+      "file_size_bytes": 8952,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence"
@@ -4146,7 +4148,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 150,
+      "line_count": 174,
       "parse_error": null,
       "path": "tools/check_glyph_docs_navigation.py",
       "potential_branch_identity_signals": [
@@ -4158,12 +4160,13 @@
       "referenced_repository_path_prefixes": [
         "docs/CAPABILITIES.md",
         "docs/CURRENT_STATE.md",
+        "docs/PROFILE_SYSTEM.md",
         "docs/README.md",
         "docs/ROADMAP.md",
         "docs/USAGE.md"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "ab5c77ab677098ce86bac27b22a70c3213513c221b804dfe50ae535632e6633a",
+      "sha256": "eee2937ecc11bd7f20ddc327754d9688bff802624c3579ceacc694d5d7e47f94",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
