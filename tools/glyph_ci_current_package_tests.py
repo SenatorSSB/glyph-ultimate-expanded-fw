@@ -70,7 +70,7 @@ def _is_flash_command(command):
         or "openocd" in executables
         or ("pio" in executables or "platformio" in executables) and "run" in tokens and "upload" in tokens
         or "uf2" in tokens and "write" in tokens
-        or "dd" in tokens and ("of=/dev/" in lowered or "of=/dev" in lowered)
+        or "dd" in executables and ("of=/dev/" in lowered or "of=/dev" in lowered)
     )
 
 
@@ -180,6 +180,7 @@ def verify_current_flashing_automation_controls():
     assert all(current_flashing_automation_reasons("host_tool.py", source) for source in forbidden)
     assert current_flashing_automation_reasons("platformio.ini", "upload_port = /dev/ttyACM0\n")
     assert current_flashing_automation_reasons("flash.sh", "dd if=firmware.uf2 of=/dev/sdb\n")
+    assert current_flashing_automation_reasons("flash.py", 'import subprocess\nsubprocess.run(["/bin/dd", "if=firmware.uf2", "of=/dev/sdb"])\n')
     print("Current flashing-automation semantic guard controls passed")
 
 
