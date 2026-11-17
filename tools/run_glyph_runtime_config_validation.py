@@ -901,58 +901,6 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
                 catalog = json.loads(catalog_path.read_text(), object_pairs_hook=pairs)
                 for record in catalog['accepted_transitions']:
                     roots.update(record[k] for k in ('build', 'parent', 'review_commit', 'evidence_commit', 'integration'))
-    if not has("agent_framework", "check_glyph_agent_framework_docs.py"):
-        return refs, roots
-    path = "docs/project/ACTIVE_AGENT_QUEUE.md"
-    found = git("ls-tree", "-z", "HEAD", "--", path)
-    records = [record for record in found.stdout.split("\0") if record]
-    if found.returncode or len(records) != 1 or records[0].split("\t", 1)[1] != path or not records[0].startswith("100644 blob "):
-        raise ValueError("committed canonical queue must be one regular 100644 blob")
-    raw = git_value("show", "HEAD:" + path)
-    start, end = "<!-- queue-state:start -->", "<!-- queue-state:end -->"
-    if raw.count(start) != 1 or raw.count(end) != 1:
-        raise ValueError("committed queue requires one queue-state marker pair")
-    block = raw.split(start, 1)[1].split(end, 1)[0].strip()
-    if not block.startswith("```json") or not block.endswith("```"):
-        raise ValueError("committed queue-state must be fenced JSON")
-    value = json.loads(block[len("```json"):-3], object_pairs_hook=pairs)
-    def mapping(value, label):
-        if not isinstance(value, dict): raise ValueError(label + " must be an object")
-        return value
-    def commit(value, label):
-        if not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{40}", value):
-            raise ValueError(label + " must be a full lowercase commit identity")
-        roots.add(value)
-    value = mapping(value, "queue")
-    packet = mapping(value.get("planner_packet"), "planner_packet")
-    if not isinstance(packet.get("state"), str): raise ValueError("planner packet state must be a string")
-    if packet["state"] != "ABSENT":
-        for field in ("base_configurator_sha", "planning_commit", "curation_commit"):
-            commit(packet.get(field), "planner_packet." + field)
-    policy = mapping(value.get("completion_correspondence"), "completion_correspondence")
-    commit(policy.get("migration_base_configurator_sha"), "completion migration base")
-    legacy = policy.get("legacy_done_ids")
-    if not isinstance(legacy, list) or not all(isinstance(item, str) for item in legacy):
-        raise ValueError("legacy_done_ids must be a string list")
-    items = value.get("items")
-    if not isinstance(items, list): raise ValueError("queue items must be a list")
-    for item in items:
-        item = mapping(item, "queue item")
-        if not isinstance(item.get("id"), str) or not isinstance(item.get("status"), str):
-            raise ValueError("queue item id/status must be strings")
-        if item["status"] == "DONE" and item["id"] not in legacy:
-            evidence = mapping(item.get("done_evidence"), "done_evidence")
-            for field in ("implementation_base_sha", "reviewed_implementation_sha", "prior_canonical_integration_sha"):
-                commit(evidence.get(field), "done_evidence." + field)
-        if item["status"] in {"HARDWARE_VALIDATED", "HARDWARE_FAILED"} or (item["status"] == "LOCAL_ACCEPTANCE_PENDING" and item.get("hardware_result") is not None):
-            reference = item.get("hardware_evidence_record")
-            if not isinstance(reference, str): raise ValueError("hardware evidence reference must be a string")
-            match = re.fullmatch(r"(?:repo-json:(docs/[^:]+\.json)|git-json:([a-f0-9]{40}):(docs/[^:]+\.json))", reference)
-            if not match: raise ValueError("hardware evidence reference must be an exact repo-json/git-json identity")
-            relative = match[1] or match[3]
-            if any(part in {"", ".", ".."} for part in relative.split("/")) or "\\" in relative:
-                raise ValueError("hardware evidence path must be normalized")
-            if match[2]: commit(match[2], "hardware evidence commit")
     return refs, roots
 
 

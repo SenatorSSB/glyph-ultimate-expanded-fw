@@ -569,64 +569,6 @@ def topology_catalog_cases(module: Any) -> list[str]:
         except ValueError: pass
         else: raise AssertionError("missing source local configurator was synthesized")
         run_git(root, "update-ref", "refs/heads/configurator", initial)
-        framework = entry("agent_framework")
-        framework["path"] = "tools/check_glyph_agent_framework_docs.py"
-        framework["command"] = ["python3", framework["path"]]
-        # An off-head object is carried only by a caller remote-tracking ref.
-        run_git(root, "switch", "-c", "unadvertised-provenance")
-        (root / "provenance.md").write_text("provenance", encoding="utf-8")
-        run_git(root, "add", "provenance.md"); run_git(root, "commit", "-m", "provenance")
-        off_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
-        run_git(root, "switch", "catalog-feature")
-        run_git(root, "update-ref", "refs/remotes/provenance/packet", off_head)
-        run_git(root, "update-ref", "-d", "refs/heads/unadvertised-provenance")
-        queue = {
-            "planner_packet": {"state": "FRESH", "base_configurator_sha": initial, "planning_commit": off_head, "curation_commit": feature},
-            "completion_correspondence": {"migration_base_configurator_sha": initial, "legacy_done_ids": ["LEGACY"]},
-            "items": [
-                {"id": "DIRECT", "status": "DONE", "done_evidence": {"implementation_base_sha": initial, "reviewed_implementation_sha": off_head, "prior_canonical_integration_sha": feature}},
-                {"id": "EXACT_PATH", "status": "DONE", "done_evidence": {"implementation_base_sha": initial, "reviewed_implementation_sha": off_head, "prior_canonical_integration_sha": feature}},
-                {"id": "LEGACY", "status": "DONE", "done_evidence": "legacy free text " + "e" * 40},
-                {"id": "HW", "status": "HARDWARE_VALIDATED", "hardware_result": "PASS", "hardware_evidence_record": "git-json:" + off_head + ":docs/evidence.json"},
-                {"id": "HW_PENDING", "status": "LOCAL_ACCEPTANCE_PENDING", "hardware_result": None, "hardware_evidence_record": "git-json:" + "d" * 40 + ":docs/evidence.json"},
-            ],
-            "unrelated_prose": "a" * 40, "foreign_upstream": "b" * 40, "firmware_artifact_sha256": "c" * 64,
-        }
-        path = root / "docs/project/ACTIVE_AGENT_QUEUE.md"
-        path.parent.mkdir(parents=True)
-        def publish(value):
-            text = value if isinstance(value, str) else json.dumps(value)
-            path.write_text("<!-- queue-state:start -->\n```json\n" + text + "\n```\n<!-- queue-state:end -->\n", encoding="utf-8")
-            run_git(root, "add", "docs/project/ACTIVE_AGENT_QUEUE.md")
-            run_git(root, "commit", "-m", "queue fixture")
-        publish(queue)
-        refs, roots = module.required_catalog([framework])
-        if refs or roots != {initial, feature, off_head}:
-            raise AssertionError("framework object root catalog scanned unrelated fields or missed consumed identities")
-        context = module.immutable_source_context([framework])
-        with tempfile.TemporaryDirectory(prefix="glyph-catalog-clone-") as clone_directory:
-            original_env = module.EXECUTION_ENV
-            module.EXECUTION_ENV = module.isolated_environment(Path(clone_directory))
-            try:
-                clone = module.clone_snapshot(context, Path(clone_directory))
-                if module.git_value("cat-file", "-t", off_head, cwd=clone) != "commit":
-                    raise AssertionError("off-head provenance object was not locally transferred")
-                clone_refs = module.git_value("for-each-ref", "--format=%(refname)", cwd=clone).splitlines()
-                if clone_refs != ["refs/heads/catalog-feature", "refs/remotes/origin/configurator"]:
-                    raise AssertionError("framework provenance imported an unrelated ref")
-            finally: module.EXECUTION_ENV = original_env
-        malformed = json.loads(json.dumps(queue)); malformed["planner_packet"]["planning_commit"] = "HEAD"; publish(malformed)
-        try: module.required_catalog([framework])
-        except ValueError: pass
-        else: raise AssertionError("nonimmutable queue field accepted")
-        malformed["planner_packet"]["planning_commit"] = "f" * 40; publish(malformed)
-        try: module.immutable_source_context([framework])
-        except ValueError: pass
-        else: raise AssertionError("missing queue object accepted")
-        publish(json.dumps(queue).replace('"state": "FRESH"', '"state": "FRESH", "state": "FRESH"'))
-        try: module.required_catalog([framework])
-        except ValueError: pass
-        else: raise AssertionError("duplicate queue keys accepted")
         observations = entry("build_input_resolution_observations")
         observations["path"] = "tools/check_glyph_build_input_resolution_observations.py"
         observations["command"] = ["python3", observations["path"]]
@@ -635,7 +577,81 @@ def topology_catalog_cases(module: Any) -> list[str]:
         refs, roots = module.required_catalog([observations, nuker])
         if refs or roots != {"8c04262c66613d46b933b1b739c01c575cb0c580", "ffc007552abc848051841362b0b0ac4c1a7d087b", "a747dd54b02b207483142331d8b5be1113fc951e", "d5050847d3f850951b3f47865dc8a91aedea0834"}:
             raise AssertionError("fixed current-source roots differ")
-    return ["ISO-12-exact-local-configurator-ref", "ISO-13-source-enumerated-queue-roots-and-off-head-transfer", "ISO-14-catalog-schema-identity-and-local-object-failures"]
+    return ["ISO-12-exact-local-configurator-ref-and-missing-ref-failure",
+            "ISO-14-fixed-build-resolution-and-nuker-source-roots"]
+
+
+def orchestration_retirement_cases(module: Any) -> list[str]:
+    """Retained protocols neither execute nor supply roots to current validation."""
+    actual_root = RUNNER_PATH.resolve().parents[1]
+    entries = json.loads((actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())["entries"]
+    by_id = {row["id"]: row for row in entries}
+    retired = []
+    for identity, filename in (
+        ("agent_framework", "check_glyph_agent_framework_docs.py"),
+        ("agentic_sequence", "check_glyph_agentic_sequence_protocol.py"),
+    ):
+        row = by_id[identity]
+        if (row["applicability"] != "historical_only" or row["branch_policy"] != "named_evidence_branch"
+                or row["load_bearing"] is not False or row["historical"] is not True
+                or row["command"] != ["python3", "tools/" + filename]):
+            raise AssertionError("retained orchestration classification/command drift: " + identity)
+        retired.append(row.copy())
+    for identity in ("hardware_artifact_custody", "checker_context", "validation_aggregate_adversarial",
+                     "source_authority_intake", "build_input_provenance_inventory", "prebuild_git_identity",
+                     "gp_config023_usb_index_validation", "docs_navigation"):
+        row = by_id[identity]
+        if row["applicability"] != "current" or row["load_bearing"] is not True or row["historical"] is not False:
+            raise AssertionError("required current safety classification drift: " + identity)
+    # The current package C023 replay still receives exactly its authenticated
+    # finite roots plus the retained milestone and GP-VAL roots. Retired entries
+    # cannot add queue-derived roots to that selection.
+    import glyph_campaign_transition as campaign
+    if module.package_scope.package_lineage(actual_root):
+        finite = frozenset({"a" * 40, "b" * 40})
+        proof = {"contract": "c023_usb_index", "object_roots": finite}
+        with mock.patch.object(module, "ROOT", actual_root), mock.patch.object(
+                module.package_scope, "original_proof", return_value=proof) as authenticated, mock.patch.object(
+                campaign, "authenticate", side_effect=AssertionError("current C023 used predecessor proof")):
+            for selected in ([by_id["gp_config023_usb_index_validation"]],
+                             [by_id["gp_config023_usb_index_validation"], *retired]):
+                if module.required_catalog(selected) != ({}, set(campaign.ROOTS) | set(finite) | {module.package_scope.C023_DONE}):
+                    raise AssertionError("current authenticated package replay roots changed")
+            if authenticated.call_count != 2 or any(call.args[0] != actual_root for call in authenticated.call_args_list):
+                raise AssertionError("current package replay did not authenticate its exact source")
+            if module.required_catalog([by_id["checker_context"], *retired]) != ({}, set()):
+                raise AssertionError("current package context acquired campaign/orchestration roots")
+            authenticated.side_effect = ValueError("package replay authority unavailable")
+            try:
+                module.required_catalog([by_id["gp_config023_usb_index_validation"], *retired])
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("current package replay authentication failed open")
+    with tempfile.TemporaryDirectory(prefix="glyph-orchestration-retirement-") as directory:
+        root = fresh_root(Path(directory))
+        module.ROOT = root
+        # No queue exists here. Catalog selection must not even attempt a Git
+        # read for either retained protocol, individually or together.
+        with mock.patch.object(module, "git", side_effect=AssertionError("historical catalog read Git")), mock.patch.object(
+                module, "git_value", side_effect=AssertionError("historical catalog read a queue/root")):
+            for selected in ([retired[0]], [retired[1]], retired):
+                if module.required_catalog(selected) != ({}, set()):
+                    raise AssertionError("historical orchestration contributed catalog roots")
+        current = entry("current_retirement_sentinel")
+        write_checker(root, current, 0)
+        for row in retired:
+            write_checker(root, row, 9)
+        manifest = write_manifest(root, [current, *retired], ["baseline", "agent_framework"])
+        code, text = invoke(module, root, manifest, "--json")
+        report = payload(text)
+        if (code or report["status"] != "PASS" or report["canonical_proof"] != "MATCH"
+                or [row["id"] for row in report["results"]] != [current["id"]]):
+            raise AssertionError("normal aggregate selected/executed retained orchestration: " + text)
+    return ["F2-historical-framework-and-sequence-not-selected-or-executed",
+            "F2-historical-orchestration-contributes-no-catalog-roots",
+            "F2-current-package-replay-exact-authenticated-roots-and-fail-closed",
+            "F2-current-custody-authority-context-replay-and-public-docs-classifications"]
 
 
 def gp_config_010_historical_object_cases(module: Any) -> list[str]:
@@ -833,12 +849,6 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                 pass
             else:
                 raise AssertionError("campaign authentication failure became empty/accepted catalog")
-        # No framework entry is selected above. Conversely framework alone must
-        # not invoke campaign authority or select off-head C020 by proximity.
-        framework = entry("agent_framework")
-        framework["command"] = ["python3", "tools/check_glyph_agent_framework_docs.py"]
-        with mock.patch.object(campaign, "authenticate", side_effect=AssertionError("framework selected campaign")):
-            module.required_catalog([framework])
         with tempfile.TemporaryDirectory(prefix="glyph-val037-catalog-closure-") as directory:
             parent = Path(directory)
             closure = {line.split(" ", 1)[0] for line in module.git_value(
@@ -1751,6 +1761,7 @@ def main() -> int:
             raise AssertionError("regenerated census was not accepted after drift repair")
         passed.append("AGG-12-census-freshness-added-removed-renamed-byte-drift")
 
+    passed.extend(orchestration_retirement_cases(module))
     passed.extend(gp_val037_current_argument_cases(module))
     passed.extend(gp_val043_runner_proof_cases(module))
     passed.extend(gp_val034_catalog_cases(module))
@@ -1769,24 +1780,39 @@ def main() -> int:
         scope = module.package_scope
         entries = json.loads((actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())["entries"]
         scope.verify_manifest_coverage(actual_root, entries)
-        for change, name in (("retire", "gp_config023_usb_index_validation"),
-                             ("remove", "validation_publication_workflow"),
-                             ("substitute", "gp_config022_rgb_target_validation")):
+        baseline = json.loads(subprocess.check_output([
+            "git", "show", scope.PACKAGE_BASE + ":docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
+        ], cwd=actual_root))["entries"]
+        required_ids = {row["id"] for row in baseline}
+        controls = [("retire", row["id"]) for row in entries
+                    if row["id"] in required_ids and row["applicability"] == "current"]
+        controls += [("remove", "validation_publication_workflow"),
+                     ("substitute", "gp_config022_rgb_target_validation")]
+        for identity in ("agent_framework", "agentic_sequence"):
+            controls.extend((change, identity) for change in (
+                "substitute", "restore-current", "restore-current-substitute"))
+        for change, name in controls:
             alternate = copy.deepcopy(entries)
             row = next(r for r in alternate if r["id"] == name)
             if change == "remove":
                 alternate.remove(row)
+            elif change.startswith("restore-current"):
+                row.update(applicability="current", branch_policy="content_only", load_bearing=True, historical=False)
+                if change == "restore-current-substitute":
+                    row["command"] = ["python3", "tools/unknown.py"]
             elif change == "substitute":
                 row["command"] = ["python3", "tools/unknown.py"]
             else:
-                row["applicability"] = "historical_only"
+                row.update(applicability="historical_only", branch_policy="named_evidence_branch", load_bearing=False, historical=True)
             try:
                 scope.verify_manifest_coverage(actual_root, alternate)
             except ValueError:
                 pass
             else:
                 raise AssertionError("current package manifest accepted " + change + " for " + name)
-        passed.append("current-package-required-command-and-classification-negatives")
+        passed.extend(["current-package-required-command-and-classification-negatives",
+                       "F2-package-all-still-current-required-commands-reject-retirement",
+                       "F2-package-retired-command-substitution-and-reactivation-rejected"])
     else:
         passed.extend(gp_val037_campaign_catalog_cases(module))
 
