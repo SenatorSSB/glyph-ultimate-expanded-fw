@@ -11,8 +11,8 @@ Branch from the current live `origin/configurator`, make a bounded change, run
 its affected checks, obtain independent reviewer inspection, and merge only
 validated work. Keep changes and review evidence easy to compare with that base.
 The normal public contributor path uses this guide and does not require an agent
-queue or personal orchestration roles. [AGENTS.md](../AGENTS.md) still imposes
-additional instructions on coding agents pending its later migration. Maintainer
+queue or personal orchestration roles. [AGENTS.md](../AGENTS.md) is the normal
+coding-agent contract and routes agents to this guide. Maintainer
 approval remains necessary for substantive compatibility and device-operation
 changes; this guide supplies no device-operation authority.
 
@@ -224,6 +224,7 @@ lessons do not broaden any historical acceptance.
 
 Older `docs/WORKFLOW.md`, `docs/AGENT_CONTEXT.md`, `docs/agent_framework/` and project
 queues contain historical/internal campaign machinery pending later consolidation.
-They are not the normal public developer entry point. Some older current-summary
-routes still point there pending authorized migration. They remain intact; this
-guide neither deletes evidence nor overrides coding-agent instructions.
+They are not prerequisites for public contributors or coding agents.
+[AGENTS.md](../AGENTS.md) is the normal coding-agent contract; this guide is the
+public developer entry point. Retained internal contracts and evidence remain
+intact pending separate consumer and preservation review.

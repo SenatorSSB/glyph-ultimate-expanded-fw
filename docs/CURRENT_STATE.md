@@ -61,8 +61,8 @@ productization remain outstanding.
 
 Use [usage](USAGE.md), [capabilities](CAPABILITIES.md),
 [native authoring v1](../profiles/README.md) and [roadmap](ROADMAP.md).
-Developers and agents must also read [AGENTS.md](../AGENTS.md),
-[agent context](AGENT_CONTEXT.md) and the
+Developers should start with [development](DEVELOPMENT.md); coding agents should
+follow [AGENTS.md](../AGENTS.md). Runtime-sensitive work must also respect the
 [implementation boundary](runtime_config/IMPLEMENTATION_BOUNDARY.md): the accepted
 native Ultimate/ProfileStore lane does not authorize arbitrary generic runtime
 configuration or new device operations.

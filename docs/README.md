@@ -7,7 +7,7 @@
 | Players / users | [Usage](USAGE.md), then [capabilities](CAPABILITIES.md) |
 | Profile authors | [Profile system and advanced design](PROFILE_SYSTEM.md), then [native Ultimate authoring v1](../profiles/README.md) |
 | Developers | [Development](DEVELOPMENT.md), then [architecture](ARCHITECTURE.md) |
-| Coding agents | [AGENTS.md](../AGENTS.md), then [agent context](AGENT_CONTEXT.md) |
+| Coding agents | [AGENTS.md](../AGENTS.md), then [development](DEVELOPMENT.md) and [architecture](ARCHITECTURE.md) / current domain docs as needed |
 | Historical/evidence research | [Selected history](history/HISTORY.md), [decisions](history/DECISIONS.md), [hardware acceptance](history/HARDWARE_ACCEPTANCE.md), [source lineage](history/SOURCE_LINEAGE.md), then [evidence index](evidence/README.md) |
 
 [Current state](CURRENT_STATE.md) owns present qualification;

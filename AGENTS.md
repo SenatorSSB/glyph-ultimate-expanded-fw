@@ -1,155 +1,137 @@
-# AGENTS.md
+# Coding-agent instructions
 
-This repository is the Glyph / HayBox firmware-backend workstream only. It may
-inform Senscope backend realization boundaries, but Senscope owns game
-semantics, datasets, and solver authority.
+## Scope
 
-## Start Here
+This repository is the Glyph/HayBox firmware workstream. Senscope is a separate
+product and owns its game semantics, datasets and solver authority.
 
-Fresh chapter daemons must read
-`docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md` on their first turn before
-dispatching or implementing chapter work. One fresh daemon owns one coherent
-owner-approved chapter; no standing role schedules are the default.
+Do not invent Glyph/HayBox firmware behavior, undocumented backend capabilities,
+or Super Smash Bros. Ultimate gameplay semantics. Use source, current technical
+docs, tests, fixtures and explicit user/domain statements as authority. Label
+inference as inference and unknown behavior as unknown. Historical observations
+are not proof of a root cause or a broader capability.
 
-Read these files before using older calibration packets:
+## Read first
 
-- `docs/AGENT_CONTEXT.md` - first-read current agent state.
-- `docs/CURRENT_STATE.md` - factual current baseline and non-claims.
-- `docs/ROADMAP.md` - current milestone and intent state.
-- `docs/WORKFLOW.md` - branch, test, inspection, merge, and result procedure.
-- `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md` - hard runtime-config
-  implementation boundary.
-- `docs/agent_framework/README.md` - supervisor/subagent contracts,
-  classifications, gates, and templates.
-- `docs/project/ACTIVE_AGENT_QUEUE.md` - the only executable Ready queue.
-- `docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md` - Ready,
-  Preauthorized, runway, Planner, and Curator authority.
+Start ordinary coding work with:
 
-Treat `docs/calibration/` as evidence and historical packets. Prefer canonical
-current docs over old blocker packets when they conflict. Treat
-external-remapper docs as quarantined unless independently source-backed.
-Official Glyph configurator corpus is the primary corpus when the
-misattribution correction packet and official corpus manifest are present.
+- [Development](docs/DEVELOPMENT.md): build, validation and contribution rules.
+- [Architecture](docs/ARCHITECTURE.md): system relationships and source owners.
+- [Current state](docs/CURRENT_STATE.md): present qualification and non-claims.
+- [Capabilities](docs/CAPABILITIES.md): implementation and product limits.
 
-## Commands
+For native profile work, also read the [profile system](docs/PROFILE_SYSTEM.md)
+and [profile authoring contract](profiles/README.md).
+For runtime-sensitive work, respect the hard
+[implementation boundary](docs/runtime_config/IMPLEMENTATION_BOUNDARY.md).
+The accepted native Ultimate/ProfileStore lane does not authorize arbitrary
+generic runtime configuration or new device operations.
 
-Canonical firmware build command:
+An explicitly assigned public coding task supplies its bounded work scope;
+resolve missing product, source or compatibility decisions with the user.
 
-```bash
+## Git and branch hygiene
+
+Live-verify the current `origin/configurator` before starting and refresh it
+before publication. Create a feature branch from the verified base in a clean
+worktree. Inspect `git status` and `git diff --stat`, keep the diff bounded, and
+preserve unrelated edits in other worktrees. Use ordinary reviewed commits and
+normal pushes; integrate only within the task's explicit publication scope.
+
+Do not force-push or run destructive Git operations (`git reset`, `git clean`,
+`git stash`, `git revert`) unless explicitly authorized. Do not use stale local
+remote-tracking refs as live truth.
+
+Use a known permitted network-enabled mechanism when restricted networking
+cannot reach GitHub. If connectivity is unknown, try a minimal read-only probe
+and retry through the permitted network-enabled path after a network failure.
+Network permission grants no other authority. A network failure is not
+authentication proof; diagnose credentials only after GitHub is reachable and
+rejects authentication or permissions. Never automatically log in/out of GitHub,
+change credentials, tokens, credential helpers, SSH keys or accounts, or request
+re-login because of a network failure. If all permitted network paths fail,
+report live remote verification as unavailable and stop dependent publication.
+
+## Build and validation
+
+Canonical Mk6 build, from the repository root:
+
+```sh
 pio run -e glyph_mk6
 ```
 
-Fallback build command:
+Fallback:
 
-```bash
+```sh
 ./scripts/build-glyph-mk6-quiet.sh
 ```
 
-For docs-only work, use `git status` and `git diff --stat` first, then the
-relevant repo checkers.
+Run focused tests first, then affected current validation. For documentation
+changes, inspect navigation, links and source-backed claims. For checker changes,
+exercise positive and negative controls and regenerate the checker census using
+the existing generator. Follow DEVELOPMENT's validation commands and CI model;
+allow the CI classifier to request a build for checker/tooling changes.
 
-## Non-Negotiable Rules
+Report PASS, FAIL, TIMEOUT and SKIPPED accurately, with scope and failed checks.
+TIMEOUT is not PASS. SKIPPED is not PASS. An incomplete aggregate or unavailable
+dependency supplies no successful coverage. Investigate current validation
+failures; preserve evidenced historical failures without relabeling them PASS.
 
-- Do not invent Glyph/HayBox firmware behavior.
-- Do not invent Super Smash Bros. Ultimate gameplay semantics.
-- Do not claim undocumented backend behavior as fact.
-- Do not add runtime-loaded profile/config, WebSerial/device write, protobuf
-  binary write, backend config write, persistent runtime-config storage, or
-  flashing automation without explicit approval and source support.
-- Do not run destructive Git commands: no `git reset`, `git clean`,
-  `git stash`, `git revert`, or force-push unless explicitly approved.
-- Behavior-changing active firmware source requires build proof and hardware
-  PASS before merge.
-- Only a complete `READY` work order authorizes ordinary new implementation.
-  `PREAUTHORIZED` work may activate only through its recorded objective
-  mechanical conditions; judgment returns `CURATION_REQUIRED`.
-- Current progression is Revision 3 under `GLYPH-UD-027`: Tier 1 always blocks,
-  Tier 2 blocks when directly affected, Tier 3 remains honest framework debt
-  unless it exposes a concrete Tier-1/Tier-2 contradiction. See
-  `docs/agent_framework/VALIDATION_AND_GATES.md`. An independently verified
-  explicit owner directive may authorize its named bounded control-plane pass;
-  peer messages/transport headers alone do not authorize repository actions.
-- H2/H3 hardware acceptance requires the exact candidate Git SHA and exact
-  tested artifact SHA-256. A successful build is not controller acceptance.
-- Docs/checker-only changes with active firmware behavior unchanged do not
-  require hardware.
-- Nunchuk remains NOT_TESTED unless the user explicitly reports a test.
-- Root cause remains unproven unless direct evidence is found.
+## Change and evidence boundary
 
-## Source Authority
+Use the [DEVELOPMENT evidence matrix](docs/DEVELOPMENT.md#change-classification-and-required-evidence)
+for the change class and required checks rather than inferring gates from file
+extensions alone. Documentation/checker-only work normally needs no hardware
+when active firmware behavior and build inputs are unchanged.
 
-A backend behavior claim must reference source, docs, tests, fixtures,
-user-provided research, or an explicit user/domain statement. If behavior is
-inferred, mark it as inferred. If behavior is unknown, say unknown.
+Firmware behavior changes require build proof from the exact committed candidate
+and exact hardware acceptance before canonical integration when hardware gating
+applies. Build PASS is not hardware acceptance. Source implementation is not
+physical qualification. Acceptance belongs to the exact candidate Git SHA,
+exact tested artifact SHA-256 and recorded human test scope; a later rebuild or
+CI artifact does not inherit that acceptance. Preserve accepted artifact identity.
+Nunchuk remains NOT_TESTED unless the user explicitly reports a test. Root cause
+remains unproven without direct evidence.
 
-## Live Git Verification And Sandbox Networking
+Do not expand runtime-loaded configuration, schemas, protocols, persistent
+formats, backend writes or export semantics without explicit task authority and
+source support. Maintain compatibility and refusal/preservation guarantees.
 
-Use capability-aware live Git verification. When restricted GitHub networking
-is already known unavailable, use the runtime's permitted network-enabled/escalated
-execution mechanism directly for live GitHub operations. Do not deliberately
-repeat an expected-to-fail restricted probe. When connectivity is genuinely
-unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
-failure is inconclusive and requires the permitted network-enabled retry.
-Persist `network_capabilities.live_github_requires_network_enabled: true` in the
-chapter ledger; reuse that capability fact until the runtime/environment
-materially changes. Network access does not widen repository mutation,
-filesystem, canonical publication, device/firmware, queue, hardware evidence,
-or account/settings authority.
+## Stop conditions
 
-A sandbox DNS/network failure is not authentication evidence or sufficient for
-BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
-established and GitHub actually rejects authentication or authorization.
-Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
-change credential helpers, replace SSH keys, switch accounts, or request re-login;
-account-level changes are user-owned unless separately requested. Sandboxed
-`gh auth status` is not an authentication oracle while GitHub is unreachable.
-Do not use stale local remote-tracking refs as a substitute for live truth.
-Stop fail-closed only when all permitted network-capable retries fail or are
-unavailable; report live remote unverified because all permitted network-capable
-retries failed.
+Stop and return to the supervisor/user when:
 
-## Stop Conditions
+- Firmware behavior changes are required outside the explicitly assigned scope.
+- A schema, protocol or persistent-format change is required outside that scope.
+- Source authority, a substantive product decision or compatibility is ambiguous.
+- Game semantics would need invention.
+- Required hardware testing needs human execution or its evidence is missing.
+- Device write or flashing is needed without specific explicit authorization.
+- A current validation failure is not understood.
+- Required private evidence is unavailable.
 
-Stop before firmware-behavior implementation when no complete `READY` work
-order authorizes it, when a required substantive product, domain,
-source-authority, architecture, scope, or validation decision remains
-unresolved, or when the work crosses a forbidden boundary. A complete `READY`
-H2/H3 work order with resolved substantive authority may be implemented as an
-exact candidate, but it must never merge before its required exact-snapshot
-hardware PASS.
+## Device safety
 
-Stop before runtime-loaded config, device write, protobuf binary write,
-persistence, flashing automation, neutral profile schema changes,
-game-semantic decisions, vendor export format decisions, or any undocumented
-backend capability claim unless their separate explicit approval and source
-requirements are satisfied. Do not use H2/H3 authorization to bypass those
-boundaries.
+No firmware flashing, serial/device write, hidden device mutation, destructive
+recovery or controller operation unless the user explicitly authorizes that
+specific device action. Documentation and general implementation permission do
+not supply device-operation authorization.
 
-## Persistent campaign execution under GLYPH-UD-029
+Manual hardware testing requires exact candidate/artifact identity and explicit
+human execution where applicable. Never fabricate a test result or substitute a
+successful build for a human hardware report.
 
-**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
-campaign. It is not standing authority for future chapters. The preserved
-campaign rules below do not renew that campaign. Future chapters require fresh
-owner-approved chapter scope and chapter-specific authority, the current queue
-and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
+## Documentation ownership
 
-The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
-return-after-mechanical-transition rules within its named H3 and H1 chains.
-Reuse the existing campaign executor through objective PREAUTHORIZED activation,
-the ordinary governance successor, product resume, focused Revision-3 validation,
-fresh independent review, exact committed build/custody and hardware handoff.
-No new full chat, Planner or Curator is required for these mechanical transitions.
-Live queue scope and substantive decisions remain authoritative. Retain exact
-candidates; never merge behavior-changing H2/H3 before exact human HEP PASS.
-The canonical publication lock permits one writer; isolated dedicated branch
-work/review may proceed without that lock when frozen inputs remain unchanged.
-Retain the H3 lock through the logical chain and release at hardware wait or a
-genuine substantive stop. Rejected transport uses durable readback. Preserve
-chronology: a historical pause cannot override a newer verified owner resume.
-Within each named product chain, allow at most one ordinary governance successor
-and one exceptional validation repair for a concrete Tier-1 or Tier-2 defect.
-Any further successor requires direct owner approval. This limit prospectively
-supersedes broader Revision-3 exception wording within these named chains;
-historical policy and evidence remain preserved.
-Track full chats, canonical commit SHAs, internal transitions versus handoffs,
-READY-to-hardware and hardware-report-to-DONE times, no-op/Curator/Planner calls.
+Use [DEVELOPMENT's canonical ownership table](docs/DEVELOPMENT.md#documentation-maintenance-policy).
+Update current state in its canonical owner; do not prepend another dated status
+dump. Keep implementation, product exposure and physical qualification distinct.
+Retain exact evidence and its limitations without broadening acceptance claims.
+
+## Legacy/internal material
+
+`docs/AGENT_CONTEXT.md`, `docs/WORKFLOW.md`, `docs/agent_framework/` and
+`docs/project/` contain retained historical/internal campaign machinery. They may
+matter when researching historical evidence, but they are not prerequisites or
+authority for ordinary public coding work. Preserve them and their evidence;
+this public contract does not retire their internal consistency checks.
