@@ -607,14 +607,31 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
     retained = (
         "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
-        "docs/agent_framework/USER_DIRECTION.md",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
     )
+    legacy_authority = ("docs/agent_framework/USER_DIRECTION.md",)
+    for row in current:
+        for path in legacy_authority:
+            if path in row["source_dependencies"]:
+                raise AssertionError(f"current legacy authority dependency: {row['id']}: {path}")
+    f3 = json.loads(subprocess.check_output([
+        "git", "show", "f6a4c68e0b7db689e6126343d48d60f0336e7694:" + relative,
+    ], cwd=actual_root))
+    expected = json.loads(json.dumps(f3))
+    authority = next(row for row in expected["entries"] if row["id"] == "source_authority_intake")
+    authority["source_dependencies"] = [
+        "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json"
+        if path == legacy_authority[0] else path for path in authority["source_dependencies"]
+    ] + ["docs/runtime_config/fixtures/source_owned_source_authority_intake.json"]
+    if actual != expected:
+        raise AssertionError("F4 manifest changed beyond the source-authority dependency migration")
+    if authority["applicability"] != "current" or authority["load_bearing"] is not True:
+        raise AssertionError("F4 source authority is no longer current/load-bearing")
     with tempfile.TemporaryDirectory(prefix="glyph-current-policy-dependencies-") as directory:
         root = fresh_root(Path(directory))
         module.ROOT = root
-        for path in (*legacy, *retained):
+        for path in (*legacy, *legacy_authority, *retained):
             target = root / path
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text("retained synthetic evidence\n", encoding="utf-8")
@@ -626,10 +643,15 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
             manifest = write_manifest(root, [probe], ["baseline"])
             assert_manifest_failure(module, root, manifest,
                                     f"legacy current policy dependency: {probe['id']}: {path}")
+        for path in legacy_authority:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current authority dependency: {probe['id']}: {path}")
         historical = entry("historical_policy_probe", applicability="historical_only",
                            historical=True, load_bearing=False)
         historical["branch_policy"] = "named_evidence_branch"
-        historical["source_dependencies"] = list(legacy)
+        historical["source_dependencies"] = list((*legacy, *legacy_authority))
         write_checker(root, historical, 9)
         probe["source_dependencies"] = list(retained)
         manifest = write_manifest(root, [probe, historical], ["baseline"])
@@ -638,7 +660,10 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
             raise AssertionError("retained current contracts or historical policy rejected: " + text)
     return ["F3-current-manifest-no-legacy-policy-dependencies",
             "F3-current-workflow-and-agent-context-rejected-with-identity",
-            "F3-historical-policy-and-current-hardware-direction-queue-receipts-allowed",
+            "F3-historical-policy-and-current-hardware-queue-receipts-allowed",
+            "F4-current-no-legacy-authority-dependency-rejected-with-identity",
+            "F4-historical-authority-and-current-hardware-queue-receipts-allowed",
+            "F4-only-source-authority-dependencies-migrated-current-load-bearing",
             "F3-all-23-current-classifications-and-all-commands-unchanged"]
 
 

@@ -35,6 +35,10 @@ APPLICABILITIES = {"current", "historical_only", "unsafe_or_mutating"}
 LEGACY_CURRENT_POLICY_DEPENDENCIES = frozenset({
     "docs/AGENT_CONTEXT.md", "docs/WORKFLOW.md",
 })
+# Owner authority is distinct from policy; historical evidence may retain it.
+LEGACY_CURRENT_AUTHORITY_DEPENDENCIES = frozenset({
+    "docs/agent_framework/USER_DIRECTION.md",
+})
 EXCLUSION_REQUIRED = {"id", "path", "reason", "detail"}
 EXCLUSION_REASONS = {"HISTORICAL_BRANCH_EVIDENCE", "HARDWARE_RESULT_EVIDENCE", "SUPERSEDED_CONTRACT", "REQUIRES_NONCANONICAL_ARGUMENT", "UNSAFE_OR_MUTATING", "DUPLICATE_COVERAGE", "NOT_CURRENT_RUNTIME_CONFIG_LANE"}
 CHECKER_TIMEOUT_SECONDS = 120.0
@@ -304,6 +308,8 @@ def validate_dependencies(entry: dict[str, object]) -> None:
     for path in dependencies:
         if entry["applicability"] == "current" and path in LEGACY_CURRENT_POLICY_DEPENDENCIES:
             raise ValueError(f"legacy current policy dependency: {entry['id']}: {path}")
+        if entry["applicability"] == "current" and path in LEGACY_CURRENT_AUTHORITY_DEPENDENCIES:
+            raise ValueError(f"legacy current authority dependency: {entry['id']}: {path}")
         if path == entry["path"]:
             raise ValueError(f"checker path repeated as source dependency: {entry['id']}")
         if not tracked_regular_stage_zero(path):

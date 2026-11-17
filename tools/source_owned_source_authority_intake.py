@@ -43,7 +43,7 @@ OPERATIONS = {"production_changeset", "source_equivalence_proof"}
 # needs separate source-authority review.
 CANONICAL_X1_INTAKE_ID = "x1-normal-restoration-overlay-hardware-candidate-2026-09-21"
 CANONICAL_X1_PROFILE_ID = "glyph_x1_normal_restoration_overlay_hardware_candidate"
-CANONICAL_X1_AUTHORITY_REFERENCE = "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018"
+CANONICAL_X1_AUTHORITY_REFERENCE = "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json"
 CANONICAL_X1_TABLE = "kX1Table"
 CANONICAL_X1_POINTS = [
     {"x": 93, "y": 51}, {"x": 128, "y": 51}, {"x": 163, "y": 51},
@@ -101,6 +101,82 @@ def load_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         _fail("JSON root must be an object")
     return value
+
+
+# Immutable extraction of GLYPH-UD-018 at the F3 canonical snapshot.  The
+# original reference is provenance only; ordinary validation reads the receipt.
+_X1_AUTHORITY_RECEIPT = {'schema_name': 'glyph_source_authority_receipt',
+ 'schema_version': 1,
+ 'authority_id': 'GLYPH-UD-018',
+ 'authority_type': 'Decision',
+ 'status_at_extraction': 'Active',
+ 'source': {'kind': 'direct_project_owner_confirmation',
+            'supplied_on': '2026-09-21',
+            'original_path': 'docs/agent_framework/USER_DIRECTION.md',
+            'original_heading': 'GLYPH-UD-018',
+            'extracted_from_commit': 'f6a4c68e0b7db689e6126343d48d60f0336e7694',
+            'section_sha256': 'f674e39a6acaebcc472ff7d6ff23f119388e6fcd378aa8bba7ce44592931c5aa'},
+ 'scope': {'table_symbol': 'kX1Table',
+           'selection': 'existing Ultimate sole/non-Mode',
+           'ordered_points': [{'direction_key': 1, 'x': 93, 'y': 51},
+                              {'direction_key': 2, 'x': 128, 'y': 51},
+                              {'direction_key': 3, 'x': 163, 'y': 51},
+                              {'direction_key': 4, 'x': 93, 'y': 128},
+                              {'direction_key': 5, 'x': 128, 'y': 128},
+                              {'direction_key': 6, 'x': 163, 'y': 128},
+                              {'direction_key': 7, 'x': 93, 'y': 205},
+                              {'direction_key': 8, 'x': 128, 'y': 205},
+                              {'direction_key': 9, 'x': 163, 'y': 205}],
+           'owned_tables': ['kX1Table'],
+           'other_tables_preserved': True},
+ 'preserve': ['every other source-owned table, including kMX1Table',
+              'current LT5/non-Mode selection route',
+              'Mode behavior',
+              'precedence',
+              'active publication mechanism',
+              'profile/configuration behavior',
+              'GP-CONFIG-010 identity'],
+ 'not_authorized': ['Senscope modifier or binding',
+                    'gameplay-angle or radius claim',
+                    'runtime-loaded configuration',
+                    'persistence',
+                    'device write',
+                    'protobuf write',
+                    'WebSerial',
+                    'flashing automation'],
+ 'hardware_gate': {'risk': 'H2',
+                   'requires_exact_committed_candidate': True,
+                   'requires_canonical_build': True,
+                   'requires_preserved_uf2_custody': True,
+                   'requires_independent_review': True,
+                   'requires_exact_snapshot_physical_pass_before_merge': True},
+ 'verbatim_direction': 'Restore the existing Ultimate sole/non-Mode `kX1Table` to the\n'
+                       '  ordered direction rows `(93,51)`, `(128,51)`, `(163,51)`, `(93,128)`,\n'
+                       '  `(128,128)`, `(163,128)`, `(93,205)`, `(128,205)`, and `(163,205)`. '
+                       'Preserve\n'
+                       '  every other source-owned table, including `kMX1Table`, and preserve the\n'
+                       '  current LT5/non-Mode selection route, Mode behavior, precedence, active\n'
+                       '  publication mechanism, profile/configuration behavior, and '
+                       'GP-CONFIG-010\n'
+                       '  identity. This decision creates no Senscope modifier or binding, makes '
+                       'no\n'
+                       '  gameplay-angle or radius claim, and does not authorize runtime-loaded\n'
+                       '  configuration, persistence, device write, protobuf write, WebSerial, or\n'
+                       '  flashing automation. The restoration is H2 and requires an exact '
+                       'committed\n'
+                       '  candidate, canonical build, preserved UF2 custody, independent review, '
+                       'and\n'
+                       '  exact-snapshot physical PASS before merge.',
+ 'original_reference': 'docs/agent_framework/USER_DIRECTION.md#glyph-ud-018'}
+X1_AUTHORITY_RECEIPT_PATH = Path(__file__).resolve().parents[1] / CANONICAL_X1_AUTHORITY_REFERENCE
+
+
+def validate_x1_authority_receipt(path: Path | None = None) -> dict[str, Any]:
+    """Validate the closed receipt without consulting USER_DIRECTION or Git."""
+    receipt = load_json(X1_AUTHORITY_RECEIPT_PATH if path is None else path)
+    if canonical_json(receipt) != canonical_json(_X1_AUTHORITY_RECEIPT):
+        _fail("X1 authority receipt differs from the exact GLYPH-UD-018 extraction", "source_authority")
+    return receipt
 
 
 def _nonempty(value: Any) -> bool:
@@ -232,6 +308,11 @@ def _closed_canonical_x1_mapping(
     if identity_values != canonical_identity:
         _block(blockers, "CANONICAL_IDENTITY_MISMATCH", "authority", "intake_id/profile_id", "production authority must use the exact reviewed X1 intake and profile identities")
         return
+    try:
+        validate_x1_authority_receipt()
+    except IntakeError as exc:
+        _block(blockers, "CANONICAL_AUTHORITY_RECEIPT_INVALID", "authority",
+               CANONICAL_X1_AUTHORITY_REFERENCE, str(exc))
     authority = payload.get("authority")
     if not isinstance(authority, dict) or authority.get("approval_reference") != CANONICAL_X1_AUTHORITY_REFERENCE:
         _block(blockers, "CANONICAL_LOCATOR_MISMATCH", "authority", "authority.approval_reference", "canonical X1 approval locator must resolve to GLYPH-UD-018")

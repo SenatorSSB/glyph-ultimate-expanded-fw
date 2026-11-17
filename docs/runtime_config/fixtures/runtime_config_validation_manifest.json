@@ -4345,12 +4345,13 @@
       "mutation_risk": "none",
       "source_dependencies": [
         "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json",
-        "docs/agent_framework/USER_DIRECTION.md",
+        "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
         "src/modes/UltimateIdentityRuntimeTables.hpp",
         "src/modes/UltimateRuntimeConfigInterpreter.hpp",
         "tools/manage_source_owned_source_authority_intake.py",
         "tools/source_owned_generator_modes.py",
-        "tools/source_owned_source_authority_intake.py"
+        "tools/source_owned_source_authority_intake.py",
+        "docs/runtime_config/fixtures/source_owned_source_authority_intake.json"
       ],
       "load_bearing": true,
       "historical": false,

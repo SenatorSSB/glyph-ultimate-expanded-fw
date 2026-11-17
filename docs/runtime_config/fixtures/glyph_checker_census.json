@@ -14794,7 +14794,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 115094,
+      "file_size_bytes": 116803,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -14825,7 +14825,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1888,
+      "line_count": 1913,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -14873,6 +14873,8 @@
         "docs/runtime_config/fixtures/gp_val039_accepted_transitions.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
         "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/fixtures/source_owned_source_authority_intake.json",
+        "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
         "tools/./bad.py",
         "tools/./check_glyph_c022_proof_replay.py",
         "tools/./check_glyph_runtime_config_webserial_device_write_source_authority.py",
@@ -14906,9 +14908,10 @@
         "coordinate_native_profile",
         "generated_source_owned",
         "hardware_evidence_contracts",
-        "runtime_config_docs"
+        "runtime_config_docs",
+        "source_authority_intake"
       ],
-      "sha256": "dd8b363a9ef67030984404fbc0ec84ecd3b120aa409a3a219437f769359c5908",
+      "sha256": "221da42b53ee836b457be8789f1cf64244c3b07d37858a88ed1d47206a81f168",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -15889,7 +15892,7 @@
       },
       "checker_id": "source_owned_source_authority_intake",
       "defines_main": false,
-      "file_size_bytes": 23719,
+      "file_size_bytes": 29554,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate_digest",
@@ -15903,9 +15906,9 @@
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
+      "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 357,
+      "line_count": 451,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_source_authority_intake.py",
       "potential_branch_identity_signals": [
@@ -15919,23 +15922,24 @@
         "x1_normal_restoration_overlay_hardware_candidate.intake.json"
       ],
       "potential_mutation_signals": [
+        "subprocess.check_output",
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_source_owned_source_authority_intake",
       "referenced_repository_path_prefixes": [
-        "docs/agent_framework/USER_DIRECTION.md",
         "docs/runtime_config/fixtures/source_owned_source_authority_intake.json",
         "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json",
-        "tools/manage_source_owned_source_authority_intake.py"
+        "tools/manage_source_owned_source_authority_intake.py",
+        "tools/source_owned_source_authority_intake.py"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs",
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "b40276c58cf0c3d9c2d3e05d341dbb53c8dd36d55917dc7918cd0d1e361f6cff",
+      "sha256": "e52ead91fddc81789261615a187c90f99fcf5d5e23c88b904af4dd040efea32a",
       "static_signals": {
-        "agent_framework": true,
+        "agent_framework": false,
         "candidate_generation": false,
         "coordinate_native": false,
         "docs_navigation": true,

@@ -52,6 +52,8 @@
     {"case_id": "canonical_grid_unspecified", "expected_blocker_codes": ["OWNERSHIP_REPLACEMENT_MISMATCH"], "expected_exit_code": 3}
   ],
   "canonical_locator_cases": [
+    {"case_id": "approval_locator_old_user_direction", "field": "authority.approval_reference", "value": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018", "expected_blocker_code": "CANONICAL_LOCATOR_MISMATCH"},
+    {"case_id": "approval_locator_wrong_receipt", "field": "authority.approval_reference", "value": "docs/runtime_config/fixtures/wrong_authority_receipt.json", "expected_blocker_code": "CANONICAL_LOCATOR_MISMATCH"},
     {"case_id": "approval_locator_wrong_anchor", "field": "authority.approval_reference", "value": "GLYPH-UD-010", "expected_blocker_code": "CANONICAL_LOCATOR_MISMATCH"},
     {"case_id": "ownership_locator_wrong_anchor", "field": "ownership.declarations[0].authorization_reference", "value": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-011", "expected_blocker_code": "CANONICAL_LOCATOR_MISMATCH"},
     {"case_id": "replacement_locator_external", "field": "replacements[0].source_reference", "value": "external-remapper://x1", "expected_blocker_code": "CANONICAL_LOCATOR_MISMATCH"},

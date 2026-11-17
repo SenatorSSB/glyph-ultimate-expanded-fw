@@ -1,7 +1,7 @@
 {
   "author": "Codex Glyph Implementation Supervisor under GP-X1-002",
   "authority": {
-    "approval_reference": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018",
+    "approval_reference": "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
     "approver": "Glyph project owner / user authority",
     "basis": "The project owner explicitly confirmed this prior nine-point X1 table for restoration; GP-X1-002 authorizes overlay_preserve with kX1Table as the sole owned table.",
     "statement": "Production authority is approved for the exact GP-X1-002 kX1Table restoration in this candidate only; all other source-owned tables remain unowned and preserved.",
@@ -200,7 +200,7 @@
   "ownership": {
     "declarations": [
       {
-        "authorization_reference": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018",
+        "authorization_reference": "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
         "rationale": "GP-X1-002 and GLYPH-UD-018 explicitly own only kX1Table for this restoration candidate.",
         "table_symbol": "kX1Table"
       }
@@ -263,7 +263,7 @@
         }
       ],
       "rationale": "Restore the project-owner-confirmed prior raw absolute X1 coordinates; miniscreen values are raw minus 128 only and no gameplay meaning is inferred.",
-      "source_reference": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018",
+      "source_reference": "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
       "table_symbol": "kX1Table"
     }
   ],

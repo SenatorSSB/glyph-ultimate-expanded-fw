@@ -8,6 +8,7 @@ import json
 import subprocess
 import sys
 import tempfile
+import types
 from contextlib import redirect_stderr
 from pathlib import Path
 from unittest.mock import patch
@@ -145,6 +146,98 @@ def run() -> tuple[int, int]:
     assert [case["case_id"] for case in policy["protected_path_cases"]] == PROTECTED_PATH_CASE_IDS
     assert [case["case_id"] for case in policy["generator_error_cases"]] == GENERATOR_ERROR_CASE_IDS
 
+    # The receipt is a closed extraction, not a journal lookup or new policy.
+    receipt = intake_module.validate_x1_authority_receipt()
+    POSITIVE += 1
+    receipt_cases = [
+        ("schema_name", lambda v: v.update(schema_name="other")),
+        ("schema_version", lambda v: v.update(schema_version=2)),
+        ("authority_id", lambda v: v.update(authority_id="GLYPH-UD-019")),
+        ("authority_type", lambda v: v.update(authority_type="Proposal")),
+        ("status", lambda v: v.update(status_at_extraction="Inactive")),
+        ("source_date", lambda v: v["source"].update(supplied_on="2026-09-22")),
+        ("source_kind", lambda v: v["source"].update(kind="inferred")),
+        ("extraction_commit", lambda v: v["source"].update(extracted_from_commit="0" * 40)),
+        ("section_digest", lambda v: v["source"].update(section_sha256="0" * 64)),
+        ("coordinate", lambda v: v["scope"]["ordered_points"][0].update(x=94)),
+        ("reordered", lambda v: v["scope"]["ordered_points"].reverse()),
+        ("expanded_ownership", lambda v: v["scope"]["owned_tables"].append("kMX1Table")),
+        ("other_tables", lambda v: v["scope"].update(other_tables_preserved=False)),
+        ("h2", lambda v: v["hardware_gate"].update(risk="H1")),
+        ("provenance", lambda v: v.update(original_reference="other")),
+        ("verbatim", lambda v: v.update(verbatim_direction=v["verbatim_direction"] + " ")),
+        ("extra_key", lambda v: v.update(new_authority=True)),
+        ("extra_nested_key", lambda v: v["source"].update(new_authority=True)),
+        ("bool_version", lambda v: v.update(schema_version=True)),
+    ]
+    # Exercise every boundary and gate independently, not just one example.
+    for field in ("preserve", "not_authorized"):
+        for index in range(len(receipt[field])):
+            receipt_cases.append((f"{field}_{index}", lambda v, f=field, i=index: v[f].pop(i)))
+    for gate in receipt["hardware_gate"]:
+        if gate != "risk":
+            receipt_cases.append((gate, lambda v, key=gate: v["hardware_gate"].pop(key)))
+    with tempfile.TemporaryDirectory(prefix="glyph-x1-authority-receipt-") as directory:
+        target = Path(directory) / "receipt.json"
+        invalid_inputs = [("missing", None), ("malformed", "{"),
+                          ("duplicate_key", '{"schema_version": 1, "schema_version": 1}')]
+        for label, mutate in receipt_cases:
+            changed = copy.deepcopy(receipt)
+            mutate(changed)
+            invalid_inputs.append((label, json.dumps(changed)))
+        for label, content in invalid_inputs:
+            if content is not None:
+                target.write_text(content, encoding="utf-8")
+            with patch.object(intake_module, "X1_AUTHORITY_RECEIPT_PATH", target):
+                try:
+                    intake_module.validate_x1_authority_receipt()
+                except IntakeError:
+                    pass
+                else:
+                    raise AssertionError("invalid receipt accepted: " + label)
+                blocked = review_intake(make_packet())
+                assert "CANONICAL_AUTHORITY_RECEIPT_INVALID" in {b["code"] for b in blocked["blockers"]}, label
+                try:
+                    emit_generator_input(make_packet(), operation="production_changeset")
+                except IntakeError:
+                    pass
+                else:
+                    raise AssertionError("invalid receipt permitted emission: " + label)
+            NEGATIVE += 1
+
+    # Replay the exact pre-F4 implementation and intake from the starting Git
+    # snapshot. Neither implementation reads USER_DIRECTION. Only the three
+    # locators may differ; emitted source data must remain byte-equivalent.
+    base = "f6a4c68e0b7db689e6126343d48d60f0336e7694"
+    def original(path: str) -> str:
+        return subprocess.check_output(["git", "show", base + ":" + path], cwd=ROOT, text=True)
+    legacy = types.ModuleType("pre_f4_source_authority_intake")
+    legacy.__file__ = str(ROOT / "tools/source_owned_source_authority_intake.py")
+    exec(compile(original("tools/source_owned_source_authority_intake.py"), legacy.__file__, "exec"), legacy.__dict__)
+    old_packet = json.loads(original(str(CANONICAL_X1_INTAKE.relative_to(ROOT))))
+    new_packet = intake_module.load_json(CANONICAL_X1_INTAKE)
+    migrated = copy.deepcopy(old_packet)
+    migrated["authority"]["approval_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    migrated["ownership"]["declarations"][0]["authorization_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    migrated["replacements"][0]["source_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    assert migrated == new_packet
+    assert legacy.review_intake(old_packet) == review_intake(new_packet)
+    # The immutable candidate baseline is still intentionally stale relative
+    # to accepted source. Rebase both copies solely for offline emission proof.
+    old_packet["baseline"] = new_packet["baseline"] = inspect_baseline()
+    assert legacy.review_intake(old_packet) == review_intake(new_packet)
+    old_input, old_artifact, old_manifest = legacy.emit_generator_input(old_packet, operation="production_changeset")
+    new_input, new_artifact, new_manifest = emit_generator_input(new_packet, operation="production_changeset")
+    old_input["metadata"]["authorization_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    assert old_input == new_input
+    assert old_artifact == new_artifact
+    # Only provenance-derived input and manifest hashes may change.
+    for key in ("input_semantic_digest", "manifest_semantic_digest"):
+        old_manifest.pop(key)
+        new_manifest.pop(key)
+    assert old_manifest == new_manifest
+    POSITIVE += 3
+
     one = make_packet()
     emitted, artifact, manifest = emit_generator_input(one, operation="production_changeset")
     assert manifest["classification"] == "NO_OP" and emitted["owned_tables"] == ["kX1Table"]
@@ -189,6 +282,7 @@ def run() -> tuple[int, int]:
 
     canonical_cases = policy["canonical_locator_cases"]
     assert [case["case_id"] for case in canonical_cases] == [
+        "approval_locator_old_user_direction", "approval_locator_wrong_receipt",
         "approval_locator_wrong_anchor", "ownership_locator_wrong_anchor",
         "replacement_locator_external", "canonical_ownership_expanded", "canonical_points_changed",
         "canonical_intake_identity_changed", "canonical_profile_identity_changed", "canonical_identity_pair_changed"
@@ -220,7 +314,7 @@ def run() -> tuple[int, int]:
     assert "CANONICAL_IDENTITY_MISMATCH" in {b["code"] for b in synthetic_report["blockers"]}
     POSITIVE += 1
     assert canonical["authority"]["approver"] == "Glyph project owner / user authority"
-    assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018"
+    assert canonical["authority"]["approval_reference"] == intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
     assert canonical["ownership"]["owned_tables"] == ["kX1Table"]
     assert [item["table_symbol"] for item in canonical["ownership"]["declarations"]] == ["kX1Table"]
     assert [item["table_symbol"] for item in canonical["replacements"]] == ["kX1Table"]
