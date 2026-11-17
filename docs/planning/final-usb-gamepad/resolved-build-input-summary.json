@@ -1,0 +1,46 @@
+{
+  "libdeps": {
+    "root": "/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6",
+    "files": 543,
+    "symlinks": {},
+    "inventory_sha256": "a1c910c5ce0090d612e28630cf9119d67c4bd08d7b4df44357e332573e5669a9"
+  },
+  "framework": {
+    "root": "/private/tmp/glyph-beta-checks-5987/pio-core/packages/framework-arduinopico",
+    "files": 52435,
+    "symlinks": {
+      "pico-sdk/lib/tinyusb/docs/contributing/code_of_conduct.rst": "../../CODE_OF_CONDUCT.rst",
+      "pico-sdk/lib/tinyusb/docs/info/contributors.rst": "../../CONTRIBUTORS.rst"
+    },
+    "inventory_sha256": "1eefad41e569c74a68927c4fc1c2711f6c4ba740435668f28cff3829e68b3912"
+  },
+  "platform": {
+    "root": "/private/tmp/glyph-beta-checks-5987/pio-core/platforms/raspberrypi",
+    "files": 167,
+    "symlinks": {},
+    "inventory_sha256": "474af53ad015928f03fd12279258bf1931a6eb7895e54be905857a2b1fa8e241"
+  },
+  "toolchain": {
+    "root": "/private/tmp/glyph-beta-checks-5987/pio-core/packages/toolchain-rp2040-earlephilhower",
+    "files": 1846,
+    "symlinks": {
+      "bin/arm-none-eabi-cc": "arm-none-eabi-gcc",
+      "lib/libcc1.so": "libcc1.0.so",
+      "lib/gcc/arm-none-eabi/12.3.0/plugin/libcc1plugin.so": "libcc1plugin.0.so",
+      "lib/gcc/arm-none-eabi/12.3.0/plugin/libcp1plugin.so": "libcp1plugin.0.so"
+    },
+    "inventory_sha256": "2cb73e982d42c7f91722dcabd1b85ae3949179da527bce2f474b274595eb8d75"
+  },
+  "scons": {
+    "root": "/private/tmp/glyph-beta-checks-5987/pio-core/packages/tool-scons",
+    "files": 215,
+    "symlinks": {},
+    "inventory_sha256": "2a1f83a7f0c4d355fdbd0fa70e672d34cb70cf89ef0759c9beb1acabd0320f4e"
+  },
+  "picotool": {
+    "root": "/private/tmp/glyph-beta-checks-5987/pio-core/packages/tool-picotool-rp2040-earlephilhower",
+    "files": 6,
+    "symlinks": {},
+    "inventory_sha256": "1a7098a5dec7287ad12f4e2d57361eb1298092134e484b8270366aa2f5acd3fe"
+  }
+}

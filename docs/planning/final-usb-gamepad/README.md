@@ -1,6 +1,6 @@
 # Final USB gamepad publication — 2026-11-17
 
-Status: source repair candidate in preparation; HARDWARE_RETEST_REQUIRED. No canonical
+Status: exact source repair candidate built and retained; HARDWARE_TEST_REQUIRED / HARDWARE_RETEST_REQUIRED. No canonical
 source integration, beta freeze or release. [Owner work order](WORK_ORDER.json) ·
 [Source audit](SOURCE_AUDIT.md) · [Exact owner packet](HARDWARE_PACKET.md).
 
@@ -29,3 +29,37 @@ The original unrelated dirty checkout remains untouched. No Planner/Curator call
 new full user chat, device operation or public release is needed for this bounded
 owner-authorized candidate. Runtime model/effort identity and token telemetry are
 UNKNOWN unless reported by the runtime. Hardware wait begins at final handoff.
+
+## Exact candidate handoff
+
+[CANDIDATE.json](CANDIDATE.json) binds source/tree, exact build input inventories,
+UF2 custody and addresses. [VALIDATION.json](VALIDATION.json) preserves all actual
+outcomes and debts; [RESOURCE_COMPARISON.json](RESOURCE_COMPARISON.json) records
+650,556→650,564B flash (+8), static198,888B and heap63,060B unchanged, 3,302 equal
+linked function shapes and unchanged stack models. [LOG_INDEX.json](LOG_INDEX.json)
+binds local logs. The full wrapper and aggregate are not PASS. The health count
+is corrected only as derived docs metadata after the exact build.
+
+Source `dcf6e29589f558a95c021bef491578f87e41750f`, tree
+`a7731388430ea70dbe666298953795f4018069b0`; UF2
+`2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42`,
+1,325,568bytes. Exactly one owner hardware handoff remains. No installation,
+canonical merge, beta tag or public release occurred. This dedicated worktree
+and owner-primary custody remain retained through hardware wait.
+
+Reproduce the resource comparison with `verify_resources.py --candidate-resource
+<extracted-candidate-resource> --baseline-resource <retained-598-resource>
+--candidate-elf <retained-candidate.elf> --baseline-elf <retained-598.elf>
+--output <new-report.json>`. Extract graphs using the existing GOPT resource
+extractor and pinned ARM toolchain; `core0.json` records its actual50-route
+composition. Native package/host boundaries and each historical standalone
+checker failure remain explicit in VALIDATION.json. The supplemental
+[retro constructor smoke](retro-smoke.json) uses [this host body](retro_smoke.cpp)
+with the existing gp_config021 console methods; it proves source initialization,
+not physical retro protocols.
+
+[Fresh independent review](REVIEW.json): APPROVED_FOR_OWNER_HARDWARE_HANDOFF,
+no material findings across source, tests, exact build/custody/resources and final
+source-free evidence packet. Canonical integration remains prohibited until exact
+hardware acceptance. Network-enabled live readback before publication still shows
+59870835 on configurator and unchanged0a1eab8 beta-readiness tip.

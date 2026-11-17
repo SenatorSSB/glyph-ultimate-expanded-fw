@@ -1,0 +1,88 @@
+{
+  "state": "HARDWARE_TEST_REQUIRED",
+  "source_sha": "dcf6e29589f558a95c021bef491578f87e41750f",
+  "tree_sha": "a7731388430ea70dbe666298953795f4018069b0",
+  "parent": "0a1eab885237f7e6ea04f405707fe78269367ef1",
+  "branch": "codex/final-usb-gamepad-enumeration",
+  "canonical_start": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "build_command": "pio run -e glyph_mk6",
+  "build": "PASS",
+  "source_was_clean_committed": true,
+  "build_cache": "matched existing package cache; PlatformIO6.1.19, ARM GCC12.3.0, SCons4.8.1",
+  "artifact": {
+    "uf2": {
+      "sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+      "bytes": 1325568
+    },
+    "bin": {
+      "sha256": "0bcddf8e45fc3b3a9e114f5039f1e6aa5d1b55b191d9e6478775d256a2e2e219",
+      "bytes": 662596
+    },
+    "elf": {
+      "sha256": "e3c7662ce3de2eb5b818ffe8c18d3d6c346e655e13ca9326efa6eb6e6376c75c",
+      "bytes": 5763716
+    },
+    "map": {
+      "sha256": "1c89bc9e92ffe664a5f3d073a18aef01a35f82beb6508a7d9032b730d7f34e4f",
+      "bytes": 3975905
+    }
+  },
+  "preserved_uf2": {
+    "sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+    "bytes": 1325568,
+    "regular_not_symlink": true,
+    "native_custody_status": "PRESERVED_AND_VERIFIED",
+    "relative_locator": "local_backups/hardware-artifacts/dcf6e29589f558a95c021bef491578f87e41750f/2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42/firmware.uf2",
+    "roots": [
+      "dedicated candidate managed worktree",
+      "owner primary repository"
+    ],
+    "evidence_relative_directory": "local_backups/hardware-artifacts/dcf6e29589f558a95c021bef491578f87e41750f/2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42/evidence"
+  },
+  "build_inputs": {
+    "tracked_production_paths": 329,
+    "all_non_doc_tracked_paths": 1254,
+    "inventories": {
+      "production-inputs.json": {
+        "sha256": "84ead368d5d6800cbc14d903f6c79b8e079d5e2773b4ee7b243d699da452d0a5",
+        "bytes": 70413
+      },
+      "all-non-doc-tracked-inputs.json": {
+        "sha256": "d5cb3c250d0605d0606dbcf7f97def79e80cdb9852b1cef16f3c92126472b10d",
+        "bytes": 286801
+      },
+      "resolved-build-inputs.json.gz": {
+        "sha256": "8c67c6065d2ed7a0226ff34b33f744cf0321c4f9c351ddf9661d636fb2845abe",
+        "bytes": 2555181
+      },
+      "resolved-build-input-summary.json": {
+        "sha256": "d4178a03537323e61e931c144ef21ea0928255693d9f79c72f36dd6ceee7279e",
+        "bytes": 1933
+      },
+      "compile_commands.json.gz": {
+        "sha256": "92a779c14008f6634c2edebc9ec6acd5558fd308ccdb3c44bb9453366e618dd7",
+        "bytes": 13383
+      }
+    },
+    "resolved_inventory_scope": "Postbuild content hashes of exact selected cached packages/tools, excluding Git internals/cache/pyc; not a reproducibility claim. Actual compiler recipe separately retained.",
+    "pins": {
+      "Arduino-Pico": "32e74d024e5e3ee5e7ec9593f5a4101641c61897",
+      "Adafruit-TinyUSB": "e2918652339aa3986f66b32c0a592c1aa72aabc8",
+      "XInput": "4b5617b19294e808ce1d950a69e6e5cc96f4ec06",
+      "platform": "5e87ae34ca025274df25b3303e9e9cb6c120123c"
+    }
+  },
+  "changed_production_build_paths": [
+    "config/glyph/common/include/final_usb_gamepad.hpp",
+    "config/glyph/common/src/config.cpp",
+    "platformio.ini"
+  ],
+  "host_proof": "PASS, with explicit preserved framework/standalone debts in VALIDATION.json",
+  "resource_proof": "PASS RESOURCE_COMPARISON.json / core0.json; no ceiling changes",
+  "hardware_acceptance": "NOT_RUN",
+  "hardware_packet": "HARDWARE_PACKET.md",
+  "install_performed": false,
+  "canonical_merge_permitted": false,
+  "release_performed": false,
+  "source_free_descendants": "Evidence metadata and derived health count are separate; never substitute their HEAD or a rebuild for this source/tree/UF2 tuple."
+}

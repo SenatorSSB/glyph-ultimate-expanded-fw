@@ -1,7 +1,7 @@
 # Later owner physical acceptance
 
 Status: NOT_RUN / HARDWARE_RETEST_REQUIRED. Use only the new exact candidate tuple
-in CANDIDATE.json once host/build/review/custody pass. This packet performs no device
+in [CANDIDATE.json](CANDIDATE.json); source/build/custody are retained and exact hardware observations remain pending. This packet performs no device
 action. Do not substitute old accepted de793f34 bytes or a rebuild. Installation is
 manual owner work, not automated here. No fresh install/nuker/storage destruction.
 Retain current readable Config and all ProfileStore records before any installation;

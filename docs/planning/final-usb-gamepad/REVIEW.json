@@ -1,0 +1,26 @@
+{
+  "verdict": "APPROVED_FOR_OWNER_HARDWARE_HANDOFF",
+  "reviewer": "usb_independent_review",
+  "independence": "Fresh native child, separate from implementer and source/test specialists; read-only review plus independent focused reruns.",
+  "reviewed_candidate": "dcf6e29589f558a95c021bef491578f87e41750f",
+  "reviewed_tree": "a7731388430ea70dbe666298953795f4018069b0",
+  "reviewed_uf2_sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+  "source_test_findings": [],
+  "exact_build_custody_resource_findings": [],
+  "final_packet_findings": [],
+  "verified": [
+    "source/tree/UF2 and both regular custody copies",
+    "329 production and1254 non-doc inputs",
+    "267 clean compiler recipes with no DIRTY",
+    "all3302 frame/call/tail/indirect shapes unchanged",
+    "core0/core1 retained bounds",
+    "health264/census/navigation PASS",
+    "only docs changed after exact candidate",
+    "honest wrapper/aggregate/standalone FAIL limits",
+    "scoped Windows/Switch/conditionalDInput/GC/preservation packet"
+  ],
+  "source_integration": "PROHIBITED until exact hardware acceptance",
+  "installation_automation": "NOT_AUTHORIZED_OR_PERFORMED",
+  "reviewed_publication": "Evidence branch only; no canonical merge/tag/release",
+  "runtime_observed_model_effort": "UNKNOWN"
+}

@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "baseline_source": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "candidate_source": "dcf6e29589f558a95c021bef491578f87e41750f",
+  "baseline_elf_sha256": "e55c7c157fdc161bd0cc0636b96bf3299f09a5d2e934b65f5f9760fc600c3a60",
+  "candidate_elf_sha256": "e3c7662ce3de2eb5b818ffe8c18d3d6c346e655e13ca9326efa6eb6e6376c75c",
+  "baseline_graph_sha256": "7ce6f6555cbb8f2d21a9c560d2448c8ea7ba4c81938577d0181f7807f1c3dc08",
+  "candidate_graph_sha256": "8d9a16bb685547fe3036626489bd7f476cdbdcd250fbb2546e6a895c6283d0c9",
+  "common_functions": 3302,
+  "changed_call_frame_tail_indirect_shapes": 0,
+  "new_functions": 0,
+  "removed_functions": 0,
+  "flash_before_after": [
+    650556,
+    650564
+  ],
+  "static_before_after": [
+    198888,
+    198888
+  ],
+  "linked_heap_capacity_before_after": [
+    63060,
+    63060
+  ],
+  "reserved_stacks_each": 2048,
+  "boot_backend_frame_before_after": [
+    64,
+    64
+  ],
+  "core0_retained_maximum": 2048,
+  "core0_lifecycle_model": 2044,
+  "core1_setup": 968,
+  "core1_loop": 984,
+  "core1_outer": 16,
+  "core1_irq": 68,
+  "core1_envelope": 1068,
+  "core1_retained_ceiling": 1152,
+  "ceiling_increase": false,
+  "physical_peak_heap_or_stack_highwater": "NOT_MEASURED",
+  "scope": "Retains source-qualified IRQ/ROM/indirect call unions from accepted model; exact current core0 composition supplied separately. Equal graph shapes do not assert equal report/USB semantics or physical acceptance."
+}

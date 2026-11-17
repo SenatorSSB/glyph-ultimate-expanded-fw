@@ -1,0 +1,302 @@
+{
+  "beta-parent-package-authority.log": {
+    "sha256": "49f0e6c1107add695134cef122ebc6474562cce0fefe4162e238c4547f297161",
+    "bytes": 1545,
+    "tail": "ge_tests as p;p.active_authority()\n                                                                                     ~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-beta-readiness/glyph-ultimate-expanded-fw/tools/glyph_ci_current_package_tests.py\", line 35, in active_authority\n    authority.ensure_no_flashing_automation_changed([path.decode() for path in changed.split(b\"\\0\") if path])\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-beta-readiness/glyph-ultimate-expanded-fw/tools/check_glyph_runtime_config_webserial_device_write_source_authority.py\", line 213, in ensure_no_flashing_automation_changed\n    fail(f\"potential flashing automation marker {marker!r} found in changed file {relpath}\")\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-beta-readiness/glyph-ultimate-expanded-fw/tools/check_glyph_runtime_config_webserial_device_write_source_authority.py\", line 87, in fail\n    raise WebSerialSourceAuthorityError(message)\ncheck_glyph_runtime_config_webserial_device_write_source_authority.WebSerialSourceAuthorityError: potential flashing automation marker 'shutil.copy' found in changed file docs/planning/beta-readiness/replay_boot.py\n"
+  },
+  "build.log": {
+    "sha256": "9d9f7e9e7f51f280a910390487f6895ad81f4a817b10dc8a149b2a882b2d5cff",
+    "bytes": 50510,
+    "tail": "duino.a\nLinking .pio/build/glyph_mk6/firmware.elf\nGenerating UF2 image\npicotool uf2 convert -t elf \".pio/build/glyph_mk6/firmware.elf\" \".pio/build/glyph_mk6/firmware.uf2\"\nRetrieving maximum program size .pio/build/glyph_mk6/firmware.elf\nFlash size: 2.00MB\nSketch size: 1.50MB\nFilesystem size: 0.50MB\nMaximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000\nChecking size .pio/build/glyph_mk6/firmware.elf\nAdvanced Memory Usage is available via \"PlatformIO Home > Project Inspect\"\nRAM:   [========  ]  75.9% (used 198888 bytes from 262144 bytes)\nFlash: [====      ]  41.5% (used 650564 bytes from 1568768 bytes)\nBuilding .pio/build/glyph_mk6/firmware.bin\nBuilding .pio/build/glyph_mk6/firmware.bin.signed\n======================== [SUCCESS] Took 210.60 seconds ========================\n\nEnvironment    Status    Duration\n-------------  --------  ------------\nglyph_mk6      SUCCESS   00:03:30.602\n========================= 1 succeeded in 00:03:30.602 =========================\n\n********************************************************************************\nThere is a new version 6.2.0 of PlatformIO available.\nPlease upgrade it via `platformio upgrade` or `python -m pip install -U platformio` command.\nChanges: https://docs.platformio.org/en/latest/history.html\n********************************************************************************\n\n"
+  },
+  "compiledb-alias-dirty.log": {
+    "sha256": "baa7a7218d199da47c54d2a4297fd5e510dfce0dfc78f02d982532d750617767",
+    "bytes": 4299,
+    "tail": "final-usb-gamepad/glyph-ultimate-expanded-fw/schema/haybox package.proto\nWriting to /Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/.pio/build/glyph_mk6/nanopb/generated-src/package.pb.h and /Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/.pio/build/glyph_mk6/nanopb/generated-src/package.pb.c\nFound 68 compatible libraries\nScanning dependencies...\nDependency Graph\n|-- Nanopb @ 0.4.91\n|-- HayBox-proto @ 0.0.0+sha.5b2bb5d\n|-- nes-pio @ 0.0.0+20240730101251.sha.422f16f\n|-- arduino-nunchuk @ 0.0.0+20260526010943\n|-- Adafruit_TinyUSB_XInput @ 0.0.0+20260526010944.sha.4b5617b\n|-- FastLED @ 3.6.0+sha.6daa7823c8\n|-- nanopb-arduino @ 1.1.0\n|-- Adafruit GFX Library @ 1.12.6\n|-- Adafruit SSD1306 @ 2.5.16\n|-- PacketIO @ 0.3.0\n|-- CRC32 @ 2.0.1\n|-- PCF8575 @ 0.2.5\n|-- TUCompositeHID\n|-- HayBox-proto @ 0.0.0+sha.db4e2f6\n|-- joybus-pio @ 0.0.0+20261020122043\n|-- Adafruit TinyUSB Library\n|-- LittleFS @ 0.1.0\n|-- Adafruit BusIO @ 1.17.4\n|-- Wire @ 1.0\n|-- SPI @ 1.0\nBuilding in release mode\nBuilding compilation database compile_commands.json\n======================== [SUCCESS] Took 177.23 seconds ========================\n\nEnvironment    Status    Duration\n-------------  --------  ------------\nglyph_mk6      SUCCESS   00:02:57.232\n========================= 1 succeeded in 00:02:57.232 =========================\n"
+  },
+  "compiledb.log": {
+    "sha256": "10cf82af104ede0b8ff0f7b8a0c452824f6d140aa56f86cd57f7c9c70d2ac42e",
+    "bytes": 2568,
+    "tail": "MB\nFilesystem size: 0.50MB\nMaximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000\nLDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf\nLDF Modes: Finder ~ chain+, Compatibility ~ soft\n[nanopb] Skipping 'schema/haybox/config.proto' (config.options)\n[nanopb] Skipping 'schema/haybox/package.proto' (package.options)\nFound 68 compatible libraries\nScanning dependencies...\nDependency Graph\n|-- Nanopb @ 0.4.91\n|-- HayBox-proto @ 0.0.0+sha.5b2bb5d\n|-- nes-pio @ 0.0.0+20240730101251.sha.422f16f\n|-- arduino-nunchuk @ 0.0.0+20260526010943\n|-- Adafruit_TinyUSB_XInput @ 0.0.0+20260526010944.sha.4b5617b\n|-- FastLED @ 3.6.0+sha.6daa7823c8\n|-- nanopb-arduino @ 1.1.0\n|-- Adafruit GFX Library @ 1.12.6\n|-- Adafruit SSD1306 @ 2.5.16\n|-- PacketIO @ 0.3.0\n|-- CRC32 @ 2.0.1\n|-- PCF8575 @ 0.2.5\n|-- TUCompositeHID\n|-- HayBox-proto @ 0.0.0+sha.db4e2f6\n|-- joybus-pio @ 0.0.0+20261020122043\n|-- Adafruit TinyUSB Library\n|-- LittleFS @ 0.1.0\n|-- Adafruit BusIO @ 1.17.4\n|-- Wire @ 1.0\n|-- SPI @ 1.0\nBuilding in release mode\nBuilding compilation database compile_commands.json\n======================== [SUCCESS] Took 185.79 seconds ========================\n\nEnvironment    Status    Duration\n-------------  --------  ------------\nglyph_mk6      SUCCESS   00:03:05.792\n========================= 1 succeeded in 00:03:05.792 =========================\n"
+  },
+  "core0.log": {
+    "sha256": "7311bb7b962a0738be5e23679bfaf51dad3eb107f7967fb12f588490b1f58aac",
+    "bytes": 52,
+    "tail": "50 route compositions, maximum 2048, lifecycle 2044\n"
+  },
+  "core1.log": {
+    "sha256": "3368a8be238ac804d0bdeae69e265c3270e706406a09ec560dd3fdb7ce4bebaa",
+    "bytes": 16546,
+    "tail": "__retarget_lock_acquire_recursive\"\n      ]\n    },\n    \"__wrap_calloc\": {\n      \"bound\": 176,\n      \"max_path\": [\n        \"__wrap_calloc\",\n        \"calloc\",\n        \"_calloc_r\",\n        \"_malloc_r\",\n        \"_free_r\",\n        \"_malloc_trim_r\",\n        \"__malloc_lock\",\n        \"__retarget_lock_acquire_recursive\"\n      ]\n    },\n    \"TwoWire::endTransmission()\": {\n      \"bound\": 672,\n      \"max_path\": [\n        \"TwoWire::endTransmission()\",\n        \"TwoWire::endTransmission(bool)\",\n        \"_probe(int, unsigned char, unsigned char, int)\",\n        \"sleep_us\"\n      ]\n    },\n    \"Adafruit_SSD1306::display()\": {\n      \"bound\": 752,\n      \"max_path\": [\n        \"Adafruit_SSD1306::display()\",\n        \"Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]\",\n        \"TwoWire::endTransmission()\",\n        \"TwoWire::endTransmission(bool)\",\n        \"_probe(int, unsigned char, unsigned char, int)\",\n        \"sleep_us\"\n      ]\n    }\n  },\n  \"unknown\": [],\n  \"excluded_precondition_faults\": {\n    \"pio_add_program\": [\n      \"panic\"\n    ],\n    \"_pio_add_program_at_offset\": [\n      \"panic\"\n    ],\n    \"hw_claim_unused_from_range\": [\n      \"panic\"\n    ],\n    \"irq_remove_handler\": [\n      \"hard_assertion_failure\"\n    ],\n    \"irq_set_exclusive_handler\": [\n      \"hard_assertion_failure\"\n    ],\n    \"noInterrupts\": [\n      \"panic\"\n    ]\n  },\n  \"reachable_count\": 237\n}\n"
+  },
+  "custody.log": {
+    "sha256": "236eae900b75ae320a83b7b1424c85059ae2c75a05ae4f92c1b4a35b0013fa87",
+    "bytes": 394,
+    "tail": "custody_status=PRESERVED_AND_VERIFIED\ncandidate_git_sha=dcf6e29589f558a95c021bef491578f87e41750f\nfirmware_artifact_sha256=2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42\npreserved_firmware_artifact_locator=local_backups/hardware-artifacts/dcf6e29589f558a95c021bef491578f87e41750f/2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42/firmware.uf2\nsize_bytes=1325568\n"
+  },
+  "final-gates/check_glyph_agent_framework_docs.log": {
+    "sha256": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3",
+    "bytes": 2112,
+    "tail": " summaries match machine state\nPASS: current prose contains no duplicated unguarded runway claims\nPASS: canonical queue, runway counts, and zero-runway liveness validate\nPASS: completion correspondence direct/replay and negative Git corpus validate\nPASS: Revision 2 authorization, evidence, and user-direction surfaces validate\nPASS: Revision-3 classification/safety/successor/transport-policy negative controls validate\nPASS: persistent campaign directive, safety and chronology controls validate\nPASS: current Revision-3 policy and prospective GP-VAL contracts validate; historical orders preserved\nPASS: firmware implementation authority and hardware merge gate are reconciled\nPASS: legacy project-local control plane is explicitly superseded\nPASS: delegation discovery and accountability adversarial self-tests validate\nPASS: native delegation discovery, role boundaries, and reporting validate\nPASS: four exact scheduled/manual task configurations validate\nPASS: capability-aware live Git and authentication protections validate\nPASS: branch classifications and judge verdicts are documented\nPASS: AGENTS.md points to framework entrypoints\nPASS: post-C024 chapter entrypoint, bounded authority, roles and passive telemetry validate\nPASS: forbidden active claims absent and required non-claims preserved\nPASS: runner prompt and scripts/agent_runner.py are absent\nglyph_agent_framework_docs: PASS\n"
+  },
+  "final-gates/check_glyph_build_input_non_selector_configuration.log": {
+    "sha256": "cab8538225e1af92d6c8648b4c9edd64a897673c49d3cb93b9de341aa3b05992",
+    "bytes": 49,
+    "tail": "PASS: declared non-selector configuration census\n"
+  },
+  "final-gates/check_glyph_build_input_provenance_inventory.log": {
+    "sha256": "2961f7c7de3a3165822a876cd9267ee520c7fcb758f464c0d01db212164862be",
+    "bytes": 320,
+    "tail": "{\"declaration_files\": 10, \"dependency_resolution\": false, \"firmware_artifact_published\": false, \"glyph_nuker_executed\": false, \"negative_tests\": 14, \"network_access\": false, \"platformio_invoked\": false, \"positive_tests\": 16, \"runtime_behavior_changed\": false, \"selectors\": 70, \"status\": \"PASS\", \"unresolved_claims\": 10}\n"
+  },
+  "final-gates/check_glyph_checker_census.log": {
+    "sha256": "dd8713ef7dc69e82203b1b743d560c66a336a7b15af18ac7aa6c845ab29666e6",
+    "bytes": 40,
+    "tail": "glyph_checker_census: PASS; entries=264\n"
+  },
+  "final-gates/check_glyph_docs_agent_surface.log": {
+    "sha256": "eaba59e085052c893b73ede08cd04d965fffc6fa418e26aac79aa0d38ce80448",
+    "bytes": 2977,
+    "tail": "last):\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_docs_agent_surface.py\", line 563, in main\n    context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/glyph_checker_context.py\", line 290, in authenticated_campaign_context\n    raise ScopeValidationError(str(exc)) from exc\nglyph_checker_context.ScopeValidationError: C024 post-integration change outside validation/evidence paths\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_docs_agent_surface.py\", line 578, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_docs_agent_surface.py\", line 566, in main\n    fail(str(exc))\n    ~~~~^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_docs_agent_surface.py\", line 120, in fail\n    raise AgentSurfaceError(message)\nAgentSurfaceError: C024 post-integration change outside validation/evidence paths\n"
+  },
+  "final-gates/check_glyph_docs_navigation.log": {
+    "sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206",
+    "bytes": 1213,
+    "tail": "glyph_docs_navigation: PASS\n- README.md\n- AGENTS.md\n- docs/AGENT_CONTEXT.md\n- docs/CURRENT_STATE.md\n- docs/ROADMAP.md\n- docs/WORKFLOW.md\n- docs/archive/README.md\n- docs/calibration/README.md\n- docs/calibration/INDEX.md\n- docs/calibration/archive_policy.md\n- docs/export/README.md\n- docs/runtime_config/README.md\n- docs/runtime_config/IMPLEMENTATION_BOUNDARY.md\n- docs/runtime_config/coordinate_native_runtime_profile_contract.md\n- docs/runtime_config/source_owned_table_symbol_map.md\n- docs/runtime_config/runtime_config_activation_alternatives_a_f.md\n- docs/runtime_config/source_authority_intake_workflow.md\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json\n- docs/agent_framework/README.md\n- docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md\n- docs/agent_framework/WORK_ORDER_TEMPLATE.md\n- docs/agent_framework/HARDWARE_EVIDENCE.md\n- docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md\n- docs/agent_framework/USER_DIRECTION.md\n- docs/agent_framework/SCHEDULED_TASKS.md\n- docs/agent_framework/MODEL_ROUTING.md\n- docs/agent_framework/SUPERVISOR_CONTRACT.md\n- docs/agent_framework/SUBAGENT_CONTRACTS.md\n- docs/agent_framework/VALIDATION_AND_GATES.md\n- docs/project/ACTIVE_AGENT_QUEUE.md\n"
+  },
+  "final-gates/check_glyph_final_usb_gamepad_enumeration.log": {
+    "sha256": "b9e5c9ade25347e0f9386518189fa2e1fb5745024691e4517be4a7067d59991c",
+    "bytes": 17940,
+    "tail": "pico/include/comms/NintendoSwitchBackend.hpp:4:\nIn file included from /Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/CommunicationBackend.hpp:4:\nIn file included from /Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/ControllerMode.hpp:4:\nIn file included from /Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/InputMode.hpp:4:\n/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/socd.hpp:10:19: warning: anonymous non-C-compatible type given name for linkage purposes by typedef declaration; add a tag name here [-Wnon-c-typedef-for-linkage]\n   10 |     typedef struct {\n      |                   ^\n      |                    SocdState\n/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/socd.hpp:11:25: note: type is not C-compatible due to this default member initializer\n   11 |         bool was_dir1 = false;\n      |                         ^~~~~\n/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/socd.hpp:15:7: note: type is given name 'SocdState' for linkage purposes by this typedef declaration\n   15 |     } SocdState;\n      |       ^\n1 warning generated.\n"
+  },
+  "final-gates/check_glyph_profile_store_selection_recovery.log": {
+    "sha256": "dec7977829494e224259c57881118496ebd69cc5321de16526c95e1d4a20e26b",
+    "bytes": 592,
+    "tail": "selection_same_different_fail_unknown_held_nonultimate_compact=PASS\nrecovery_manual_automatic_unavailable_validator_readonly=PASS\ncommitted_boot_consume_validate_nonusb=PASS\nactual_setup_route_ordinary=PASS\nactual_setup_route_rt2_deferred=PASS\nactual_setup_route_automatic=PASS\nactual_setup_route_filesystem=PASS\nactual_setup_route_mb1=PASS\nloop_gate=PASS\nfinal backend USB routing=PASS\nbaseline_loop_gate=PASS\nnegative_controls_retired_manual_route_automatic_dead_refusal=PASS\nnegative_controls_old_immediate_activation_and_uninitialized_RT2=PASS\nglyph_profile_store_selection_recovery=PASS\n"
+  },
+  "focused/boot_detection_regressions.log": {
+    "sha256": "83fe4f24fde857945661b71d9670a283381321cebfc344fcd5858eda604a0928",
+    "bytes": 735,
+    "tail": "{\"checks\": 25, \"hardware_operations\": 0, \"source\": \"actual_header_and_port_bodies\", \"unchanged_vendor_repeat_stream_reproductions\": 2, \"source_files_sha256\": {\"HAL/pico/src/comms/BootJoybusDetection.cpp\": \"d0fc8aed148e27ae4d82285bb936e4b1b5516b5ba61102113cc72bcb4cd68ec5\", \"lib/glyph-joybus-pio/src/N64Console.cpp\": \"3d2e250805ec43aa318d63ee5216a67d5ddb30b209a8d4d833070a29c5a7da41\", \"include/comms/BootJoybusDetection.hpp\": \"977a453f930b7bba7ed926e493cc4f0b5418cd1360c8a76d40940bb61d4706f9\", \"lib/glyph-joybus-pio/include/gamecube_definitions.h\": \"acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2\", \"lib/glyph-joybus-pio/include/n64_definitions.h\": \"88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef\"}}\n"
+  },
+  "focused/check_glyph_active_profile_display.log": {
+    "sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455",
+    "bytes": 116,
+    "tail": "PASS actual resolver/native activation labels; ABI=short\nPASS actual resolver/native activation labels; ABI=default\n"
+  },
+  "focused/check_glyph_artifact_postprocessor_workflow.log": {
+    "sha256": "c65cd851b158384d80245af2b21df22110036dfda95fe79a0203607b1a4f769a",
+    "bytes": 44,
+    "tail": "glyph_artifact_postprocessor_workflow: PASS\n"
+  },
+  "focused/check_glyph_build_input_non_selector_configuration.log": {
+    "sha256": "92aa3276d9a3a0aa076d7ee4e9c2db967127b362a0f1712fa430b92fb02676b0",
+    "bytes": 1009,
+    "tail": "Traceback (most recent call last):\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_build_input_non_selector_configuration.py\", line 174, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_build_input_non_selector_configuration.py\", line 168, in main\n    validate(data)\n    ~~~~~~~~^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_build_input_non_selector_configuration.py\", line 123, in validate\n    fail(f\"source identity mismatch: {path}\")\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_build_input_non_selector_configuration.py\", line 45, in fail\n    raise AssertionError(message)\nAssertionError: source identity mismatch: platformio.ini\n"
+  },
+  "focused/check_glyph_build_input_provenance_inventory.log": {
+    "sha256": "5d0ed496a99d7f4f5fb2ab22ebb93793cb4c451a24deb20a517c6c29a0ca192f",
+    "bytes": 85,
+    "tail": "glyph_build_input_provenance_inventory: FAIL: declaration byte drift: platformio.ini\n"
+  },
+  "focused/check_glyph_build_input_resolution_observations.log": {
+    "sha256": "192d4575ad25057f8fe2ae2630ec7c23160b485c248306486a18cc4da6828df5",
+    "bytes": 129,
+    "tail": "glyph_build_input_resolution_observations: PASS; records=44; direct=42; derived=2; base=8c04262c66613d46b933b1b739c01c575cb0c580\n"
+  },
+  "focused/check_glyph_controller_profile_selector.log": {
+    "sha256": "84a93938097e2a9774553358a182b520aad23169f8dea404c639296961f86e57",
+    "bytes": 1127,
+    "tail": "-fshort-enums PASS compact character policy:43-record owner topology/Ultimate+20SEL/Ultimate+Kazuya/all4 routes/contexts/read-only/names/noncompact/ties/keys/capacity\nPASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates\n-fshort-enums PASS production managed Profile menu, bound legacy pair, ordering, eligibility, plate, name and USB action\n-fshort-enums PASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation\n-fno-short-enums PASS compact character policy:43-record owner topology/Ultimate+20SEL/Ultimate+Kazuya/all4 routes/contexts/read-only/names/noncompact/ties/keys/capacity\nPASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates\n-fno-short-enums PASS production managed Profile menu, bound legacy pair, ordering, eligibility, plate, name and USB action\n-fno-short-enums PASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation\n"
+  },
+  "focused/check_glyph_gamecube_selector_liveness.log": {
+    "sha256": "94fb2173244758122f416fbf0a48bba465b58b9c41e353b3bfb06dfd278cff17",
+    "bytes": 2858,
+    "tail": "s duplicates\n-fshort-enums PASS production managed Profile menu, bound legacy pair, ordering, eligibility, plate, name and USB action\n-fshort-enums GC no-poll request -> bounded return -> actual selector service PASS\nGC no-poll request -> bounded return -> actual selector service PASS\nGC no-poll request -> bounded return -> actual selector service PASS\nGC no-poll request -> bounded return -> actual selector service PASS\nPASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation\n-fno-short-enums PASS compact character policy:43-record owner topology/Ultimate+20SEL/Ultimate+Kazuya/all4 routes/contexts/read-only/names/noncompact/ties/keys/capacity\nPASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates\n-fno-short-enums PASS production managed Profile menu, bound legacy pair, ordering, eligibility, plate, name and USB action\n-fno-short-enums GC no-poll request -> bounded return -> actual selector service PASS\nGC no-poll request -> bounded return -> actual selector service PASS\nGC no-poll request -> bounded return -> actual selector service PASS\nGC no-poll request -> bounded return -> actual selector service PASS\nPASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation\n"
+  },
+  "focused/check_glyph_profile_store_config_persistence.log": {
+    "sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84",
+    "bytes": 1391,
+    "tail": "stale_cache=PASS\nmissing_durable_load_and_save=PASS\ndurable_generation_changed=PASS\nopen:config-v2.bin=PASS\nread:config-v2.bin=PASS\nopen:config-v2.tmp=PASS\nwrite:config-v2.tmp=PASS\nread:config-v2.tmp=PASS\nrename:config-v2.bin=PASS\nrename:config-v2.tmp=PASS\nprior_remove_failure=PASS\npartial_write_call_2=PASS\npartial_write_call_3=PASS\ndurable_crc_mismatch=PASS\nmalformed_durable=PASS\nload_rejected_preserves_caller=PASS\nsuccessful_publish_no_postcommit_false=PASS\nprior_only_publish_success=PASS\nprior_only_publish_failure=PASS\ninterrupted_rotation_prior_recovery=PASS\nchecked_config_staging_sync_close=PASS\nchecked_config_staging_sync_close=PASS\nchecked_config_staging_sync_close=PASS\nchecked_config_staging_sync_close=PASS\nlost_ack_resolved_exact=PASS\nunknown_fence_and_reconcile=PASS\nbounded_immutable_legacy_source=PASS\nlegacy_snapshot_reserve_preflight=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nconfig_staging_open_write_read_unknown=PASS\nconfig_staging_open_write_read_unknown=PASS\nconfig_staging_open_write_read_unknown=PASS\ncurrent_persistence_cases=37 target_FS_power_loss=NOT_EMULATED\nglyph_profile_store_config_persistence: PASS; current_source=true hardware=NOT_CLAIMED\n"
+  },
+  "focused/check_glyph_profile_store_littlefs_host.log": {
+    "sha256": "fd494947956a356c5bfffa4d3e063b01ab1c67478a9ded22328722bd1af83b4c",
+    "bytes": 878,
+    "tail": "profile_store_pinned_littlefs_ram=PASS directory_bytes=2620 record_bytes=4128 replacements=128 negative_validations=128 remount_readback=true\nglyph_profile_store_littlefs_host: PASS asan=true ubsan=true framework=1.30603.0 ram_block_size=4096 ram_block_count=128 physical_multicore=NOT_TESTED\nsource_sha256 src/lfs.c 3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e\nsource_sha256 src/lfs_util.c b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1\nsource_sha256 lib/littlefs/lfs.c 8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5\nsource_sha256 lib/littlefs/lfs.h bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a\nsource_sha256 lib/littlefs/lfs_util.c 8e1376a90e923a2897388a54ebaa756ad3ea07a0e2a87e73c0045515c0a82685\nsource_sha256 lib/littlefs/lfs_util.h 825e70edbe8839dc814fb41ad950c191035e6fa5b697a90ee7fa2b287e360c33\n"
+  },
+  "focused/check_glyph_profile_store_production_tool.log": {
+    "sha256": "3312e476c911392d5584ab41068826f6c421025778d96841dfde74f3ad6d3c85",
+    "bytes": 1529,
+    "tail": "ction ProfileStore tool: malformed response after transmission; unresolved\n{\n  \"response\": {\n    \"profile_id\": 99,\n    \"request_token\": \"101\",\n    \"status\": \"PROFILE_STORE_OK\"\n  }\n}\n{\n  \"response\": {\n    \"profile_id\": 99,\n    \"request_token\": \"101\",\n    \"status\": \"PROFILE_STORE_OK\"\n  }\n}\n{\n  \"response\": {\n    \"profile_id\": 99,\n    \"request_token\": \"101\",\n    \"status\": \"PROFILE_STORE_OK\"\n  }\n}\nproduction ProfileStore tool: rename acknowledgement lost; outcome unknown\n{\"dry_run\": true, \"native_packet\": \"apply_native_preprocessing_context\", \"payload_sha256\": \"1cc6e0af9ddf4dfd78526e8d63380a0c61333fa1105ca0f2ea4b178f156290c8\", \"serial_opened\": false}\nnative Config packet: execution requires explicit port and owner-exclusive Configurator session; SET_CONFIG has no atomic generation fence\n{\"dry_run\": false, \"native_packet\": \"apply_native_preprocessing_context\", \"payload_sha256\": \"1cc6e0af9ddf4dfd78526e8d63380a0c61333fa1105ca0f2ea4b178f156290c8\", \"serial_opened\": true}\nnative Config packet: lost acknowledgement\nnative Config packet: fresh GET_CONFIG differs from explicit current backup; no SET sent\n{\"dry_run\": true, \"native_packet\": \"restore_original_user_config\", \"payload_sha256\": \"63d197c632439c678be46d2bf877699880c3caf5972da9130a0e1b73939cfa79\", \"serial_opened\": false}\nglyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true\n"
+  },
+  "focused/check_glyph_profile_store_selection_recovery.log": {
+    "sha256": "dec7977829494e224259c57881118496ebd69cc5321de16526c95e1d4a20e26b",
+    "bytes": 592,
+    "tail": "selection_same_different_fail_unknown_held_nonultimate_compact=PASS\nrecovery_manual_automatic_unavailable_validator_readonly=PASS\ncommitted_boot_consume_validate_nonusb=PASS\nactual_setup_route_ordinary=PASS\nactual_setup_route_rt2_deferred=PASS\nactual_setup_route_automatic=PASS\nactual_setup_route_filesystem=PASS\nactual_setup_route_mb1=PASS\nloop_gate=PASS\nfinal backend USB routing=PASS\nbaseline_loop_gate=PASS\nnegative_controls_retired_manual_route_automatic_dead_refusal=PASS\nnegative_controls_old_immediate_activation_and_uninitialized_RT2=PASS\nglyph_profile_store_selection_recovery=PASS\n"
+  },
+  "focused/check_glyph_runtime_config_validation_health.log": {
+    "sha256": "5e55363dcc161a8c17176e6a04890513f914140bd3229db5ef5c4b2eb8e745a4",
+    "bytes": 135,
+    "tail": "glyph_runtime_config_validation_health: PASS; census_count=263; manifest_entries=64; baseline=116d34322837fe1f6f724c820b49ccb0d24d6787\n"
+  },
+  "focused/check_glyph_runtime_config_validation_publication_workflow.log": {
+    "sha256": "b0d0b83b4c74aa27eff3233034483f05393b53c5bce509c8b143577e2951017b",
+    "bytes": 1135,
+    "tail": "glyph_runtime_config_validation_publication_workflow: PASS; cases=missing_pull_request,wrong_validation_command,shallow_checkout,write_permission,missing_dependency,continue_on_error,alternate_unguarded_publication,comment_only_aggregate,inert_aggregate_step,folded_aggregate_shape,aggregate_in_wrong_job,ambiguous_duplicate_step,unsupported_needs_shape,alternate_unguarded_nuker,conditional_validation_or_publication,trailing_success_mask,trailing_exit_success_mask,same_indent_sibling_shell,explicit_shell,explicit_working_directory,explicit_env,explicit_uses,shell_function,heredoc_control_flow,multiline_control_flow,malformed_block_indentation,setup_fetch_masked,setup_duplicate_operation,setup_intervening_ref_mutation,setup_wrong_base_expression,setup_unreachable_branch,setup_trailing_command,setup_duplicate_step,setup_wrong_base_environment,setup_wrong_base_placement,setup_default_shell_override,setup_inline_default_shell_override,setup_continuation_duplicate,substituted_build_classifier,inverted_build_condition,current_host_removed_dependency,current_host_omits_real_package_checks,current_host_tolerates_native_failure\n"
+  },
+  "focused/check_switch_readiness.log": {
+    "sha256": "60dbf0e9b4c6b3eded2a4cf2e436403f4861698fff3af72a852a399fd9917e32",
+    "bytes": 16456,
+    "tail": "                   ^\n      |                    SocdState\ninclude/core/socd.hpp:11:25: note: type is not C-compatible due to this default member initializer\n   11 |         bool was_dir1 = false;\n      |                         ^~~~~\ninclude/core/socd.hpp:15:7: note: type is given name 'SocdState' for linkage purposes by this typedef declaration\n   15 |     } SocdState;\n      |       ^\n1 warning generated.\nIn file included from src/comms/IntegratedDisplay.cpp:1:\nIn file included from include/comms/IntegratedDisplay.hpp:4:\nIn file included from include/core/CommunicationBackend.hpp:4:\nIn file included from include/core/ControllerMode.hpp:4:\nIn file included from include/core/InputMode.hpp:4:\ninclude/core/socd.hpp:10:19: warning: anonymous non-C-compatible type given name for linkage purposes by typedef declaration; add a tag name here [-Wnon-c-typedef-for-linkage]\n   10 |     typedef struct {\n      |                   ^\n      |                    SocdState\ninclude/core/socd.hpp:11:25: note: type is not C-compatible due to this default member initializer\n   11 |         bool was_dir1 = false;\n      |                         ^~~~~\ninclude/core/socd.hpp:15:7: note: type is given name 'SocdState' for linkage purposes by this typedef declaration\n   15 |     } SocdState;\n      |       ^\n1 warning generated.\nPASS bounded Switch wait, scan order, shared-menu controls and 8-byte reports\n"
+  },
+  "focused/glyph_ci_current_firmware.log": {
+    "sha256": "ed6a4e3bc827c197acb367294ec8fa897d645d517fb21dfe15cece1738d90242",
+    "bytes": 4405,
+    "tail": " exactly one SOCD\nPASS source mutation array_order_priority: unique table priority\nPASS source mutation losing_table_influence: losing or inactive table\nPASS source mutation copied_owner: copied view cannot\nPASS source mutation stale_generation: latched active generation\nPASS source mutation codec_control: PASS native validation negatives, canonical field-order rejection, legacy duplicate-schema compatibility, callback leases/copy poisoning/request identity/embedded rejection\nPASS source mutation incoming_callback_alias: incoming callback alias poisoning\nPASS source mutation encode_size_mismatch: callback encode size/bytes\nPASS source mutation embedded_skipped: actual Config decoder rejects native callback\nPASS source mutation omitted_request_payload: independent full native wire request identity\nvalidation_matrix total=540 physical=36 other_named=24 byte_width=4 PASS\nNeoPixel current null, valid and recovery source tests passed in both time layouts\nKeyboard pipeline, held keys, release and report behavior matched 104 rows; five source mutants rejected\ndefault-enum C024 selector identity host proof: PASS; actual mode setup, row identity, no-effects refusals and reboot actions verified\nshort-enum C024 selector identity host proof: PASS; actual mode setup, row identity, no-effects refusals and reboot actions verified\nCurrent two-ABI configuration and native runtime checks passed\n"
+  },
+  "focused/glyph_ci_current_package_tests.log": {
+    "sha256": "133c02ce362d57901d4f58791169cd75703ee93121a5bcfa07c86acf5907269e",
+    "bytes": 1514,
+    "tail": "-ultimate-expanded-fw/tools/glyph_ci_current_package_tests.py\", line 195, in <module>\n    active_authority()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/glyph_ci_current_package_tests.py\", line 35, in active_authority\n    authority.ensure_no_flashing_automation_changed([path.decode() for path in changed.split(b\"\\0\") if path])\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_runtime_config_webserial_device_write_source_authority.py\", line 213, in ensure_no_flashing_automation_changed\n    fail(f\"potential flashing automation marker {marker!r} found in changed file {relpath}\")\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_runtime_config_webserial_device_write_source_authority.py\", line 87, in fail\n    raise WebSerialSourceAuthorityError(message)\ncheck_glyph_runtime_config_webserial_device_write_source_authority.WebSerialSourceAuthorityError: potential flashing automation marker 'shutil.copy' found in changed file docs/planning/beta-readiness/replay_boot.py\n"
+  },
+  "focused/run.log": {
+    "sha256": "8ca3652936846fbb257d5e7eed1ebb0ef03fe04dca471caff607baab63e06c41",
+    "bytes": 11215,
+    "tail": "municationBackend.hpp:4:\nIn file included from /Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/ControllerMode.hpp:4:\nIn file included from /Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/InputMode.hpp:4:\n/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/socd.hpp:10:19: warning: anonymous non-C-compatible type given name for linkage purposes by typedef declaration; add a tag name here [-Wnon-c-typedef-for-linkage]\n   10 |     typedef struct {\n      |                   ^\n      |                    SocdState\n/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/socd.hpp:11:25: note: type is not C-compatible due to this default member initializer\n   11 |         bool was_dir1 = false;\n      |                         ^~~~~\n/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/include/core/socd.hpp:15:7: note: type is given name 'SocdState' for linkage purposes by this typedef declaration\n   15 |     } SocdState;\n      |       ^\n1 warning generated.\nPASS early-configured: CDC+HID EP83, actual eight-byte report\nPASS early-descriptor-only: CDC+HID EP83, actual eight-byte report\nPASS late: CDC+HID EP83, actual eight-byte report\n"
+  },
+  "focused/test_glyph_ci_build_inputs.log": {
+    "sha256": "023789213753612c5b36c07bb7ae3edfd05b15a0087c67b53a3d2b7e2feca250",
+    "bytes": 100,
+    "tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.905s\n\nOK\n"
+  },
+  "focused/test_glyph_docs_agent_surface_integration.log": {
+    "sha256": "466ee9ab4012e46510480e0559b6f7f5e518d51e2644aaa068b41e1af0e2974d",
+    "bytes": 111,
+    "tail": "............\n----------------------------------------------------------------------\nRan 12 tests in 7.595s\n\nOK\n"
+  },
+  "focused/test_glyph_hardware_correspondence.log": {
+    "sha256": "4ec44022615c82152cdd64f3cdb2be90e56dd39400ba3d0c479cf65b56aa6579",
+    "bytes": 168,
+    "tail": "....................................................................\n----------------------------------------------------------------------\nRan 68 tests in 42.187s\n\nOK\n"
+  },
+  "health-final.log": {
+    "sha256": "20ee963df0a3df1c5352d5fa8fc7d641784f88fa97edf8bf16949919f8e68812",
+    "bytes": 135,
+    "tail": "glyph_runtime_config_validation_health: PASS; census_count=264; manifest_entries=64; baseline=116d34322837fe1f6f724c820b49ccb0d24d6787\n"
+  },
+  "health.log": {
+    "sha256": "6aa1cafb329c4feb541e0289ffebd58df87b3bef70f03b89cd07a57856550905",
+    "bytes": 85,
+    "tail": "glyph_runtime_config_validation_health: FAIL: checker census correspondence is stale\n"
+  },
+  "native-metrics/incoherent_timer_accepted.log": {
+    "sha256": "5362c7380579008123eb1b296dc9df0f437d72469e29ec19d729b08f105e7f66",
+    "bytes": 206,
+    "tail": "Assertion failed: (wire.tx[16]==2&&runtime_identity::ReadLE(wire.tx.data()+156,4)==0&&(runtime_identity::ReadLE(wire.tx.data()+154,2)&64)), function main, file incoherent_timer_accepted-host.cpp, line 107.\n"
+  },
+  "native-metrics/odd_mailbox_accepted.log": {
+    "sha256": "1bc5ef85022a7ea526ae71e6d2873eda6fe6f842a91b3c5eacbeb4024cd36457",
+    "bytes": 253,
+    "tail": "Assertion failed: (wire.tx[16]==1&&runtime_identity::ReadLE(wire.tx.data()+124,8)==0&&runtime_identity::ReadLE(wire.tx.data()+132,4)==0&&(runtime_identity::ReadLE(wire.tx.data()+136,2)&128)), function main, file odd_mailbox_accepted-host.cpp, line 109.\n"
+  },
+  "native-metrics/unbounded_scan_chunk.log": {
+    "sha256": "c2a958558dc6db30a5a19de332b1f7e9fc04dc8660985cd215ae75dea0f33ad1",
+    "bytes": 120,
+    "tail": "Assertion failed: (word_reads-before<=16), function complete_measurements, file unbounded_scan_chunk-host.cpp, line 54.\n"
+  },
+  "native-target-metrics-resolved.log": {
+    "sha256": "94a75e70454eff4222944944b7c58ad8fc01931851174c476ba4b071a92e8268",
+    "bytes": 646,
+    "tail": "PASS actual retained metrics/demux/statistics/finite scans/atomic mailbox rejection/clock invalidation; host observations only\nPASS metric source mutation unbounded_scan_chunk\nPASS metric source mutation odd_mailbox_accepted\nPASS metric source mutation incoherent_timer_accepted\nPASS actual pinned CDC/FIFO observer: try-only guard, TX preemption defers, busy/no-response/rate-drop RX progresses via existing post-loop task; raw Serial never called\nglyph_native_target_metrics: FAIL: [Errno 2] No such file or directory: '/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++'\n"
+  },
+  "native-target-metrics.log": {
+    "sha256": "e8dcddc7a402bef24e4c7a03a7384143d9df749445d6499f55775b19e5f70c6e",
+    "bytes": 556,
+    "tail": "PASS actual retained metrics/demux/statistics/finite scans/atomic mailbox rejection/clock invalidation; host observations only\nPASS metric source mutation unbounded_scan_chunk\nPASS metric source mutation odd_mailbox_accepted\nPASS metric source mutation incoherent_timer_accepted\nglyph_native_target_metrics: FAIL: [Errno 2] No such file or directory: '/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c'\n"
+  },
+  "navigation-final.log": {
+    "sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206",
+    "bytes": 1213,
+    "tail": "glyph_docs_navigation: PASS\n- README.md\n- AGENTS.md\n- docs/AGENT_CONTEXT.md\n- docs/CURRENT_STATE.md\n- docs/ROADMAP.md\n- docs/WORKFLOW.md\n- docs/archive/README.md\n- docs/calibration/README.md\n- docs/calibration/INDEX.md\n- docs/calibration/archive_policy.md\n- docs/export/README.md\n- docs/runtime_config/README.md\n- docs/runtime_config/IMPLEMENTATION_BOUNDARY.md\n- docs/runtime_config/coordinate_native_runtime_profile_contract.md\n- docs/runtime_config/source_owned_table_symbol_map.md\n- docs/runtime_config/runtime_config_activation_alternatives_a_f.md\n- docs/runtime_config/source_authority_intake_workflow.md\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json\n- docs/agent_framework/README.md\n- docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md\n- docs/agent_framework/WORK_ORDER_TEMPLATE.md\n- docs/agent_framework/HARDWARE_EVIDENCE.md\n- docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md\n- docs/agent_framework/USER_DIRECTION.md\n- docs/agent_framework/SCHEDULED_TASKS.md\n- docs/agent_framework/MODEL_ROUTING.md\n- docs/agent_framework/SUPERVISOR_CONTRACT.md\n- docs/agent_framework/SUBAGENT_CONTRACTS.md\n- docs/agent_framework/VALIDATION_AND_GATES.md\n- docs/project/ACTIVE_AGENT_QUEUE.md\n"
+  },
+  "package-components.log": {
+    "sha256": "b60da2cb83e70bf950a6db3661b72bee1b5bf0592b56319e118add8653e56e02",
+    "bytes": 2308,
+    "tail": "e_native_runtime_profile_contract: OFFLINE PIPELINE PASS\n- profile fixture: docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_neutral_5.json\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json\n- docs/runtime_config/fixtures/generated_source_owned_layout_spec.json\n- docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp\nglyph_coordinate_native_runtime_profile_contract: OFFLINE EXPORT PACKAGE PASS\n- export package: docs/runtime_config/fixtures/coordinate_native_offline_export_package.json\nobservation fault seams 132 of 132 bytes 26\nshort-read fault seams 50 of 50 bytes 26\nPublic synthetic CREATE and three actual publication cuts passed with byte-exact read-only restart\nCurrent package wire, historical Config fault injection, startup/STATUS and intact LittleFS recovery passed\n"
+  },
+  "resource-diagnostics-baseline.log": {
+    "sha256": "a964c991c742216901975194712301f1576046bcf0c1ecf0d712e295056662c2",
+    "bytes": 527,
+    "tail": "resource_diagnostic_ARM_init_frame_bytes=12 bss_bytes=24\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-beta-readiness-5987/tools/check_glyph_resource_diagnostics.py\", line 56, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/private/tmp/glyph-beta-readiness-5987/tools/check_glyph_resource_diagnostics.py\", line 51, in main\n    assert '-D GLYPH_STRICT_HARDENING_CANDIDATE=1' in diagnostic\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "resource-diagnostics.log": {
+    "sha256": "3977d2366363c67f4faebc3c9f04d454f002e7c93b68b70a9763453a86546bb2",
+    "bytes": 635,
+    "tail": "resource_diagnostic_ARM_init_frame_bytes=12 bss_bytes=24\nTraceback (most recent call last):\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_resource_diagnostics.py\", line 56, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_resource_diagnostics.py\", line 51, in main\n    assert '-D GLYPH_STRICT_HARDENING_CANDIDATE=1' in diagnostic\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "resource-extract.log": {
+    "sha256": "44f07fa333c9a6ab5a5338b0314330761e2624883e7cf31d5bb0e66f4c70c426",
+    "bytes": 3409,
+    "tail": "     \"size\": 2591353,\n      \"offset\": 752474\n    },\n    \".debug_abbrev\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 211627,\n      \"offset\": 3343827\n    },\n    \".debug_loclists\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 654747,\n      \"offset\": 3555454\n    },\n    \".debug_aranges\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 33264,\n      \"offset\": 4210208\n    },\n    \".debug_rnglists\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 70759,\n      \"offset\": 4243472\n    },\n    \".debug_line\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 588014,\n      \"offset\": 4314231\n    },\n    \".debug_str\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 370730,\n      \"offset\": 4902245\n    },\n    \".debug_frame\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 91736,\n      \"offset\": 5272976\n    },\n    \".debug_line_str\": {\n      \"type\": 1,\n      \"address\": 0,\n      \"size\": 1020,\n      \"offset\": 5364712\n    },\n    \".symtab\": {\n      \"type\": 2,\n      \"address\": 0,\n      \"size\": 191808,\n      \"offset\": 5365732\n    },\n    \".strtab\": {\n      \"type\": 3,\n      \"address\": 0,\n      \"size\": 204755,\n      \"offset\": 5557540\n    },\n    \".shstrtab\": {\n      \"type\": 3,\n      \"address\": 0,\n      \"size\": 298,\n      \"offset\": 5762295\n    }\n  },\n  \"static\": 198888,\n  \"stack_reservations\": [\n    2048,\n    2048\n  ],\n  \"heap_start\": 537069996,\n  \"heap_capacity\": 63060\n}\n"
+  },
+  "resource-safety-baseline.log": {
+    "sha256": "f94d1e460c2066658b723aec579a3341ab4a7b23117c10a27dffbfc2d8fbe253",
+    "bytes": 1052,
+    "tail": "Traceback (most recent call last):\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 163, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 157, in main\n    result=dict(elf=check_elf(args.elf,args.objdump),watermark=watermark_stress())\n                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 78, in check_elf\n    calls = check_calls(disassembly)\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 55, in check_calls\n    assert match, name\n           ^^^^^\nAssertionError: InitializeResourceDiagnosticsCore()\n"
+  },
+  "resource-safety.log": {
+    "sha256": "f94d1e460c2066658b723aec579a3341ab4a7b23117c10a27dffbfc2d8fbe253",
+    "bytes": 1052,
+    "tail": "Traceback (most recent call last):\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 163, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 157, in main\n    result=dict(elf=check_elf(args.elf,args.objdump),watermark=watermark_stress())\n                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 78, in check_elf\n    calls = check_calls(disassembly)\n  File \"/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw/tools/check_glyph_liveness_resource_safety.py\", line 55, in check_calls\n    assert match, name\n           ^^^^^\nAssertionError: InitializeResourceDiagnosticsCore()\n"
+  },
+  "retro-smoke.log": {
+    "sha256": "cc9ada82a98e61cf4af187bbd181aa94d20d5a84ea54ba368e7032e22692ed39",
+    "bytes": 8633,
+    "tail": "raw16 = 0;\n      |                      ^\ntools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h:20:3: note: type is given name 'nes_report_t' for linkage purposes by this typedef declaration\n   20 | } nes_report_t;\n      |   ^\nIn file included from /private/tmp/glyph-final-usb-results/retro-smoke/main.cpp:3:\nIn file included from HAL/pico/include/comms/SnesBackend.hpp:6:\nIn file included from tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp:5:\ntools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h:6:14: warning: anonymous non-C-compatible type given name for linkage purposes by typedef declaration; add a tag name here [-Wnon-c-typedef-for-linkage]\n    6 | typedef union {\n      |              ^\n      |               snes_report_t\ntools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h:7:22: note: type is not C-compatible due to this default member initializer\n    7 |     uint32_t raw32 = 0;\n      |                      ^\ntools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h:26:3: note: type is given name 'snes_report_t' for linkage purposes by this typedef declaration\n   26 | } snes_report_t;\n      |   ^\n3 warnings generated.\nPASS actual N64/NES/SNES constructors, identities, dispatch; physical PIO boundary doubles, no USB symbols linked\n"
+  },
+  "sequence.log": {
+    "sha256": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b",
+    "bytes": 113,
+    "tail": "glyph_agentic_sequence_protocol; status=PASS; user_intervention_gates=8; hardware_status=not_new_hardware_result\n"
+  },
+  "transactions/boot_regressions.log": {
+    "sha256": "713522f283cbdf7160a1f78c6b93586a99536f05084b8f0c2829ad79929b47f7",
+    "bytes": 124,
+    "tail": "{\"cases\": 58, \"normal\": 9, \"recovery\": 49, \"visible_required\": true, \"physical_cause\": \"UNKNOWN\", \"hardware_operations\": 0}\n"
+  },
+  "transactions/build.log": {
+    "sha256": "37441acce8780e778f1b39c8fd9844ebb193281a513338be910a0d6f2b25d08d",
+    "bytes": 78,
+    "tail": "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness\n"
+  },
+  "transactions/historical_config_regressions.log": {
+    "sha256": "f13f0155eaae592b322fa8e240d30b5950abc4146a079c8c561e1fecc4cd3f53",
+    "bytes": 124,
+    "tail": "historical compatibility: 5 positive, 17 negative, 33 namespace cases; read/seek/stat/open/close and short-read faults PASS\n"
+  },
+  "transactions/lifecycle_regressions.log": {
+    "sha256": "46a8bb3703e27f37fa69bf370119c0bf4b701fc1d6bdb58ea44f926d38a1d756",
+    "bytes": 326,
+    "tail": "PASS operation 18 revision 2, 22 cut/restart cases\nPASS operation 19 revision 3, 22 cut/restart cases\nPASS operation 17 revision 4, 22 cut/restart cases\nPASS operation 17 revision 5, 22 cut/restart cases\nPASS operation 20 revision 6, 20 cut/restart cases\nPASS guarded lifecycle and create after reclaim on production LittleFS\n"
+  },
+  "transactions/managed_selection.log": {
+    "sha256": "c6e0210edaa50102bced8d71b758e44e4f15b87bcb2a51a67bc7f12290bcfc1f",
+    "bytes": 220,
+    "tail": "PASS two independent managed packages, asymmetric contexts/programs and plates, seven per-backend selections/refusals, four fresh-process activations, exact unrelated namespace/default preservation and two damaged pairs\n"
+  },
+  "transactions/regressions.log": {
+    "sha256": "17d98e3b25b53a5ac44f7d418c050a77809fa4e772d22ed705d2cf7b8e6ec26e",
+    "bytes": 44,
+    "tail": "actual production regression checks 64 PASS\n"
+  },
+  "transactions/startup_work.log": {
+    "sha256": "4c141819dce690e36e3e0395fec49752d68bd35b477493f54cead1a9c1f81334",
+    "bytes": 339,
+    "tail": "{\"enumerations\": 24, \"opens\": 104, \"seeks\": 218, \"reads\": 1616, \"nor_reads\": 13438, \"config_load\": {\"checked_reads\": 124, \"nor_reads\": 153}, \"config_faults\": {\"seams\": 124, \"failed\": 124, \"short_failed\": 121, \"short_loaded\": 3}, \"host_median_us\": 6113, \"fixture_sha256\": \"251a9a7cc1c1c3242be170605e651074e198e12d9c02a9ca5da3336d53a99580\"}\n"
+  },
+  "transactions/storage_fence_regressions.log": {
+    "sha256": "f662d1226b1e8ab95a6e04a87e1f4f7404298d7b687253f1cfe12825848fc09b",
+    "bytes": 87,
+    "tail": "{\"cases\": 32, \"normal\": 5, \"hardware_operations\": 0, \"physical_filesystem\": \"UNKNOWN\"}\n"
+  }
+}

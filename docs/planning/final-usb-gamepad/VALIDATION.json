@@ -1,0 +1,587 @@
+{
+  "date": "2026-11-17",
+  "candidate_source": "dcf6e29589f558a95c021bef491578f87e41750f",
+  "starting_live_canonical": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "original_beta_tip": "0a1eab885237f7e6ea04f405707fe78269367ef1",
+  "classification": "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR / H2",
+  "source_free_evidence_delta": "Only docs/ added/changed after exact candidate build. Health derived census count263->264 repaired; firmware and all non-doc inputs must remain exact candidate.",
+  "initial_focused_run": [
+    {
+      "name": "test_glyph_ci_build_inputs",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/test_glyph_ci_build_inputs.py"
+      ],
+      "exit": 0,
+      "seconds": 0.991,
+      "log": "/private/tmp/glyph-final-usb-results/focused/test_glyph_ci_build_inputs.log"
+    },
+    {
+      "name": "check_glyph_runtime_config_validation_health",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_runtime_config_validation_health.py"
+      ],
+      "exit": 0,
+      "seconds": 0.045,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_runtime_config_validation_health.log"
+    },
+    {
+      "name": "check_glyph_build_input_provenance_inventory",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_build_input_provenance_inventory.py"
+      ],
+      "exit": 1,
+      "seconds": 0.082,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_build_input_provenance_inventory.log"
+    },
+    {
+      "name": "check_glyph_build_input_non_selector_configuration",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_build_input_non_selector_configuration.py"
+      ],
+      "exit": 1,
+      "seconds": 0.059,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_build_input_non_selector_configuration.log"
+    },
+    {
+      "name": "check_glyph_build_input_resolution_observations",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_build_input_resolution_observations.py"
+      ],
+      "exit": 0,
+      "seconds": 0.152,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_build_input_resolution_observations.log"
+    },
+    {
+      "name": "check_glyph_runtime_config_validation_publication_workflow",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_runtime_config_validation_publication_workflow.py"
+      ],
+      "exit": 0,
+      "seconds": 0.081,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_runtime_config_validation_publication_workflow.log"
+    },
+    {
+      "name": "check_glyph_artifact_postprocessor_workflow",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_artifact_postprocessor_workflow.py"
+      ],
+      "exit": 0,
+      "seconds": 0.047,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_artifact_postprocessor_workflow.log"
+    },
+    {
+      "name": "check_glyph_active_profile_display",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_active_profile_display.py"
+      ],
+      "exit": 0,
+      "seconds": 11.202,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_active_profile_display.log"
+    },
+    {
+      "name": "check_glyph_controller_profile_selector",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_controller_profile_selector.py"
+      ],
+      "exit": 0,
+      "seconds": 13.857,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_controller_profile_selector.log"
+    },
+    {
+      "name": "check_glyph_profile_store_selection_recovery",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_profile_store_selection_recovery.py"
+      ],
+      "exit": 0,
+      "seconds": 5.091,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_profile_store_selection_recovery.log"
+    },
+    {
+      "name": "check_glyph_profile_store_config_persistence",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_profile_store_config_persistence.py"
+      ],
+      "exit": 0,
+      "seconds": 2.677,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_profile_store_config_persistence.log"
+    },
+    {
+      "name": "check_glyph_profile_store_production_tool",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_profile_store_production_tool.py"
+      ],
+      "exit": 0,
+      "seconds": 0.833,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_profile_store_production_tool.log"
+    },
+    {
+      "name": "check_glyph_profile_store_littlefs_host",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_profile_store_littlefs_host.py"
+      ],
+      "exit": 0,
+      "seconds": 0.998,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_profile_store_littlefs_host.log"
+    },
+    {
+      "name": "glyph_ci_current_firmware",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/glyph_ci_current_firmware.py"
+      ],
+      "exit": 0,
+      "seconds": 76.116,
+      "log": "/private/tmp/glyph-final-usb-results/focused/glyph_ci_current_firmware.log"
+    },
+    {
+      "name": "glyph_ci_current_package_tests",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/glyph_ci_current_package_tests.py"
+      ],
+      "exit": 1,
+      "seconds": 0.394,
+      "log": "/private/tmp/glyph-final-usb-results/focused/glyph_ci_current_package_tests.log"
+    },
+    {
+      "name": "test_glyph_hardware_correspondence",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/test_glyph_hardware_correspondence.py"
+      ],
+      "exit": 0,
+      "seconds": 42.367,
+      "log": "/private/tmp/glyph-final-usb-results/focused/test_glyph_hardware_correspondence.log"
+    },
+    {
+      "name": "test_glyph_docs_agent_surface_integration",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/test_glyph_docs_agent_surface_integration.py"
+      ],
+      "exit": 0,
+      "seconds": 7.686,
+      "log": "/private/tmp/glyph-final-usb-results/focused/test_glyph_docs_agent_surface_integration.log"
+    },
+    {
+      "name": "check_glyph_gamecube_selector_liveness",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_glyph_gamecube_selector_liveness.py"
+      ],
+      "exit": 0,
+      "seconds": 20.934,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_glyph_gamecube_selector_liveness.log"
+    },
+    {
+      "name": "check_switch_readiness",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/check_switch_readiness.py"
+      ],
+      "exit": 0,
+      "seconds": 3.249,
+      "log": "/private/tmp/glyph-final-usb-results/focused/check_switch_readiness.log"
+    },
+    {
+      "name": "run",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/fixtures/switch_readiness/usb_host/run.py"
+      ],
+      "exit": 0,
+      "seconds": 1.197,
+      "log": "/private/tmp/glyph-final-usb-results/focused/run.log"
+    },
+    {
+      "name": "boot_detection_regressions",
+      "argv": [
+        "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+        "tools/fixtures/glyph_package_v1/transaction/boot_detection_regressions.py",
+        "--repo",
+        "/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw",
+        "--out",
+        "/private/tmp/glyph-final-usb-results/focused/boot"
+      ],
+      "exit": 0,
+      "seconds": 0.913,
+      "log": "/private/tmp/glyph-final-usb-results/focused/boot_detection_regressions.log"
+    }
+  ],
+  "final_candidate_gates": [
+    {
+      "name": "check_glyph_final_usb_gamepad_enumeration",
+      "exit": 0,
+      "seconds": 1.935,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_final_usb_gamepad_enumeration.log",
+      "log_sha256": "b9e5c9ade25347e0f9386518189fa2e1fb5745024691e4517be4a7067d59991c"
+    },
+    {
+      "name": "check_glyph_profile_store_selection_recovery",
+      "exit": 0,
+      "seconds": 6.1,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_profile_store_selection_recovery.log",
+      "log_sha256": "dec7977829494e224259c57881118496ebd69cc5321de16526c95e1d4a20e26b"
+    },
+    {
+      "name": "check_glyph_checker_census",
+      "exit": 0,
+      "seconds": 1.76,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_checker_census.log",
+      "log_sha256": "dd8713ef7dc69e82203b1b743d560c66a336a7b15af18ac7aa6c845ab29666e6"
+    },
+    {
+      "name": "check_glyph_build_input_provenance_inventory",
+      "exit": 0,
+      "seconds": 0.119,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_build_input_provenance_inventory.log",
+      "log_sha256": "2961f7c7de3a3165822a876cd9267ee520c7fcb758f464c0d01db212164862be"
+    },
+    {
+      "name": "check_glyph_build_input_non_selector_configuration",
+      "exit": 0,
+      "seconds": 0.164,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_build_input_non_selector_configuration.log",
+      "log_sha256": "cab8538225e1af92d6c8648b4c9edd64a897673c49d3cb93b9de341aa3b05992"
+    },
+    {
+      "name": "check_glyph_docs_navigation",
+      "exit": 0,
+      "seconds": 0.036,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_docs_navigation.log",
+      "log_sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+    },
+    {
+      "name": "check_glyph_agent_framework_docs",
+      "exit": 0,
+      "seconds": 22.904,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_agent_framework_docs.log",
+      "log_sha256": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3"
+    },
+    {
+      "name": "check_glyph_docs_agent_surface",
+      "exit": 1,
+      "seconds": 6.59,
+      "log": "/private/tmp/glyph-final-usb-results/final-gates/check_glyph_docs_agent_surface.log",
+      "log_sha256": "eaba59e085052c893b73ede08cd04d965fffc6fa418e26aac79aa0d38ce80448"
+    }
+  ],
+  "transaction_checks": {
+    "source": "0a1eab885237f7e6ea04f405707fe78269367ef1",
+    "results": [
+      {
+        "name": "build",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/build.py",
+          "--repo",
+          "/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw",
+          "--boot-probe",
+          "--out",
+          "/private/tmp/glyph-final-usb-results/transactions/build"
+        ],
+        "exit": 0,
+        "seconds": 9.927,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/build.log"
+      },
+      {
+        "name": "lifecycle_regressions",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/lifecycle_regressions.py",
+          "--corpus",
+          "/private/tmp/productization-20261113-senscope/contracts/glyph-package-v1",
+          "--binary",
+          "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness",
+          "--out",
+          "/private/tmp/glyph-final-usb-results/transactions/lifecycle_regressions"
+        ],
+        "exit": 0,
+        "seconds": 12.809,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/lifecycle_regressions.log"
+      },
+      {
+        "name": "managed_selection",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/managed_selection.py",
+          "--corpus",
+          "/private/tmp/productization-20261113-senscope/contracts/glyph-package-v1",
+          "--binary",
+          "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness",
+          "--out",
+          "/private/tmp/glyph-final-usb-results/transactions/managed_selection"
+        ],
+        "exit": 0,
+        "seconds": 0.829,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/managed_selection.log"
+      },
+      {
+        "name": "startup_work",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/startup_work.py",
+          "--corpus",
+          "/private/tmp/productization-20261113-senscope/contracts/glyph-package-v1",
+          "--binary",
+          "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness"
+        ],
+        "exit": 0,
+        "seconds": 0.501,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/startup_work.log"
+      },
+      {
+        "name": "boot_regressions",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/boot_regressions.py",
+          "--corpus",
+          "/private/tmp/productization-20261113-senscope/contracts/glyph-package-v1",
+          "--binary",
+          "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness",
+          "--out",
+          "/private/tmp/glyph-final-usb-results/transactions/boot_regressions",
+          "--require-visible"
+        ],
+        "exit": 0,
+        "seconds": 3.285,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/boot_regressions.log"
+      },
+      {
+        "name": "regressions",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/regressions.py",
+          "--corpus",
+          "/private/tmp/productization-20261113-senscope/contracts/glyph-package-v1",
+          "--binary",
+          "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness",
+          "--repo",
+          "/Users/rasmus.pekkarinen/.codex/worktrees/glyph-final-usb-gamepad/glyph-ultimate-expanded-fw",
+          "--out",
+          "/private/tmp/glyph-final-usb-results/transactions/regressions"
+        ],
+        "exit": 0,
+        "seconds": 5.158,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/regressions.log"
+      },
+      {
+        "name": "historical_config_regressions",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/historical_config_regressions.py",
+          "--corpus",
+          "/private/tmp/productization-20261113-senscope/contracts/glyph-package-v1",
+          "--binary",
+          "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness",
+          "--out",
+          "/private/tmp/glyph-final-usb-results/transactions/historical_config_regressions"
+        ],
+        "exit": 0,
+        "seconds": 3.777,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/historical_config_regressions.log"
+      },
+      {
+        "name": "storage_fence_regressions",
+        "argv": [
+          "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+          "tools/fixtures/glyph_package_v1/transaction/storage_fence_regressions.py",
+          "--corpus",
+          "/private/tmp/productization-20261113-senscope/contracts/glyph-package-v1",
+          "--binary",
+          "/private/tmp/glyph-final-usb-results/transactions/build/package-fault-harness",
+          "--out",
+          "/private/tmp/glyph-final-usb-results/transactions/storage_fence_regressions"
+        ],
+        "exit": 0,
+        "seconds": 3.068,
+        "log": "/private/tmp/glyph-final-usb-results/transactions/storage_fence_regressions.log"
+      }
+    ]
+  },
+  "current_product_package_components": {
+    "result": "PASS",
+    "invocation": "Import glyph_ci_current_package_tests; call offline_source_tools() and run_package() unchanged. Full wrapper FAIL remains preserved; no monkeypatch or checker bypass presented as wrapper PASS.",
+    "log": "package-components.log",
+    "reason": "Whole wrapper stops in inherited source-authority marker scan before product suites."
+  },
+  "new_host_fixture": {
+    "result": "PASS",
+    "cases": 25,
+    "helper_ids": 256,
+    "switch_only_mutants_rejected": [
+      "XInput",
+      "DInput"
+    ],
+    "boundary": "real pinned USB/class/backend constructors and actual selection/finalization; electrical Windows/console hardware excluded"
+  },
+  "other_current_checks": {
+    "sequence": "PASS",
+    "checker_census": "PASS264",
+    "docs_navigation": "PASS",
+    "agent_framework": "PASS",
+    "build_provenance": "PASS16positive14negative",
+    "non_selector_census": "PASS",
+    "health_initial": "FAIL stale263 count after checker addition",
+    "health_final": {
+      "result": "PASS",
+      "census_count": 264,
+      "log_sha256": "20ee963df0a3df1c5352d5fa8fc7d641784f88fa97edf8bf16949919f8e68812"
+    }
+  },
+  "framework_debt": [
+    {
+      "check": "docs_agent_surface",
+      "result": "FAIL",
+      "reason": "C024 post-integration change outside validation/evidence paths; preserved on canonical baseline and beta before repair; no changed-product contradiction."
+    },
+    {
+      "check": "glyph_ci_current_package_tests wrapper",
+      "result": "FAIL",
+      "reason": "Flashing marker shutil.copy in unchanged inherited beta-readiness/replay_boot.py; independently reproduced at0a1eab8. Product source/storage suites executed unchanged separately PASS."
+    },
+    {
+      "check": "full aggregate current",
+      "result": "FAIL/SETUP_FAILURE",
+      "canonical_proof": "UNAVAILABLE",
+      "reason": "Unsupported ignored nested dependency Git directory .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/. No checks executed, no aggregate PASS."
+    },
+    {
+      "check": "full aggregate historical",
+      "result": "FAIL/CHECKER_TIMEOUT",
+      "reason": "Previous598 audit timeout remains unchanged evidence; no fresh fullaggregatePASS."
+    },
+    {
+      "check": "liveness_resource_safety exactELF",
+      "result": "FAIL on candidate AND exact598baseline",
+      "reason": "Expected InitializeResourceDiagnosticsCore symbol absent in production composition; diagnostics flag intentionally disabled. Actual candidate resource graph and existing source-bound compositions separately PASS."
+    },
+    {
+      "check": "resource_diagnostics",
+      "result": "FAIL on candidate AND baseline",
+      "reason": "Watermark/ARM init12byte and bss24 proof executes, then old expectation for strict diagnostics production build flags fails. No flags added or ceiling increased."
+    },
+    {
+      "check": "native_target_metrics standalone",
+      "result": "FAIL",
+      "reason": "Initial cache path absent; resolved-cache rerun passes host mutation/actualCDC observer, then hardcoded historical compiler path absent. Existing exact linked-image metric frames/call unions unchanged; no standalone fullPASS."
+    }
+  ],
+  "resources": {
+    "status": "PASS",
+    "baseline_source": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+    "candidate_source": "dcf6e29589f558a95c021bef491578f87e41750f",
+    "baseline_elf_sha256": "e55c7c157fdc161bd0cc0636b96bf3299f09a5d2e934b65f5f9760fc600c3a60",
+    "candidate_elf_sha256": "e3c7662ce3de2eb5b818ffe8c18d3d6c346e655e13ca9326efa6eb6e6376c75c",
+    "baseline_graph_sha256": "7ce6f6555cbb8f2d21a9c560d2448c8ea7ba4c81938577d0181f7807f1c3dc08",
+    "candidate_graph_sha256": "8d9a16bb685547fe3036626489bd7f476cdbdcd250fbb2546e6a895c6283d0c9",
+    "common_functions": 3302,
+    "changed_call_frame_tail_indirect_shapes": 0,
+    "new_functions": 0,
+    "removed_functions": 0,
+    "flash_before_after": [
+      650556,
+      650564
+    ],
+    "static_before_after": [
+      198888,
+      198888
+    ],
+    "linked_heap_capacity_before_after": [
+      63060,
+      63060
+    ],
+    "reserved_stacks_each": 2048,
+    "boot_backend_frame_before_after": [
+      64,
+      64
+    ],
+    "core0_retained_maximum": 2048,
+    "core0_lifecycle_model": 2044,
+    "core1_setup": 968,
+    "core1_loop": 984,
+    "core1_outer": 16,
+    "core1_irq": 68,
+    "core1_envelope": 1068,
+    "core1_retained_ceiling": 1152,
+    "ceiling_increase": false,
+    "physical_peak_heap_or_stack_highwater": "NOT_MEASURED",
+    "scope": "Retains source-qualified IRQ/ROM/indirect call unions from accepted model; exact current core0 composition supplied separately. Equal graph shapes do not assert equal report/USB semantics or physical acceptance."
+  },
+  "uf2_validation": {
+    "blocks": 2589,
+    "address_begin": "0x10000000",
+    "payload_end_exclusive": "0x100a1d00",
+    "littlefs_start": "0x1017f000",
+    "bin_plus_zero_padding": true,
+    "program_only": true,
+    "sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+    "bytes": 1325568
+  },
+  "review": {
+    "source_tests": "Independent usb_independent_review: no material findings; fresh25case and provenance reruns PASS. Exact build/custody supplement reviewed separately.",
+    "hardware": "NOT_RUN / exact owner observations required",
+    "final_verdict": "APPROVED_FOR_OWNER_HARDWARE_HANDOFF: final source-free packet,267clean compiler recipes, dual custody, manifests, health264/census/navigation and all retained FAIL limits independently verified. See REVIEW.json."
+  },
+  "delegation": {
+    "guidance_applicable": "AGENTS Start Here -> VALIDATION_AND_GATES / SUBAGENT_CONTRACTS",
+    "native_capability": "collaboration scoped children available",
+    "specialists": [
+      "usb_source_audit",
+      "usb_host_tests"
+    ],
+    "fresh_reviewer": "usb_independent_review",
+    "full_user_chats_created": 0,
+    "planner_calls": 0,
+    "curator_calls": 0,
+    "observed_model_effort": "UNKNOWN",
+    "tokens": "UNKNOWN",
+    "direct_return_capability": "VERIFIED by native specialist completion events"
+  },
+  "device_action": false,
+  "destructive_operation": false,
+  "canonical_source_merge": false,
+  "beta_tag": false,
+  "public_release": false,
+  "retro_actual_constructors": {
+    "result": "PASS",
+    "production_units": [
+      "HAL/pico/src/comms/N64Backend.cpp",
+      "HAL/pico/src/comms/NesBackend.cpp",
+      "HAL/pico/src/comms/SnesBackend.cpp",
+      "src/core/CommunicationBackend.cpp",
+      "src/core/InputSource.cpp"
+    ],
+    "cases": "actual constructors/IDs/GetOffset and one dispatch each; no linked USB symbols",
+    "boundary": "existing gp_config021 console wire methods and Arduino host doubles; no electrical/protocol acceptance",
+    "fixture_sha256": "e44f44249f057d76a1351f356b8b36d4a29e8423be247d1e82d12e0103f56c97",
+    "log_sha256": "cc9ada82a98e61cf4af187bbd181aa94d20d5a84ea54ba368e7032e22692ed39"
+  },
+  "compiler_database": {
+    "initial_collection": "SUCCESS but DIRTY diagnostic version from temporary cache alias; retained only as failed metadata attempt",
+    "correction": "Removed task-created alias, staged source-free docs outside checkout, verified clean exact dcf candidate and regenerated compiledb SUCCESS with no DIRTY macro. No candidate rebuild or artifact substitution.",
+    "final_log_sha256": "10cf82af104ede0b8ff0f7b8a0c452824f6d140aa56f86cd57f7c9c70d2ac42e"
+  },
+  "original_audit_bytes": {
+    "unchanged_vs_beta_tip": [
+      "evidence.json",
+      "replay_boot.py",
+      "observe_boot.inc",
+      "VALIDATION.json"
+    ],
+    "new_evidence_chronology": "physical failure follows earlier audit, source fix and exact build follow failure"
+  }
+}

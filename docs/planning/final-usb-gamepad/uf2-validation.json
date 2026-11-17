@@ -1,0 +1,10 @@
+{
+  "blocks": 2589,
+  "address_begin": "0x10000000",
+  "payload_end_exclusive": "0x100a1d00",
+  "littlefs_start": "0x1017f000",
+  "bin_plus_zero_padding": true,
+  "program_only": true,
+  "sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+  "bytes": 1325568
+}

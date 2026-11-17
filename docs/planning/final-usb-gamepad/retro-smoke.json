@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "production_units": [
+    "HAL/pico/src/comms/N64Backend.cpp",
+    "HAL/pico/src/comms/NesBackend.cpp",
+    "HAL/pico/src/comms/SnesBackend.cpp",
+    "src/core/CommunicationBackend.cpp",
+    "src/core/InputSource.cpp"
+  ],
+  "cases": "actual constructors/IDs/GetOffset and one dispatch each; no linked USB symbols",
+  "boundary": "existing gp_config021 console wire methods and Arduino host doubles; no electrical/protocol acceptance",
+  "fixture_sha256": "e44f44249f057d76a1351f356b8b36d4a29e8423be247d1e82d12e0103f56c97",
+  "log_sha256": "cc9ada82a98e61cf4af187bbd181aa94d20d5a84ea54ba368e7032e22692ed39"
+}
