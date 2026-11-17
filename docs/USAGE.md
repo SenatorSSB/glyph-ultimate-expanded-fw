@@ -1,5 +1,8 @@
 # Using Glyph — current guide
 
+For repository/system relationships see [architecture](ARCHITECTURE.md);
+for build, tests and contribution rules see [development](DEVELOPMENT.md).
+
 This is a barebones guide during public beta/release preparation, not a finished
 release/install workflow. Start with [capabilities](CAPABILITIES.md) and
 [current qualification](CURRENT_STATE.md).

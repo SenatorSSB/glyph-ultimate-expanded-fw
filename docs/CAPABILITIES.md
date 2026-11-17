@@ -1,5 +1,8 @@
 # Glyph capabilities
 
+For repository/system relationships see [architecture](ARCHITECTURE.md);
+for build, tests and contribution rules see [development](DEVELOPMENT.md).
+
 Implementation, stock exposure, product workflow, managed-package support,
 Senscope support and physical qualification are separate claims. The sections
 below are scoped inventories, not a promise that every mode/backend combination

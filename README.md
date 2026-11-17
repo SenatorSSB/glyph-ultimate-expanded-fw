@@ -53,7 +53,8 @@ move for every character or game state, and supplies no Smash thresholds.
 - [Native profile authors: start with v1](profiles/README.md)
 - [Documentation index and glossary](docs/README.md)
 - [Roadmap](docs/ROADMAP.md)
-- [Developers and coding agents](AGENTS.md)
+- [Developers: build, test and contribute](docs/DEVELOPMENT.md)
+- [Coding agents: repository instructions](AGENTS.md)
 
 Offline profile authoring exists. Installation, recovery and ordinary managed
 selection still have product limitations; see the usage guide before proceeding.

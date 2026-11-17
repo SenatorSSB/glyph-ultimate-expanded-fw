@@ -1,5 +1,8 @@
 # Profile System
 
+For repository/system relationships see [architecture](ARCHITECTURE.md);
+for build, tests and contribution rules see [development](DEVELOPMENT.md).
+
 ## Scope and terminology
 
 This describes the **current native Ultimate profile system**. Ultimate also has
