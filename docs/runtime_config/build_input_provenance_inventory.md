@@ -24,7 +24,8 @@ The local entrypoint contract records the canonical `pio run -e glyph_mk6`
 command, the fallback wrapper chain through `scripts/build-glyph-mk6-quiet.sh`
 and `scripts/pio-local.sh`, the ordered interpreter alternatives, and the
 `PLATFORMIO_CORE_DIR` declaration. It does not resolve which executable or
-dependency environment is selected.
+dependency environment is selected. Current build policy is owned by
+`AGENTS.md` and `docs/DEVELOPMENT.md`.
 
 ## Discovery boundary
 

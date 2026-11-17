@@ -581,6 +581,67 @@ def topology_catalog_cases(module: Any) -> list[str]:
             "ISO-14-fixed-build-resolution-and-nuker-source-roots"]
 
 
+def current_policy_dependency_cases(module: Any) -> list[str]:
+    """Public policy ownership is narrow; retained evidence stays admissible."""
+    actual_root = RUNNER_PATH.resolve().parents[1]
+    relative = "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
+    actual = json.loads((actual_root / relative).read_text())
+    baseline = json.loads(subprocess.check_output([
+        "git", "show", "11e7d4e4f8f7d3a9ddf35cb9bb5097ae5e70dc25:" + relative,
+    ], cwd=actual_root))
+    # Dependency migration must not change any command or classification field.
+    without_dependencies = lambda rows: [
+        {key: value for key, value in row.items() if key != "source_dependencies"}
+        for row in rows
+    ]
+    if without_dependencies(actual["entries"]) != without_dependencies(baseline["entries"]):
+        raise AssertionError("F3 changed manifest commands/classifications")
+    current = [row for row in actual["entries"] if row["applicability"] == "current"]
+    if len(current) != 23 or not all(row["load_bearing"] and not row["historical"] for row in current):
+        raise AssertionError("F3 current classification count drift")
+    legacy = ("docs/WORKFLOW.md", "docs/AGENT_CONTEXT.md")
+    for row in current:
+        for path in legacy:
+            if path in row["source_dependencies"]:
+                raise AssertionError(f"current legacy policy dependency: {row['id']}: {path}")
+    retained = (
+        "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
+        "docs/agent_framework/HARDWARE_EVIDENCE.md",
+        "docs/agent_framework/USER_DIRECTION.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
+        "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
+    )
+    with tempfile.TemporaryDirectory(prefix="glyph-current-policy-dependencies-") as directory:
+        root = fresh_root(Path(directory))
+        module.ROOT = root
+        for path in (*legacy, *retained):
+            target = root / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text("retained synthetic evidence\n", encoding="utf-8")
+            run_git(root, "add", path)
+        probe = entry("current_policy_probe")
+        write_checker(root, probe, 0)
+        for path in legacy:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current policy dependency: {probe['id']}: {path}")
+        historical = entry("historical_policy_probe", applicability="historical_only",
+                           historical=True, load_bearing=False)
+        historical["branch_policy"] = "named_evidence_branch"
+        historical["source_dependencies"] = list(legacy)
+        write_checker(root, historical, 9)
+        probe["source_dependencies"] = list(retained)
+        manifest = write_manifest(root, [probe, historical], ["baseline"])
+        code, text = invoke(module, root, manifest, "--check-manifest")
+        if code or "glyph_runtime_config_validation_manifest: PASS; entries=2;" not in text:
+            raise AssertionError("retained current contracts or historical policy rejected: " + text)
+    return ["F3-current-manifest-no-legacy-policy-dependencies",
+            "F3-current-workflow-and-agent-context-rejected-with-identity",
+            "F3-historical-policy-and-current-hardware-direction-queue-receipts-allowed",
+            "F3-all-23-current-classifications-and-all-commands-unchanged"]
+
+
 def orchestration_retirement_cases(module: Any) -> list[str]:
     """Retained protocols neither execute nor supply roots to current validation."""
     actual_root = RUNNER_PATH.resolve().parents[1]
@@ -1761,6 +1822,7 @@ def main() -> int:
             raise AssertionError("regenerated census was not accepted after drift repair")
         passed.append("AGG-12-census-freshness-added-removed-renamed-byte-drift")
 
+    passed.extend(current_policy_dependency_cases(module))
     passed.extend(orchestration_retirement_cases(module))
     passed.extend(gp_val037_current_argument_cases(module))
     passed.extend(gp_val043_runner_proof_cases(module))

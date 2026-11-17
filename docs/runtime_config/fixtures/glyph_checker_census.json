@@ -1039,7 +1039,7 @@
       },
       "checker_id": "build_input_provenance_inventory",
       "defines_main": true,
-      "file_size_bytes": 40185,
+      "file_size_bytes": 40524,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -1050,7 +1050,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 605,
+      "line_count": 608,
       "parse_error": null,
       "path": "tools/check_glyph_build_input_provenance_inventory.py",
       "potential_branch_identity_signals": [
@@ -1064,6 +1064,7 @@
       "python_module": "tools.check_glyph_build_input_provenance_inventory",
       "referenced_repository_path_prefixes": [
         "HAL/pico/src",
+        "docs/DEVELOPMENT.md",
         "docs/WORKFLOW.md",
         "docs/runtime_config/build_input_provenance_inventory.md",
         "docs/runtime_config/fixtures/build_input_provenance_inventory.json"
@@ -1073,7 +1074,7 @@
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "0944104be43cf4a03c9dfb03c1cc4470ec20b6accafb2b4234564e5c7824ac52",
+      "sha256": "b8fb7008e66c41ca7dd0322edf7c6efbb21c8f27135dfb3b30f64709064db9be",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -14793,7 +14794,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 111464,
+      "file_size_bytes": 115094,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -14804,6 +14805,7 @@
         "candidate_safety",
         "carrying_candidate",
         "configurator",
+        "evidence",
         "evidence_commit",
         "evidence_root",
         "hardware-evidence",
@@ -14823,7 +14825,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1826,
+      "line_count": 1888,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -14836,6 +14838,7 @@
         "candidate_safety",
         "carrying_candidate",
         "configurator",
+        "evidence",
         "evidence_commit",
         "evidence_root",
         "hardware-evidence",
@@ -14856,7 +14859,14 @@
       ],
       "python_module": "tools.check_glyph_runtime_config_validation_aggregate",
       "referenced_repository_path_prefixes": [
+        "docs/AGENT_CONTEXT.md",
+        "docs/WORKFLOW.md",
+        "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
+        "docs/agent_framework/HARDWARE_EVIDENCE.md",
+        "docs/agent_framework/USER_DIRECTION.md",
+        "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
         "docs/agent_framework/xHARDWARE_EVIDENCE.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/fixtures",
         "docs/runtime_config/fixtures/glyph_checker_census.json",
         "docs/runtime_config/fixtures/gp_val034_accepted_transitions.json",
@@ -14898,7 +14908,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "19788187d82b6058dbc9f4faa55cb28961222e53cb836c56ed2790b621473004",
+      "sha256": "dd8b363a9ef67030984404fbc0ec84ecd3b120aa409a3a219437f769359c5908",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

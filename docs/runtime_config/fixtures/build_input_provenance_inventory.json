@@ -744,7 +744,7 @@
     "environment_line": "PLATFORMIO_CORE_DIR=\"$PWD/.platformio-home\"",
     "policy_sources": [
       "AGENTS.md",
-      "docs/WORKFLOW.md"
+      "docs/DEVELOPMENT.md"
     ],
     "wrapper_roles": [
       {

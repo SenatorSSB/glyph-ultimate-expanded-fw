@@ -378,7 +378,7 @@ def expected_inventory(root: Path = ROOT) -> dict[str, object]:
             "fallback_edge": {"wrapper": "scripts/build-glyph-mk6-quiet.sh", "command": ["./scripts/pio-local.sh", "run", "-e", "glyph_mk6"]},
             "interpreter_selection": {"wrapper": "scripts/pio-local.sh", "alternatives": [".venv/bin/python", "python", "python3"], "resolution_state": "UNRESOLVED"},
             "environment_line": "PLATFORMIO_CORE_DIR=\"$PWD/.platformio-home\"",
-            "policy_sources": ["AGENTS.md", "docs/WORKFLOW.md"],
+            "policy_sources": ["AGENTS.md", "docs/DEVELOPMENT.md"],
             "wrapper_roles": [{"path": "scripts/build-glyph-mk6-quiet.sh", "role": "fallback_build_entrypoint"}, {"path": "scripts/pio-local.sh", "role": "local_interpreter_selector"}],
         },
     }
@@ -402,7 +402,7 @@ def validate_shape(value: object) -> dict[str, object]:
         raise ValueError("fallback edge drift")
     if entrypoints["interpreter_selection"] != {"wrapper": "scripts/pio-local.sh", "alternatives": [".venv/bin/python", "python", "python3"], "resolution_state": "UNRESOLVED"}:
         raise ValueError("interpreter selection drift")
-    if entrypoints["environment_line"] != 'PLATFORMIO_CORE_DIR="$PWD/.platformio-home"' or entrypoints["policy_sources"] != ["AGENTS.md", "docs/WORKFLOW.md"]:
+    if entrypoints["environment_line"] != 'PLATFORMIO_CORE_DIR="$PWD/.platformio-home"' or entrypoints["policy_sources"] != ["AGENTS.md", "docs/DEVELOPMENT.md"]:
         raise ValueError("build policy boundary drift")
     if entrypoints["wrapper_roles"] != [{"path": "scripts/build-glyph-mk6-quiet.sh", "role": "fallback_build_entrypoint"}, {"path": "scripts/pio-local.sh", "role": "local_interpreter_selector"}]:
         raise ValueError("wrapper role binding drift")
@@ -479,6 +479,9 @@ def adversarial_tests(current: dict[str, object]) -> tuple[int, int]:
     negative = 0
     validate_shape(copy.deepcopy(current)); positive += 1
     for mutation in (
+        lambda value: value["local_build_entrypoints"].__setitem__("policy_sources", ["AGENTS.md", "docs/WORKFLOW.md"]),
+        lambda value: value["local_build_entrypoints"].__setitem__("policy_sources", ["docs/DEVELOPMENT.md"]),
+        lambda value: value["local_build_entrypoints"]["policy_sources"].append("docs/WORKFLOW.md"),
         lambda value: value.__setitem__("schema_version", True),
         lambda value: value.__setitem__("unknown", True),
         lambda value: value["declaration_files"][0].__setitem__("path", "../escape"),

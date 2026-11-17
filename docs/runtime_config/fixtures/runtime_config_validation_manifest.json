@@ -3896,7 +3896,7 @@
       "mutation_risk": "temporary_repository_only",
       "source_dependencies": [
         "AGENTS.md",
-        "docs/WORKFLOW.md",
+        "docs/DEVELOPMENT.md",
         "platformio.ini",
         "config/glyph/env.ini",
         "config/glyph/meta.yaml",
@@ -3949,7 +3949,7 @@
         "builder_scripts/arduino_pico.py",
         "tools/glyph_tracked_worktree_integrity.py",
         "platformio.ini",
-        "docs/WORKFLOW.md"
+        "docs/DEVELOPMENT.md"
       ],
       "load_bearing": true,
       "historical": false,
@@ -4529,7 +4529,7 @@
         "tools/glyph_tracked_worktree_integrity.py",
         "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
-        "docs/WORKFLOW.md"
+        "docs/DEVELOPMENT.md"
       ],
       "load_bearing": true,
       "historical": false,
