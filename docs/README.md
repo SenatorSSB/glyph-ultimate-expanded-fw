@@ -8,7 +8,7 @@
 | Profile authors | [Profile system and advanced design](PROFILE_SYSTEM.md), then [native Ultimate authoring v1](../profiles/README.md) |
 | Developers | [Development](DEVELOPMENT.md), then [architecture](ARCHITECTURE.md) |
 | Coding agents | [AGENTS.md](../AGENTS.md), then [agent context](AGENT_CONTEXT.md) |
-| Historical/evidence research | [Acceptance evidence](planning/final-usb-gamepad/acceptance/README.md), [maintenance audit](maintenance/README.md), [calibration index](calibration/README.md) |
+| Historical/evidence research | [Selected history](history/HISTORY.md), [decisions](history/DECISIONS.md), [hardware acceptance](history/HARDWARE_ACCEPTANCE.md), [source lineage](history/SOURCE_LINEAGE.md), then [evidence index](evidence/README.md) |
 
 [Current state](CURRENT_STATE.md) owns present qualification;
 [roadmap](ROADMAP.md) owns forward intent. Their legacy journals preserve earlier

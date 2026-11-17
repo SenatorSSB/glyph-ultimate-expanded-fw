@@ -191,15 +191,16 @@ This guide retires no checker and changes no current applicability.
 | DEVELOPMENT | Build, test and contribution rules |
 | [ROADMAP](ROADMAP.md) | Future intent |
 | [profiles/README](../profiles/README.md) | Exact v1 authoring contract |
-| `docs/history/` (target) | Durable historical milestones and decisions |
-| `docs/evidence/` (target) | Evidence index linking preserved evidence |
+| [history](history/HISTORY.md) / [decisions](history/DECISIONS.md) | Selected milestones and durable rationale |
+| [hardware acceptance](history/HARDWARE_ACCEPTANCE.md) / [source lineage](history/SOURCE_LINEAGE.md) | Physical scope and source/artifact relationships |
+| [evidence](evidence/README.md) | Logical index linking preserved evidence |
 
 Replace/edit current summaries instead of prepending another dated status report.
 Completed work leaves ROADMAP. Detailed incident packets belong in evidence or
 history, rather than current entry points. Give one fact one canonical current
 owner where practical. Validators protect invariants, not obsolete paragraph
-wording. History/evidence destinations are a documentation target; existing
-packets have not been moved by this guide.
+wording. Curated history/evidence now has explicit owners; existing packets remain at
+their original paths pending separate preservation and consumer review.
 
 ## Lessons learned / engineering practices
 

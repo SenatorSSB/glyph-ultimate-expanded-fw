@@ -418,8 +418,11 @@ docs/
   ARCHITECTURE.md
   DEVELOPMENT.md
   ROADMAP.md
-  history/...                     target historical decisions/milestones
-  evidence/...                    target evidence index
+  history/HISTORY.md              selected chronology
+  history/DECISIONS.md            durable rationale
+  history/HARDWARE_ACCEPTANCE.md  scoped physical evidence
+  history/SOURCE_LINEAGE.md       source/artifact correspondence
+  evidence/README.md             logical evidence index
 profiles/
   README.md
   schema/
@@ -428,6 +431,8 @@ profiles/
 ```
 
 This is a documentation target, not a proposal to move firmware source directories.
-The history/evidence destinations describe later consolidation; old campaign and
-governance documents remain intact. Documentation ownership/maintenance rules live
+The [history](history/HISTORY.md), [decisions](history/DECISIONS.md),
+[hardware acceptance](history/HARDWARE_ACCEPTANCE.md),
+[source lineage](history/SOURCE_LINEAGE.md) and [evidence index](evidence/README.md)
+are actual curated surfaces. Old campaign and governance documents remain intact. Documentation ownership/maintenance rules live
 in [DEVELOPMENT](DEVELOPMENT.md#documentation-maintenance-policy).
