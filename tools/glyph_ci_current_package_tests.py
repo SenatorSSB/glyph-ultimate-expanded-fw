@@ -64,10 +64,11 @@ def _is_device_path(text):
 def _is_flash_command(command):
     lowered = command.lower()
     tokens = re.split(r"\s+", lowered)
+    executables = {Path(token).name for token in tokens}
     return (
-        "picotool" in tokens
-        or "openocd" in tokens
-        or ("pio" in tokens or "platformio" in tokens) and "run" in tokens and "upload" in tokens
+        "picotool" in executables
+        or "openocd" in executables
+        or ("pio" in executables or "platformio" in executables) and "run" in tokens and "upload" in tokens
         or "uf2" in tokens and "write" in tokens
         or "dd" in tokens and ("of=/dev/" in lowered or "of=/dev" in lowered)
     )
@@ -170,6 +171,7 @@ def verify_current_flashing_automation_controls():
         'import subprocess\nsubprocess.run(["pio", "run", "-t", "upload"], check=True)\n',
         'import subprocess\nsubprocess.run(["picotool", "load", "firmware.uf2"], check=True)\n',
         'import subprocess\nsubprocess.run(["openocd", "-f", "flash.cfg"], check=True)\n',
+        'import subprocess\nsubprocess.run(["/usr/bin/openocd", "-f", "flash.cfg"], check=True)\n',
         'from pathlib import Path\nPath("/Volumes/RPI-RP2/firmware.uf2").write_bytes(image)\n',
         'upload_port = "/dev/ttyACM0"\n',
         'upload_protocol = "picotool"\n',
