@@ -3973,7 +3973,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 22831,
+      "file_size_bytes": 26498,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -4010,7 +4010,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 559,
+      "line_count": 619,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -4050,8 +4050,11 @@
         "HAL/pico/src/comms/ConfiguratorBackend.cpp",
         "backend/storage/write/WebSerial/flashing",
         "docs/AGENT_CONTEXT.md",
+        "docs/CAPABILITIES.md",
         "docs/CURRENT_STATE.md",
+        "docs/README.md",
         "docs/ROADMAP.md",
+        "docs/USAGE.md",
         "docs/archive/README.md",
         "docs/calibration/INDEX.md",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
@@ -4112,7 +4115,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "f5db60aa0d3565c68b5fb18b2d2c7f942305873de5e7d752260c3491e5e7c6ca",
+      "sha256": "b593610691e93394633b2ba0db4e8fdb47cf46863c37b46d2e33983fd8494cbe",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -4133,7 +4136,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 7311,
+      "file_size_bytes": 7318,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence"
@@ -4160,7 +4163,7 @@
         "docs/USAGE.md"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "72daed93047a3d4496caaafc3027b9045920dd59fd73fd5ee484c00f608b8531",
+      "sha256": "ab5c77ab677098ce86bac27b22a70c3213513c221b804dfe50ae535632e6633a",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

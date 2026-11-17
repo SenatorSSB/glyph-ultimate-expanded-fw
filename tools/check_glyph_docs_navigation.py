@@ -55,7 +55,7 @@ def require_links(label: str, text: str, targets: tuple[str, ...]) -> None:
 def reject_stale_claims(label: str, text: str) -> None:
     n = normalize(text)
     patterns = (
-        r"(?:public (?:beta|release)|final public release) (?:is |has been )?(?:available|published|released|complete|launched|ready now)",
+        r"(?:public (?:beta|release)|final public release) (?:is |has been )?(?:available|published|released|complete|launched|ready now|exists)",
         r"runtime[- ]loaded (?:config|profiles?) (?:is|are) not implemented",
         r"(?:webserial/device write|protobuf binary write|runtime-config storage|firmware binary/protobuf parser integration) is not implemented",
     )

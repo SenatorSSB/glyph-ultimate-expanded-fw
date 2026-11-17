@@ -71,8 +71,9 @@ RIGHT can intentionally select a DOWN-LEFT output.
 
 The [evaluator](../src/modes/UltimateNativeEvaluator.cpp) separately resolves
 conditions, table selection, digital bindings and analogue activation/gates.
-One input can participate in several mechanisms. Ordinary remapping is
-one-to-one as documented in [Config's schema](../schema/haybox/config.proto).
+One input can participate in several mechanisms. In ordinary remapping, each physical input maps to one destination; multiple
+physical inputs may share a destination, as documented in
+[Config's schema](../schema/haybox/config.proto).
 “Subsystem/sublayer” means coordinated rules sharing conditions, not a separate
 native collection type or arbitrary nesting. No timers, persistent toggles,
 scripts or automated sequences are supplied by this finite native program.

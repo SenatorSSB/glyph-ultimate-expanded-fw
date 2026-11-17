@@ -417,14 +417,75 @@ def validate_boundary(text: str) -> None:
     )
 
 
+def current_doc_section(text: str, kind: str) -> str:
+    """Keep package doc validation self-contained: no new manifest dependency."""
+    start, end = f"<!-- {kind}-v1:start -->", f"<!-- {kind}-v1:end -->"
+    legacy = {"current-state": "legacy-current-state-journal",
+              "current-roadmap": "legacy-roadmap-journal"}[kind]
+    boundary = f"<!-- {legacy}:start -->"
+    if (text.count(start) != 1 or text.count(end) != 1 or text.count(boundary) != 1
+            or not text.index(start) < text.index(end) < text.index(boundary)):
+        fail(f"{kind}: invalid current/legacy boundaries")
+    if not re.fullmatch(r"# [^\n]+\s*", text.split(start)[0]):
+        fail(f"{kind}: current prose outside bounded section")
+    current = text.split(start)[1].split(end)[0]
+    reject_phrases(kind, current, (
+        "Runtime-loaded config is not implemented",
+        "Runtime-config storage is not implemented",
+        "WebSerial/device write is not implemented",
+        "Protobuf binary write is not implemented"))
+    if re.search(r"public (?:beta|release) (?:is |has been )?(?:available|published|released|complete|launched|exists)",
+                 normalize(current)):
+        fail(f"{kind}: positive public-release claim")
+    return current
+
+
 def validate_current_state(text: str) -> None:
-    from check_glyph_docs_navigation import validate_current_state as validate_current
-    validate_current(text)
+    current = current_doc_section(text, "current-state")
+    require_phrases(rel(CURRENT_STATE), current, (
+        "configurator", "PREPARED_NOT_ACTIVATED", "NOT_RELEASED",
+        "Senscope complete-path acceptance",
+        "dcf6e29589f558a95c021bef491578f87e41750f",
+        "a7731388430ea70dbe666298953795f4018069b0",
+        "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+        "1,325,568", "API-visible"))
+    for name, status in (("DInput", "N/A"), ("Browser Gamepad API / JoyCheck", "NOT_QUALIFIED"),
+                         ("Keyboard", "DEFERRED / NOT_TESTED"), ("Switch 2", "OUT_OF_SCOPE / NOT_TESTED"),
+                         ("Nunchuk", "NOT_TESTED"), ("Fresh Install / recovery hardening", "DEFERRED / UNQUALIFIED")):
+        rows = [line for line in current.splitlines() if line.startswith(f"| {name} |")]
+        if len(rows) != 1 or status not in rows[0].split("|")[2]:
+            fail(f"current-state: missing scoped {name} qualification")
+        if name == "DInput" and re.search(r"\bPASS\b", rows[0].split("|")[2]):
+            fail("current-state: selected DInput physical qualification must remain N/A")
 
 
 def validate_roadmap(text: str) -> None:
-    from check_glyph_docs_navigation import validate_roadmap as validate_current
-    validate_current(text)
+    current = current_doc_section(text, "current-roadmap")
+    require_phrases(rel(ROADMAP), current, (
+        "## Near-term preparation", "## Later / conditional",
+        "PREPARED_NOT_ACTIVATED", "NOT_RELEASED", "Senscope", "DInput", "Fresh Install"))
+
+
+def validate_public_doc_surface() -> None:
+    """Current package consumer checks public files without historical prose locks."""
+    for path, headings in (
+        ("docs/README.md", ("Choose your route", "Compact glossary")),
+        ("docs/CAPABILITIES.md", ("Mode engines", "Communication backends", "Native Ultimate profiles",
+                                  "Profile and package management", "Physical qualification")),
+        ("docs/USAGE.md", ("Design a profile", "Row, native profile and package",
+                           "Selection, installation and recovery")),
+    ):
+        text = read_required(REPO_ROOT / path)
+        require_phrases(path, text, headings + ("../profiles/README.md",))
+    for path in ("README.md", "docs/USAGE.md", "docs/CAPABILITIES.md"):
+        text = read_required(REPO_ROOT / path)
+        require_phrases(path, text.replace("**", ""), ("30 profile rows total", "shared 30-row budget"))
+    readme = read_required(REPO_ROOT / "README.md")
+    for target in ("docs/USAGE.md", "docs/CAPABILITIES.md", "docs/CURRENT_STATE.md", "profiles/README.md"):
+        if f"]({target})" not in readme:
+            fail(f"README: missing public route {target}")
+    if "](profiles/ultimate/README.md)" in readme:
+        fail("README: v0 golden cannot replace current authoring")
 
 
 def validate_runtime_readme(text: str) -> None:
@@ -483,8 +544,7 @@ def validate_archive_index(text: str) -> None:
 
 
 def validate_docs() -> None:
-    from check_glyph_docs_navigation import current_section, validate_docs as validate_public_docs
-    validate_public_docs(REPO_ROOT)
+    validate_public_doc_surface()
     docs = {
         AGENT_CONTEXT: read_required(AGENT_CONTEXT),
         BOUNDARY: read_required(BOUNDARY),
@@ -497,8 +557,8 @@ def validate_docs() -> None:
     validate_current_state(docs[CURRENT_STATE])
     validate_roadmap(docs[ROADMAP])
     # Historical journals are evidence about their own time, not current claims.
-    docs[CURRENT_STATE] = current_section(docs[CURRENT_STATE], "current-state")
-    docs[ROADMAP] = current_section(docs[ROADMAP], "current-roadmap")
+    docs[CURRENT_STATE] = current_doc_section(docs[CURRENT_STATE], "current-state")
+    docs[ROADMAP] = current_doc_section(docs[ROADMAP], "current-roadmap")
     for path in (AGENT_CONTEXT, BOUNDARY, CURRENT_STATE, ROADMAP, RUNTIME_README, ARCHIVE_INDEX):
         reject_forbidden_attribution(rel(path), docs[path])
         reject_phrases(rel(path), docs[path], FORBIDDEN_ACTIVE_CLAIMS)
