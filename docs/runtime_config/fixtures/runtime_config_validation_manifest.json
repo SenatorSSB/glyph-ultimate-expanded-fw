@@ -4503,14 +4503,14 @@
         "tools/check_glyph_agent_framework_docs.py"
       ],
       "category": "agent_framework",
-      "applicability": "current",
-      "branch_policy": "content_only",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "framework contracts"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "retained historical/internal personal orchestration evidence; F1 moved public-current AGENTS responsibilities to AGENTS.md and docs/DEVELOPMENT.md, with current public safety enforced by AGENTS/docs navigation and current package docs checks; hardware/artifact custody and queue/receipt-dependent current validation remain separate CURRENT checks and are not retired"
     },
     {
       "id": "hardware_artifact_custody",
@@ -4543,14 +4543,14 @@
         "tools/check_glyph_agentic_sequence_protocol.py"
       ],
       "category": "agent_framework",
-      "applicability": "current",
-      "branch_policy": "content_only",
+      "applicability": "historical_only",
+      "branch_policy": "named_evidence_branch",
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [],
-      "load_bearing": true,
-      "historical": false,
-      "reason": "agentic sequence protocol"
+      "load_bearing": false,
+      "historical": true,
+      "reason": "retained historical personal workflow protocol; branch, test, review and device-safety rules have current public owners in AGENTS.md and docs/DEVELOPMENT.md; the calibration protocol remains evidence rather than a normal current product/runtime-config check"
     },
     {
       "id": "reconstructed_authority",

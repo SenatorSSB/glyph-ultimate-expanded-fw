@@ -60,8 +60,13 @@ The full current aggregate still checks firmware input provenance, offline
 isolation, source-owned tooling and publication custody.
 
 <!-- validation-health-summary:start -->
-Current summary: manifest entries = 64; current load-bearing checks = 25.
+Current summary: manifest entries = 64; current load-bearing checks = 23.
 <!-- validation-health-summary:end -->
+
+The two personal orchestration protocols remain available as historical evidence.
+Their public product/safety responsibilities have current owners in AGENTS.md,
+DEVELOPMENT, navigation and package checks; separate current custody and
+queue/receipt-dependent validation remain in force.
 
 ## Historical validation records
 

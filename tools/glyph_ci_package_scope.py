@@ -51,6 +51,8 @@ MAINTENANCE_INPUTS = frozenset({
 
 
 RETIRED_PACKAGE_CHECKS = frozenset({
+    'agent_framework',
+    'agentic_sequence',
     'artifact_install',
     'campaign_webserial_source_authority',
     'config_menu_invalid_state_characterization',
