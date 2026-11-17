@@ -1,5 +1,83 @@
 # Glyph Current State
 
+<!-- current-state-v1:start -->
+## Current snapshot
+
+Canonical branch: **configurator**. Canonical source integration is **COMPLETE**.
+Current documentation/CI descendants retain the physically tested firmware source,
+defaults, schemas and build configuration; they are not newly tested firmware.
+Later host-tool/checker changes are distinct from those firmware inputs. Obtain
+the live branch tip from Git when needed; it is not the tested artifact identity.
+
+| Stable tested identity | Value |
+| --- | --- |
+| Source commit | `dcf6e29589f558a95c021bef491578f87e41750f` |
+| Source tree | `a7731388430ea70dbe666298953795f4018069b0` |
+| Retained UF2 SHA-256 | `2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42` |
+| Retained UF2 size | 1,325,568 bytes |
+
+Build evidence is the separate descendant
+`ebde1447f5cf348b3af82240ebd95445b44cb888`. Acceptance and later documentation
+commits are not the build source. A rebuild or CI build does not inherit physical
+acceptance of the retained UF2.
+
+## Qualification scope
+
+| Route or feature | Selected physical status |
+| --- | --- |
+| Windows XInput / joy.cpl | PASS, selected owner-reported identity and controls |
+| Original Switch USB / Ultimate | PASS, selected packet |
+| GameCube through actual adapter / original Switch / Ultimate | PASS, selected packet; exact adapter model UNKNOWN |
+| Config and all 27 stored profiles | PASS, API-visible preservation; normal reconnect owner-reported |
+| DInput | N/A, no selected beta profile exposes this route |
+| Browser Gamepad API / JoyCheck | NOT_QUALIFIED, discrepancy unresolved |
+| Keyboard | DEFERRED / NOT_TESTED for this packet |
+| Switch 2 | OUT_OF_SCOPE / NOT_TESTED |
+| Nunchuk | NOT_TESTED |
+| Fresh Install / recovery hardening | DEFERRED / UNQUALIFIED |
+
+The [exact acceptance record](planning/final-usb-gamepad/acceptance/README.md) and
+[physical result](planning/final-usb-gamepad/acceptance/PHYSICAL_RESULT.json) own
+scope and limitations. Preservation compares the 368-byte Config, ordered
+27-entry directory and raw wrappers through the API. It does not prove raw-flash
+equality or a later raw post-reboot comparison. Unit continuity is owner-reported;
+a globally unique unit identity is UNKNOWN. No broader mode, modifier, adapter or
+browser qualification follows. Root cause of the browser discrepancy remains
+UNPROVEN. Focused host proof and historical aggregate failures remain distinct;
+no full aggregate PASS is claimed.
+
+## Release and product status
+
+Beta freeze: **PREPARED_NOT_ACTIVATED**. Public release: **NOT_RELEASED**.
+This repository is being prepared for public beta/release; no public beta or
+release is claimed. Source integration is complete, while the immutable acceptance
+packet's earlier pending-integration statements remain historical.
+
+[Senscope complete-path acceptance](planning/final-usb-gamepad/acceptance/SENSCOPE_HANDOFF.md)
+remains separate, against the eventual frozen firmware. Physical DInput needs an
+appropriate supported profile. Keyboard is deferred, and Fresh Install/recovery
+is unqualified. Ordinary managed-package selection and Builder/install
+productization remain outstanding.
+
+Use [usage](USAGE.md), [capabilities](CAPABILITIES.md),
+[native authoring v1](../profiles/README.md) and [roadmap](ROADMAP.md).
+Developers and agents must also read [AGENTS.md](../AGENTS.md),
+[agent context](AGENT_CONTEXT.md) and the
+[implementation boundary](runtime_config/IMPLEMENTATION_BOUNDARY.md): the accepted
+native Ultimate/ProfileStore lane does not authorize arbitrary generic runtime
+configuration or new device operations.
+<!-- current-state-v1:end -->
+
+## Legacy chronological journal — historical, pending consolidation
+
+The complete previous document body follows unchanged. Its dated claims describe
+those checkpoints, including pending work later completed. It is evidence about
+its own time, not an override of the current snapshot above.
+
+<!-- legacy-current-state-journal:start -->
+
+# Glyph Current State
+
 ## Exact candidate physical qualification accepted — 2026-11-17
 
 Required first-beta physical scope **PASS** for source

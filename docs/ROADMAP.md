@@ -1,5 +1,55 @@
 # Glyph Roadmap
 
+<!-- current-roadmap-v1:start -->
+## Near-term preparation
+
+These are forward priorities, not implementation or device-operation authority.
+[Current state](CURRENT_STATE.md) owns completed source integration and exact
+physical qualification. Beta freeze remains **PREPARED_NOT_ACTIVATED**; public
+release remains **NOT_RELEASED**.
+
+| Priority | Intended outcome / dependency |
+| --- | --- |
+| Documentation consolidation | Useful player/user entry points now; controlled extraction of durable history and decisions later, after consumer migration. |
+| Clean release-repository staging | Review export scope, attribution, privacy and recoverable preservation before staging a clean release repository. |
+| Beta/release preparation | Finish product/install documentation and qualification review before an explicit owner freeze/publication decision. |
+| Senscope complete-path acceptance | Verify the complete authoring/package/install/readback/execution path against eventual frozen firmware; firmware acceptance alone does not complete it. |
+| Physical DInput coverage | Select an appropriate supported profile and separately qualify the route; the selected first-beta packet recorded N/A. |
+
+Complete-package firmware primitives exist, while ordinary managed selection and
+Senscope Builder/install productization remain outstanding. Preserve the logical
+profile's dedicated Config row and ProfileStore record, selected plate and exact
+readback through that work. See [capabilities](CAPABILITIES.md) and
+[usage](USAGE.md) for the current workflow limits.
+
+## Later / conditional
+
+These are deferred possibilities, not committed delivery promises:
+
+- Keyboard profile-kind product support and its separate physical qualification.
+- MODE_CUSTOM product evaluation beyond its implemented engine.
+- Fresh Install / recovery hardening and qualification.
+- Boot-time optimization if valuable; observed console recognition time is not
+  an internal firmware timing measurement.
+- Browser Gamepad compatibility only if intentionally supported; current
+  JoyCheck/browser status is NOT_QUALIFIED.
+- Switch 2 only if intentionally added and tested.
+- Other transport/profile families following separate source and product decisions.
+
+Historical plans below retain earlier ordering, decisions and evidence. They do
+not renew old campaign authority or authorize forbidden boundaries. Developers
+and agents start with [AGENTS.md](../AGENTS.md).
+<!-- current-roadmap-v1:end -->
+
+## Legacy roadmap journal — historical, pending consolidation
+
+The complete previous document body follows unchanged. Its dated intent and
+pending states remain historical evidence for later controlled consolidation.
+
+<!-- legacy-roadmap-journal:start -->
+
+# Glyph Roadmap
+
 ## Exact candidate physical qualification accepted — 2026-11-17
 
 Required first-beta physical scope **PASS** for source

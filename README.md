@@ -1,86 +1,69 @@
-# Glyph Firmware
+# Glyph firmware
 
-*Glyph's firmware is based on HayBox, please consider supporting/sponsoring it [here](https://github.com/JonnyHaystack/HayBox)*
+Customizable Glyph controller firmware for Super Smash Bros. Ultimate players,
+based on HayBox. Design raw stick outputs and coordinated button rules for your
+own profiles.
 
-This repository is the Glyph/HayBox-side firmware, configurator, and backend
-realization workstream for possible Senscope integration. It is used to inspect,
-model, document, and cautiously implement controller/backend behavior.
+> **Availability:** This community fork is being prepared for its public beta/release.
+> Selected firmware routes have physical qualification; documentation and
+> productization are ongoing. This is not yet a final public release.
 
-Senscope is a separate browser-first Super Smash Bros. Ultimate Rectangle
-Modifier Designer app. This repo may inform future Senscope backend adapters,
-realization evaluators, manual-entry guides, or export workflows, but it must
-not change Senscope game-semantic source authority.
+## Build your own controls
 
-## Start Here
+- **Profile flexibility.** Config supports a maximum of **30 profile rows total**:
+  a shared 30-row budget. Retained stock and other mode rows consume that budget.
+  A row owns its remaps and SOCD settings; a native Ultimate profile owns its
+  coordinate tables and rules. Backend destinations, overall brightness and some
+  mode options are device-global. A complete managed package brings the paired
+  row and native record together, with its plate and RGB configuration.
+- **Nine-way modifier outputs.** Each native coordinate table contains all nine
+  direction states, including **5 / no direction**:
 
-- [Editable Ultimate native profile](profiles/ultimate/README.md) - exact recovered
-  profile source, finite JSON schema, offline compiler and byte-exact proof.
-- [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) - current baseline, readiness
-  categories, approval gates, and non-claims.
-- [docs/ROADMAP.md](docs/ROADMAP.md) - clean long-term Glyph-side roadmap.
-- [docs/WORKFLOW.md](docs/WORKFLOW.md) - branch, inspection, test, merge, and
-  result-recording workflow.
-- [AGENTS.md](AGENTS.md) - standing operating contract for agents.
-- [docs/calibration/README.md](docs/calibration/README.md) - guide to detailed
-  evidence packets and historical records.
-- [docs/export/README.md](docs/export/README.md) - offline official
-  configurator export-target contract docs and preview-only fixtures.
+  ```text
+  7 8 9
+  4 5 6
+  1 2 3
+  ```
 
-## Current Status
+  Every entry can hold any valid raw stick coordinate (`x,y` from 0 to 255).
+  Holding RIGHT while a modifier is active may intentionally output DOWN-LEFT,
+  or another chosen coordinate. Input direction does not have to match output
+  direction; direction 5 may also output a non-center coordinate. There is no
+  automatic character-facing awareness.
+- **One input, coordinated roles.** A physical input can participate independently
+  in a digital binding, a modifier/table-selection condition, a subsystem/layer
+  activation condition and analogue effect gating. Ordinary remapping itself
+  does not provide unrestricted duplicate fanout.
+- **Subsystems / sublayers.** Conditions and rules can activate coordinated groups
+  of mappings and effects. This is a finite deterministic rule system, without
+  arbitrary nested scripting, persistent toggles, timers, macros or automated
+  input sequences.
 
-- GFW3 runtime remap work is merged, user hardware-tested, and recorded.
-- Phase 3 generated-like C++ constants path is merged, build-gated, user
-  hardware-tested for applicable non-nunchuk scope, and recorded.
-- Preservation hardware pass is recorded for applicable non-nunchuk scope.
-- Step 14 manual firmware-consuming runtime-config load is blocked before implementation.
-- Step 15 source-authority research complete.
-- Step 16 WebSerial/device-write implementation is blocked before implementation.
-- Step 17 flashing automation is forbidden/not approved; safety boundary complete.
-- Phase 6 bounded config-owned modifier-data architecture is complete as
-  docs/spec/tooling only; runtime-loaded config, storage, parser integration,
-  WebSerial/device write, and flashing remain not implemented.
-- Step 18 public/manual workflow release-candidate hardware result is recorded for
-  applicable doable scope in
-  `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
-  the plan/checklist remain plan-only and no public release or official
-  configurator compatibility claim is made.
-- Official Glyph configurator corpus records user-provided default and
-  back-and-forth JSON fixtures when the correction packet is present.
-- Offline official configurator export target contract work is docs/tools only,
-  preview-only, and not a public release or official compatibility claim.
-- Retired official-configurator historical evidence is bounded by
-  `tools/check_glyph_official_configurator_validation.py`; the official app is
-  not a product/development dependency, no operator capture is required, and
-  historical compatibility chains are not current evidence.
-- Calibration docs remain useful evidence, but the current roadmap should be
-  read from `docs/CURRENT_STATE.md`, `docs/ROADMAP.md`, and
-  `docs/WORKFLOW.md`.
+For a **neutral-B style rule**, a chosen physical input can request B while also
+selecting or gating a left-stick output rule. Held direction buttons then need
+not produce their ordinary directional stick output. Design the exact coordinate
+and competing rules for the intended context: this is no promise of a particular
+move for every character or game state, and supplies no Smash thresholds.
 
-## Explicit Non-Claims
+## Find your next step
 
-- Runtime-loaded config is not implemented.
-- Runtime-config storage is not implemented.
-- Firmware binary/protobuf parser integration is not implemented.
-- WebSerial/device write is not implemented.
-- Protobuf binary write is not implemented.
-- Firmware flashing automation is not implemented.
-- No external-remapper adapter output is implemented.
-- No public release claim is made.
-- No nunchuk validation claim is made.
+- [Players and users: current usage](docs/USAGE.md)
+- [Features and limits](docs/CAPABILITIES.md)
+- [Current physical qualification and exact tested firmware](docs/CURRENT_STATE.md)
+- [Native profile authors: start with v1](profiles/README.md)
+- [Documentation index and glossary](docs/README.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Developers and coding agents](AGENTS.md)
 
-`docs/calibration/` contains detailed evidence packets, dated blocker records,
-historical branch notes, templates, and correction packets. Treat it as an
-evidence archive, not the main current roadmap.
+Offline profile authoring exists. Installation, recovery and ordinary managed
+selection still have product limitations; see the usage guide before proceeding.
+The firmware's Configurator transport is distinct from the retired official
+configurator website, which is not a development dependency.
 
-## Glyph Links
+## Credits and license
 
-For remapping your Glyph: [Configurator](https://limitlabs.com/pages/glyph-configurator)
-
-Glyph resources: [Resources](https://limitlabs.com/pages/glyph-resources)
-
-User manual: [Manual](https://cdn.shopify.com/s/files/1/0926/5597/6818/files/Glyph_Manual_v1.0.pdf?v=1775239160)
-
-Order today through [Satisfye.com](https://www.satisfye.com/collections/glyph), our manufacturing and logistics partner for Glyph.
-
----
-This project is licensed under the GNU GPL Version 3 - see the [LICENSE](LICENSE) file for details
+Glyph firmware builds on [HayBox by JonnyHaystack](https://github.com/JonnyHaystack/HayBox)
+and the upstream Glyph work by Limit Labs and contributors. This community fork
+is not presented as an official Limit Labs release. Please consider supporting
+HayBox upstream. Licensed under [GNU GPL version 3](LICENSE); retain upstream
+copyright and license notices.
