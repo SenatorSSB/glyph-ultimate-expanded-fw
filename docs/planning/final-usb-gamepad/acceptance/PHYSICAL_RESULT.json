@@ -1,0 +1,125 @@
+{
+  "schema": "glyph_final_usb_gamepad_physical_acceptance_v1",
+  "recorded_at_utc": "2026-11-17T01:30:29.481676+00:00",
+  "FIRST_BETA_PHYSICAL_QUALIFICATION": "PASS",
+  "candidate": {
+    "source": "dcf6e29589f558a95c021bef491578f87e41750f",
+    "tree": "a7731388430ea70dbe666298953795f4018069b0",
+    "uf2_sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+    "uf2_bytes": 1325568
+  },
+  "build_evidence_commit": "ebde1447f5cf348b3af82240ebd95445b44cb888",
+  "canonical_at_review": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "protocol_at_handoff": "git-json:ebde1447f5cf348b3af82240ebd95445b44cb888:docs/planning/final-usb-gamepad/HARDWARE_PACKET.md",
+  "row_mapping": "A1/A2=X1/X2; B1/B2=S1/S2; C=D1/D2 applicability/smoke; D1/D2=G1/G2; P=P1/P2; R1 explicit current owner workflow supplement",
+  "rows": {
+    "X1": "PASS",
+    "X2": "PASS",
+    "S1": "PASS",
+    "S2": "PASS",
+    "D1": "N/A",
+    "D2": "N/A",
+    "G1": "PASS",
+    "G2": "PASS",
+    "P1": "PASS",
+    "P2": "PASS",
+    "R1": "PASS"
+  },
+  "unit_setup": {
+    "unit": "Same owner Glyph Mk6 as preceding Senscope/Glyph tests, owner reported; serial not supplied",
+    "profile": "Owner Kaz5Test; saved native ID53 KazTest5; executing profile supported by owner observed behavior, not a saved name alone",
+    "windows": "Windows11, direct USB; controller Device Manager Xbox360 Peripherals / Xbox360 Wireless Receiver for Windows",
+    "switch": "Original Nintendo Switch / Super Smash Bros. Ultimate; Switch USB and GameCube cable \u2192 actual adapter \u2192 Switch routes",
+    "adapter_model": "Not provided"
+  },
+  "installation": {
+    "result": "PASS",
+    "owner_report": "Installed the UF2. It boots normally, About shows dcf6e295, and connected in Configurator mode again.",
+    "recorded_at_utc": "2026-11-17T00:37:33.052289+00:00",
+    "method": "Owner manual install of previously handed-off exact retained UF2; no automated flashing",
+    "identity_readback": {
+      "device_name": "glyph_mk6",
+      "firmware_name": "HayBox",
+      "firmware_version": "dcf6e295"
+    },
+    "attestation_limit": "Owner installation report and matching DeviceInfo prefix; no machine attestation of flashed image bytes"
+  },
+  "windows_identity": {
+    "status": "Device is working properly",
+    "category": "Xbox 360 Peripherals",
+    "name": "Xbox 360 Wireless Receiver for Windows",
+    "driver_event": "xusb22.inf configured, owner reported",
+    "hardware_ids": [
+      "USB\\VID_0738&PID_4726&REV_0100&MI_00",
+      "USB\\VID_0738&PID_4726&MI_00"
+    ],
+    "joy_cpl": "Pico; both left axes/signs, representative face button, release/neutral and no-stuck checks owner PASS"
+  },
+  "preservation": {
+    "result": "PASS",
+    "summary": "final-readback-2/summary.json",
+    "config_bytes": 368,
+    "config_sha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+    "config_exact_preflight": true,
+    "ordered_inventory_exact_preflight": true,
+    "all_27_profile_wrappers_revisions_digests_exact_preflight": true,
+    "all_profile_health": 1,
+    "incarnation": 1,
+    "generation": "234",
+    "token_high_water": "17293822569102712138",
+    "config_generation": "3241733502",
+    "recovery_flags": 0,
+    "mutation_feasible": true,
+    "config_stable_within_readback": true,
+    "exchanges": 64,
+    "scope": "Final route-session API-visible Config and ProfileStore preservation PASS; not universal raw-flash equality. Subsequent normal reconnect/usability separately owner-reported PASS.",
+    "selector_restoration": "Raw Config exact preflight after owner manual selection restoration; no outstanding Config differences",
+    "agent_device_mutations": 0
+  },
+  "final_reboot": {
+    "recorded_at_utc": "2026-11-17T01:16:41.876608+00:00",
+    "origin": "Owner current-chat report",
+    "owner_report": "Normal reconnect passed: XInput and Kaz5Test are correct, input and release work, and it is usable.",
+    "R1": "PASS",
+    "scope": "Owner-reported normal reconnect/usability after final restoration/readback; no new post-reboot Config/ProfileStore byte comparison claimed."
+  },
+  "independent_review": "INDEPENDENT_REVIEW.json",
+  "machine_evidence": "PRESERVATION_REPLAY.json",
+  "owner_evidence": "OWNER_OBSERVATIONS.json",
+  "raw_input_hashes": "PRIVATE_INPUT_MANIFEST.json",
+  "history_corrections": [
+    "Initial apparent Pico-only X1 FAIL superseded by exact VID/PID + working XUSB and joy.cpl observations. All chronology retained.",
+    "Initial DInput/profile-index inference corrected; owner confirms actual tested profile does not expose DInput.",
+    "Initial final-readback INFO timeout explained by owner not yet entering Configurator; subsequent64-exchange capture PASS."
+  ],
+  "scope_classifications": {
+    "Windows XInput": "PASS",
+    "Original Switch USB / Ultimate": "PASS",
+    "GameCube -> GC adapter -> original Switch / Ultimate": "PASS",
+    "DInput physical": "N/A for this packet/profile",
+    "Browser Gamepad API compatibility": "NOT_QUALIFIED / unresolved",
+    "Switch 2": "NOT_TESTED / OUT_OF_SCOPE",
+    "N64": "NOT_TESTED",
+    "NES": "NOT_TESTED",
+    "SNES": "NOT_TESTED",
+    "Keyboard": "NOT_TESTED / deferred",
+    "Fresh Install recovery": "NOT_TESTED / post-beta hardening",
+    "Nunchuk": "NOT_TESTED"
+  },
+  "limitations": [
+    "Machine INFO is source-prefix observation, not attestation of flashed image bytes; owner reports installation of exact handed-off artifact.",
+    "No globally unique unit identifier, adapter model, browser/version, per-modifier coordinates or machine-recorded gameplay video.",
+    "No physical DInput test, universal browser compatibility, Switch2, retro-console, keyboard or FreshInstall acceptance.",
+    "Raw comparisons prove API-visible preservation only; not universal NOR/raw-flash equality."
+  ],
+  "unit_continuity": "Owner explicitly identifies same unit throughout current session; source-prefix continuity and identical distinctive Config/27-profile store support same-session continuity. No globally unique identifier or cryptographic device attestation. Accepted under approved packet/contract; no invented serial.",
+  "adapter": "Actual GameCube adapter route owner-confirmed; exact model UNKNOWN. Nonblocking reproduction-metadata limitation for approved scope, no general adapter compatibility claim.",
+  "browser": "joycheck.io XInput sees only HOME after HOME activation despite working Windows joy.cpl; Switch USB on same site shows Generic controller and button activity. Root cause UNKNOWN. No controller defect established; not a required packet blocker.",
+  "SOURCE_FIX_REQUIRED": "none identified for selected first-beta required scope",
+  "future_DInput_requirement": "Before public Senscope complete-profile/device release, perform physical DInput acceptance using a frozen beta firmware and an actual supported Senscope-authored profile exposing DInput. Separate complete-path Senscope/Glyph acceptance, not retrospective expansion of this packet.",
+  "canonical_integration": "PENDING_OWNER_AUTHORIZATION; current branch evidence publication only",
+  "freeze": "PREPARED_NOT_ACTIVATED",
+  "public_release": "NOT_PERFORMED",
+  "authority": "Explicit owner current-chat authorization for candidate-descendant source-free evidence publication; no canonical queue/DONE/source integration change",
+  "no_new_firmware_or_device_operations": true
+}

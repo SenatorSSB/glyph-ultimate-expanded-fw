@@ -1,0 +1,124 @@
+{
+  "result": "PASS",
+  "method": "Independent root replay of every successful request/response journal, raw protobuf responses, Config payload and all27 serialized wrapper backups across all three captures; exact baseline tuple comparison",
+  "private_root_relative": "local_backups/hardware-qualification/final-usb-gamepad/20261117T003118Z",
+  "private_manifest_files_verified": 491,
+  "phases": {
+    "preflight": {
+      "successful_read_only_exchanges": 64,
+      "info_version": "5dfc4cc2",
+      "config_bytes": 368,
+      "config_sha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+      "profile_count": 27,
+      "ordered_inventory_equal_preflight": true,
+      "all_wrappers_revisions_digests_equal_preflight": true,
+      "all_health": 1,
+      "status": {
+        "store_incarnation": 1,
+        "store_generation": 234,
+        "config_generation": 3241733502,
+        "transaction_token_high_water": 17293822569102712138,
+        "recovery_flags": 0,
+        "mutation_feasible": true
+      },
+      "config_and_status_stable_within_capture": true,
+      "capture_start_utc": "2026-11-17T00:33:18.170596+00:00",
+      "capture_end_utc": "2026-11-17T00:33:20.701775+00:00"
+    },
+    "postinstall": {
+      "successful_read_only_exchanges": 64,
+      "info_version": "dcf6e295",
+      "config_bytes": 368,
+      "config_sha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+      "profile_count": 27,
+      "ordered_inventory_equal_preflight": true,
+      "all_wrappers_revisions_digests_equal_preflight": true,
+      "all_health": 1,
+      "status": {
+        "store_incarnation": 1,
+        "store_generation": 234,
+        "config_generation": 3241733502,
+        "transaction_token_high_water": 17293822569102712138,
+        "recovery_flags": 0,
+        "mutation_feasible": true
+      },
+      "config_and_status_stable_within_capture": true,
+      "capture_start_utc": "2026-11-17T00:37:18.911304+00:00",
+      "capture_end_utc": "2026-11-17T00:37:21.491766+00:00"
+    },
+    "final-readback-2": {
+      "successful_read_only_exchanges": 64,
+      "info_version": "dcf6e295",
+      "config_bytes": 368,
+      "config_sha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+      "profile_count": 27,
+      "ordered_inventory_equal_preflight": true,
+      "all_wrappers_revisions_digests_equal_preflight": true,
+      "all_health": 1,
+      "status": {
+        "store_incarnation": 1,
+        "store_generation": 234,
+        "config_generation": 3241733502,
+        "transaction_token_high_water": 17293822569102712138,
+        "recovery_flags": 0,
+        "mutation_feasible": true
+      },
+      "config_and_status_stable_within_capture": true,
+      "capture_start_utc": "2026-11-17T01:13:34.855698+00:00",
+      "capture_end_utc": "2026-11-17T01:13:37.348249+00:00"
+    }
+  },
+  "manual_records": {
+    "windows-xinput-observation-01.json": {
+      "sha256": "e1cc75a7b52a55af808399ce5ee173bc2c2c2ade359691c5ccccffc070df54cd",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T00:48:20.142169+00:00"
+    },
+    "windows-xinput-observation-02.json": {
+      "sha256": "72a1c2be5b91a122d7c22f9019e70c10f495280fb795c898aeeca9fc2db3dad6",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T00:52:10.859249+00:00"
+    },
+    "windows-xinput-observation-03.json": {
+      "sha256": "fe0e7bc83d23fdadcbc692e72419d4861586f5830d4511d557bd08a9c519dc1c",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T00:56:56.456142+00:00"
+    },
+    "windows-xinput-observation-04.json": {
+      "sha256": "c72d59af8ab053d440a8d896185e240639efc706b5b02f7841ba37041a7f97e6",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T00:59:49.686390+00:00"
+    },
+    "windows-switch-hid-observation-01.json": {
+      "sha256": "69dfcb2c4bec39b4097a176975ec75b8b545013cc8d0fabaf4d926496493c2f3",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T01:02:20.241117+00:00"
+    },
+    "original-switch-ultimate-observation-01.json": {
+      "sha256": "249a1bd8b11889a76e74fcc45b8ffb305f5f4d1564c35490b47264f76fa7d6d4",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T01:03:37.442986+00:00"
+    },
+    "gamecube-ultimate-observation-01.json": {
+      "sha256": "ffadfc7a2cfd2e6ee51b6b6a1fc683b4d2b7857e48bae89669de981a088bf144",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T01:06:41.974832+00:00"
+    },
+    "profile-and-dinput-owner-confirmation.json": {
+      "sha256": "9233117e1520b2ea417c21971ea8611a63214589565de5de3d972e398402b076",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T01:12:02.391898+00:00"
+    },
+    "final-reboot-owner-observation.json": {
+      "sha256": "1531d342298b6bf3cb4755c08855413f028119402e692734d429c232f9790341",
+      "classification": "owner report transcribed during this chat, not direct machine/gameplay capture",
+      "recorded_at_utc": "2026-11-17T01:16:41.876608+00:00"
+    }
+  },
+  "limitations": [
+    "Host journal times record capture/transcription time, not precise physical event timing.",
+    "No direct gameplay capture, USB trace or flashed-byte attestation; physical rows are owner reports.",
+    "No post-final-reboot storage comparison; final reconnect/input/release owner report only."
+  ],
+  "output_scope": "Private raw Config/library not published; hashes and bounded comparisons only"
+}

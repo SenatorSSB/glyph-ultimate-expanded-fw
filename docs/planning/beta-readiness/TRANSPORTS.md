@@ -1,5 +1,25 @@
 # Transport correspondence for Glyph Mk6
 
+## Exact candidate physical qualification accepted — 2026-11-17
+
+Required first-beta physical scope **PASS** for source
+`dcf6e29589f558a95c021bef491578f87e41750f`, tree
+`a7731388430ea70dbe666298953795f4018069b0`, retained UF2 SHA-256
+`2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42`
+(1,325,568 bytes). Windows0738:4726/joy.cpl, original Switch USB/Ultimate,
+GameCube-adapter/original Switch/Ultimate, final API-visible preservation of368-byte
+Config/all27profiles and normal reconnect PASS. Host/source repair proof retains its
+focused PASS and recorded framework failures; no full aggregate PASS is claimed.
+DInput physical N/A for actual selected profile; future Senscope complete-path DInput
+acceptance is required before public complete-profile/device release. JoyCheck/browser
+Gamepad API remains NOT_QUALIFIED, discrepancy unresolved. Unique unit ID and exact
+adapter model UNKNOWN; independent review accepts same-session owner continuity and
+approved bounded route without broader claims. SOURCE_FIX_REQUIRED: none identified
+for selected first-beta required scope. Keyboard deferred; Switch2 out of scope;
+Nunchuk NOT_TESTED. Canonical integration pending owner authorization; beta freeze
+prepared/not activated; no public release. [Accepted evidence and exact next step](../final-usb-gamepad/acceptance/README.md).
+Earlier entries below retain chronological knowledge, not current pending-test status.
+
 ## Superseding physical finding and repair — 2026-11-17
 
 The later owner XInput smoke found Windows **Other devices / Pico**, no expected

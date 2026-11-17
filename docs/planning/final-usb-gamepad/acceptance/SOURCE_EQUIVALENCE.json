@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "tested_source": "dcf6e29589f558a95c021bef491578f87e41750f",
+  "tested_tree": "a7731388430ea70dbe666298953795f4018069b0",
+  "checked_committed_head": "ebde1447f5cf348b3af82240ebd95445b44cb888",
+  "checked_descendant_commits": [
+    "ebde1447f5cf348b3af82240ebd95445b44cb888"
+  ],
+  "all_non_doc_paths": 1254,
+  "production_manifest_paths": 329,
+  "native_critical_paths": 327,
+  "complete_non_doc_mode_type_blob_path_sha256": "664593e12981e76ff0587ffa4ae5f9cbd15c2375c551dfcefe6be4b828b8224f",
+  "per_commit_non_doc_and_native_critical_equality": true,
+  "index_and_live_non_doc_modes_bytes_equal_source": true,
+  "untracked_non_doc_or_critical_additions": false,
+  "negative_controls": [
+    "virtual platformio.ini blob mutation REJECTED",
+    "virtual config.cpp blob mutation REJECTED"
+  ],
+  "tooling": "Uses repository glyph_tracked_worktree_integrity.is_critical_path, immutable complete git ls-tree mode/type/blob/path comparison, existing production-inputs.json and all-non-doc-tracked-inputs.json. Follows established gopt-qualification/integration/source-correspondence.json exact-tree model. No classifier exemptions added or checker modified. Legacy verify_correspondence finite metadata allowlist is not expanded or claimed as a full current-campaign validator.",
+  "record_scope": "All acceptance changes must be regular docs/evidence metadata; rerun on final committed publication tip. This record deliberately has no self-SHA. Final exact publication-tip proof retained with private session handoff."
+}

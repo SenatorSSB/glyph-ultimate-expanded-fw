@@ -1,0 +1,33 @@
+{
+  "schema": "glyph_first_beta_freeze_proposal_v1",
+  "state": "PREPARED_NOT_ACTIVATED",
+  "tested_production_source": "dcf6e29589f558a95c021bef491578f87e41750f",
+  "tested_source_tree": "a7731388430ea70dbe666298953795f4018069b0",
+  "tested_artifact": {
+    "sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+    "bytes": 1325568,
+    "locator": "local_backups/hardware-artifacts/dcf6e29589f558a95c021bef491578f87e41750f/2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42/firmware.uf2"
+  },
+  "hardware_acceptance": "PHYSICAL_RESULT.json",
+  "hardware_acceptance_branch": "codex/final-usb-gamepad-hardware-acceptance",
+  "hardware_acceptance_commit": "Resolve exact live publication tip; commit containing this record is evidence, not build source. Exact publication SHA returned in owner handoff.",
+  "canonical_integration_commit": null,
+  "canonical_integration_commit_status": "UNKNOWN until separately authorized integration",
+  "activation_requires": "Explicit owner acceptance/freeze; no automatic beta freeze by physical PASS or evidence publication",
+  "Senscope_repin": "FORBIDDEN until target explicitly frozen/accepted; then fresh source correspondence and separate complete-package physical acceptance",
+  "source_equivalence": "SOURCE_EQUIVALENCE.json",
+  "scope": {
+    "Windows XInput": "PASS",
+    "Original Switch USB / Ultimate": "PASS",
+    "GameCube -> GC adapter -> original Switch / Ultimate": "PASS",
+    "DInput physical": "N/A for this packet/profile",
+    "Browser Gamepad API compatibility": "NOT_QUALIFIED / unresolved",
+    "Switch 2": "NOT_TESTED / OUT_OF_SCOPE",
+    "N64": "NOT_TESTED",
+    "NES": "NOT_TESTED",
+    "SNES": "NOT_TESTED",
+    "Keyboard": "NOT_TESTED / deferred",
+    "Fresh Install recovery": "NOT_TESTED / post-beta hardening",
+    "Nunchuk": "NOT_TESTED"
+  }
+}

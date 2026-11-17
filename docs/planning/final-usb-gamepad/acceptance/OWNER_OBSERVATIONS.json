@@ -1,0 +1,198 @@
+{
+  "provenance": "Transcribed contemporaneously from owner messages in this same chat; no independent machine gameplay or DeviceManager capture. Original private file hashes in PRIVATE_INPUT_MANIFEST.json.",
+  "records": {
+    "windows-xinput-observation-01.json": {
+      "recorded_at_utc": "2026-11-17T00:48:20.142169+00:00",
+      "source": "dcf6e29589f558a95c021bef491578f87e41750f",
+      "tree": "a7731388430ea70dbe666298953795f4018069b0",
+      "uf2_sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+      "origin": "Owner report in current chat",
+      "verbatim": "When I connect it to Windows, I get the first ding sound and it shows as Pico with a generic icon in Other devices. Then after the bootscreen completes, the PC dings a sounds again, showing the initial Pico disappearing and a new Pico named device appearing. It still shows as Other devices, but the symbol is a gamepad. So it is not being read as an Input Device still.",
+      "observed": {
+        "initial_name": "Pico",
+        "initial_category": "Other devices",
+        "initial_icon": "generic",
+        "after_bootscreen": "Initial device disappears; second connection sound; new Pico appears",
+        "final_name": "Pico",
+        "final_category": "Other devices",
+        "final_icon": "gamepad",
+        "hardware_ids": "NOT_PROVIDED",
+        "device_status_error_code": "NOT_PROVIDED",
+        "usable_xinput_receiver": "NOT_ESTABLISHED"
+      },
+      "classification": {
+        "X1": "FAIL",
+        "X1_detail": "Windows acceptance unmet: final device remains in Other devices; exact VID/PID and driver-binding cause unknown pending Hardware IDs and Device status",
+        "X2": "NOT_TESTED"
+      },
+      "inference": "Observed disappearance/reappearance is consistent with candidate final reconnect; sound/icon/name alone do not establish USB identity or root cause",
+      "next": "Stop XInput route; capture final device Hardware IDs and General device status; no driver/config/firmware changes",
+      "source_fix_required": "UNKNOWN pending bounded diagnosis; cannot state none"
+    },
+    "windows-xinput-observation-02.json": {
+      "recorded_at_utc": "2026-11-17T00:52:10.859249+00:00",
+      "origin": "Owner report in current chat",
+      "owner_observation": "Device Manager new category Xbox 360 Peripherals; Xbox 360 Wireless Receiver for Windows; properties show xusb22.inf was configured. Earlier remove-only surface was distinct from Device Manager.",
+      "hardware_ids": "NOT_PROVIDED",
+      "general_device_status": "NOT_PROVIDED",
+      "input_receiver_result": "NOT_TESTED",
+      "assessment": "Evidence supersedes initial Pico-only interpretation. Xbox category and configured XUSB INF are positive evidence but do not prove expected VID/PID, driver started successfully, or usable inputs.",
+      "correction": "Earlier X1 FAIL was premature as a confirmed enumeration failure. Preserve original report and classification chronologically; current X1 NOT_TESTED (identity verification incomplete), X2 NOT_TESTED.",
+      "next": "Capture Hardware Ids and General Device status on Xbox entry; then bounded joy.cpl input/release test if working normally; no driver/config/firmware changes."
+    },
+    "windows-xinput-observation-03.json": {
+      "recorded_at_utc": "2026-11-17T00:56:56.456142+00:00",
+      "origin": "Owner report in current chat",
+      "candidate": {
+        "source": "dcf6e29589f558a95c021bef491578f87e41750f",
+        "tree": "a7731388430ea70dbe666298953795f4018069b0",
+        "uf2_sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+        "uf2_bytes": 1325568
+      },
+      "category": "Xbox 360 Peripherals",
+      "displayed_name": "Xbox 360 Wireless Receiver for Windows",
+      "driver_inf": "xusb22.inf",
+      "device_status": "Device is working properly.",
+      "hardware_ids": [
+        "USB\\VID_0738&PID_4726&REV_0100&MI_00",
+        "USB\\VID_0738&PID_4726&MI_00"
+      ],
+      "joy_cpl": {
+        "controller_name": "Pico",
+        "detected": true,
+        "owner_report": "joy.cpl responds to my buttons. Pressing HOME button also makes the PC react to other app functionalities.",
+        "buttons_respond": "PASS: owner reports button responses; representative face-button identity not specified",
+        "button_release": "NOT_TESTED",
+        "left_x_both_directions": "NOT_TESTED",
+        "left_y_both_directions": "NOT_TESTED",
+        "neutral_no_stuck_input": "NOT_TESTED",
+        "optional_modifier_distinction": "NOT_TESTED",
+        "home_response": "Observed application reaction; not used as axis/button-release proof"
+      },
+      "classification": {
+        "X1": "PASS",
+        "X2": "NOT_TESTED"
+      },
+      "scope": "Final expected VID/PID and working XUSB interface verified by owner; joy.cpl button activity observed. Axis/face-button/release row incomplete. No universal Windows or other-route acceptance.",
+      "prior_observations": "01 and02 preserved; initial X1 FAIL superseded by exact identity evidence, no firmware/driver change reported."
+    },
+    "windows-xinput-observation-04.json": {
+      "recorded_at_utc": "2026-11-17T00:59:49.686390+00:00",
+      "origin": "Owner report in current chat",
+      "owner_report": "All those worked. On joycheck.io no controller is shown until HOME is pressed; then Xbox controller appears but only Xbox button activates, other buttons do nothing.",
+      "joy_cpl": {
+        "left_x_both_signs": "PASS",
+        "left_y_both_signs": "PASS",
+        "neutral": "PASS",
+        "representative_face_button_press_release": "PASS",
+        "no_stuck_input": "PASS",
+        "optional_modifier_distinction": "Owner all-those confirmation includes preceding optional instruction, but exact modifier/value not specified; no quantified output claim"
+      },
+      "classification": {
+        "X1": "PASS",
+        "X2": "PASS"
+      },
+      "browser_discrepancy": {
+        "site": "https://joycheck.io",
+        "browser_version": "UNKNOWN",
+        "detection": "Only after HOME",
+        "input": "Only Xbox/Home reported changing; other buttons no response",
+        "status": "UNRESOLVED supplementary receiver discrepancy; not dismissed or treated as proven firmware defect",
+        "cause": "UNKNOWN",
+        "scope": "joy.cpl acceptance does not prove browser compatibility or separately attest XInputGetState; no universal receiver compatibility claimed"
+      },
+      "next": "Continue exact-candidate original Switch bounded regression; retain browser discrepancy; browser/version useful for bounded follow-up without changing firmware/config/driver"
+    },
+    "windows-switch-hid-observation-01.json": {
+      "recorded_at_utc": "2026-11-17T01:02:20.241117+00:00",
+      "origin": "Owner current-chat report",
+      "owner_report": "Changed to Switch USB mode on PC; joycheck.io shows Generic controller and all buttons correspond and make website react; joy.cpl shows POKKEN CONTROLLER.",
+      "setup": {
+        "unit": "Same campaign unit per owner continuity",
+        "firmware": "Exact handed-off dcf6e295 candidate per established installation continuity",
+        "host": "Windows PC, not original Nintendo Switch",
+        "backend": "Switch USB, owner manual menu selection",
+        "browser": "UNKNOWN/version UNKNOWN"
+      },
+      "observations": {
+        "joycheck_label": "Generic controller",
+        "joycheck_buttons": "All buttons correspond and react, owner reported; no exhaustive certification claim",
+        "joy_cpl_label": "POKKEN CONTROLLER",
+        "hardware_ids": "NOT_PROVIDED",
+        "axis_neutral_release": "NOT_EXPLICITLY_REPORTED_FOR_THIS_ROUTE"
+      },
+      "assessment": "Working browser button reception on Switch USB mode narrows prior discrepancy to backend/receiver-dependent behavior on this setup. Does not establish root cause or browser XInput compatibility. POKKEN name consistent with intended simple Switch HID source; no VID/PID proof inferred from name.",
+      "classification_effect": "Supplementary Windows-host Switch-HID observation only; S1 and S2 remain NOT_TESTED on original Nintendo Switch/Ultimate. X1/X2 joy.cpl PASS retained.",
+      "selection_preservation": "Owner-authorized normal menu change to Switch USB. Account for saved Config differences and restore exact preflight selections or obtain explicit owner final-state choice before final comparison."
+    },
+    "original-switch-ultimate-observation-01.json": {
+      "recorded_at_utc": "2026-11-17T01:03:37.442986+00:00",
+      "origin": "Owner current-chat report",
+      "owner_report": "Tested on the original Switch in Ultimate. It recognizes the controller, stick movement and buttons work, and releasing returns to neutral with nothing stuck.",
+      "source": "dcf6e29589f558a95c021bef491578f87e41750f",
+      "tree": "a7731388430ea70dbe666298953795f4018069b0",
+      "uf2_sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+      "setup": {
+        "unit": "Same campaign unit per owner continuity",
+        "console": "Original Nintendo Switch",
+        "game": "Super Smash Bros. Ultimate",
+        "backend": "Nintendo Switch USB per preceding owner selection and session continuity",
+        "profile_display": "Not explicitly reported for this route",
+        "cable_details": "Not explicitly provided"
+      },
+      "classification": {
+        "S1": "PASS",
+        "S2": "PASS"
+      },
+      "scope": "Owner-reported bounded recognition, stick/buttons and release/neutral/no stuck input. No Switch2, rumble, gyro, timing or exhaustive controller certification claim."
+    },
+    "gamecube-ultimate-observation-01.json": {
+      "recorded_at_utc": "2026-11-17T01:06:41.974832+00:00",
+      "origin": "Owner current-chat report",
+      "owner_report": "All the GameCube tests passed, including the modifier, simultaneous inputs, release, and gameplay/menu stability.",
+      "candidate": {
+        "source": "dcf6e29589f558a95c021bef491578f87e41750f",
+        "tree": "a7731388430ea70dbe666298953795f4018069b0",
+        "uf2_sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+        "uf2_bytes": 1325568
+      },
+      "setup": {
+        "route": "Glyph \u2192 GameCube cable \u2192 actual GameCube adapter \u2192 original Nintendo Switch \u2192 Ultimate per preceding instructions and owner all-tests report",
+        "unit": "Same campaign unit per owner continuity",
+        "adapter_make_model": "NOT_PROVIDED",
+        "active_profile_name_and_modifier": "NOT_PROVIDED; request exact identifiers; no executing identity inferred from saved label"
+      },
+      "classification": {
+        "G1": "PASS",
+        "G2": "PASS"
+      },
+      "rows": {
+        "cardinal_and_diagonal": "PASS owner all-tests report",
+        "configured_modifier": "PASS owner explicit report; exact modifier identity not provided",
+        "face_and_shoulder_trigger": "PASS owner all-tests report",
+        "simultaneous": "PASS owner explicit report",
+        "release_neutral_no_stuck_or_stale_modifier": "PASS owner explicit report",
+        "gameplay_menu_stability": "PASS owner explicit report; exact elapsed duration not independently measured"
+      },
+      "scope": "Bounded owner-reported tests on installed candidate continuity; no exhaustive timing or gameplay-semantic claims."
+    },
+    "profile-and-dinput-owner-confirmation.json": {
+      "recorded_at_utc": "2026-11-17T01:12:02.391898+00:00",
+      "origin": "Owner current-chat report",
+      "owner_report": "I was on Kaz5Test, I tried most modifiers, all looked good. DInput was not available at least on that profile; unsure whether available on other used profiles. Back on Mac, on XInput, in Configurator.",
+      "tested_profile_label_owner": "Kaz5Test",
+      "modifiers": "Most tried, all looked good; individual modifier names/coordinates not supplied",
+      "D1": "N/A",
+      "D2": "N/A",
+      "dinput_disposition": "N/A \u2014 no selected beta profile exposes DInput",
+      "scope": "Owner confirms normal menu unavailability for tested profile; no applicability edits or alternative profile created; no universal DInput exclusion claim"
+    },
+    "final-reboot-owner-observation.json": {
+      "recorded_at_utc": "2026-11-17T01:16:41.876608+00:00",
+      "origin": "Owner current-chat report",
+      "owner_report": "Normal reconnect passed: XInput and Kaz5Test are correct, input and release work, and it is usable.",
+      "R1": "PASS",
+      "scope": "Owner-reported normal reconnect/usability after final restoration/readback; no new post-reboot Config/ProfileStore byte comparison claimed."
+    }
+  }
+}

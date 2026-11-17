@@ -1,0 +1,112 @@
+{
+  "reviewer": "physical_evidence_review",
+  "reviewed_at_utc": "2026-11-17T01:26:58.859430+00:00",
+  "independence": "New child reviewer; no participation in candidate implementation/source/build review or physical-session capture. Read-only review; no device access.",
+  "manifest_files_verified": 491,
+  "machine_checks": {
+    "preflight": {
+      "exchanges": 64,
+      "profiles": 27,
+      "health_checks": 27,
+      "config_bytes": 368,
+      "config_sha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+      "start": "2026-11-17T00:33:18.170596+00:00",
+      "end": "2026-11-17T00:33:20.701775+00:00",
+      "info": "5dfc4cc2"
+    },
+    "postinstall": {
+      "exchanges": 64,
+      "profiles": 27,
+      "health_checks": 27,
+      "config_bytes": 368,
+      "config_sha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+      "start": "2026-11-17T00:37:18.911304+00:00",
+      "end": "2026-11-17T00:37:21.491766+00:00",
+      "info": "dcf6e295"
+    },
+    "final-readback-2": {
+      "exchanges": 64,
+      "profiles": 27,
+      "health_checks": 27,
+      "config_bytes": 368,
+      "config_sha256": "b3f03f33c01111eceda1a602cdb30f6e4d003375f495f20008d5a529b804c8b8",
+      "start": "2026-11-17T01:13:34.855698+00:00",
+      "end": "2026-11-17T01:13:37.348249+00:00",
+      "info": "dcf6e295"
+    }
+  },
+  "findings": [],
+  "custody_verified": [
+    "dedicated candidate checkout / local_backups/hardware-artifacts/dcf6e29589f558a95c021bef491578f87e41750f/2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42/firmware.uf2",
+    "owner primary repository / local_backups/hardware-artifacts/dcf6e29589f558a95c021bef491578f87e41750f/2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42/firmware.uf2"
+  ],
+  "raw_comparisons": "PASS: all three captures have identical368-byte Config, ordered27-entry inventory,27wrapper/revision pairs, both per-capture status responses, all27health1. Journals match exact raw files/hashes and allowed read-only requests.",
+  "owner_observation_files": [
+    "windows-xinput-observation-01.json",
+    "windows-xinput-observation-02.json",
+    "windows-xinput-observation-03.json",
+    "windows-xinput-observation-04.json",
+    "windows-switch-hid-observation-01.json",
+    "original-switch-ultimate-observation-01.json",
+    "gamecube-ultimate-observation-01.json",
+    "profile-and-dinput-owner-confirmation.json",
+    "final-reboot-owner-observation.json"
+  ],
+  "chronology": "PASS: preflight precedes installed-source captures; Windows corrections precede final required-route reports; final readback precedes reboot report. Initial apparent Pico-only failure is corrected by later exact IDs and status, not erased. Initial readback INFO timeout retained; owner acknowledged not yet in Configurator, later capture completes.",
+  "answers": {
+    "X1_X2": "PASS supported by owner DeviceManager working0738:4726 and explicit joy.cpl axis/button/release checklist confirmation. No browser or standalone XInputGetState test inferred.",
+    "S1_S2": "PASS supported by owner original Switch/Ultimate recognition, movement/buttons and neutral/no stuck observation.",
+    "G1_G2": "PASS supported by owner all-GameCube-tests confirmation in context of enumerated steps plus explicit modifier/simultaneous/release/gameplay/menu stability and later Kaz5Test/most modifiers confirmation. Exact duration not measured, individual modifiers not enumerated.",
+    "P1_P2": "PASS independently reconstructed from raw API protobuf captures and request/response journals, not summary alone.",
+    "R1": "PASS supported by explicit owner normal reconnect XInput/Kaz5Test/input/release/usability report. No post-reboot raw storage equality inferred.",
+    "D1_D2": "N/A correct under conditional approved packet; owner actual tested profile DInput not exposed. Not physical DInput PASS.",
+    "unit_and_adapter_limitations": "Do not invalidate selected scope. Contract requires controller/context and says do not require irrelevant sensitive hardware identifiers; no mandatory globally unique unit ID or adapter make/model gate. Same owner/current chat explicitly identifies same unit; installed INFO continuity and unchanged distinctive Config/27profiles/store support same-session continuity. This is owner-attested continuity, not cryptographic unique-unit proof. Adapter actual route owner-confirmed; make/model UNKNOWN limits reproduction/generalization.",
+    "JoyCheck_source_fix": "No source fix established. Windows identity and joy.cpl acceptance pass. HOME-only browser behavior is unresolved/unqualified; no universal GamepadAPI claim. Current owner directive explicitly nonblocking absent a proven controller defect.",
+    "prohibited_operations": "Inspected complete capture journals contain only INFO1,GET_CONFIG3,identity10,ProfileStore9 with STATUS1/LIST2/READ3/HEALTH12 and zero transaction tokens. No mutation/reboot/flashing command. Physical install/selection/reconnect owner manual. No universal zero-flash-write claim."
+  },
+  "verdict": "APPROVED_FOR_EXACT_TUPLE_SELECTED_SCOPE_SOURCE_FREE_HARDWARE_ACCEPTANCE",
+  "acceptance": "FIRST_BETA_PHYSICAL_QUALIFICATION: PASS for exact source/tree/UF2 only; canonical integration/freeze/release not authorized by this verdict.",
+  "SOURCE_FIX_REQUIRED": "none identified for selected first-beta required scope",
+  "limitations": [
+    "Machine INFO is source-prefix observation, not attestation of flashed image bytes; owner reports installation of exact handed-off artifact.",
+    "No globally unique unit identifier, adapter model, browser/version, per-modifier coordinates or machine-recorded gameplay video.",
+    "No physical DInput test, universal browser compatibility, Switch2, retro-console, keyboard or FreshInstall acceptance.",
+    "Raw comparisons prove API-visible preservation only; not universal NOR/raw-flash equality."
+  ],
+  "candidate": {
+    "source": "dcf6e29589f558a95c021bef491578f87e41750f",
+    "tree": "a7731388430ea70dbe666298953795f4018069b0",
+    "uf2_sha256": "2c77e2b7e50af2fd3b516d1ee7d0b8a67bcf992d6fcf0e3109a837422740cd42",
+    "uf2_bytes": 1325568
+  },
+  "evidence_manifest_sha256": "012c583b8c75718b24c6d38f9bf2bbd7027bd3c9fd931ae976258135b9bc7228",
+  "qualification_report_sha256": "00526f03335044d48406c1577726329f43911b201caddf56a433fba44ebad6fc",
+  "files_inspected": {
+    "contract": [
+      "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "docs/planning/final-usb-gamepad/HARDWARE_PACKET.md",
+      "docs/planning/final-usb-gamepad/CANDIDATE.json"
+    ],
+    "local_root": [
+      "QUALIFICATION_REPORT.json",
+      "manifest.sha256.json",
+      "final-readback/STOP.json",
+      "windows-xinput-observation-01.json",
+      "windows-xinput-observation-02.json",
+      "windows-xinput-observation-03.json",
+      "windows-xinput-observation-04.json",
+      "windows-switch-hid-observation-01.json",
+      "original-switch-ultimate-observation-01.json",
+      "gamecube-ultimate-observation-01.json",
+      "profile-and-dinput-owner-confirmation.json",
+      "final-reboot-owner-observation.json"
+    ],
+    "capture_directories": [
+      "preflight",
+      "postinstall",
+      "final-readback-2"
+    ],
+    "capture_files": "All manifest-listed files rehashed; each capture exchanges.jsonl and all64 raw response.pb files decoded/compared; config.raw.pb, ordered-inventory.json and all27 profile-N.wrapper.pb checked against responses; preflight/config-backup.json base64 decoded."
+  },
+  "timestamp_interpretation": "at_utc values in request journals are recorded host request-start timestamps; owner-observation recorded_at_utc values are recording times rather than independently measured physical-action times. Installation report record creation after postinstall readback does not invert physical install chronology; candidate INFO is already observed in postinstall capture."
+}
