@@ -6,7 +6,16 @@ ProfileStore, selector, communication backend, GameCube behavior or native limit
 The human JSON is the source of truth. This format describes finite native input
 and raw-output operations; it defines no character or game semantics.
 
-Use [the v1 schema](schema/glyph-native-ultimate-profile.v1.schema.json) and the
+Start with the valid [neutral authoring seed](templates/UltimateNativeSeed.v1.profile.json).
+Copy it to a new human source file and keep that source under version control.
+The seed has no physical button assumptions: constant-false cardinals, nine
+`[128,128]` points, no remaps/SOCD/rules/bindings, disabled Mode/digital/D-pad
+gates, and one selectedTable LS effect. It is a starting shape, not a recommended
+gameplay profile; it supplies no ordinary gameplay bindings.
+
+For evaluator order, input domains, ownership and advanced design, read
+[Profile System](../docs/PROFILE_SYSTEM.md). The authoritative syntax remains
+[the v1 schema](schema/glyph-native-ultimate-profile.v1.schema.json) and the
 small [single-table](examples/SyntheticSingle.v1.profile.json) or
 [sparse-table](examples/SyntheticSparse.v1.profile.json) examples. Both examples
 are synthetic, non-product fixtures with arbitrary test coordinates. They are
@@ -65,35 +74,91 @@ body and wrapper SHA-256 values. `token_count` counts tokens stored in condition
 clauses, not every token-valued field. Reports describe compilation, not device
 installation or physical acceptance.
 
-## Human concepts
+## Minimal safe workflow
 
-```text
-conditions
-    ↓
-table-selection rules
-    ↓
-one selected 9-way coordinate table
+1. Copy [UltimateNativeSeed](templates/UltimateNativeSeed.v1.profile.json) to
+   your own v1 JSON file. Establish the concrete requirements below before adding
+   executable rules. Do not copy historical v0 table inventory or Kazuya intent.
+2. Supply explicit preprocessing, named sources and all nine coordinates for
+   every declared table. Add conditions/rules, bindings and effects only as
+   required. Use [Profile System](../docs/PROFILE_SYSTEM.md) to check stage and
+   priority interactions; the schema alone cannot prove those interactions.
+3. Run `validate` on your file, then `compile` to a disposable `.pb`, then
+   `report`. The Commands section accepts the seed or your file in place of
+   SyntheticSparse. Repeat compilation and compare bytes when recording a
+   candidate. JSON Schema PASS alone is insufficient.
+4. Inspect the table-slot map, neutral-filled slots, counts, body budget and
+   hashes. Check intended active effects and their priorities separately from
+   merely valid declarations. Compiler admission proves finite native validity,
+   not that the design meets a user's requirements.
+5. Preserve the human JSON, its concrete requirements/design questions and its
+   compilation report. Binary decode cannot recover original v1 symbols or
+   sparse declaration intent. Package/install/physical acceptance is separate.
 
-separate finite sections:
-    digital bindings
-    analogue effects
-```
+**Authoring JSON is not a complete package.** Validate/compile/report emits
+native data; it does not publish a row/record, install a device configuration or
+prove physical execution. See [usage](../docs/USAGE.md) and
+[capabilities](../docs/CAPABILITIES.md) for the existing management boundaries.
 
-Conditions combine finite input observations. Table rules choose the selected
-coordinate table; the default applies when no rule wins. Several command
-combinations can share a table, through separate rules or a shared condition.
-The number of physical buttons is not the number of modifier slots. Conditions,
-rules, sources, bindings and effects have separate finite capacities; they are
-not one slot per physical button.
+## LLM authoring contract — clarify before encoding
 
-Digital bindings set named output bits with a token and optional winner-table
-filter. Analogue effects separately target `leftStick`, `rightStick`,
-`bothSticks`, `triggerL` or `triggerR`. Stick coordinate modes are `selectedTable`,
-`table`, `fixed` and `inline`. A trigger effect instead carries one integer byte
-`value`. A selected table affects the native selected-table coordinate path;
-fixed/inline/table effects can independently supply coordinates according to
-the existing evaluator. Digital post-mask and D-pad routing retain the existing
-native fields and semantics.
+An LLM may transform concrete controller requirements into this existing v1
+format. It must establish the following, as applicable, and check the schema and
+compiler rather than inventing another format:
+
+| Required intent | Establish explicitly |
+| --- | --- |
+| Inputs and preprocessing | Physical/logical input IDs; original, pre-SOCD, post-SOCD or final digital observation; ordered remaps; SOCD pairs and policies |
+| Direction and tables | Four tokens for each direction source; every declared table's nine raw coordinates; explicit slots and default table |
+| Selection and digital behavior | Conditions/stages and table-selection rules; digital outputs and winner-table filters; post-mask if needed |
+| Analogue behavior | Target, coordinate mode/source or trigger value, activation, priority, gates/inversion and winner filters |
+| Routing and Mode | Required D-pad routing/bypass/digital suppression and stick-digital gates; whether Mode gate behavior is actually required |
+
+Required unknown intent remains unknown. Ask the user or retain an explicit design
+question outside executable JSON. If executable data is missing, do not emit a
+supposedly finished profile with placeholder strings, invalid sentinel values or
+invented coordinates. A valid neutral seed is not a substitute for missing intent.
+
+A goal such as “always get neutral B” does not establish a raw coordinate
+threshold. Obtain user-supplied coordinates/constraints, a separately authoritative
+game-semantic source, or clarification. `metadata.character` is annotation only;
+it must never act as a hidden game-semantic engine. Do not infer facing awareness,
+button layout, SOCD policy, game thresholds, macro/timer/script behavior or timed
+sequences. The finite native program supplies no arbitrary scripting or timers.
+
+Do not assume all logic reads post-SOCD state. Do not assume selecting a table
+changes all outputs: an eligible selectedTable effect must consume it. Keep
+independent digital contributions and target-specific priority domains explicit.
+A multi-role input can share conditions across table rules and bindings and drive
+an effect through finalDigital; this does not require one remap to fan out.
+
+## Feature coverage and source map
+
+The committed examples are synthetic syntax/compilation fixtures. All current
+files in `examples/*.v1.profile.json` and `templates/*.v1.profile.json` are checked
+by the v1 asset tests; the current package documentation consumer runs that suite
+in hosted CI. Independent standard JSON Schema checks run when `jsonschema` is
+available; compiler/native admission remains mandatory without it.
+
+| Concept | Seed | SyntheticSingle | SyntheticSparse | Authoritative section |
+| --- | --- | --- | --- | --- |
+| Minimal layout-free start | Constant-false source; neutral table + LS selectedTable effect | Assumes LF1..LF4 | Assumes LF1..LF4/RF inputs | Schema `directionSources`, `gates`, `analogEffects`; compiler `compile_profile` |
+| Full nine-way asymmetry / non-center key 5 | All points neutral | Arbitrary nine distinct points, including 5 | Default and Diagonal_Test-2 asymmetric; ForcedDown includes non-center 5 | Schema `tables`; compiler slot/table block |
+| Sparse declared slots / neutral fill | Slot 0 | Slot 27 | Slots 0,7,13,27 | Compiler `slots`, initial neutral table block; report `neutral_filled_slots` |
+| Early/late and input domains | No conditions | No conditions | forceDown, alternateInput, resolvedLeft | Schema `conditions`; production `validate_native_body` stage checks |
+| Selected-table rules / multi-role input | Default only | Default only, no consuming effect | RF1 → forceDown → ForcedDown + buttonA → finalDigital triggerL | Schema `tableRules`, `digitalBindings`, `analogEffects`; evaluator order in Profile System |
+| selectedTable / table / fixed / inline | selectedTable | None | All four declared | Schema coordinate union; compiler effect encoding; native priority admission |
+| LS/RS/both sticks and triggers | LS | No effects | All target types declared | Schema target union; production overlapping-priority checks |
+| Post-mask / routing | Disabled | Disabled | Post-mask active by condition; D-pad flags false | Schema `digitalPostMask`, `dpad`; evaluator digital routing |
+
+[SyntheticSingle](examples/SyntheticSingle.v1.profile.json) alone does not consume
+its coordinate table: baseline native direction outputs still apply.
+[SyntheticSparse](examples/SyntheticSparse.v1.profile.json) already covers the rich
+format, so no additional large example is needed. Its fixed bothSticks and inline
+LS effects lose to always-active priority-10 stick effects, triggerR activation is
+false, and D-pad routing is disabled. These declarations demonstrate valid shapes,
+not simultaneous execution of every path. See [subsystems](../docs/PROFILE_SYSTEM.md#subsystems--sublayers)
+for small composition patterns and their limits.
 
 ## Sparse profile-owned tables
 
@@ -161,8 +226,8 @@ LS/RS cardinal activations listed in the schema. Digital outputs are `buttonA`,
 carry explicit `left`, `right`, `down`, `up` tokens. Array order assigns dense
 condition/source IDs and is preserved. Lower numeric priority wins in the
 existing table/effect priority domains; priorities are 1..255 and must be unique
-within their native overlapping domains. Priority 255 retains native comparison
-behavior and is not normalized by the authoring compiler.
+within their native overlapping domains. Priority 255 can win: the evaluator starts each priority domain at 256. The
+authoring compiler does not normalize priorities.
 
 Preprocessing remains `MODE_ULTIMATE` with ordered remaps and ordered SOCD
 pairs/policies. Its header digest uses the existing production

@@ -10,7 +10,10 @@ import sys
 import tempfile
 import unittest
 
-import jsonschema
+try:
+    import jsonschema
+except ModuleNotFoundError:
+    jsonschema = None
 import glyph_native_profile_json as codec
 from test_glyph_native_profile_json import synthetic, CONTEXT
 
@@ -18,6 +21,9 @@ ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = ROOT / 'profiles/examples'
 V1_SCHEMA = ROOT / 'profiles/schema/glyph-native-ultimate-profile.v1.schema.json'
 DOMAIN = b'Glyph.Native.Authoring.v1\0'
+ASSETS = sorted([*EXAMPLES.glob('*.v1.profile.json'),
+                 *(ROOT / 'profiles/templates').glob('*.v1.profile.json')])
+SEED = ROOT / 'profiles/templates/UltimateNativeSeed.v1.profile.json'
 
 
 def single():
@@ -130,6 +136,53 @@ def negatives():
 
 
 class V1PositiveTests(unittest.TestCase):
+    def test_all_committed_authoring_assets(self):
+        self.assertIn(SEED, ASSETS)
+        self.assertGreaterEqual(len(ASSETS), 3)
+        schema = codec.load_json(V1_SCHEMA)
+        for path in ASSETS:
+            with self.subTest(asset=path.relative_to(ROOT)):
+                # Strict loader rejects duplicate keys/non-JSON constants.
+                p = codec.load_json(path)
+                if jsonschema is not None:
+                    jsonschema.Draft202012Validator(schema).validate(p)
+                validated = codec.validate_profile(p)
+                raw = codec.compile_profile(p)
+                self.assertEqual(codec.compile_profile(codec.load_json(path)), raw)
+                report = codec.compile_report(p)
+                self.assertEqual(validated['engine'], 'native_abi1')
+                self.assertEqual(report['wrapper_sha256'], hashlib.sha256(raw).hexdigest())
+                self.assertEqual(report['body_sha256'], validated['body_sha256'])
+                # compile_profile -> wrap_body invokes production validate_native_body.
+                self.assertEqual(codec.validate_native_body(codec.unwrap_profile(raw))['schema'], 5)
+
+    def test_seed_has_no_layout_assumptions_and_consumes_its_table(self):
+        p = codec.load_json(SEED)
+        self.assertEqual(p['preprocessing'], {'mode': 'MODE_ULTIMATE', 'remaps': [], 'socd': []})
+        self.assertEqual(p['conditions'] + p['tableRules'] + p['digitalBindings'], [])
+        self.assertEqual(set(p['gates'].values()), {'false'})
+        self.assertFalse(any(p['dpad'].values()))
+        self.assertEqual(len(p['tables']), 1)
+        self.assertTrue(all(point == [128, 128] for t in p['tables'].values() for point in t['directions'].values()))
+        self.assertTrue(all(s[k] == 'false' for s in p['directionSources'] for k in ('left', 'right', 'down', 'up')))
+        self.assertEqual(len(p['analogEffects']), 1)
+        effect = p['analogEffects'][0]
+        self.assertEqual((effect['target'], effect['coordinates']['mode']), ('leftStick', 'selectedTable'))
+        self.assertEqual((effect['activation'], effect['gate'], effect['gateInverted']), ('true', 'true', False))
+        self.assertEqual(codec.compile_report(p)['body_bytes'], 649)
+
+    def test_rich_example_preserves_asymmetry_and_multi_role_composition(self):
+        p = sparse()
+        points = p['tables']['Default']['directions']
+        self.assertEqual(len({tuple(points[str(i)]) for i in range(1, 10)}), 9)
+        self.assertNotEqual(points['5'], [128, 128])
+        condition = next(c for c in p['conditions'] if c['name'] == 'forceDown')
+        self.assertEqual(condition['all'], ['postSocd:RF1'])
+        self.assertTrue(any(r['when'] == 'condition:forceDown' and r['table'] == 'ForcedDown' for r in p['tableRules']))
+        self.assertTrue(any(b['when'] == 'condition:forceDown' and 'buttonA' in b['outputs'] and b['winnerTable'] == 'ForcedDown' for b in p['digitalBindings']))
+        self.assertTrue(any(e['activation'] == 'finalDigital:buttonA' and e['target'] == 'triggerL' and e['winnerTable'] == 'ForcedDown' for e in p['analogEffects']))
+        codec.validate_profile(p)
+
     def test_one_table_and_all_neutral_slots(self):
         p = single(); b = body(p)
         self.assertEqual(b[16], 27)
@@ -221,13 +274,17 @@ class V1PositiveTests(unittest.TestCase):
             out = Path(d) / 'profile.pb'; report = Path(d) / 'report.json'; proto = Path(d) / 'profile.json'
             def run(*args):
                 return subprocess.run([sys.executable, str(ROOT/'tools/glyph_native_profile_json.py'), *map(str, args)], capture_output=True, text=True, check=True)
-            src = EXAMPLES/'SyntheticSparse.v1.profile.json'
-            run('validate', src); run('compile', src, '--output', out)
-            run('compile', src, '--format', 'protobuf-json', '--output', proto)
-            run('report', src, '--output', report)
-            self.assertEqual(codec.unwrap_profile(codec.load_json(proto)), codec.unwrap_profile(out.read_bytes()))
-            self.assertEqual(codec.load_json(report), codec.compile_report(sparse()))
-            self.assertEqual(json.loads(run('report', src).stdout), codec.load_json(report))
+            for src in ASSETS:
+                with self.subTest(asset=src.relative_to(ROOT)):
+                    run('validate', src); run('compile', src, '--output', out)
+                    first = out.read_bytes()
+                    run('compile', src, '--output', out)
+                    self.assertEqual(out.read_bytes(), first)
+                    run('compile', src, '--format', 'protobuf-json', '--output', proto)
+                    run('report', src, '--output', report)
+                    self.assertEqual(codec.unwrap_profile(codec.load_json(proto)), codec.unwrap_profile(first))
+                    self.assertEqual(codec.load_json(report), codec.compile_report(codec.load_json(src)))
+                    self.assertEqual(json.loads(run('report', src).stdout), codec.load_json(report))
 
     def test_binary_decode_retains_only_archival_wire_representation(self):
         p = sparse(); raw = codec.compile_profile(p)
@@ -317,11 +374,12 @@ class V1NegativeTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'duplicate JSON key'):
                 codec.load_json(file)
 
+    @unittest.skipIf(jsonschema is None, "optional jsonschema dependency unavailable")
     def test_builtin_and_standard_schema_agree_on_all_fixtures(self):
         schema = codec.load_json(V1_SCHEMA)
         jsonschema.Draft202012Validator.check_schema(schema)
         standard = jsonschema.Draft202012Validator(schema)
-        cases = [('single', single()), ('sparse', sparse()), ('capacity', boundary())] + negatives()
+        cases = [(str(p.relative_to(ROOT)), codec.load_json(p)) for p in ASSETS] + [('capacity', boundary())] + negatives()
         for label, p in cases:
             builtin_ok = True
             try: codec._schema_check(p, schema)
@@ -333,5 +391,6 @@ class V1NegativeTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    print(f'V1 fixtures: 12 positive test methods; 8 provenance methods; {len(negatives()) + 1} negative cases (including duplicate-key input); independent schema agreement over {len(negatives()) + 3} fixtures.', flush=True)
+    print(f'V1 guidance assets: {len(ASSETS)}; negative cases: {len(negatives()) + 1} including duplicate-key input; '
+          f'standard schema: {"available" if jsonschema is not None else "optional dependency unavailable"}.')
     unittest.main()

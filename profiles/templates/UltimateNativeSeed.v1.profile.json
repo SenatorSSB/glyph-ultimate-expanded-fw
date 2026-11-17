@@ -1,0 +1,107 @@
+{
+  "format": "glyph-native-ultimate-profile",
+  "formatVersion": 1,
+  "name": "Ultimate native authoring seed — neutral, not a gameplay profile",
+  "provenance": {
+    "kind": "authoredSourceV1"
+  },
+  "preprocessing": {
+    "mode": "MODE_ULTIMATE",
+    "remaps": [],
+    "socd": []
+  },
+  "tables": {
+    "SeedNeutral": {
+      "slot": 0,
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    }
+  },
+  "conditions": [],
+  "directionSources": [
+    {
+      "name": "noCardinals",
+      "left": "false",
+      "right": "false",
+      "down": "false",
+      "up": "false"
+    }
+  ],
+  "defaultTable": "SeedNeutral",
+  "leftStickSource": "noCardinals",
+  "rightStickSource": "noCardinals",
+  "gates": {
+    "mode": "false",
+    "leftStickDigital": "false",
+    "rightStickDigital": "false",
+    "dpad": "false"
+  },
+  "dpad": {
+    "routeToDpad": false,
+    "bypassLeftStick": false,
+    "suppressLeftStickDigital": false
+  },
+  "tableRules": [],
+  "digitalBindings": [],
+  "analogEffects": [
+    {
+      "target": "leftStick",
+      "priority": 1,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "noCardinals",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    }
+  ],
+  "digitalPostMask": {
+    "gate": "false",
+    "set": [],
+    "clear": [],
+    "inverted": false
+  },
+  "metadata": {
+    "description": "Valid offline authoring seed. No physical input layout or gameplay semantics are assumed. All table points are neutral; no digital bindings or table rules are declared.",
+    "character": null
+  }
+}
