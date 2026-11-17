@@ -43,6 +43,9 @@ Browser Gamepad API compatibility is NOT_QUALIFIED, not implied by USB support.
 
 ## Native Ultimate profiles
 
+See [Profile System](PROFILE_SYSTEM.md) for evaluator order, ownership, input
+domains, priorities and coordinated input design.
+
 The current [v1 authoring entry point](../profiles/README.md) supports offline
 validate/compile/report using profile-owned symbolic tables and finite rules.
 Production bounds come from the [native validator](../src/modes/UltimateNativeProfile.cpp)

@@ -5,7 +5,7 @@
 | Reader | Start here |
 | --- | --- |
 | Players / users | [Usage](USAGE.md), then [capabilities](CAPABILITIES.md) |
-| Profile authors | [Native Ultimate authoring v1](../profiles/README.md) |
+| Profile authors | [Profile system and advanced design](PROFILE_SYSTEM.md), then [native Ultimate authoring v1](../profiles/README.md) |
 | Developers | [Repository instructions](../AGENTS.md) and [workflow](WORKFLOW.md) |
 | Coding agents | [AGENTS.md](../AGENTS.md), then [agent context](AGENT_CONTEXT.md) |
 | Historical/evidence research | [Acceptance evidence](planning/final-usb-gamepad/acceptance/README.md), [maintenance audit](maintenance/README.md), [calibration index](calibration/README.md) |
@@ -34,4 +34,5 @@ their own time. The public entry points above do not require that archaeology.
 | Subsystem / sublayer | Player shorthand for coordinated conditions, table rules, bindings and effects; not a scripting engine. |
 
 See [capabilities](CAPABILITIES.md) for implementation versus workflow and hardware
-scope, and [authoring](../profiles/README.md) for precise native semantics.
+scope, [profile system](PROFILE_SYSTEM.md) for native evaluation and ownership, and
+[authoring](../profiles/README.md) for the exact source/validation contract.

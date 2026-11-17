@@ -12,7 +12,8 @@ valid raw coordinate, including a non-center output for no-direction key 5.
 Coordinated input roles and layers are deterministic mappings, not macros or game
 semantics. There is no automatic character-facing awareness.
 
-Start at [native Ultimate authoring v1](../profiles/README.md). Its synthetic
+Read [Profile System](PROFILE_SYSTEM.md) for advanced design and evaluator
+semantics. Start authoring at [native Ultimate authoring v1](../profiles/README.md). Its synthetic
 examples and validate/compile/report commands are offline; they open no device.
 Keep the human JSON: decoding wire bytes does not recover authored names or intent.
 The old v0 golden is archival, not the template for a new profile.
