@@ -75,12 +75,13 @@ pending. Live canonical is the pinned preparation descendant, and its non-doc
 tracked inputs equal the tested production source. Preserve both the publication
 fact and historical decision wording; do not infer a freeze or release decision.
 
-Source findings requiring separate bounded review: stock NES/SNES backend
-indices still select rows 10/9 while the current labels there are N64/GameCube;
-Smash64 declares two SOCD pairs beside four initializers
-([defaults](../../config/glyph/common/include/glyph_overrides.hpp), lines 256–266,
-605–659). Intent and physical effects are unverified. These block broader default
-route/four-active-pair claims; no source repair belongs in this batch.
+Source finding requiring separate bounded review: Smash64 declares
+`socd_pairs_count = 2` while four `SocdPair` initializer entries are visibly
+present in that initializer block
+([defaults](../../config/glyph/common/include/glyph_overrides.hpp), lines 256–264).
+The intended interpretation and any physical or runtime significance are
+unverified; this audit does not establish a user-visible defect. No firmware
+repair is authorized by Batch A.
 
 Proposed destinations below require subsequent approved edits and consumer review:
 
