@@ -49,3 +49,8 @@ Canonical integration PENDING_OWNER_AUTHORIZATION; [freeze](BETA_FREEZE_PROPOSAL
 PREPARED_NOT_ACTIVATED. [Exact integration procedure](INTEGRATION_PREPARATION.md) and
 [Senscope handoff](SENSCOPE_HANDOFF.md) are preparation only. No canonical publication,
 beta tag, public release, flash or source/build-input edit occurred in this review.
+
+[Exact committed packet review](PACKET_REVIEW.json) approves acceptance record
+`2d64e75a1f020d1f7564d3a15db63cb7fcffe96a`. Later review-only descendants preserve
+the tested-source distinction. The final published tip is pinned in the owner handoff;
+canonical integration remains UNKNOWN/pending and freeze remains unactivated.

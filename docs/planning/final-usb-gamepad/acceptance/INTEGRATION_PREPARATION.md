@@ -29,7 +29,9 @@ test "$(git rev-parse origin/codex/final-usb-gamepad-enumeration)" = ebde1447f5c
 test "$(git rev-parse origin/codex/final-usb-gamepad-hardware-acceptance)" = "$ACCEPTED_SHA"
 git merge-base --is-ancestor "$EXPECTED_BASE" "$ACCEPTED_SHA"
 git rev-list --left-right --count "$EXPECTED_BASE...$ACCEPTED_SHA"
-git diff --exit-code dcf6e29589f558a95c021bef491578f87e41750f "$ACCEPTED_SHA" -- . ':!docs/**'
+for revision in $(git rev-list dcf6e29589f558a95c021bef491578f87e41750f.."$ACCEPTED_SHA"); do
+  git diff --exit-code dcf6e29589f558a95c021bef491578f87e41750f "$revision" -- . ':!docs/**'
+done
 git switch configurator
 test "$(git rev-parse HEAD)" = "$EXPECTED_BASE"
 git merge --ff-only "$ACCEPTED_SHA"

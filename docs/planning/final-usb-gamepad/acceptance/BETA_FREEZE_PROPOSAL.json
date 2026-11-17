@@ -29,5 +29,7 @@
     "Keyboard": "NOT_TESTED / deferred",
     "Fresh Install recovery": "NOT_TESTED / post-beta hardening",
     "Nunchuk": "NOT_TESTED"
-  }
+  },
+  "reviewed_hardware_acceptance_commit": "2d64e75a1f020d1f7564d3a15db63cb7fcffe96a",
+  "hardware_acceptance_publication_branch": "codex/final-usb-gamepad-hardware-acceptance"
 }

@@ -8,7 +8,9 @@
     "docs_navigation": "PASS",
     "runtime_config_validation_health": "PASS census264",
     "git_diff_check": "PASS",
-    "source_equivalence": "PASS1254non-doc/329production/327nativecritical modes/blobs/path, virtual negativecontrols rejected"
+    "source_equivalence": "PASS1254non-doc/329production/327nativecritical modes/blobs/path, virtual negativecontrols rejected",
+    "report_json_and_local_links": "PASS",
+    "exact_committed_source_equivalence": "PASS through2d64e75a1f020d1f7564d3a15db63cb7fcffe96a; every descendant,1254complete/327nativecritical/329production"
   },
   "not_run": [
     "Firmware rebuild",
@@ -16,5 +18,5 @@
     "Full aggregate validation"
   ],
   "historical_debt": "Original final-usb-gamepad/VALIDATION.json full wrapper/aggregate/standalone FAIL/debt remains; no new aggregate PASS.",
-  "final_packet_review": "Pending exact committed packet independent review; publication only after approval"
+  "final_packet_review": "PASS: independent exact committed2d64e75a review in PACKET_REVIEW.json; final review-only child must receive bounded delta review before publication"
 }

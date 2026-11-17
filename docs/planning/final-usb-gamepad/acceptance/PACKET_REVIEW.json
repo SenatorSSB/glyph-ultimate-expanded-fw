@@ -1,0 +1,32 @@
+{
+  "reviewer": "physical_evidence_review",
+  "reviewed_at_utc": "2026-11-17T01:34:27.460946+00:00",
+  "reviewed_commit": "2d64e75a1f020d1f7564d3a15db63cb7fcffe96a",
+  "independence": "Independent physical reviewer; no packet authoring, read-only committed review",
+  "verdict": "APPROVED_FOR_SOURCE_FREE_EVIDENCE_PUBLICATION_AND_INTEGRATION_PREPARATION",
+  "findings": [],
+  "checks": {
+    "public_records_match_private_evidence": true,
+    "owner_records_exact": true,
+    "private_manifest_491entries_exact": true,
+    "new_regular_docs_blobs": 11,
+    "current_docs_append_only": 9,
+    "original_HARDWARE_PACKET_and_CANDIDATE_unchanged": true,
+    "descendants_checked": [
+      "ebde1447f5cf348b3af82240ebd95445b44cb888",
+      "2d64e75a1f020d1f7564d3a15db63cb7fcffe96a"
+    ],
+    "complete_non_doc_entries_equal_each_commit": 1254,
+    "native_critical_entries_equal_each_commit": 327,
+    "production_manifest_mode_blob_hash_equal_tip": 329,
+    "all_non_doc_manifest_mode_blob_hash_equal_tip": 1254,
+    "no_private_raw_Config_or_unique_identifiers_published": true,
+    "absolute_owner_paths_redacted": true,
+    "freeze_prepared_not_activated_canonical_unknown": true,
+    "integration_procedure": "Separate owner authorization; exact base/ref pin guards; clean checkout; ancestor check; non-doc diff plus fullproof reminder; ff-only merge; ordinary nonforce push; no execution.",
+    "Senscope_handoff": "No repin before explicit freeze; fresh correspondence and complete-package acceptance; future DInput physical acceptance with actual supported profile; keyboard deferred; no Switch2/browser qualification.",
+    "limitations": "Same-session owner continuity only, uniqueID and adapter modelUNKNOWN, browser unresolved, API-visible preservation only, no raw storage proof after final reboot."
+  },
+  "source_equivalence_record_scope": "Public record intentionally binds preacceptance committed ebde1447; this exact-tip review independently proves2d64e75a and each descendant preserve tested source/build.",
+  "no_device_or_production_operations": true
+}

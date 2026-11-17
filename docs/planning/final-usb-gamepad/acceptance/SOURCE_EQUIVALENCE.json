@@ -2,9 +2,10 @@
   "result": "PASS",
   "tested_source": "dcf6e29589f558a95c021bef491578f87e41750f",
   "tested_tree": "a7731388430ea70dbe666298953795f4018069b0",
-  "checked_committed_head": "ebde1447f5cf348b3af82240ebd95445b44cb888",
+  "checked_committed_head": "2d64e75a1f020d1f7564d3a15db63cb7fcffe96a",
   "checked_descendant_commits": [
-    "ebde1447f5cf348b3af82240ebd95445b44cb888"
+    "ebde1447f5cf348b3af82240ebd95445b44cb888",
+    "2d64e75a1f020d1f7564d3a15db63cb7fcffe96a"
   ],
   "all_non_doc_paths": 1254,
   "production_manifest_paths": 329,

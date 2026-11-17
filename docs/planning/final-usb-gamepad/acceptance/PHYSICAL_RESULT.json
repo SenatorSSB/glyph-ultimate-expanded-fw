@@ -10,7 +10,11 @@
   },
   "build_evidence_commit": "ebde1447f5cf348b3af82240ebd95445b44cb888",
   "canonical_at_review": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
-  "protocol_at_handoff": "git-json:ebde1447f5cf348b3af82240ebd95445b44cb888:docs/planning/final-usb-gamepad/HARDWARE_PACKET.md",
+  "protocol_at_handoff": {
+    "commit": "ebde1447f5cf348b3af82240ebd95445b44cb888",
+    "path": "docs/planning/final-usb-gamepad/HARDWARE_PACKET.md",
+    "type": "immutable approved Markdown hardware protocol, not a JSON evidence-record locator"
+  },
   "row_mapping": "A1/A2=X1/X2; B1/B2=S1/S2; C=D1/D2 applicability/smoke; D1/D2=G1/G2; P=P1/P2; R1 explicit current owner workflow supplement",
   "rows": {
     "X1": "PASS",
@@ -121,5 +125,7 @@
   "freeze": "PREPARED_NOT_ACTIVATED",
   "public_release": "NOT_PERFORMED",
   "authority": "Explicit owner current-chat authorization for candidate-descendant source-free evidence publication; no canonical queue/DONE/source integration change",
-  "no_new_firmware_or_device_operations": true
+  "no_new_firmware_or_device_operations": true,
+  "reviewed_acceptance_record": "git-json:2d64e75a1f020d1f7564d3a15db63cb7fcffe96a:docs/planning/final-usb-gamepad/acceptance/PHYSICAL_RESULT.json",
+  "final_packet_review": "PACKET_REVIEW.json"
 }
