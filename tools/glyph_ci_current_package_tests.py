@@ -86,9 +86,9 @@ def _copy_destination(node, names):
 def current_flashing_automation_reasons(relpath, source):
     """Classify executable flashing actions, not ordinary host fixture copying.
 
-    Generic copy APIs are rejected only when their statically visible source or
-    destination identifies a bootloader/device path.  Python string literals on
-    their own are deliberately not actions: this keeps regression fixtures and
+    Generic copy APIs are rejected only when their statically visible destination
+    identifies a bootloader/device path; device-to-host reads remain allowed.
+    Python string literals on their own are deliberately not actions: this keeps regression fixtures and
     documentation from becoming evidence of a host-initiated device mutation.
     """
     suffix = Path(relpath).suffix.lower()

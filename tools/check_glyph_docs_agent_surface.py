@@ -418,37 +418,13 @@ def validate_boundary(text: str) -> None:
 
 
 def validate_current_state(text: str) -> None:
-    require_phrases(
-        rel(CURRENT_STATE),
-        text,
-        (
-            "docs/AGENT_CONTEXT.md",
-            "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
-            "source-owned Y2 layout HARDWARE_PASS",
-            "Active RuntimeConfigView selection remains unchanged",
-            "Forbidden current active-publication paths",
-            "coordinate-native runtime profile contract scaffolding",
-            "coordinate_native_runtime_profile_contract.json",
-            "Nunchuk remains NOT_TESTED",
-            "root cause remains unproven",
-        ),
-    )
-    sections = text.split("\n## ")[1:]
-    if not sections or len(sections[0].splitlines()) > 120:
-        fail(f"{rel(CURRENT_STATE)} current chapter should remain concise")
+    from check_glyph_docs_navigation import validate_current_state as validate_current
+    validate_current(text)
 
 
 def validate_roadmap(text: str) -> None:
-    require_phrases(
-        rel(ROADMAP),
-        text,
-        (
-            "source-owned realization generator",
-            "coordinate-native runtime profile contract scaffolding",
-            "future browser/protobuf/persistence backend",
-            "after the runtime model exists",
-        ),
-    )
+    from check_glyph_docs_navigation import validate_roadmap as validate_current
+    validate_current(text)
 
 
 def validate_runtime_readme(text: str) -> None:
@@ -507,6 +483,8 @@ def validate_archive_index(text: str) -> None:
 
 
 def validate_docs() -> None:
+    from check_glyph_docs_navigation import current_section, validate_docs as validate_public_docs
+    validate_public_docs(REPO_ROOT)
     docs = {
         AGENT_CONTEXT: read_required(AGENT_CONTEXT),
         BOUNDARY: read_required(BOUNDARY),
@@ -516,14 +494,17 @@ def validate_docs() -> None:
         CALIBRATION_INDEX: read_required(CALIBRATION_INDEX),
         ARCHIVE_INDEX: read_required(ARCHIVE_INDEX),
     }
+    validate_current_state(docs[CURRENT_STATE])
+    validate_roadmap(docs[ROADMAP])
+    # Historical journals are evidence about their own time, not current claims.
+    docs[CURRENT_STATE] = current_section(docs[CURRENT_STATE], "current-state")
+    docs[ROADMAP] = current_section(docs[ROADMAP], "current-roadmap")
     for path in (AGENT_CONTEXT, BOUNDARY, CURRENT_STATE, ROADMAP, RUNTIME_README, ARCHIVE_INDEX):
         reject_forbidden_attribution(rel(path), docs[path])
         reject_phrases(rel(path), docs[path], FORBIDDEN_ACTIVE_CLAIMS)
 
     validate_agent_context(docs[AGENT_CONTEXT])
     validate_boundary(docs[BOUNDARY])
-    validate_current_state(docs[CURRENT_STATE])
-    validate_roadmap(docs[ROADMAP])
     validate_runtime_readme(docs[RUNTIME_README])
     validate_calibration_index(docs[CALIBRATION_INDEX])
     validate_archive_index(docs[ARCHIVE_INDEX])
