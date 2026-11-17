@@ -198,6 +198,73 @@ class PublicDocsTests(unittest.TestCase):
         nav.validate_docs(overrides=self.docs)
         surface.validate_technical_surface(self.docs)
 
+    def test_curated_acceptance_cannot_be_promoted(self):
+        for before, after in (
+            ('| DInput | N/A |', '| DInput | PASS |'),
+            ('| DInput | N/A |', '| DInput | N/A / PASS |'),
+            ('| Browser Gamepad API / JoyCheck | NOT_QUALIFIED |',
+             '| Browser Gamepad API / JoyCheck | PASS |'),
+            ('| Nunchuk | NOT_TESTED |', '| Nunchuk | PASS |')):
+            with self.subTest(before=before):
+                self.setUp(); self.reject('docs/history/HARDWARE_ACCEPTANCE.md', before, after)
+
+    def test_ci_rebuild_does_not_inherit_acceptance(self):
+        for path in ('docs/history/HARDWARE_ACCEPTANCE.md', 'docs/history/SOURCE_LINEAGE.md'):
+            with self.subTest(path=path):
+                self.setUp()
+                self.docs[path] += '\nA CI rebuild inherits hardware acceptance.\n'
+                with self.assertRaises(nav.DocsNavigationError):
+                    nav.validate_docs(overrides=self.docs)
+
+    def test_curated_tested_source_is_not_documentation_tip(self):
+        for path in ('docs/history/HARDWARE_ACCEPTANCE.md', 'docs/history/SOURCE_LINEAGE.md'):
+            with self.subTest(path=path):
+                self.setUp()
+                self.reject(path, '| Tested source | `dcf6e29589f558a95c021bef491578f87e41750f` |',
+                            '| Tested source | `935f08f72dc52476dfbdd2e0059467c13ac5cd9d` |')
+
+    def test_future_fresh_commit_is_not_tested_commit(self):
+        self.reject('docs/history/SOURCE_LINEAGE.md',
+                    'A fresh public repository commit will not become the physically tested source\ncommit.',
+                    'A fresh public repository commit becomes the physically tested source commit.')
+
+    def test_evidence_scope_warning_is_required(self):
+        self.reject('docs/evidence/README.md',
+                    'Linking evidence does not broaden its scope or upgrade\nits status.',
+                    'Linking evidence upgrades every result.')
+
+    def test_history_current_truth_owner_and_selected_scope(self):
+        self.reject('docs/history/HISTORY.md',
+                    'owns present truth', 'shares historical and present truth')
+        self.setUp()
+        self.reject('docs/history/HISTORY.md', 'not an exhaustive', 'an exhaustive')
+
+    def test_historical_reader_route_is_public(self):
+        path = 'docs/README.md'
+        row = next(line for line in self.docs[path].splitlines()
+                   if line.startswith('| Historical/evidence research |'))
+        self.reject(path, row, '| Historical/evidence research | [Queue](project/ACTIVE_AGENT_QUEUE.md), then [framework](agent_framework/README.md) |')
+        self.setUp()
+        self.reject(path, row, row.replace(' |', ', then agent_framework required |', 1))
+
+    def test_curated_private_locators_and_contacts_are_rejected(self):
+        for path in nav.CURATED_PATHS:
+            for locator in ('/Users/sample/private/capture.json', '/home/sample/capture.json',
+                            'C:\\Users\\sample\\capture.json', 'local_backups/unit/firmware.uf2',
+                            'private-capture-path: hidden', 'sample@example.invalid'):
+                with self.subTest(path=path, locator=locator):
+                    self.setUp(); self.docs[path] += '\n' + locator + '\n'
+                    with self.assertRaises(nav.DocsNavigationError):
+                        nav.validate_docs(overrides=self.docs)
+
+    def test_curated_wording_and_milestones_are_not_locked(self):
+        self.docs['docs/history/HISTORY.md'] = self.docs['docs/history/HISTORY.md'].replace(
+            'selected chronology, not an exhaustive journal', 'selected milestones, not exhaustive history').replace(
+            'Material change and evidence', 'Engineering milestone and sources')
+        self.docs['docs/history/DECISIONS.md'] = self.docs['docs/history/DECISIONS.md'].replace(
+            'Keep version domains independent', 'Preserve separate version contracts')
+        nav.validate_docs(overrides=self.docs)
+
     def test_current_candidate(self):
         nav.validate_docs(overrides=self.docs)
 

@@ -4142,22 +4142,26 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 13902,
+      "file_size_bytes": 18884,
       "hard_coded_branch_like_strings": [
         "configurator",
-        "evidence"
+        "evidence",
+        "evidence.",
+        "evidence/README.md"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 242,
+      "line_count": 309,
       "parse_error": null,
       "path": "tools/check_glyph_docs_navigation.py",
       "potential_branch_identity_signals": [
         "configurator",
-        "evidence"
+        "evidence",
+        "evidence.",
+        "evidence/README.md"
       ],
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_docs_navigation",
@@ -4170,12 +4174,17 @@
         "docs/README.md",
         "docs/ROADMAP.md",
         "docs/USAGE.md",
+        "docs/evidence/README.md",
+        "docs/history/DECISIONS.md",
+        "docs/history/HARDWARE_ACCEPTANCE.md",
+        "docs/history/HISTORY.md",
+        "docs/history/SOURCE_LINEAGE.md",
         "include/core/ProfileStore.hpp",
         "src/config.cpp",
         "src/core/mode_selection.cpp"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "7085c893b860e8473eb44c2c7edebfb83f4c76ef88057670d70b5b7fffe6055f",
+      "sha256": "6ac3a09207c45be7f21b8d118be976823a26ce5910c4b3587dc4e616ac40edaf",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
