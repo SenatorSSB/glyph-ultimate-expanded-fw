@@ -8,7 +8,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_PATHS = ("README.md", "docs/README.md", "docs/CURRENT_STATE.md",
                 "docs/ROADMAP.md", "docs/CAPABILITIES.md", "docs/USAGE.md",
-                "docs/PROFILE_SYSTEM.md", "profiles/README.md")
+                "docs/PROFILE_SYSTEM.md", "profiles/README.md",
+                "docs/ARCHITECTURE.md", "docs/DEVELOPMENT.md")
 
 
 class DocsNavigationError(AssertionError):
@@ -98,11 +99,78 @@ def validate_roadmap(text: str) -> str:
     return current
 
 
+def validate_technical_surface(docs: dict[str, str]) -> None:
+    """Protect relationships and reader routes, allowing prose/diagram rewording."""
+    def route(path: str, reader: str, target: str) -> None:
+        rows = [line for line in docs[path].splitlines() if re.search(reader, line, re.I)]
+        if not any(f"]({target})" in line for line in rows):
+            fail(f"{path}: missing {reader} route to {target}")
+
+    route("README.md", r"\bdevelopers\b", "docs/DEVELOPMENT.md")
+    route("README.md", r"coding agents", "AGENTS.md")
+    route("docs/README.md", r"\bdevelopers\b", "DEVELOPMENT.md")
+    # The developer route must not require old orchestration as a second step.
+    for path in ("README.md", "docs/README.md"):
+        for line in docs[path].splitlines():
+            if re.search(r"\bdevelopers\b", line, re.I) and re.search(
+                    r"AGENTS\.md|WORKFLOW\.md|AGENT_CONTEXT|ACTIVE_AGENT_QUEUE|agent_framework", line):
+                fail(f"{path}: developer route depends on internal agent workflow")
+    architecture = docs["docs/ARCHITECTURE.md"]
+    development = docs["docs/DEVELOPMENT.md"]
+    for path, text, targets in (
+        ("architecture", architecture, ("PROFILE_SYSTEM.md", "CAPABILITIES.md",
+            "../platformio.ini", "../config/glyph/common/src/config.cpp",
+            "../src/core/mode_selection.cpp", "../include/core/ProfileStore.hpp")),
+        ("development", development, ("ARCHITECTURE.md", "CURRENT_STATE.md", "PROFILE_SYSTEM.md")),
+    ):
+        for target in targets:
+            if f"]({target})" not in text:
+                fail(f"{path}: missing technical route {target}")
+    a, d = normalize(architecture).replace("**", ""), normalize(development).replace("**", "")
+    def distinction(label: str, text: str, pattern: str) -> None:
+        if not re.search(pattern, text):
+            fail(f"technical docs: missing {label} distinction")
+    distinction("row/engine", a, r"(?:row label|profile label).{0,30}(?:is not|differs from|!=|≠).{0,25}mode engine")
+    distinction("engine/backend", a, r"mode engine.{0,30}(?:is not|differs from|!=|≠).{0,25}(?:communication )?backend")
+    distinction("row/record", a, r"config row.{0,25}(?:is not|differs from|!=|≠).{0,25}profilestore record")
+    distinction("record/package", a, r"(?:neither alone is|record (?:is not|!=|≠|differs from)).{0,20}complete package")
+    distinction("Configurator/website", a, r"configurator (?:firmware )?transport.{0,40}(?:distinct from|is not|differs from).{0,30}retired official configurator website")
+    distinction("build/hardware", d, r"(?:ci build|build pass|build proof).{0,35}(?:is not|!=|≠|differs from).{0,25}(?:physical )?hardware (?:acceptance|pass)")
+    if re.search(r"(?:ci build|build pass|build proof).{0,20}(?:proves|is|inherits) (?:physical )?hardware (?:acceptance|pass)", d):
+        fail("development: build cannot confer hardware acceptance")
+    for status in ("timeout", "skipped"):
+        distinction(f"{status}/PASS", d, rf"{status}.{{0,15}}(?:is not|!=|≠|does not mean).{{0,10}}pass")
+        if re.search(rf"{status} (?:is|means|equals) pass", d):
+            fail(f"development: {status} cannot mean PASS")
+    if "pio run -e glyph_mk6" not in d:
+        fail("development: missing canonical build command")
+    # Only the introductory normal path is dependency-free; the final migration
+    # note may name retained internal files without making them prerequisites.
+    intro = re.split(r"^## ", development, flags=re.M)
+    supported = next((s for s in intro if s.lower().startswith("supported public development path")), "")
+    if not supported or re.search(r"ACTIVE_AGENT_QUEUE|agent_framework|WORKFLOW\.md|AGENT_CONTEXT", supported):
+        fail("development: normal public path requires internal campaign documents")
+    if not re.search(r"^## Documentation maintenance policy\s*$", development, re.M):
+        fail("development: missing documentation ownership policy")
+    policy = development.split("## Documentation maintenance policy", 1)[1].split("\n## ", 1)[0]
+    for owner in ("CURRENT_STATE", "CAPABILITIES", "USAGE", "PROFILE_SYSTEM", "ARCHITECTURE",
+                  "DEVELOPMENT", "ROADMAP", "profiles/README", "history", "evidence"):
+        if not any(owner in line for line in policy.splitlines() if line.startswith("|")):
+            fail(f"development: missing canonical owner {owner}")
+    for pattern in (r"mode engine is (?:the same as|a) (?:communication )?backend",
+                    r"config row is (?:itself )?a profilestore record",
+                    r"profilestore record is (?:itself )?a complete package",
+                    r"configurator transport is the (?:retired )?official configurator website"):
+        if re.search(pattern, a):
+            fail("architecture: conflated system responsibilities")
+
+
 def validate_docs(root: Path = REPO_ROOT, overrides: dict[str, str] | None = None) -> None:
     """Overrides let tests mutate current prose without touching tracked files."""
     docs = {}
     for path in PUBLIC_PATHS:
         docs[path] = overrides[path] if overrides and path in overrides else (root / path).read_text(encoding="utf-8")
+    validate_technical_surface(docs)
     docs["docs/CURRENT_STATE.md"] = validate_current_state(docs["docs/CURRENT_STATE.md"])
     docs["docs/ROADMAP.md"] = validate_roadmap(docs["docs/ROADMAP.md"])
     require_links("README", docs["README.md"], ("docs/USAGE.md", "docs/CAPABILITIES.md",

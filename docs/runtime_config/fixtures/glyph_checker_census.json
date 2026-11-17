@@ -3973,7 +3973,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 29031,
+      "file_size_bytes": 34053,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -4010,7 +4010,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 657,
+      "line_count": 725,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -4050,8 +4050,10 @@
         "HAL/pico/src/comms/ConfiguratorBackend.cpp",
         "backend/storage/write/WebSerial/flashing",
         "docs/AGENT_CONTEXT.md",
+        "docs/ARCHITECTURE.md",
         "docs/CAPABILITIES.md",
         "docs/CURRENT_STATE.md",
+        "docs/DEVELOPMENT.md",
         "docs/PROFILE_SYSTEM.md",
         "docs/README.md",
         "docs/ROADMAP.md",
@@ -4065,6 +4067,8 @@
         "docs/runtime_config/fixtures/glyph_checker_census.json",
         "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
         "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
+        "include/core/ProfileStore.hpp",
+        "src/config.cpp",
         "src/core/mode_selection.cpp",
         "src/modes/UltimateIdentityRuntimeTables.hpp",
         "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
@@ -4117,7 +4121,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "1fd91e66626166d0464df565018adabd647f9c240fad1270a4b095a2cdecb1cf",
+      "sha256": "fef8a029d5323e4935b120d74de905b7cd6afb5219f037e322be91f8833b5687",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -4138,7 +4142,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 8952,
+      "file_size_bytes": 13902,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence"
@@ -4148,7 +4152,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 174,
+      "line_count": 242,
       "parse_error": null,
       "path": "tools/check_glyph_docs_navigation.py",
       "potential_branch_identity_signals": [
@@ -4158,17 +4162,22 @@
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_docs_navigation",
       "referenced_repository_path_prefixes": [
+        "docs/ARCHITECTURE.md",
         "docs/CAPABILITIES.md",
         "docs/CURRENT_STATE.md",
+        "docs/DEVELOPMENT.md",
         "docs/PROFILE_SYSTEM.md",
         "docs/README.md",
         "docs/ROADMAP.md",
-        "docs/USAGE.md"
+        "docs/USAGE.md",
+        "include/core/ProfileStore.hpp",
+        "src/config.cpp",
+        "src/core/mode_selection.cpp"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "eee2937ecc11bd7f20ddc327754d9688bff802624c3579ceacc694d5d7e47f94",
+      "sha256": "7085c893b860e8473eb44c2c7edebfb83f4c76ef88057670d70b5b7fffe6055f",
       "static_signals": {
-        "agent_framework": false,
+        "agent_framework": true,
         "candidate_generation": false,
         "coordinate_native": false,
         "docs_navigation": true,

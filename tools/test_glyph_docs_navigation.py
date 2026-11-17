@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Focused public-doc regression controls; no tracked fixture mutations."""
+import re
 import unittest
 from unittest.mock import patch
 
@@ -81,6 +82,121 @@ class PublicDocsTests(unittest.TestCase):
                 with patch.object(surface, 'read_required', side_effect=read_override):
                     with self.assertRaises(surface.AgentSurfaceError):
                         surface.validate_public_doc_surface()
+
+    def assert_both_reject(self):
+        with self.assertRaises(nav.DocsNavigationError):
+            nav.validate_docs(overrides=self.docs)
+        def read_override(path):
+            return self.docs[path.relative_to(nav.REPO_ROOT).as_posix()]
+        with patch.object(surface, 'read_required', side_effect=read_override):
+            with self.assertRaises(surface.AgentSurfaceError):
+                surface.validate_public_doc_surface()
+
+    def test_technical_routes_in_both_consumers(self):
+        for path, target in (
+            ('README.md', 'docs/DEVELOPMENT.md'), ('README.md', 'AGENTS.md'),
+            ('docs/README.md', 'DEVELOPMENT.md'),
+            ('docs/ARCHITECTURE.md', 'PROFILE_SYSTEM.md'),
+            ('docs/ARCHITECTURE.md', 'CAPABILITIES.md'),
+            ('docs/ARCHITECTURE.md', '../config/glyph/common/src/config.cpp'),
+            ('docs/DEVELOPMENT.md', 'ARCHITECTURE.md'),
+            ('docs/DEVELOPMENT.md', 'CURRENT_STATE.md'),
+            ('docs/DEVELOPMENT.md', 'PROFILE_SYSTEM.md')):
+            with self.subTest(path=path, target=target):
+                self.setUp()
+                self.docs[path] = self.docs[path].replace(f']({target})', '](README.md)')
+                self.assert_both_reject()
+
+    def test_architecture_distinctions_in_both_consumers(self):
+        for before, after in (
+            ('stock row label is not a mode engine', 'stock row label is a mode engine'),
+            ('mode engine is not a communication backend', 'mode engine is a communication backend'),
+            ('Config row is not a ProfileStore record', 'Config row is a ProfileStore record'),
+            ('neither alone is a complete package', 'each alone is a complete package'),
+            ('transport is distinct from the retired', 'transport is the retired')):
+            with self.subTest(before=before):
+                self.setUp()
+                text = self.docs['docs/ARCHITECTURE.md']
+                # Whitespace in prose is not part of the contract.
+                changed, count = re.subn(r'\s+'.join(map(re.escape, before.split())), after, text)
+                self.assertGreater(count, 0)
+                self.docs['docs/ARCHITECTURE.md'] = changed
+                self.assert_both_reject()
+
+    def test_development_evidence_and_policy_in_both_consumers(self):
+        for before, after in (
+            ('pio run -e glyph_mk6', 'pio run'),
+            ('A CI build is not physical hardware acceptance', 'A CI build proves physical hardware acceptance'),
+            ('TIMEOUT is not PASS', 'TIMEOUT is PASS'),
+            ('SKIPPED is\nnot PASS', 'SKIPPED is PASS'),
+            ('## Documentation maintenance policy', '## Notes')):
+            with self.subTest(before=before):
+                self.setUp()
+                self.assertIn(before, self.docs['docs/DEVELOPMENT.md'])
+                self.docs['docs/DEVELOPMENT.md'] = self.docs['docs/DEVELOPMENT.md'].replace(before, after)
+                self.assert_both_reject()
+
+    def test_public_path_does_not_require_internal_queue(self):
+        for path, before, after in (
+            ('README.md', 'Developers: build, test and contribute', 'Developers: first read ACTIVE_AGENT_QUEUE'),
+            ('docs/README.md', '| Developers |', '| Developers: agent_framework required |'),
+            ('docs/DEVELOPMENT.md', 'Branch from the current live', 'Read ACTIVE_AGENT_QUEUE first. Branch from the current live')):
+            with self.subTest(path=path):
+                self.setUp()
+                self.docs[path] = self.docs[path].replace(before, after)
+                self.assert_both_reject()
+
+    def test_technical_prose_and_diagrams_can_be_reworded(self):
+        self.docs['docs/ARCHITECTURE.md'] = self.docs['docs/ARCHITECTURE.md'].replace(
+            'is not a mode engine', 'differs from a mode engine').replace(
+            'flowchart LR', 'flowchart TD')
+        nav.validate_docs(overrides=self.docs)
+        technical = {p: self.docs[p] for p in ('README.md', 'docs/README.md',
+                     'docs/ARCHITECTURE.md', 'docs/DEVELOPMENT.md')}
+        surface.validate_technical_surface(technical)
+
+    def test_development_guards_in_both_consumers(self):
+        for before, after in (
+            ('pio run -e glyph_mk6', 'pio run -e other'),
+            ('TIMEOUT is not PASS', 'TIMEOUT is PASS'),
+            ('SKIPPED is\nnot PASS', 'SKIPPED is PASS'),
+            ('## Documentation maintenance policy', '## Other notes'),
+            ('| [ROADMAP](ROADMAP.md) | Future intent |', '| Other | Future intent |'),
+            ('A CI build is not physical hardware acceptance', 'A CI build proves physical hardware acceptance')):
+            with self.subTest(before=before):
+                self.setUp()
+                self.assertIn(before, self.docs['docs/DEVELOPMENT.md'])
+                self.docs['docs/DEVELOPMENT.md'] = self.docs['docs/DEVELOPMENT.md'].replace(before, after)
+                self.assert_both_reject()
+
+    def test_public_path_cannot_require_internal_workflow(self):
+        for path, before, after in (
+            ('README.md', '](docs/DEVELOPMENT.md)', '](docs/DEVELOPMENT.md), then [required queue](docs/project/ACTIVE_AGENT_QUEUE.md)'),
+            ('docs/README.md', '](DEVELOPMENT.md)', '](DEVELOPMENT.md), then [required workflow](WORKFLOW.md)'),
+            ('docs/DEVELOPMENT.md', 'Branch from the current live', 'Read docs/project/ACTIVE_AGENT_QUEUE.md first. Branch from the current live')):
+            with self.subTest(path=path):
+                self.setUp()
+                self.docs[path] = self.docs[path].replace(before, after)
+                self.assert_both_reject()
+
+    def test_internal_workflow_cannot_become_public_prerequisite(self):
+        for path, before, after in (
+            ('README.md', 'Developers: build, test and contribute',
+             'Developers: read AGENTS.md first, then build, test and contribute'),
+            ('docs/README.md', '| Developers |', '| Developers: WORKFLOW.md first |'),
+            ('docs/DEVELOPMENT.md', '## Supported public development path',
+             '## Supported public development path\nRead ACTIVE_AGENT_QUEUE first.')):
+            with self.subTest(path=path):
+                self.setUp(); self.docs[path] = self.docs[path].replace(before, after)
+                self.assert_both_reject()
+
+    def test_technical_wording_is_not_paragraph_locked(self):
+        self.docs['docs/ARCHITECTURE.md'] = self.docs['docs/ARCHITECTURE.md'].replace(
+            'stock row label is not a mode engine', 'stock row label differs from the mode engine')
+        self.docs['docs/DEVELOPMENT.md'] = self.docs['docs/DEVELOPMENT.md'].replace(
+            'TIMEOUT is not PASS', 'TIMEOUT does not mean PASS')
+        nav.validate_docs(overrides=self.docs)
+        surface.validate_technical_surface(self.docs)
 
     def test_current_candidate(self):
         nav.validate_docs(overrides=self.docs)
