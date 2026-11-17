@@ -7,6 +7,7 @@ from unittest.mock import patch
 import check_glyph_docs_agent_surface as surface
 
 import check_glyph_docs_navigation as nav
+import check_glyph_agent_framework_docs as framework
 
 
 class PublicDocsTests(unittest.TestCase):
@@ -18,6 +19,91 @@ class PublicDocsTests(unittest.TestCase):
         self.docs[path] = self.docs[path].replace(before, after)
         with self.assertRaises(nav.DocsNavigationError):
             nav.validate_docs(overrides=self.docs)
+
+    def test_public_agents_contract_negative_controls(self):
+        original = self.docs['AGENTS.md']
+        controls = (
+            ('queue requirement', original + '\nACTIVE_AGENT_QUEUE.md is required for ordinary work.\n'),
+            ('READY requirement', original + '\nA READY work order is required for every ordinary task.\n'),
+            ('Planner prerequisite', original.replace('Start ordinary coding work with:',
+                                                   'First follow Planner and Curator runway.')),
+            ('build acceptance', original + '\nA CI build proves hardware acceptance.\n'),
+            ('TIMEOUT PASS', original + '\nTIMEOUT is PASS.\n'),
+            ('SKIPPED PASS', original + '\nSKIPPED means PASS.\n'),
+            ('specific device authority', original.replace('specific device action', 'general task')),
+            ('device boundary deletion', original.replace('unless the user explicitly authorizes that',
+                                                         'because the user assigned a task about that')),
+            ('canonical command', original.replace('pio run -e glyph_mk6', 'pio run -e other')),
+            ('automatic login', original + '\nAfter network failure run gh auth login.\n'),
+            ('automatic credentials', original + '\nAfter DNS failure change GitHub credentials.\n'),
+        )
+        for label, bad in controls:
+            with self.subTest(control=label):
+                self.setUp(); self.docs['AGENTS.md'] = bad
+                self.assert_both_reject()
+                with self.assertRaises(framework.FrameworkDocsError):
+                    framework.check_public_agents_contract(bad)
+        for action in ('serial/device write', 'hidden device mutation',
+                       'destructive\nrecovery', 'controller operation'):
+            with self.subTest(action=action):
+                self.setUp()
+                self.assertIn(action, original)
+                self.docs['AGENTS.md'] = original.replace(action, 'ordinary action')
+                self.assert_both_reject()
+                with self.assertRaises(framework.FrameworkDocsError):
+                    framework.check_public_agents_contract(self.docs['AGENTS.md'])
+
+    def test_agent_route_cannot_return_to_internal_context(self):
+        row = next(line for line in self.docs['docs/README.md'].splitlines()
+                   if line.startswith('| Coding agents |'))
+        for target in ('AGENT_CONTEXT.md', 'WORKFLOW.md', 'agent_framework/README.md',
+                       'project/ACTIVE_AGENT_QUEUE.md'):
+            with self.subTest(target=target):
+                self.setUp()
+                self.docs['docs/README.md'] = self.docs['docs/README.md'].replace(
+                    row, '| Coding agents | [AGENTS.md](../AGENTS.md), then [required context](' + target + ') |')
+                self.assert_both_reject()
+
+    def test_current_state_cannot_require_internal_prerequisites(self):
+        for path in ('AGENT_CONTEXT.md', 'project/ACTIVE_AGENT_QUEUE.md',
+                     'docs/WORKFLOW.md', 'docs/agent_framework/'):
+            with self.subTest(path=path):
+                self.setUp()
+                self.docs['docs/CURRENT_STATE.md'] = self.docs['docs/CURRENT_STATE.md'].replace(
+                    '<!-- current-state-v1:end -->',
+                    'Developers and coding agents must read ' + path + ' first.\n<!-- current-state-v1:end -->')
+                self.assert_both_reject()
+
+    def test_public_agents_semantic_rewording(self):
+        text = self.docs['AGENTS.md'].replace('Build PASS is not hardware acceptance',
+                                            'Build proof does not confer hardware acceptance').replace(
+            'TIMEOUT is not PASS', 'TIMEOUT does not mean PASS').replace(
+            'specific device action', 'particular device action').replace(
+            '## Read first', '## Public entry points')
+        self.docs['AGENTS.md'] = text
+        nav.validate_docs(overrides=self.docs)
+        surface.check_public_agents_contract(text)
+        framework.check_public_agents_contract(text)
+
+    def test_package_docs_do_not_read_historical_status_mirrors(self):
+        retired = {surface.AGENT_CONTEXT, surface.RUNTIME_README,
+                   surface.CALIBRATION_INDEX, surface.ARCHIVE_INDEX}
+        original_read = surface.read_required
+        def current_only(path):
+            self.assertNotIn(path, retired)
+            return original_read(path)
+        with patch.object(surface, 'read_required', side_effect=current_only):
+            surface.validate_docs()
+
+    def test_framework_scan_excludes_public_agents(self):
+        original_read = framework.read_required
+        def internal_only(path):
+            self.assertNotEqual(path, 'AGENTS.md')
+            return original_read(path)
+        with patch.object(framework, 'read_required', side_effect=internal_only):
+            text = framework.active_framework_text()
+        self.assertNotIn('# Coding-agent instructions', text)
+        self.assertIn('GLYPH-UD-029', text)
 
     def test_profile_system_routes(self):
         for path in ('docs/README.md', 'docs/CAPABILITIES.md', 'docs/USAGE.md'):

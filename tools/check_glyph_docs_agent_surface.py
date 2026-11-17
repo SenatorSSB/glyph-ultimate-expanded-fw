@@ -466,6 +466,84 @@ def validate_roadmap(text: str) -> None:
         "PREPARED_NOT_ACTIVATED", "NOT_RELEASED", "Senscope", "DInput", "Fresh Install"))
 
 
+def check_public_agents_contract(text: str) -> None:
+    """Validate public safety and routes without mirroring internal orchestration."""
+    n = " ".join(text.replace("`", "").replace("**", "").split()).lower()
+    targets = set(re.findall(r"\[[^]\n]*\]\(([^)\s]+)\)", text))
+    for target in ("docs/DEVELOPMENT.md", "docs/ARCHITECTURE.md", "docs/CURRENT_STATE.md",
+                   "docs/CAPABILITIES.md", "docs/PROFILE_SYSTEM.md", "profiles/README.md",
+                   "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md"):
+        if target not in targets:
+            fail(f"AGENTS: missing public route {target}")
+    if "pio run -e glyph_mk6" not in n:
+        fail("AGENTS: missing canonical Mk6 build command")
+    if "./scripts/build-glyph-mk6-quiet.sh" not in n:
+        fail("AGENTS: missing fallback build command")
+    distinctions = {
+        "build/hardware": r"(?:ci build|build pass|build proof).{0,35}(?:is not|!=|≠|does not (?:prove|confer)|differs from).{0,25}(?:physical )?hardware (?:acceptance|pass)",
+        "TIMEOUT/PASS": r"timeout.{0,15}(?:is not|!=|≠|does not mean).{0,10}pass",
+        "SKIPPED/PASS": r"skipped.{0,15}(?:is not|!=|≠|does not mean).{0,10}pass",
+    }
+    for label, pattern in distinctions.items():
+        if not re.search(pattern, n):
+            fail(f"AGENTS: missing {label} distinction")
+    for pattern in (
+        r"(?:ci build|build pass|build proof).{0,20}(?:proves|is|inherits|confers) (?:physical )?hardware (?:acceptance|pass)",
+        r"(?:timeout|skipped) (?:is|means|equals) pass",
+    ):
+        if re.search(pattern, n):
+            fail("AGENTS: build/incomplete validation cannot confer acceptance")
+    # Internal names may occur in a short retained-history note, never as the
+    # public operating instructions. Check affirmative requirements even there.
+    operational = re.split(r"^## (?:Legacy|Historical)[^\n]*\n", text, maxsplit=1, flags=re.M | re.I)[0]
+    internal = r"AGENT_CONTEXT|WORKFLOW\.md|agent_framework|ACTIVE_AGENT_QUEUE|\bPlanner\b|\bCurator\b|\bRunner\b|\brunway\b|PREAUTHORIZED|\bREADY\b|GLYPH-UD-|daemon|model.routing|scheduled.task|queue promotion"
+    if re.search(internal, operational, re.I):
+        fail("AGENTS: public workflow operationalizes internal campaign machinery")
+    if re.search(r"(?:active_agent_queue|ready work order).{0,70}(?:is required|must|required for|every ordinary task)", n):
+        fail("AGENTS: ordinary tasks cannot require a queue/work order")
+    if re.search(r"(?:must|required to|first) (?:read|follow|use).{0,60}(?:agent_context|workflow\.md|agent_framework|active_agent_queue|planner|curator|runway)", n):
+        fail("AGENTS: historical/internal material is not a public prerequisite")
+    # Require the complete explicit action-specific device boundary in one
+    # paragraph, not scattered references to devices and general task approval.
+    device = next((" ".join(p.split()).lower() for p in text.replace("`", "").split("\n\n")
+                   if re.search(r"(?:no|do not|never).{0,25}(?:firmware )?flash", p, re.I | re.S)), "")
+    if (not all(re.search(pattern, device) for pattern in (
+            r"serial/device write|serial.{0,15}device write", r"hidden device mutation",
+            r"destructive recovery", r"controller operation"))
+            or not re.search(r"unless.{0,20}(?:the )?user.{0,20}explicitly authoriz.{0,35}(?:specific|particular|exact) device action", device)):
+        fail("AGENTS: missing explicit authorization for each specific device action")
+    if not re.search(r"(?:never|do not).{0,20}automatic.{0,130}(?:credential|token)", n):
+        fail("AGENTS: missing protection against automatic GitHub credential changes")
+    if not re.search(r"network failure.{0,15}(?:is not|!=|does not (?:prove|mean)).{0,20}authentication", n):
+        fail("AGENTS: network failure is not authentication proof")
+    for sentence in re.split(r"[.\n]", n):
+        if re.search(r"(?:network|dns).{0,25}fail|after.{0,20}fail", sentence) and re.search(
+                r"(?:auto[- ]?login|automatically (?:log|change)|(?:run|use) gh auth login|change (?:github )?credentials)", sentence):
+            if not re.search(r"never|do not|must not", sentence):
+                fail("AGENTS: network failure cannot authorize account mutation")
+
+
+def check_public_agent_routes(index: str, current: str | None = None) -> None:
+    """Keep coding-agent and contributor entry points distinct and public."""
+    rows = [line for line in index.splitlines() if re.search(r"coding agents", line, re.I)]
+    if len(rows) != 1 or not all(f"]({target})" in rows[0] for target in
+                                ("../AGENTS.md", "DEVELOPMENT.md", "ARCHITECTURE.md")):
+        fail("docs index: coding-agent route must use AGENTS then public technical docs")
+    internal = r"AGENT_CONTEXT|ACTIVE_AGENT_QUEUE|WORKFLOW\.md|agent_framework|\bPlanner\b|\bCurator\b|\brunway\b"
+    if re.search(internal, rows[0], re.I):
+        fail("docs index: coding-agent route requires internal workflow")
+    if current is not None:
+        # The bounded current owner is public; legacy journals are not scanned.
+        if re.search(internal, current, re.I):
+            fail("current-state: normal developer/agent route requires internal workflow")
+        for target in ("DEVELOPMENT.md", "../AGENTS.md", "runtime_config/IMPLEMENTATION_BOUNDARY.md"):
+            if f"]({target})" not in current:
+                fail(f"current-state: missing public/safety route {target}")
+        n = " ".join(current.split()).lower()
+        if not re.search(r"native ultimate/profilestore lane.{0,35}does not authorize.{0,30}generic runtime configuration.{0,20}new device operations", n):
+            fail("current-state: missing native lane/runtime/device boundary")
+
+
 def validate_technical_surface(docs: dict[str, str]) -> None:
     """Protect relationships and reader routes, allowing prose/diagram rewording."""
     def route(path: str, reader: str, target: str) -> None:
@@ -534,6 +612,9 @@ def validate_technical_surface(docs: dict[str, str]) -> None:
 
 def validate_public_doc_surface() -> None:
     """Current package consumer checks public files without historical prose locks."""
+    check_public_agents_contract(read_required(REPO_ROOT / "AGENTS.md"))
+    check_public_agent_routes(read_required(REPO_ROOT / "docs/README.md"),
+                              current_doc_section(read_required(CURRENT_STATE), "current-state"))
     validate_technical_surface({path: read_required(REPO_ROOT / path) for path in (
         "README.md", "docs/README.md", "docs/ARCHITECTURE.md", "docs/DEVELOPMENT.md")})
     for path, headings in (
@@ -650,30 +731,21 @@ def validate_archive_index(text: str) -> None:
 
 
 def validate_docs() -> None:
+    """Current package docs use canonical public owners and the hard boundary.
+
+    Historical status/index validators above remain available for evidence replay;
+    the current package path does not require those mirrors to state current truth.
+    """
     validate_public_doc_surface()
-    docs = {
-        AGENT_CONTEXT: read_required(AGENT_CONTEXT),
-        BOUNDARY: read_required(BOUNDARY),
-        CURRENT_STATE: read_required(CURRENT_STATE),
-        ROADMAP: read_required(ROADMAP),
-        RUNTIME_README: read_required(RUNTIME_README),
-        CALIBRATION_INDEX: read_required(CALIBRATION_INDEX),
-        ARCHIVE_INDEX: read_required(ARCHIVE_INDEX),
-    }
+    docs = {path: read_required(path) for path in (BOUNDARY, CURRENT_STATE, ROADMAP)}
     validate_current_state(docs[CURRENT_STATE])
     validate_roadmap(docs[ROADMAP])
-    # Historical journals are evidence about their own time, not current claims.
     docs[CURRENT_STATE] = current_doc_section(docs[CURRENT_STATE], "current-state")
     docs[ROADMAP] = current_doc_section(docs[ROADMAP], "current-roadmap")
-    for path in (AGENT_CONTEXT, BOUNDARY, CURRENT_STATE, ROADMAP, RUNTIME_README, ARCHIVE_INDEX):
-        reject_forbidden_attribution(rel(path), docs[path])
-        reject_phrases(rel(path), docs[path], FORBIDDEN_ACTIVE_CLAIMS)
-
-    validate_agent_context(docs[AGENT_CONTEXT])
+    for path, text in docs.items():
+        reject_forbidden_attribution(rel(path), text)
+        reject_phrases(rel(path), text, FORBIDDEN_ACTIVE_CLAIMS)
     validate_boundary(docs[BOUNDARY])
-    validate_runtime_readme(docs[RUNTIME_README])
-    validate_calibration_index(docs[CALIBRATION_INDEX])
-    validate_archive_index(docs[ARCHIVE_INDEX])
 
 
 def exact_gp026_schema_attributes(root: Path) -> bool:
@@ -715,9 +787,8 @@ def main() -> int:
     validate_docs()
     print("glyph_docs_agent_surface: PASS")
     print(f"- branch: {branch}")
-    print(f"- agent context: {rel(AGENT_CONTEXT)}")
+    print("- current documentation: AGENTS.md and public technical owners")
     print(f"- implementation boundary: {rel(BOUNDARY)}")
-    print(f"- archive index: {rel(ARCHIVE_INDEX)}")
     return 0
 
 
