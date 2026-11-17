@@ -1,5 +1,23 @@
 # Transport correspondence for Glyph Mk6
 
+## Superseding physical finding and repair — 2026-11-17
+
+The later owner XInput smoke found Windows **Other devices / Pico**, no expected
+XInput controller and no usable browser gamepad. Mac browser attempts also exposed
+no usable gamepad. **XInput: SOURCE_FIX_REQUIRED / HARDWARE_RETEST_REQUIRED.**
+Source audit confirms DInput shares late interface publication: **DInput:
+SOURCE_FIX_REQUIRED**, regardless of selected profile applicability. Switch's
+previous exact-image PASS is retained, with regression required after shared repair.
+The new [repair and current state](../final-usb-gamepad/README.md),
+[source audit](../final-usb-gamepad/SOURCE_AUDIT.md) and
+[replacement owner packet](../final-usb-gamepad/HARDWARE_PACKET.md) control continuation.
+Old de793f34 acceptance does not qualify the changed candidate. Configurator and
+retro backends are excluded from final gamepad reconnect. No canonical merge,
+freeze, tag or release. The prior scope/audit below records its earlier knowledge;
+“none identified” was correct before this finding and is now superseded.
+
+## Prior beta-readiness snapshot at 0a1eab8
+
 At the original audit intake, both the fork's merge base and the then-live Limit Labs configurator ref resolved to `9a78c7eeec87527b68644573e4c29fbdfb543239`. Limit Labs identifies that short version as release 1.0.7. The comparison below uses that committed Mk6 source against `59870835e7cd8e7c52bd3742e4910a7083cd21f5`. The official release bytes and the source lineage have different forms of provenance. [Official source](https://github.com/LimitLabs/FW-Glyph/tree/9a78c7eeec87527b68644573e4c29fbdfb543239) · [Official releases](https://limitlabs.com/pages/glyph-resources)
 
 | Input path | GameCube | Nintendo Switch USB | XInput | DInput |

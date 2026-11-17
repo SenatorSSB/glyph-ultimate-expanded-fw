@@ -1012,7 +1012,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "065dce027399c5ee808b553d6ded205335565acd5e2cb58bb877e95639b4d3f9",
+      "sha256": "bb4f2dfe2465f5680ba35c55201b24860c008bf066581617d379c13fad3e683a",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -5076,6 +5076,70 @@
         "docs_navigation": true,
         "generated_source_owned_artifacts": false,
         "hardware_results": true,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "final_usb_gamepad_enumeration",
+      "defines_main": true,
+      "file_size_bytes": 8573,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 137,
+      "parse_error": null,
+      "path": "tools/check_glyph_final_usb_gamepad_enumeration.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_final_usb_gamepad_enumeration",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/comms/backend_init.hpp",
+        "HAL/pico/src/comms/DInputBackend.cpp",
+        "HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+        "HAL/pico/src/comms/XInputBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "include/Adafruit_USBD_XInput.hpp",
+        "include/hardware/timer.h",
+        "lib/TUCompositeHID/include",
+        "lib/TUCompositeHID/src/TUCompositeHID.cpp",
+        "lib/TUCompositeHID/src/TUGamepad.cpp",
+        "lib/TUCompositeHID/src/TUKeyboard.cpp",
+        "src/Adafruit_USBD_XInput.cpp",
+        "src/config.cpp",
+        "src/core/CommunicationBackend.cpp",
+        "src/core/InputSource.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "tools/fixtures/final_usb_gamepad",
+        "tools/fixtures/gp_config012_button_host/generated",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb",
+        "tools/fixtures/profile_store_cdc_rx_progress/include",
+        "tools/fixtures/stage_c_ultimate_profiles_host/include",
+        "tools/fixtures/switch_readiness/include",
+        "tools/fixtures/switch_readiness/usb_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "0259bd3b1bcd7358d53381bfa9097c457cd9af1a37b630387ce3f2707bfc5608",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
         "identity_runtime_tables": false,
         "runtime_config": false,
         "source_owned": false,
@@ -13175,7 +13239,7 @@
       },
       "checker_id": "profile_store_selection_recovery",
       "defines_main": true,
-      "file_size_bytes": 10289,
+      "file_size_bytes": 10468,
       "hard_coded_branch_like_strings": [
         "branch",
         "configurator"
@@ -13185,7 +13249,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 153,
+      "line_count": 154,
       "parse_error": null,
       "path": "tools/check_glyph_profile_store_selection_recovery.py",
       "potential_branch_identity_signals": [
@@ -13202,13 +13266,14 @@
         "include/core/PackageOwnership.hpp",
         "include/core/ProfileStore.hpp",
         "include/core/RecoveryInitialization.hpp",
+        "include/final_usb_gamepad.hpp",
         "src/config.cpp",
         "src/core/mode_selection.cpp",
         "tools/fixtures/mode_selection_host/include",
         "tools/fixtures/profile_store_selection_recovery_host"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "6f35ae3624cd00539eb83859b1594be947570a80f8f2d641f92a571900764154",
+      "sha256": "5cca7f7bcbf4efb5a0de72ad552fb049cecfe4bbe5a46330ce95d118aec9f60a",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

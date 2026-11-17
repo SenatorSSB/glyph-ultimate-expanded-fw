@@ -39,8 +39,9 @@
 #include "img/update.hpp"
 
 #include <Adafruit_SSD1306.h>
-#if defined(GLYPH_MK6_SWITCH_USB_REENUMERATION) && GLYPH_MK6_SWITCH_USB_REENUMERATION
+#if defined(GLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION) && GLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION
 #include <tusb.h>
+#include "final_usb_gamepad.hpp"
 #endif
 #include <config.pb.h>
 #include "hardware/sync.h"
@@ -381,11 +382,12 @@ __attribute__((noinline)) bool InitializeBootBackends() {
         backend_count = 1;
     }
 
-#if defined(GLYPH_MK6_SWITCH_USB_REENUMERATION) && GLYPH_MK6_SWITCH_USB_REENUMERATION
-    // The core attaches CDC before setup. A host can cache that identity or
-    // configure CDC before the Switch constructor registers its HID endpoint.
-    // Offer the finished descriptors once, after console detection has returned.
-    if (initialized_backend_count > 0 && backends[0]->BackendId() == COMMS_BACKEND_NINTENDO_SWITCH) {
+#if defined(GLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION) && GLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION
+    // The core attaches CDC before setup; gamepad constructors register their
+    // final interfaces/identity later. Publish once after successful selection,
+    // using the executing backend rather than the provisional detection backend.
+    if (initialized_backend_count > 0 &&
+        requires_final_usb_gamepad_reenumeration(backends[0]->BackendId())) {
         tud_disconnect();
         delay(10);
         tud_connect();

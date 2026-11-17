@@ -108,10 +108,11 @@ def main() -> int:
                 function_body(app, 'publish_boot_state') + '\n')
             (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+boot_phases(phase_source)+'\n'+boot+'\n'+loop_source+'\n')
             exe = directory/'routes'
-            run(['c++','-std=c++17','-DGLYPH_MK6_SWITCH_USB_REENUMERATION=1','-fshort-enums','-Wall','-Wextra','-Werror',
+            run(['c++','-std=c++17','-DGLYPH_MK6_SWITCH_USB_REENUMERATION=1','-DGLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION=1','-fshort-enums','-Wall','-Wextra','-Werror',
                  '-Wno-missing-field-initializers','-fsanitize=address,undefined','-fno-omit-frame-pointer',
-                 *sum((['-I',str(p)] for p in [directory,generated,nanopb,ROOT/'include']),[]),
+                 *sum((['-I',str(p)] for p in [directory,generated,nanopb,ROOT/'include',ROOT/'config/glyph/common/include']),[]),
                  '-include',str(ROOT/'include/core/NativeTargetMetrics.hpp'),
+                 '-include',str(ROOT/'config/glyph/common/include/final_usb_gamepad.hpp'),
                  str(HOST/'setup_routes.cpp'),'-o',str(exe)])
             return exe
         routes = app_case('actual_routes')
@@ -121,7 +122,7 @@ def main() -> int:
             'git', 'show', '79475873f2c5f4b84e77bf9f94ab39779ffc69a5:config/glyph/common/src/config.cpp'
         ], cwd=ROOT, text=True)
         original_usb = app_case('original_usb', phase_source=parent)
-        assert 'Switch enumeration sequence' in run([str(original_usb), 'usb_enumeration'], expected=1)
+        assert 'USB gamepad enumeration sequence' in run([str(original_usb), 'usb_enumeration'], expected=1)
         baseline = subprocess.check_output([
             'git', 'show', '2bcb5104054f64d8b9c1af9dd1be4a974112f8ec:config/glyph/common/src/config.cpp'
         ], cwd=ROOT, text=True)

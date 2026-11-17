@@ -1,0 +1,68 @@
+{
+  "id": "OWNER-FINAL-USB-GAMEPAD-20261117",
+  "state": "READY",
+  "authority": "Direct owner instruction in this Codex chat dated 2026-11-17: bounded backend-classified final USB gamepad re-enumeration repair analogous to the accepted Switch fix is within scope; implement, host-test, build and prepare exact candidate; no installation or canonical source merge before exact hardware acceptance.",
+  "base": "59870835e7cd8e7c52bd3742e4910a7083cd21f5",
+  "audit_ancestry": [
+    "7908cac88317bbf0d1dee62ab1f8198bba12b4f3",
+    "0a1eab885237f7e6ea04f405707fe78269367ef1"
+  ],
+  "classification": "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
+  "risk": "H2",
+  "objective": "Finalize only executing XInput, DInput and Nintendo Switch USB gamepad interfaces after successful validated backend selection.",
+  "allowed": [
+    "explicit backend classification helper",
+    "existing InitializeBootBackends final reconnect boundary",
+    "pinned source audit",
+    "defect-sensitive host tests and affected regression consumers",
+    "build flag rename and corresponding provenance",
+    "exact committed build/resource/custody packet",
+    "chronological beta-doc reconciliation"
+  ],
+  "excluded": [
+    "Configurator reconnect absent independent source proof",
+    "GameCube/N64/NES/SNES USB reconnect",
+    "report semantics",
+    "USB stack replacement",
+    "storage formats",
+    "profile ownership or applicability",
+    "gameplay semantics",
+    "generic reset API",
+    "resource ceilings",
+    "device action",
+    "destructive operations",
+    "beta tag or public release"
+  ],
+  "validation": [
+    "early CDC and final descriptor replay with pinned TinyUSB and XInput",
+    "provisional USB to final retro exclusions",
+    "failed startup/detection and recovery controls",
+    "Switch-only mutant fails XInput and DInput",
+    "current host and directly affected startup/selection/preservation checks",
+    "checker census and build-input provenance",
+    "canonical glyph_mk6 build",
+    "linked resource/stack/callgraph comparison",
+    "fresh independent review",
+    "later exact owner hardware packet"
+  ],
+  "completion": "New exact committed candidate/tree/build inputs/UF2 identity and host/build evidence retained; hardware wait. Not DONE or hardware PASS.",
+  "hardware_gate": "Windows XInput primary defect acceptance; bounded original Switch regression; DInput if an existing selected beta profile exposes it else N/A; retained final GameCube qualification; no newly mandatory retro tests.",
+  "stop_conditions": [
+    "report/protocol change",
+    "stack replacement",
+    "persistent format change",
+    "profile ownership or game-semantic decision",
+    "unrestricted reset API",
+    "ceiling increase",
+    "destructive storage/device action"
+  ],
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "original_physical_finding": {
+    "Windows": "XInput selected, direct USB, browser no usable gamepad; Device Manager only Other devices/Pico, no expected XInput identity.",
+    "Mac": "Attempted browser USB tests exposed no usable gamepad.",
+    "source_artifact_of_failed_smoke": "Not independently supplied for this new observation; do not invent an exact installation tuple.",
+    "causation": "Host retaining early identity is source-supported hypothesis; physical root cause remains unproven."
+  }
+}

@@ -121,15 +121,17 @@ void check_usb_enumeration() {
     Backend primary;
     Backend *routes[] = {&primary};
     backends = routes;
-    for (const auto id : {COMMS_BACKEND_GAMECUBE, COMMS_BACKEND_XINPUT, COMMS_BACKEND_CONFIGURATOR,
+    for (const auto id : {COMMS_BACKEND_GAMECUBE, COMMS_BACKEND_N64, COMMS_BACKEND_NES,
+                          COMMS_BACKEND_SNES, COMMS_BACKEND_XINPUT, COMMS_BACKEND_CONFIGURATOR,
                           COMMS_BACKEND_DINPUT, COMMS_BACKEND_NINTENDO_SWITCH}) {
         primary.id = id;
         initialized_count = 1;
         usb_events.clear();
         require(InitializeBootBackends(), "normal backend initialization");
-        const bool is_switch = id == COMMS_BACKEND_NINTENDO_SWITCH;
-        require(usb_events == (is_switch ? "selected detach wait attach " : "selected "),
-                "Switch enumeration sequence");
+        const bool is_gamepad = id == COMMS_BACKEND_NINTENDO_SWITCH ||
+                                id == COMMS_BACKEND_XINPUT || id == COMMS_BACKEND_DINPUT;
+        require(usb_events == (is_gamepad ? "selected detach wait attach " : "selected "),
+                "USB gamepad enumeration sequence");
     }
     initialized_count = 0;
     usb_events.clear();

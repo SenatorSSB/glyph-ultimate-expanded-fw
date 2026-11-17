@@ -1,5 +1,23 @@
 # Mk6 beta-readiness audit
 
+## Superseding physical finding and repair — 2026-11-17
+
+The later owner XInput smoke found Windows **Other devices / Pico**, no expected
+XInput controller and no usable browser gamepad. Mac browser attempts also exposed
+no usable gamepad. **XInput: SOURCE_FIX_REQUIRED / HARDWARE_RETEST_REQUIRED.**
+Source audit confirms DInput shares late interface publication: **DInput:
+SOURCE_FIX_REQUIRED**, regardless of selected profile applicability. Switch's
+previous exact-image PASS is retained, with regression required after shared repair.
+The new [repair and current state](../final-usb-gamepad/README.md),
+[source audit](../final-usb-gamepad/SOURCE_AUDIT.md) and
+[replacement owner packet](../final-usb-gamepad/HARDWARE_PACKET.md) control continuation.
+Old de793f34 acceptance does not qualify the changed candidate. Configurator and
+retro backends are excluded from final gamepad reconnect. No canonical merge,
+freeze, tag or release. The prior scope/audit below records its earlier knowledge;
+“none identified” was correct before this finding and is now superseded.
+
+## Prior beta-readiness snapshot at 0a1eab8
+
 ## Current first-beta disposition — 2026-11-17
 
 [Current requirements matrix](MATRIX.md) · [Ordered owner test packet](OPERATOR.md) · [Narrow install/recovery contract](QUALIFICATION.md) · [Current validation ledger](VALIDATION.json).

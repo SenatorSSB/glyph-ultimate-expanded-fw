@@ -1,5 +1,21 @@
 # Agent Context
 
+## Later XInput physical finding / USB repair candidate — 2026-11-17
+
+Owner first-beta Windows direct-USB XInput smoke showed only Other devices/Pico,
+no expected XInput identity and no usable browser gamepad; Mac browser attempts
+also yielded none. Earlier beta audit's SOURCE_FIX_REQUIRED:none is superseded.
+XInput SOURCE_FIX_REQUIRED/HARDWARE_RETEST_REQUIRED; DInput source audit confirms
+shared late-interface publication. The bounded owner-authorized repair finalizes
+only final XInput/DInput/Switch, after validated startup/detection; Configurator
+and GameCube/N64/NES/SNES remain excluded. Prior Switch exact-image PASS is retained
+with new-candidate regression required. [Current chapter](planning/final-usb-gamepad/README.md)
+and [later owner packet](planning/final-usb-gamepad/HARDWARE_PACKET.md) supersede the
+prior beta packet. Source integration is held for exact candidate hardware PASS.
+No device action, destructive operation, freeze, beta tag or release is authorized
+or performed by this candidate preparation. Historical entries below retain chronology.
+
+
 ## Current first-beta qualification scope — 2026-11-17
 
 Live configurator remains 59870835e7cd8e7c52bd3742e4910a7083cd21f5; production/build
