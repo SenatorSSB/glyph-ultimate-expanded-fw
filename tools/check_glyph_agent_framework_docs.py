@@ -14,7 +14,6 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_DOCS = (
-    "AGENTS.md",
     "docs/agent_framework/README.md",
     "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
     "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
@@ -2390,8 +2389,64 @@ def framework_paths() -> list[Path]:
 
 def active_framework_text() -> str:
     parts = [path.read_text(encoding="utf-8") for path in framework_paths()]
-    parts.append(read_required("AGENTS.md"))
     return "\n".join(parts)
+
+
+def check_public_agents_contract(text: str) -> None:
+    """Validate public safety and routes without mirroring internal orchestration."""
+    n = " ".join(text.replace("`", "").replace("**", "").split()).lower()
+    targets = set(re.findall(r"\[[^]\n]*\]\(([^)\s]+)\)", text))
+    for target in ("docs/DEVELOPMENT.md", "docs/ARCHITECTURE.md", "docs/CURRENT_STATE.md",
+                   "docs/CAPABILITIES.md", "docs/PROFILE_SYSTEM.md", "profiles/README.md",
+                   "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md"):
+        if target not in targets:
+            fail(f"AGENTS: missing public route {target}")
+    if "pio run -e glyph_mk6" not in n:
+        fail("AGENTS: missing canonical Mk6 build command")
+    if "./scripts/build-glyph-mk6-quiet.sh" not in n:
+        fail("AGENTS: missing fallback build command")
+    distinctions = {
+        "build/hardware": r"(?:ci build|build pass|build proof).{0,35}(?:is not|!=|≠|does not (?:prove|confer)|differs from).{0,25}(?:physical )?hardware (?:acceptance|pass)",
+        "TIMEOUT/PASS": r"timeout.{0,15}(?:is not|!=|≠|does not mean).{0,10}pass",
+        "SKIPPED/PASS": r"skipped.{0,15}(?:is not|!=|≠|does not mean).{0,10}pass",
+    }
+    for label, pattern in distinctions.items():
+        if not re.search(pattern, n):
+            fail(f"AGENTS: missing {label} distinction")
+    for pattern in (
+        r"(?:ci build|build pass|build proof).{0,20}(?:proves|is|inherits|confers) (?:physical )?hardware (?:acceptance|pass)",
+        r"(?:timeout|skipped) (?:is|means|equals) pass",
+    ):
+        if re.search(pattern, n):
+            fail("AGENTS: build/incomplete validation cannot confer acceptance")
+    # Internal names may occur in a short retained-history note, never as the
+    # public operating instructions. Check affirmative requirements even there.
+    operational = re.split(r"^## (?:Legacy|Historical)[^\n]*\n", text, maxsplit=1, flags=re.M | re.I)[0]
+    internal = r"AGENT_CONTEXT|WORKFLOW\.md|agent_framework|ACTIVE_AGENT_QUEUE|\bPlanner\b|\bCurator\b|\bRunner\b|\brunway\b|PREAUTHORIZED|\bREADY\b|GLYPH-UD-|daemon|model.routing|scheduled.task|queue promotion"
+    if re.search(internal, operational, re.I):
+        fail("AGENTS: public workflow operationalizes internal campaign machinery")
+    if re.search(r"(?:active_agent_queue|ready work order).{0,70}(?:is required|must|required for|every ordinary task)", n):
+        fail("AGENTS: ordinary tasks cannot require a queue/work order")
+    if re.search(r"(?:must|required to|first) (?:read|follow|use).{0,60}(?:agent_context|workflow\.md|agent_framework|active_agent_queue|planner|curator|runway)", n):
+        fail("AGENTS: historical/internal material is not a public prerequisite")
+    # Require the complete explicit action-specific device boundary in one
+    # paragraph, not scattered references to devices and general task approval.
+    device = next((" ".join(p.split()).lower() for p in text.replace("`", "").split("\n\n")
+                   if re.search(r"(?:no|do not|never).{0,25}(?:firmware )?flash", p, re.I | re.S)), "")
+    if (not all(re.search(pattern, device) for pattern in (
+            r"serial/device write|serial.{0,15}device write", r"hidden device mutation",
+            r"destructive recovery", r"controller operation"))
+            or not re.search(r"unless.{0,20}(?:the )?user.{0,20}explicitly authoriz.{0,35}(?:specific|particular|exact) device action", device)):
+        fail("AGENTS: missing explicit authorization for each specific device action")
+    if not re.search(r"(?:never|do not).{0,20}automatic.{0,130}(?:credential|token)", n):
+        fail("AGENTS: missing protection against automatic GitHub credential changes")
+    if not re.search(r"network failure.{0,15}(?:is not|!=|does not (?:prove|mean)).{0,20}authentication", n):
+        fail("AGENTS: network failure is not authentication proof")
+    for sentence in re.split(r"[.\n]", n):
+        if re.search(r"(?:network|dns).{0,25}fail|after.{0,20}fail", sentence) and re.search(
+                r"(?:auto[- ]?login|automatically (?:log|change)|(?:run|use) gh auth login|change (?:github )?credentials)", sentence):
+            if not re.search(r"never|do not|must not", sentence):
+                fail("AGENTS: network failure cannot authorize account mutation")
 
 
 def check_required_paths() -> None:
@@ -2408,7 +2463,7 @@ def check_codex_only_surface() -> None:
     if (REPO_ROOT / ".claude" / "agents").exists():
         fail(".claude/agents must not exist for current Codex/OpenAI-only workflow")
     bad: list[str] = []
-    for path in framework_paths() + [REPO_ROOT / "AGENTS.md"]:
+    for path in framework_paths():
         text = path.read_text(encoding="utf-8")
         for term in NON_CODEX_TERMS:
             if term in text:
@@ -3590,7 +3645,7 @@ def check_persistent_batch_surface() -> None:
     if not body.startswith("```json\n") or not body.endswith("```"):
         fail("persistent campaign policy must be one fenced JSON object")
     validate_persistent_batch_policy(_revision_three_json(body[8:-3]))
-    for path in ('AGENTS.md', 'docs/WORKFLOW.md', 'docs/agent_framework/README.md', 'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md', 'docs/agent_framework/SUPERVISOR_CONTRACT.md', 'docs/agent_framework/SUBAGENT_CONTRACTS.md', 'docs/agent_framework/SCHEDULED_TASKS.md', 'docs/agent_framework/CYCLE_STATE_MACHINE.md', 'docs/agent_framework/PROMPT_TEMPLATES.md'):
+    for path in ('docs/WORKFLOW.md', 'docs/agent_framework/README.md', 'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md', 'docs/agent_framework/SUPERVISOR_CONTRACT.md', 'docs/agent_framework/SUBAGENT_CONTRACTS.md', 'docs/agent_framework/SCHEDULED_TASKS.md', 'docs/agent_framework/CYCLE_STATE_MACHINE.md', 'docs/agent_framework/PROMPT_TEMPLATES.md'):
         require_phrase(path, "GLYPH-UD-029")
     require_phrase("docs/agent_framework/USER_DIRECTION.md", "01a1078b-f2a9-77c2-b3bd-c0f0aaba5d74")
     for key in PERSISTENT_BATCH_POLICY:
@@ -3620,7 +3675,7 @@ def check_revision_three_surface() -> None:
         fail("Revision-3 policy must be one fenced JSON object")
     validate_revision_three_policy(_revision_three_json(body[8:-3]))
     validate_revision_three_future_orders(load_queue_state()["items"])
-    for path in ("AGENTS.md", "docs/WORKFLOW.md", "docs/agent_framework/README.md",
+    for path in ("docs/WORKFLOW.md", "docs/agent_framework/README.md",
                  "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md", "docs/agent_framework/SUPERVISOR_CONTRACT.md",
                  "docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/agent_framework/HARDWARE_EVIDENCE.md",
                  "docs/agent_framework/HARDWARE_CORRESPONDENCE.md", "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
@@ -3745,11 +3800,6 @@ def check_revision_two_surface() -> None:
 
 def check_firmware_implementation_authority() -> None:
     required = {
-        "AGENTS.md": (
-            "A complete READY H2/H3 work order with resolved substantive authority may be implemented",
-            "must never merge before its required exact-snapshot hardware PASS",
-            "Do not use H2/H3 authorization to bypass those boundaries",
-        ),
         "docs/WORKFLOW.md": (
             "A complete READY work order may authorize source-grounded firmware/runtime behavior implementation without a fresh user approval solely because",
             "User/domain input is required before implementation when the proposed runtime behavior still contains an unresolved",
@@ -3772,7 +3822,6 @@ def check_firmware_implementation_authority() -> None:
             require_phrase(rel_path, phrase)
 
     stale_blanket_rules = {
-        "AGENTS.md": "Stop before implementing if the task requires firmware behavior changes",
         "docs/WORKFLOW.md": "User product approval is required before firmware behavior implementation",
     }
     for rel_path, stale_phrase in stale_blanket_rules.items():
@@ -4171,7 +4220,7 @@ def check_capability_network_text(text: str, label: str) -> None:
 
 
 def check_live_remote_retry_contract() -> None:
-    for path in ("AGENTS.md", "docs/WORKFLOW.md",
+    for path in ("docs/WORKFLOW.md",
                  "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md"):
         check_capability_network_text(read_required(path), path)
     # Bullet indentation must not change the shared operational meaning.
@@ -4193,7 +4242,7 @@ def check_live_remote_retry_contract() -> None:
 
 def check_chapter_operating_contract() -> None:
     bootstrap = "docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md"
-    for path in ("AGENTS.md", "docs/project/AGENTS.md", "docs/agent_framework/README.md"):
+    for path in ("docs/project/AGENTS.md", "docs/agent_framework/README.md"):
         require_phrase(path, "FUTURE_DAEMON_BOOTSTRAP.md")
     for phrase in ("Terra / low", "Terra / medium", "no silent substitute",
                    "Set model/effort on every dispatch and resume", "Role existence is not a quota",
@@ -4209,7 +4258,7 @@ def check_chapter_operating_contract() -> None:
         require_phrase(bootstrap, phrase)
     require_phrase("docs/agent_framework/SCHEDULED_TASKS.md", "LEGACY / NOT DEFAULT FOR NEW CHAPTERS")
     require_phrase("docs/agent_framework/SCHEDULED_TASKS.md", "do NOT themselves disable external Codex schedules")
-    for path in ("AGENTS.md", "docs/WORKFLOW.md", "docs/agent_framework/README.md",
+    for path in ("docs/WORKFLOW.md", "docs/agent_framework/README.md",
                  "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md", "docs/agent_framework/SUPERVISOR_CONTRACT.md",
                  "docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/agent_framework/SCHEDULED_TASKS.md",
                  "docs/agent_framework/CYCLE_STATE_MACHINE.md", "docs/agent_framework/PROMPT_TEMPLATES.md"):
@@ -4235,12 +4284,9 @@ def check_contract_phrases() -> None:
     pass_line("branch classifications and judge verdicts are documented")
 
 
-def check_navigation_pointers() -> None:
-    require_phrase("AGENTS.md", "docs/AGENT_CONTEXT.md")
-    require_phrase("AGENTS.md", "docs/agent_framework/README.md")
-    require_phrase("AGENTS.md", "docs/project/ACTIVE_AGENT_QUEUE.md")
-    require_phrase("AGENTS.md", "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md")
-    pass_line("AGENTS.md points to framework entrypoints")
+def check_public_agents_surface() -> None:
+    check_public_agents_contract(read_required("AGENTS.md"))
+    pass_line("public AGENTS contract validates independently of internal framework")
 
 
 def check_forbidden_claims() -> None:
@@ -4295,7 +4341,7 @@ def main() -> int:
         check_task_configurations()
         check_live_remote_retry_contract()
         check_contract_phrases()
-        check_navigation_pointers()
+        check_public_agents_surface()
         check_chapter_operating_contract()
         check_forbidden_claims()
         check_runner_boundary()

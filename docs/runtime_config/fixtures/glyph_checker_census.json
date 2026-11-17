@@ -587,7 +587,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 214334,
+      "file_size_bytes": 217911,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -650,7 +650,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 4310,
+      "line_count": 4356,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -717,7 +717,11 @@
       "referenced_repository_path_prefixes": [
         "docs/../evidence.json",
         "docs/AGENT_CONTEXT.md",
+        "docs/ARCHITECTURE.md",
+        "docs/CAPABILITIES.md",
         "docs/CURRENT_STATE.md",
+        "docs/DEVELOPMENT.md",
+        "docs/PROFILE_SYSTEM.md",
         "docs/ROADMAP.md",
         "docs/WORKFLOW.md",
         "docs/agent_framework",
@@ -772,14 +776,16 @@
         "docs/project/CODEX_CLOUD_WORKFLOW.md",
         "docs/project/CODEX_WORKFLOW.md",
         "docs/reviewed.txt",
+        "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
         "docs/symlink.json",
         "docs/test_protocol.md"
       ],
       "runtime_config_relevance_signals": [
         "artifact_custody_provenance",
-        "hardware_evidence_contracts"
+        "hardware_evidence_contracts",
+        "runtime_config_docs"
       ],
-      "sha256": "6ce02487e60ef94d0906a8a77fe11d6c20fcfc953671184ff23c7f404c03aa35",
+      "sha256": "82b73b407f8eb2e5c6bd326c28d0ce5d75c7d01c57c6dd18d42e0a18f74d2ad1",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -3973,7 +3979,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 34053,
+      "file_size_bytes": 39668,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -4010,7 +4016,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 725,
+      "line_count": 796,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -4121,7 +4127,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "fef8a029d5323e4935b120d74de905b7cd6afb5219f037e322be91f8833b5687",
+      "sha256": "47f2575012620aed601b1acc106d8c7584ea7f911208b8e8dbcd3b9211894a18",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -4142,7 +4148,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 18884,
+      "file_size_bytes": 24826,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence",
@@ -4154,7 +4160,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 309,
+      "line_count": 389,
       "parse_error": null,
       "path": "tools/check_glyph_docs_navigation.py",
       "potential_branch_identity_signals": [
@@ -4179,12 +4185,15 @@
         "docs/history/HARDWARE_ACCEPTANCE.md",
         "docs/history/HISTORY.md",
         "docs/history/SOURCE_LINEAGE.md",
+        "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
         "include/core/ProfileStore.hpp",
         "src/config.cpp",
         "src/core/mode_selection.cpp"
       ],
-      "runtime_config_relevance_signals": [],
-      "sha256": "6ac3a09207c45be7f21b8d118be976823a26ce5910c4b3587dc4e616ac40edaf",
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "3e14e4090aa7b32d60e041bf19a6c3824426c72781614e9f11dce300a7a5b419",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
