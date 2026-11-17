@@ -74,6 +74,15 @@ def _is_flash_command(command):
     )
 
 
+def _copy_destination(node, names):
+    if len(node.args) >= 2:
+        return _literal_text(node.args[1], names)
+    for keyword in node.keywords:
+        if keyword.arg in {"dst", "destination"}:
+            return _literal_text(keyword.value, names)
+    return ""
+
+
 def current_flashing_automation_reasons(relpath, source):
     """Classify executable flashing actions, not ordinary host fixture copying.
 
@@ -115,7 +124,7 @@ def current_flashing_automation_reasons(relpath, source):
             else:
                 name = aliases.get(name, name)
             arguments = " ".join(_literal_text(arg, names) for arg in node.args)
-            if name in COPY_CALLS and _is_device_path(arguments):
+            if name in COPY_CALLS and _is_device_path(_copy_destination(node, names)):
                 reasons.append(f"device-context copy at line {node.lineno}")
             elif name in PROCESS_CALLS and _is_flash_command(arguments):
                 reasons.append(f"flashing command at line {node.lineno}")
@@ -164,10 +173,12 @@ def verify_current_flashing_automation_controls():
         'import shutil\nshutil.copy("request.pb", scratch / "request.pb")\n',
         # Removing the RPI-RP2 destination makes this an ordinary host copy.
         'import shutil\nshutil.copy("firmware.uf2", scratch / "firmware.uf2")\n',
+        'import shutil\nshutil.copy("/Volumes/RPI-RP2/INFO_UF2.TXT", scratch / "INFO_UF2.TXT")\n',
     )
     forbidden = (
         'import shutil\nshutil.copy("firmware.uf2", "/Volumes/RPI-RP2/firmware.uf2")\n',
         'import shutil\ntarget = "/Volumes/RPI-RP2"\nshutil.copy("firmware.uf2", target)\n',
+        'import shutil\nshutil.copy(src="firmware.uf2", dst="/Volumes/RPI-RP2/firmware.uf2")\n',
         'import subprocess\nsubprocess.run(["pio", "run", "-t", "upload"], check=True)\n',
         'import subprocess\nsubprocess.run(["picotool", "load", "firmware.uf2"], check=True)\n',
         'import subprocess\nsubprocess.run(["openocd", "-f", "flash.cfg"], check=True)\n',
