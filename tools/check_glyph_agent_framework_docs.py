@@ -2401,8 +2401,8 @@ def check_public_agents_contract(text: str) -> None:
                    "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md"):
         if target not in targets:
             fail(f"AGENTS: missing public route {target}")
-    if "pio run -e glyph_mk6" not in n:
-        fail("AGENTS: missing canonical Mk6 build command")
+    if not re.search(r"^[ \t]*pio run -e glyph_mk6[ \t]*$", text, re.M):
+        fail("AGENTS: missing exact canonical Mk6 build command")
     if "./scripts/build-glyph-mk6-quiet.sh" not in n:
         fail("AGENTS: missing fallback build command")
     distinctions = {
@@ -2429,6 +2429,11 @@ def check_public_agents_contract(text: str) -> None:
         fail("AGENTS: ordinary tasks cannot require a queue/work order")
     if re.search(r"(?:must|required to|first) (?:read|follow|use).{0,60}(?:agent_context|workflow\.md|agent_framework|active_agent_queue|planner|curator|runway)", n):
         fail("AGENTS: historical/internal material is not a public prerequisite")
+    for sentence in re.split(r"(?<=[.!?])\s+", n):
+        if re.search(internal, sentence, re.I) and re.search(
+                r"\b(?:must|requires?|required|mandatory|prerequisites?|first|before)\b", sentence):
+            if not re.search(r"not (?:prerequisites?|required|mandatory)|do not require|never require", sentence):
+                fail("AGENTS: internal approval/workflow cannot be an ordinary-work prerequisite")
     # Require the complete explicit action-specific device boundary in one
     # paragraph, not scattered references to devices and general task approval.
     device = next((" ".join(p.split()).lower() for p in text.replace("`", "").split("\n\n")
