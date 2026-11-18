@@ -45,6 +45,20 @@ class ExportTests(unittest.TestCase):
                      b'mail'+b'@example.invalid', b'private-capture-path']:
             with self.subTest(body=body): self.reject([item(body=body)])
 
+    def test_encoded_locators_and_other_host_roots(self):
+        for b in [br'\u002fUsers\u002fperson\u002fwork', b'%252fUsers%252fperson%252fwork',
+                  br'\x2fUsers\x2fperson', b'/root/person', b'/Volumes/disk/person',
+                  b'/mnt/owner', b'/run/user/123', b'/var/tmp/owner',
+                  br'person\u0040example.invalid']:
+            with self.subTest(body=b):self.reject([item(body=b)])
+        deep=b'/Users/person'
+        for _ in range(10):deep=deep.replace(b'%',b'%25').replace(b'/',b'%2f')
+        self.reject([item(body=deep)])
+
+    def test_output_cannot_relocate_into_historical_family(self):
+        p=policy();p['exceptions']['src/a']={'classification':'PUBLIC_INCLUDE','purpose':'test','output':'docs/project/leak'}
+        self.reject([item('src/a')],p)
+
     def test_historical_family_requires_narrow_record(self):
         p=policy();p['exceptions']['docs/project/x.md']={'classification':'PUBLIC_INCLUDE','purpose':'bad'}
         self.reject([item('docs/project/x.md')],p)

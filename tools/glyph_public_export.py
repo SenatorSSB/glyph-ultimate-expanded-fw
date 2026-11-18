@@ -36,7 +36,7 @@ FORBIDDEN_COMPONENTS = {'.git', '.pio', '.platformio', '.platformio-home', '.ven
                         '__pycache__', 'node_modules', '.pytest_cache', 'local_backups'}
 BINARY_EXTENSIONS = {'.gz', '.pb', '.bin', '.body', '.cobs', '.png', '.uf2', '.elf', '.zip', '.a', '.o'}
 PATTERNS = {
-    'absolute_path': r'(?:/(?:Users|home|private|tmp|var/folders)/|\b[A-Za-z]:[\\/]|file://)',
+    'absolute_path': r'(?:/(?:Users|home|root|Volumes|mnt|private|tmp|run/user|var/tmp|var/folders)/|\b[A-Za-z]:[\\/]|file://)',
     'contact': r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}',
     'backup_locator': r'local_backups[/\\][^\s`"\']*',
     'private_capture': r'private[-_ ](?:capture|artifact)[-_ ](?:path|locator|location)',
@@ -139,10 +139,26 @@ def transform(path, data):
     return (title.rstrip() + '\n\n' + start + body + end + '\n').encode('utf-8')
 
 def privacy_hits(data):
-    # Decode escapes in JSON/code as well as URL-encoded locators, without
-    # evaluating code or removing the original bytes from the scan.
-    text = data.decode('utf-8', errors='replace')
-    text += '\n' + unquote(text).replace('\\/', '/')
+    # Normalize encoded text as data, never evaluate Python/source code. Keep
+    # every intermediate view, so decoding cannot hide a raw match. A bounded
+    # fixed point also catches nested percent/JSON/hex escapes; excess encoding
+    # depth fails closed instead of silently leaving an encoded locator.
+    value = data.decode('utf-8', errors='replace')
+    views = [value]
+    def character(match):
+        codepoint = int(match.group(1), 16)
+        if codepoint > 0x10ffff: fail('invalid encoded codepoint')
+        return chr(codepoint)
+    for _ in range(8):
+        decoded = unquote(value).replace('\\/', '/')
+        decoded = re.sub(r'\\u([0-9a-fA-F]{4})', character, decoded)
+        decoded = re.sub(r'\\U([0-9a-fA-F]{8})', character, decoded)
+        decoded = re.sub(r'\\x([0-9a-fA-F]{2})', character, decoded)
+        if decoded == value: break
+        views.append(decoded); value = decoded
+    else:
+        fail('privacy normalization exceeds encoding-depth bound')
+    text = '\n'.join(views)
     return sorted({(kind, m.group()) for kind, pattern in PATTERNS.items()
                    for m in re.finditer(pattern, text, re.I)})
 
@@ -263,7 +279,7 @@ def plan(entries, policy):
         if path in seen: fail('duplicate source path')
         seen.add(path)
         classification = classify(path, data, policy)
-        row = {'path': path, 'classification': classification, 'bytes': len(data), 'sha256': digest(data)}
+        row = {'path': path, 'classification': classification, 'bytes': len(data), 'git_mode': mode, 'sha256': digest(data)}
         group = summary[classification]; group['files'] += 1; group['bytes'] += len(data)
         ext = Path(path).suffix.lower() or '(none)'
         totals = group['extensions'].setdefault(ext, {'files': 0, 'bytes': 0})
@@ -275,6 +291,8 @@ def plan(entries, policy):
             else: row['privacy'] = scan(path, body, policy)
             destination = policy['exceptions'].get(path, {}).get('output', path)
             path_ok(destination)
+            if destination.startswith(HISTORICAL) and not (policy['exceptions'].get(path, {}).get('historical_exception') and destination == path):
+                fail('historical output relocation: ' + destination)
             if destination in output: fail('output collision: ' + destination)
             if path in JOURNALS and destination != path: fail('journal relocation forbidden')
             output[destination] = (mode, body)

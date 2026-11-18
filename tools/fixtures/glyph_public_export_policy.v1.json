@@ -11,20 +11,20 @@
       "sha256": "cc0edd079f07687441740bfca2c4416137ade1c9d57f43da4954fff521fba362"
     },
     "include/img/remap.png": {
-      "consumer": "config/glyph/common/include/Images.hpp and include/img/*.h source counterparts",
+      "consumer": "HAL/pico/src/display/RemapMenu.cpp includes include/img/remap.hpp",
       "decoder": "PNG chunk/CRC parser and visual inspection",
       "format": "PNG",
       "max_bytes": 1024,
-      "purpose": "Firmware UI source artwork, retained alongside generated bitmap headers.",
+      "purpose": "Source artwork companion to the compiled bitmap header; PNG itself is not directly read by compiler. PNG128x64/chunks/metadata and visual content reviewed.",
       "schema": "PNG",
       "sha256": "11b0ecd17f556172d315894a7e44f71bbf56781249defbf94bfc0aa425921418"
     },
     "include/img/update.png": {
-      "consumer": "config/glyph/common/include/Images.hpp and include/img/*.h source counterparts",
+      "consumer": "config/glyph/common/src/config.cpp and HAL/pico/src/display/DefaultConfigMenu.cpp include include/img/update.hpp",
       "decoder": "PNG chunk/CRC parser and visual inspection",
       "format": "PNG",
       "max_bytes": 1024,
-      "purpose": "Firmware UI source artwork, retained alongside generated bitmap headers.",
+      "purpose": "Source artwork companion to the compiled bitmap header; PNG itself is not directly read by compiler. PNG128x64/chunks/metadata and visual content reviewed.",
       "schema": "PNG",
       "sha256": "93024b400be941f7c08d5fba07fec56160f1a51212cc7f7f6af42477edf0d026"
     },
@@ -2209,8 +2209,8 @@
       "match_sha256": [
         "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
       ],
-      "purpose": "Reviewed safety-pattern code and synthetic negative controls, not concrete owner evidence; exact bytes and tokens bound.",
-      "sha256": "9e1de2adcee6d6ebb60b2615ddb1825ae0dbc69c69d50147dfba8ac6b7d01e3d"
+      "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
+      "sha256": "1dd8adcf0c8d8e59d972604cb4d38cdb54b30c44e3590ca0d3a8b08ff3d46370"
     },
     "tools/glyph_tracked_worktree_integrity.py": {
       "match_sha256": [
@@ -2335,13 +2335,19 @@
     },
     "tools/test_glyph_public_export.py": {
       "match_sha256": [
+        "276f6eb2014ac1b34d2321ca2beacfdc9f5231e8ed1fd351b19ba200ce63fe6e",
+        "2e7a047d1d624b3044ed72adaa6c53a1437c71b25cfc4062737fccc993b79f9b",
+        "34355701dfa4009a86509153eb7c1364899ce8a667909aee47c242a97dee4c9a",
         "3e51344b76bf930a9824a3a851c987309ef19590b30216e63cc73516450994e0",
+        "7c4159b922c3ff91bfeac824d90c7277c6d5806aac1338991eb921535ea170fa",
         "8a4cfce477926ec388ae57e6ef4ef13cba7881386b2927e7b94750c584a09384",
+        "8f4d19830b757c45446ef3e6cae47abe961166fe349fa8039be6b2a8c8f3a51d",
         "90dfa00d2f5c2b55a53fe15a283cfa552be21d63051c1f6576e6fbe06f49eff8",
-        "98b412c212237491aeddce6ac2a322349ee62fe3346f332a631d2acd5810672c"
+        "98b412c212237491aeddce6ac2a322349ee62fe3346f332a631d2acd5810672c",
+        "99ff99e0f7dd484e37d45e67cffae89006a5b8b562599e63804f5f3283e9f5f8"
       ],
-      "purpose": "Reviewed safety-pattern code and synthetic negative controls, not concrete owner evidence; exact bytes and tokens bound.",
-      "sha256": "2d475b48af878a91a4769358c30f1b7c2e147b3bb0018bdcfd5449bd9a6323d4"
+      "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
+      "sha256": "5ffa435922d6a0dab70a801353ffd268c80c3d93fd294178263c7a90ca01fb72"
     }
   },
   "rules": [
