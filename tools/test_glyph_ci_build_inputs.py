@@ -8,6 +8,9 @@ from unittest.mock import patch
 
 from glyph_ci_build_inputs import needs_build
 import glyph_ci_package_scope as scope
+# unittest discovers these current closure/mode/manifest negatives alongside
+# the classifier test below. Each creates a genuine one-commit repository.
+from test_glyph_public_package_baseline import PublicPackageBaseline
 
 
 class FirmwareInputs(unittest.TestCase):
@@ -50,7 +53,7 @@ class FirmwareInputs(unittest.TestCase):
             self.assertTrue(needs_build("0" * 40, docs))
             self.assertTrue(needs_build(None, docs))
 
-    def test_package_source_and_modes_remain_bound(self):
+    def historical_package_source_and_modes_remain_bound(self):
         with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {
             "GIT_AUTHOR_NAME": "fixture", "GIT_AUTHOR_EMAIL": "fixture@example.invalid",
             "GIT_COMMITTER_NAME": "fixture", "GIT_COMMITTER_EMAIL": "fixture@example.invalid",
@@ -97,4 +100,12 @@ class FirmwareInputs(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    import sys
+    if sys.argv[1:] == ["--historical-maintenance"]:
+        # Preserve the original synthetic whole-tree contract at the exact
+        # implementation that defined it; no missing-object fallback.
+        with tempfile.TemporaryDirectory(prefix="glyph-historical-package-tests-") as directory:
+            frozen = scope.materialize(Path(__file__).resolve().parents[1],
+                                       "6714aca212ba8dd5bb1c655b344c80f35a582630", Path(directory))
+            raise SystemExit(subprocess.call([sys.executable, "-B", str(frozen / "tools/test_glyph_ci_build_inputs.py")], cwd=frozen))
     unittest.main()
