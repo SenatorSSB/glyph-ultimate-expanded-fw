@@ -145,7 +145,7 @@ def validate_g2c(value: dict) -> None:
 
 
 def validate_g2c_receipt() -> None:
-    if hashlib.sha256(DISCOVERY.read_bytes()).hexdigest() != "0527e4bb66c63f4e518acb44c5fa0329be2a454b7de352427ef346b4f0e78510":
+    if hashlib.sha256(DISCOVERY.read_bytes()).hexdigest() != "15c4846e0182a671a0ad59d54b62b4ca250293848cbfb74c0e2df53ccf8e9c5d":
         fail("sealed G2C discovery receipt drifted")
     value = json.loads(DISCOVERY.read_text(encoding="utf-8"))
     validate_g2c(value)

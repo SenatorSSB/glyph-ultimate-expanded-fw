@@ -69,7 +69,9 @@ symbols including `__availability_version_check` and `_abort`. No target
 executable was produced; hash, size, type, and exact-byte comparison are
 therefore **NOT POSSIBLE**, rather than a mismatch or equivalence finding.
 This host/toolchain limitation does not prove the source cannot build elsewhere.
-Neither tracked nor source-built nuker was executed. The detailed classification
+Neither tracked nor source-built nuker was executed during these source-discovery
+probes. The separately authorized unchanged hosted firmware build may execute
+the tracked tool; that does not establish source correspondence. The detailed classification
 is `SOURCE_FOUND_BUILD_RECIPE_INCOMPLETE`; the stage disposition records that
 source was found but the binary was not reproduced.
 

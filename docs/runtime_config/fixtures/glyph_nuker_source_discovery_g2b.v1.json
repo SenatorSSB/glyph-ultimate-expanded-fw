@@ -128,7 +128,7 @@
       "live_github_requires_network_enabled": true
     },
     "nonclaims": [
-      "No reverse engineering or execution of tracked/built nuker occurred. Zig compiler/build runner execution is only a bounded build attempt.",
+      "No reverse engineering occurred. Source-discovery probes did not execute tracked or built nuker; only the separately authorized unchanged canonical hosted firmware build may invoke the tracked executable. Zig compiler/build runner execution belongs to the bounded source build attempt.",
       "No firmware/controller source, build workflow, executable, invocation, ordering or retained firmware artifact changed.",
       "No hardware acceptance transfers to any new artifact or changed executable. No device operation, public repository/release, or upstream contact occurred.",
       "Historical G2B and sealed August lineage receipts above/in the separate fixture remain historical; this follow-up supersedes only current discovery knowledge."
