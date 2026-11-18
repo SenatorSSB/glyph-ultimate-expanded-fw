@@ -2066,6 +2066,10 @@
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json": {
       "classification": "PUBLIC_INCLUDE",
       "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Owner-approved G2D reproduction receipt required by current offline lineage checker; license and public-export refusal remain unresolved."
     }
   },
   "forbidden_markers": [
@@ -2139,7 +2143,7 @@
   ],
   "notice_sha256": {
     "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
-    "THIRD_PARTY_NOTICES.md": "ec416ccc49962072cacc8a5036fc7d19b6479a5d6bf8dc17a59979512380af7a",
+    "THIRD_PARTY_NOTICES.md": "bacb2efc08ff288884cf6da893b02505123f8d7f5daf25bb278763d8fbf203f3",
     "config/glyph/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
     "lib/glyph-joybus-pio/LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
     "lib/glyph-joybus-pio/UPSTREAM.md": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6",

@@ -13,6 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DOC = ROOT / "docs/runtime_config/glyph_nuker_source_lineage.md"
 FIXTURE = ROOT / "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json"
 DISCOVERY = ROOT / "docs/runtime_config/fixtures/glyph_nuker_source_discovery_g2b.v1.json"
+REPRODUCTION = ROOT / "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json"
+G2D_RAW_SHA256 = "3ff7af9ab670029c8a3c8e8118349cfc44b3c80ac163528c31537bb35fccca73"
+G2D_SEMANTIC_SHA256 = "a76bc6670d85f5b7615be3158e4fee66c64072120be93063e9a70edc21563284"
 NUKER = ROOT / "glyph_nuker"
 EXPECTED_SHA256 = "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae"
 EXPECTED_BLOB = "d0524944a90503a8881281b6673b1f46e36f9383"
@@ -86,8 +89,7 @@ def validate_historical_repository_facts() -> None:
 
 def validate_current_receipt() -> None:
     # The packet seals a bounded historical search, never positive lineage.
-    if hashlib.sha256(FIXTURE.read_bytes()).hexdigest() != "292728ec8d9f78d2bb1a3dd5dc9cf52dc07a273af57a9e3561a2b8e4b44c4fe1":
-        fail("sealed source-search receipt drifted")
+    sealed_receipt(FIXTURE, "292728ec8d9f78d2bb1a3dd5dc9cf52dc07a273af57a9e3561a2b8e4b44c4fe1")
     workflow = (ROOT / ".github/workflows/build.yml").read_text()
     for command in ("mv glyph_nuker $PIO_ENV/glyph_nuker", "ls *.uf2 | xargs ./glyph_nuker"):
         if command not in workflow:
@@ -108,7 +110,7 @@ def validate_current_receipt() -> None:
             fail("omitted postprocessor lacks explicit public blocking contract")
 
 def validate_g2c(value: dict) -> None:
-    """Keep verified binary origin separate from unproven source clearance."""
+    """Validate G2C knowledge at its historical checkpoint, before G2D."""
     if value["binary"] != {"path": "glyph_nuker", "git_blob": EXPECTED_BLOB, "sha256": EXPECTED_SHA256} or any(v != "UNKNOWN" for v in value["claims"].values()):
         fail("G2B historical binary/unknown claims drifted")
     current = value["stage_g2c"]
@@ -145,8 +147,7 @@ def validate_g2c(value: dict) -> None:
 
 
 def validate_g2c_receipt() -> None:
-    if hashlib.sha256(DISCOVERY.read_bytes()).hexdigest() != "15c4846e0182a671a0ad59d54b62b4ca250293848cbfb74c0e2df53ccf8e9c5d":
-        fail("sealed G2C discovery receipt drifted")
+    sealed_receipt(DISCOVERY, "15c4846e0182a671a0ad59d54b62b4ca250293848cbfb74c0e2df53ccf8e9c5d")
     value = json.loads(DISCOVERY.read_text(encoding="utf-8"))
     validate_g2c(value)
     # Negative controls protect the distinction between a source candidate and
@@ -166,6 +167,98 @@ def validate_g2c_receipt() -> None:
             fail("unsupported G2C clearance accepted: " + field)
 
 
+def sealed_receipt(path: Path, expected: str) -> bytes:
+    if path.is_symlink() or not path.is_file():
+        fail("required regular receipt missing: " + path.name)
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != expected:
+        fail("sealed receipt drifted: " + path.name)
+    return raw
+
+
+def unique_pairs(items: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in items:
+        if key in result:
+            fail("duplicate G2D key: " + key)
+        result[key] = value
+    return result
+
+
+def validate_g2d(value: dict) -> None:
+    # This is a closed reviewed receipt, not admission of arbitrary new build
+    # results. The semantic seal protects every matrix hash/size, input identity,
+    # limitation, negative control and release field against unsupported edits.
+    semantic = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    if hashlib.sha256(semantic).hexdigest() != G2D_SEMANTIC_SHA256:
+        fail("G2D reviewed evidence/limitations/release status drifted")
+    if (value["schema"] != "glyph_nuker_source_reproduction_g2d.v1"
+            or value["stage_result"] != "SOURCE_REPRODUCED_LICENSE_UNRESOLVED"):
+        fail("G2D disposition drifted")
+    rows = value["matrix"]
+    revisions = {item["revision"] for item in value["source"]["revisions"]}
+    if (len(rows) != 8 or {(r["revision"], r["optimization"]) for r in rows}
+            != {(rev, opt) for rev in revisions for opt in
+                ("Debug", "ReleaseSafe", "ReleaseFast", "ReleaseSmall")}):
+        fail("G2D complete bounded matrix required")
+    for row in rows:
+        exact = (row["revision"] == value["build"]["matching_revision"]
+                 and row["optimization"] == "ReleaseSmall")
+        if (row["build_exit"] != 0 or row["python_exact_bytes_equal"] is not exact
+                or row["cmp_exit"] != (0 if exact else 1)
+                or row["outcome"] != ("EXACT" if exact else "DIFFERENT")
+                or (row["sha256"] == EXPECTED_SHA256) != exact):
+            fail("G2D unsupported exact-match claim")
+    output = value["matching_output"]
+    if output["git_blob"] != EXPECTED_BLOB or output["sha256"] != EXPECTED_SHA256 or output["size_bytes"] != 23336:
+        fail("G2D matching binary identity drifted")
+    release = value["release"]
+    if (release["source_license"] != "UNRESOLVED"
+            or release["executable_license"] != "UNRESOLVED"
+            or release["public_export"] != "BLOCKED"
+            or release["export_classification"] != "REVIEW_REQUIRED"
+            or release["export_blocker_status"] != "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED"
+            or release["release_inputs_cleared"] is not False):
+        fail("G2D license/export gate drifted")
+
+
+def validate_g2d_receipt() -> list[str]:
+    raw = sealed_receipt(REPRODUCTION, G2D_RAW_SHA256)
+    value = json.loads(raw, object_pairs_hook=unique_pairs)
+    validate_g2d(value)
+    # Each mutation is checked against the semantic validator rather than only
+    # the raw-file seal. No source compilation or executable execution occurs.
+    changes = [
+        ("incorrect_source_revision", ("build", "matching_revision"), "0" * 40),
+        ("incorrect_optimization", ("build", "matching_optimization"), "ReleaseFast"),
+        ("incorrect_binary_identity", ("matching_output", "sha256"), "0" * 64),
+        ("unsupported_exact_match", ("matrix", 0, "outcome"), "EXACT"),
+        ("fabricated_source_license", ("release", "source_license"), "GPLv3"),
+        ("fabricated_executable_license", ("release", "executable_license"), "GPLv3"),
+        ("unsupported_public_export", ("release", "public_export"), "CLEARED"),
+        ("changed_release_blocker", ("release", "export_blocker_status"), "RESOLVED"),
+        ("hardware_transfer", ("limitations", "hardware_qualification_transfer"), True),
+        ("historical_attestation", ("limitations", "historical_original_build_procedure"), "VERIFIED"),
+        ("missing_matrix_row", ("matrix",), value["matrix"][:-1]),
+        ("changed_output_size", ("matrix", 0, "size_bytes"), 23336),
+        ("negative_control_promotion", ("comparison", "negative_controls", 1, "python_exact_bytes_equal"), True),
+    ]
+    rejected = []
+    for label, path, replacement in changes:
+        tampered = copy.deepcopy(value)
+        parent = tampered
+        for key in path[:-1]:
+            parent = parent[key]
+        parent[path[-1]] = replacement
+        try:
+            validate_g2d(tampered)
+        except LineageError:
+            rejected.append(label)
+        else:
+            fail("unsupported G2D claim accepted: " + label)
+    return rejected
+
+
 def main() -> int:
     try:
         validate(load())
@@ -175,6 +268,7 @@ def main() -> int:
             fail("expected no arguments or --historical")
         validate_current_receipt()
         validate_g2c_receipt()
+        rejected = validate_g2d_receipt()
         if not DOC.is_file() or "BOUNDED_SOURCE_LINEAGE_NOT_FOUND" not in DOC.read_text(encoding="utf-8"):
             fail("lineage document missing bounded status")
         tampered = copy.deepcopy(load())
@@ -185,7 +279,8 @@ def main() -> int:
             pass
         else:
             fail("unsupported purpose claim accepted")
-        print("glyph_nuker_source_lineage: PASS; sealed historical/G2C receipts; binary origin exact; candidate source found; exact source/license UNKNOWN; GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED")
+        print("glyph_nuker_source_lineage: PASS; sealed historical/G2C receipts unchanged; G2D exact source-build correspondence; SOURCE_REPRODUCED_LICENSE_UNRESOLVED; PUBLIC_EXPORT BLOCKED; GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED")
+        print("G2D negative controls rejected: " + ", ".join(rejected))
         return 0
     except (OSError, subprocess.CalledProcessError, json.JSONDecodeError, KeyError, TypeError, LineageError) as exc:
         print(f"glyph_nuker_source_lineage: FAIL: {exc}")

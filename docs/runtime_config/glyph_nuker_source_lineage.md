@@ -1,6 +1,98 @@
 # `glyph_nuker` Source Lineage
 
-## Current G2C finding — 2026-11-18
+## Current G2D finding — 2026-11-18
+
+Stage result: `SOURCE_REPRODUCED_LICENSE_UNRESOLVED`.
+Engineering export gate: **`REVIEW_REQUIRED` / PUBLIC EXPORT BLOCKED**.
+
+The [G2D reproduction receipt](fixtures/glyph_nuker_source_reproduction_g2d.v1.json)
+supersedes G2C's earlier **current-state** conclusion about source-build
+correspondence. G2C and the sealed August/G2B evidence remain unchanged historical
+observations: the earlier macOS host-runner link failures produced no target
+executable and do not contradict the later Linux result.
+
+### Exact source-build correspondence
+
+Unmodified [GregTurbo/glyph-nuker root revision](https://github.com/GregTurbo/glyph-nuker/tree/b583d53ea71347f2721d40bf3b55933190bdc87a)
+`b583d53ea71347f2721d40bf3b55933190bdc87a`, built with verified official
+**Zig 0.15.2** in disposable Debian 12 amd64 Linux containers, reproduces the
+tracked executable byte-for-byte:
+
+```sh
+zig build -Dtarget=x86_64-linux -Doptimize=ReleaseSmall
+```
+
+The compiler log records **x86-64 baseline CPU**. There were no additional
+strip/libc/linker flags; the fixture records the full common output/cache/verbosity
+arguments. Linux x86-64 execution used architecture translation/emulation on a
+macOS arm64 host; the exact translation backend is unknown. Source archives were
+bound to pinned commit metadata by recomputing all Git blobs and recursive trees.
+The official Zig archive was checked against its saved official release index
+before extraction/execution. Their exact identities are in the receipt.
+
+Matching output: **23,336 bytes**, stripped statically linked x86-64 Linux ELF;
+SHA-256 `8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae`;
+tracked Git blob `d0524944a90503a8881281b6673b1f46e36f9383`, mode `100755`.
+Official binary origin remains the separately verified LimitLabs/FW-Glyph
+provenance recorded in G2C below.
+
+All eight bounded builds succeeded with fresh caches, each attempted once:
+
+| Immutable source revision | Debug (default) | ReleaseSafe | ReleaseFast | ReleaseSmall |
+| --- | --- | --- | --- | --- |
+| `b583d53ea71347f2721d40bf3b55933190bdc87a` | DIFFERENT | DIFFERENT | DIFFERENT | **EXACT** |
+| `5c544caa61fe378eb44be4edf74993b7841bf907` | DIFFERENT | DIFFERENT | DIFFERENT | DIFFERENT |
+
+Every output's size/hash and comparison results are recorded in the fixture.
+`cmp -s`, SHA-256 and Python direct byte equality agree. Synthetic identical-copy,
+modified-byte and truncated-file controls respectively accepted/rejected/rejected.
+A fresh G2D reviewer inspected the retained bytes, inputs, commands and raw logs
+and found no material contradiction; it did not rerun builds. G2E inspected that
+complete packet and rechecked identities, retained comparisons and controls.
+Detailed logs and original reports are preserved privately outside the repository
+and export tree; public report digests bind this summary to those records.
+
+G2D executed no nuker and processed no firmware. This conclusion rests on the
+recorded commands, inspected build graph and isolated mounts, without a
+kernel-level execution audit. Exact byte correspondence establishes reproducibility
+for this revision/configuration. It does **not** attest that the historical author
+used this precise command or environment; historical maintainer attestation is
+still absent. The seven different outputs establish only their bounded results.
+No replacement, execution-safety or hardware qualification is granted.
+
+### Licensing and public export remain unresolved
+
+Keep these evidence domains separate:
+
+1. **Binary origin:** verified official LimitLabs/FW-Glyph bytes (G2C).
+2. **Source-build correspondence:** exact byte-identical reproduction (G2D).
+3. **Historical original procedure:** not independently attested by the maintainer.
+4. **Licensing:** source, executable and intended Corresponding Source distribution
+   terms remain unresolved. Neither inspected GregTurbo source revision contains
+   an explicit license declaration. Official FW-Glyph's repository-wide GPLv3
+   statement does not establish its applicability to that separate source or
+   clear the executable's historical distribution terms.
+5. **Public export:** still blocked, with no release input cleared.
+
+The narrowed private **UNSENT** request asks the author/authorized maintainer for
+applicable licenses for the matching source and existing executable, permission
+and completeness requirements for distributing the source as Corresponding Source
+with firmware under the intended release arrangement, required notices/attribution,
+and a clear source-repository license declaration. Historical source/build
+confirmation is requested if available; another reproduction experiment is not
+required. No upstream contact is authorized or performed.
+
+`GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED` remains the release blocker. Normal export
+refuses `glyph_nuker`; diagnostic staging omits the executable and retains its
+workflow publication blocker. The owner-approved exact G2D receipt exception
+includes evidence only and grants no executable/source redistribution clearance.
+No firmware/build inputs, executable, workflow invocation or retained firmware
+artifact changed; no hardware acceptance transfers.
+
+## Historical G2C finding — 2026-11-18
+
+The following section records G2C knowledge at that time; its current-state
+conclusion is superseded by G2D above.
 
 Stage result: `SOURCE_FOUND_BINARY_NOT_REPRODUCED`.
 Engineering export gate: **`REVIEW_REQUIRED` / PUBLIC EXPORT BLOCKED**.

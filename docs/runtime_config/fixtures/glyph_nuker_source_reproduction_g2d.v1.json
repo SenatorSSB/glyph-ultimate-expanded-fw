@@ -1,0 +1,266 @@
+{
+  "schema": "glyph_nuker_source_reproduction_g2d.v1",
+  "observed_on": "2026-11-18",
+  "canonical_start": "dfe87f200408bee03db52627c7da58007b6b4f05",
+  "stage_result": "SOURCE_REPRODUCED_LICENSE_UNRESOLVED",
+  "binary_origin": {
+    "repository": "LimitLabs/FW-Glyph",
+    "revision": "9a78c7eeec87527b68644573e4c29fbdfb543239",
+    "evidence": "glyph_nuker_source_discovery_g2b.v1.json#stage_g2c.binary_provenance"
+  },
+  "source": {
+    "repository": "GregTurbo/glyph-nuker",
+    "revisions": [
+      {
+        "revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+        "git_tree": "7f91222014fcbf11b3420068832a56ba9e37958e",
+        "archive_sha256": "0490f02bfa0970d94ad07b99e1ea34ada7fa0f13ec8d2106c31196cb17306142",
+        "source_url": "https://codeload.github.com/GregTurbo/glyph-nuker/tar.gz/b583d53ea71347f2721d40bf3b55933190bdc87a",
+        "metadata_url": "https://api.github.com/repos/GregTurbo/glyph-nuker/git/commits/b583d53ea71347f2721d40bf3b55933190bdc87a"
+      },
+      {
+        "revision": "5c544caa61fe378eb44be4edf74993b7841bf907",
+        "git_tree": "c82caf4ddd4e656eb62c4fb41beeb8ae77bf7400",
+        "archive_sha256": "00a6d79cc71147d762c8a9bde1b5240453b3a3247ea9fd1357cd30af48243998",
+        "source_url": "https://codeload.github.com/GregTurbo/glyph-nuker/tar.gz/5c544caa61fe378eb44be4edf74993b7841bf907",
+        "metadata_url": "https://api.github.com/repos/GregTurbo/glyph-nuker/git/commits/5c544caa61fe378eb44be4edf74993b7841bf907"
+      }
+    ],
+    "input_verification": "Pinned HTTPS commit metadata and codeload archives; recomputed recursive Git trees and every file/blob identity; archive bytes equal extracted source.",
+    "paths": [
+      ".gitignore",
+      "build.zig",
+      "build.zig.zon",
+      "src/main.zig",
+      "src/root.zig"
+    ],
+    "source_modified": false,
+    "declared_dependencies": [],
+    "license_declaration_in_inspected_revisions": "ABSENT"
+  },
+  "toolchain": {
+    "version": "0.15.2",
+    "host": "x86_64-linux",
+    "archive_sha256": "02aa270f183da276e5b5920b1dac44a63f1a49e55050ebde3aecc9eb82f93239",
+    "size": 53733924,
+    "url": "https://ziglang.org/download/0.15.2/zig-x86_64-linux-0.15.2.tar.xz",
+    "checksum_source": "https://ziglang.org/download/index.json",
+    "verified_before_execution": true
+  },
+  "environment": {
+    "guest": "Debian GNU/Linux 12 (bookworm)",
+    "architecture": "amd64 / x86-64 Linux",
+    "kernel": "6.12.76-linuxkit",
+    "physical_host": "macOS arm64",
+    "execution": "linux/amd64 containers through architecture emulation/translation; exact backend UNKNOWN",
+    "base_image": "docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+    "inspection_image": "sha256:defc3161e58df99eca084944fbd88be6a004f89735b92bb2e503f8c572895c1a",
+    "inspection_tools": {
+      "file": "5.44",
+      "binutils": "2.40-2"
+    },
+    "isolation": "No network; read-only source/toolchain/root; separate output and initially empty local/global caches for each build."
+  },
+  "build": {
+    "entrypoint": "zig build",
+    "target": "x86_64-linux",
+    "cpu": "baseline",
+    "attempts_per_configuration": 1,
+    "matching_revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+    "matching_optimization": "ReleaseSmall",
+    "matching_command": "zig build -Dtarget=x86_64-linux -Doptimize=ReleaseSmall",
+    "common_argv": [
+      "/zig/zig",
+      "build",
+      "-Dtarget=x86_64-linux"
+    ],
+    "optimization_argument": "Debug omits optimization flag (source default); other modes add -Doptimize=<mode>.",
+    "common_suffix_argv": [
+      "--prefix",
+      "/out/install",
+      "--cache-dir",
+      "/out/cache",
+      "--global-cache-dir",
+      "/out/global-cache",
+      "--verbose",
+      "-j2"
+    ],
+    "wrapper_timeout_seconds": 240,
+    "additional_strip_libc_linker_flags": [],
+    "order": "Debug for both revisions, then ReleaseSafe/ReleaseFast/ReleaseSmall for root, then later revision."
+  },
+  "matrix": [
+    {
+      "revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+      "optimization": "Debug",
+      "source_default_optimization": true,
+      "build_exit": 0,
+      "outcome": "DIFFERENT",
+      "size_bytes": 7583650,
+      "sha256": "2db3b5aee4cd1c9b63d6516e255373579fac7a1e936dd58439cbb112e97a598e",
+      "cmp_exit": 1,
+      "python_exact_bytes_equal": false
+    },
+    {
+      "revision": "5c544caa61fe378eb44be4edf74993b7841bf907",
+      "optimization": "Debug",
+      "source_default_optimization": true,
+      "build_exit": 0,
+      "outcome": "DIFFERENT",
+      "size_bytes": 7583650,
+      "sha256": "cd0123ac052decace61f1f5cc77e87acd2a80854d04f6402c644e31ba25a9d18",
+      "cmp_exit": 1,
+      "python_exact_bytes_equal": false
+    },
+    {
+      "revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+      "optimization": "ReleaseSafe",
+      "source_default_optimization": false,
+      "build_exit": 0,
+      "outcome": "DIFFERENT",
+      "size_bytes": 2264680,
+      "sha256": "51fd343029d0b7295dc24f7220d2063eba49fd01232e23c5bee5badf56a9d1fe",
+      "cmp_exit": 1,
+      "python_exact_bytes_equal": false
+    },
+    {
+      "revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+      "optimization": "ReleaseFast",
+      "source_default_optimization": false,
+      "build_exit": 0,
+      "outcome": "DIFFERENT",
+      "size_bytes": 991864,
+      "sha256": "8a01243b142b6b31c6849b8ef470d7bc7e1aee7959487d1b3dada508853978e6",
+      "cmp_exit": 1,
+      "python_exact_bytes_equal": false
+    },
+    {
+      "revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+      "optimization": "ReleaseSmall",
+      "source_default_optimization": false,
+      "build_exit": 0,
+      "outcome": "EXACT",
+      "size_bytes": 23336,
+      "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+      "cmp_exit": 0,
+      "python_exact_bytes_equal": true
+    },
+    {
+      "revision": "5c544caa61fe378eb44be4edf74993b7841bf907",
+      "optimization": "ReleaseSafe",
+      "source_default_optimization": false,
+      "build_exit": 0,
+      "outcome": "DIFFERENT",
+      "size_bytes": 2264696,
+      "sha256": "5c0ff9d848a33a57afa3816517f2e77354a1b77cddb19b7c3b00cc6114afdd75",
+      "cmp_exit": 1,
+      "python_exact_bytes_equal": false
+    },
+    {
+      "revision": "5c544caa61fe378eb44be4edf74993b7841bf907",
+      "optimization": "ReleaseFast",
+      "source_default_optimization": false,
+      "build_exit": 0,
+      "outcome": "DIFFERENT",
+      "size_bytes": 991856,
+      "sha256": "befe9e18231e5715eb0bd20d6d31dafe21b568cf250421b96c2d4a9c2764a675",
+      "cmp_exit": 1,
+      "python_exact_bytes_equal": false
+    },
+    {
+      "revision": "5c544caa61fe378eb44be4edf74993b7841bf907",
+      "optimization": "ReleaseSmall",
+      "source_default_optimization": false,
+      "build_exit": 0,
+      "outcome": "DIFFERENT",
+      "size_bytes": 23336,
+      "sha256": "b081b92d77b19f53f0afad7e20b47010760b159de8521aaf343580851f49ee79",
+      "cmp_exit": 1,
+      "python_exact_bytes_equal": false
+    }
+  ],
+  "matching_output": {
+    "path": "glyph_nuker",
+    "git_mode": "100755",
+    "git_blob": "d0524944a90503a8881281b6673b1f46e36f9383",
+    "size_bytes": 23336,
+    "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+    "format": "stripped, statically linked ELF64 little-endian x86-64 Linux executable"
+  },
+  "comparison": {
+    "methods": [
+      "cmp -s",
+      "SHA-256",
+      "Python direct bytes equality"
+    ],
+    "agreement": "All eight outputs agree across methods; one exact, seven different.",
+    "negative_controls": [
+      {
+        "case": "identical_1024_bytes",
+        "size_bytes": 1024,
+        "sha256": "785b0751fc2c53dc14a4ce3d800e69ef9ce1009eb327ccf458afe09c242c26c9",
+        "cmp_exit": 0,
+        "python_exact_bytes_equal": true
+      },
+      {
+        "case": "one_byte_changed",
+        "size_bytes": 1024,
+        "sha256": "e4f50f4666467386ba5a5d2c539d4438d8a9440dfa1e60b6514be047c6ac898f",
+        "cmp_exit": 1,
+        "python_exact_bytes_equal": false
+      },
+      {
+        "case": "truncated_to_1023_bytes",
+        "size_bytes": 1023,
+        "sha256": "84d353b0e5a01f3e12370cd86b340c1fa07fd8a91490d67eb06b91206df54bc4",
+        "cmp_exit": 1,
+        "python_exact_bytes_equal": false
+      }
+    ]
+  },
+  "independent_review": {
+    "result": "PASS_NO_MATERIAL_CONTRADICTION",
+    "evidence": "independent-review.json",
+    "scope": "All eight retained outputs, commands/logs, source/archive/tree/blob and Zig identities, synthetic controls, canonical copies and 1534 tracked baseline files.",
+    "limitations": [
+      "No build rerun; original execution chronology supported by scripts/logs, not independently witnessed.",
+      "No kernel-level execution audit; no-nuker-execution evidence is invoked commands, inspected build graph and isolated mounts.",
+      "Baseline lacks untracked-file byte hashes; unchanged untracked contents cannot be independently established.",
+      "Requested reviewer model/effort is not independently observed telemetry."
+    ]
+  },
+  "evidence": {
+    "custody": "Complete raw packet preserved in owner-private durable storage outside the public repository/export tree; private paths and raw logs intentionally omitted.",
+    "original_packet_sha256": {
+      "REPORT.txt": "0e83e458c79de388b642aac4c3c1e88944b312cd61f9fbb7e10b50fb88746774",
+      "matrix.json": "ba8b41530c00526821271d85bad05fb9269702e2d92880f352aa69603beee268",
+      "input-provenance.json": "c57847958d6c92beb1b2935ce4462025a3d56d4d7983f9cf6fbeff3e9adadc40",
+      "independent-review.json": "1fa585838494008688d7e1460087d8c48303315f0824c851c65ee35b8e20740d",
+      "preservation.json": "9a0a2eb7461f048e305b61cd18966ac96ded0a252a16728a34cde4ac96de2fa5",
+      "negative-controls.json": "230f5e59fe1c6b42b0eb541097101bd7d524708b31e1a0bb5c2d1dd3075e07ce",
+      "EVIDENCE_SHA256SUMS": "29038352573e9cf9f044b44f71c8847d58ca7c049f9c100a577b74b719bdc34c"
+    },
+    "g2e_verification": "Retained bytes and all command/result/build/inspection logs inspected; source archives/trees/blobs, Zig archive/index, negative controls and report consistency checked; no builds rerun."
+  },
+  "limitations": {
+    "historical_original_build_procedure": "NOT_INDEPENDENTLY_ATTESTED_BY_MAINTAINER",
+    "other_configurations": "Seven mismatches concern only these tested recipes; no universal mismatch claim.",
+    "g2c": "Earlier macOS host-runner link failures and UNKNOWN claims remain sealed historical evidence; current source-build correspondence supersedes that current-state conclusion.",
+    "nuker_executables_executed_by_g2d": false,
+    "firmware_processed_by_g2d": false,
+    "hardware_qualification_transfer": false,
+    "external_source_copied_into_public_tree": false,
+    "replacement_or_behavior_clearance": false
+  },
+  "release": {
+    "source_license": "UNRESOLVED",
+    "executable_license": "UNRESOLVED",
+    "corresponding_source_distribution_permission": "UNRESOLVED",
+    "official_firmware_repository_license_context": "GPLv3; does not establish separate source/executable licensing applicability.",
+    "export_classification": "REVIEW_REQUIRED",
+    "public_export": "BLOCKED",
+    "export_blocker_status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+    "release_inputs_cleared": false,
+    "upstream_contact": "UNSENT"
+  }
+}
