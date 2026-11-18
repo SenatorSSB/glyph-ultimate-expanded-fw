@@ -4009,12 +4009,6 @@
       "required_arguments": [],
       "mutation_risk": "temporary_repository_only",
       "source_dependencies": [
-        "docs/agent_framework/GP_VAL_041_FINITE_SCOPE_CURATOR_20261004.md",
-        "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
-        "docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json",
-        "docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json",
-        "docs/agent_framework/curation_receipts/gp_val041_finite_scope_20261004.json",
-        "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/fixtures/gp_val037_accepted_transitions.json",
         "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
@@ -4050,10 +4044,6 @@
       "required_arguments": [],
       "mutation_risk": "temporary_repository_only",
       "source_dependencies": [
-        "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
-        "docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json",
-        "docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json",
-        "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/fixtures/gp_val037_accepted_transitions.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",

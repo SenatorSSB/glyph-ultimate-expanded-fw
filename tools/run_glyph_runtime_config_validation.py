@@ -303,6 +303,13 @@ def direct_local_helpers(checker_path: str) -> set[str]:
     return found
 
 
+def is_legacy_internal_workflow_dependency(path: str) -> bool:
+    return (
+        path.startswith("docs/agent_framework/")
+        or path == "docs/project/ACTIVE_AGENT_QUEUE.md"
+    )
+
+
 def validate_dependencies(entry: dict[str, object]) -> None:
     dependencies = entry["source_dependencies"]
     if not isinstance(dependencies, list) or not all(isinstance(path, str) for path in dependencies):
@@ -316,6 +323,8 @@ def validate_dependencies(entry: dict[str, object]) -> None:
             raise ValueError(f"legacy current policy dependency: {entry['id']}: {path}")
         if entry["applicability"] == "current" and path in LEGACY_CURRENT_AUTHORITY_DEPENDENCIES:
             raise ValueError(f"legacy current authority dependency: {entry['id']}: {path}")
+        if entry["applicability"] == "current" and is_legacy_internal_workflow_dependency(path):
+            raise ValueError(f"legacy current internal workflow dependency: {entry['id']}: {path}")
         if path == entry["path"]:
             raise ValueError(f"checker path repeated as source dependency: {entry['id']}")
         if not tracked_regular_stage_zero(path):

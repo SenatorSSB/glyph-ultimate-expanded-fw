@@ -582,7 +582,7 @@ def topology_catalog_cases(module: Any) -> list[str]:
 
 
 def current_policy_dependency_cases(module: Any) -> list[str]:
-    """Public policy ownership is narrow; retained evidence stays admissible."""
+    """Current dependencies exclude personal workflow; historical evidence remains admissible."""
     actual_root = RUNNER_PATH.resolve().parents[1]
     relative = "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
     actual = json.loads((actual_root / relative).read_text())
@@ -611,6 +611,13 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
     retained = (
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
+        "docs/agent_framework/GP_VAL_041_FINITE_SCOPE_CURATOR_20261004.md",
+        "docs/agent_framework/other.md",
+    )
+    allowed_current = (
+        "docs/evidence/HARDWARE_EVIDENCE.md",
+        "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
+        "docs/DEVELOPMENT.md",
     )
     legacy_authority = ("docs/agent_framework/USER_DIRECTION.md",)
     for row in current:
@@ -636,8 +643,44 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
     if hardware["source_dependencies"][2:4] != list(legacy_hardware):
         raise AssertionError("F5 unexpected starting hardware dependencies")
     hardware["source_dependencies"][2:4] = ["docs/evidence/HARDWARE_EVIDENCE.md"]
-    if actual != expected:
+    f5 = json.loads(subprocess.check_output([
+        "git", "show", "f5ffb297bf74d5f41cca206d20dfa794139bea74:" + relative,
+    ], cwd=actual_root))
+    if f5 != expected:
         raise AssertionError("F5 manifest changed beyond hardware dependency migration")
+    expected = json.loads(json.dumps(f5))
+    removals = {
+        "checker_context": (
+            "docs/agent_framework/GP_VAL_041_FINITE_SCOPE_CURATOR_20261004.md",
+            "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
+            "docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json",
+            "docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json",
+            "docs/agent_framework/curation_receipts/gp_val041_finite_scope_20261004.json",
+            "docs/project/ACTIVE_AGENT_QUEUE.md",
+        ),
+        "validation_aggregate_adversarial": (
+            "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
+            "docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json",
+            "docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json",
+            "docs/project/ACTIVE_AGENT_QUEUE.md",
+        ),
+    }
+    for row in expected["entries"]:
+        if row["id"] in removals:
+            paths = removals[row["id"]]
+            if any(row["source_dependencies"].count(path) != 1 for path in paths):
+                raise AssertionError("F6 unexpected starting dependencies: " + row["id"])
+            row["source_dependencies"] = [path for path in row["source_dependencies"] if path not in paths]
+    if actual != expected:
+        raise AssertionError("F6 manifest changed beyond exact 6+4 dependency removal")
+    c023 = lambda manifest: next(row for row in manifest["entries"]
+                               if row["id"] == "gp_config023_usb_index_validation")
+    if c023(actual) != c023(f5):
+        raise AssertionError("F6 changed the C023 entry/dependencies")
+    for row in current:
+        for path in row["source_dependencies"]:
+            if path.startswith("docs/agent_framework/") or path == "docs/project/ACTIVE_AGENT_QUEUE.md":
+                raise AssertionError(f"current internal workflow dependency: {row['id']}: {path}")
     if hardware["applicability"] != "current" or hardware["load_bearing"] is not True:
         raise AssertionError("F5 custody must remain current/load-bearing")
     for row in current:
@@ -649,7 +692,7 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
     with tempfile.TemporaryDirectory(prefix="glyph-current-policy-dependencies-") as directory:
         root = fresh_root(Path(directory))
         module.ROOT = root
-        for path in (*legacy, *legacy_authority, *legacy_hardware, *retained):
+        for path in (*legacy, *legacy_authority, *legacy_hardware, *retained, *allowed_current):
             target = root / path
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text("retained synthetic evidence\n", encoding="utf-8")
@@ -671,23 +714,33 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
             manifest = write_manifest(root, [probe], ["baseline"])
             assert_manifest_failure(module, root, manifest,
                                     f"legacy current hardware contract dependency: {probe['id']}: {path}")
+        for path in retained:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current internal workflow dependency: {probe['id']}: {path}")
         historical = entry("historical_policy_probe", applicability="historical_only",
                            historical=True, load_bearing=False)
         historical["branch_policy"] = "named_evidence_branch"
-        historical["source_dependencies"] = list((*legacy, *legacy_authority, *legacy_hardware))
+        historical["source_dependencies"] = list((*legacy, *legacy_authority, *legacy_hardware, *retained))
         write_checker(root, historical, 9)
-        probe["source_dependencies"] = list(retained)
-        manifest = write_manifest(root, [probe, historical], ["baseline"])
-        code, text = invoke(module, root, manifest, "--check-manifest")
-        if code or "glyph_runtime_config_validation_manifest: PASS; entries=2;" not in text:
-            raise AssertionError("retained current contracts or historical policy rejected: " + text)
-    return ["F5-current-hardware-legacy-rejected-with-identity-historical-allowed",
+        for path in allowed_current:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe, historical], ["baseline"])
+            code, text = invoke(module, root, manifest, "--check-manifest")
+            if code or "glyph_runtime_config_validation_manifest: PASS; entries=2;" not in text:
+                raise AssertionError("current public contract or historical workflow rejected: " + text)
+    return ["F6-exact-F5-manifest-delta-only-6-plus-4-removals-C023-unchanged",
+            "F6-current-manifest-personal-orchestration-dependencies-zero",
+            "F6-current-internal-workflow-rejected-with-checker-and-path",
+            "F6-historical-workflow-and-current-public-contracts-allowed",
+            "F5-current-hardware-legacy-rejected-with-identity-historical-allowed",
             "F5-only-custody-dependencies-migrated-23-classifications-unchanged",
             "F3-current-manifest-no-legacy-policy-dependencies",
             "F3-current-workflow-and-agent-context-rejected-with-identity",
-            "F3-historical-policy-and-current-hardware-queue-receipts-allowed",
+            "F3-historical-policy-and-current-public-contracts-allowed",
             "F4-current-no-legacy-authority-dependency-rejected-with-identity",
-            "F4-historical-authority-and-current-hardware-queue-receipts-allowed",
+            "F4-historical-authority-and-current-public-contracts-allowed",
             "F4-only-source-authority-dependencies-migrated-current-load-bearing",
             "F3-all-23-current-classifications-and-all-commands-unchanged"]
 
@@ -730,8 +783,11 @@ def orchestration_retirement_cases(module: Any) -> list[str]:
                     raise AssertionError("current authenticated package replay roots changed")
             if authenticated.call_count != 2 or any(call.args[0] != actual_root for call in authenticated.call_args_list):
                 raise AssertionError("current package replay did not authenticate its exact source")
-            if module.required_catalog([by_id["checker_context"], *retired]) != ({}, set()):
-                raise AssertionError("current package context acquired campaign/orchestration roots")
+            for selected in ([by_id["checker_context"]], [by_id["checker_context"], *retired]):
+                if module.required_catalog(selected) != ({}, set()):
+                    raise AssertionError("current package context acquired campaign/orchestration roots")
+            if authenticated.call_count != 2:
+                raise AssertionError("current package context invoked C023 authentication")
             authenticated.side_effect = ValueError("package replay authority unavailable")
             try:
                 module.required_catalog([by_id["gp_config023_usb_index_validation"], *retired])
@@ -1173,7 +1229,8 @@ def gp_val037_current_argument_cases(module: Any) -> list[str]:
     """Exercise the actual load/preflight and argv path in disposable repositories.
 
     The inert dispatch fixture mocks only campaign authority/catalog selection;
-    it is a runner compatibility proof, never a real guard/source phase PASS.
+    it is runner schema/argv compatibility proof, never a real current campaign/
+    source-authority PASS. Canonical queue/curation bytes are not fixture inputs.
     """
     from copy import deepcopy
     import glyph_campaign_transition as campaign
