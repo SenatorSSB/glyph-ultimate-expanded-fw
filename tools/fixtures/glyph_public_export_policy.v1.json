@@ -2349,7 +2349,7 @@
         "a7e949b9328317dd320a56cae822118ffc1341d535e30dfb7948b455a7e25693"
       ],
       "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
-      "sha256": "f7a1c0fff953c0a0d6f863464cfc097016468dd27ba48513dc1361434570636f"
+      "sha256": "ea167911c0fb1985757444ff5c9a44105f71bd57e1c1167964525966e42c893c"
     },
     "tools/test_glyph_config_010_semantic_applicability.py": {
       "match_sha256": [
