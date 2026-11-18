@@ -1942,6 +1942,34 @@
     "tools/fixtures/profile_store_rx_host/physical-update.pb": {
       "classification": "PRIVATE_ARCHIVE_ONLY",
       "purpose": "Historical device capture; no current public necessity established."
+    },
+    "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
+    },
+    "docs/runtime_config/fixtures/source_owned_x1_pre_f4_semantic_reference.v1.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
+    },
+    "docs/runtime_config/fixtures/public_package_baseline.v1.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
+    },
+    "docs/runtime_config/fixtures/gp_config023_usb_index_public_current.v1.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
+    },
+    "docs/runtime_config/fixtures/glyph_nuker_source_discovery_g2b.v1.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
+    },
+    "docs/runtime_config/gp_config023_usb_index_public_current.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
+    },
+    "docs/runtime_config/public_current_receipts.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
     }
   },
   "forbidden_markers": [
@@ -2107,7 +2135,7 @@
         "f8d43d5220f9321b2a939639de7bfd766adbc61ed9970d3eb278cfd5ae7863a3"
       ],
       "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
-      "sha256": "e988926a99d88a1d1ba4b924e7780d7c77f19711c0b856681e8a63b57f9753be"
+      "sha256": "863559fc4f47a17dc7fb1eb59b4164b25ff4e91387a0df7d9f7b27153cf00ab3"
     },
     "tools/check_glyph_docs_navigation.py": {
       "match_sha256": [
@@ -2165,7 +2193,7 @@
         "e68b161548121ea821208a4fc59ba82f10cd638b27143043d9db1fa9b8f27d6d"
       ],
       "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
-      "sha256": "5daf0828dfaffb5b0ff0baf8255ea3476335d4ca589ff9d6447cb28159a79b91"
+      "sha256": "883ed8a2a6c730eddc579e071f6f1c38a3772d7b933124001bb83ef179f9e257"
     },
     "tools/check_glyph_source_owned_candidate_generation.py": {
       "match_sha256": [
@@ -2259,14 +2287,14 @@
         "8f4d19830b757c45446ef3e6cae47abe961166fe349fa8039be6b2a8c8f3a51d"
       ],
       "purpose": "Reviewed privacy-recognizer code or explicit synthetic forbidden-device-write negative controls; exact source and token fingerprints.",
-      "sha256": "c35fa472bd6375eb7ab2399c7a11ebe6df921febdf74c5ead8a2d414ced464eb"
+      "sha256": "9a5875df9cfa188f75fbc64747436a4fbefc37f72f5d8ed92292aab23ee2fe90"
     },
     "tools/glyph_public_export.py": {
       "match_sha256": [
         "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
       ],
       "purpose": "Reviewed privacy-recognizer code or explicit synthetic forbidden-device-write negative controls; exact source and token fingerprints.",
-      "sha256": "e87c02deef09b191acbce618be9d088a3c92958290f5920bf786213360ea8f30"
+      "sha256": "8621338165f890252df7ddc97b1eacafe5cc4b15c1584d99b8b1bb00607338b7"
     },
     "tools/glyph_tracked_worktree_integrity.py": {
       "match_sha256": [
@@ -2360,7 +2388,7 @@
         "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
       ],
       "purpose": "Reviewed safety-pattern code and synthetic negative controls, not concrete owner evidence; exact bytes and tokens bound.",
-      "sha256": "19d233df3f76681b203a163436491a2374b1f4e48ca9548b8f1f06f29b17af64"
+      "sha256": "c2a020759601346416c352f8c3975952f4136ad1398e90850823f560ca46ba75"
     },
     "tools/test_glyph_documentation_audit.py": {
       "match_sha256": [
@@ -2403,7 +2431,7 @@
         "99ff99e0f7dd484e37d45e67cffae89006a5b8b562599e63804f5f3283e9f5f8"
       ],
       "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
-      "sha256": "e015ab798ef04a52704eab082f2f2c26adf687de501390a54f3f0fdc80928c99"
+      "sha256": "350b964bab581fcfd92056f504ce6c68a3306389e63d00a142196b340e4a5d83"
     }
   },
   "rules": [

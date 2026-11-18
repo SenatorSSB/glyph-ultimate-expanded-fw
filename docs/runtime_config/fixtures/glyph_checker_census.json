@@ -1095,7 +1095,7 @@
       },
       "checker_id": "build_input_resolution_observations",
       "defines_main": false,
-      "file_size_bytes": 11139,
+      "file_size_bytes": 11196,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence_locator"
@@ -1120,13 +1120,14 @@
         "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json",
         "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
         "docs/runtime_config/fixtures/build_input_resolution_observations.json",
-        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "tools/check_glyph_build_input_provenance_inventory.py"
       ],
       "runtime_config_relevance_signals": [
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "4a77365178500ecf9a1b03858eb20ed45ccad1317096c5701c2657f3f12734db",
+      "sha256": "dedc885780ac3a7fa49dd2a406e50b9c8ab51ec9525a440668f650786cf4d097",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

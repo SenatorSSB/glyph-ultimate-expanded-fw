@@ -147,7 +147,7 @@ def check() -> None:
             fail(f"unknown result: {actual['selector_id']}")
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     entry = next((item for item in manifest["entries"] if item["id"] == "build_input_resolution_observations"), None)
-    if entry is None or entry["source_dependencies"] != [str(INVENTORY.relative_to(ROOT)), WORKFLOW, META, "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json"]:
+    if entry is None or entry["source_dependencies"] != [str(INVENTORY.relative_to(ROOT)), WORKFLOW, META, "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json", "tools/check_glyph_build_input_provenance_inventory.py"]:
         fail("manifest direct dependencies are not exact")
     print(f"glyph_build_input_resolution_observations: PASS; records={len(records)}; direct={len(records)-2}; derived=2; base={BASE}")
 

@@ -3929,7 +3929,8 @@
         "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
         ".github/workflows/build-device-config.yml",
         "config/glyph/meta.yaml",
-        "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json"
+        "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json",
+        "tools/check_glyph_build_input_provenance_inventory.py"
       ],
       "load_bearing": true,
       "historical": false,

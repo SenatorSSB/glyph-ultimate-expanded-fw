@@ -1652,8 +1652,8 @@
     }
   ],
   "manifest_path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
-  "manifest_entries_semantic_digest": "1882d7c64cc1129d7fa92216a4fc8a7e057e62dc51b4ff48865609be086a519e",
-  "manifest_semantic_digest": "0396a6710516ce3ba0e82b3a0f2c943c29ea203ec69879deb87c13dc5c2a3b22",
+  "manifest_entries_semantic_digest": "ae2cb4b5379b7c31db8e2d752fc6df2a104802fb3b2f4ce98121e48dd306f3f2",
+  "manifest_semantic_digest": "b40d4eb8fac80adbe6b14839221c0f1a8bfd3e720b5fafb41caca916189aeff9",
   "historical_checker_classification": [
     "tools/check_glyph_c021_proof_replay.py",
     "tools/check_glyph_config_menu_invalid_state_characterization.py",
@@ -1702,5 +1702,14 @@
     "No requirement for provenance commit objects in a public repository.",
     "No firmware semantics, protocol, schema or persistent format changes."
   ],
-  "receipt_semantic_digest": "af47a2e22a8006e40b0e71de8376af16e88e0709f6d96ef4b9124667e5e5ff74"
+  "flashing_guard_existing_declarations": [
+    {
+      "path": "config/glyph/env.ini",
+      "sha256": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36",
+      "reasons": [
+        "flashing command or upload configuration"
+      ]
+    }
+  ],
+  "receipt_semantic_digest": "84f1c73ff5872ef67a5796e33331d06d57055e78e0b6cb796865a5696079cc19"
 }

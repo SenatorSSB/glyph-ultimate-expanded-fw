@@ -366,6 +366,8 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
 def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     value = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=pairs)
     version = value.get("schema_version")
+    if (ROOT / package_scope.PUBLIC_BASELINE).exists() and version != 5:
+        raise ValueError("sealed public current package requires manifest schema 5")
     if version not in (4, 5) or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list) or not isinstance(value.get("strong_signal_exclusions"), list):
         raise ValueError("invalid manifest root")
     categories = set(value["categories"])
@@ -858,7 +860,19 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         ("build_input_resolution_observations", "check_glyph_build_input_resolution_observations.py", ("8c04262c66613d46b933b1b739c01c575cb0c580", "ffc007552abc848051841362b0b0ac4c1a7d087b")),
         ("nuker_source_lineage", "check_glyph_nuker_source_lineage.py", ("a747dd54b02b207483142331d8b5be1113fc951e", "d5050847d3f850951b3f47865dc8a91aedea0834")),
     ):
-        if has(checker_id, filename): roots.update(identities)
+        if has(checker_id, filename):
+            if package_scope.package_lineage(ROOT):
+                # These two exact current commands now authenticate sealed
+                # receipts instead of replaying historical Git observations.
+                # Require their exact checked-in manifest records, not object
+                # absence, before using the history-independent current proof.
+                current_entries = json.loads((ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())["entries"]
+                package_scope.verify_manifest_coverage(ROOT, current_entries)
+                expected = next(row for row in current_entries if row["id"] == checker_id)
+                if any(row != expected for row in selected if row["id"] == checker_id):
+                    raise ValueError("invalid sealed current receipt command: " + checker_id)
+            else:
+                roots.update(identities)
     if any(entry["id"] == "gp_config_010_integration_semantic_correspondence"
            and entry["command"] == GP_CONFIG_010_SEMANTIC_COMMAND for entry in selected):
         roots.add(GP_CONFIG_010_HISTORICAL_CANDIDATE)

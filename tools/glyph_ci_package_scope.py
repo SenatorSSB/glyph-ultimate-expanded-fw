@@ -18,7 +18,7 @@ MAINTENANCE_BRANCH = "codex/ci-productization-20261113"
 
 PUBLIC_BASELINE = "docs/runtime_config/fixtures/public_package_baseline.v1.json"
 # Reviewed extraction digest; updated only with a reviewed contract migration.
-PUBLIC_BASELINE_SHA256 = "40cdd41c37e154c187fc1f7e3225badf15c60f0a4c5fd537cbd5c02dc45a550a"
+PUBLIC_BASELINE_SHA256 = "9f6418aa70e4d20a08a7f2464f4aa99716afc2c27e7ae06b4106ed681fec61e9"
 PROTECTED_PREFIXES = ("HAL/", "include/", "src/", "config/", "schema/", "lib/", "builder_scripts/", "scripts/")
 PROTECTED_FILES = ("platformio.ini",)
 
@@ -61,7 +61,7 @@ def public_contract(root):
         if name.startswith(PROTECTED_PREFIXES) or name in PROTECTED_FILES:
             if stage != "0" or name in indexed:
                 raise ValueError("unmerged/duplicate protected source: " + name)
-            indexed[name] = mode
+            indexed[name] = (mode, oid)
     disk = set()
     for prefix in PROTECTED_PREFIXES:
         base = root / prefix
@@ -79,12 +79,19 @@ def public_contract(root):
             raise ValueError("symlink protected input: " + name)
         mode = "100755" if source.stat().st_mode & 0o111 else "100644"
         if (not stat.S_ISREG(source.stat().st_mode) or mode != record["git_mode"]
-                or indexed[name] != mode or hashlib.sha256(source.read_bytes()).hexdigest() != record["sha256"]):
+                or indexed[name][0] != mode or hashlib.sha256(source.read_bytes()).hexdigest() != record["sha256"]
+                or indexed[name][1] != hashlib.sha1(b"blob " + str(len(source.read_bytes())).encode() + b"\0" + source.read_bytes()).hexdigest()):
             raise ValueError("protected current source mismatch: " + name)
     sealed = dict(value)
     recorded = sealed.pop("receipt_semantic_digest")
     if semantic_digest(sealed) != recorded:
         raise ValueError("public receipt semantic digest mismatch")
+    manifest = root / value["manifest_path"]
+    if manifest.is_symlink() or not manifest.is_file():
+        raise ValueError("required current manifest missing/nonregular")
+    document = json.loads(manifest.read_text(), object_pairs_hook=_pairs)
+    if document.get("schema_version") != 5 or semantic_digest(document) != value["manifest_semantic_digest"]:
+        raise ValueError("sealed current manifest schema/semantic identity drift")
     return value
 
 
