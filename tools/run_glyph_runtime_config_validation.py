@@ -226,6 +226,17 @@ def c022_replay_arguments(entry: dict[str, object]) -> bool:
 
 def c023_replay_arguments(entry: dict[str, object]) -> bool:
     """Only the exact GP-VAL-042 replay command binds the C023 source proof."""
+    current = 'tools/check_glyph_gp_config023_usb_index_public_current.py'
+    if entry['path'] == current:
+        expected = {'id': 'gp_config023_usb_index_validation', 'path': current,
+                    'command': ['python3', current], 'category': 'candidate_safety',
+                    'applicability': 'current', 'branch_policy': 'content_only',
+                    'required_arguments': [], 'mutation_risk': 'temporary_file_only',
+                    'load_bearing': True, 'historical': False}
+        if any(entry.get(key) != value for key, value in expected.items()):
+            raise ValueError('invalid exact public C023 current contract')
+        package_scope.public_contract(ROOT)
+        return False
     path = 'tools/check_glyph_c023_proof_replay.py'
     if entry['path'] != path and entry['id'] != 'gp_config023_usb_index_validation':
         return False
@@ -360,6 +371,9 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
     categories = set(value["categories"])
     ids: set[str] = set()
     entries: list[dict[str, object]] = []
+    current_package = version == 5
+    if current_package:
+        package_scope.public_contract(ROOT)
     for entry in value["entries"]:
         if not isinstance(entry, dict) or set(entry) != REQUIRED:
             raise ValueError(f"invalid checker entry: {entry!r}")
@@ -374,7 +388,11 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
         if not isinstance(entry["command"], list) or not all(isinstance(part, str) for part in entry["command"]):
             raise ValueError(f"invalid command: {checker_id}")
         validate_checker_command(entry)
-        validate_dependencies(entry)
+        # Sealed v5 historical records remain inert evidence. Their original
+        # inputs may deliberately be private/excluded; current dependencies
+        # always retain full tracked-file and direct-helper validation.
+        if not (current_package and entry["applicability"] == "historical_only"):
+            validate_dependencies(entry)
         validate_branch_policy(entry)
         if entry["applicability"] == "current" and (entry["historical"] or not entry["load_bearing"] or (entry["required_arguments"] and not campaign_arguments) or entry["mutation_risk"] not in {"none", "temporary_file_only", "temporary_repository_only"}):
             raise ValueError(f"unsafe current aggregate entry: {checker_id}")
@@ -425,7 +443,7 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
     c023_markers = ('docs/runtime_config/fixtures/gp_val042_c023_transition.json',
                     'docs/runtime_config/fixtures/gp_val042_accepted_transitions.json',
                     'tools/glyph_c023_campaign_transition.py')
-    if any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c023_markers):
+    if version == 4 and any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c023_markers):
         row = [entry for entry in entries if entry['id'] == 'gp_config023_usb_index_validation']
         if len(row) != 1 or not c023_replay_arguments(row[0]):
             raise ValueError('missing required042 exact C023 candidate replay')
@@ -468,6 +486,10 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
         if signals:
             strong_paths.add(census_entry["path"])
     replay_paths = frozenset()
+    if current_package:
+        # Extracted classification only. These paths are not replayed and do
+        # not provide current safety proof or historical PASS in this mode.
+        replay_paths = frozenset(package_scope.public_contract(ROOT)["historical_checker_classification"])
     if any(entry['id'] == 'gp_config023_usb_index_validation' and c023_replay_arguments(entry)
            for entry in entries):
         from glyph_c023_campaign_transition import replay_covered_checker_paths
@@ -490,6 +512,8 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
         raise ValueError(f"unclassified strong-signal checker: {path}")
     for path in sorted(exclusion_paths - strong_paths):
         raise ValueError(f"strong-signal exclusion lacks census signal: {path}")
+    if current_package and package_scope.semantic_digest(value) != package_scope.public_contract(ROOT)["manifest_semantic_digest"]:
+        raise ValueError("sealed manifest document identity drift")
     return entries, exclusions, categories
 
 
@@ -946,7 +970,12 @@ def immutable_source_context(selected: list[dict[str, object]]) -> dict[str, obj
     override = os.environ.get("GLYPH_CHECKER_BASE")
     base = git_value("rev-parse", "--verify", f"{override}^{{commit}}") if override else comparison_ref
     if not base:
-        raise ValueError("origin/configurator must resolve to an immutable commit without GLYPH_CHECKER_BASE")
+        if package_scope.package_lineage(ROOT):
+            # Public current proof authenticates a source snapshot, not the
+            # development fork's branch topology. This base is visible data.
+            base = head
+        else:
+            raise ValueError("origin/configurator must resolve to an immutable commit without GLYPH_CHECKER_BASE")
     merge_base = git_value("merge-base", head, base)
     expected_input = os.environ.get("GLYPH_CHECKER_EXPECTED_MERGE_BASE")
     expected = git_value("rev-parse", "--verify", f"{expected_input}^{{commit}}") if expected_input else merge_base
@@ -1155,6 +1184,7 @@ def main() -> int:
                     active = clone
                     checker_env = checker_environment(entry, env)
                     is_c023 = (entry["id"] == "gp_config023_usb_index_validation"
+                               and entry["path"] == "tools/check_glyph_c023_proof_replay.py"
                                and package_scope.package_lineage(ROOT))
                     if is_c023:
                         active = package_scope.materialize(clone, package_scope.C023_DONE, parent)

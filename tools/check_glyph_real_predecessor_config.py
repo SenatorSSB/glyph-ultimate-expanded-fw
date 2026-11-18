@@ -12,11 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "6b73a7c507f35c111745c6bdd341618b490cbdcd"
-BACKUP = Path(os.environ.get(
-    "GLYPH_REAL_PREDECESSOR_BACKUP",
-    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/"
-    "local_backups/hardware-tests/multi-profile-store-20261013/preflash-config-backup.json",
-))
+BACKUP_INPUT = os.environ.get("GLYPH_REAL_PREDECESSOR_BACKUP")
 HOST = ROOT / "tools/fixtures/profile_store_predecessor_host/replay_validation.cpp"
 BUILD = ROOT / ".pio/build/glyph_mk6/nanopb/generated-src"
 NANOPB = ROOT / ".pio/libdeps/glyph_mk6/Nanopb"
@@ -31,7 +27,10 @@ def run(command: list[str], *, check: bool = True) -> subprocess.CompletedProces
 
 def main() -> int:
     try:
-        raw = base64.b64decode(json.loads(BACKUP.read_text(encoding="utf-8"))["rawConfigPayloadBase64"], validate=True)
+        if not BACKUP_INPUT:
+            raise ValueError("explicit GLYPH_REAL_PREDECESSOR_BACKUP input is required; no private fallback")
+        backup = Path(BACKUP_INPUT)
+        raw = base64.b64decode(json.loads(backup.read_text(encoding="utf-8"))["rawConfigPayloadBase64"], validate=True)
         if len(raw) != 4201 or hashlib.sha256(raw).hexdigest() != "f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480":
             raise AssertionError("captured predecessor fixture identity mismatch")
         if not (BUILD / "config.pb.c").is_file():

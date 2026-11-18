@@ -1,0 +1,195 @@
+{
+  "schema": "glyph_gp_config023_usb_index_public_current.v1",
+  "source_contract_id": "C023_PUBLIC_CURRENT_1",
+  "extraction_provenance": {
+    "extraction_commit": "6714aca212ba8dd5bb1c655b344c80f35a582630",
+    "source_tree": "de8b8385c6b68425553a94024e710adaabf1a260",
+    "historical_candidate": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+    "original_fixture": {
+      "path": "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
+      "sha256": "f084b80be971e78b62e175f6fae34c6b1e2286fbd0ed1709c64173871dd0bdf9"
+    },
+    "original_report": {
+      "path": "docs/runtime_config/gp_config023_usb_index_validation.md",
+      "sha256": "d45313e6071b52b2e157fc56c80cff456a29e0d059767b46f48aa42c8c8cb2c8"
+    },
+    "git_ids_are_inert_metadata": true
+  },
+  "command": [
+    "python3",
+    "tools/check_glyph_gp_config023_usb_index_public_current.py"
+  ],
+  "production_sources": [
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "673db9dbe9736059c03c65dcae1c98cee3a15b638a170b3faff7046b97b5deb5"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "959e1afe28e854ca3401839875badbb2b314ed36f789bcac8a80ace18707c4aa"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "8727612b565922c85d51c8ed11ae6fb443a81b51051eb210c1855450df22f95d"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "11bba05e8e6b6f73097469a01a04c37cebb014f5ee2a0a9a492fcbc7fe9cccef"
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+    },
+    {
+      "path": "include/core/BootDiagnostics.hpp",
+      "sha256": "ae4cb7f85ee6c83919eacaf4610b1437e5cc1dcf7e05cd99f9bbc33319529b98"
+    },
+    {
+      "path": "include/core/CheckedStorage.hpp",
+      "sha256": "c7d1d95a0f13f89f1198f69b87fcd4738ed929ee43ae80a822e92155086d31cf"
+    },
+    {
+      "path": "include/core/ModeSelectionTransaction.hpp",
+      "sha256": "98e6d11d5722bbb6e92109a03cec36198e67b28402de328016832a7e4c6e5715"
+    },
+    {
+      "path": "include/core/PackageStorageFence.hpp",
+      "sha256": "32fd9ddc44952deb63ca1536e66d53b5e6590119b0ef445d866f6012b67a0913"
+    },
+    {
+      "path": "include/core/ProfileStore.hpp",
+      "sha256": "3a538d5486e6c435149f2249aad0684c12e93d2f10a9c0b007be0040414c7cdd"
+    },
+    {
+      "path": "include/core/ProfileStoreStorage.hpp",
+      "sha256": "af7a998ad594734e9589a0961a2ce0a67091ccfbe657bb0b2d6d153ccf655bd0"
+    },
+    {
+      "path": "include/core/ProfileStoreTransaction.hpp",
+      "sha256": "af647f116534fac3f10c473d11c8c93347d25b541efa8924c13454e34686f5ab"
+    },
+    {
+      "path": "include/core/Sha256.hpp",
+      "sha256": "ba6080472c663e99489e378382af6ff3718ef8f737f9e7aaf375b4f187fa9e83"
+    },
+    {
+      "path": "include/core/config_button_validation.hpp",
+      "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f"
+    },
+    {
+      "path": "include/core/config_usb_default_validation.hpp",
+      "sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11"
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "sha256": "1c73c8b2ab2c0ded58f8023e1236cc28af8e3c8d76d946a904708074f9849fc2"
+    },
+    {
+      "path": "include/modes/UltimateNativeProfile.hpp",
+      "sha256": "98983da977093dd226c4570dc0c9ae5ea48f794d65fab70d0dc9f652aa6b8f59"
+    },
+    {
+      "path": "include/modes/UltimateProfileConfig.hpp",
+      "sha256": "2eba575ba8ace466426e94fb68614fba297730a3fd092e044d9dc83e48eb1bd3"
+    },
+    {
+      "path": "include/modes/UltimateProfileEvaluator.hpp",
+      "sha256": "e7a68817e13a11ba7e9e88c112fc3ade46e40c5d75fa94060896be70f4f722fc"
+    },
+    {
+      "path": "schema/haybox/config.options",
+      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+    },
+    {
+      "path": "schema/haybox/config.proto",
+      "sha256": "1b781f97e8a93c8840d26698e8c802b366feb812afb7ad45f06c5d3d9ad5ee33"
+    },
+    {
+      "path": "src/core/config_button_validation.cpp",
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb"
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "sha256": "dcf45c06ecc57bd7a2fdd669a9102ede467d2bc00ad526fe9f5e206044d4a932"
+    },
+    {
+      "path": "src/modes/UltimateNativeProfile.cpp",
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b"
+    }
+  ],
+  "host_sources": [
+    {
+      "path": "tools/fixtures/gp_config023_usb_public_current/host_stubs.hpp",
+      "sha256": "e657cc1a1110d1696d78f74ef1f31adcbba996974e98d2c3120ed90b86e53c54"
+    },
+    {
+      "path": "tools/fixtures/gp_config023_usb_public_current/usb_index_harness.cpp",
+      "sha256": "eff8599d5048bc97cdae4c36209cf4737fcf23ee809dd09081aa4ce8ca60046a"
+    }
+  ],
+  "production_fragments": {
+    "initialize_backends": "140d87c4a724f6af9e1c58e72a6de6b15c7d390d9ed6d605f8bbfae89b414126",
+    "selectors": "0ac13fa680676c0ab32692eb4152e61b9e634e837a17937cf7e114cff15a484a",
+    "persistence": "447df5d0ac2b252a5f0df0f2e1c5c9d57e2db1fd53c27da7019927219e7005ca",
+    "recovery": "ebc2762ec647a611d32e2acf38cfd826cd161e9fc461f56570a49f9628fe4fc8"
+  },
+  "accepted_identities": {
+    "config_schema": "current schema/haybox/config.proto plus config.options exact byte bindings",
+    "backend_extent": 15,
+    "index_encoding": "Config.default_usb_backend_config IS_8",
+    "native_schema": 5,
+    "native_encoding": 1,
+    "native_engine_abi": 1
+  },
+  "expected": {
+    "index_count_matrix": "counts 0..15 by indices 0..255; exactly 4096 cases; accepted iff 1 <= index <= count <= actual generated extent 15",
+    "oversized_counts": "16..255 rejected by actual generated extent",
+    "invalid_routes": "five invalid pre-selector states and one selector-created invalid state reject before downstream callbacks and saves",
+    "valid_routes": [
+      "GameCube",
+      "USB XInput",
+      "Keyboard through DInput",
+      "watchdog DInput"
+    ],
+    "abi_modes": [
+      "default enum",
+      "-fshort-enums"
+    ],
+    "sanitizers": [
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
+    ]
+  },
+  "decoder_cases": {
+    "omitted_index": "pb_decode accepts omitted field to zero-initialized value; production semantic validator rejects",
+    "zero_index": "actual nanopb decode succeeds; production semantic validator rejects",
+    "out_of_range": "actual nanopb decode succeeds for 2 and 255; semantic validator rejects against one populated backend",
+    "uint8_overflow": "actual nanopb decoder rejects wire value 256 under generated IS_8 representation",
+    "valid_control": "actual nanopb decode plus semantic validation accepts index 1 with one backend"
+  },
+  "consumer_contracts": {
+    "setconfig": "Current DecodeIncomingSetConfig actual pb_decode; DecodeSetConfig calls shared ValidateSetCandidate before Ready; HandleSetConfig gates Ready then saves; FinalizeSetConfig refuses failed save before live publication.",
+    "stored_load": "Execute current SetValidator/ValidateConfig and CompleteReadConfigCandidate/SelectReadConfigCandidate/InitializeReadConfigCandidate/FinishConfigDecode/ReadConfigCandidate/FinishLoadedConfig/LoadConfigDriver/LoadConfigChecked bodies. Invalid semantic candidates never reach live publication; invalid/valid reads do not save.",
+    "startup": "Current setup source-checks defaults, stored-load and InitializeBootBackends order; current InitializeBootBackends refuses post-selector invalid index before mode bindings or fallback.",
+    "secondary_core": "Current setup1 gates menu construction on terminal non-refused outcome.",
+    "refusal": "Execute current draw_recovery_page/refuse_boot; source-check current enter_recovery_configurator scratch clearing and publication order."
+  },
+  "expected_host_output": "index_matrix counts=0..15 indices=0..255 cases=4096 accepted=120 actual_extent=15 oversized_counts=16..255 REJECT\ninvalid_routes pre_selector=5 no_callbacks_or_save=PASS post_selector=1 selector_only=PASS Config_pre_rejection=BYTE_EXACT\nroute GC primary=1 secondary=1 detect=0 mode=1 PASS\nroute USB_XInput getter=1 detect=1 primary=2 secondary=1 mode=1 PASS\nroute Keyboard_DInput primary=1 secondary=1 mode=2 PASS\nroute watchdog DInput scratch=(1,2) valid_index=1 mode_update=2 save=1 PASS\ncontainment invalid_config=REJECT caller_bytes=BYTE_EXACT validator_persistence=NOT_APPLICABLE\ndecoder_case omitted decode=PASS semantic=REJECT stored=REJECT caller=BYTE_EXACT saved=BYTE_EXACT\ndecoder_case zero decode=PASS semantic=REJECT stored=REJECT caller=BYTE_EXACT saved=BYTE_EXACT\ndecoder_case out_of_range_2 decode=PASS semantic=REJECT stored=REJECT caller=BYTE_EXACT saved=BYTE_EXACT\ndecoder_case out_of_range_255 decode=PASS semantic=REJECT stored=REJECT caller=BYTE_EXACT saved=BYTE_EXACT\ndecoder_case varint_256 decode=REJECT semantic=NOT_REACHED stored=REJECT caller=BYTE_EXACT saved=BYTE_EXACT\ndecoder_case valid_1 decode=PASS semantic=PASS stored=PASS saved=BYTE_EXACT\nstartup_recovery executable_display=PASS exact_text_and_order=PASS scratch_clear=PASS display_unavailable=PASS\ngp_config023_usb_index_public_current: PASS (host-only; no hardware claim)\n",
+  "coverage_limits": [
+    "Host-only source-bound proof; no firmware build or hardware claim.",
+    "Peripheral backend constructors and physical device behavior are callback stubs; actual current backend phase/default selector bodies execute.",
+    "Current full semantic validator, USB-index predicate, button validator and native admission source compile against freshly generated current schema.",
+    "Current persistence load pipeline executes with a host file/header and filename selection double. CheckSavedConfig returns accepted; CRC/header authenticity, actual filesystem I/O and recovery-file selection are not proven by this C023 checker.",
+    "Current SET consumer ordering is source-checked across the accepted split phase functions; ConfiguratorBackend transport is not executed by this checker.",
+    "Startup draw/refuse bodies execute with a display recorder; current setup/InitializeBootBackends/setup1 and recovery configurator ordering are source-checked. Full hardware setup, OLED driver, second-core scheduling and physical display are not executed.",
+    "The historical C023 transition replay remains separate development evidence; this receipt cannot establish campaign ancestry or source lineage."
+  ],
+  "hardware_acceptance": "NOT_CLAIMED",
+  "nunchuk": "NOT_TESTED",
+  "root_cause": "UNPROVEN",
+  "semantic_digest": "00c96541b50262839d0eaa68d00ab788c404e8da8cd089178807012a66e55cd9"
+}

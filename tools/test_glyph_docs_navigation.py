@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Focused public-doc regression controls; no tracked fixture mutations."""
 import re
+import tempfile
+from pathlib import Path
 import unittest
 from unittest.mock import patch
 
@@ -19,6 +21,19 @@ class PublicDocsTests(unittest.TestCase):
             end=f"<!-- {kind}-v1:end -->"
             self.docs[path]=self.docs[path].split(end)[0]+end+"\n"
         nav.validate_docs(overrides=self.docs)
+        # Both current consumers accept the exact current-only export and
+        # reject unbounded trailing prose, duplicate or misordered markers.
+        for path, kind in (("docs/CURRENT_STATE.md", "current-state"),
+                           ("docs/ROADMAP.md", "current-roadmap")):
+            text = self.docs[path]
+            surface.current_doc_section(text, kind)
+            for bad_text in (text + "Unbounded legacy prose\n",
+                             text + f"<!-- {kind}-v1:end -->",
+                             text.replace(f"<!-- {kind}-v1:start -->", "")):
+                with self.assertRaises(surface.AgentSurfaceError):
+                    surface.current_doc_section(bad_text, kind)
+                with self.assertRaises(nav.DocsNavigationError):
+                    nav.current_section(bad_text, kind)
         bad=dict(self.docs)
         bad["docs/CURRENT_STATE.md"] += "Unbounded legacy prose\n"
         with self.assertRaises(nav.DocsNavigationError):nav.validate_docs(overrides=bad)
@@ -111,12 +126,17 @@ class PublicDocsTests(unittest.TestCase):
             surface.validate_docs()
 
     def test_framework_scan_excludes_public_agents(self):
-        original_read = framework.read_required
-        def internal_only(path):
-            self.assertNotEqual(path, 'AGENTS.md')
-            return original_read(path)
-        with patch.object(framework, 'read_required', side_effect=internal_only):
-            text = framework.active_framework_text()
+        # Exercise the actual filesystem scanner with a complete bounded test
+        # tree. Public exports deliberately omit development framework files.
+        with tempfile.TemporaryDirectory(prefix="glyph-framework-scan-") as directory:
+            root = Path(directory)
+            (root / "docs/agent_framework").mkdir(parents=True)
+            (root / "AGENTS.md").write_text(self.docs["AGENTS.md"])
+            (root / "docs/agent_framework/retained.md").write_text("GLYPH-UD-029 retained contract\n")
+            with patch.object(framework, "REPO_ROOT", root):
+                paths = framework.framework_paths()
+                self.assertEqual(paths, [root / "docs/agent_framework/retained.md"])
+                text = framework.active_framework_text()
         self.assertNotIn('# Coding-agent instructions', text)
         self.assertIn('GLYPH-UD-029', text)
 
@@ -463,7 +483,10 @@ class PublicDocsTests(unittest.TestCase):
         nav.validate_docs(overrides=self.docs)
 
     def test_public_export_ignores_legacy_bodies_but_rejects_their_anchors(self):
-        for path in ('docs/CURRENT_STATE.md', 'docs/ROADMAP.md'):
+        for path, kind in (('docs/CURRENT_STATE.md', 'legacy-current-state-journal'),
+                           ('docs/ROADMAP.md', 'legacy-roadmap-journal')):
+            if f'<!-- {kind}:start -->' not in self.docs[path]:
+                self.docs[path] += f'\n<!-- {kind}:start -->\n'
             self.docs[path] += '\n/Users/example/old-capture\n[old](planning/old.md)\n'
         nav.validate_public_export(nav.REPO_ROOT, self.docs)
         self.public_add('README.md', '[old](docs/CURRENT_STATE.md#exact-candidate-physical-qualification-accepted--2026-11-17)')
@@ -517,7 +540,10 @@ class PublicDocsTests(unittest.TestCase):
                 self.reject(path, 'shared 30-row budget', '30 additional Ultimate profiles')
 
     def test_legacy_prose_is_not_current_claim(self):
-        for path in ('docs/CURRENT_STATE.md', 'docs/ROADMAP.md'):
+        for path, kind in (('docs/CURRENT_STATE.md', 'legacy-current-state-journal'),
+                           ('docs/ROADMAP.md', 'legacy-roadmap-journal')):
+            if f'<!-- {kind}:start -->' not in self.docs[path]:
+                self.docs[path] += f'\n<!-- {kind}:start -->\n'
             self.docs[path] += '\nRuntime-loaded config is not implemented.\nPublic release is available.\n'
         nav.validate_docs(overrides=self.docs)
 

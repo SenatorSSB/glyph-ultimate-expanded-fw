@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import io
 import json
 import subprocess
@@ -89,6 +90,57 @@ def assert_review_case(case: dict, mutation) -> None:
     assert set(case["expected_blocker_codes"]).issubset(actual_codes), (case["case_id"], case["expected_blocker_codes"], actual_codes)
     assert set(case.get("expected_blocker_categories", [])).issubset(actual_categories), (case["case_id"], case.get("expected_blocker_categories"), actual_categories)
     NEGATIVE += 1
+
+
+SEMANTIC_REFERENCE = ROOT / "docs/runtime_config/fixtures/source_owned_x1_pre_f4_semantic_reference.v1.json"
+
+
+def load_semantic_reference() -> dict:
+    if SEMANTIC_REFERENCE.is_symlink():
+        raise ValueError("semantic reference must be a regular file")
+    raw = SEMANTIC_REFERENCE.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != "438408b5182976c3aea06abd51f0e92662ad1efaa5a725d9bce955e92823b8f7":
+        raise ValueError("sealed pre-F4 semantic reference digest mismatch")
+    value = json.loads(raw)
+    semantic = dict(value); recorded = semantic.pop("receipt_semantic_digest")
+    if hashlib.sha256(json.dumps(semantic, sort_keys=True, separators=(",", ":")).encode()).hexdigest() != recorded:
+        raise ValueError("pre-F4 receipt semantic digest mismatch")
+    return value
+
+
+def historical_f4_equivalence() -> None:
+    # Replay the exact pre-F4 implementation and intake from the starting Git
+    # snapshot. Neither implementation reads USER_DIRECTION. Only the three
+    # locators may differ; emitted source data must remain byte-equivalent.
+    base = "f6a4c68e0b7db689e6126343d48d60f0336e7694"
+    def original(path: str) -> str:
+        return subprocess.check_output(["git", "show", base + ":" + path], cwd=ROOT, text=True)
+    legacy = types.ModuleType("pre_f4_source_authority_intake")
+    legacy.__file__ = str(ROOT / "tools/source_owned_source_authority_intake.py")
+    exec(compile(original("tools/source_owned_source_authority_intake.py"), legacy.__file__, "exec"), legacy.__dict__)
+    old_packet = json.loads(original(str(CANONICAL_X1_INTAKE.relative_to(ROOT))))
+    new_packet = intake_module.load_json(CANONICAL_X1_INTAKE)
+    migrated = copy.deepcopy(old_packet)
+    migrated["authority"]["approval_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    migrated["ownership"]["declarations"][0]["authorization_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    migrated["replacements"][0]["source_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    assert migrated == new_packet
+    assert legacy.review_intake(old_packet) == review_intake(new_packet)
+    # The immutable candidate baseline is still intentionally stale relative
+    # to accepted source. Rebase both copies solely for offline emission proof.
+    old_packet["baseline"] = new_packet["baseline"] = inspect_baseline()
+    assert legacy.review_intake(old_packet) == review_intake(new_packet)
+    old_input, old_artifact, old_manifest = legacy.emit_generator_input(old_packet, operation="production_changeset")
+    new_input, new_artifact, new_manifest = emit_generator_input(new_packet, operation="production_changeset")
+    old_input["metadata"]["authorization_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
+    assert old_input == new_input
+    assert old_artifact == new_artifact
+    # Only provenance-derived input and manifest hashes may change.
+    for key in ("input_semantic_digest", "manifest_semantic_digest"):
+        old_manifest.pop(key)
+        new_manifest.pop(key)
+    assert old_manifest == new_manifest
+
 
 
 def run() -> tuple[int, int]:
@@ -205,37 +257,25 @@ def run() -> tuple[int, int]:
                     raise AssertionError("invalid receipt permitted emission: " + label)
             NEGATIVE += 1
 
-    # Replay the exact pre-F4 implementation and intake from the starting Git
-    # snapshot. Neither implementation reads USER_DIRECTION. Only the three
-    # locators may differ; emitted source data must remain byte-equivalent.
-    base = "f6a4c68e0b7db689e6126343d48d60f0336e7694"
-    def original(path: str) -> str:
-        return subprocess.check_output(["git", "show", base + ":" + path], cwd=ROOT, text=True)
-    legacy = types.ModuleType("pre_f4_source_authority_intake")
-    legacy.__file__ = str(ROOT / "tools/source_owned_source_authority_intake.py")
-    exec(compile(original("tools/source_owned_source_authority_intake.py"), legacy.__file__, "exec"), legacy.__dict__)
-    old_packet = json.loads(original(str(CANONICAL_X1_INTAKE.relative_to(ROOT))))
+    # A sealed extraction of the exact pre-F4 output supplies the semantic
+    # reference in fresh histories. Missing Git objects never select this path.
+    reference = load_semantic_reference()
+    assert reference["schema"] == "glyph_x1_pre_f4_semantic_reference.v1"
+    old_packet = reference["original_packet"]
     new_packet = intake_module.load_json(CANONICAL_X1_INTAKE)
     migrated = copy.deepcopy(old_packet)
     migrated["authority"]["approval_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
     migrated["ownership"]["declarations"][0]["authorization_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
     migrated["replacements"][0]["source_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
     assert migrated == new_packet
-    assert legacy.review_intake(old_packet) == review_intake(new_packet)
-    # The immutable candidate baseline is still intentionally stale relative
-    # to accepted source. Rebase both copies solely for offline emission proof.
-    old_packet["baseline"] = new_packet["baseline"] = inspect_baseline()
-    assert legacy.review_intake(old_packet) == review_intake(new_packet)
-    old_input, old_artifact, old_manifest = legacy.emit_generator_input(old_packet, operation="production_changeset")
+    assert review_intake(new_packet) == reference["original_review"]
+    assert inspect_baseline() == reference["emission_baseline"]
+    new_packet["baseline"] = inspect_baseline()
+    assert review_intake(new_packet) == reference["rebased_review"]
     new_input, new_artifact, new_manifest = emit_generator_input(new_packet, operation="production_changeset")
-    old_input["metadata"]["authorization_reference"] = intake_module.CANONICAL_X1_AUTHORITY_REFERENCE
-    assert old_input == new_input
-    assert old_artifact == new_artifact
-    # Only provenance-derived input and manifest hashes may change.
     for key in ("input_semantic_digest", "manifest_semantic_digest"):
-        old_manifest.pop(key)
         new_manifest.pop(key)
-    assert old_manifest == new_manifest
+    assert {"input": new_input, "artifact": new_artifact, "manifest": new_manifest} == reference["normalized_emission"]
     POSITIVE += 3
 
     one = make_packet()
@@ -443,6 +483,10 @@ def run() -> tuple[int, int]:
 
 if __name__ == "__main__":
     try:
+        if sys.argv[1:] == ["--historical-f4"]:
+            historical_f4_equivalence()
+        elif sys.argv[1:]:
+            raise ValueError("expected no arguments or --historical-f4")
         positive, negative = run()
         print(json.dumps({"status": "PASS", "positive_tests": positive, "negative_tests": negative, "active_source_changed": False, "hardware_candidate_created": False}, sort_keys=True))
         raise SystemExit(0)

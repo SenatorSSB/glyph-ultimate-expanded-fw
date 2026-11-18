@@ -1,0 +1,58 @@
+{
+  "binary": {
+    "git_blob": "d0524944a90503a8881281b6673b1f46e36f9383",
+    "path": "glyph_nuker",
+    "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae"
+  },
+  "claims": {
+    "build_recipe": "UNKNOWN",
+    "byte_transformation": "UNKNOWN",
+    "license": "UNKNOWN",
+    "purpose": "UNKNOWN",
+    "reproducibility": "UNKNOWN",
+    "source_lineage": "UNKNOWN"
+  },
+  "extraction_base": "6714aca212ba8dd5bb1c655b344c80f35a582630",
+  "nonclaims": [
+    "No reverse engineering performed.",
+    "No artifact processing, firmware byte, hardware acceptance or workflow changed.",
+    "Independent review still requires authoritative source/license/build correspondence."
+  ],
+  "result": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+  "schema": "glyph_nuker_g2b_bounded_source_discovery.v1",
+  "searched_on": "2026-11-18",
+  "searches": [
+    {
+      "limitation": "No claim the project never existed; no source/license available at this named locator.",
+      "method": "GitHub repository metadata GET over established connectivity",
+      "observed_result": "HTTP 404 Not Found",
+      "surface": "https://api.github.com/repos/GregTurbo/HayBox-Glyph"
+    },
+    {
+      "limitation": "Mutable release list, not proof of universal or historical absence.",
+      "method": "GitHub releases API GET",
+      "observed_result": [],
+      "surface": "https://api.github.com/repos/SenatorSSB/glyph-ultimate-expanded-fw/releases?per_page=100"
+    },
+    {
+      "limitation": "Current upstream filename search only; no full source-content or unreachable-history search, no equivalence inference.",
+      "matching_paths": [],
+      "method": "Recursive tree path-name filter for nuker or glyph, case-insensitive",
+      "observed_identity": "2cffcd239800500aad7098cdb7c6ac55eccf5ea9",
+      "surface": "https://api.github.com/repos/JonnyHaystack/HayBox/git/trees/master?recursive=1",
+      "truncated": false
+    },
+    {
+      "limitation": "Executable identity only, not source correspondence or permission.",
+      "method": "Exact-base root listing",
+      "observed_result": [
+        {
+          "git_blob": "d0524944a90503a8881281b6673b1f46e36f9383",
+          "path": "glyph_nuker",
+          "type": "file"
+        }
+      ],
+      "surface": "https://api.github.com/repos/SenatorSSB/glyph-ultimate-expanded-fw/contents?ref=6714aca212ba8dd5bb1c655b344c80f35a582630"
+    }
+  ]
+}

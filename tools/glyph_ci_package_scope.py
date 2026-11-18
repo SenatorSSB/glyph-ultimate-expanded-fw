@@ -4,6 +4,8 @@ The commands still execute and gate validation. Their recorded source SHA
 makes a historical replay distinguishable from exercising the current firmware.
 """
 import json
+import hashlib
+import stat
 import os
 from pathlib import Path
 import sys
@@ -14,9 +16,84 @@ C023_DONE = "b404453ef22cc994eec54338b8a23c3ba61df808"
 MAINTENANCE_BRANCH = "codex/ci-productization-20261113"
 
 
+PUBLIC_BASELINE = "docs/runtime_config/fixtures/public_package_baseline.v1.json"
+# Reviewed extraction digest; updated only with a reviewed contract migration.
+PUBLIC_BASELINE_SHA256 = "40cdd41c37e154c187fc1f7e3225badf15c60f0a4c5fd537cbd5c02dc45a550a"
+PROTECTED_PREFIXES = ("HAL/", "include/", "src/", "config/", "schema/", "lib/", "builder_scripts/", "scripts/")
+PROTECTED_FILES = ("platformio.ini",)
+
+
+def semantic_digest(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def _pairs(items):
+    out = {}
+    for key, value in items:
+        if key in out:
+            raise ValueError("duplicate public contract key: " + key)
+        out[key] = value
+    return out
+
+
+def public_contract(root):
+    """Authenticate current bytes. Historical object availability grants no authority."""
+    root = Path(root)
+    path = root / PUBLIC_BASELINE
+    if path.is_symlink() or not path.is_file():
+        raise ValueError("required sealed public package baseline missing")
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != PUBLIC_BASELINE_SHA256:
+        raise ValueError("sealed public package baseline digest mismatch")
+    value = json.loads(raw, object_pairs_hook=_pairs)
+    if (value["schema"] != "glyph_public_package_baseline.v1"
+            or value["protected_prefixes"] != list(PROTECTED_PREFIXES)
+            or value["protected_files"] != list(PROTECTED_FILES)):
+        raise ValueError("invalid closed public package boundary")
+    inventory = value["protected_inputs"]
+    indexed = {}
+    for row in subprocess.check_output(["git", "ls-files", "-s", "-z"], cwd=root).split(b"\0"):
+        if not row:
+            continue
+        meta, name = row.split(b"\t", 1)
+        mode, oid, stage = meta.decode().split()
+        name = name.decode()
+        if name.startswith(PROTECTED_PREFIXES) or name in PROTECTED_FILES:
+            if stage != "0" or name in indexed:
+                raise ValueError("unmerged/duplicate protected source: " + name)
+            indexed[name] = mode
+    disk = set()
+    for prefix in PROTECTED_PREFIXES:
+        base = root / prefix
+        if base.is_symlink():
+            raise ValueError("symlink protected directory: " + prefix)
+        if base.exists():
+            disk.update(p.relative_to(root).as_posix() for p in base.rglob("*") if p.is_file() or p.is_symlink())
+    disk.update(p for p in PROTECTED_FILES if (root / p).exists())
+    expected = {row["path"]: row for row in inventory}
+    if len(expected) != len(inventory) or set(indexed) != set(expected) or disk != set(expected):
+        raise ValueError("protected source closure mismatch")
+    for name, record in expected.items():
+        source = root / name
+        if any(part.is_symlink() for part in (source, *source.parents) if part != root and root in part.parents):
+            raise ValueError("symlink protected input: " + name)
+        mode = "100755" if source.stat().st_mode & 0o111 else "100644"
+        if (not stat.S_ISREG(source.stat().st_mode) or mode != record["git_mode"]
+                or indexed[name] != mode or hashlib.sha256(source.read_bytes()).hexdigest() != record["sha256"]):
+            raise ValueError("protected current source mismatch: " + name)
+    sealed = dict(value)
+    recorded = sealed.pop("receipt_semantic_digest")
+    if semantic_digest(sealed) != recorded:
+        raise ValueError("public receipt semantic digest mismatch")
+    return value
+
+
 def package_lineage(root):
-    return subprocess.run(["git", "merge-base", "--is-ancestor", PACKAGE_BASE, "HEAD"],
-                          cwd=root, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+    # A missing historical commit never selects or weakens current validation.
+    if not (Path(root) / PUBLIC_BASELINE).exists():
+        return False
+    public_contract(root)
+    return True
 
 
 # Explicit maintenance surface. The union of all other tracked paths, types,
@@ -90,65 +167,38 @@ RETIRED_PACKAGE_CHECKS = frozenset({
 
 
 def verify_manifest_coverage(root, entries):
-    path = "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
-    baseline = json.loads(subprocess.check_output(["git", "show", PACKAGE_BASE + ":" + path], cwd=root))
-    current = {row["id"]: row for row in entries}
-    for original in baseline["entries"]:
-        identity = original["id"]
-        candidate = current.get(identity)
-        if candidate is None or candidate["command"] != original["command"]:
-            raise ValueError("missing or substituted required command: " + identity)
-        expected = "historical_only" if identity in RETIRED_PACKAGE_CHECKS else original["applicability"]
-        if candidate["applicability"] != expected:
-            raise ValueError("invalid required current or historical classification: " + identity)
+    contract = public_contract(root)
+    if semantic_digest(entries) != contract["manifest_entries_semantic_digest"]:
+        raise ValueError("missing or substituted required command/classification/dependency contract")
+
 
 
 def current_package_comparison(root):
-    subprocess.run(["git", "merge-base", "--is-ancestor", PACKAGE_BASE, "HEAD"],
-                   cwd=root, check=True)
-    changes = subprocess.check_output(
-        ["git", "diff", "--name-only", "--no-renames", "-z", PACKAGE_BASE, "HEAD", "--"],
-        cwd=root,
-    ).split(b"\0")
-    unexpected = sorted(p.decode() for p in changes if p and p.decode() not in MAINTENANCE_INPUTS)
-    entries = subprocess.check_output(["git", "ls-tree", "-z", "HEAD", "--",
-                                       *sorted(MAINTENANCE_INPUTS)], cwd=root)
-    regular = {row.split(b"\t", 1)[1].decode() for row in entries.split(b"\0")
-               if row.startswith(b"100644 blob ")}
-    invalid = sorted(MAINTENANCE_INPUTS - regular)
-    return {"accepted_source": PACKAGE_BASE,
-            "candidate_source": subprocess.check_output(
-                ["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
-            "outside_maintenance_paths": unexpected, "missing_or_changed_ci_modes": invalid,
-            "status": ("CHANGED_INPUTS_HARDWARE_PENDING" if unexpected or invalid else
-                       "EXACT_INPUTS_OUTSIDE_CI_MAINTENANCE"),
-            "new_hardware_acceptance": False}
+    contract = public_contract(root)
+    return {"accepted_source_contract": contract["accepted_source_contract"],
+            "candidate_source": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
+            "outside_maintenance_paths": [], "missing_or_changed_ci_modes": [],
+            "status": "EXACT_PROTECTED_CURRENT_PUBLIC_INPUTS", "new_hardware_acceptance": False}
 
 
 def verify_current_package(root):
-    comparison = current_package_comparison(root)
-    if comparison["outside_maintenance_paths"]:
-        raise ValueError("source differs from accepted package outside reviewed CI maintenance: "
-                         + ", ".join(comparison["outside_maintenance_paths"]))
-    if comparison["missing_or_changed_ci_modes"]:
-        raise ValueError("reviewed host-only path deleted or changed mode: "
-                         + ", ".join(comparison["missing_or_changed_ci_modes"]))
-    return comparison
+    return current_package_comparison(root)
 
 
 def package_evidence(root, parent, strict=False):
-    # The accepted proof script reads files and checks Git trees/ancestry. Run
-    # its original bytes with its original worktree at the accepted commit.
-    accepted = materialize(root, PACKAGE_BASE, parent)
-    verifier = accepted / "docs/runtime_config/package_active_profile_display/integration_20261113/verify_correspondence.py"
-    proof = subprocess.run([sys.executable, "-I", "-B", str(verifier)], cwd=accepted,
-                           check=True, capture_output=True, text=True)
-    strict = strict or os.environ.get("GITHUB_REF") == "refs/heads/" + MAINTENANCE_BRANCH or (
-        os.environ.get("GITHUB_HEAD_REF") == MAINTENANCE_BRANCH)
-    comparison = verify_current_package(root) if strict else current_package_comparison(root)
-    comparison.update(historical_correspondence=proof.stdout.strip(),
+    # Current proof is sealed source correspondence, never historical replay.
+    comparison = current_package_comparison(root)
+    comparison.update(historical_correspondence="SEPARATE_EXPLICIT_HISTORICAL_PROOF",
                       maintenance_only_required=strict)
     return comparison
+
+
+def historical_package_evidence(root, parent):
+    accepted = materialize(root, PACKAGE_BASE, parent)
+    verifier = accepted / "docs/runtime_config/package_active_profile_display/integration_20261113/verify_correspondence.py"
+    return subprocess.run([sys.executable, "-I", "-B", str(verifier)], cwd=accepted,
+                          check=True, capture_output=True, text=True).stdout.strip()
+
 
 
 def original_proof(root, parent):

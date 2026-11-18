@@ -16,7 +16,6 @@ from check_glyph_profile_store_liveness_host import run, SOURCES
 FROZEN = 'd59684b9368be61183881bdfc82adc774ad5f0ba'
 HOST = ROOT / 'tools/fixtures/profile_store_read_storage'
 HISTORY = ROOT / 'tools/fixtures/profile_store_liveness_host/liveness_harness.cpp'
-DEFAULT_EVIDENCE = Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses')
 
 
 def maximum_profile(message):

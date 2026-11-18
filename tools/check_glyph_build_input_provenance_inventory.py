@@ -160,6 +160,19 @@ def tracked_index(root: Path = ROOT) -> dict[str, tuple[str, str]]:
     return result
 
 
+def omitted_postprocessor_record(root: Path) -> dict[str, str]:
+    # Only the positively authenticated public contract permits omission. This
+    # records excluded historical bytes, not bytes observed in this checkout.
+    from glyph_ci_package_scope import public_contract
+    postprocessor = public_contract(root)["opaque_postprocessor"]
+    if postprocessor != {"path": "glyph_nuker",
+                         "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+                         "status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+                         "public_action": "OMIT_AND_BLOCK_PUBLICATION"}:
+        raise ValueError("omitted postprocessor lacks explicit public blocking contract")
+    return {"path": "glyph_nuker", "git_mode": "100755", "sha256": postprocessor["sha256"]}
+
+
 def declaration_paths(index: dict[str, tuple[str, str]]) -> list[str]:
     paths = {
         path for path in index
@@ -349,6 +362,9 @@ def expected_inventory(root: Path = ROOT) -> dict[str, object]:
     declarations = []
     for relative in declaration_paths(index):
         path = root / relative
+        if relative == "glyph_nuker" and not path.exists() and not path.is_symlink():
+            declarations.append(omitted_postprocessor_record(root))
+            continue
         if relative not in index or not path.is_file() or path.is_symlink():
             raise ValueError(f"missing or unsafe tracked declaration: {relative}")
         declarations.append({"path": relative, "git_mode": index[relative][0], "sha256": sha256(path)})
@@ -439,6 +455,10 @@ def validate_declaration_files(
     for item in declarations:
         relative = item["path"]
         path = root / relative
+        if relative == "glyph_nuker" and not path.exists() and not path.is_symlink():
+            if item != omitted_postprocessor_record(root):
+                raise ValueError("omitted postprocessor historical declaration identity drift")
+            continue
         if relative not in index:
             raise ValueError(f"untracked declaration: {relative}")
         if path.is_symlink() or not path.is_file():

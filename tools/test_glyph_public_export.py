@@ -164,6 +164,13 @@ class ExportTests(unittest.TestCase):
         for embedded in [b, b + b'.json', b'prefix-' + b, b'machine=' + b + b'-backup', b.upper()]:
             with self.subTest(body=embedded):self.reject([item(body=embedded)],p)
 
+    def test_opaque_workflow_remains_nonpublishable(self):
+        output = {'.github/workflows/build.yml': ('100644', b'ls *.uf2 | xargs ./glyph_nuker')}
+        self.assertEqual(ex.workflow_publication_blockers(output),
+                         ['.github/workflows/build.yml:GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED'])
+        output['glyph_nuker'] = ('100755', b'opaque')
+        self.assertTrue(ex.workflow_publication_blockers(output))
+
     def test_repository_policy_regular_tracked_paths_and_direct_dependencies(self):
         p=ex.load_policy(ex.ROOT/ex.POLICY)
         dispositions={path:ex.classify(path,b,p) for path,_,b in ex.tracked_tree(ex.ROOT,'HEAD')}

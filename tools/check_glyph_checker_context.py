@@ -501,7 +501,7 @@ def current_package_guard_tests():
     print("current package WebSerial document, source markers and flashing guards passed")
 
 
-def main() -> int:
+def current_context_tests() -> int:
     with tempfile.TemporaryDirectory(prefix="glyph-checker-context-") as directory:
         root = fresh_repo(Path(directory))
         run(root, "switch", "-c", "renamed-feature-branch")
@@ -697,12 +697,11 @@ def main() -> int:
         "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
         "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
     ), PROTECTED_SCOPE_MAINS[:3], "gp_val041", detached=True)
-    from glyph_ci_package_scope import package_lineage
-    if package_lineage(Path(__file__).resolve().parents[1]):
-        current_package_guard_tests()
-    else:
-        campaign_guard_tests()
-        campaign_protected_scope_tests()
+    # Positive current authority is mandatory. Missing development objects
+    # never select historical campaign authentication.
+    from glyph_ci_package_scope import public_contract
+    public_contract(Path(__file__).resolve().parents[1])
+    current_package_guard_tests()
 
     case_ids = (
         "CTX-01-valid-feature-branch",
@@ -726,6 +725,21 @@ def main() -> int:
     )
     print("glyph_checker_context: PASS; cases=" + ",".join(case_ids))
     return 0
+
+
+def main() -> int:
+    if sys.argv[1:] == ["--historical-maintenance"]:
+        campaign_guard_tests()
+        campaign_protected_scope_tests()
+        return 0
+    if sys.argv[1:]:
+        raise ValueError("expected no arguments or --historical-maintenance")
+    # Synthetic branch/base controls own their contexts; a caller's base must
+    # not override a detached/missing-base negative in a disposable repository.
+    controlled = {key: value for key, value in os.environ.items()
+                  if key not in {"GLYPH_CHECKER_BASE", "GLYPH_CHECKER_EXPECTED_MERGE_BASE"}}
+    with patch.dict(os.environ, controlled, clear=True):
+        return current_context_tests()
 
 
 if __name__ == "__main__":

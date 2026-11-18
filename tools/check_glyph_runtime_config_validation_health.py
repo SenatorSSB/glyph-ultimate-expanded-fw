@@ -127,7 +127,7 @@ def validate_health(value: dict[str, Any], census_value: dict[str, Any], manifes
     expected_results = [
         {"id": "identity_table_source_sync", "path": "tools/check_glyph_identity_runtime_table_source_sync.py", "classification": "repaired_current_load_bearing_source_sync_checker", "starting_configurator": {"exit_code": 1, "error": "stale 27-table interpreter bridge fixture"}, "feature_branch": {"result": "PASS"}},
         {"id": "runtime_semantics_evaluator_bridge", "path": "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py", "classification": "repaired_current_load_bearing_evaluator_bridge_checker", "starting_configurator": {"exit_code": 1, "error": "stale Ultimate.cpp SHA and 27-table bridge lineage"}, "feature_branch": {"result": "PASS"}},
-        {"id": "gp_config023_usb_index_validation", "path": "tools/check_glyph_c023_proof_replay.py", "classification": "exact_C023_candidate_host_proof_replay", "starting_configurator": {"exit_code": 1, "error": "C023 host proof is introduced by the exact reviewed candidate and is absent at B023"}, "feature_branch": {"result": "PASS"}},
+        {"id": "gp_config023_usb_index_validation", "path": "tools/check_glyph_gp_config023_usb_index_public_current.py", "classification": "source_bound_current_C023_host_proof", "starting_configurator": {"exit_code": 1, "error": "C023 host proof is introduced by the exact reviewed candidate and is absent at B023"}, "feature_branch": {"result": "PASS"}},
     ]
     if value["checker_results"] != expected_results:
         raise ValueError("checker result correspondence is stale")

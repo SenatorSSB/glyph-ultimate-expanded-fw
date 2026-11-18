@@ -1,0 +1,1706 @@
+{
+  "schema": "glyph_public_package_baseline.v1",
+  "accepted_source_contract": "GLYPH_G2B_CURRENT_SOURCE_6714aca_V1",
+  "protected_prefixes": [
+    "HAL/",
+    "include/",
+    "src/",
+    "config/",
+    "schema/",
+    "lib/",
+    "builder_scripts/",
+    "scripts/"
+  ],
+  "protected_files": [
+    "platformio.ini"
+  ],
+  "protected_inputs": [
+    {
+      "path": "HAL/avr/avr_nousb/include/comms/backend_init.hpp",
+      "git_mode": "100644",
+      "sha256": "bcf1a719c1237ca89d64b39c202daeda2f525aa9a675a4277ac3c9d6d0012119"
+    },
+    {
+      "path": "HAL/avr/avr_nousb/include/config_defaults.hpp",
+      "git_mode": "100644",
+      "sha256": "0630d1e9eef930f2916f36bf7271f0109b747348332274ed10628e12e89dfe90"
+    },
+    {
+      "path": "HAL/avr/avr_nousb/include/core/KeyboardMode.hpp",
+      "git_mode": "100644",
+      "sha256": "0bce112ca5e1d4cf7abc95441f861dad62d0d25458068ee8b3c361a9271cede1"
+    },
+    {
+      "path": "HAL/avr/avr_nousb/include/core/keycodes.h",
+      "git_mode": "100644",
+      "sha256": "e14316cffc17795eec5ca4a82340e3ea73195b84d6421a7cc3fb8d7df620d4d5"
+    },
+    {
+      "path": "HAL/avr/avr_nousb/src/comms/backend_init.cpp",
+      "git_mode": "100644",
+      "sha256": "343a31026cf393f67b62fea2439cb72717d2bcdbe72554170d0e4708884eb849"
+    },
+    {
+      "path": "HAL/avr/avr_nousb/src/comms/console_detection.cpp",
+      "git_mode": "100644",
+      "sha256": "d633a7f1a183b8da8277746089812ccd7695e14c9bbe8cc82607059a57619136"
+    },
+    {
+      "path": "HAL/avr/avr_nousb/src/core/KeyboardMode.cpp",
+      "git_mode": "100644",
+      "sha256": "f2e3daf44db7c85cdad293e7f27cb3650d2f08f64cfd1eebb0dd309169526805"
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/comms/DInputBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "fc9bdbf87073c3ee6a97bd6ee7f0398f5bc06beb490e0db1729c5b6006e50d78"
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/comms/backend_init.hpp",
+      "git_mode": "100644",
+      "sha256": "bcf1a719c1237ca89d64b39c202daeda2f525aa9a675a4277ac3c9d6d0012119"
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/config_defaults.hpp",
+      "git_mode": "100644",
+      "sha256": "0442b12680440099878fe864d63a7afce57437e3a46c606de4c37c0b6e6df57e"
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/core/KeyboardMode.hpp",
+      "git_mode": "100644",
+      "sha256": "315e0e21b8880db08d82b8ec39861be4bb6a500c6d97c958101ef7f88c95875e"
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/comms/DInputBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "e240965b0b8941c1f558b1ddea1767ff3ae5fcac2a68b47a87f1b7007d130900"
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/comms/backend_init.cpp",
+      "git_mode": "100644",
+      "sha256": "df77b89c4c751aa5564fce4378cc440391ae758bcb172748332c9bfb85cb32f8"
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/comms/console_detection.cpp",
+      "git_mode": "100644",
+      "sha256": "1e23aa138e4d4e1c8f175f61d74c2d1275e61eb77beaf35aa3341c4b81bd0e98"
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/core/KeyboardMode.cpp",
+      "git_mode": "100644",
+      "sha256": "dcf43c8a3b8d53df0a0359c6b0ac6e28a53d85ca20caf5538c289fbc1a33e703"
+    },
+    {
+      "path": "HAL/avr/include/comms/GamecubeBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "10a771fa10f73234cb8e4b1f8713d23000dddfca27a25cdd30a6755248d39a36"
+    },
+    {
+      "path": "HAL/avr/include/comms/N64Backend.hpp",
+      "git_mode": "100644",
+      "sha256": "701322be26a57be3b8733d3c4bca7a7d823da49c0f2c1fa6513e042edc85ac11"
+    },
+    {
+      "path": "HAL/avr/include/gpio.hpp",
+      "git_mode": "100644",
+      "sha256": "9e3d5b0707fe0866757a6bc78ee14d06969fe217b12651bc10a2858dbf519c50"
+    },
+    {
+      "path": "HAL/avr/include/input/NunchukInput.hpp",
+      "git_mode": "100644",
+      "sha256": "bd8713f919892a9a31faa078b3e963d83d658e1553fed0fbf5c3cd1b99ac3406"
+    },
+    {
+      "path": "HAL/avr/include/serial.hpp",
+      "git_mode": "100644",
+      "sha256": "829424b1189ab60bb604a994a44257779c4cc38155108afd73250fc960698297"
+    },
+    {
+      "path": "HAL/avr/include/stdlib.hpp",
+      "git_mode": "100644",
+      "sha256": "7fd5fc2820f5f1fdbec8f79579d95083ce79444bf7de715f2a54b2fb7c49825c"
+    },
+    {
+      "path": "HAL/avr/include/util/state_util.hpp",
+      "git_mode": "100644",
+      "sha256": "daf54029491dc42df3e16d4a90a4f7a9e6a185674c54dd2ce42f582764bc29de"
+    },
+    {
+      "path": "HAL/avr/proto/config.options",
+      "git_mode": "100644",
+      "sha256": "41c31500a7c865899927f1024412e54ea93883968047615d57b72eb44b824697"
+    },
+    {
+      "path": "HAL/avr/src/comms/GamecubeBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "d422c31ddd40d88d5b25af654978701f2cbddd565e32e798ffdecf6c148903ae"
+    },
+    {
+      "path": "HAL/avr/src/comms/N64Backend.cpp",
+      "git_mode": "100644",
+      "sha256": "8f1a93bdbebdb84359e4edced1f2ca3639b7da93e760130a1369758b3102b14d"
+    },
+    {
+      "path": "HAL/avr/src/gpio.cpp",
+      "git_mode": "100644",
+      "sha256": "ec2bd0142c9105abbbd206bb8aeec69d340dd24d6132d68516160446041aca58"
+    },
+    {
+      "path": "HAL/avr/src/input/NunchukInput.cpp",
+      "git_mode": "100644",
+      "sha256": "fe426c1f8ccdb4b32bd74e6ca3e90fd62e436405dabdf2d87f9b0e4bc8e2af9c"
+    },
+    {
+      "path": "HAL/avr/src/reboot.cpp",
+      "git_mode": "100644",
+      "sha256": "042c0825b4d7def4694100e43bdc522ec324e0e666d46e38a14444821a35a90e"
+    },
+    {
+      "path": "HAL/avr/src/serial.cpp",
+      "git_mode": "100644",
+      "sha256": "7e34fb0519142d0bd66e35dfa1cf6b7380214688db47adc978192a8abdd52315"
+    },
+    {
+      "path": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "477c44312ea772f82a9a6ed7de71bacbe14f2a337766ffd4607529e8d1aa5a12"
+    },
+    {
+      "path": "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+      "git_mode": "100644",
+      "sha256": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9"
+    },
+    {
+      "path": "HAL/pico/include/comms/DInputBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "d647b49a4c338f0abaa03b9a3d9518f7a3a25b4b51cce0d1c830d8c98742475e"
+    },
+    {
+      "path": "HAL/pico/include/comms/GamecubeBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "2dcf4c3a906a860663617583becc2495062a3d5ba7ef7286591b12d462a406b5"
+    },
+    {
+      "path": "HAL/pico/include/comms/N64Backend.hpp",
+      "git_mode": "100644",
+      "sha256": "50a1b0f125346b5881c2665c3da2fbb0485aa563dbf98aedc70bb8c105047cd0"
+    },
+    {
+      "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b"
+    },
+    {
+      "path": "HAL/pico/include/comms/NesBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "a07f99ec7da25c529c42b62e2d8d92faa1ef8b6b1052e55a1b401063f1cd8f12"
+    },
+    {
+      "path": "HAL/pico/include/comms/NintendoSwitchBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "201faa4dbaaddb5badf274e350f17ab9d6b3e6e286de321094d590e0c031540c"
+    },
+    {
+      "path": "HAL/pico/include/comms/SnesBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "a55c6001beb1d42c82a5ff81b603add089e15687e43700bfec7afe106922d925"
+    },
+    {
+      "path": "HAL/pico/include/comms/XInputBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "e0cf78a9c800461f4636b0e4ecebc47a52f7b1e001f709af210373f4bf9229cf"
+    },
+    {
+      "path": "HAL/pico/include/comms/backend_init.hpp",
+      "git_mode": "100644",
+      "sha256": "3c2e4b29d06e85e17ba0f63ac7160589ec0b5661874406a9e3a576446b2cf227"
+    },
+    {
+      "path": "HAL/pico/include/config_defaults.hpp",
+      "git_mode": "100644",
+      "sha256": "468903039d4ae881e9529ffe07427b635c74e4c6ff7e64f7237c9f286cdcfb8a"
+    },
+    {
+      "path": "HAL/pico/include/core/CheckedStorageFile.hpp",
+      "git_mode": "100644",
+      "sha256": "2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c"
+    },
+    {
+      "path": "HAL/pico/include/core/KeyboardMode.hpp",
+      "git_mode": "100644",
+      "sha256": "6bc35650a119ec942e26015dcb36361ffb284e0f8221134ccd5776ebdfb7a7b5"
+    },
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "git_mode": "100644",
+      "sha256": "cd80ea0289b0ab7a42da664e6045678fce67614c2f322a916d75afa4a1818b40"
+    },
+    {
+      "path": "HAL/pico/include/display/ConfigMenu.hpp",
+      "git_mode": "100644",
+      "sha256": "847d938f57951c2ed08898d47bca3c3c853ebb1db6168bc063d99cd825c9c9e0"
+    },
+    {
+      "path": "HAL/pico/include/display/ConfigMenuAssets/GlyphMenuBitmaps.h",
+      "git_mode": "100644",
+      "sha256": "2571a4f5d3f7952ba007ef022cc24e24bb9069f4e99e94c2e193dd398c0e4dd7"
+    },
+    {
+      "path": "HAL/pico/include/display/CurrentProfileLabel.hpp",
+      "git_mode": "100644",
+      "sha256": "f6fe56165aaf736078d553c4b0f4b0dadf84643baf1fb3937f1797294575cc6e"
+    },
+    {
+      "path": "HAL/pico/include/display/DefaultConfigMenu.hpp",
+      "git_mode": "100644",
+      "sha256": "e54955a841d0b7b0fed5577f24e9cca9c511b15a15d1f769d75335e38a1bc773"
+    },
+    {
+      "path": "HAL/pico/include/display/DisplayMode.hpp",
+      "git_mode": "100644",
+      "sha256": "6dfa4950dc2280df961de0198ea3a01c0a271b2f8fc3334374463793fa316a29"
+    },
+    {
+      "path": "HAL/pico/include/display/InputDisplay.hpp",
+      "git_mode": "100644",
+      "sha256": "4f06b4ec13b1359b676e7945e0be473231192e70256fc81c2ed563bb09e987d4"
+    },
+    {
+      "path": "HAL/pico/include/display/PlateLabel.hpp",
+      "git_mode": "100644",
+      "sha256": "d4a6811b401a2a5dd25eab2b8742909ab9884653882b44aa7164fbde83c13430"
+    },
+    {
+      "path": "HAL/pico/include/display/RemapMenu.hpp",
+      "git_mode": "100644",
+      "sha256": "fed30a80b3f4a76dd09a0eaa3a7742d8cf953ca77aff5b18c70d5df06700c135"
+    },
+    {
+      "path": "HAL/pico/include/display/RgbBrightnessMenu.hpp",
+      "git_mode": "100644",
+      "sha256": "d752ea83abefeaccd390d58df6826a001397038f650a5539ac5342cf6a23c521"
+    },
+    {
+      "path": "HAL/pico/include/game_utils/Ult_adc.h",
+      "git_mode": "100644",
+      "sha256": "de421be79897f8fd8f0fe66e8d1cea9b997da3b543f6471cc18683dd1c2fe648"
+    },
+    {
+      "path": "HAL/pico/include/gpio.hpp",
+      "git_mode": "100644",
+      "sha256": "0a1bf79395451be05260e928a2c5197e2804f04e9d375f43d35378f1bc406553"
+    },
+    {
+      "path": "HAL/pico/include/input/DebouncedGpioButtonInput.hpp",
+      "git_mode": "100644",
+      "sha256": "0aaf94af6a0fd96a12f7eba2dafb046eed0d02d3bf7c22196418fad09aa4a973"
+    },
+    {
+      "path": "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp",
+      "git_mode": "100644",
+      "sha256": "45c3dfd010eebbcce79329df30f71f3d25a33759b30ecbe9fe2cc95fa1e5df30"
+    },
+    {
+      "path": "HAL/pico/include/input/GamecubeControllerInput.hpp",
+      "git_mode": "100644",
+      "sha256": "e3ce3ddd0bd176be7b56b56822aa6e212746b27f29ed6df71965ea0252f08462"
+    },
+    {
+      "path": "HAL/pico/include/input/NunchukInput.hpp",
+      "git_mode": "100644",
+      "sha256": "aa0b068b73a8726f9a2eee201e94b024b42dc27c60e273007dee805cc3da1185"
+    },
+    {
+      "path": "HAL/pico/include/input/Pca9671Input.hpp",
+      "git_mode": "100644",
+      "sha256": "2968f3413ae2d865c09730a669f7600e43d5d80c216b6362068fca6f2d87ff98"
+    },
+    {
+      "path": "HAL/pico/include/input/debounce.hpp",
+      "git_mode": "100644",
+      "sha256": "75327d780827f78b87993fcb9dc584b67ec9847346112f19a3a8b3918e7503ae"
+    },
+    {
+      "path": "HAL/pico/include/rgb/ButtonLocations.hpp",
+      "git_mode": "100644",
+      "sha256": "4b1a0aa989c2c162e0700b0d30c22f0f1653dc27708ad8cc51f27c97cdb6cb05"
+    },
+    {
+      "path": "HAL/pico/include/serial.hpp",
+      "git_mode": "100644",
+      "sha256": "829424b1189ab60bb604a994a44257779c4cc38155108afd73250fc960698297"
+    },
+    {
+      "path": "HAL/pico/include/stdlib.hpp",
+      "git_mode": "100644",
+      "sha256": "676ecc6f5a9b333bf2c55a9df11ddf037a83fe217788c17f887fae4851ea90bc"
+    },
+    {
+      "path": "HAL/pico/include/tempfix.h",
+      "git_mode": "100644",
+      "sha256": "a33d7576b55839bb26da5fe3b80fbea8951d55d52d65a6a8cf0ca329edef7930"
+    },
+    {
+      "path": "HAL/pico/include/tusb_config_pico.h",
+      "git_mode": "100644",
+      "sha256": "ca059e0e8ff7f779e469b40ad67bea695e9d69abf092af7e119993963ba2238c"
+    },
+    {
+      "path": "HAL/pico/include/util/state_util.hpp",
+      "git_mode": "100644",
+      "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81"
+    },
+    {
+      "path": "HAL/pico/src/comms/BootJoybusDetection.cpp",
+      "git_mode": "100644",
+      "sha256": "d0fc8aed148e27ae4d82285bb936e4b1b5516b5ba61102113cc72bcb4cd68ec5"
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "673db9dbe9736059c03c65dcae1c98cee3a15b638a170b3faff7046b97b5deb5"
+    },
+    {
+      "path": "HAL/pico/src/comms/DInputBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea"
+    },
+    {
+      "path": "HAL/pico/src/comms/GamecubeBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "3e9066b89a8433e1ba7d7cebe8048a8e24624b60339449fff0a90da663982ce4"
+    },
+    {
+      "path": "HAL/pico/src/comms/N64Backend.cpp",
+      "git_mode": "100644",
+      "sha256": "8cdf98be87caaeb23b9a0412a6bfd08bc98615a2f64f6e5ea3096a9fb60535ce"
+    },
+    {
+      "path": "HAL/pico/src/comms/NesBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "60b721c48257df2a8d2783f666cfb4ffdb75c61eb649978b4b64c69ceade0fa2"
+    },
+    {
+      "path": "HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "740a22bd05df3103bd01cfb7b6a357309c825ae70f1ba11d4a91c0f058a0048a"
+    },
+    {
+      "path": "HAL/pico/src/comms/SnesBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "cbe6b62c117469b0ba970b17c939d1966cff0078e09e51242aa2c106d6941660"
+    },
+    {
+      "path": "HAL/pico/src/comms/XInputBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "git_mode": "100644",
+      "sha256": "959e1afe28e854ca3401839875badbb2b314ed36f789bcac8a80ace18707c4aa"
+    },
+    {
+      "path": "HAL/pico/src/comms/console_detection.cpp",
+      "git_mode": "100644",
+      "sha256": "55542693f06be22b0a63ecfe9e99ad477393c4571e499e815922f2e204e35d9f"
+    },
+    {
+      "path": "HAL/pico/src/core/CheckedStorage.cpp",
+      "git_mode": "100644",
+      "sha256": "887b14dc443484ce7caaf49b430c7b8a8f01320f29d876b345e228a313e90abd"
+    },
+    {
+      "path": "HAL/pico/src/core/GlyphPackageSourceReader.cpp",
+      "git_mode": "100644",
+      "sha256": "75caec42f7b87e06ad512fc5ee6f584f051853d86fc2ed99ca4a5472e31cdf9f"
+    },
+    {
+      "path": "HAL/pico/src/core/KeyboardMode.cpp",
+      "git_mode": "100644",
+      "sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d"
+    },
+    {
+      "path": "HAL/pico/src/core/NativeTargetMetrics.cpp",
+      "git_mode": "100644",
+      "sha256": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c"
+    },
+    {
+      "path": "HAL/pico/src/core/NativeTargetMetricsEntry.S",
+      "git_mode": "100644",
+      "sha256": "319a50ecef85093cd0b91660c1a25bd55df36e64f85e744f8df004627918cb0a"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "git_mode": "100644",
+      "sha256": "8727612b565922c85d51c8ed11ae6fb443a81b51051eb210c1855450df22f95d"
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStore.cpp",
+      "git_mode": "100644",
+      "sha256": "ce1594d85e1ef588b126b4cbfa989ba93847b5a356d36a88f884fc88e6a59220"
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStoreLifecycle.inc",
+      "git_mode": "100644",
+      "sha256": "5e6c14fefda867076915368d362279970fd7675137ae1a1fa87ab071d0a03474"
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStorePackage.inc",
+      "git_mode": "100644",
+      "sha256": "622aa1a48c7e3b79da4f55adf5a1aff2d0b32d8953de6b8503d843d2a0b81c78"
+    },
+    {
+      "path": "HAL/pico/src/core/ResourceDiagnostics.cpp",
+      "git_mode": "100644",
+      "sha256": "99628d38b1adbc44aa2084ccded843e050e453341291de29c0c34ef03df418da"
+    },
+    {
+      "path": "HAL/pico/src/display/ConfigMenu.cpp",
+      "git_mode": "100644",
+      "sha256": "fbbd6124ce97139e290465ddd5c2b7f6f38c754566845cbd8b765ab24943b09f"
+    },
+    {
+      "path": "HAL/pico/src/display/CurrentProfileLabel.cpp",
+      "git_mode": "100644",
+      "sha256": "c292d61ffb3a5124f8e83603740074ed17edb7aae5d34a919edc9669e0aac9aa"
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "git_mode": "100644",
+      "sha256": "86f60d910c6dd8b5f49b1ee00ed23eb6702e59feca8b1f7be3accef4a61a3be0"
+    },
+    {
+      "path": "HAL/pico/src/display/InputDisplay.cpp",
+      "git_mode": "100644",
+      "sha256": "ed99cd63a3d241f935fb10e117139d87bc43fdb961840dca574e3137e0006dec"
+    },
+    {
+      "path": "HAL/pico/src/display/RemapMenu.cpp",
+      "git_mode": "100644",
+      "sha256": "3707564737f8e9f4652e1daddedb6f0e40c94a2cc741d89bc29760d94a39b7fb"
+    },
+    {
+      "path": "HAL/pico/src/display/RgbBrightnessMenu.cpp",
+      "git_mode": "100644",
+      "sha256": "2a1cf75ef2db9c933404c5a60d4850836b0ba6faf16579a6d7f258701afad650"
+    },
+    {
+      "path": "HAL/pico/src/game_utils/Rivals2_adc.cpp",
+      "git_mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "HAL/pico/src/game_utils/Ult_adc.c",
+      "git_mode": "100644",
+      "sha256": "447012837b38bcac0ed70d7cae6d69540217523cc1d88758021913dc2571156e"
+    },
+    {
+      "path": "HAL/pico/src/gpio.cpp",
+      "git_mode": "100644",
+      "sha256": "141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c"
+    },
+    {
+      "path": "HAL/pico/src/input/GamecubeControllerInput.cpp",
+      "git_mode": "100644",
+      "sha256": "1365d96c017fc3889e660edab39884c6d86019d59b0fa6de08c09dd9b421175c"
+    },
+    {
+      "path": "HAL/pico/src/input/NunchukInput.cpp",
+      "git_mode": "100644",
+      "sha256": "31435748031cfe1fd0781892c3b5818d63e0ce36b6caa9e30683a2916167c497"
+    },
+    {
+      "path": "HAL/pico/src/input/Pca9671Input.cpp",
+      "git_mode": "100644",
+      "sha256": "97777d2cff4f64873bc10c6595fce045d773cc84fe65d10b9497cecff62517d8"
+    },
+    {
+      "path": "HAL/pico/src/reboot.cpp",
+      "git_mode": "100644",
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e"
+    },
+    {
+      "path": "HAL/pico/src/rgb/ButtonLocations.cpp",
+      "git_mode": "100644",
+      "sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f"
+    },
+    {
+      "path": "HAL/pico/src/serial.cpp",
+      "git_mode": "100644",
+      "sha256": "4a38620ffc8683d55d61d88a262ebc1f2a9f830dbd086fca8733f0253e222e4d"
+    },
+    {
+      "path": "builder_scripts/arduino_pico.py",
+      "git_mode": "100644",
+      "sha256": "676b20e42500cb0b5f671892250a2c063e21a31459ed542ad48a9481a7fce0af"
+    },
+    {
+      "path": "builder_scripts/native_target_metrics.py",
+      "git_mode": "100644",
+      "sha256": "ce41658b2e69eb61877ce27b3a5c345aa2980ad503db9a721f86a4198a985914"
+    },
+    {
+      "path": "config/glyph/.clang-format",
+      "git_mode": "100644",
+      "sha256": "50183aa8e613253fd778203d5d6824f94710c3986d627e5d28df52d9d74fc3c7"
+    },
+    {
+      "path": "config/glyph/.github/workflows/build.yml",
+      "git_mode": "100644",
+      "sha256": "85e134a6b98e377db510c468e50a41446c4b62ec486728e1da880f04e531c4a7"
+    },
+    {
+      "path": "config/glyph/LICENSE",
+      "git_mode": "100644",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "config/glyph/common/include/LEDTemplates.hpp",
+      "git_mode": "100644",
+      "sha256": "913df323d7eebe69146dec8e03cb4cc944a927b56d482a039a67f3cd3e42ec53"
+    },
+    {
+      "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+      "git_mode": "100644",
+      "sha256": "aaa1859f1964bcf99145fc6a0210f835c7f9f05ab64705f6700f40be618f682d"
+    },
+    {
+      "path": "config/glyph/common/include/display/AboutMenu.hpp",
+      "git_mode": "100644",
+      "sha256": "decc5c33755d07974c906bb68a0a77c083c7349cc329cc3a838177069418736f"
+    },
+    {
+      "path": "config/glyph/common/include/display/Font4x7Fixed.h",
+      "git_mode": "100644",
+      "sha256": "697738b9192b5c97872ccf3b0a6f94970e1f3df95d88efa8bb27958d85079d5f"
+    },
+    {
+      "path": "config/glyph/common/include/display/GlyphConfigMenu.hpp",
+      "git_mode": "100644",
+      "sha256": "428ad8033d9a03adbf51526a7cb494287da0525e6c493f83f8c19d8d366f64d7"
+    },
+    {
+      "path": "config/glyph/common/include/display/MenuButtonHints.hpp",
+      "git_mode": "100644",
+      "sha256": "2773d48665657301e72c071114eba137f7ab0fc257e845ee0419664a750ebfed"
+    },
+    {
+      "path": "config/glyph/common/include/display/OopsieMenu.hpp",
+      "git_mode": "100644",
+      "sha256": "d4b29b14d2421b284b7a3d42f3c717ece9df2e9e45026190b10901f277c8df24"
+    },
+    {
+      "path": "config/glyph/common/include/display/Picopixel.h",
+      "git_mode": "100644",
+      "sha256": "035c01e6d48efdfef1e4de6152d0d03910210e449236506ec7c8f71799073363"
+    },
+    {
+      "path": "config/glyph/common/include/final_usb_gamepad.hpp",
+      "git_mode": "100644",
+      "sha256": "6525805b9ad212d2e0c3fe07707b236163644425c22f894e9592516d8febc8aa"
+    },
+    {
+      "path": "config/glyph/common/include/glyph_config_validation.hpp",
+      "git_mode": "100644",
+      "sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229"
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "git_mode": "100644",
+      "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c"
+    },
+    {
+      "path": "config/glyph/common/include/icons/12x12bitmaps.hpp",
+      "git_mode": "100644",
+      "sha256": "6c8b930223444cc753e2e1ba0a77886fc49879eaf1360db8e7f50686e7c1891e"
+    },
+    {
+      "path": "config/glyph/common/include/icons/12x12buttons.hpp",
+      "git_mode": "100644",
+      "sha256": "d738fa0effbc7c2931852acbf92015ad79ed04c707cbf9ee6422375aebb459e3"
+    },
+    {
+      "path": "config/glyph/common/include/icons/16x16bitmaps.hpp",
+      "git_mode": "100644",
+      "sha256": "d7dea73e0a0ffaac25d3cd095a11bd71e4c12a000492e58279f8320904d843e2"
+    },
+    {
+      "path": "config/glyph/common/include/icons/menubases.hpp",
+      "git_mode": "100644",
+      "sha256": "ec71e2e9d304782edffb457ff46aac6151644a4a9fc80c1299de2055486b7873"
+    },
+    {
+      "path": "config/glyph/common/include/icons/splashscreen.hpp",
+      "git_mode": "100644",
+      "sha256": "241acda95bcb2b4ced277e020c85c0afc6ff4108acc817094682f4d9c6b41fa2"
+    },
+    {
+      "path": "config/glyph/common/src/LEDTemplates.cpp",
+      "git_mode": "100644",
+      "sha256": "a30275c41a87d152fc653caf084c80a9dfb59493b73c40639e8eedbeb6c264a7"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "git_mode": "100644",
+      "sha256": "11bba05e8e6b6f73097469a01a04c37cebb014f5ee2a0a9a492fcbc7fe9cccef"
+    },
+    {
+      "path": "config/glyph/common/src/display/AboutMenu.cpp",
+      "git_mode": "100644",
+      "sha256": "402e29c92b6f7f5a1d5d15b3bfb0ce65e9bb1c5f8f700d1e92ddfc61f32bc872"
+    },
+    {
+      "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "git_mode": "100644",
+      "sha256": "137fbcac8b6d95c6ee06a0e2be1b11769a56f2a03c75cd8060cc24bf3c7b8fdf"
+    },
+    {
+      "path": "config/glyph/common/src/display/MenuButtonHints.cpp",
+      "git_mode": "100644",
+      "sha256": "1dc0a5780d1e1ffee6e5e6d24fc62b60605510c675c8a15d278a90d119469bb9"
+    },
+    {
+      "path": "config/glyph/common/src/display/OopsieMenu.cpp",
+      "git_mode": "100644",
+      "sha256": "f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2"
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "git_mode": "100644",
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+    },
+    {
+      "path": "config/glyph/env.ini",
+      "git_mode": "100644",
+      "sha256": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36"
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/button_positions.hpp",
+      "git_mode": "100644",
+      "sha256": "73b84b62bec59650ed5a027b0d6100bb09109618c65611ca6bf37b8877736e2f"
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/glyph_pinout.hpp",
+      "git_mode": "100644",
+      "sha256": "1ac5e4278fb72b8c918a6bb307521927afb8d27142aba278bd0f7bfb219e4ab6"
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/matrix_definition.hpp",
+      "git_mode": "100644",
+      "sha256": "c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1"
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/neopixel_definitions.hpp",
+      "git_mode": "100644",
+      "sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32"
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/button_positions.hpp",
+      "git_mode": "100644",
+      "sha256": "1bfc10fcbbfdd38dd76e4fd9bc7567272fc5c56d8b61eb9faebf0f931da5e745"
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/glyph_pinout.hpp",
+      "git_mode": "100644",
+      "sha256": "70274b04cf82ef037932afd75b51260e9c1edbe22067106ae99ecb8c0b4b23b2"
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/matrix_definition.hpp",
+      "git_mode": "100644",
+      "sha256": "d6044350481f23f0c38b4b95edb10d8fe8a085d2cd034a6e74220c2cf80ecbce"
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/neopixel_definitions.hpp",
+      "git_mode": "100644",
+      "sha256": "125bb5e45b15067fa36de64747775f71226fe478bf43a63dbed8096240c7bef9"
+    },
+    {
+      "path": "config/glyph/meta.yaml",
+      "git_mode": "100644",
+      "sha256": "22e3d23a7b596aa99da26fe86cc83e9e24d57b40200f702b9289e94cef2d8655"
+    },
+    {
+      "path": "include/comms/B0XXInputViewer.hpp",
+      "git_mode": "100644",
+      "sha256": "3c64aa64e551830da8c4779686e2f289457dcdbe405319533b9bc8a44e14833f"
+    },
+    {
+      "path": "include/comms/BootJoybusDetection.hpp",
+      "git_mode": "100644",
+      "sha256": "977a453f930b7bba7ed926e493cc4f0b5418cd1360c8a76d40940bb61d4706f9"
+    },
+    {
+      "path": "include/comms/IntegratedDisplay.hpp",
+      "git_mode": "100644",
+      "sha256": "8b66db83f79a251ac1d6fe80ad88f131c973c3c7b5191579ec787dc2423fdcae"
+    },
+    {
+      "path": "include/comms/console_detection.hpp",
+      "git_mode": "100644",
+      "sha256": "3399447101a74e7c9eaf49ced98e3a31ef77e1f35ae79ebb3c0cf09ed8f2d184"
+    },
+    {
+      "path": "include/core/BootDiagnostics.hpp",
+      "git_mode": "100644",
+      "sha256": "ae4cb7f85ee6c83919eacaf4610b1437e5cc1dcf7e05cd99f9bbc33319529b98"
+    },
+    {
+      "path": "include/core/BootTiming.hpp",
+      "git_mode": "100644",
+      "sha256": "36802c90f550e9cd308f423379cbe8a9c29fe2aeea5095664179de3dd3bb9ba0"
+    },
+    {
+      "path": "include/core/CheckedStorage.hpp",
+      "git_mode": "100644",
+      "sha256": "c7d1d95a0f13f89f1198f69b87fcd4738ed929ee43ae80a822e92155086d31cf"
+    },
+    {
+      "path": "include/core/CommunicationBackend.hpp",
+      "git_mode": "100644",
+      "sha256": "27926c1f7a3c8ce765e17ab200367795d323f2fa3450b8f1ad2e2185117ac494"
+    },
+    {
+      "path": "include/core/CompactConfigRecovery.hpp",
+      "git_mode": "100644",
+      "sha256": "d8ff4e60420c5964c5d6ab863a4e28cc737a4fc7491eaf26043007846ce3dfc4"
+    },
+    {
+      "path": "include/core/ConfigWireValidator.hpp",
+      "git_mode": "100644",
+      "sha256": "ebed06409d6c1a874d7781a46a5b5483182fc855c575cbf26d4442e6aa89cc59"
+    },
+    {
+      "path": "include/core/ConfigWriteCandidate.hpp",
+      "git_mode": "100644",
+      "sha256": "7f45aa7acbb8e3985a91af4bde26f4bd5aefcfb59154f7cc740775f93c56c24b"
+    },
+    {
+      "path": "include/core/ControllerMode.hpp",
+      "git_mode": "100644",
+      "sha256": "f45832e3f6a764e8b2720da3c4591f5989b835513619bcb1f238e26f5986f16d"
+    },
+    {
+      "path": "include/core/GlyphPackageSourceReader.hpp",
+      "git_mode": "100644",
+      "sha256": "8a7e06c8b320e8576340600e65cec2b48291ff6841d686b9da3b84cfff57fe1e"
+    },
+    {
+      "path": "include/core/InputMode.hpp",
+      "git_mode": "100644",
+      "sha256": "07de8d5f1d72b9c25a18b152e57c958839d4e6abf30b4ef18effc5035f35e832"
+    },
+    {
+      "path": "include/core/InputSource.hpp",
+      "git_mode": "100644",
+      "sha256": "10c5e42a7c624ff89d3ab14389a071fab9f332a973fff7db3791358334aa500a"
+    },
+    {
+      "path": "include/core/ModeSelectionTransaction.hpp",
+      "git_mode": "100644",
+      "sha256": "98e6d11d5722bbb6e92109a03cec36198e67b28402de328016832a7e4c6e5715"
+    },
+    {
+      "path": "include/core/NativeTargetMetrics.hpp",
+      "git_mode": "100644",
+      "sha256": "1f5dc61a2c0556de9c1501677ff0661674a91ce03a2b33669c9251a406bdfcaf"
+    },
+    {
+      "path": "include/core/PackageNamespaceClassifier.hpp",
+      "git_mode": "100644",
+      "sha256": "f2da2fca7114663cba28435c253ded9e9cf31e3c5dbb78d67239abe8a36d8c10"
+    },
+    {
+      "path": "include/core/PackageOwnership.hpp",
+      "git_mode": "100644",
+      "sha256": "221d4f3363179c9c24667f7c003941788d34392dacb2d5db5b68c1a3c029173a"
+    },
+    {
+      "path": "include/core/PackageRequestWire.hpp",
+      "git_mode": "100644",
+      "sha256": "ebc3ee6afc057819ad2e2379df9f51469841d913c3aa6955bf0fbfe5ae402fc5"
+    },
+    {
+      "path": "include/core/PackageStorageFence.hpp",
+      "git_mode": "100644",
+      "sha256": "32fd9ddc44952deb63ca1536e66d53b5e6590119b0ef445d866f6012b67a0913"
+    },
+    {
+      "path": "include/core/PackageStorageFormat.hpp",
+      "git_mode": "100644",
+      "sha256": "2b148a3bc7b80a0b600c044020432aea5a67494a14630ccc057ff1f616f58e9e"
+    },
+    {
+      "path": "include/core/ProfileSelection.hpp",
+      "git_mode": "100644",
+      "sha256": "38392bd1dd4525268f88709909b66ffa6a14999802d87a41313ec80a50092869"
+    },
+    {
+      "path": "include/core/ProfileStore.hpp",
+      "git_mode": "100644",
+      "sha256": "3a538d5486e6c435149f2249aad0684c12e93d2f10a9c0b007be0040414c7cdd"
+    },
+    {
+      "path": "include/core/ProfileStoreAtomicCommit.hpp",
+      "git_mode": "100644",
+      "sha256": "b3d5b79d64a721922b92272fe028775e3e0be9a71b97df84fb8eed049a26cc0e"
+    },
+    {
+      "path": "include/core/ProfileStoreCapacity.hpp",
+      "git_mode": "100644",
+      "sha256": "7c63893a21efd5cf75926c83e107d4e3e36b456ffc6353e0cbe93f15879dcc9b"
+    },
+    {
+      "path": "include/core/ProfileStoreFaultControls.hpp",
+      "git_mode": "100644",
+      "sha256": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1"
+    },
+    {
+      "path": "include/core/ProfileStoreName.hpp",
+      "git_mode": "100644",
+      "sha256": "3d1b30552c2e4eff0f515714d3b70cb346a5eefcd6fb67205e824c8d3775aeef"
+    },
+    {
+      "path": "include/core/ProfileStorePaths.hpp",
+      "git_mode": "100644",
+      "sha256": "e2919e14fd17f820eb604a20117dc0fd33ee104aa53960607dd5f8eeb6c412e0"
+    },
+    {
+      "path": "include/core/ProfileStoreReadTrace.hpp",
+      "git_mode": "100644",
+      "sha256": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456"
+    },
+    {
+      "path": "include/core/ProfileStoreRequestIdentity.hpp",
+      "git_mode": "100644",
+      "sha256": "a0ee0e8d0d6d2c9f40404af3643a671ed405fd640a00b681b0664f8f663c3bd9"
+    },
+    {
+      "path": "include/core/ProfileStoreRxDiagnostics.hpp",
+      "git_mode": "100644",
+      "sha256": "123f0e55754d8ad9b3e91b8f0f29f8e4360f428765af88e545d74d3afde26624"
+    },
+    {
+      "path": "include/core/ProfileStoreStorage.hpp",
+      "git_mode": "100644",
+      "sha256": "af7a998ad594734e9589a0961a2ce0a67091ccfbe657bb0b2d6d153ccf655bd0"
+    },
+    {
+      "path": "include/core/ProfileStoreTransaction.hpp",
+      "git_mode": "100644",
+      "sha256": "af647f116534fac3f10c473d11c8c93347d25b541efa8924c13454e34686f5ab"
+    },
+    {
+      "path": "include/core/RecoveryInitialization.hpp",
+      "git_mode": "100644",
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a"
+    },
+    {
+      "path": "include/core/ResolvedInputContext.hpp",
+      "git_mode": "100644",
+      "sha256": "52bb4f647cb78595f1d670bd53b2944fb2711685acf99b6ef8370a8142db4dea"
+    },
+    {
+      "path": "include/core/ResourceDiagnostics.hpp",
+      "git_mode": "100644",
+      "sha256": "00cddf0ce9bd9a34c0f3daa54fd3f909946ce9c17f0a9ce9dbe3dfa28e8715ad"
+    },
+    {
+      "path": "include/core/RuntimeIdentity.hpp",
+      "git_mode": "100644",
+      "sha256": "0450362343a148cc647272a7671ae536578caca8edf8ec075dec3db2d139090f"
+    },
+    {
+      "path": "include/core/RuntimeIdentityService.hpp",
+      "git_mode": "100644",
+      "sha256": "fa7695213529918e52676cbe3d6ed3af435eeca0795f944662141d3a8111c5e7"
+    },
+    {
+      "path": "include/core/RuntimeIdentityWire.hpp",
+      "git_mode": "100644",
+      "sha256": "f613fcdcb244b00da2d99a24b784784936e0a44fc11c8668ed1da90ed15d1197"
+    },
+    {
+      "path": "include/core/RuntimeProfileDigest.hpp",
+      "git_mode": "100644",
+      "sha256": "d882efc236d334e5b8ecb403d1d5c99f8bea0539afa788e267a28ddb7a786ffb"
+    },
+    {
+      "path": "include/core/Sha256.hpp",
+      "git_mode": "100644",
+      "sha256": "ba6080472c663e99489e378382af6ff3718ef8f737f9e7aaf375b4f187fa9e83"
+    },
+    {
+      "path": "include/core/StackWatermark.hpp",
+      "git_mode": "100644",
+      "sha256": "7b87846fa11a0910ec0c4fc6c5fd5520c78dffd6bce1015c335983ab9845f236"
+    },
+    {
+      "path": "include/core/config_button_validation.hpp",
+      "git_mode": "100644",
+      "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f"
+    },
+    {
+      "path": "include/core/config_rgb_target_validation.hpp",
+      "git_mode": "100644",
+      "sha256": "f75b4229ec193c172f9bc8b1d38a44a29d34b039763542a9788bda2974c35a0f"
+    },
+    {
+      "path": "include/core/config_usb_default_validation.hpp",
+      "git_mode": "100644",
+      "sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11"
+    },
+    {
+      "path": "include/core/config_utils.hpp",
+      "git_mode": "100644",
+      "sha256": "c4aaf06ebaf36422510a9f746bec20cbdc87bef099de2981c456719c637e076f"
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "git_mode": "100644",
+      "sha256": "1c73c8b2ab2c0ded58f8023e1236cc28af8e3c8d76d946a904708074f9849fc2"
+    },
+    {
+      "path": "include/core/mode_selection.hpp",
+      "git_mode": "100644",
+      "sha256": "f9fe61ca46dd11f70aae8f260a0598fc3a98c6d6f09a9e53df31e1fbcc9e83a0"
+    },
+    {
+      "path": "include/core/pinout.hpp",
+      "git_mode": "100644",
+      "sha256": "6ec5dcf6130383825a1fb5c0ce573a563a97719d7015cef68cb4c7e7cabf906a"
+    },
+    {
+      "path": "include/core/socd.hpp",
+      "git_mode": "100644",
+      "sha256": "88ff9be552e89f0c92a1548662fc4bf9b6fd4408b242f6f42bec8ecf70e6fc91"
+    },
+    {
+      "path": "include/core/state.hpp",
+      "git_mode": "100644",
+      "sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3"
+    },
+    {
+      "path": "include/img/remap.hpp",
+      "git_mode": "100644",
+      "sha256": "62cd1efb2f2fa30089b4a11f236712c582cf3b99b23dc350676cd2f858f1fbff"
+    },
+    {
+      "path": "include/img/remap.png",
+      "git_mode": "100644",
+      "sha256": "11b0ecd17f556172d315894a7e44f71bbf56781249defbf94bfc0aa425921418"
+    },
+    {
+      "path": "include/img/update.hpp",
+      "git_mode": "100644",
+      "sha256": "ae7cb4bd3ea6d3e8d1f581b75612bf0f1254cde142b37c494e2bc7087fcebbcf"
+    },
+    {
+      "path": "include/img/update.png",
+      "git_mode": "100644",
+      "sha256": "93024b400be941f7c08d5fba07fec56160f1a51212cc7f7f6af42477edf0d026"
+    },
+    {
+      "path": "include/input/GpioButtonInput.hpp",
+      "git_mode": "100644",
+      "sha256": "bdc492be32684546c2c77a307e934a9227243c582b1beed917ae7cf266de48cb"
+    },
+    {
+      "path": "include/input/SwitchMatrixInput.hpp",
+      "git_mode": "100644",
+      "sha256": "9f7fa65db078877d53cc851c8a906ac6c37ddbbb615f28266fc35bcd301f88f6"
+    },
+    {
+      "path": "include/modes/64.hpp",
+      "git_mode": "100644",
+      "sha256": "2839f6573877ff438e674e8e3c406850e02c2624bac7c79975cbe637e3b99442"
+    },
+    {
+      "path": "include/modes/CustomControllerMode.hpp",
+      "git_mode": "100644",
+      "sha256": "8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414"
+    },
+    {
+      "path": "include/modes/CustomKeyboardMode.hpp",
+      "git_mode": "100644",
+      "sha256": "c907de266f4ebeea8518511cf725c57bf52c85c0c9827f25cc2a7d20381f9464"
+    },
+    {
+      "path": "include/modes/DefaultKeyboardMode.hpp",
+      "git_mode": "100644",
+      "sha256": "5fd3dbe2d6e377dcb13e5f58eea8b800c1477bcf84d8b4321649314edd1b2a75"
+    },
+    {
+      "path": "include/modes/FgcMode.hpp",
+      "git_mode": "100644",
+      "sha256": "90b854be77c26b268399f0f6d3849e27f804f83b4ab61eaedede34d83353da78"
+    },
+    {
+      "path": "include/modes/Melee18Button.hpp",
+      "git_mode": "100644",
+      "sha256": "cc80c0cb76c0714b42eaeaaa9819093f6d2ddf18dda9ec09f2f430651f5b4e11"
+    },
+    {
+      "path": "include/modes/Melee20Button.hpp",
+      "git_mode": "100644",
+      "sha256": "38dfa8a874455d3f865c722bf6bfe4ebf607292085375440cb46ccf294c53cd6"
+    },
+    {
+      "path": "include/modes/ProjectM.hpp",
+      "git_mode": "100644",
+      "sha256": "35f2e3695bfc8c209400a5c66f2ba81f02341ed22f24591ab044beac09c9d115"
+    },
+    {
+      "path": "include/modes/Rivals2.hpp",
+      "git_mode": "100644",
+      "sha256": "90bfc5ab82915b63f41504c78a50e8e8565df44734c36016428b3dba3f5b20dc"
+    },
+    {
+      "path": "include/modes/RivalsOfAether.hpp",
+      "git_mode": "100644",
+      "sha256": "5feadf8205b79807bd467184aa0a195e07fcc090af367010a7aaf3e77d0afb0e"
+    },
+    {
+      "path": "include/modes/SenscopePrototype.hpp",
+      "git_mode": "100644",
+      "sha256": "8c17dd70815e30e356355cc7f28a199441f92872d63dcae6277ff86ae609bcd1"
+    },
+    {
+      "path": "include/modes/Ultimate.hpp",
+      "git_mode": "100644",
+      "sha256": "1773c2c8f5649640f0b403b4028016265f7f8e110f080dda446ee162deabcb2c"
+    },
+    {
+      "path": "include/modes/UltimateNativeEvaluator.hpp",
+      "git_mode": "100644",
+      "sha256": "9c080b6444efac9f302a10975948c26b8d38c7d7c22caa4ba26baf5cb3bc3a52"
+    },
+    {
+      "path": "include/modes/UltimateNativeProfile.hpp",
+      "git_mode": "100644",
+      "sha256": "98983da977093dd226c4570dc0c9ae5ea48f794d65fab70d0dc9f652aa6b8f59"
+    },
+    {
+      "path": "include/modes/UltimateProfileConfig.hpp",
+      "git_mode": "100644",
+      "sha256": "2eba575ba8ace466426e94fb68614fba297730a3fd092e044d9dc83e48eb1bd3"
+    },
+    {
+      "path": "include/modes/UltimateProfileEvaluator.hpp",
+      "git_mode": "100644",
+      "sha256": "e7a68817e13a11ba7e9e88c112fc3ade46e40c5d75fa94060896be70f4f722fc"
+    },
+    {
+      "path": "include/modes/WordProcessorMode.hpp",
+      "git_mode": "100644",
+      "sha256": "4a71d99de878182377d810209adb92c0a6281d62c7701dfd16f9665ac13c50af"
+    },
+    {
+      "path": "include/modes/extra/DarkSouls.hpp",
+      "git_mode": "100644",
+      "sha256": "f88664aa5496b01e181995d27d2540884c7df51f0bc645910595e2e69c0543ae"
+    },
+    {
+      "path": "include/modes/extra/HollowKnight.hpp",
+      "git_mode": "100644",
+      "sha256": "2ee4a18947bcefb5a047aca0e96885c9220e60eaeccd2b35cc091808d1086849"
+    },
+    {
+      "path": "include/modes/extra/MKWii.hpp",
+      "git_mode": "100644",
+      "sha256": "00449d919f23e47357089b3fa113307a8b290d717b8f224235d1b5020134cf19"
+    },
+    {
+      "path": "include/modes/extra/MultiVersus.hpp",
+      "git_mode": "100644",
+      "sha256": "3c9270177fce9f2604fb1b4eac8c5eeed9fcb112953d1b6f6ec1eba331e527ce"
+    },
+    {
+      "path": "include/modes/extra/RocketLeague.hpp",
+      "git_mode": "100644",
+      "sha256": "59798c9b4d3d1f295b1df1473def893fc313f7f95a11a144ee93814295e58ef4"
+    },
+    {
+      "path": "include/modes/extra/SaltAndSanctuary.hpp",
+      "git_mode": "100644",
+      "sha256": "c848bf3429951dc8f859b858bc434633746d7a2d50b277a15846f0cf5c946e79"
+    },
+    {
+      "path": "include/modes/extra/ShovelKnight.hpp",
+      "git_mode": "100644",
+      "sha256": "ddb1a9a9ce2ccc52312f1457c893078d35c2fa83cb1dbdc75142eb2d537c6e8c"
+    },
+    {
+      "path": "include/modes/extra/ToughLoveArena.hpp",
+      "git_mode": "100644",
+      "sha256": "c9b38505dc4ffc5d1b8a3192761d9030ad3e5e80e1104d1d40635be0a432350f"
+    },
+    {
+      "path": "include/modes/extra/Ultimate2.hpp",
+      "git_mode": "100644",
+      "sha256": "0b6cd1f76a9fbfaea3f3e47e98b24ead82f2a482948c7f1a269806eb00adbeba"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeBuildFlags.hpp",
+      "git_mode": "100644",
+      "sha256": "0486efd34d98a2a89620bdf3159a609e5c3bb3b1d0170db1380446ec5c75ff4c"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeDigital.hpp",
+      "git_mode": "100644",
+      "sha256": "d08c02c66b0258c9d9bbae9d53a04f1375edc6f3a8579808c2609199dac475e7"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeDirection.hpp",
+      "git_mode": "100644",
+      "sha256": "c9b1e29aecaa6993f12324503a8631f9625c8917883677cca3ff7baba05a5dd3"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeForce.hpp",
+      "git_mode": "100644",
+      "sha256": "c3ea72442fa9ff1ac263d24453da61d6ceaa061d4a033251d8a4d47be1e387be"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeModifier.hpp",
+      "git_mode": "100644",
+      "sha256": "14aaddebe44ac170a53889564bf3202a9d28cb6ed79f4ebf7f9d344f04f16ca8"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeOutput.hpp",
+      "git_mode": "100644",
+      "sha256": "7e79a6b10b35dd56fbc49a38b14caa796ce05f7acf9eefb04e549a334070af29"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeResolver.hpp",
+      "git_mode": "100644",
+      "sha256": "001f6b923bbab6917f8a86030e2235550f2b865ce40ecc273a072c7456dd9fc5"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeSelfTest.hpp",
+      "git_mode": "100644",
+      "sha256": "39d0151759e199e2e70e1e74716e1beff8b38f8d5fb6f38efac8ea28b1e2d0a1"
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeTypes.hpp",
+      "git_mode": "100644",
+      "sha256": "1c3cd07ddcee4ce1cb4f5d33b66392c88b7217bf5dc9d021a1cf058bf4c5d0fe"
+    },
+    {
+      "path": "include/reboot.hpp",
+      "git_mode": "100644",
+      "sha256": "bcc6237cd7c3b85e263cdfd2f265aaf257537a75fc6518acb4edf5f0ab14ef6d"
+    },
+    {
+      "path": "lib/TUCompositeHID/include/TUCompositeHID.hpp",
+      "git_mode": "100644",
+      "sha256": "a1b6a39213696018fb11e7694baff07c255b042b9bfce5989592a2403031763d"
+    },
+    {
+      "path": "lib/TUCompositeHID/include/TUGamepad.hpp",
+      "git_mode": "100644",
+      "sha256": "4e8b6b3ad56bfa5506a5febb5a4c018b7ac68fc9d35ae926b7ade55fd2a61c06"
+    },
+    {
+      "path": "lib/TUCompositeHID/include/TUKeyboard.hpp",
+      "git_mode": "100644",
+      "sha256": "29421cd802dc74ffb930ffbff16045cc3764d4129327751b0949d3dbb873e7d7"
+    },
+    {
+      "path": "lib/TUCompositeHID/src/TUCompositeHID.cpp",
+      "git_mode": "100644",
+      "sha256": "8dda015db9bb7a458d106ed7a415ccfa2a2888bc6c9ebdcc03f240fa96e8d294"
+    },
+    {
+      "path": "lib/TUCompositeHID/src/TUGamepad.cpp",
+      "git_mode": "100644",
+      "sha256": "b43911537a77fde06fb1a2c13482f30f59869b15470367c2b47c0ae16c6b2b0e"
+    },
+    {
+      "path": "lib/TUCompositeHID/src/TUKeyboard.cpp",
+      "git_mode": "100644",
+      "sha256": "bc046bbf1b998caf53bc58deed4b4927da050a9e3d24cf9a1e7da0373ab41ca9"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/LICENSE",
+      "git_mode": "100644",
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/UPSTREAM.md",
+      "git_mode": "100644",
+      "sha256": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/GamecubeConsole.hpp",
+      "git_mode": "100644",
+      "sha256": "54d2ced01964d91c2f8858f62b0b0b083681ba57bb5698a716f68a00ca29f2fa"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/GamecubeController.hpp",
+      "git_mode": "100644",
+      "sha256": "60171271dc96bdc0e89a58379806a32d4bc9ac11772b7bef63bb34551f638e99"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/N64Console.hpp",
+      "git_mode": "100644",
+      "sha256": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/N64Controller.hpp",
+      "git_mode": "100644",
+      "sha256": "1b190c1db980b628376c8b2a70ce3928effe2fdfa6dd847fd2658b076ae980ef"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/README",
+      "git_mode": "100644",
+      "sha256": "d1995176b3585fd998d0094d692fe9daf37b9dd6b3ef5dcd3b44914bf154dd9a"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/gamecube_definitions.h",
+      "git_mode": "100644",
+      "sha256": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/joybus.h",
+      "git_mode": "100644",
+      "sha256": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/joybus.pio.h",
+      "git_mode": "100644",
+      "sha256": "22ef77997e80d886f058484c06b9cf6521682dbdf10c40d8225e15ca028519e3"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/n64_definitions.h",
+      "git_mode": "100644",
+      "sha256": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/library.json",
+      "git_mode": "100644",
+      "sha256": "30ad48b1bb69e5019f4ea94d948c90bea29a478df72f28d52066fa7e8b842b99"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/GamecubeConsole.cpp",
+      "git_mode": "100644",
+      "sha256": "ab05eed54f34138ef2693c724eb6607a99e453a921bf6d308845739b5d7e09a1"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/GamecubeController.cpp",
+      "git_mode": "100644",
+      "sha256": "d2a57d444ea7062e567bbbd35934dcb0974b483bec895ed4e618d29ed7470e5d"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/N64Console.cpp",
+      "git_mode": "100644",
+      "sha256": "3d2e250805ec43aa318d63ee5216a67d5ddb30b209a8d4d833070a29c5a7da41"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/N64Controller.cpp",
+      "git_mode": "100644",
+      "sha256": "4cb9727eedf90442417f60e7ea6464ae65e1ab62e050968bfc21da2ab24932ed"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/joybus.c",
+      "git_mode": "100644",
+      "sha256": "e902fb66507ec708d2bdae1f2a2fc11c4f769c581fd11f07cb18db2643352fb3"
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/joybus.pio",
+      "git_mode": "100644",
+      "sha256": "17b9d52460c8b9e2d57fe649b1a64e0f523140a0bc58aca0b8929120d8481ba8"
+    },
+    {
+      "path": "platformio.ini",
+      "git_mode": "100644",
+      "sha256": "8c61f867c0ba799213a38ccc7d88d9a02f72270fb7a37b9d11d5128459d414b0"
+    },
+    {
+      "path": "schema/haybox/README.md",
+      "git_mode": "100644",
+      "sha256": "763b498457a656436304bfe04799f12018be8a6bee69ea0b69c80e601b3a1a43"
+    },
+    {
+      "path": "schema/haybox/config.options",
+      "git_mode": "100644",
+      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+    },
+    {
+      "path": "schema/haybox/config.proto",
+      "git_mode": "100644",
+      "sha256": "1b781f97e8a93c8840d26698e8c802b366feb812afb7ad45f06c5d3d9ad5ee33"
+    },
+    {
+      "path": "schema/haybox/package.options",
+      "git_mode": "100644",
+      "sha256": "0b271ee8767333f4d77530ea76605fce4d65e8b4d5b4db6208b74257f0453197"
+    },
+    {
+      "path": "schema/haybox/package.proto",
+      "git_mode": "100644",
+      "sha256": "36b18aaef58317101d6266eae9b3a822a2eb4ee19cd8f81a2e70876f3d422ae3"
+    },
+    {
+      "path": "scripts/build-glyph-mk6-quiet.sh",
+      "git_mode": "100755",
+      "sha256": "328ff73b9f1da1ccad5d7ee0431b664b9c33a70c35959e4a14f6677881844eeb"
+    },
+    {
+      "path": "scripts/build-glyph-mk6-senscope-playtest-quiet.sh",
+      "git_mode": "100755",
+      "sha256": "ba43d4b4509f0b7096fd2adf4f6ad7da1a9f5871b6e7a2c2e4d648f36d0efd7c"
+    },
+    {
+      "path": "scripts/pio-local.sh",
+      "git_mode": "100755",
+      "sha256": "3b81e400830b30db0a4a194cdb5ff35df61e4d15f13b8d3891e79f2716ee9714"
+    },
+    {
+      "path": "src/comms/B0XXInputViewer.cpp",
+      "git_mode": "100644",
+      "sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e"
+    },
+    {
+      "path": "src/comms/IntegratedDisplay.cpp",
+      "git_mode": "100644",
+      "sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e"
+    },
+    {
+      "path": "src/core/CommunicationBackend.cpp",
+      "git_mode": "100644",
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575"
+    },
+    {
+      "path": "src/core/ConfigWireMetadata.inc",
+      "git_mode": "100644",
+      "sha256": "8fde50d336862dbea4066349112e784a183937acbe5dd3d7b2a5da78fb64afc2"
+    },
+    {
+      "path": "src/core/ConfigWireValidator.cpp",
+      "git_mode": "100644",
+      "sha256": "09829351afffa88cb172ec5d6375a01608b5174c98bf46b2430984ef3d2d61f7"
+    },
+    {
+      "path": "src/core/ControllerMode.cpp",
+      "git_mode": "100644",
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0"
+    },
+    {
+      "path": "src/core/InputMode.cpp",
+      "git_mode": "100644",
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7"
+    },
+    {
+      "path": "src/core/InputSource.cpp",
+      "git_mode": "100644",
+      "sha256": "daeefea10d724ea5be8c9ea4faeee3d0d8716a4e091a3ce57537604d4b111ad8"
+    },
+    {
+      "path": "src/core/PackageNamespaceClassifier.cpp",
+      "git_mode": "100644",
+      "sha256": "8d2c52cb0728cbae076bb2b6d266860cb8f2b8eeccbc2131f208cb778d9f5a30"
+    },
+    {
+      "path": "src/core/PackageStorageFence.cpp",
+      "git_mode": "100644",
+      "sha256": "d98f858cc38b3f777fd3aafa446aaba4317944c39c1fd4cd0f3bb591cc11590b"
+    },
+    {
+      "path": "src/core/PackageStorageFormat.cpp",
+      "git_mode": "100644",
+      "sha256": "13c012a881a1db6a91dfaf155c96d9877ca76b7be090d217a0d05b5f8efe253e"
+    },
+    {
+      "path": "src/core/ProfileStore_stub.cpp",
+      "git_mode": "100644",
+      "sha256": "2c4021af6daf08d2f2dc312aa192e1c88524ac0a9f85fcaff837d78c4b0bea3f"
+    },
+    {
+      "path": "src/core/config_button_validation.cpp",
+      "git_mode": "100644",
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    {
+      "path": "src/core/config_rgb_target_validation.cpp",
+      "git_mode": "100644",
+      "sha256": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7"
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "git_mode": "100644",
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb"
+    },
+    {
+      "path": "src/core/config_utils.cpp",
+      "git_mode": "100644",
+      "sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab"
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "git_mode": "100644",
+      "sha256": "dcf45c06ecc57bd7a2fdd669a9102ede467d2bc00ad526fe9f5e206044d4a932"
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "git_mode": "100644",
+      "sha256": "f42d2bee17ca5a1027c8451984292d1bd045c455dd3c46601089a561d2b23327"
+    },
+    {
+      "path": "src/core/profile_selection.cpp",
+      "git_mode": "100644",
+      "sha256": "ea040933181a924e168ac7b92a9af37986df9a7bd27e9fb220edefec6425aa13"
+    },
+    {
+      "path": "src/core/socd.cpp",
+      "git_mode": "100644",
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3"
+    },
+    {
+      "path": "src/input/GpioButtonInput.cpp",
+      "git_mode": "100644",
+      "sha256": "df29717f747bf8e95dd9d9382c10dec5b94d3ff7e8d4c8521b8bb02cb8c2323d"
+    },
+    {
+      "path": "src/modes/64.cpp",
+      "git_mode": "100644",
+      "sha256": "ee374d38fc3293e884e97dddb2d48a0fd410a9a4b84f5311206f3b5921a4ca49"
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "git_mode": "100644",
+      "sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31"
+    },
+    {
+      "path": "src/modes/CustomKeyboardMode.cpp",
+      "git_mode": "100644",
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def"
+    },
+    {
+      "path": "src/modes/DefaultKeyboardMode.cpp",
+      "git_mode": "100644",
+      "sha256": "120f9cbe1909660c176b7bd49ff1a5c23b90e6f0e1db49c6b95cf2d3e448b757"
+    },
+    {
+      "path": "src/modes/FgcMode.cpp",
+      "git_mode": "100644",
+      "sha256": "236de331e38c68a221f44ececf4444b601b3c1e56b1ac20bb6422390720f5ef0"
+    },
+    {
+      "path": "src/modes/Melee18Button.cpp",
+      "git_mode": "100644",
+      "sha256": "b3185ca5e260444f8e7b05c2bb8d60ec0ca9d46ae9d33980dd0b829212f07c21"
+    },
+    {
+      "path": "src/modes/Melee20Button.cpp",
+      "git_mode": "100644",
+      "sha256": "42f9be54340a918172194ecf152bb1aaad8762da9f5f04c4f52925a679929522"
+    },
+    {
+      "path": "src/modes/ProjectM.cpp",
+      "git_mode": "100644",
+      "sha256": "ad3b3c1b80e1157a13adb3b3166569f8f955d2f94462426aeb5ea31070a94c2a"
+    },
+    {
+      "path": "src/modes/Rivals2.cpp",
+      "git_mode": "100644",
+      "sha256": "44242d673f75fa417168f69c63075345eaabad6c8ef5b90393ef01b56ddd329c"
+    },
+    {
+      "path": "src/modes/RivalsOfAether.cpp",
+      "git_mode": "100644",
+      "sha256": "ccc04805c353d4beec97164d45ac0a5dfb0792e5816b4cf1882f3ec7a7e80c4e"
+    },
+    {
+      "path": "src/modes/SenscopePrototype.cpp",
+      "git_mode": "100644",
+      "sha256": "cadadf8668701d6296e69688519e1a0679835150e9135d6e1b5f9369e23d01c8"
+    },
+    {
+      "path": "src/modes/Ultimate.cpp",
+      "git_mode": "100644",
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832"
+    },
+    {
+      "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "git_mode": "100644",
+      "sha256": "a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb"
+    },
+    {
+      "path": "src/modes/UltimateNativeEvaluator.cpp",
+      "git_mode": "100644",
+      "sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08"
+    },
+    {
+      "path": "src/modes/UltimateNativeProfile.cpp",
+      "git_mode": "100644",
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b"
+    },
+    {
+      "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+      "git_mode": "100644",
+      "sha256": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108"
+    },
+    {
+      "path": "src/modes/UltimateRuntimeConfigParser.hpp",
+      "git_mode": "100644",
+      "sha256": "efc24de83510f214f97a0d72986b3f4b3f8fc0673fa2ee12d74353e373d54234"
+    },
+    {
+      "path": "src/modes/extra/DarkSouls.cpp",
+      "git_mode": "100644",
+      "sha256": "68d224e9168e68b1f576d08be9ab4966385bdd50e40a19e17018f70eb96202cd"
+    },
+    {
+      "path": "src/modes/extra/HollowKnight.cpp",
+      "git_mode": "100644",
+      "sha256": "349f3f39e733762112314205cf4db74127cd71b29e9c521abe86bca60b1b1081"
+    },
+    {
+      "path": "src/modes/extra/MKWii.cpp",
+      "git_mode": "100644",
+      "sha256": "fe30535aad13a9b05195cc12e34c5092c951b3987f68b4319b052effabbec31d"
+    },
+    {
+      "path": "src/modes/extra/MultiVersus.cpp",
+      "git_mode": "100644",
+      "sha256": "c4c86a703703142ecb4511be70ad811c74f1cb52a82713ee5b80c4d0333ab2da"
+    },
+    {
+      "path": "src/modes/extra/RocketLeague.cpp",
+      "git_mode": "100644",
+      "sha256": "dfdb89b6d94575b1f23d2869f4b650ce8acfb8e76ba0718cac7d14e7d650f01b"
+    },
+    {
+      "path": "src/modes/extra/SaltAndSanctuary.cpp",
+      "git_mode": "100644",
+      "sha256": "088cfd1bc1dfb7e055103a6f8e5323e3a6ff24794a950f47aa127efeece80ca6"
+    },
+    {
+      "path": "src/modes/extra/ShovelKnight.cpp",
+      "git_mode": "100644",
+      "sha256": "635524dd5890548a8c68c13decce46a4463aee3d38119506dbfbb564c639390a"
+    },
+    {
+      "path": "src/modes/extra/ToughLoveArena.cpp",
+      "git_mode": "100644",
+      "sha256": "1bb0f372a91d16e8e6f94a94c56b4a9602084b9df0423b0e24851bce657fd39c"
+    },
+    {
+      "path": "src/modes/extra/Ultimate2.cpp",
+      "git_mode": "100644",
+      "sha256": "4af4597ad7467be10e92f198e9ea4edcf2ba796dbd3c0e5c36357483d839a3c7"
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
+      "git_mode": "100644",
+      "sha256": "85b0a87cfbc46035e9b255394f2105dd92b9057cad42ec0d606df51d89dde624"
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "git_mode": "100644",
+      "sha256": "e9984660752cecba91a2fbc0fc4cbfe1f940f02389d55a3753dd0022c2f0069d"
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp",
+      "git_mode": "100644",
+      "sha256": "b2493dee6328f87e2c8b936a0ce2472ee9670f805136d0042edc4e55d4cb067d"
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp",
+      "git_mode": "100644",
+      "sha256": "b47c24415c9e9dddf573f8255dfedac7be26f4d7568bc3dfbcab68befe95937d"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeDigital.cpp",
+      "git_mode": "100644",
+      "sha256": "1e070471ad29d1ed9ed753b05187e92bc9166228ef0b961068d03befe10cc5cd"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeDirection.cpp",
+      "git_mode": "100644",
+      "sha256": "852bc5f9886e1e69c9e978b12cbac8a37482926972a06f2fa38799d51693641e"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeForce.cpp",
+      "git_mode": "100644",
+      "sha256": "413f62bacc6b2ce2c71525ebd82df11e0292467d8ff845a27744b3bcae295efe"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeModifier.cpp",
+      "git_mode": "100644",
+      "sha256": "0b7f895499d6a203f772fde35298524698b4822fd64063187bc05c13fafd9cde"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeOutput.cpp",
+      "git_mode": "100644",
+      "sha256": "cac775337faba93ee47cebed2035557e1a92b04f5ade9b32e8a695560b09e623"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeResolver.cpp",
+      "git_mode": "100644",
+      "sha256": "24a20cdb21a7d8ad3a1ff775f4c1c34fc08c190c15db38744d8afb7e1db04d31"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeSelfTest.cpp",
+      "git_mode": "100644",
+      "sha256": "f20a15b5e751a6bd531967112fe53c54fffd1f969e549c5b0e9f8e3465bb0c79"
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeValidation.cpp",
+      "git_mode": "100644",
+      "sha256": "5b39b461a168a5eb84b581797805f4a1a7a7b5fd7db2a64d1ada37cbdcdbc528"
+    }
+  ],
+  "manifest_path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+  "manifest_entries_semantic_digest": "1882d7c64cc1129d7fa92216a4fc8a7e057e62dc51b4ff48865609be086a519e",
+  "manifest_semantic_digest": "0396a6710516ce3ba0e82b3a0f2c943c29ea203ec69879deb87c13dc5c2a3b22",
+  "historical_checker_classification": [
+    "tools/check_glyph_c021_proof_replay.py",
+    "tools/check_glyph_config_menu_invalid_state_characterization.py",
+    "tools/check_glyph_configurator_setconfig_transaction.py",
+    "tools/check_glyph_current_config_persistence_recovery_research.py",
+    "tools/check_glyph_custom_modifier_cache_characterization.py",
+    "tools/check_glyph_getconfig_raw_load_characterization.py",
+    "tools/check_glyph_gp_config012_button_mask_characterization.py",
+    "tools/check_glyph_gp_config013_usb_default_characterization.py",
+    "tools/check_glyph_gp_config014_modifier_capacity.py",
+    "tools/check_glyph_gp_config019_usb_name_selection.py",
+    "tools/check_glyph_gp_config020_button_validation.py",
+    "tools/check_glyph_gp_config021_persisted_recovery.py",
+    "tools/check_glyph_gp_config022_rgb_target_validation.py",
+    "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
+    "tools/check_glyph_neopixel_historical_replay.py",
+    "tools/check_glyph_setconfig_runtime_rebinding_characterization.py",
+    "tools/test_glyph_c017_campaign_transition.py",
+    "tools/test_glyph_c021_campaign_transition.py"
+  ],
+  "current_c023": {
+    "id": "gp_config023_usb_index_validation",
+    "command": [
+      "python3",
+      "tools/check_glyph_gp_config023_usb_index_public_current.py"
+    ],
+    "proof": "CURRENT_SOURCE_HOST_ONLY"
+  },
+  "opaque_postprocessor": {
+    "path": "glyph_nuker",
+    "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+    "status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+    "public_action": "OMIT_AND_BLOCK_PUBLICATION"
+  },
+  "extraction_provenance": {
+    "repository": "SenatorSSB/glyph-ultimate-expanded-fw",
+    "extraction_commit": "6714aca212ba8dd5bb1c655b344c80f35a582630",
+    "extraction_tree": "de8b8385c6b68425553a94024e710adaabf1a260",
+    "historical_package_commit": "f4146bedebb50559454954b8e20c9b641aeba616",
+    "historical_c023_done": "b404453ef22cc994eec54338b8a23c3ba61df808",
+    "historical_classification_extraction": "authenticated exact C023_DONE original classifier; classification only, no replay PASS transferred"
+  },
+  "nonclaims": [
+    "No hardware acceptance for exported or rebuilt artifacts.",
+    "No glyph_nuker source, license, purpose, byte transformation or reproducibility proof.",
+    "No requirement for provenance commit objects in a public repository.",
+    "No firmware semantics, protocol, schema or persistent format changes."
+  ],
+  "receipt_semantic_digest": "af47a2e22a8006e40b0e71de8376af16e88e0709f6d96ef4b9124667e5e5ff74"
+}

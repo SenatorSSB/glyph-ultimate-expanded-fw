@@ -8,7 +8,7 @@
   },
   "repository_checker_census": {
     "artifact": "docs/runtime_config/fixtures/glyph_checker_census.json",
-    "discovered_count": 264,
+    "discovered_count": 265,
     "validated": true
   },
   "aggregate_census_freshness": {
@@ -50,8 +50,8 @@
     },
     {
       "id": "gp_config023_usb_index_validation",
-      "path": "tools/check_glyph_c023_proof_replay.py",
-      "classification": "exact_C023_candidate_host_proof_replay",
+      "path": "tools/check_glyph_gp_config023_usb_index_public_current.py",
+      "classification": "source_bound_current_C023_host_proof",
       "starting_configurator": {
         "exit_code": 1,
         "error": "C023 host proof is introduced by the exact reviewed candidate and is absent at B023"

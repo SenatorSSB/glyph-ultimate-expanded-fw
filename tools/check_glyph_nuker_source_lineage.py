@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,7 +68,7 @@ def validate(value: dict) -> None:
     if set(claims) != {"source_lineage", "purpose", "byte_transformation", "build_recipe", "reproducible_build", "artifact_acceptance", "safety", "hardware"} or any(item != "UNKNOWN" for item in claims.values()):
         fail("unknown claims were promoted")
 
-def validate_repository_facts() -> None:
+def validate_historical_repository_facts() -> None:
     if not NUKER.is_file() or NUKER.is_symlink() or hashlib.sha256(NUKER.read_bytes()).hexdigest() != EXPECTED_SHA256:
         fail("tracked glyph_nuker SHA-256 drifted")
     mode = subprocess.check_output(["git", "ls-files", "-s", "--", "glyph_nuker"], cwd=ROOT, text=True).strip()
@@ -82,10 +83,37 @@ def validate_repository_facts() -> None:
     if EXPECTED_HEAD not in subprocess.check_output(["git", "rev-list", "--all"], cwd=ROOT, text=True):
         fail("live configurator evidence identity is unavailable locally")
 
+def validate_current_receipt() -> None:
+    # The packet seals a bounded historical search, never positive lineage.
+    if hashlib.sha256(FIXTURE.read_bytes()).hexdigest() != "292728ec8d9f78d2bb1a3dd5dc9cf52dc07a273af57a9e3561a2b8e4b44c4fe1":
+        fail("sealed source-search receipt drifted")
+    workflow = (ROOT / ".github/workflows/build.yml").read_text()
+    for command in ("mv glyph_nuker $PIO_ENV/glyph_nuker", "ls *.uf2 | xargs ./glyph_nuker"):
+        if command not in workflow:
+            fail("current artifact-processing command changed")
+    if NUKER.exists() or NUKER.is_symlink():
+        if not NUKER.is_file() or NUKER.is_symlink() or hashlib.sha256(NUKER.read_bytes()).hexdigest() != EXPECTED_SHA256:
+            fail("tracked glyph_nuker SHA-256 drifted")
+        mode = subprocess.check_output(["git", "ls-files", "-s", "--", "glyph_nuker"], cwd=ROOT, text=True).strip()
+        if not mode.startswith(f"100755 {EXPECTED_BLOB} "):
+            fail("tracked glyph_nuker Git mode/blob drifted")
+    else:
+        from glyph_ci_package_scope import public_contract
+        contract = public_contract(ROOT)
+        if contract["opaque_postprocessor"] != {
+                "path": "glyph_nuker", "sha256": EXPECTED_SHA256,
+                "status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+                "public_action": "OMIT_AND_BLOCK_PUBLICATION"}:
+            fail("omitted postprocessor lacks explicit public blocking contract")
+
 def main() -> int:
     try:
         validate(load())
-        validate_repository_facts()
+        if sys.argv[1:] == ["--historical"]:
+            validate_historical_repository_facts()
+        elif sys.argv[1:]:
+            fail("expected no arguments or --historical")
+        validate_current_receipt()
         if not DOC.is_file() or "BOUNDED_SOURCE_LINEAGE_NOT_FOUND" not in DOC.read_text(encoding="utf-8"):
             fail("lineage document missing bounded status")
         tampered = copy.deepcopy(load())
@@ -96,7 +124,7 @@ def main() -> int:
             pass
         else:
             fail("unsupported purpose claim accepted")
-        print("glyph_nuker_source_lineage: PASS; bounded source lineage not found")
+        print("glyph_nuker_source_lineage: PASS; sealed bounded search receipt only; source/license UNKNOWN; GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED")
         return 0
     except (OSError, subprocess.CalledProcessError, json.JSONDecodeError, LineageError) as exc:
         print(f"glyph_nuker_source_lineage: FAIL: {exc}")

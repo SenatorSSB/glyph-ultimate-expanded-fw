@@ -1,0 +1,2427 @@
+{
+  "emission_baseline": {
+    "artifact_format_version": 1,
+    "baseline_id": "current_source_owned_baseline",
+    "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+    "source_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "table_count": 28,
+    "table_inventory": [
+      {
+        "table_digest": "d452b92bacb79f9c430261aa862ed87df042c99eff174a4a1d5513ff055b4c5a",
+        "table_id": 0,
+        "table_symbol": "kDefaultTable"
+      },
+      {
+        "table_digest": "f89b98222f8cb30c47c86542ec92901bf28d14cbadd6e194b6f01e03926e4f04",
+        "table_id": 1,
+        "table_symbol": "kModeDefaultTable"
+      },
+      {
+        "table_digest": "4119081bd9f4d95d70f644daed3174ecd6746172884c752ffa1544d7b3fe0b75",
+        "table_id": 2,
+        "table_symbol": "kX1Table"
+      },
+      {
+        "table_digest": "f67712f6f81309804bab68b2ed556899a9ba9fc36606ca989235f316ba8fdd64",
+        "table_id": 3,
+        "table_symbol": "kX2Table"
+      },
+      {
+        "table_digest": "6da8c00c71a20d1397f29c23438c80990996914701c177e8c44329c7a8c0e27d",
+        "table_id": 4,
+        "table_symbol": "kMX1Table"
+      },
+      {
+        "table_digest": "dd7beadeb4ad79272bb5ee7f1b22e3db82e3ff9c740de0768877b5b68275cea6",
+        "table_id": 5,
+        "table_symbol": "kMX2Table"
+      },
+      {
+        "table_digest": "e219accacc83d2bdcb15711072c822129f987b0f4efeaf1b2118ab9632d1bd9b",
+        "table_id": 6,
+        "table_symbol": "kY1Table"
+      },
+      {
+        "table_digest": "7a20e58558a206cd7b6cec99661a0e611779b67c29d1fcb0ddef3d9ddda75610",
+        "table_id": 7,
+        "table_symbol": "kY2Table"
+      },
+      {
+        "table_digest": "d343f1b09afcc8bc1300e50a071622d026c54506326d8026c924faddbffcd1ec",
+        "table_id": 8,
+        "table_symbol": "kMY1Table"
+      },
+      {
+        "table_digest": "a58f480cf0a3a2e75698ecfa23ffaae2026dcd9f17284dbbbfbe4f0cb5a26f47",
+        "table_id": 9,
+        "table_symbol": "kLayerNormalXTable"
+      },
+      {
+        "table_digest": "f3d646b0b17d23545f8117bfd61861d5565e5cb7debfdb3f216227b8cadba785",
+        "table_id": 10,
+        "table_symbol": "kMLayerNormalXTable"
+      },
+      {
+        "table_digest": "b20200bc6dd830d92a4db873f159c8f0576822e0f9224977a5da69b67104a960",
+        "table_id": 11,
+        "table_symbol": "kLayerFlipperTable"
+      },
+      {
+        "table_digest": "71c1b7b4a30b6aa34472b7d5a246f04caf625bc1828c5733fe9a836dbe567555",
+        "table_id": 12,
+        "table_symbol": "kMLayerFlipperTable"
+      },
+      {
+        "table_digest": "4c7c61423f285fd12e210740d673bb728254c633109d7d4cd1edbe43e6461eeb",
+        "table_id": 13,
+        "table_symbol": "kY1Tilt1Table"
+      },
+      {
+        "table_digest": "a9a86450acfb5be918aa9124ea091098b39f45de4ef8a9c97629478f59ffb6cf",
+        "table_id": 14,
+        "table_symbol": "kMY1Tilt1Table"
+      },
+      {
+        "table_digest": "4b6932887bc65dafdbe21b0246936d4f2cd08a70656b17edbc6ed57421703989",
+        "table_id": 15,
+        "table_symbol": "kY1LayerFlipperTable"
+      },
+      {
+        "table_digest": "9a7e5d55e78b212b5110cf14ec5e7eb3c8ecc5e9c8a78e37bef38b45542058e5",
+        "table_id": 16,
+        "table_symbol": "kMY1LayerFlipperTable"
+      },
+      {
+        "table_digest": "3760575bd5b0390588e8265fc0bf0a0b68f0fb377519e05bdb5dfe82897cc1c1",
+        "table_id": 17,
+        "table_symbol": "kY1LayerNormalXTable"
+      },
+      {
+        "table_digest": "91b40a0d1e2dc8d1eb7e170f37862d3e785e7b5dc80b43314b14828f66cc3469",
+        "table_id": 18,
+        "table_symbol": "kMY1LayerNormalXTable"
+      },
+      {
+        "table_digest": "db4d2d70f083b35a23d923933122ed7718ba0bb95b6d4f32049f6bcd6840f506",
+        "table_id": 19,
+        "table_symbol": "kTilt1Table"
+      },
+      {
+        "table_digest": "ae2d40b6abfe1c3002f4efa34adcb094d8c42ca748f3ebb279fb2c4362d7411f",
+        "table_id": 20,
+        "table_symbol": "kTilt2Table"
+      },
+      {
+        "table_digest": "61fad165907b1ffe83f71f5ba335f47611cce39a70cc3e1535fa50ecba16fb42",
+        "table_id": 21,
+        "table_symbol": "kTilt3Table"
+      },
+      {
+        "table_digest": "34d6957593df07b42dff98206ec5be231bfc9a2e2a775fe72f460d38d1671110",
+        "table_id": 22,
+        "table_symbol": "kTilt1Minus41Table"
+      },
+      {
+        "table_digest": "67a7aaf00e20274e8305ac725c6a9c6bb36cd926a22983d0818647a30a3937c4",
+        "table_id": 23,
+        "table_symbol": "kRT1RF4CustomTable"
+      },
+      {
+        "table_digest": "a94169be4bf61453a608dcacaba12c88b9ca130fd6b42854ee4c8c228b91be70",
+        "table_id": 24,
+        "table_symbol": "kMTilt1Table"
+      },
+      {
+        "table_digest": "4b0204bac3808090e8c9fdd62cf4cbcc8e83d2b6d2025082d6d005d2d26fb2c1",
+        "table_id": 25,
+        "table_symbol": "kMTilt2Table"
+      },
+      {
+        "table_digest": "ece192ce482a653b93a29ddc5c2513d43217f780ccc195d1e5046398f52cfbee",
+        "table_id": 26,
+        "table_symbol": "kMTilt3Table"
+      },
+      {
+        "table_digest": "144913f07278b00a6a30feda60ec25893bc12d5bba30e019eb18f5ee6e6d6e71",
+        "table_id": 27,
+        "table_symbol": "kLt1LowMagnitudeTable"
+      }
+    ],
+    "table_order": [
+      "kDefaultTable",
+      "kModeDefaultTable",
+      "kX1Table",
+      "kX2Table",
+      "kMX1Table",
+      "kMX2Table",
+      "kY1Table",
+      "kY2Table",
+      "kMY1Table",
+      "kLayerNormalXTable",
+      "kMLayerNormalXTable",
+      "kLayerFlipperTable",
+      "kMLayerFlipperTable",
+      "kY1Tilt1Table",
+      "kMY1Tilt1Table",
+      "kY1LayerFlipperTable",
+      "kMY1LayerFlipperTable",
+      "kY1LayerNormalXTable",
+      "kMY1LayerNormalXTable",
+      "kTilt1Table",
+      "kTilt2Table",
+      "kTilt3Table",
+      "kTilt1Minus41Table",
+      "kRT1RF4CustomTable",
+      "kMTilt1Table",
+      "kMTilt2Table",
+      "kMTilt3Table",
+      "kLt1LowMagnitudeTable"
+    ],
+    "table_order_digest": "dbf84342023124d0ce63414d3efe28db7f8cd3bcf950c7e1a9addcedbcff51cb"
+  },
+  "extraction_commit": "6714aca212ba8dd5bb1c655b344c80f35a582630",
+  "implementation_path": "tools/source_owned_source_authority_intake.py",
+  "implementation_sha256": "ef96c2caf496ab88fa2d676de76b13ebeab4ae8e3a33196d7fce49911e463b34",
+  "normalized_emission": {
+    "artifact": {
+      "artifact_semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+      "baseline": {
+        "artifact_format_version": 1,
+        "baseline_id": "current_source_owned_baseline",
+        "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+        "source_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+        "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "table_count": 28,
+        "table_order": [
+          "kDefaultTable",
+          "kModeDefaultTable",
+          "kX1Table",
+          "kX2Table",
+          "kMX1Table",
+          "kMX2Table",
+          "kY1Table",
+          "kY2Table",
+          "kMY1Table",
+          "kLayerNormalXTable",
+          "kMLayerNormalXTable",
+          "kLayerFlipperTable",
+          "kMLayerFlipperTable",
+          "kY1Tilt1Table",
+          "kMY1Tilt1Table",
+          "kY1LayerFlipperTable",
+          "kMY1LayerFlipperTable",
+          "kY1LayerNormalXTable",
+          "kMY1LayerNormalXTable",
+          "kTilt1Table",
+          "kTilt2Table",
+          "kTilt3Table",
+          "kTilt1Minus41Table",
+          "kRT1RF4CustomTable",
+          "kMTilt1Table",
+          "kMTilt2Table",
+          "kMTilt3Table",
+          "kLt1LowMagnitudeTable"
+        ]
+      },
+      "generation_mode": "overlay_preserve",
+      "generator_version": "1.0.0",
+      "profile_id": "glyph_x1_normal_restoration_overlay_hardware_candidate",
+      "profile_name": "X1 normal restoration hardware candidate",
+      "provenance_class": "production_authorized",
+      "schema_version": 1,
+      "table_shape": {
+        "axes_per_point": 2,
+        "points_per_table": 9,
+        "table_count": 28
+      },
+      "tables": [
+        {
+          "points": [
+            {
+              "x": 61,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 195,
+              "y": 51
+            },
+            {
+              "x": 61,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 195,
+              "y": 128
+            },
+            {
+              "x": 61,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 195,
+              "y": 205
+            }
+          ],
+          "table_id": 0,
+          "table_name": "Default",
+          "table_symbol": "kDefaultTable"
+        },
+        {
+          "points": [
+            {
+              "x": 14,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 242,
+              "y": 87
+            },
+            {
+              "x": 14,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 242,
+              "y": 169
+            },
+            {
+              "x": 14,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 242,
+              "y": 169
+            }
+          ],
+          "table_id": 1,
+          "table_name": "ModeDefault",
+          "table_symbol": "kModeDefaultTable"
+        },
+        {
+          "points": [
+            {
+              "x": 93,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 163,
+              "y": 51
+            },
+            {
+              "x": 93,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 163,
+              "y": 128
+            },
+            {
+              "x": 93,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 163,
+              "y": 205
+            }
+          ],
+          "table_id": 2,
+          "table_name": "X1",
+          "table_symbol": "kX1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 82,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 174,
+              "y": 51
+            },
+            {
+              "x": 82,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 174,
+              "y": 128
+            },
+            {
+              "x": 82,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 174,
+              "y": 205
+            }
+          ],
+          "table_id": 3,
+          "table_name": "X2",
+          "table_symbol": "kX2Table"
+        },
+        {
+          "points": [
+            {
+              "x": 78,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 178,
+              "y": 87
+            },
+            {
+              "x": 78,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 178,
+              "y": 169
+            },
+            {
+              "x": 78,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 178,
+              "y": 169
+            }
+          ],
+          "table_id": 4,
+          "table_name": "MX1",
+          "table_symbol": "kMX1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 65,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 191,
+              "y": 87
+            },
+            {
+              "x": 65,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 191,
+              "y": 169
+            },
+            {
+              "x": 65,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 191,
+              "y": 169
+            }
+          ],
+          "table_id": 5,
+          "table_name": "MX2",
+          "table_symbol": "kMX2Table"
+        },
+        {
+          "points": [
+            {
+              "x": 61,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 195,
+              "y": 99
+            },
+            {
+              "x": 61,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 195,
+              "y": 128
+            },
+            {
+              "x": 61,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 195,
+              "y": 157
+            }
+          ],
+          "table_id": 6,
+          "table_name": "Y1",
+          "table_symbol": "kY1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 69,
+              "y": 78
+            },
+            {
+              "x": 128,
+              "y": 78
+            },
+            {
+              "x": 187,
+              "y": 78
+            },
+            {
+              "x": 61,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 195,
+              "y": 128
+            },
+            {
+              "x": 61,
+              "y": 164
+            },
+            {
+              "x": 128,
+              "y": 174
+            },
+            {
+              "x": 195,
+              "y": 164
+            }
+          ],
+          "table_id": 7,
+          "table_name": "Y2",
+          "table_symbol": "kY2Table"
+        },
+        {
+          "points": [
+            {
+              "x": 14,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 242,
+              "y": 179
+            },
+            {
+              "x": 14,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 242,
+              "y": 169
+            },
+            {
+              "x": 14,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 242,
+              "y": 77
+            }
+          ],
+          "table_id": 8,
+          "table_name": "MY1",
+          "table_symbol": "kMY1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 87,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 169,
+              "y": 51
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 169,
+              "y": 205
+            }
+          ],
+          "table_id": 9,
+          "table_name": "LayerNormalX",
+          "table_symbol": "kLayerNormalXTable"
+        },
+        {
+          "points": [
+            {
+              "x": 87,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 169,
+              "y": 87
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            }
+          ],
+          "table_id": 10,
+          "table_name": "MLayerNormalX",
+          "table_symbol": "kMLayerNormalXTable"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 87,
+              "y": 51
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 87,
+              "y": 205
+            }
+          ],
+          "table_id": 11,
+          "table_name": "LayerFlipper",
+          "table_symbol": "kLayerFlipperTable"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 87,
+              "y": 87
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            }
+          ],
+          "table_id": 12,
+          "table_name": "MLayerFlipper",
+          "table_symbol": "kMLayerFlipperTable"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 87,
+              "y": 99
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 87,
+              "y": 157
+            }
+          ],
+          "table_id": 13,
+          "table_name": "Y1Tilt1",
+          "table_symbol": "kY1Tilt1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 87,
+              "y": 179
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 87,
+              "y": 77
+            }
+          ],
+          "table_id": 14,
+          "table_name": "MY1Tilt1",
+          "table_symbol": "kMY1Tilt1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 87,
+              "y": 99
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 87,
+              "y": 157
+            }
+          ],
+          "table_id": 15,
+          "table_name": "Y1LayerFlipper",
+          "table_symbol": "kY1LayerFlipperTable"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 87,
+              "y": 179
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 87,
+              "y": 77
+            }
+          ],
+          "table_id": 16,
+          "table_name": "MY1LayerFlipper",
+          "table_symbol": "kMY1LayerFlipperTable"
+        },
+        {
+          "points": [
+            {
+              "x": 87,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 169,
+              "y": 99
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 169,
+              "y": 157
+            }
+          ],
+          "table_id": 17,
+          "table_name": "Y1LayerNormalX",
+          "table_symbol": "kY1LayerNormalXTable"
+        },
+        {
+          "points": [
+            {
+              "x": 87,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 169,
+              "y": 179
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 169,
+              "y": 77
+            }
+          ],
+          "table_id": 18,
+          "table_name": "MY1LayerNormalX",
+          "table_symbol": "kMY1LayerNormalXTable"
+        },
+        {
+          "points": [
+            {
+              "x": 187,
+              "y": 47
+            },
+            {
+              "x": 128,
+              "y": 47
+            },
+            {
+              "x": 69,
+              "y": 47
+            },
+            {
+              "x": 187,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 69,
+              "y": 128
+            },
+            {
+              "x": 187,
+              "y": 209
+            },
+            {
+              "x": 128,
+              "y": 209
+            },
+            {
+              "x": 69,
+              "y": 209
+            }
+          ],
+          "table_id": 19,
+          "table_name": "Tilt1",
+          "table_symbol": "kTilt1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 88,
+              "y": 79
+            },
+            {
+              "x": 128,
+              "y": 79
+            },
+            {
+              "x": 168,
+              "y": 79
+            },
+            {
+              "x": 88,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 168,
+              "y": 128
+            },
+            {
+              "x": 88,
+              "y": 177
+            },
+            {
+              "x": 128,
+              "y": 177
+            },
+            {
+              "x": 168,
+              "y": 177
+            }
+          ],
+          "table_id": 20,
+          "table_name": "Tilt2",
+          "table_symbol": "kTilt2Table"
+        },
+        {
+          "points": [
+            {
+              "x": 69,
+              "y": 82
+            },
+            {
+              "x": 128,
+              "y": 83
+            },
+            {
+              "x": 187,
+              "y": 82
+            },
+            {
+              "x": 69,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 187,
+              "y": 128
+            },
+            {
+              "x": 76,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 180,
+              "y": 169
+            }
+          ],
+          "table_id": 21,
+          "table_name": "Tilt3",
+          "table_symbol": "kTilt3Table"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 47
+            },
+            {
+              "x": 128,
+              "y": 47
+            },
+            {
+              "x": 87,
+              "y": 47
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 209
+            },
+            {
+              "x": 128,
+              "y": 209
+            },
+            {
+              "x": 87,
+              "y": 209
+            }
+          ],
+          "table_id": 22,
+          "table_name": "Tilt1Minus41",
+          "table_symbol": "kTilt1Minus41Table"
+        },
+        {
+          "points": [
+            {
+              "x": 69,
+              "y": 78
+            },
+            {
+              "x": 128,
+              "y": 78
+            },
+            {
+              "x": 187,
+              "y": 78
+            },
+            {
+              "x": 69,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 187,
+              "y": 128
+            },
+            {
+              "x": 72,
+              "y": 172
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 184,
+              "y": 172
+            }
+          ],
+          "table_id": 23,
+          "table_name": "RT1RF4Custom",
+          "table_symbol": "kRT1RF4CustomTable"
+        },
+        {
+          "points": [
+            {
+              "x": 169,
+              "y": 88
+            },
+            {
+              "x": 128,
+              "y": 88
+            },
+            {
+              "x": 87,
+              "y": 88
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 168
+            },
+            {
+              "x": 128,
+              "y": 168
+            },
+            {
+              "x": 87,
+              "y": 168
+            }
+          ],
+          "table_id": 24,
+          "table_name": "MTilt1",
+          "table_symbol": "kMTilt1Table"
+        },
+        {
+          "points": [
+            {
+              "x": 96,
+              "y": 82
+            },
+            {
+              "x": 128,
+              "y": 82
+            },
+            {
+              "x": 160,
+              "y": 82
+            },
+            {
+              "x": 96,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 160,
+              "y": 169
+            },
+            {
+              "x": 96,
+              "y": 174
+            },
+            {
+              "x": 128,
+              "y": 174
+            },
+            {
+              "x": 160,
+              "y": 174
+            }
+          ],
+          "table_id": 25,
+          "table_name": "MTilt2",
+          "table_symbol": "kMTilt2Table"
+        },
+        {
+          "points": [
+            {
+              "x": 96,
+              "y": 86
+            },
+            {
+              "x": 128,
+              "y": 86
+            },
+            {
+              "x": 160,
+              "y": 86
+            },
+            {
+              "x": 96,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 160,
+              "y": 169
+            },
+            {
+              "x": 96,
+              "y": 170
+            },
+            {
+              "x": 128,
+              "y": 170
+            },
+            {
+              "x": 160,
+              "y": 170
+            }
+          ],
+          "table_id": 26,
+          "table_name": "MTilt3",
+          "table_symbol": "kMTilt3Table"
+        },
+        {
+          "points": [
+            {
+              "x": 89,
+              "y": 89
+            },
+            {
+              "x": 128,
+              "y": 79
+            },
+            {
+              "x": 167,
+              "y": 89
+            },
+            {
+              "x": 79,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 177,
+              "y": 128
+            },
+            {
+              "x": 89,
+              "y": 167
+            },
+            {
+              "x": 128,
+              "y": 177
+            },
+            {
+              "x": 167,
+              "y": 167
+            }
+          ],
+          "table_id": 27,
+          "table_name": "Lt1LowMagnitude",
+          "table_symbol": "kLt1LowMagnitudeTable"
+        }
+      ]
+    },
+    "input": {
+      "baseline": {
+        "artifact_format_version": 1,
+        "baseline_id": "current_source_owned_baseline",
+        "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+        "source_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+        "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "table_count": 28,
+        "table_inventory": [
+          {
+            "table_digest": "d452b92bacb79f9c430261aa862ed87df042c99eff174a4a1d5513ff055b4c5a",
+            "table_id": 0,
+            "table_symbol": "kDefaultTable"
+          },
+          {
+            "table_digest": "f89b98222f8cb30c47c86542ec92901bf28d14cbadd6e194b6f01e03926e4f04",
+            "table_id": 1,
+            "table_symbol": "kModeDefaultTable"
+          },
+          {
+            "table_digest": "4119081bd9f4d95d70f644daed3174ecd6746172884c752ffa1544d7b3fe0b75",
+            "table_id": 2,
+            "table_symbol": "kX1Table"
+          },
+          {
+            "table_digest": "f67712f6f81309804bab68b2ed556899a9ba9fc36606ca989235f316ba8fdd64",
+            "table_id": 3,
+            "table_symbol": "kX2Table"
+          },
+          {
+            "table_digest": "6da8c00c71a20d1397f29c23438c80990996914701c177e8c44329c7a8c0e27d",
+            "table_id": 4,
+            "table_symbol": "kMX1Table"
+          },
+          {
+            "table_digest": "dd7beadeb4ad79272bb5ee7f1b22e3db82e3ff9c740de0768877b5b68275cea6",
+            "table_id": 5,
+            "table_symbol": "kMX2Table"
+          },
+          {
+            "table_digest": "e219accacc83d2bdcb15711072c822129f987b0f4efeaf1b2118ab9632d1bd9b",
+            "table_id": 6,
+            "table_symbol": "kY1Table"
+          },
+          {
+            "table_digest": "7a20e58558a206cd7b6cec99661a0e611779b67c29d1fcb0ddef3d9ddda75610",
+            "table_id": 7,
+            "table_symbol": "kY2Table"
+          },
+          {
+            "table_digest": "d343f1b09afcc8bc1300e50a071622d026c54506326d8026c924faddbffcd1ec",
+            "table_id": 8,
+            "table_symbol": "kMY1Table"
+          },
+          {
+            "table_digest": "a58f480cf0a3a2e75698ecfa23ffaae2026dcd9f17284dbbbfbe4f0cb5a26f47",
+            "table_id": 9,
+            "table_symbol": "kLayerNormalXTable"
+          },
+          {
+            "table_digest": "f3d646b0b17d23545f8117bfd61861d5565e5cb7debfdb3f216227b8cadba785",
+            "table_id": 10,
+            "table_symbol": "kMLayerNormalXTable"
+          },
+          {
+            "table_digest": "b20200bc6dd830d92a4db873f159c8f0576822e0f9224977a5da69b67104a960",
+            "table_id": 11,
+            "table_symbol": "kLayerFlipperTable"
+          },
+          {
+            "table_digest": "71c1b7b4a30b6aa34472b7d5a246f04caf625bc1828c5733fe9a836dbe567555",
+            "table_id": 12,
+            "table_symbol": "kMLayerFlipperTable"
+          },
+          {
+            "table_digest": "4c7c61423f285fd12e210740d673bb728254c633109d7d4cd1edbe43e6461eeb",
+            "table_id": 13,
+            "table_symbol": "kY1Tilt1Table"
+          },
+          {
+            "table_digest": "a9a86450acfb5be918aa9124ea091098b39f45de4ef8a9c97629478f59ffb6cf",
+            "table_id": 14,
+            "table_symbol": "kMY1Tilt1Table"
+          },
+          {
+            "table_digest": "4b6932887bc65dafdbe21b0246936d4f2cd08a70656b17edbc6ed57421703989",
+            "table_id": 15,
+            "table_symbol": "kY1LayerFlipperTable"
+          },
+          {
+            "table_digest": "9a7e5d55e78b212b5110cf14ec5e7eb3c8ecc5e9c8a78e37bef38b45542058e5",
+            "table_id": 16,
+            "table_symbol": "kMY1LayerFlipperTable"
+          },
+          {
+            "table_digest": "3760575bd5b0390588e8265fc0bf0a0b68f0fb377519e05bdb5dfe82897cc1c1",
+            "table_id": 17,
+            "table_symbol": "kY1LayerNormalXTable"
+          },
+          {
+            "table_digest": "91b40a0d1e2dc8d1eb7e170f37862d3e785e7b5dc80b43314b14828f66cc3469",
+            "table_id": 18,
+            "table_symbol": "kMY1LayerNormalXTable"
+          },
+          {
+            "table_digest": "db4d2d70f083b35a23d923933122ed7718ba0bb95b6d4f32049f6bcd6840f506",
+            "table_id": 19,
+            "table_symbol": "kTilt1Table"
+          },
+          {
+            "table_digest": "ae2d40b6abfe1c3002f4efa34adcb094d8c42ca748f3ebb279fb2c4362d7411f",
+            "table_id": 20,
+            "table_symbol": "kTilt2Table"
+          },
+          {
+            "table_digest": "61fad165907b1ffe83f71f5ba335f47611cce39a70cc3e1535fa50ecba16fb42",
+            "table_id": 21,
+            "table_symbol": "kTilt3Table"
+          },
+          {
+            "table_digest": "34d6957593df07b42dff98206ec5be231bfc9a2e2a775fe72f460d38d1671110",
+            "table_id": 22,
+            "table_symbol": "kTilt1Minus41Table"
+          },
+          {
+            "table_digest": "67a7aaf00e20274e8305ac725c6a9c6bb36cd926a22983d0818647a30a3937c4",
+            "table_id": 23,
+            "table_symbol": "kRT1RF4CustomTable"
+          },
+          {
+            "table_digest": "a94169be4bf61453a608dcacaba12c88b9ca130fd6b42854ee4c8c228b91be70",
+            "table_id": 24,
+            "table_symbol": "kMTilt1Table"
+          },
+          {
+            "table_digest": "4b0204bac3808090e8c9fdd62cf4cbcc8e83d2b6d2025082d6d005d2d26fb2c1",
+            "table_id": 25,
+            "table_symbol": "kMTilt2Table"
+          },
+          {
+            "table_digest": "ece192ce482a653b93a29ddc5c2513d43217f780ccc195d1e5046398f52cfbee",
+            "table_id": 26,
+            "table_symbol": "kMTilt3Table"
+          },
+          {
+            "table_digest": "144913f07278b00a6a30feda60ec25893bc12d5bba30e019eb18f5ee6e6d6e71",
+            "table_id": 27,
+            "table_symbol": "kLt1LowMagnitudeTable"
+          }
+        ],
+        "table_order": [
+          "kDefaultTable",
+          "kModeDefaultTable",
+          "kX1Table",
+          "kX2Table",
+          "kMX1Table",
+          "kMX2Table",
+          "kY1Table",
+          "kY2Table",
+          "kMY1Table",
+          "kLayerNormalXTable",
+          "kMLayerNormalXTable",
+          "kLayerFlipperTable",
+          "kMLayerFlipperTable",
+          "kY1Tilt1Table",
+          "kMY1Tilt1Table",
+          "kY1LayerFlipperTable",
+          "kMY1LayerFlipperTable",
+          "kY1LayerNormalXTable",
+          "kMY1LayerNormalXTable",
+          "kTilt1Table",
+          "kTilt2Table",
+          "kTilt3Table",
+          "kTilt1Minus41Table",
+          "kRT1RF4CustomTable",
+          "kMTilt1Table",
+          "kMTilt2Table",
+          "kMTilt3Table",
+          "kLt1LowMagnitudeTable"
+        ],
+        "table_order_digest": "dbf84342023124d0ce63414d3efe28db7f8cd3bcf950c7e1a9addcedbcff51cb"
+      },
+      "generation_mode": "overlay_preserve",
+      "metadata": {
+        "authorization_reference": "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
+        "intake_id": "x1-normal-restoration-overlay-hardware-candidate-2026-09-21"
+      },
+      "owned_tables": [
+        "kX1Table"
+      ],
+      "profile_id": "glyph_x1_normal_restoration_overlay_hardware_candidate",
+      "profile_name": "X1 normal restoration hardware candidate",
+      "provenance_class": "production_authorized",
+      "schema_version": 2,
+      "tables": [
+        {
+          "points": [
+            {
+              "x": 93,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 163,
+              "y": 51
+            },
+            {
+              "x": 93,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 163,
+              "y": 128
+            },
+            {
+              "x": 93,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 163,
+              "y": 205
+            }
+          ],
+          "table_id": 2,
+          "table_symbol": "kX1Table"
+        }
+      ]
+    },
+    "manifest": {
+      "artifact_semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+      "baseline": {
+        "artifact_format_version": 1,
+        "baseline_id": "current_source_owned_baseline",
+        "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+        "source_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+        "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "table_count": 28,
+        "table_order": [
+          "kDefaultTable",
+          "kModeDefaultTable",
+          "kX1Table",
+          "kX2Table",
+          "kMX1Table",
+          "kMX2Table",
+          "kY1Table",
+          "kY2Table",
+          "kMY1Table",
+          "kLayerNormalXTable",
+          "kMLayerNormalXTable",
+          "kLayerFlipperTable",
+          "kMLayerFlipperTable",
+          "kY1Tilt1Table",
+          "kMY1Tilt1Table",
+          "kY1LayerFlipperTable",
+          "kMY1LayerFlipperTable",
+          "kY1LayerNormalXTable",
+          "kMY1LayerNormalXTable",
+          "kTilt1Table",
+          "kTilt2Table",
+          "kTilt3Table",
+          "kTilt1Minus41Table",
+          "kRT1RF4CustomTable",
+          "kMTilt1Table",
+          "kMTilt2Table",
+          "kMTilt3Table",
+          "kLt1LowMagnitudeTable"
+        ]
+      },
+      "changed_table_count": 0,
+      "changed_table_ids": [],
+      "classification": "NO_OP",
+      "generator_version": "1.0.0",
+      "input_profile_id": "glyph_x1_normal_restoration_overlay_hardware_candidate",
+      "preserved_table_count": 28,
+      "preserved_table_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "rows": [
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "d452b92bacb79f9c430261aa862ed87df042c99eff174a4a1d5513ff055b4c5a",
+          "candidate_digest": "d452b92bacb79f9c430261aa862ed87df042c99eff174a4a1d5513ff055b4c5a",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 0,
+          "table_symbol": "kDefaultTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "f89b98222f8cb30c47c86542ec92901bf28d14cbadd6e194b6f01e03926e4f04",
+          "candidate_digest": "f89b98222f8cb30c47c86542ec92901bf28d14cbadd6e194b6f01e03926e4f04",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 1,
+          "table_symbol": "kModeDefaultTable"
+        },
+        {
+          "action": "replace_explicit_owned",
+          "baseline_digest": "4119081bd9f4d95d70f644daed3174ecd6746172884c752ffa1544d7b3fe0b75",
+          "candidate_digest": "4119081bd9f4d95d70f644daed3174ecd6746172884c752ffa1544d7b3fe0b75",
+          "changed": false,
+          "explicit_ownership": true,
+          "ownership_source": "candidate_input",
+          "provenance": "production_authorized",
+          "reason": "explicit ownership permits replacement",
+          "table_id": 2,
+          "table_symbol": "kX1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "f67712f6f81309804bab68b2ed556899a9ba9fc36606ca989235f316ba8fdd64",
+          "candidate_digest": "f67712f6f81309804bab68b2ed556899a9ba9fc36606ca989235f316ba8fdd64",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 3,
+          "table_symbol": "kX2Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "6da8c00c71a20d1397f29c23438c80990996914701c177e8c44329c7a8c0e27d",
+          "candidate_digest": "6da8c00c71a20d1397f29c23438c80990996914701c177e8c44329c7a8c0e27d",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 4,
+          "table_symbol": "kMX1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "dd7beadeb4ad79272bb5ee7f1b22e3db82e3ff9c740de0768877b5b68275cea6",
+          "candidate_digest": "dd7beadeb4ad79272bb5ee7f1b22e3db82e3ff9c740de0768877b5b68275cea6",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 5,
+          "table_symbol": "kMX2Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "e219accacc83d2bdcb15711072c822129f987b0f4efeaf1b2118ab9632d1bd9b",
+          "candidate_digest": "e219accacc83d2bdcb15711072c822129f987b0f4efeaf1b2118ab9632d1bd9b",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 6,
+          "table_symbol": "kY1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "7a20e58558a206cd7b6cec99661a0e611779b67c29d1fcb0ddef3d9ddda75610",
+          "candidate_digest": "7a20e58558a206cd7b6cec99661a0e611779b67c29d1fcb0ddef3d9ddda75610",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 7,
+          "table_symbol": "kY2Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "d343f1b09afcc8bc1300e50a071622d026c54506326d8026c924faddbffcd1ec",
+          "candidate_digest": "d343f1b09afcc8bc1300e50a071622d026c54506326d8026c924faddbffcd1ec",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 8,
+          "table_symbol": "kMY1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "a58f480cf0a3a2e75698ecfa23ffaae2026dcd9f17284dbbbfbe4f0cb5a26f47",
+          "candidate_digest": "a58f480cf0a3a2e75698ecfa23ffaae2026dcd9f17284dbbbfbe4f0cb5a26f47",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 9,
+          "table_symbol": "kLayerNormalXTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "f3d646b0b17d23545f8117bfd61861d5565e5cb7debfdb3f216227b8cadba785",
+          "candidate_digest": "f3d646b0b17d23545f8117bfd61861d5565e5cb7debfdb3f216227b8cadba785",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 10,
+          "table_symbol": "kMLayerNormalXTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "b20200bc6dd830d92a4db873f159c8f0576822e0f9224977a5da69b67104a960",
+          "candidate_digest": "b20200bc6dd830d92a4db873f159c8f0576822e0f9224977a5da69b67104a960",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 11,
+          "table_symbol": "kLayerFlipperTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "71c1b7b4a30b6aa34472b7d5a246f04caf625bc1828c5733fe9a836dbe567555",
+          "candidate_digest": "71c1b7b4a30b6aa34472b7d5a246f04caf625bc1828c5733fe9a836dbe567555",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 12,
+          "table_symbol": "kMLayerFlipperTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "4c7c61423f285fd12e210740d673bb728254c633109d7d4cd1edbe43e6461eeb",
+          "candidate_digest": "4c7c61423f285fd12e210740d673bb728254c633109d7d4cd1edbe43e6461eeb",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 13,
+          "table_symbol": "kY1Tilt1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "a9a86450acfb5be918aa9124ea091098b39f45de4ef8a9c97629478f59ffb6cf",
+          "candidate_digest": "a9a86450acfb5be918aa9124ea091098b39f45de4ef8a9c97629478f59ffb6cf",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 14,
+          "table_symbol": "kMY1Tilt1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "4b6932887bc65dafdbe21b0246936d4f2cd08a70656b17edbc6ed57421703989",
+          "candidate_digest": "4b6932887bc65dafdbe21b0246936d4f2cd08a70656b17edbc6ed57421703989",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 15,
+          "table_symbol": "kY1LayerFlipperTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "9a7e5d55e78b212b5110cf14ec5e7eb3c8ecc5e9c8a78e37bef38b45542058e5",
+          "candidate_digest": "9a7e5d55e78b212b5110cf14ec5e7eb3c8ecc5e9c8a78e37bef38b45542058e5",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 16,
+          "table_symbol": "kMY1LayerFlipperTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "3760575bd5b0390588e8265fc0bf0a0b68f0fb377519e05bdb5dfe82897cc1c1",
+          "candidate_digest": "3760575bd5b0390588e8265fc0bf0a0b68f0fb377519e05bdb5dfe82897cc1c1",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 17,
+          "table_symbol": "kY1LayerNormalXTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "91b40a0d1e2dc8d1eb7e170f37862d3e785e7b5dc80b43314b14828f66cc3469",
+          "candidate_digest": "91b40a0d1e2dc8d1eb7e170f37862d3e785e7b5dc80b43314b14828f66cc3469",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 18,
+          "table_symbol": "kMY1LayerNormalXTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "db4d2d70f083b35a23d923933122ed7718ba0bb95b6d4f32049f6bcd6840f506",
+          "candidate_digest": "db4d2d70f083b35a23d923933122ed7718ba0bb95b6d4f32049f6bcd6840f506",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 19,
+          "table_symbol": "kTilt1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "ae2d40b6abfe1c3002f4efa34adcb094d8c42ca748f3ebb279fb2c4362d7411f",
+          "candidate_digest": "ae2d40b6abfe1c3002f4efa34adcb094d8c42ca748f3ebb279fb2c4362d7411f",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 20,
+          "table_symbol": "kTilt2Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "61fad165907b1ffe83f71f5ba335f47611cce39a70cc3e1535fa50ecba16fb42",
+          "candidate_digest": "61fad165907b1ffe83f71f5ba335f47611cce39a70cc3e1535fa50ecba16fb42",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 21,
+          "table_symbol": "kTilt3Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "34d6957593df07b42dff98206ec5be231bfc9a2e2a775fe72f460d38d1671110",
+          "candidate_digest": "34d6957593df07b42dff98206ec5be231bfc9a2e2a775fe72f460d38d1671110",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 22,
+          "table_symbol": "kTilt1Minus41Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "67a7aaf00e20274e8305ac725c6a9c6bb36cd926a22983d0818647a30a3937c4",
+          "candidate_digest": "67a7aaf00e20274e8305ac725c6a9c6bb36cd926a22983d0818647a30a3937c4",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 23,
+          "table_symbol": "kRT1RF4CustomTable"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "a94169be4bf61453a608dcacaba12c88b9ca130fd6b42854ee4c8c228b91be70",
+          "candidate_digest": "a94169be4bf61453a608dcacaba12c88b9ca130fd6b42854ee4c8c228b91be70",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 24,
+          "table_symbol": "kMTilt1Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "4b0204bac3808090e8c9fdd62cf4cbcc8e83d2b6d2025082d6d005d2d26fb2c1",
+          "candidate_digest": "4b0204bac3808090e8c9fdd62cf4cbcc8e83d2b6d2025082d6d005d2d26fb2c1",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 25,
+          "table_symbol": "kMTilt2Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "ece192ce482a653b93a29ddc5c2513d43217f780ccc195d1e5046398f52cfbee",
+          "candidate_digest": "ece192ce482a653b93a29ddc5c2513d43217f780ccc195d1e5046398f52cfbee",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 26,
+          "table_symbol": "kMTilt3Table"
+        },
+        {
+          "action": "preserve_source_owned_baseline",
+          "baseline_digest": "144913f07278b00a6a30feda60ec25893bc12d5bba30e019eb18f5ee6e6d6e71",
+          "candidate_digest": "144913f07278b00a6a30feda60ec25893bc12d5bba30e019eb18f5ee6e6d6e71",
+          "changed": false,
+          "explicit_ownership": false,
+          "ownership_source": "current_source_owned_baseline",
+          "provenance": "production_authorized",
+          "reason": "unowned table copied from authoritative source baseline",
+          "table_id": 27,
+          "table_symbol": "kLt1LowMagnitudeTable"
+        }
+      ],
+      "schema_version": 1
+    }
+  },
+  "original_packet": {
+    "author": "Codex Glyph Implementation Supervisor under GP-X1-002",
+    "authority": {
+      "approval_reference": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018",
+      "approver": "Glyph project owner / user authority",
+      "basis": "The project owner explicitly confirmed this prior nine-point X1 table for restoration; GP-X1-002 authorizes overlay_preserve with kX1Table as the sole owned table.",
+      "statement": "Production authority is approved for the exact GP-X1-002 kX1Table restoration in this candidate only; all other source-owned tables remain unowned and preserved.",
+      "status": "approved"
+    },
+    "baseline": {
+      "artifact_format_version": 1,
+      "baseline_id": "current_source_owned_baseline",
+      "semantic_digest": "b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874",
+      "source_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+      "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "table_count": 28,
+      "table_inventory": [
+        {
+          "table_digest": "d452b92bacb79f9c430261aa862ed87df042c99eff174a4a1d5513ff055b4c5a",
+          "table_id": 0,
+          "table_symbol": "kDefaultTable"
+        },
+        {
+          "table_digest": "f89b98222f8cb30c47c86542ec92901bf28d14cbadd6e194b6f01e03926e4f04",
+          "table_id": 1,
+          "table_symbol": "kModeDefaultTable"
+        },
+        {
+          "table_digest": "0c3925affb1f4c67a8e9f570fa9390449e833e84ada2e40b8385f5748c57ca0b",
+          "table_id": 2,
+          "table_symbol": "kX1Table"
+        },
+        {
+          "table_digest": "f67712f6f81309804bab68b2ed556899a9ba9fc36606ca989235f316ba8fdd64",
+          "table_id": 3,
+          "table_symbol": "kX2Table"
+        },
+        {
+          "table_digest": "6da8c00c71a20d1397f29c23438c80990996914701c177e8c44329c7a8c0e27d",
+          "table_id": 4,
+          "table_symbol": "kMX1Table"
+        },
+        {
+          "table_digest": "dd7beadeb4ad79272bb5ee7f1b22e3db82e3ff9c740de0768877b5b68275cea6",
+          "table_id": 5,
+          "table_symbol": "kMX2Table"
+        },
+        {
+          "table_digest": "e219accacc83d2bdcb15711072c822129f987b0f4efeaf1b2118ab9632d1bd9b",
+          "table_id": 6,
+          "table_symbol": "kY1Table"
+        },
+        {
+          "table_digest": "7a20e58558a206cd7b6cec99661a0e611779b67c29d1fcb0ddef3d9ddda75610",
+          "table_id": 7,
+          "table_symbol": "kY2Table"
+        },
+        {
+          "table_digest": "d343f1b09afcc8bc1300e50a071622d026c54506326d8026c924faddbffcd1ec",
+          "table_id": 8,
+          "table_symbol": "kMY1Table"
+        },
+        {
+          "table_digest": "a58f480cf0a3a2e75698ecfa23ffaae2026dcd9f17284dbbbfbe4f0cb5a26f47",
+          "table_id": 9,
+          "table_symbol": "kLayerNormalXTable"
+        },
+        {
+          "table_digest": "f3d646b0b17d23545f8117bfd61861d5565e5cb7debfdb3f216227b8cadba785",
+          "table_id": 10,
+          "table_symbol": "kMLayerNormalXTable"
+        },
+        {
+          "table_digest": "b20200bc6dd830d92a4db873f159c8f0576822e0f9224977a5da69b67104a960",
+          "table_id": 11,
+          "table_symbol": "kLayerFlipperTable"
+        },
+        {
+          "table_digest": "71c1b7b4a30b6aa34472b7d5a246f04caf625bc1828c5733fe9a836dbe567555",
+          "table_id": 12,
+          "table_symbol": "kMLayerFlipperTable"
+        },
+        {
+          "table_digest": "4c7c61423f285fd12e210740d673bb728254c633109d7d4cd1edbe43e6461eeb",
+          "table_id": 13,
+          "table_symbol": "kY1Tilt1Table"
+        },
+        {
+          "table_digest": "a9a86450acfb5be918aa9124ea091098b39f45de4ef8a9c97629478f59ffb6cf",
+          "table_id": 14,
+          "table_symbol": "kMY1Tilt1Table"
+        },
+        {
+          "table_digest": "4b6932887bc65dafdbe21b0246936d4f2cd08a70656b17edbc6ed57421703989",
+          "table_id": 15,
+          "table_symbol": "kY1LayerFlipperTable"
+        },
+        {
+          "table_digest": "9a7e5d55e78b212b5110cf14ec5e7eb3c8ecc5e9c8a78e37bef38b45542058e5",
+          "table_id": 16,
+          "table_symbol": "kMY1LayerFlipperTable"
+        },
+        {
+          "table_digest": "3760575bd5b0390588e8265fc0bf0a0b68f0fb377519e05bdb5dfe82897cc1c1",
+          "table_id": 17,
+          "table_symbol": "kY1LayerNormalXTable"
+        },
+        {
+          "table_digest": "91b40a0d1e2dc8d1eb7e170f37862d3e785e7b5dc80b43314b14828f66cc3469",
+          "table_id": 18,
+          "table_symbol": "kMY1LayerNormalXTable"
+        },
+        {
+          "table_digest": "db4d2d70f083b35a23d923933122ed7718ba0bb95b6d4f32049f6bcd6840f506",
+          "table_id": 19,
+          "table_symbol": "kTilt1Table"
+        },
+        {
+          "table_digest": "ae2d40b6abfe1c3002f4efa34adcb094d8c42ca748f3ebb279fb2c4362d7411f",
+          "table_id": 20,
+          "table_symbol": "kTilt2Table"
+        },
+        {
+          "table_digest": "61fad165907b1ffe83f71f5ba335f47611cce39a70cc3e1535fa50ecba16fb42",
+          "table_id": 21,
+          "table_symbol": "kTilt3Table"
+        },
+        {
+          "table_digest": "34d6957593df07b42dff98206ec5be231bfc9a2e2a775fe72f460d38d1671110",
+          "table_id": 22,
+          "table_symbol": "kTilt1Minus41Table"
+        },
+        {
+          "table_digest": "67a7aaf00e20274e8305ac725c6a9c6bb36cd926a22983d0818647a30a3937c4",
+          "table_id": 23,
+          "table_symbol": "kRT1RF4CustomTable"
+        },
+        {
+          "table_digest": "a94169be4bf61453a608dcacaba12c88b9ca130fd6b42854ee4c8c228b91be70",
+          "table_id": 24,
+          "table_symbol": "kMTilt1Table"
+        },
+        {
+          "table_digest": "4b0204bac3808090e8c9fdd62cf4cbcc8e83d2b6d2025082d6d005d2d26fb2c1",
+          "table_id": 25,
+          "table_symbol": "kMTilt2Table"
+        },
+        {
+          "table_digest": "ece192ce482a653b93a29ddc5c2513d43217f780ccc195d1e5046398f52cfbee",
+          "table_id": 26,
+          "table_symbol": "kMTilt3Table"
+        },
+        {
+          "table_digest": "144913f07278b00a6a30feda60ec25893bc12d5bba30e019eb18f5ee6e6d6e71",
+          "table_id": 27,
+          "table_symbol": "kLt1LowMagnitudeTable"
+        }
+      ],
+      "table_order": [
+        "kDefaultTable",
+        "kModeDefaultTable",
+        "kX1Table",
+        "kX2Table",
+        "kMX1Table",
+        "kMX2Table",
+        "kY1Table",
+        "kY2Table",
+        "kMY1Table",
+        "kLayerNormalXTable",
+        "kMLayerNormalXTable",
+        "kLayerFlipperTable",
+        "kMLayerFlipperTable",
+        "kY1Tilt1Table",
+        "kMY1Tilt1Table",
+        "kY1LayerFlipperTable",
+        "kMY1LayerFlipperTable",
+        "kY1LayerNormalXTable",
+        "kMY1LayerNormalXTable",
+        "kTilt1Table",
+        "kTilt2Table",
+        "kTilt3Table",
+        "kTilt1Minus41Table",
+        "kRT1RF4CustomTable",
+        "kMTilt1Table",
+        "kMTilt2Table",
+        "kMTilt3Table",
+        "kLt1LowMagnitudeTable"
+      ],
+      "table_order_digest": "dbf84342023124d0ce63414d3efe28db7f8cd3bcf950c7e1a9addcedbcff51cb"
+    },
+    "intake_id": "x1-normal-restoration-overlay-hardware-candidate-2026-09-21",
+    "intent": {
+      "controller_scope": "Glyph Mk6",
+      "generation_mode": "overlay_preserve",
+      "provenance_class": "production_authorized",
+      "requested_operation": "production_changeset",
+      "source_owned_runtime_tables": true
+    },
+    "notes": "The project owner confirmed the exact nine raw X1 coordinates under GLYPH-UD-018. Glyph performs no semantic inference or conversion. This candidate-specific authority does not extend to another table, routing, publication, runtime-loaded configuration, device write, persistence, flashing, release, merge, or hardware acceptance.",
+    "ownership": {
+      "declarations": [
+        {
+          "authorization_reference": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018",
+          "rationale": "GP-X1-002 and GLYPH-UD-018 explicitly own only kX1Table for this restoration candidate.",
+          "table_symbol": "kX1Table"
+        }
+      ],
+      "owned_tables": [
+        "kX1Table"
+      ],
+      "unlisted_tables_are_unowned": true
+    },
+    "profile_id": "glyph_x1_normal_restoration_overlay_hardware_candidate",
+    "profile_name": "X1 normal restoration hardware candidate",
+    "purpose": "Restore the project owner's exact confirmed prior raw X1 coordinates as one hardware-gated source-owned candidate while preserving every other source-owned runtime table.",
+    "replacements": [
+      {
+        "points": [
+          {
+            "direction_key": 1,
+            "x": 93,
+            "y": 51
+          },
+          {
+            "direction_key": 2,
+            "x": 128,
+            "y": 51
+          },
+          {
+            "direction_key": 3,
+            "x": 163,
+            "y": 51
+          },
+          {
+            "direction_key": 4,
+            "x": 93,
+            "y": 128
+          },
+          {
+            "direction_key": 5,
+            "x": 128,
+            "y": 128
+          },
+          {
+            "direction_key": 6,
+            "x": 163,
+            "y": 128
+          },
+          {
+            "direction_key": 7,
+            "x": 93,
+            "y": 205
+          },
+          {
+            "direction_key": 8,
+            "x": 128,
+            "y": 205
+          },
+          {
+            "direction_key": 9,
+            "x": 163,
+            "y": 205
+          }
+        ],
+        "rationale": "Restore the project-owner-confirmed prior raw absolute X1 coordinates; miniscreen values are raw minus 128 only and no gameplay meaning is inferred.",
+        "source_reference": "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018",
+        "table_symbol": "kX1Table"
+      }
+    ],
+    "review": {
+      "acknowledges_build_not_hardware_proof": true,
+      "acknowledges_separate_hardware_gate": true,
+      "unresolved_questions": []
+    },
+    "schema_version": 1
+  },
+  "original_review": {
+    "authority_status": "approved",
+    "baseline_matches_current": false,
+    "blockers": [
+      {
+        "category": "baseline_mismatch",
+        "code": "BASELINE_MISMATCH",
+        "message": "baseline does not match the authoritative current source-owned baseline",
+        "path": "baseline.semantic_digest"
+      },
+      {
+        "category": "baseline_mismatch",
+        "code": "BASELINE_MISMATCH",
+        "message": "baseline does not match the authoritative current source-owned baseline",
+        "path": "baseline.table_inventory"
+      }
+    ],
+    "future_hardware_candidate_after_downstream_gates": false,
+    "generation_mode": "overlay_preserve",
+    "intake_id": "x1-normal-restoration-overlay-hardware-candidate-2026-09-21",
+    "owned_table_count": 1,
+    "production_emission_allowed": false,
+    "provenance_class": "production_authorized",
+    "replacement_table_count": 1,
+    "requested_operation": "production_changeset",
+    "schema_version": 1,
+    "semantic_change_present": false,
+    "semantic_digest": "7b4582f9dafcceb2da7105bc9381097d5b35500fa8fc9b12d33e9eb8be199481",
+    "source_equivalence_emission_allowed": false
+  },
+  "provenance_commit": "f6a4c68e0b7db689e6126343d48d60f0336e7694",
+  "rebased_review": {
+    "authority_status": "approved",
+    "baseline_matches_current": true,
+    "blockers": [],
+    "future_hardware_candidate_after_downstream_gates": false,
+    "generation_mode": "overlay_preserve",
+    "intake_id": "x1-normal-restoration-overlay-hardware-candidate-2026-09-21",
+    "owned_table_count": 1,
+    "production_emission_allowed": true,
+    "provenance_class": "production_authorized",
+    "replacement_table_count": 1,
+    "requested_operation": "production_changeset",
+    "schema_version": 1,
+    "semantic_change_present": false,
+    "semantic_digest": "13f1f04f3380781850c06288082155d3a65875d907daddb27c010ec02412b1fe",
+    "source_equivalence_emission_allowed": false
+  },
+  "receipt_semantic_digest": "a8743288abf9febf245a61c1dd2c4af9b544dde688958ddcad7a889634932029",
+  "schema": "glyph_x1_pre_f4_semantic_reference.v1"
+}

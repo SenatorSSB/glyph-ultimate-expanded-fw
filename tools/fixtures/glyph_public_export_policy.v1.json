@@ -1208,8 +1208,8 @@
       "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
     },
     "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json": {
-      "classification": "REVIEW_REQUIRED",
-      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Original immutable C023 development evidence; public current source-bound replacement retains durable invariants without private locators."
     },
     "docs/runtime_config/fixtures/gp_config_010_integration_semantic_correspondence.json": {
       "classification": "PUBLIC_INCLUDE",
@@ -1384,8 +1384,8 @@
       "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
     },
     "docs/runtime_config/gp_config023_usb_index_validation.md": {
-      "classification": "REVIEW_REQUIRED",
-      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Original immutable C023 development evidence; public current source-bound replacement retains durable invariants without private locators."
     },
     "docs/runtime_config/gp_config_007_transaction_stage_schema.md": {
       "classification": "PUBLIC_INCLUDE",
@@ -1560,12 +1560,12 @@
       "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
     },
     "tools/check_glyph_profile_store_read_storage.py": {
-      "classification": "REVIEW_REQUIRED",
-      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Owner-local defaults removed; checked-in safe evidence or explicit caller input only. Historical checker retained without publishing private backup bytes."
     },
     "tools/check_glyph_real_predecessor_config.py": {
-      "classification": "REVIEW_REQUIRED",
-      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Owner-local defaults removed; checked-in safe evidence or explicit caller input only. Historical checker retained without publishing private backup bytes."
     },
     "tools/fixtures/glyph_package_v1/historical_config/minimal.pb": {
       "classification": "PUBLIC_INCLUDE",

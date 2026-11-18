@@ -43,12 +43,16 @@ consistency enforced as curated metadata rather than checker-branch semantics.
 
 ## Package descendants
 
-The original C023 proof runs on its exact milestone checkout. The accepted
-package correspondence runs at `f4146bedebb50559454954b8e20c9b641aeba616`.
-Current CI maintenance independently requires the same Git objects and modes
-outside its explicit host-only paths. Firmware changes produce a path inventory
-and require the current checks and applicable Mk6 build. Hardware acceptance
-remains bound to its original artifact.
+The current package uses the sealed `public_package_baseline.v1.json` contract:
+327 closed firmware/build inputs, exact current manifest identities and explicit
+nonclaims. The current C023 command compiles actual current production bodies
+against a separate public-safe fixture. Neither current proof requires old Git
+objects. Original C023 evidence and exact replay command remain preserved for
+explicit development-history use; absence of objects never authorizes a weaker
+proof. The development and diagnostic public census both discover 265 checkers.
+Hardware acceptance remains bound to its original artifact. The unresolved
+`glyph_nuker` source/license gate blocks publication independently of current
+host validation; any unprocessed compilation is PRE_POSTPROCESSOR_BUILD_ONLY.
 
 The manifest lists the replaced generation-bound commands and their current
 successors. Original source and results remain in Git history. Linux runs the

@@ -3904,9 +3904,10 @@
         ".github/workflows/build-device-config.yml",
         "config/glyph/.github/workflows/build.yml",
         "builder_scripts/arduino_pico.py",
-        "glyph_nuker",
         "scripts/build-glyph-mk6-quiet.sh",
-        "scripts/pio-local.sh"
+        "scripts/pio-local.sh",
+        "docs/runtime_config/fixtures/public_package_baseline.v1.json",
+        "tools/glyph_ci_package_scope.py"
       ],
       "load_bearing": true,
       "historical": false,
@@ -3927,7 +3928,8 @@
       "source_dependencies": [
         "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
         ".github/workflows/build-device-config.yml",
-        "config/glyph/meta.yaml"
+        "config/glyph/meta.yaml",
+        "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json"
       ],
       "load_bearing": true,
       "historical": false,
@@ -3988,9 +3990,10 @@
       "required_arguments": [],
       "mutation_risk": "none",
       "source_dependencies": [
-        "glyph_nuker",
         ".github/workflows/build.yml",
-        "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json"
+        "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json",
+        "docs/runtime_config/fixtures/public_package_baseline.v1.json",
+        "tools/glyph_ci_package_scope.py"
       ],
       "load_bearing": true,
       "historical": false,
@@ -4341,7 +4344,8 @@
         "tools/manage_source_owned_source_authority_intake.py",
         "tools/source_owned_generator_modes.py",
         "tools/source_owned_source_authority_intake.py",
-        "docs/runtime_config/fixtures/source_owned_source_authority_intake.json"
+        "docs/runtime_config/fixtures/source_owned_source_authority_intake.json",
+        "docs/runtime_config/fixtures/source_owned_x1_pre_f4_semantic_reference.v1.json"
       ],
       "load_bearing": true,
       "historical": false,
@@ -5677,22 +5681,46 @@
     },
     {
       "id": "gp_config023_usb_index_validation",
-      "path": "tools/check_glyph_c023_proof_replay.py",
+      "path": "tools/check_glyph_gp_config023_usb_index_public_current.py",
       "command": [
         "python3",
-        "tools/check_glyph_c023_proof_replay.py"
+        "tools/check_glyph_gp_config023_usb_index_public_current.py"
       ],
       "category": "candidate_safety",
       "applicability": "current",
-      "branch_policy": "content_and_scope",
+      "branch_policy": "content_only",
       "required_arguments": [],
       "mutation_risk": "temporary_file_only",
       "source_dependencies": [
-        "docs/runtime_config/fixtures/gp_val042_accepted_transitions.json",
-        "docs/runtime_config/fixtures/gp_val042_c023_transition.json",
-        "tools/glyph_c022_campaign_transition.py",
-        "tools/glyph_c023_campaign_transition.py",
-        "tools/glyph_hardware_correspondence.py"
+        "docs/runtime_config/fixtures/gp_config023_usb_index_public_current.v1.json",
+        "docs/runtime_config/gp_config023_usb_index_public_current.md",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "config/glyph/common/src/config.cpp",
+        "config/glyph/common/src/glyph_config_validation.cpp",
+        "include/core/BootDiagnostics.hpp",
+        "include/core/CheckedStorage.hpp",
+        "include/core/ModeSelectionTransaction.hpp",
+        "include/core/PackageStorageFence.hpp",
+        "include/core/ProfileStore.hpp",
+        "include/core/ProfileStoreStorage.hpp",
+        "include/core/ProfileStoreTransaction.hpp",
+        "include/core/Sha256.hpp",
+        "include/core/config_button_validation.hpp",
+        "include/core/config_usb_default_validation.hpp",
+        "include/core/config_validation.hpp",
+        "include/modes/UltimateNativeProfile.hpp",
+        "include/modes/UltimateProfileConfig.hpp",
+        "include/modes/UltimateProfileEvaluator.hpp",
+        "schema/haybox/config.options",
+        "schema/haybox/config.proto",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/gp_config023_usb_public_current/host_stubs.hpp",
+        "tools/fixtures/gp_config023_usb_public_current/usb_index_harness.cpp"
       ],
       "load_bearing": true,
       "historical": false,

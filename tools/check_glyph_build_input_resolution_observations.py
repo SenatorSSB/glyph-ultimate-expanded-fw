@@ -5,6 +5,7 @@ import hashlib, json, re, subprocess, sys
 from datetime import datetime
 from pathlib import Path
 
+HISTORICAL = sys.argv[1:] == ["--historical"]
 ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = ROOT / "docs/runtime_config/fixtures/build_input_provenance_inventory.json"
 PATH = ROOT / "docs/runtime_config/fixtures/build_input_resolution_observations.json"
@@ -29,23 +30,36 @@ def fail(message: str) -> None:
 def git(*args: str) -> str:
     return subprocess.run(["git", *args], cwd=ROOT, text=True, capture_output=True, check=True).stdout
 
+RECEIPT = ROOT / "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json"
+
+def sealed_observation_receipt() -> dict:
+    if RECEIPT.is_symlink():
+        fail("sealed observation receipt must be a regular file")
+    raw = RECEIPT.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != "1dd7353cc3d6c929187c10a36ea760eb0060438f2fa65c5bcf36da8284a6f053":
+        fail("sealed observation receipt digest mismatch")
+    value = json.loads(raw)
+    semantic = dict(value); recorded = semantic.pop("receipt_semantic_digest")
+    if hashlib.sha256(json.dumps(semantic, sort_keys=True, separators=(",", ":")).encode()).hexdigest() != recorded:
+        fail("observation receipt semantic digest mismatch")
+    if value["schema"] != "glyph_build_input_observation_receipt.v1":
+        fail("sealed observation receipt identity mismatch")
+    for row in value["declarations"].values():
+        if hashlib.sha256(row["text"].encode()).hexdigest() != row["sha256"]:
+            fail("sealed declaration digest mismatch")
+    return value
+
 def base_blob(path: str) -> str:
-    return git("rev-parse", f"{BASE}:{path}").strip()
+    return git("rev-parse", f"{BASE}:{path}").strip() if HISTORICAL else sealed_observation_receipt()["declarations"][path]["git_blob"]
 
 def base_text(path: str) -> str:
-    return git("show", f"{BASE}:{path}")
+    return git("show", f"{BASE}:{path}") if HISTORICAL else sealed_observation_receipt()["declarations"][path]["text"]
 
 def historical_inventory() -> dict:
     return json.loads(base_text(str(INVENTORY.relative_to(ROOT))))
 
-def historical_observations() -> dict:
-    return json.loads(git("show", f"{OBSERVATION_BASE}:{PATH.relative_to(ROOT)}"))
-
 def historical_observations_bytes() -> bytes:
-    return subprocess.run(
-        ["git", "show", f"{OBSERVATION_BASE}:{PATH.relative_to(ROOT)}"],
-        cwd=ROOT, capture_output=True, check=True,
-    ).stdout
+    return subprocess.run(["git", "show", f"{OBSERVATION_BASE}:{PATH.relative_to(ROOT)}"], cwd=ROOT, capture_output=True, check=True).stdout
 
 def blob_locator(commit: str, path: str) -> str:
     return f"https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/blob/{commit}/{path}"
@@ -77,9 +91,19 @@ def expected_records(inv: dict, workflow_text: str) -> list[dict]:
 def check() -> None:
     inv = historical_inventory()
     data = json.loads(PATH.read_text(encoding="utf-8"))
-    historical_data = historical_observations()
-    if PATH.read_bytes() != historical_observations_bytes() or data != historical_data:
-        fail("timestamped observation packet drifted from immutable historical object")
+    if HISTORICAL:
+        if PATH.read_bytes() != historical_observations_bytes():
+            fail("timestamped observation packet drifted from immutable historical object")
+    elif hashlib.sha256(PATH.read_bytes()).hexdigest() != sealed_observation_receipt()["observation_sha256"]:
+        fail("timestamped observation packet drifted from sealed extraction")
+    # Current selectors, declarations and wrapper chain remain independently
+    # source-bound; historical observed selectors never substitute for them.
+    from check_glyph_build_input_provenance_inventory import expected_inventory, validate_shape, assert_selector_contexts
+    current_inventory = expected_inventory()
+    validate_shape(current_inventory)
+    if json.loads(INVENTORY.read_text(encoding="utf-8")) != current_inventory:
+        fail("current declared build-input inventory drift")
+    assert_selector_contexts()
     if set(data) != {"schema_name","schema_version","status","source_inventory","records"}:
         fail("top-level schema mismatch")
     if data["schema_name"] != "glyph_build_input_resolution_observations" or data["schema_version"] != 1:
@@ -93,7 +117,8 @@ def check() -> None:
         fail("historical source inventory blob drifted")
     if base_blob(WORKFLOW) != WORKFLOW_BLOB or base_blob(META) != META_BLOB:
         fail("bound workflow or metadata blob drifted")
-    subprocess.run(["git", "merge-base", "--is-ancestor", BASE, "HEAD"], cwd=ROOT, check=True, capture_output=True)
+    if HISTORICAL:
+        subprocess.run(["git", "merge-base", "--is-ancestor", BASE, "HEAD"], cwd=ROOT, check=True, capture_output=True)
     expected = expected_records(inv, base_text(WORKFLOW))
     records = data["records"]
     if len(records) != len(expected):
@@ -122,12 +147,14 @@ def check() -> None:
             fail(f"unknown result: {actual['selector_id']}")
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     entry = next((item for item in manifest["entries"] if item["id"] == "build_input_resolution_observations"), None)
-    if entry is None or entry["source_dependencies"] != [str(INVENTORY.relative_to(ROOT)), WORKFLOW, META]:
+    if entry is None or entry["source_dependencies"] != [str(INVENTORY.relative_to(ROOT)), WORKFLOW, META, "docs/runtime_config/fixtures/build_input_observation_receipt.v1.json"]:
         fail("manifest direct dependencies are not exact")
     print(f"glyph_build_input_resolution_observations: PASS; records={len(records)}; direct={len(records)-2}; derived=2; base={BASE}")
 
 if __name__ == "__main__":
     try:
+        if sys.argv[1:] not in ([], ["--historical"]):
+            fail("expected no arguments or --historical")
         check()
     except (OSError, ValueError, json.JSONDecodeError, subprocess.CalledProcessError) as exc:
         print(f"glyph_build_input_resolution_observations: FAIL: {exc}")

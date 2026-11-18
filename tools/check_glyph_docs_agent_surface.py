@@ -423,9 +423,13 @@ def current_doc_section(text: str, kind: str) -> str:
     legacy = {"current-state": "legacy-current-state-journal",
               "current-roadmap": "legacy-roadmap-journal"}[kind]
     boundary = f"<!-- {legacy}:start -->"
-    if (text.count(start) != 1 or text.count(end) != 1 or text.count(boundary) != 1
-            or not text.index(start) < text.index(end) < text.index(boundary)):
-        fail(f"{kind}: invalid current/legacy boundaries")
+    if (text.count(start) != 1 or text.count(end) != 1 or text.index(start) >= text.index(end)):
+        fail(f"{kind}: invalid current boundaries")
+    if boundary in text:
+        if text.count(boundary) != 1 or text.index(end) >= text.index(boundary):
+            fail(f"{kind}: invalid legacy boundary")
+    elif text.split(end, 1)[1].strip():
+        fail(f"{kind}: unbounded content after current-only section")
     if not re.fullmatch(r"# [^\n]+\s*", text.split(start)[0]):
         fail(f"{kind}: current prose outside bounded section")
     current = text.split(start)[1].split(end)[0]

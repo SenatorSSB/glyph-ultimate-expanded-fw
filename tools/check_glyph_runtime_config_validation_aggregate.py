@@ -581,7 +581,7 @@ def topology_catalog_cases(module: Any) -> list[str]:
             "ISO-14-fixed-build-resolution-and-nuker-source-roots"]
 
 
-def current_policy_dependency_cases(module: Any) -> list[str]:
+def historical_policy_dependency_cases(module: Any) -> list[str]:
     """Current dependencies exclude personal workflow; historical evidence remains admissible."""
     actual_root = RUNNER_PATH.resolve().parents[1]
     relative = "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
@@ -745,7 +745,79 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
             "F3-all-23-current-classifications-and-all-commands-unchanged"]
 
 
-def orchestration_retirement_cases(module: Any) -> list[str]:
+def current_policy_dependency_cases(module: Any) -> list[str]:
+    """Current public boundary probes; migration correspondence is historical."""
+    actual_root = RUNNER_PATH.resolve().parents[1]
+    actual = json.loads((actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())
+    module.package_scope.public_contract(actual_root)
+    module.package_scope.verify_manifest_coverage(actual_root, actual["entries"])
+    current = [row for row in actual["entries"] if row["applicability"] == "current"]
+    if not current or not all(row["load_bearing"] and not row["historical"] for row in current):
+        raise AssertionError("current load-bearing classification drift")
+    legacy = ("docs/WORKFLOW.md", "docs/AGENT_CONTEXT.md")
+    legacy_hardware = ("docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
+                       "docs/agent_framework/HARDWARE_EVIDENCE.md")
+    legacy_authority = ("docs/agent_framework/USER_DIRECTION.md",)
+    retained = ("docs/project/ACTIVE_AGENT_QUEUE.md",
+                "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
+                "docs/agent_framework/GP_VAL_041_FINITE_SCOPE_CURATOR_20261004.md",
+                "docs/agent_framework/other.md")
+    allowed_current = ("docs/evidence/HARDWARE_EVIDENCE.md",
+                       "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json",
+                       "docs/DEVELOPMENT.md")
+    for row in current:
+        for path in row["source_dependencies"]:
+            if (path in (*legacy, *legacy_hardware, *legacy_authority) or
+                    path.startswith(("docs/agent_framework/", "docs/project/"))):
+                raise AssertionError(f"current internal dependency: {row['id']}: {path}")
+    with tempfile.TemporaryDirectory(prefix="glyph-current-policy-dependencies-") as directory:
+        root = fresh_root(Path(directory))
+        module.ROOT = root
+        for path in (*legacy, *legacy_authority, *legacy_hardware, *retained, *allowed_current):
+            target = root / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text("retained synthetic evidence\n", encoding="utf-8")
+            run_git(root, "add", path)
+        probe = entry("current_policy_probe")
+        write_checker(root, probe, 0)
+        for path in legacy:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current policy dependency: {probe['id']}: {path}")
+        for path in legacy_authority:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current authority dependency: {probe['id']}: {path}")
+        for path in legacy_hardware:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current hardware contract dependency: {probe['id']}: {path}")
+        for path in retained:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current internal workflow dependency: {probe['id']}: {path}")
+        historical = entry("historical_policy_probe", applicability="historical_only",
+                           historical=True, load_bearing=False)
+        historical["branch_policy"] = "named_evidence_branch"
+        historical["source_dependencies"] = list((*legacy, *legacy_authority, *legacy_hardware, *retained))
+        write_checker(root, historical, 9)
+        for path in allowed_current:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe, historical], ["baseline"])
+            code, text = invoke(module, root, manifest, "--check-manifest")
+            if code or "glyph_runtime_config_validation_manifest: PASS; entries=2;" not in text:
+                raise AssertionError("current public contract or historical workflow rejected: " + text)
+    return ["G2B-current-manifest-exact-sealed-contract",
+            "G2B-current-public-dependency-boundaries-and-negatives",
+            "G2B-historical-evidence-admissible-without-current-authority"]
+
+
+
+def historical_orchestration_retirement_cases(module: Any) -> list[str]:
     """Retained protocols neither execute nor supply roots to current validation."""
     actual_root = RUNNER_PATH.resolve().parents[1]
     entries = json.loads((actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())["entries"]
@@ -819,6 +891,66 @@ def orchestration_retirement_cases(module: Any) -> list[str]:
             "F2-historical-orchestration-contributes-no-catalog-roots",
             "F2-current-package-replay-exact-authenticated-roots-and-fail-closed",
             "F2-current-custody-authority-context-replay-and-public-docs-classifications"]
+
+
+def orchestration_retirement_cases(module: Any) -> list[str]:
+    """Retained protocols neither execute nor supply roots to current validation."""
+    actual_root = RUNNER_PATH.resolve().parents[1]
+    entries = json.loads((actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())["entries"]
+    by_id = {row["id"]: row for row in entries}
+    retired = []
+    for identity, filename in (
+        ("agent_framework", "check_glyph_agent_framework_docs.py"),
+        ("agentic_sequence", "check_glyph_agentic_sequence_protocol.py"),
+    ):
+        row = by_id[identity]
+        if (row["applicability"] != "historical_only" or row["branch_policy"] != "named_evidence_branch"
+                or row["load_bearing"] is not False or row["historical"] is not True
+                or row["command"] != ["python3", "tools/" + filename]):
+            raise AssertionError("retained orchestration classification/command drift: " + identity)
+        retired.append(row.copy())
+    for identity in ("hardware_artifact_custody", "checker_context", "validation_aggregate_adversarial",
+                     "source_authority_intake", "build_input_provenance_inventory", "prebuild_git_identity",
+                     "gp_config023_usb_index_validation", "docs_navigation"):
+        row = by_id[identity]
+        if row["applicability"] != "current" or row["load_bearing"] is not True or row["historical"] is not False:
+            raise AssertionError("required current safety classification drift: " + identity)
+    # The source-bound current C023 replacement and context guard require no
+    # development roots; retained protocols must not add any. Authenticate the
+    # positive contract first, and make any historical replay call fatal here.
+    module.package_scope.public_contract(actual_root)
+    with mock.patch.object(module, "ROOT", actual_root), mock.patch.object(
+            module.package_scope, "original_proof", side_effect=AssertionError("current invoked historical C023")):
+        for selected in ([by_id["gp_config023_usb_index_validation"]],
+                         [by_id["gp_config023_usb_index_validation"], *retired],
+                         [by_id["checker_context"]], [by_id["checker_context"], *retired]):
+            if module.required_catalog(selected) != ({}, set()):
+                raise AssertionError("current public proof acquired development history roots")
+    with tempfile.TemporaryDirectory(prefix="glyph-orchestration-retirement-") as directory:
+        root = fresh_root(Path(directory))
+        module.ROOT = root
+        # No queue exists here. Catalog selection must not even attempt a Git
+        # read for either retained protocol, individually or together.
+        with mock.patch.object(module, "git", side_effect=AssertionError("historical catalog read Git")), mock.patch.object(
+                module, "git_value", side_effect=AssertionError("historical catalog read a queue/root")):
+            for selected in ([retired[0]], [retired[1]], retired):
+                if module.required_catalog(selected) != ({}, set()):
+                    raise AssertionError("historical orchestration contributed catalog roots")
+        current = entry("current_retirement_sentinel")
+        write_checker(root, current, 0)
+        for row in retired:
+            write_checker(root, row, 9)
+        manifest = write_manifest(root, [current, *retired], ["baseline", "agent_framework"])
+        code, text = invoke(module, root, manifest, "--json")
+        report = payload(text)
+        if (code or report["status"] != "PASS" or report["canonical_proof"] != "MATCH"
+                or [row["id"] for row in report["results"]] != [current["id"]]):
+            raise AssertionError("normal aggregate selected/executed retained orchestration: " + text)
+    return ["F2-historical-framework-and-sequence-not-selected-or-executed",
+            "F2-historical-orchestration-contributes-no-catalog-roots",
+            "G2B-current-C023-and-context-select-no-development-roots",
+            "G2B-current-safety-classifications-retained"]
+
 
 
 def gp_config_010_historical_object_cases(module: Any) -> list[str]:
@@ -1949,10 +2081,10 @@ def main() -> int:
         scope = module.package_scope
         entries = json.loads((actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())["entries"]
         scope.verify_manifest_coverage(actual_root, entries)
-        baseline = json.loads(subprocess.check_output([
-            "git", "show", scope.PACKAGE_BASE + ":docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
-        ], cwd=actual_root))["entries"]
-        required_ids = {row["id"] for row in baseline}
+        # The positively authenticated receipt closes the exact manifest.
+        # Git history is provenance, not an input to current coverage tests.
+        scope.public_contract(actual_root)
+        required_ids = {row["id"] for row in entries}
         controls = [("retire", row["id"]) for row in entries
                     if row["id"] in required_ids and row["applicability"] == "current"]
         controls += [("remove", "validation_publication_workflow"),
@@ -1983,7 +2115,7 @@ def main() -> int:
                        "F2-package-all-still-current-required-commands-reject-retirement",
                        "F2-package-retired-command-substitution-and-reactivation-rejected"])
     else:
-        passed.extend(gp_val037_campaign_catalog_cases(module))
+        raise AssertionError("current aggregate requires positive package contract; historical campaign suite is --historical-maintenance")
 
     if set(REQUIRED) != set(entry("schema_probe")):
         raise AssertionError("adversarial manifest entry no longer matches the runner schema")
@@ -1991,5 +2123,22 @@ def main() -> int:
     return 0
 
 
+def historical_maintenance() -> int:
+    """Execute the unchanged pre-G2B migration suite at its exact snapshot.
+
+    This opt-in requires development Git objects. Object absence fails, and
+    never authorizes the current validation path or substitutes a PASS.
+    """
+    from glyph_ci_package_scope import materialize
+    snapshot = "6714aca212ba8dd5bb1c655b344c80f35a582630"
+    with tempfile.TemporaryDirectory(prefix="glyph-historical-maintenance-") as directory:
+        root = materialize(RUNNER_PATH.resolve().parents[1], snapshot, Path(directory))
+        return subprocess.run([sys.executable, "-I", "-B", str(root / "tools/check_glyph_runtime_config_validation_aggregate.py")], cwd=root).returncode
+
+
 if __name__ == "__main__":
+    if sys.argv[1:] == ["--historical-maintenance"]:
+        raise SystemExit(historical_maintenance())
+    if sys.argv[1:]:
+        raise SystemExit("expected no arguments or --historical-maintenance")
     raise SystemExit(main())

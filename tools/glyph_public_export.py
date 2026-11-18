@@ -340,6 +340,17 @@ def plan(entries, policy):
             fail('embedded notice/source altered: ' + path)
     return rows, output, summary
 
+def workflow_publication_blockers(output):
+    """Omitted opaque inputs cannot leave an apparently publishable workflow."""
+    blockers = []
+    for path, (_, body) in sorted(output.items()):
+        if path.endswith(('.yml', '.yaml')) and b'glyph_nuker' in body:
+            # No public source/license/build correspondence is established by
+            # retaining a workflow or by succeeding at preprocessor compilation.
+            blockers.append(path + ':GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED')
+    return blockers
+
+
 def validate_staging(root, expected):
     actual = set()
     for base, dirs, files in os.walk(root, followlinks=False):
@@ -380,12 +391,17 @@ def main():
         rows, output, summary = plan(tracked_tree(args.root, args.revision), policy)
         blockers = [r['path'] for r in rows if r['classification'] == 'REVIEW_REQUIRED']
         blockers += ['license:' + r['name'] for r in policy['dependencies'] if r['action'] == 'REVIEW_REQUIRED']
+        blocked_workflows = workflow_publication_blockers(output)
+        blockers += blocked_workflows
         report = {'schema': 'glyph_public_export_inventory.v1', 'source_commit': subprocess.check_output(
             ['git', 'rev-parse', args.revision + '^{commit}'], cwd=args.root, text=True).strip(),
             'policy_sha256': digest((args.policy or args.root / POLICY).read_bytes()),
             'tracked_blobs': len(rows), 'classification_totals': summary,
             'privacy': 'PASS_FOR_INCLUDED_OUTPUTS', 'blockers': blockers,
             'stage_h_ready': False, 'diagnostic_only': args.diagnostic_stage,
+            'workflow_publication': 'BLOCKED' if blocked_workflows else 'NOT_ESTABLISHED',
+            'blocked_workflows': blocked_workflows,
+            'compilation_scope_if_attempted': 'PRE_POSTPROCESSOR_BUILD_ONLY' if blocked_workflows else 'NOT_RUN',
             'output_files': len(output), 'output_bytes': sum(len(b) for _, b in output.values()), 'inventory': rows}
         if args.output and args.report.absolute().is_relative_to(args.output.absolute()): fail('private report inside staging root')
         args.report.write_text(json.dumps(report, indent=2, sort_keys=True) + '\n', encoding='utf-8')

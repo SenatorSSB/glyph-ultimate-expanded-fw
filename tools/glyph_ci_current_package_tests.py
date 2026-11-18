@@ -15,7 +15,7 @@ from check_glyph_profile_native_ultimate import program
 
 import check_glyph_docs_agent_surface as docs
 import check_glyph_runtime_config_webserial_device_write_source_authority as authority
-from glyph_ci_package_scope import PACKAGE_BASE
+from glyph_ci_package_scope import public_contract
 
 ROOT = Path(__file__).resolve().parents[1]
 TRANSACTION = ROOT / "tools/fixtures/glyph_package_v1/transaction"
@@ -203,9 +203,11 @@ def active_authority():
     authority.ensure_no_positive_claims(text)
     authority.ensure_no_runtime_write_symbols_added()
     verify_current_flashing_automation_controls()
-    changed = subprocess.check_output(["git", "diff", "--name-only", "--no-renames", "-z",
-                                       PACKAGE_BASE, "HEAD"], cwd=ROOT)
-    ensure_no_current_flashing_automation([path.decode() for path in changed.split(b"\0") if path])
+    public_contract(ROOT)
+    current = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT)
+    ensure_no_current_flashing_automation([path.decode() for path in current.split(b"\0")
+                                         if path and not path.decode().startswith("docs/")])
+
 
 
 def offline_source_tools():
