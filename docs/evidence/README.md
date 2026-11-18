@@ -69,7 +69,10 @@ later ancestry without asserting identical full trees. The
 [resolution observations](../runtime_config/build_input_resolution_observations.md)
 and [postprocessor provenance](../runtime_config/artifact_postprocessor_provenance.md)
 retain declared/resolved/observed distinctions, not an invented reproducibility
-claim. Current build/evidence practice belongs in [DEVELOPMENT](../DEVELOPMENT.md).
+claim. The [current hardware evidence contract](HARDWARE_EVIDENCE.md) defines
+engineering custody and acceptance requirements; it is not evidence of a PASS.
+Actual accepted results remain in [hardware acceptance](../history/HARDWARE_ACCEPTANCE.md).
+Current build/evidence practice belongs in [DEVELOPMENT](../DEVELOPMENT.md).
 
 ## Archive and calibration indexes
 

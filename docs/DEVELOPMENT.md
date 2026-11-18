@@ -139,6 +139,9 @@ authorized. Never discard unrelated local edits to obtain a clean build.
 
 ## Firmware artifact and hardware evidence
 
+See the [current hardware evidence contract](evidence/HARDWARE_EVIDENCE.md) for
+artifact custody and acceptance requirements.
+
 **Build proof:** firmware compiled from known source. **Hardware acceptance:**
 the exact candidate source plus exact tested artifact SHA-256 and recorded human
 test scope passed. These are different claims. Preserve the retained UF2 and its
