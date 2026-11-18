@@ -355,6 +355,29 @@ class PublicDocsTests(unittest.TestCase):
             'Keep version domains independent', 'Preserve separate version contracts')
         nav.validate_docs(overrides=self.docs)
 
+    def test_hardware_contract_routes_and_semantics(self):
+        for path, before, after in (
+            ('docs/evidence/README.md', '](HARDWARE_EVIDENCE.md)', '](README.md)'),
+            ('docs/DEVELOPMENT.md', '](evidence/HARDWARE_EVIDENCE.md)', '](CURRENT_STATE.md)'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', '](../../tools/glyph_hardware_artifact_custody.py)', '](README.md)'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'Build proof is not\nhardware acceptance', 'Build proof is hardware acceptance'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'exact candidate Git SHA', 'candidate label'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'exact tested artifact SHA-256', 'artifact filename'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'recorded human test scope', 'assumed scope'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'does not inherit PASS', 'inherits PASS'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'supplies no\nflashing or device-write authority', 'authorizes flashing'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'require explicit user\nauthorization', 'require no authorization')):
+            with self.subTest(before=before):
+                self.setUp()
+                self.reject(path, before, after)
+
+    def test_hardware_contract_allows_wording_changes(self):
+        path = 'docs/evidence/HARDWARE_EVIDENCE.md'
+        self.docs[path] = self.docs[path].replace('Build proof is not\nhardware acceptance',
+            'Build proof does not confer hardware acceptance').replace(
+            'does not inherit PASS', 'cannot inherit PASS')
+        nav.validate_docs(overrides=self.docs)
+
     def test_current_candidate(self):
         nav.validate_docs(overrides=self.docs)
 

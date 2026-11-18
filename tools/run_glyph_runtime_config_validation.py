@@ -39,6 +39,10 @@ LEGACY_CURRENT_POLICY_DEPENDENCIES = frozenset({
 LEGACY_CURRENT_AUTHORITY_DEPENDENCIES = frozenset({
     "docs/agent_framework/USER_DIRECTION.md",
 })
+LEGACY_CURRENT_HARDWARE_CONTRACT_DEPENDENCIES = frozenset({
+    "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
+    "docs/agent_framework/HARDWARE_EVIDENCE.md",
+})
 EXCLUSION_REQUIRED = {"id", "path", "reason", "detail"}
 EXCLUSION_REASONS = {"HISTORICAL_BRANCH_EVIDENCE", "HARDWARE_RESULT_EVIDENCE", "SUPERSEDED_CONTRACT", "REQUIRES_NONCANONICAL_ARGUMENT", "UNSAFE_OR_MUTATING", "DUPLICATE_COVERAGE", "NOT_CURRENT_RUNTIME_CONFIG_LANE"}
 CHECKER_TIMEOUT_SECONDS = 120.0
@@ -306,6 +310,8 @@ def validate_dependencies(entry: dict[str, object]) -> None:
     if len(dependencies) != len(set(dependencies)):
         raise ValueError(f"duplicate source dependency: {entry['id']}")
     for path in dependencies:
+        if entry["applicability"] == "current" and path in LEGACY_CURRENT_HARDWARE_CONTRACT_DEPENDENCIES:
+            raise ValueError(f"legacy current hardware contract dependency: {entry['id']}: {path}")
         if entry["applicability"] == "current" and path in LEGACY_CURRENT_POLICY_DEPENDENCIES:
             raise ValueError(f"legacy current policy dependency: {entry['id']}: {path}")
         if entry["applicability"] == "current" and path in LEGACY_CURRENT_AUTHORITY_DEPENDENCIES:

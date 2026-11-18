@@ -12,7 +12,8 @@ CURATED_PATHS = ("docs/history/HISTORY.md", "docs/history/DECISIONS.md",
 PUBLIC_PATHS = ("AGENTS.md", "README.md", "docs/README.md", "docs/CURRENT_STATE.md",
                 "docs/ROADMAP.md", "docs/CAPABILITIES.md", "docs/USAGE.md",
                 "docs/PROFILE_SYSTEM.md", "profiles/README.md",
-                "docs/ARCHITECTURE.md", "docs/DEVELOPMENT.md") + CURATED_PATHS
+                "docs/ARCHITECTURE.md", "docs/DEVELOPMENT.md",
+                "docs/evidence/HARDWARE_EVIDENCE.md") + CURATED_PATHS
 
 
 class DocsNavigationError(AssertionError):
@@ -314,11 +315,42 @@ def validate_history_surface(docs: dict[str, str]) -> None:
             fail(f"{path}: private locator/contact in curated public evidence")
 
 
+def validate_hardware_contract(docs: dict[str, str]) -> None:
+    require_links("evidence index", docs["docs/evidence/README.md"], ("HARDWARE_EVIDENCE.md",))
+    require_links("development", docs["docs/DEVELOPMENT.md"], ("evidence/HARDWARE_EVIDENCE.md",))
+    text = docs["docs/evidence/HARDWARE_EVIDENCE.md"]
+    require_links("hardware contract", text, ("../../tools/glyph_hardware_artifact_custody.py",))
+    # The custody checker validates closed data; here protect readable semantics.
+    prose = text.split("<!-- hardware-evidence-contract-v1:start -->")[0]
+    n = normalize(prose)
+    required = (
+        r"build proof.{0,20}(?:is not|!=|≠|does not (?:establish|confer)).{0,15}hardware acceptance",
+        r"acceptance requires.{0,20}exact candidate git sha.{0,30}exact tested artifact sha-256.{0,35}(?:recorded )?human test scope",
+        r"(?:later source commit|rebuild).{0,35}(?:does not|cannot|never).{0,15}inherit pass",
+        r"(?:document|contract).{0,20}(?:supplies|grants|provides) no.{0,30}flashing.{0,30}device-write authority",
+        r"specific device actions require explicit user authorization",
+    )
+    if any(not re.search(pattern, n) for pattern in required):
+        fail("hardware contract: missing readable safety distinction")
+    reversals = (
+        r"build proof (?:is|confers|establishes) hardware acceptance",
+        r"(?:rebuild|later source commit) (?:automatically )?inherits? pass",
+        r"(?:document|contract) (?:authorizes|permits) (?:flashing|device writes?)",
+        r"physical observations (?:may|can) be fabricated",
+    )
+    if any(re.search(pattern, n) for pattern in reversals):
+        fail("hardware contract: safety reversal")
+    operational = prose.split("## Historical provenance")[0]
+    if re.search(r"\b(?:Planner|Curator|READY|PREAUTHORIZED|runway|daemon)\b|queue state", operational, re.I):
+        fail("hardware contract: personal orchestration promoted into public contract")
+
+
 def validate_docs(root: Path = REPO_ROOT, overrides: dict[str, str] | None = None) -> None:
     """Overrides let tests mutate current prose without touching tracked files."""
     docs = {}
     for path in PUBLIC_PATHS:
         docs[path] = overrides[path] if overrides and path in overrides else (root / path).read_text(encoding="utf-8")
+    validate_hardware_contract(docs)
     check_public_agents_contract(docs["AGENTS.md"])
     validate_technical_surface(docs)
     validate_history_surface(docs)

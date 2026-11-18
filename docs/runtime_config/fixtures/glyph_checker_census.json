@@ -4149,26 +4149,32 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 25293,
+      "file_size_bytes": 27343,
       "hard_coded_branch_like_strings": [
+        "candidate",
         "configurator",
         "evidence",
         "evidence.",
-        "evidence/README.md"
+        "evidence/HARDWARE_EVIDENCE.md",
+        "evidence/README.md",
+        "hardware-evidence-contract-v1"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
+      "invokes_git": true,
       "invokes_subprocess": false,
-      "line_count": 394,
+      "line_count": 426,
       "parse_error": null,
       "path": "tools/check_glyph_docs_navigation.py",
       "potential_branch_identity_signals": [
+        "candidate",
         "configurator",
         "evidence",
         "evidence.",
-        "evidence/README.md"
+        "evidence/HARDWARE_EVIDENCE.md",
+        "evidence/README.md",
+        "hardware-evidence-contract-v1"
       ],
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_docs_navigation",
@@ -4181,6 +4187,7 @@
         "docs/README.md",
         "docs/ROADMAP.md",
         "docs/USAGE.md",
+        "docs/evidence/HARDWARE_EVIDENCE.md",
         "docs/evidence/README.md",
         "docs/history/DECISIONS.md",
         "docs/history/HARDWARE_ACCEPTANCE.md",
@@ -4189,12 +4196,14 @@
         "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
         "include/core/ProfileStore.hpp",
         "src/config.cpp",
-        "src/core/mode_selection.cpp"
+        "src/core/mode_selection.cpp",
+        "tools/glyph_hardware_artifact_custody.py"
       ],
       "runtime_config_relevance_signals": [
+        "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "779789945d150f7e120688c758187268aabb5017f25d30e1d66f234dc00d8261",
+      "sha256": "d729e875d6c296d8f0e402cca86bb551c07e845b6032560d6d54650d13def6a2",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -8361,22 +8370,28 @@
       },
       "checker_id": "hardware_artifact_custody",
       "defines_main": true,
-      "file_size_bytes": 8309,
+      "file_size_bytes": 13421,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate-repo",
         "candidate_a",
         "candidate_b",
+        "candidate_git_sha",
         "candidate_link",
         "candidate_link.symlink_to",
-        "require_clean_candidate_checkout"
+        "evidence/HARDWARE_EVIDENCE.md",
+        "glyph_public_hardware_evidence_contract",
+        "hardware-evidence-contract-v1",
+        "raw_private_evidence_may_remain_private",
+        "require_clean_candidate_checkout",
+        "requires_exact_candidate_git_sha"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 219,
+      "line_count": 324,
       "parse_error": null,
       "path": "tools/check_glyph_hardware_artifact_custody.py",
       "potential_branch_identity_signals": [
@@ -8384,24 +8399,36 @@
         "candidate-repo",
         "candidate_a",
         "candidate_b",
+        "candidate_git_sha",
         "candidate_link",
         "candidate_link.symlink_to",
-        "require_clean_candidate_checkout"
+        "evidence/HARDWARE_EVIDENCE.md",
+        "glyph_public_hardware_evidence_contract",
+        "hardware-evidence-contract-v1",
+        "raw_private_evidence_may_remain_private",
+        "require_clean_candidate_checkout",
+        "requires_exact_candidate_git_sha"
       ],
       "potential_mutation_signals": [
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_hardware_artifact_custody",
       "referenced_repository_path_prefixes": [
+        "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
+        "docs/agent_framework/HARDWARE_EVIDENCE.md",
+        "docs/evidence/HARDWARE_EVIDENCE.md",
         "src/ignored.cpp"
       ],
-      "runtime_config_relevance_signals": [],
-      "sha256": "ca5055a1c3058a8d001f3500c9e4c878c40552d2f4fdf2e29fc8c8a13a6e28c7",
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
+        "hardware_evidence_contracts"
+      ],
+      "sha256": "4599b499c6dd8511079b37f0a9a24cb4225a402614094bb07585a452a79ee92d",
       "static_signals": {
-        "agent_framework": false,
+        "agent_framework": true,
         "candidate_generation": false,
         "coordinate_native": false,
-        "docs_navigation": false,
+        "docs_navigation": true,
         "generated_source_owned_artifacts": false,
         "hardware_results": false,
         "identity_runtime_tables": false,
@@ -14794,7 +14821,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 116803,
+      "file_size_bytes": 118328,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -14806,6 +14833,7 @@
         "carrying_candidate",
         "configurator",
         "evidence",
+        "evidence/HARDWARE_EVIDENCE.md",
         "evidence_commit",
         "evidence_root",
         "hardware-evidence",
@@ -14825,7 +14853,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1913,
+      "line_count": 1938,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -14839,6 +14867,7 @@
         "carrying_candidate",
         "configurator",
         "evidence",
+        "evidence/HARDWARE_EVIDENCE.md",
         "evidence_commit",
         "evidence_root",
         "hardware-evidence",
@@ -14866,6 +14895,7 @@
         "docs/agent_framework/USER_DIRECTION.md",
         "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
         "docs/agent_framework/xHARDWARE_EVIDENCE.md",
+        "docs/evidence/HARDWARE_EVIDENCE.md",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/fixtures",
         "docs/runtime_config/fixtures/glyph_checker_census.json",
@@ -14911,7 +14941,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "221da42b53ee836b457be8789f1cf64244c3b07d37858a88ed1d47206a81f168",
+      "sha256": "46a9fb87fcd02a6a3edddeca9632527ef1a78e184ddb7fe13c9879e01a74c235",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

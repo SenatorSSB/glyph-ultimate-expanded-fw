@@ -604,9 +604,11 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
         for path in legacy:
             if path in row["source_dependencies"]:
                 raise AssertionError(f"current legacy policy dependency: {row['id']}: {path}")
-    retained = (
+    legacy_hardware = (
         "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
+    )
+    retained = (
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json",
     )
@@ -624,14 +626,30 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
         "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json"
         if path == legacy_authority[0] else path for path in authority["source_dependencies"]
     ] + ["docs/runtime_config/fixtures/source_owned_source_authority_intake.json"]
+    f4 = json.loads(subprocess.check_output([
+        "git", "show", "367785cfe02d883c185327cfface06c37307f2b3:" + relative,
+    ], cwd=actual_root))
+    if f4 != expected:
+        raise AssertionError("F4 source-authority migration drift")
+    expected = json.loads(json.dumps(f4))
+    hardware = next(row for row in expected["entries"] if row["id"] == "hardware_artifact_custody")
+    if hardware["source_dependencies"][2:4] != list(legacy_hardware):
+        raise AssertionError("F5 unexpected starting hardware dependencies")
+    hardware["source_dependencies"][2:4] = ["docs/evidence/HARDWARE_EVIDENCE.md"]
     if actual != expected:
-        raise AssertionError("F4 manifest changed beyond the source-authority dependency migration")
+        raise AssertionError("F5 manifest changed beyond hardware dependency migration")
+    if hardware["applicability"] != "current" or hardware["load_bearing"] is not True:
+        raise AssertionError("F5 custody must remain current/load-bearing")
+    for row in current:
+        for path in legacy_hardware:
+            if path in row["source_dependencies"]:
+                raise AssertionError(f"current legacy hardware dependency: {row['id']}: {path}")
     if authority["applicability"] != "current" or authority["load_bearing"] is not True:
         raise AssertionError("F4 source authority is no longer current/load-bearing")
     with tempfile.TemporaryDirectory(prefix="glyph-current-policy-dependencies-") as directory:
         root = fresh_root(Path(directory))
         module.ROOT = root
-        for path in (*legacy, *legacy_authority, *retained):
+        for path in (*legacy, *legacy_authority, *legacy_hardware, *retained):
             target = root / path
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text("retained synthetic evidence\n", encoding="utf-8")
@@ -648,17 +666,24 @@ def current_policy_dependency_cases(module: Any) -> list[str]:
             manifest = write_manifest(root, [probe], ["baseline"])
             assert_manifest_failure(module, root, manifest,
                                     f"legacy current authority dependency: {probe['id']}: {path}")
+        for path in legacy_hardware:
+            probe["source_dependencies"] = [path]
+            manifest = write_manifest(root, [probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest,
+                                    f"legacy current hardware contract dependency: {probe['id']}: {path}")
         historical = entry("historical_policy_probe", applicability="historical_only",
                            historical=True, load_bearing=False)
         historical["branch_policy"] = "named_evidence_branch"
-        historical["source_dependencies"] = list((*legacy, *legacy_authority))
+        historical["source_dependencies"] = list((*legacy, *legacy_authority, *legacy_hardware))
         write_checker(root, historical, 9)
         probe["source_dependencies"] = list(retained)
         manifest = write_manifest(root, [probe, historical], ["baseline"])
         code, text = invoke(module, root, manifest, "--check-manifest")
         if code or "glyph_runtime_config_validation_manifest: PASS; entries=2;" not in text:
             raise AssertionError("retained current contracts or historical policy rejected: " + text)
-    return ["F3-current-manifest-no-legacy-policy-dependencies",
+    return ["F5-current-hardware-legacy-rejected-with-identity-historical-allowed",
+            "F5-only-custody-dependencies-migrated-23-classifications-unchanged",
+            "F3-current-manifest-no-legacy-policy-dependencies",
             "F3-current-workflow-and-agent-context-rejected-with-identity",
             "F3-historical-policy-and-current-hardware-queue-receipts-allowed",
             "F4-current-no-legacy-authority-dependency-rejected-with-identity",

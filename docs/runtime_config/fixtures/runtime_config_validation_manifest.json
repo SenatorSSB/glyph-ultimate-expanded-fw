@@ -4528,8 +4528,7 @@
       "source_dependencies": [
         "tools/glyph_hardware_artifact_custody.py",
         "tools/glyph_tracked_worktree_integrity.py",
-        "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
-        "docs/agent_framework/HARDWARE_EVIDENCE.md",
+        "docs/evidence/HARDWARE_EVIDENCE.md",
         "docs/DEVELOPMENT.md"
       ],
       "load_bearing": true,
