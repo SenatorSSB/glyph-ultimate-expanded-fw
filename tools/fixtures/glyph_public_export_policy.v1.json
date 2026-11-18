@@ -1970,6 +1970,102 @@
     "docs/runtime_config/public_current_receipts.md": {
       "classification": "PUBLIC_INCLUDE",
       "purpose": "G2B reviewed privacy-safe current validation receipt/contract and source-bound host proof; historical commit IDs are inert provenance, not required Git objects."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_neutral_5.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_direction_key_outside_range.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_raw_coordinate_outside_byte_range.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_malformed_9way_table.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_capability_metadata.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_neutral_5.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_offline_artifact_bundle_manifest.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_offline_export_package.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_unresolved_role_state.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current package host offline negative/pipeline/packaging test dependency. Privacy-reviewed inert fixture; preserves exact rejection and offline-only/non-hardware assertions."
     }
   },
   "forbidden_markers": [
@@ -2431,7 +2527,7 @@
         "99ff99e0f7dd484e37d45e67cffae89006a5b8b562599e63804f5f3283e9f5f8"
       ],
       "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
-      "sha256": "350b964bab581fcfd92056f504ce6c68a3306389e63d00a142196b340e4a5d83"
+      "sha256": "3e132118639e4629b679f4a283ba5bd8c1044f80df125e35c11a9a58ad848830"
     }
   },
   "rules": [

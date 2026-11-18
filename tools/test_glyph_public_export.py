@@ -171,6 +171,30 @@ class ExportTests(unittest.TestCase):
         output['glyph_nuker'] = ('100755', b'opaque')
         self.assertTrue(ex.workflow_publication_blockers(output))
 
+    def test_current_package_offline_fixture_closure(self):
+        import check_glyph_coordinate_native_runtime_profile_contract as contract
+        p = ex.load_policy(ex.ROOT / ex.POLICY)
+        cases = [
+            contract.DRY_RUN_NEUTRAL_FIXTURE, contract.DRY_RUN_CARDINAL_FIXTURE,
+            contract.DRY_RUN_DIAGONAL_FIXTURE, contract.DRY_RUN_MERGE_FIXTURE,
+            contract.DRY_RUN_Y2_NEUTRAL_FIXTURE, contract.DRY_RUN_Y2_CARDINAL_FIXTURE,
+            contract.DRY_RUN_Y2_DIAGONAL_FIXTURE, contract.DRY_RUN_Y2_TILT3_FIXTURE,
+            *contract.DRY_RUN_NEGATIVE_FIXTURES,
+        ]
+        inputs = [path for path, _ in contract.NEGATIVE_FIXTURE_REASON_PAIRS] + [
+            contract.OFFLINE_PIPELINE_PROFILE_FIXTURE, *cases,
+            *contract.CONVERTER_PROFILE_FIXTURES, *contract.CONVERTER_NEGATIVE_FIXTURES,
+            contract.LAYOUT_SPEC_FIXTURE, contract.GENERATED_OUTPUT_FIXTURE,
+            contract.OFFLINE_ARTIFACT_BUNDLE_MANIFEST_FIXTURE,
+            contract.OFFLINE_EXPORT_PACKAGE_FIXTURE,
+        ]
+        inputs += [ex.ROOT / json.loads(path.read_text())['profile_path'] for path in cases]
+        for path in inputs:
+            relative = path.relative_to(ex.ROOT).as_posix()
+            with self.subTest(path=relative):
+                self.assertIn(ex.classify(relative, path.read_bytes(), p), ex.PUBLIC)
+                ex.scan(relative, path.read_bytes(), p)
+
     def test_repository_policy_regular_tracked_paths_and_direct_dependencies(self):
         p=ex.load_policy(ex.ROOT/ex.POLICY)
         dispositions={path:ex.classify(path,b,p) for path,_,b in ex.tracked_tree(ex.ROOT,'HEAD')}
