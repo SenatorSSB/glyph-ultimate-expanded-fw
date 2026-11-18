@@ -378,6 +378,78 @@ class PublicDocsTests(unittest.TestCase):
             'does not inherit PASS', 'cannot inherit PASS')
         nav.validate_docs(overrides=self.docs)
 
+    def public_add(self, path, prose):
+        if path in ('docs/CURRENT_STATE.md', 'docs/ROADMAP.md'):
+            kind = 'current-state' if path.endswith('CURRENT_STATE.md') else 'current-roadmap'
+            marker = '<!-- ' + kind + '-v1:end -->'
+            self.docs[path] = self.docs[path].replace(marker, prose + '\n' + marker)
+        else:
+            self.docs[path] += '\n' + prose + '\n'
+
+    def test_public_export_excluded_routes(self):
+        controls = (
+            ('docs/CURRENT_STATE.md', '[packet](planning/final-usb-gamepad/README.md)'),
+            ('docs/ROADMAP.md', '[framework](agent_framework/README.md)'),
+            ('docs/history/HISTORY.md', '[packet](../calibration/README.md)'),
+            ('docs/history/HARDWARE_ACCEPTANCE.md', '[packet](../planning/final-usb-gamepad/README.md)'),
+            ('docs/evidence/README.md', '[archive](../archive/README.md)'),
+            ('AGENTS.md', '[required context](docs/AGENT_CONTEXT.md)'),
+            ('docs/DEVELOPMENT.md', '[required workflow](WORKFLOW.md)'),
+            ('README.md', '[queue](docs/project/ACTIVE_AGENT_QUEUE.md)'),
+            ('docs/USAGE.md', '[packet][old]\n\n[old]: <planning/final-usb-gamepad/README.md> "Source"'),
+            ('docs/USAGE.md', '[packet](runtime_config/../%70lanning/final-usb-gamepad/README.md)'),
+            ('docs/USAGE.md', '[packet](<planning/final-usb-gamepad/README.md> "Source")'),
+            ('README.md', '[packet](https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/blob/configurator/docs/planning/final-usb-gamepad/README.md)'),
+        )
+        for path, prose in controls:
+            with self.subTest(path=path, prose=prose):
+                self.setUp(); self.public_add(path, prose)
+                with self.assertRaisesRegex(nav.DocsNavigationError, 'PUBLIC-EXPORT excluded route'):
+                    nav.validate_public_export(nav.REPO_ROOT, self.docs)
+
+    def test_public_export_privacy(self):
+        for path in nav.PUBLIC_PATHS:
+            for prose in ('/Users/example/capture.json', '/home/example/capture.json',
+                          '/private/capture.json', '/tmp/capture.json',
+                          'file:///example/capture.json', 'C:\\Users\\example\\capture.json',
+                          'author@example.invalid', 'private-capture-path: hidden',
+                          'private-artifact-locator: hidden',
+                          'local_backups/hardware-artifacts/' + 'a'*40 + '/' + 'b'*64 + '/firmware.uf2'):
+                with self.subTest(path=path, prose=prose):
+                    self.setUp(); self.public_add(path, prose)
+                    with self.assertRaisesRegex(nav.DocsNavigationError, 'PUBLIC-EXPORT private locator/contact'):
+                        nav.validate_public_export(nav.REPO_ROOT, self.docs)
+
+    def test_public_export_template_is_exact_and_location_scoped(self):
+        self.public_add('docs/evidence/HARDWARE_EVIDENCE.md', nav.CUSTODY_TEMPLATE)
+        nav.validate_public_export(nav.REPO_ROOT, self.docs)
+        for path, prose in (
+            ('README.md', nav.CUSTODY_TEMPLATE),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', nav.CUSTODY_TEMPLATE.replace('<candidate_git_sha>', 'a'*40)),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', nav.CUSTODY_TEMPLATE.replace('firmware.uf2', 'capture.json'))):
+            with self.subTest(path=path, prose=prose):
+                self.setUp(); self.public_add(path, prose)
+                with self.assertRaises(nav.DocsNavigationError):
+                    nav.validate_public_export(nav.REPO_ROOT, self.docs)
+
+    def test_public_export_allows_curated_links_and_plain_provenance(self):
+        self.public_add('README.md', '[Evidence](docs/evidence/README.md)')
+        self.public_add('docs/history/HISTORY.md',
+                        'Original provenance: `docs/calibration/old-result.md`.')
+        self.public_add('docs/evidence/HARDWARE_EVIDENCE.md',
+                        'Historical source: `docs/agent_framework/HARDWARE_EVIDENCE.md`.')
+        self.docs['docs/ARCHITECTURE.md'] = self.docs['docs/ARCHITECTURE.md'].replace(
+            'stock row label is not a mode engine', 'stock row label differs from a mode engine')
+        nav.validate_docs(overrides=self.docs)
+
+    def test_public_export_ignores_legacy_bodies_but_rejects_their_anchors(self):
+        for path in ('docs/CURRENT_STATE.md', 'docs/ROADMAP.md'):
+            self.docs[path] += '\n/Users/example/old-capture\n[old](planning/old.md)\n'
+        nav.validate_public_export(nav.REPO_ROOT, self.docs)
+        self.public_add('README.md', '[old](docs/CURRENT_STATE.md#exact-candidate-physical-qualification-accepted--2026-11-17)')
+        with self.assertRaisesRegex(nav.DocsNavigationError, 'missing public anchor'):
+            nav.validate_public_export(nav.REPO_ROOT, self.docs)
+
     def test_current_candidate(self):
         nav.validate_docs(overrides=self.docs)
 

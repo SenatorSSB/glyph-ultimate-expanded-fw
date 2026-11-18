@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import re
+import posixpath
+from urllib.parse import unquote, urlsplit
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -49,7 +51,89 @@ def require(label: str, text: str, phrases: tuple[str, ...]) -> None:
 
 
 def links(text: str) -> set[str]:
-    return set(re.findall(r"\[[^]\n]*\]\(([^)\s]+)\)", text))
+    """Collect inline/image, reference and autolink destinations, including titles.
+
+    Definitions are checked even when unused, so later reference use cannot turn
+    an unchecked definition into a public route. Plain provenance is not a link.
+    """
+    destination = r'<([^>\n]+)>|([^\s<>]+)'
+    targets: set[str] = set()
+    # Permit a nested parenthesized component (common in URLs) and optional title.
+    inline = r'!?\[[^]\n]*\]\(\s*(?:<([^>\n]+)>|((?:[^\s()]+|\([^()]*\))+))(?:\s+["\'][^\n]*["\'])?\s*\)'
+    for match in re.finditer(inline, text):
+        targets.add(match[1] or match[2])
+    for match in re.finditer(r'^ {0,3}\[[^]\n]+\]:\s*(?:' + destination + r')', text, re.M):
+        targets.add(match[1] or match[2])
+    targets.update(re.findall(r'<((?:https?://|file://|mailto:)[^<>\s]+)>', text, re.I))
+    return targets
+
+
+def public_export_view(docs: dict[str, str]) -> dict[str, str]:
+    """The standalone documentation surface excludes both retained journals."""
+    view = dict(docs)
+    for path, kind in (("docs/CURRENT_STATE.md", "current-state"),
+                       ("docs/ROADMAP.md", "current-roadmap")):
+        view[path] = current_section(view[path], kind)
+    return view
+
+
+# These paths remain in the development fork, but are unavailable public routes.
+PUBLIC_EXPORT_EXCLUDED_PREFIXES = (
+    "docs/agent_framework/", "docs/project/", "docs/planning/",
+    "docs/calibration/", "docs/archive/", "docs/maintenance/",
+)
+PUBLIC_EXPORT_EXCLUDED_FILES = ("docs/AGENT_CONTEXT.md", "docs/WORKFLOW.md")
+CUSTODY_TEMPLATE = "local_backups/hardware-artifacts/<candidate_git_sha>/<artifact_sha256>/firmware.uf2"
+PRIVATE_PUBLIC_TEXT = re.compile(
+    r"/Users/|/home/|/private/|/tmp/|file://|\b[A-Za-z]:[\\/]|local_backups/|"
+    r"private[-_ ]capture[-_ ](?:path|locator)|private[-_ ]artifact[-_ ](?:location|locator)|"
+    r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", re.I)
+
+
+def validate_public_export(root: Path, docs: dict[str, str]) -> None:
+    """Reject excluded reader dependencies and private paths in PUBLIC-EXPORT.
+
+    Technical source/runtime routes remain available export inputs; this view
+    neither retires their checkers nor claims privacy clearance of the full tree.
+    """
+    view = public_export_view(docs)
+    for path, text in view.items():
+        privacy_text = text
+        if path == "docs/evidence/HARDWARE_EVIDENCE.md":
+            privacy_text = privacy_text.replace(CUSTODY_TEMPLATE, "<generic custody template>")
+        # Decode URL escapes as well: an encoded private locator is still private.
+        if PRIVATE_PUBLIC_TEXT.search(unquote(privacy_text)):
+            fail(f"{path}: PUBLIC-EXPORT private locator/contact")
+        for target in links(text):
+            url = urlsplit(unquote(target))
+            if url.scheme in ("http", "https"):
+                # A same-repository GitHub URL must not bypass local route policy.
+                if url.netloc.lower() == "github.com" and url.path.lower().startswith(
+                        "/senatorssb/glyph-ultimate-expanded-fw/blob/"):
+                    rel = url.path.split("/", 5)[-1]
+                    if any(rel.lower().startswith(p.lower()) for p in PUBLIC_EXPORT_EXCLUDED_PREFIXES) or rel.lower() in {p.lower() for p in PUBLIC_EXPORT_EXCLUDED_FILES}:
+                        fail(f"{path}: PUBLIC-EXPORT excluded route {target}")
+                continue
+            if url.scheme or url.netloc:
+                fail(f"{path}: PUBLIC-EXPORT unsupported link scheme {target}")
+            dest = url.path
+            rel = posixpath.normpath(posixpath.join(posixpath.dirname(path), dest)) if dest else path
+            if (rel.startswith("../") or dest.startswith("/") or
+                    any(rel.lower().startswith(p.lower()) for p in PUBLIC_EXPORT_EXCLUDED_PREFIXES) or
+                    rel.lower() in {p.lower() for p in PUBLIC_EXPORT_EXCLUDED_FILES}):
+                fail(f"{path}: PUBLIC-EXPORT excluded route {target}")
+            resolved = root / rel
+            if not resolved.is_file() or not resolved.resolve().is_relative_to(root.resolve()):
+                fail(f"{path}: broken local link {target}")
+            if url.fragment:
+                # Anchors into retained journals will disappear in the export.
+                content = view.get(rel)
+                if content is None:
+                    content = resolved.read_text(encoding="utf-8")
+                headings = re.findall(r"^#+ (.+)$", content, re.M)
+                slugs = {re.sub(r"[^\w -]", "", h.lower()).replace(" ", "-") for h in headings}
+                if url.fragment not in slugs:
+                    fail(f"{path}: missing public anchor {target}")
 
 
 def require_links(label: str, text: str, targets: tuple[str, ...]) -> None:
@@ -311,7 +395,7 @@ def validate_history_surface(docs: dict[str, str]) -> None:
     for path in CURATED_PATHS:
         # Scan prose AND link targets. Raw/private inputs remain at their original
         # owner-controlled location; only sanitized repository records are public.
-        if re.search(r"(?:/Users/|/home/|/private/|/tmp/|file://|[A-Za-z]:[\\/]|local_backups/|private[-_ ]capture[-_ ]path|private[-_ ]artifact[-_ ]location|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,})", docs[path], re.I):
+        if re.search(r"(?:/Users/|/home/|/private/|/tmp/|file://|\b[A-Za-z]:[\\/]|local_backups/|private[-_ ]capture[-_ ]path|private[-_ ]artifact[-_ ]location|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,})", docs[path], re.I):
             fail(f"{path}: private locator/contact in curated public evidence")
 
 
@@ -350,6 +434,8 @@ def validate_docs(root: Path = REPO_ROOT, overrides: dict[str, str] | None = Non
     docs = {}
     for path in PUBLIC_PATHS:
         docs[path] = overrides[path] if overrides and path in overrides else (root / path).read_text(encoding="utf-8")
+    docs["LICENSE"] = (root / "LICENSE").read_text(encoding="utf-8")
+    validate_public_export(root, docs)
     validate_hardware_contract(docs)
     check_public_agents_contract(docs["AGENTS.md"])
     validate_technical_surface(docs)
