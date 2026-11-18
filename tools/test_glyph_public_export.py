@@ -152,6 +152,11 @@ class ExportTests(unittest.TestCase):
         q=copy.deepcopy(p);q['privacy_exceptions']['src/ok.txt']['match_sha256']=[]
         with self.assertRaises(ex.ExportError):ex.scan('src/ok.txt',b,q)
 
+    def test_owner_marker_cannot_be_excepted(self):
+        b=b'rasmus'+b'.pekkarinen';p=policy()
+        p['privacy_exceptions']['src/ok.txt']={'sha256':ex.digest(b),'match_sha256':[ex.digest(('owner_local:'+b.decode()).encode())],'purpose':'forbidden'}
+        self.reject([item(body=b)],p)
+
     def test_repository_policy_regular_tracked_paths_and_direct_dependencies(self):
         p=ex.load_policy(ex.ROOT/ex.POLICY)
         dispositions={path:ex.classify(path,b,p) for path,_,b in ex.tracked_tree(ex.ROOT,'HEAD')}

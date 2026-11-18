@@ -37,10 +37,14 @@ Declarations are in [PlatformIO](platformio.ini) and [Glyph environments](config
 | PCF8575 ^0.2.2 | version range | [MIT](https://raw.githubusercontent.com/RobTillaart/PCF8575/0.2.2/LICENSE) |
 | Adafruit BusIO (transitive from display libraries; observed version 1.17.4) | transitive observation not lock | [MIT](https://raw.githubusercontent.com/adafruit/Adafruit_BusIO/1.17.4/LICENSE) |
 
+| platform = atmelavr | unversioned / observed package | [Apache-2.0](https://dl.registry.platformio.org/download/platformio/platform/atmelavr/5.3.0/atmelavr-5.3.0.tar.gz) |
+| framework = arduino under avr_base | unversioned / observed package | [LGPL-2.1-or-later (inspected source component)](https://raw.githubusercontent.com/arduino/ArduinoCore-avr/1.8.6/cores/arduino/Arduino.h) |
+| avr_base lib_deps = Wire | unversioned / observed package | [LGPL-2.1-or-later (inspected source component)](https://raw.githubusercontent.com/arduino/ArduinoCore-avr/1.8.6/libraries/Wire/src/Wire.cpp) |
+
 ## Unresolved export inputs
 
 `glyph_nuker` is invoked by the retained CI workflow. Its [bounded lineage record](docs/runtime_config/glyph_nuker_source_lineage.md) leaves source, build recipe, license and byte transformation unknown. The export policy marks it **REVIEW_REQUIRED** and excludes it from diagnostic staging. This unresolved required input blocks an approved public export; no executable redistribution or firmware acceptance is implied.
 
-The exported AVR declarations also name unversioned `atmelavr`, its Arduino framework and built-in Wire. Their exact resolved source/license inventory remains **REVIEW_REQUIRED**; Mk6 Arduino-Pico metadata does not clear AVR inputs.
+The unversioned AVR selector was separately observed as `atmelavr5.3.0` (Apache-2.0) selecting `framework-arduino-avr~5.4.0`. The framework5.4.0 Arduino and built-in Wire headers match ArduinoCore-avr1.8.6 and state LGPL-2.1-or-later. These observations do not lock a future unversioned resolution.
 
 The deterministic [export policy](tools/fixtures/glyph_public_export_policy.v1.json) records selectors, evidence locators, bundled-notice obligations and remaining review gates. Fresh-history validation is a separate gate.

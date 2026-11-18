@@ -236,9 +236,12 @@ def inspect_binary(path, data, policy):
     suffix = Path(path).suffix.lower()
     if suffix == '.gz':
         # Read bytes only; gzip cannot choose any output filesystem path.
+        limit = record['max_decompressed_bytes']
+        if type(limit) is not int or not 0 < limit <= 8 * 1024 * 1024:
+            fail('unsafe gzip expansion bound')
         with gzip.GzipFile(fileobj=io.BytesIO(data)) as stream:
-            unpacked = stream.read(record['max_decompressed_bytes'] + 1)
-        if len(unpacked) > record['max_decompressed_bytes']: fail('gzip expansion exceeds bound')
+            unpacked = stream.read(limit + 1)
+        if len(unpacked) > limit: fail('gzip expansion exceeds bound')
         if digest(unpacked) != record['decompressed_sha256']: fail('gzip expanded digest drift')
         scan(path, unpacked, policy)
         info['decompressed_sha256'] = digest(unpacked)
