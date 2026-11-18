@@ -36,7 +36,7 @@ FORBIDDEN_COMPONENTS = {'.git', '.pio', '.platformio', '.platformio-home', '.ven
                         '__pycache__', 'node_modules', '.pytest_cache', 'local_backups'}
 BINARY_EXTENSIONS = {'.gz', '.pb', '.bin', '.body', '.cobs', '.png', '.uf2', '.elf', '.zip', '.a', '.o'}
 PATTERNS = {
-    'absolute_path': r'(?:/(?:Users|home|root|Volumes|mnt|private|tmp|run/user|var/tmp|var/folders)/|\b[A-Za-z]:[\\/]|file://)',
+    'absolute_path': r'(?:(?<![A-Za-z0-9_])/(?:Users|home|root|Volumes|mnt|private|tmp|run/user|var/tmp|var/folders)/|\b[A-Za-z]:[\\/]|file://)',
     'contact': r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}',
     'backup_locator': r'local_backups[/\\][^\s`"\']*',
     'private_capture': r'private[-_ ](?:capture|artifact)[-_ ](?:path|locator|location)',

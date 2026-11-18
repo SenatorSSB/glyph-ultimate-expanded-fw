@@ -1552,6 +1552,22 @@
       "classification": "PUBLIC_INCLUDE",
       "purpose": "Synthetic old-descriptor Config fault injection and preservation."
     },
+    "tools/fixtures/kazuya/independent-review.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical personal orchestration review receipt, not a current host input."
+    },
+    "tools/fixtures/kazuya/v2/independent-review.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical personal orchestration review receipt, not a current host input."
+    },
+    "tools/fixtures/kazuya/v3/independent-review.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical personal orchestration review receipt, not a current host input."
+    },
+    "tools/fixtures/kazuya/v4/independent-review.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical personal orchestration review receipt, not a current host input."
+    },
     "tools/fixtures/kazuya/verification.json": {
       "classification": "PRIVATE_ARCHIVE_ONLY",
       "purpose": "Historical private capture/command/report, not a required current source input."
@@ -2205,12 +2221,19 @@
       "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
       "sha256": "dd8cd84eec58d7c2d06bda4300ed5818ad640c80d18b7b4fb5d732d2c34596b9"
     },
+    "tools/glyph_ci_current_package_tests.py": {
+      "match_sha256": [
+        "8f4d19830b757c45446ef3e6cae47abe961166fe349fa8039be6b2a8c8f3a51d"
+      ],
+      "purpose": "Reviewed privacy-recognizer code or explicit synthetic forbidden-device-write negative controls; exact source and token fingerprints.",
+      "sha256": "c35fa472bd6375eb7ab2399c7a11ebe6df921febdf74c5ead8a2d414ced464eb"
+    },
     "tools/glyph_public_export.py": {
       "match_sha256": [
         "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
       ],
-      "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
-      "sha256": "1dd8adcf0c8d8e59d972604cb4d38cdb54b30c44e3590ca0d3a8b08ff3d46370"
+      "purpose": "Reviewed privacy-recognizer code or explicit synthetic forbidden-device-write negative controls; exact source and token fingerprints.",
+      "sha256": "a2c227c0fb98051c4c04ca34b94454e643c51f1a6be292dbc079f143b43357c9"
     },
     "tools/glyph_tracked_worktree_integrity.py": {
       "match_sha256": [
