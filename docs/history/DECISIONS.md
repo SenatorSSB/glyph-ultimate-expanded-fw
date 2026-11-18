@@ -5,7 +5,7 @@ device-operation authority. Each entry labels its status, type and scope.
 Observations, decisions, inferences and practices carry different weight;
 unknown rationale is identified rather than reconstructed.
 [CURRENT_STATE](../CURRENT_STATE.md) owns present status; [history](HISTORY.md)
-records sequence and [evidence](../evidence/README.md) routes to original records.
+records sequence and [evidence](../evidence/README.md) indexes the curated account.
 
 ### Keep generic active publication source-owned
 
@@ -48,8 +48,8 @@ misattributed external-remapper records remain quarantined.
 using those exports as evidence of external-remapper execution.  
 **Scope:** Firmware/backend/export-shape claims. Glyph does not decide Smash game
 thresholds, datasets or solver semantics.  
-**Sources:** [Correction](../calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md),
-[architecture boundary](../ARCHITECTURE.md).
+**Sources:** [Source-classification correction](HISTORY.md#important-failures-and-corrections),
+[architecture boundary](../ARCHITECTURE.md); original correction identified below.
 
 ### Keep native output finite and deterministic
 
@@ -111,8 +111,7 @@ dedicated native ProfileStore record, with no sharing even for identical preproc
 **Scope:** Row and record remain distinct objects, jointly owned by the package;
 optional owned RGB and plate remain in their source-defined layers. This is not
 completed ordinary managed-selection acceptance.  
-**Sources:** [November 5 direction](../ROADMAP.md),
-[ownership matrix](../PROFILE_SYSTEM.md#ownership-matrix),
+**Sources:** [Ownership matrix](../PROFILE_SYSTEM.md#ownership-matrix),
 [package contract](../runtime_config/glyph_package_v1/README.md).
 
 ### Ordinary selection stays eligible and boot-bound
@@ -162,10 +161,10 @@ website-retirement rationale was recovered.
 **Decision:** Public contributors use development, architecture and bounded checks;
 normal public work does not require personal campaign queues or agent roles.  
 **Rationale/evidence:** Stage D established a supported public build/test/review path
-and single documentation owners. Coding-agent instructions still apply pending
-separate migration.  
+and single documentation owners. [AGENTS.md](../../AGENTS.md) is the current
+public coding-agent contract.
 **Scope:** Reader navigation; this extracts no authority to delete internal records.  
-**Sources:** [Development](../DEVELOPMENT.md), [maintenance audit](../maintenance/README.md).
+**Sources:** [Development](../DEVELOPMENT.md), [public development policy](../DEVELOPMENT.md#documentation-maintenance-policy).
 
 ### Stage a future clean history with explicit original correspondence
 
@@ -178,5 +177,16 @@ source/artifact correspondence.
 unreviewed export material; review and recoverable private preservation precede
 export. Fresh history cannot retroactively become physical test history.  
 **Scope:** Future owner-approved export only; Stage E preserves original records.  
-**Sources:** [Maintenance privacy/export plan](../maintenance/README.md),
+**Sources:** [future clean release correspondence](SOURCE_LINEAGE.md#future-clean-release-repository),
 [source lineage](SOURCE_LINEAGE.md).
+
+## Historical source provenance
+
+The following original development-fork records supplied the selected facts
+above at snapshot `5c54d0dcca304f476720655c96f315bac5ed2f6b`. These are provenance
+identifiers, not supported public navigation. Preserve the originals privately
+when preparing an export; their omission does not broaden any acceptance.
+
+```text
+docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md
+```

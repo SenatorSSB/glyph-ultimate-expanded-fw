@@ -1,95 +1,75 @@
 # Evidence index
 
-This is a logical map to selected authoritative entrypoints, not a copied archive
-or complete corpus review. Linking evidence does not broaden its scope or upgrade
+This is a logical map to the curated public account, not a copied archive or a
+complete corpus review. Linking evidence does not broaden its scope or upgrade
 its status. A historical FAIL stays historical FAIL; build proof stays build
 proof, not hardware PASS. Candidate-era pending statements describe their time.
-[CURRENT_STATE](../CURRENT_STATE.md) owns present truth; [history](../history/HISTORY.md),
-[decisions](../history/DECISIONS.md), [hardware acceptance](../history/HARDWARE_ACCEPTANCE.md)
-and [source lineage](../history/SOURCE_LINEAGE.md) curate the durable public account.
+[CURRENT_STATE](../CURRENT_STATE.md) owns present truth.
 
 ## Current first-beta hardware acceptance
 
 **Question:** Which exact artifact passed which physical rows, with what limits?
-The [accepted packet](../planning/final-usb-gamepad/acceptance/README.md) routes to
-physical result, independent review and sanitized preservation replay. This is
-current selected-scope firmware acceptance, with DInput N/A, browser NOT_QUALIFIED
-and other deferred/untested rows preserved. The
-[Senscope handoff](../planning/final-usb-gamepad/acceptance/SENSCOPE_HANDOFF.md)
-is preparation for separate future complete-path acceptance, not its completion.
+[Hardware acceptance](../history/HARDWARE_ACCEPTANCE.md#current-selected-first-beta-firmware-acceptance)
+records selected firmware scope, exact source/tree/artifact identities, DInput N/A,
+browser NOT_QUALIFIED and deferred/untested rows. [Source lineage](../history/SOURCE_LINEAGE.md)
+separates tested source, build evidence, acceptance and later descendants.
+[Senscope complete-path acceptance](../ARCHITECTURE.md#senscope-boundary) remains
+separate future work against an explicitly owner-frozen target.
 
 ## Native authoring and accepted character profiles
 
 **Question:** What is the human source, and what profile behavior was accepted?
 [Authoring v1](../../profiles/README.md) is the current offline contract;
-[Kazuya](../../profiles/kazuya/README.md) gives canonical v5 and historical v4
-rollback identities. The [accepted profile records](../runtime_config/accepted_character_profiles/README.md)
-separate owner-reported gameplay/readback from reproducible source/host proof.
-[Ultimate archival evidence](../../profiles/ultimate/README.md) remains historical,
-not the current authoring template or universal gameplay qualification.
+[Profile System](../PROFILE_SYSTEM.md) explains evaluator semantics and ownership.
+[Profile/gameplay acceptance](../history/HARDWARE_ACCEPTANCE.md#profile-and-gameplay-specific-acceptance)
+preserves Kazuya v4 rollback and v5 source/wrapper identities and owner-reported
+readback/gameplay limits. Archival v0 is not the current authoring template.
 
 ## ProfileStore, package lifecycle and selection
 
 **Question:** Which storage, ownership and selection invariants do the sources prove?
-The [native selector integration](../runtime_config/controller_profile_selector/integration_20261023/README.md)
-retains exact accepted source/correspondence and bounded physical scope.
-[Package CREATE](../runtime_config/glyph_package_v1/README.md) and
-[lifecycle](../runtime_config/package_lifecycle_v2/README.md) describe implementation
-and its original candidate boundaries. Current architecture is in
-[ARCHITECTURE](../ARCHITECTURE.md); these packets do not qualify ordinary managed
-selection or the Senscope Builder/install product path by linkage.
+[Architecture](../ARCHITECTURE.md#profilestore-and-package-lifecycle) explains
+publication, refusal and ownership. [Selection](../ARCHITECTURE.md#selection--activation-architecture)
+separates source machinery from unfinished ordinary managed-selection product
+acceptance. [Decisions](../history/DECISIONS.md) retain the dedicated row/record
+ownership and compatibility boundaries. Linking these facts does not complete
+Senscope Builder/install acceptance.
 
 ## Backend, USB and console qualification
 
-**Question:** Which route findings motivated a repair, and what remained unqualified?
-[Final USB source audit](../planning/final-usb-gamepad/SOURCE_AUDIT.md) separates
-source findings from later physical results. [Earlier Switch USB result](../planning/gusb/PHYSICAL_RESULT.json)
-is historical exact-image evidence. [GOPT closeout](../planning/gopt-qualification/PHYSICAL_CLOSEOUT.md)
-is PARTIAL; neither it nor the later accepted firmware extends to all profile,
-display, adapter, browser or console combinations.
+**Question:** Which route findings motivated repair, and what remained unqualified?
+[History](../history/HISTORY.md#important-failures-and-corrections) preserves the
+physical XInput finding and later bounded USB repair. [Hardware acceptance](../history/HARDWARE_ACCEPTANCE.md)
+retains historical FAIL/PARTIAL and selected later PASS without expanding to all
+profiles, displays, adapters, browsers or consoles. [Capabilities](../CAPABILITIES.md)
+keeps implementation, exposure and physical qualification distinct.
 
 ## Historical failures and regression evidence
 
 **Question:** What must a future cleanup avoid forgetting?
-The [archive index](../archive/README.md) routes to failed generic publication
-attempts, with root cause unproven. The
-[generated-content diagnosis](../runtime_config/source_owned_candidate_generation_diff_diagnosis.md)
-explains why explicit generation ownership matters. The
-[original selector failure](../runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json)
-remains FAIL despite later repair. Original packets and frozen checker inputs
-stay at their paths; this index retires no regression or historical-object fetch.
+[History](../history/HISTORY.md) records failed generic active publication,
+generated-content ownership and the selector failure. [Decisions](../history/DECISIONS.md)
+retain source-authority and generation-policy corrections; root cause remains
+unproven where stated. Original development-fork packets and frozen checker inputs
+remain preserved. This index retires no regression or historical-object fetch.
+Historical source-path identifiers in curated provenance are not public navigation.
 
 ## Build, provenance and custody
 
 **Question:** Which source/build inputs correspond, and what remains unknown?
-[Acceptance source equivalence](../planning/final-usb-gamepad/acceptance/SOURCE_EQUIVALENCE.json)
-has a finite recorded scope; [source lineage](../history/SOURCE_LINEAGE.md) verifies
-later ancestry without asserting identical full trees. The
-[build-input inventory](../runtime_config/build_input_provenance_inventory.md),
-[resolution observations](../runtime_config/build_input_resolution_observations.md)
-and [postprocessor provenance](../runtime_config/artifact_postprocessor_provenance.md)
-retain declared/resolved/observed distinctions, not an invented reproducibility
-claim. The [current hardware evidence contract](HARDWARE_EVIDENCE.md) defines
-engineering custody and acceptance requirements; it is not evidence of a PASS.
-Actual accepted results remain in [hardware acceptance](../history/HARDWARE_ACCEPTANCE.md).
-Current build/evidence practice belongs in [DEVELOPMENT](../DEVELOPMENT.md).
-
-## Archive and calibration indexes
-
-**Question:** Where are the originals when a selected summary is insufficient?
-Use the [calibration overview](../calibration/README.md),
-[grouped calibration index](../calibration/INDEX.md) and
-[archive index](../archive/README.md). Their older “current” labels describe
-historical baselines; prefer current public owners for present status.
-External-remapper records remain quarantined under the
-[official-corpus correction](../calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md).
-An inspected index does not mean every linked packet has been reviewed.
+[Source lineage](../history/SOURCE_LINEAGE.md#build-input-equivalence) records finite
+tracked-input comparisons without implying reproducible firmware bytes or identical
+full trees. [Architecture](../ARCHITECTURE.md#build-architecture) explains declared,
+resolved and generated inputs. The [current hardware evidence contract](HARDWARE_EVIDENCE.md)
+defines custody and acceptance requirements; it is not evidence of a PASS.
+[Development](../DEVELOPMENT.md) owns current build/evidence practice.
 
 ## Private evidence policy
 
 Raw captures and private controller receipts may remain owner-private. Public
-sanitized manifests/acceptance records can establish that evidence was reviewed
-without exposing its locators. Private evidence should not enter a public release
-repository merely for completeness. Public claims remain bounded by what the
-public acceptance record actually establishes. This extraction does not access
-private captures or promise a privacy clearance of the retained historical corpus.
+sanitized accounts can establish that evidence was reviewed without exposing its
+locators. Private evidence should not enter a public release repository merely
+for completeness. Claims remain bounded by what the public acceptance account
+establishes. Original source identifiers remain provenance, not a requirement to
+publish private captures. This index does not promise privacy clearance of the
+retained historical corpus or authorize deletion of original evidence.

@@ -19,7 +19,7 @@ For evaluator order, input domains, ownership and advanced design, read
 small [single-table](examples/SyntheticSingle.v1.profile.json) or
 [sparse-table](examples/SyntheticSparse.v1.profile.json) examples. Both examples
 are synthetic, non-product fixtures with arbitrary test coordinates. They are
-not suggested controller profiles. The [v0 Ultimate source](ultimate/README.md)
+not suggested controller profiles. The [v0 Ultimate source](ultimate/Ultimate.profile.json)
 remains a frozen archival golden representation of retained ID27, with its own
 unchanged schema and exact compilation. Do not imitate its historical table
 inventory for a new profile.
@@ -32,18 +32,18 @@ Run from the repository root with Python 3. No command opens a device.
 python3 tools/glyph_native_profile_json.py validate profiles/examples/SyntheticSparse.v1.profile.json
 
 python3 tools/glyph_native_profile_json.py compile \
-  profiles/examples/SyntheticSparse.v1.profile.json --output /tmp/SyntheticSparse.pb
+  profiles/examples/SyntheticSparse.v1.profile.json --output ./SyntheticSparse.pb
 
 python3 tools/glyph_native_profile_json.py compile \
   profiles/examples/SyntheticSparse.v1.profile.json --format protobuf-json \
-  --output /tmp/SyntheticSparse.protobuf.json
+  --output ./SyntheticSparse.protobuf.json
 
 python3 tools/glyph_native_profile_json.py report \
   profiles/examples/SyntheticSparse.v1.profile.json
 
 # Optional report file:
 python3 tools/glyph_native_profile_json.py report \
-  profiles/examples/SyntheticSparse.v1.profile.json --output /tmp/SyntheticSparse.report.json
+  profiles/examples/SyntheticSparse.v1.profile.json --output ./SyntheticSparse.report.json
 
 # jsonschema is a test-only dependency; the compiler uses the standard library.
 python3 tools/test_glyph_native_profile_json.py -v

@@ -285,7 +285,7 @@ separate persisted scripting object, nested interpreter or timed sequence.
 [SyntheticSparse](../profiles/examples/SyntheticSparse.v1.profile.json) is a
 synthetic format example, not recommended gameplay coordinates. The
 [accepted Kazuya source](../profiles/kazuya/Kazuya.profile.json) is a separate
-real-world reference with its own [acceptance scope](../profiles/kazuya/README.md).
+real-world reference with its own [acceptance scope](history/HARDWARE_ACCEPTANCE.md#profile-and-gameplay-specific-acceptance).
 Its layout, conditions and coordinates are not generic defaults. No game
 threshold is derived from either a table name or a metadata character label.
 

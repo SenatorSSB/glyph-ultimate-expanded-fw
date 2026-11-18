@@ -36,9 +36,9 @@ acceptance of the retained UF2.
 | Nunchuk | NOT_TESTED |
 | Fresh Install / recovery hardening | DEFERRED / UNQUALIFIED |
 
-The [exact acceptance record](planning/final-usb-gamepad/acceptance/README.md) and
-[physical result](planning/final-usb-gamepad/acceptance/PHYSICAL_RESULT.json) own
-scope and limitations. Preservation compares the 368-byte Config, ordered
+The curated [hardware acceptance](history/HARDWARE_ACCEPTANCE.md) owns scope and
+limitations; [source lineage](history/SOURCE_LINEAGE.md) records exact source,
+build and acceptance correspondence. Preservation compares the 368-byte Config, ordered
 27-entry directory and raw wrappers through the API. It does not prove raw-flash
 equality or a later raw post-reboot comparison. Unit continuity is owner-reported;
 a globally unique unit identity is UNKNOWN. No broader mode, modifier, adapter or
@@ -53,7 +53,7 @@ This repository is being prepared for public beta/release; no public beta or
 release is claimed. Source integration is complete, while the immutable acceptance
 packet's earlier pending-integration statements remain historical.
 
-[Senscope complete-path acceptance](planning/final-usb-gamepad/acceptance/SENSCOPE_HANDOFF.md)
+[Senscope complete-path acceptance](ARCHITECTURE.md#senscope-boundary)
 remains separate, against the eventual frozen firmware. Physical DInput needs an
 appropriate supported profile. Keyboard is deferred, and Fresh Install/recovery
 is unqualified. Ordinary managed-package selection and Builder/install

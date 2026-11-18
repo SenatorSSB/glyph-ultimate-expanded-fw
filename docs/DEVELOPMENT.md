@@ -212,7 +212,7 @@ their original paths pending separate preservation and consumer review.
 | Source presence is not product exposure; product exposure is not physical qualification | Keep the separate columns in [capabilities](CAPABILITIES.md) |
 | Build PASS is not hardware PASS | Keep exact source, retained artifact and human scope in [current state](CURRENT_STATE.md) |
 | Stored labels are not executing identity | Require active owned native-view/context correspondence; see [architecture](ARCHITECTURE.md#selection--activation-architecture) |
-| API-visible preservation is not raw-flash equality | Preserve the narrow accepted observation in [acceptance](planning/final-usb-gamepad/acceptance/README.md) |
+| API-visible preservation is not raw-flash equality | Preserve the narrow accepted observation in [acceptance](history/HARDWARE_ACCEPTANCE.md) |
 | A historical failed regression may still encode a current invariant | Extract durable coverage before retiring replay; keep compatibility/refusal fixtures |
 | Mode engine is not profile label or backend | Review dispatch and transport separately in [architecture](ARCHITECTURE.md#mode-architecture) |
 | Authoring JSON is not a complete package | Native compilation does not materialize paired Config/storage ownership; see [profile system](PROFILE_SYSTEM.md) |
@@ -225,9 +225,9 @@ lessons do not broaden any historical acceptance.
 
 ## Legacy/internal workflow note
 
-Older `docs/WORKFLOW.md`, `docs/AGENT_CONTEXT.md`, `docs/agent_framework/` and project
-queues contain historical/internal campaign machinery pending later consolidation.
-They are not prerequisites for public contributors or coding agents.
+Historical/internal campaign machinery from the development fork is not part of
+the supported public workflow. Curated [history](history/HISTORY.md) and
+[evidence](evidence/README.md) contain the durable public facts.
 [AGENTS.md](../AGENTS.md) is the normal coding-agent contract; this guide is the
 public developer entry point. Retained internal contracts and evidence remain
 intact pending separate consumer and preservation review.

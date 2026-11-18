@@ -26,10 +26,7 @@ The current host-file tool is
 The owner-held, content-addressed locator is:
 
 ```text
-local_backups/hardware-artifacts/
-  <candidate_git_sha>/
-    <artifact_sha256>/
-      firmware.uf2
+local_backups/hardware-artifacts/<candidate_git_sha>/<artifact_sha256>/firmware.uf2
 ```
 
 Candidate identities are full 40-character lowercase hexadecimal Git commit SHAs;

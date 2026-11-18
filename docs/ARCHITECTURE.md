@@ -380,7 +380,8 @@ operations require their own authority; this map adds none.
 
 ## Senscope boundary
 
-The committed [Senscope handoff](planning/final-usb-gamepad/acceptance/SENSCOPE_HANDOFF.md)
+The [current status](CURRENT_STATE.md#release-and-product-status),
+[qualification limits](history/HARDWARE_ACCEPTANCE.md#current-selected-first-beta-firmware-acceptance)
 and [profile-system ownership](PROFILE_SYSTEM.md#ownership-matrix) define the boundary.
 
 | Senscope owns | Glyph firmware owns |
@@ -400,6 +401,11 @@ The boundary exchanges explicit data, not hidden game assumptions. Glyph table
 names/character metadata do not establish Smash thresholds, facing or move
 recognition. Senscope complete-path acceptance remains separate and incomplete;
 firmware physical qualification does not complete Builder/install acceptance.
+Senscope must not repin until the owner explicitly freezes and accepts the beta
+target. Fresh source correspondence and separate complete-package physical
+acceptance must then use that exact target, including physical DInput with an
+actual supported Senscope-authored profile exposing it before public Senscope
+complete-profile/device release. See [roadmap](ROADMAP.md#near-term-preparation).
 
 ## Current architecture versus target documentation structure
 

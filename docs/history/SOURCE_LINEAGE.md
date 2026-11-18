@@ -31,10 +31,10 @@ flowchart LR
     I -. ancestry through documentation and host-tool commits .-> D[935f08f7: Batch D canonical baseline]
 ```
 
-The [acceptance record](../planning/final-usb-gamepad/acceptance/README.md) owns
-hardware scope and [packet review](../planning/final-usb-gamepad/acceptance/PACKET_REVIEW.json)
-binds the acceptance publication. Its pending-integration wording describes that
-time. [CURRENT_STATE](../CURRENT_STATE.md) records later completed canonical
+[Hardware acceptance](HARDWARE_ACCEPTANCE.md) owns physical scope. The retained
+original packet review binds the source-free acceptance publication above. Its
+pending-integration wording describes that time. [CURRENT_STATE](../CURRENT_STATE.md)
+records later completed canonical
 integration. The baseline was live-verified on `configurator` at Stage E intake;
 it is not the UF2 build source, an activated freeze or a release.
 
@@ -44,14 +44,14 @@ See [hardware acceptance](HARDWARE_ACCEPTANCE.md) for installation-attestation l
 
 ## Build-input equivalence
 
-The [source-equivalence record](../planning/final-usb-gamepad/acceptance/SOURCE_EQUIVALENCE.json)
-proves complete mode/type/blob/path equality of 1,254 non-documentation paths for
+The original source-equivalence record establishes complete mode/type/blob/path
+equality of 1,254 non-documentation paths for
 build-evidence and acceptance descendants at its recorded scope. That complete
 non-doc equality must not be extended to later documentation work by assumption.
 
 Stage E mechanically compared `git ls-tree -r -z` inventories for the tested
-source and all 18 descendant commits through Batch D. Every one of the 329 paths
-in the retained [production-input manifest](../planning/final-usb-gamepad/production-inputs.json)
+source and all 18 descendant commits through Batch D. Every path
+in the retained 329-path production-input inventory
 is identical in mode/type/blob/path across those commits. The repository's
 [critical-path helper](../../tools/glyph_tracked_worktree_integrity.py) selects 327
 critical entries; these and all five schema entries also remain identical.
@@ -67,14 +67,17 @@ commit remains a documentation/checker descendant, never a new physical test.
 
 To verify without a build: resolve the tested tree with `git rev-parse`, check
 ancestry with `git merge-base --is-ancestor`, enumerate each side with
-`git ls-tree -r -z`, and compare mode/type/blob/path entries for the production
-manifest and critical/schema sets. Compare the full inventories separately to
+`git ls-tree -r -z`, and compare mode/type/blob/path entries for the original production
+inventory and critical/schema sets. Exact replay of that historical comparison
+requires the privately preserved inventory named in Historical source provenance;
+the critical/schema sets remain inspectable in current source. Compare the full
+inventories separately to
 avoid mistaking scoped equivalence for identical Git trees. No classifier
 exemptions or historical correspondence rules are changed here.
 
 ## Major profile lineage
 
-[Kazuya](../../profiles/kazuya/README.md) retains v1→v5 sources and their frozen
+[Canonical Kazuya source](../../profiles/kazuya/Kazuya.profile.json) retains v1→v5 sources and their frozen
 checks. Git object checks confirm the historical v1 blob
 `542ef2607457b42f324d4962ed2bb543f317cd21`, v4 blob
 `50741602af1b8e5bf70bdc745416ca9a794ee3c7` and v5 blob
@@ -87,7 +90,7 @@ remaining under `profiles/kazuya/`.
 
 ## Future clean release repository
 
-The [reviewed release plan](../maintenance/README.md) calls for:
+The reviewed release preparation calls for:
 
 ```text
 original tested history/evidence
@@ -100,3 +103,17 @@ commit. It must retain explicit correspondence to the original source/tree and
 retained tested artifact evidence. Preserve upstream copyright/license attribution;
 review export contents and recoverable private preservation before publication.
 Stage E creates no release repository, export, freeze, release or Senscope repin.
+
+## Historical source provenance
+
+The following original development-fork records supplied the selected facts
+above at snapshot `5c54d0dcca304f476720655c96f315bac5ed2f6b`. These are provenance
+identifiers, not supported public navigation. Preserve the originals privately
+when preparing an export; their omission does not broaden any acceptance.
+
+```text
+docs/planning/final-usb-gamepad/acceptance/PACKET_REVIEW.json
+docs/planning/final-usb-gamepad/acceptance/README.md
+docs/planning/final-usb-gamepad/acceptance/SOURCE_EQUIVALENCE.json
+docs/planning/final-usb-gamepad/production-inputs.json
+```

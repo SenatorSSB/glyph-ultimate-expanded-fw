@@ -9,6 +9,15 @@ below are scoped inventories, not a promise that every mode/backend combination
 works. [Current state](CURRENT_STATE.md) owns exact hardware identities;
 [usage](USAGE.md) describes today's limited workflow.
 
+## Hardware target
+
+The current production build target is **Glyph Mk6**, using the Raspberry Pi Pico
+(RP2040) platform composition in [platformio.ini](../platformio.ini) and
+[Glyph environments](../config/glyph/env.ini). Other HAL/config environments in
+the tree do not inherit Mk6 physical qualification. See the
+[Mk6 pin defaults](../config/glyph/glyph_mk6/include/glyph_pinout.hpp) before
+reasoning about optional hardware; source support alone is not a tested setup.
+
 ## Mode engines
 
 Nine concrete engines are dispatched in
@@ -43,6 +52,24 @@ backend implementations. These are transports/output paths, not profile kinds.
 PS4/PS5 enum presence in the [schema](../schema/haybox/config.proto) does not
 establish a Mk6 backend: those IDs have no constructor in the cited dispatcher.
 Browser Gamepad API compatibility is NOT_QUALIFIED, not implied by USB support.
+
+## Backend/profile applicability
+
+[Mode dispatch](../src/core/mode_selection.cpp) and
+[selection admission](../src/core/profile_selection.cpp) determine validity;
+backend constructors alone do not establish a valid profile/backend pair.
+Keyboard requires DInput and a valid keyboard-config reference. Ordinary
+selection also checks the row's backend applicability; native Ultimate requires
+a matching engine/schema, native record and preprocessing context. Configurator
+is a management route, excluded from ordinary profile enumeration. A record name
+alone proves none of those conditions.
+
+Physically qualified pairs are narrower: the selected Ultimate profile on
+Windows XInput, original Switch USB/Ultimate, and GameCube through the actual
+adapter/original Switch/Ultimate have the scoped PASS in
+[hardware acceptance](history/HARDWARE_ACCEPTANCE.md). That packet's DInput
+selected-profile result remains N/A. There is no universal qualified cross-product
+of every implemented engine, authored profile and constructed backend.
 
 ## Native Ultimate profiles
 

@@ -11,9 +11,9 @@ machine-captured evidence remain distinct. Packet-specific limitations remain bi
 
 ## Current selected first-beta firmware acceptance
 
-The [accepted packet](../planning/final-usb-gamepad/acceptance/README.md) and
-[physical result](../planning/final-usb-gamepad/acceptance/PHYSICAL_RESULT.json)
-record selected-scope acceptance on 2026-11-17:
+The retained acceptance and physical-result records establish selected-scope
+acceptance on 2026-11-17, summarized here with exact
+[source correspondence](SOURCE_LINEAGE.md#current-first-beta-lineage):
 
 | Identity | Value |
 | --- | --- |
@@ -38,8 +38,7 @@ record selected-scope acceptance on 2026-11-17:
 | Nunchuk | NOT_TESTED | No executed nunchuk rows |
 
 Machine evidence consists of three complete 64-exchange captures and 81 healthy
-profile observations. The [preservation replay](../planning/final-usb-gamepad/acceptance/PRESERVATION_REPLAY.json)
-and [independent review](../planning/final-usb-gamepad/acceptance/INDEPENDENT_REVIEW.json)
+profile observations. The retained preservation replay and independent review
 record reconstruction from raw responses and journals, verification of 491 private
 manifest files and both retained UF2 copies. This extraction uses those sanitized
 records; it has not accessed or rehashed the private firmware/captures.
@@ -55,7 +54,7 @@ recordings are absent. No general adapter or all-profile acceptance follows.
 JoyCheck saw only HOME for XInput after HOME activation despite working joy.cpl;
 Switch USB showed button activity on the same site. Browser root cause UNKNOWN;
 no controller defect is established. Before public Senscope complete-profile/device
-release, the [separate handoff](../planning/final-usb-gamepad/acceptance/SENSCOPE_HANDOFF.md)
+release, [complete-path acceptance](../ARCHITECTURE.md#senscope-boundary)
 requires physical DInput with an appropriate supported Senscope-authored profile
 against an owner-frozen target. That future work cannot broaden this packet.
 
@@ -67,8 +66,8 @@ firmware routes, arbitrary profiles or universal move recognition.
 
 | Episode | Evidence and limits |
 | --- | --- |
-| Kazuya v4 / KazTest4, historical ID51 | Gameplay-accepted rollback reference per the later [Kazuya canonical record](../../profiles/kazuya/README.md) and [accepted identity](../runtime_config/accepted_character_profiles/ACCEPTED_KAZUYA.json). Accepted source commit `5e30341ee06761e20e864ccc013ca6658e42b5ca`; exact source blob `50741602af1b8e5bf70bdc745416ca9a794ee3c7`; wrapper SHA-256 `46084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c`. The original [v4 README](../../profiles/kazuya/v4/README.md) is a pre-device HOST_VERIFIED / gameplay NOT_TESTED snapshot; its historical status is preserved. |
-| Kazuya v5 / KazTest5, ID53 | Owner reports readback verified and gameplay accepted. [Canonical source](../../profiles/kazuya/README.md) is byte-identical to v5, source commit `510234798d74d4aa29dbc35df030df5530c26c81`, Git blob `64c2825605082701b9252832149535c82ebb7fc5`; wrapper SHA-256 `72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87`. Private controller receipts are unavailable in the checkout; promotion performed no controller operation. |
+| Kazuya v4 / KazTest4, historical ID51 | Gameplay-accepted rollback reference per the later [canonical Kazuya source](../../profiles/kazuya/Kazuya.profile.json) and [accepted identity](../runtime_config/accepted_character_profiles/ACCEPTED_KAZUYA.json). Accepted source commit `5e30341ee06761e20e864ccc013ca6658e42b5ca`; exact source blob `50741602af1b8e5bf70bdc745416ca9a794ee3c7`; wrapper SHA-256 `46084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c`. The original v4 README is a pre-device HOST_VERIFIED / gameplay NOT_TESTED snapshot; its historical status is preserved. |
+| Kazuya v5 / KazTest5, ID53 | Owner reports readback verified and gameplay accepted. [Canonical source](../../profiles/kazuya/Kazuya.profile.json) is byte-identical to v5, source commit `510234798d74d4aa29dbc35df030df5530c26c81`, Git blob `64c2825605082701b9252832149535c82ebb7fc5`; wrapper SHA-256 `72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87`. Private controller receipts are unavailable in the checkout; promotion performed no controller operation. |
 
 In the final USB packet the owner calls the executing profile Kaz5Test while the
 saved ID53 record is KazTest5. Behavior is owner-observed; saved names and
@@ -80,11 +79,11 @@ comparison establishes retained wrapper bytes, not gameplay recognition.
 | Episode | Historical status and lasting boundary |
 | --- | --- |
 | June 2026 generic active publication diagnostics | HISTORICAL FAIL: [dedicated active storage](../runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md) and [generated baseline view](../runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md). No proven root cause; later native success does not turn these into PASS. |
-| June 29 source-owned Y2 port | HISTORICAL PASS for the [exact source-owned packet](../calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md); no generic runtime-view acceptance. |
-| October 22 selector | HISTORICAL FAIL for `4898951994bcabcaef2846145de2922a674656f8`: GameCube final B→A selection froze at an intermediate menu. Root cause UNPROVEN; separate XInput observations remain bounded. [Immutable failure](../runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json). |
+| June 29 source-owned Y2 port | HISTORICAL owner-reported PASS for the June 29 source-owned Y2 layout (including forced A+Up/A+Down without disconnect); no generic runtime-view acceptance. |
+| October 22 selector | HISTORICAL FAIL for `4898951994bcabcaef2846145de2922a674656f8`: GameCube final B→A selection froze at an intermediate menu. Root cause UNPROVEN; separate XInput observations remain bounded. Retained UF2 SHA-256 `7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e`; original failure record identified below. |
 | October 23 repaired selector | HISTORICAL PASS within [accepted integration](../runtime_config/controller_profile_selector/integration_20261023/README.md): exact `8b2c75e35bb990aee06de3165e5780082c4f08ad`, XInput selection/persistence and API preservation; normal GameCube Switch/adapter OWNER_REPORTED_PASS. Conditional physical no-poll remains NOT_TESTED. |
-| November 16 GOPT closeout | PARTIAL: preservation/startup/final XInput and owner GameCube observations; distinct-profile output and physical ellipsis undemonstrated. [Sanitized closeout](../planning/gopt-qualification/PHYSICAL_CLOSEOUT.md) retains profile27's inherited context hold. |
-| November 17 earlier beta audit | SUPERSEDED OBSERVATION: earlier no-fix conclusion was superseded by the later physical XInput finding and [final USB repair](../planning/final-usb-gamepad/README.md); old exact-image Switch evidence remains historical. |
+| November 16 GOPT closeout | PARTIAL: preservation/startup/final XInput and owner GameCube observations; distinct-profile output and physical ellipsis undemonstrated. Sanitized closeout retains profile27's inherited context hold. |
+| November 17 earlier beta audit | SUPERSEDED OBSERVATION: earlier no-fix conclusion was superseded by the later physical XInput finding and final USB repair; old exact-image Switch evidence remains historical. |
 
 ## Evidence locations
 
@@ -92,3 +91,23 @@ Use the [evidence index](../evidence/README.md) for authoritative entrypoints,
 [history](HISTORY.md) for corrections in sequence and [source lineage](SOURCE_LINEAGE.md)
 for the tested-source/build/acceptance/documentation distinction. Private raw
 captures remain private; sanitized records define the public claim boundaries.
+
+## Historical source provenance
+
+The following original development-fork records supplied the selected facts
+above at snapshot `5c54d0dcca304f476720655c96f315bac5ed2f6b`. These are provenance
+identifiers, not supported public navigation. Preserve the originals privately
+when preparing an export; their omission does not broaden any acceptance.
+
+```text
+docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md
+docs/runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json
+profiles/kazuya/v4/README.md
+docs/planning/final-usb-gamepad/README.md
+docs/planning/final-usb-gamepad/acceptance/INDEPENDENT_REVIEW.json
+docs/planning/final-usb-gamepad/acceptance/PHYSICAL_RESULT.json
+docs/planning/final-usb-gamepad/acceptance/PRESERVATION_REPLAY.json
+docs/planning/final-usb-gamepad/acceptance/README.md
+docs/planning/final-usb-gamepad/acceptance/SENSCOPE_HANDOFF.md
+docs/planning/gopt-qualification/PHYSICAL_CLOSEOUT.md
+```

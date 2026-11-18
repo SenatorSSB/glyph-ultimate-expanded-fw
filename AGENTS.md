@@ -130,8 +130,7 @@ Retain exact evidence and its limitations without broadening acceptance claims.
 
 ## Legacy/internal material
 
-`docs/AGENT_CONTEXT.md`, `docs/WORKFLOW.md`, `docs/agent_framework/` and
-`docs/project/` contain retained historical/internal campaign machinery. They may
-matter when researching historical evidence, but they are not prerequisites or
-authority for ordinary public coding work. Preserve them and their evidence;
-this public contract does not retire their internal consistency checks.
+Historical/internal campaign machinery from the development fork is not part of
+the supported public workflow. Curated [history](docs/history/HISTORY.md) and
+[evidence](docs/evidence/README.md) contain the durable public facts. Retained
+internal records and their consistency checks are not retired by this contract.
