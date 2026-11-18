@@ -1009,6 +1009,12 @@
       "classification": "PUBLIC_INCLUDE",
       "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
     },
+    "docs/calibration/fixtures/gp_config_024_usb_profile_identity_repair.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "historical_exception": true,
+      "purpose": "Narrow actual source read: tools/glyph_ci_current_firmware.py current_usb_menu reads usb_menu.FIXTURE. Full UTF8/privacy scan clear; no public navigation route added.",
+      "sha256": "9a4449d0841eeea706a3e6e510f2efc02d1e32e9e24a4a4c1e149c42948d4290"
+    },
     "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json": {
       "classification": "PUBLIC_INCLUDE",
       "historical_exception": true,
@@ -1940,6 +1946,11 @@
       "purpose": "Historical device capture; no current public necessity established."
     }
   },
+  "forbidden_marker_sha256": [
+    "0e53c2dc8733e35255173982af3434a49957e2ea35467670dc9c5155f2bf48ba",
+    "26a5106ba2a258783e6cbe868c3e08ef84787c82025dcfadd7aafa493f301557",
+    "8523eb161c8e9e06f206f6bbda28d21d990944fd443f7d2e170346c75e2739bb"
+  ],
   "notice_obligations": [
     {
       "material_prefix": "config/glyph/",
@@ -2248,7 +2259,7 @@
         "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
       ],
       "purpose": "Reviewed privacy-recognizer code or explicit synthetic forbidden-device-write negative controls; exact source and token fingerprints.",
-      "sha256": "526b2d4f0a219bfaea65a6db9bc98b82aa541caab2ba6b4e90d8ac68ee313606"
+      "sha256": "36bf7e9ea1eca27450c1ffd68b064479238359b4b51d57355c3989f4a29a9867"
     },
     "tools/glyph_tracked_worktree_integrity.py": {
       "match_sha256": [
@@ -2385,7 +2396,7 @@
         "99ff99e0f7dd484e37d45e67cffae89006a5b8b562599e63804f5f3283e9f5f8"
       ],
       "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
-      "sha256": "11554b66df0ecbc41061eabcb927aabda8fd5beb7cdd4ad1fc0d904b07cef2f9"
+      "sha256": "1d42c79e493fb0942d0068803700861575dcb7d76dbee5958242d5e4280080f5"
     }
   },
   "rules": [

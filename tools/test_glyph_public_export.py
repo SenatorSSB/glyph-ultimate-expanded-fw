@@ -62,7 +62,7 @@ class ExportTests(unittest.TestCase):
     def test_historical_family_requires_narrow_record(self):
         p=policy();p['exceptions']['docs/project/x.md']={'classification':'PUBLIC_INCLUDE','purpose':'bad'}
         self.reject([item('docs/project/x.md')],p)
-        p['exceptions']['docs/project/x.md']['historical_exception']=True
+        p['exceptions']['docs/project/x.md'].update(historical_exception=True,sha256=ex.digest(item()[2]))
         self.assertIn('docs/project/x.md',ex.plan([item('docs/project/x.md')],p)[1])
 
     def test_binary_defaults_to_deny(self):
@@ -153,7 +153,7 @@ class ExportTests(unittest.TestCase):
         with self.assertRaises(ex.ExportError):ex.scan('src/ok.txt',b,q)
 
     def test_owner_marker_cannot_be_excepted(self):
-        b=b'rasmus'+b'.pekkarinen';p=policy()
+        b=b'synthetic.owner';p=policy();p['forbidden_marker_sha256']=[ex.digest(b)]
         p['privacy_exceptions']['src/ok.txt']={'sha256':ex.digest(b),'match_sha256':[ex.digest(('owner_local:'+b.decode()).encode())],'purpose':'forbidden'}
         self.reject([item(body=b)],p)
 

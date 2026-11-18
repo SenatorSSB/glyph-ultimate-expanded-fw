@@ -40,7 +40,6 @@ PATTERNS = {
     'contact': r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}',
     'backup_locator': r'local_backups[/\\][^\s`"\']*',
     'private_capture': r'private[-_ ](?:capture|artifact)[-_ ](?:path|locator|location)',
-    'owner_local': r'rasmus' + r'\.pekkarinen|' + 'Personal' + r' code',
 }
 
 class ExportError(ValueError):
@@ -92,6 +91,8 @@ def classify(path, data, policy):
     exact = policy['exceptions'].get(path)
     if exact:
         result = exact['classification']
+        if exact.get('historical_exception') and exact.get('sha256') != digest(data):
+            fail('historical exception bytes drifted: ' + path)
     else:
         matches = [r for r in policy['rules'] if path.startswith(r['prefix'])]
         if len(matches) != 1:
@@ -138,7 +139,7 @@ def transform(path, data):
     # Retain current boundaries so standalone navigation can verify this form.
     return (title.rstrip() + '\n\n' + start + body + end + '\n').encode('utf-8')
 
-def privacy_hits(data):
+def privacy_hits(data, forbidden_marker_sha256=()):
     # Normalize encoded text as data, never evaluate Python/source code. Keep
     # every intermediate view, so decoding cannot hide a raw match. A bounded
     # fixed point also catches nested percent/JSON/hex escapes; excess encoding
@@ -159,11 +160,24 @@ def privacy_hits(data):
     else:
         fail('privacy normalization exceeds encoding-depth bound')
     text = '\n'.join(views)
-    return sorted({(kind, m.group()) for kind, pattern in PATTERNS.items()
-                   for m in re.finditer(pattern, text, re.I)})
+    hits = {(kind, m.group()) for kind, pattern in PATTERNS.items()
+            for m in re.finditer(pattern, text, re.I)}
+    # Owner-specific identifiers are represented only by fingerprints in the
+    # public policy. Scan individual path/identifier tokens and adjacent-word
+    # phrases without publishing the private words in the recognizer itself.
+    forbidden = set(forbidden_marker_sha256)
+    if forbidden:
+        tokens = re.finditer(r'[\w.-]+', text)
+        phrases = re.finditer(r'(?<![\w.-])(?=([\w.-]+\s+[\w.-]+))', text)
+        candidates = [m.group() for m in tokens] + [m.group(1) for m in phrases]
+        for candidate in candidates:
+            normalized = ' '.join(candidate.casefold().split())
+            if digest(normalized.encode('utf-8')) in forbidden:
+                hits.add(('owner_local', candidate))
+    return sorted(hits)
 
 def scan(path, data, policy):
-    hits = privacy_hits(data)
+    hits = privacy_hits(data, policy.get('forbidden_marker_sha256', ()))
     record = policy.get('privacy_exceptions', {}).get(path)
     if record:
         if digest(data) != record['sha256'] or not record.get('purpose'):
