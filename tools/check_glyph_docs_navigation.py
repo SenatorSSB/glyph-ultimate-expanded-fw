@@ -58,11 +58,47 @@ def links(text: str) -> set[str]:
     """
     destination = r'<([^>\n]+)>|([^\s<>]+)'
     targets: set[str] = set()
-    # Permit a nested parenthesized component (common in URLs) and optional title.
-    inline = r'!?\[[^]\n]*\]\(\s*(?:<([^>\n]+)>|((?:[^\s()]+|\([^()]*\))+))(?:\s+["\'][^\n]*["\'])?\s*\)'
-    for match in re.finditer(inline, text):
-        targets.add(match[1] or match[2])
-    for match in re.finditer(r'^ {0,3}\[[^]\n]+\]:\s*(?:' + destination + r')', text, re.M):
+    # Balance labels rather than limiting them to one line or bracket level.
+    # Destination scanning separately balances URL parentheses and escapes.
+    for start, char in enumerate(text):
+        if char != "[" or (start and text[start - 1] == "\\"):
+            continue
+        depth, end = 1, start + 1
+        while end < len(text) and depth:
+            if text[end] == "\\":
+                end += 2
+                continue
+            depth += (text[end] == "[") - (text[end] == "]")
+            end += 1
+        if depth or end >= len(text) or text[end] != "(":
+            continue
+        begin = end + 1
+        while begin < len(text) and text[begin].isspace():
+            begin += 1
+        if begin >= len(text):
+            continue
+        if text[begin] == "<":
+            end = text.find(">", begin + 1)
+            if end != -1:
+                targets.add(text[begin + 1:end])
+            continue
+        end, depth = begin, 0
+        while end < len(text):
+            if text[end] == "\\":
+                end += 2
+                continue
+            if text[end] == "(" :
+                depth += 1
+            elif text[end] == ")":
+                if not depth:
+                    break
+                depth -= 1
+            elif text[end].isspace() and not depth:
+                break
+            end += 1
+        if end < len(text) and end > begin and not depth:
+            targets.add(text[begin:end])
+    for match in re.finditer(r'^ {0,3}\[[^]]+\]:\s*(?:' + destination + r')', text, re.M):
         targets.add(match[1] or match[2])
     targets.update(re.findall(r'<((?:https?://|file://|mailto:)[^<>\s]+)>', text, re.I))
     return targets
@@ -100,7 +136,8 @@ def validate_public_export(root: Path, docs: dict[str, str]) -> None:
     for path, text in view.items():
         privacy_text = text
         if path == "docs/evidence/HARDWARE_EVIDENCE.md":
-            privacy_text = privacy_text.replace(CUSTODY_TEMPLATE, "<generic custody template>")
+            privacy_text = re.sub(r"(?<![\w./\\<>-])" + re.escape(CUSTODY_TEMPLATE) + r"(?![\w./\\<>-])",
+                                  "<generic custody template>", privacy_text)
         # Decode URL escapes as well: an encoded private locator is still private.
         if PRIVATE_PUBLIC_TEXT.search(unquote(privacy_text)):
             fail(f"{path}: PUBLIC-EXPORT private locator/contact")
@@ -110,8 +147,9 @@ def validate_public_export(root: Path, docs: dict[str, str]) -> None:
                 # A same-repository GitHub URL must not bypass local route policy.
                 if url.netloc.lower() == "github.com" and url.path.lower().startswith(
                         "/senatorssb/glyph-ultimate-expanded-fw/blob/"):
-                    rel = url.path.split("/", 5)[-1]
-                    if any(rel.lower().startswith(p.lower()) for p in PUBLIC_EXPORT_EXCLUDED_PREFIXES) or rel.lower() in {p.lower() for p in PUBLIC_EXPORT_EXCLUDED_FILES}:
+                    repo_path = url.path.lower()
+                    if (any("/" + p.lower() in repo_path for p in PUBLIC_EXPORT_EXCLUDED_PREFIXES) or
+                            any(repo_path.endswith("/" + p.lower()) for p in PUBLIC_EXPORT_EXCLUDED_FILES)):
                         fail(f"{path}: PUBLIC-EXPORT excluded route {target}")
                 continue
             if url.scheme or url.netloc:

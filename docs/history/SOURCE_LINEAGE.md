@@ -77,8 +77,8 @@ exemptions or historical correspondence rules are changed here.
 
 ## Major profile lineage
 
-[Canonical Kazuya source](../../profiles/kazuya/Kazuya.profile.json) retains v1→v5 sources and their frozen
-checks. Git object checks confirm the historical v1 blob
+The Kazuya source tree retains v1→v5 sources and their frozen checks, with
+[canonical JSON](../../profiles/kazuya/Kazuya.profile.json) pointing to v5. Git object checks confirm the historical v1 blob
 `542ef2607457b42f324d4962ed2bb543f317cd21`, v4 blob
 `50741602af1b8e5bf70bdc745416ca9a794ee3c7` and v5 blob
 `64c2825605082701b9252832149535c82ebb7fc5` remain unchanged at Batch D.

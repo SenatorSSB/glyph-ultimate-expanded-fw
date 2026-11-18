@@ -4154,7 +4154,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 32130,
+      "file_size_bytes": 33420,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate_git_sha",
@@ -4170,7 +4170,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": false,
-      "line_count": 512,
+      "line_count": 550,
       "parse_error": null,
       "path": "tools/check_glyph_docs_navigation.py",
       "potential_branch_identity_signals": [
@@ -4219,7 +4219,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "ff0d910fc8f2456d2afc85dfc00dec39a72e22e776af16ab67f62b932a7a252a",
+      "sha256": "8dad916751e4a5542f07a407271bec57181b2a53e0985ecf100b55acd8c62327",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

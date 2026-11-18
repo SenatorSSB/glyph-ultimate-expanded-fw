@@ -401,6 +401,13 @@ class PublicDocsTests(unittest.TestCase):
             ('docs/USAGE.md', '[packet](<planning/final-usb-gamepad/README.md> "Source")'),
             ('README.md', '[packet](https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/blob/configurator/docs/planning/final-usb-gamepad/README.md)'),
         )
+        controls += (
+            ('README.md', '[Historical\npacket](docs/planning/final-usb-gamepad/README.md)'),
+            ('README.md', '[Historical [packet]](docs/planning/final-usb-gamepad/README.md)'),
+            ('README.md', '[Deep [nested [packet]]](docs/calibration/README.md)'),
+            ('README.md', '[packet](https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/blob/codex/example/docs/planning/final-usb-gamepad/README.md)'),
+            ('README.md', '[packet](https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/blob/codex/example/docs/WORKFLOW.md)'),
+        )
         for path, prose in controls:
             with self.subTest(path=path, prose=prose):
                 self.setUp(); self.public_add(path, prose)
@@ -425,6 +432,8 @@ class PublicDocsTests(unittest.TestCase):
         nav.validate_public_export(nav.REPO_ROOT, self.docs)
         for path, prose in (
             ('README.md', nav.CUSTODY_TEMPLATE),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', nav.CUSTODY_TEMPLATE + '/capture.json'),
+            ('docs/evidence/HARDWARE_EVIDENCE.md', 'owner/' + nav.CUSTODY_TEMPLATE),
             ('docs/evidence/HARDWARE_EVIDENCE.md', nav.CUSTODY_TEMPLATE.replace('<candidate_git_sha>', 'a'*40)),
             ('docs/evidence/HARDWARE_EVIDENCE.md', nav.CUSTODY_TEMPLATE.replace('firmware.uf2', 'capture.json'))):
             with self.subTest(path=path, prose=prose):
@@ -433,7 +442,7 @@ class PublicDocsTests(unittest.TestCase):
                     nav.validate_public_export(nav.REPO_ROOT, self.docs)
 
     def test_public_export_allows_curated_links_and_plain_provenance(self):
-        self.public_add('README.md', '[Evidence](docs/evidence/README.md)')
+        self.public_add('README.md', '[Curated\n[public] evidence](docs/evidence/README.md)')
         self.public_add('docs/history/HISTORY.md',
                         'Original provenance: `docs/calibration/old-result.md`.')
         self.public_add('docs/evidence/HARDWARE_EVIDENCE.md',
