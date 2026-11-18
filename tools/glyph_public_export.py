@@ -139,7 +139,7 @@ def transform(path, data):
     # Retain current boundaries so standalone navigation can verify this form.
     return (title.rstrip() + '\n\n' + start + body + end + '\n').encode('utf-8')
 
-def privacy_hits(data, forbidden_marker_sha256=()):
+def privacy_hits(data, forbidden_markers=()):
     # Normalize encoded text as data, never evaluate Python/source code. Keep
     # every intermediate view, so decoding cannot hide a raw match. A bounded
     # fixed point also catches nested percent/JSON/hex escapes; excess encoding
@@ -165,19 +165,30 @@ def privacy_hits(data, forbidden_marker_sha256=()):
     # Owner-specific identifiers are represented only by fingerprints in the
     # public policy. Scan individual path/identifier tokens and adjacent-word
     # phrases without publishing the private words in the recognizer itself.
-    forbidden = set(forbidden_marker_sha256)
+    forbidden = {}
+    for marker in forbidden_markers:
+        length, fingerprint = marker['length'], marker['sha256']
+        if type(length) is not int or not 1 <= length <= 128:
+            fail('invalid private marker length')
+        forbidden.setdefault(length, set()).add(fingerprint)
     if forbidden:
         tokens = re.finditer(r'[\w.-]+', text)
         phrases = re.finditer(r'(?<![\w.-])(?=([\w.-]+\s+[\w.-]+))', text)
-        candidates = [m.group() for m in tokens] + [m.group(1) for m in phrases]
-        for candidate in candidates:
+        candidates = (m.group() for m in tokens)
+        # Match inside a larger identifier/filename as well as at token edges.
+        # Adjacent-word windows cover protected phrases with normalized spaces.
+        import itertools
+        for candidate in itertools.chain(candidates, (m.group(1) for m in phrases)):
             normalized = ' '.join(candidate.casefold().split())
-            if digest(normalized.encode('utf-8')) in forbidden:
-                hits.add(('owner_local', candidate))
+            for length, fingerprints in forbidden.items():
+                for offset in range(len(normalized) - length + 1):
+                    window = normalized[offset:offset + length]
+                    if digest(window.encode('utf-8')) in fingerprints:
+                        hits.add(('owner_local', window))
     return sorted(hits)
 
 def scan(path, data, policy):
-    hits = privacy_hits(data, policy.get('forbidden_marker_sha256', ()))
+    hits = privacy_hits(data, policy.get('forbidden_markers', ()))
     record = policy.get('privacy_exceptions', {}).get(path)
     if record:
         if digest(data) != record['sha256'] or not record.get('purpose'):
@@ -323,8 +334,10 @@ def plan(entries, policy):
                 if not wanted or digest(output[notice][1]) != wanted:
                     fail('required bundled notice altered: ' + notice)
     for path, required in policy.get('embedded_notices', {}).items():
-        if path in output and any(token.encode() not in output[path][1] for token in required):
-            fail('embedded notice removed: ' + path)
+        # Embedded notices are inseparable from these exact reviewed source
+        # bytes. A shortened license keeping only its opening keywords fails.
+        if path in output and digest(output[path][1]) != required['sha256']:
+            fail('embedded notice/source altered: ' + path)
     return rows, output, summary
 
 def validate_staging(root, expected):

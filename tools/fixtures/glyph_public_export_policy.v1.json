@@ -937,16 +937,14 @@
     }
   ],
   "embedded_notices": {
-    "lib/TUCompositeHID/include/TUGamepad.hpp": [
-      "MIT License",
-      "Copyright (c) 2021",
-      "Permission is hereby granted"
-    ],
-    "lib/TUCompositeHID/src/TUGamepad.cpp": [
-      "MIT License",
-      "Copyright (c) 2021",
-      "Permission is hereby granted"
-    ]
+    "lib/TUCompositeHID/include/TUGamepad.hpp": {
+      "purpose": "Full original MIT notice and its source bytes must remain intact; re-review required on any change.",
+      "sha256": "4e8b6b3ad56bfa5506a5febb5a4c018b7ac68fc9d35ae926b7ade55fd2a61c06"
+    },
+    "lib/TUCompositeHID/src/TUGamepad.cpp": {
+      "purpose": "Full original MIT notice and its source bytes must remain intact; re-review required on any change.",
+      "sha256": "b43911537a77fde06fb1a2c13482f30f59869b15470367c2b47c0ae16c6b2b0e"
+    }
   },
   "exceptions": {
     ".clang-format": {
@@ -1946,10 +1944,19 @@
       "purpose": "Historical device capture; no current public necessity established."
     }
   },
-  "forbidden_marker_sha256": [
-    "0e53c2dc8733e35255173982af3434a49957e2ea35467670dc9c5155f2bf48ba",
-    "26a5106ba2a258783e6cbe868c3e08ef84787c82025dcfadd7aafa493f301557",
-    "8523eb161c8e9e06f206f6bbda28d21d990944fd443f7d2e170346c75e2739bb"
+  "forbidden_markers": [
+    {
+      "length": 13,
+      "sha256": "0e53c2dc8733e35255173982af3434a49957e2ea35467670dc9c5155f2bf48ba"
+    },
+    {
+      "length": 30,
+      "sha256": "26a5106ba2a258783e6cbe868c3e08ef84787c82025dcfadd7aafa493f301557"
+    },
+    {
+      "length": 17,
+      "sha256": "8523eb161c8e9e06f206f6bbda28d21d990944fd443f7d2e170346c75e2739bb"
+    }
   ],
   "notice_obligations": [
     {
@@ -2259,7 +2266,7 @@
         "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
       ],
       "purpose": "Reviewed privacy-recognizer code or explicit synthetic forbidden-device-write negative controls; exact source and token fingerprints.",
-      "sha256": "36bf7e9ea1eca27450c1ffd68b064479238359b4b51d57355c3989f4a29a9867"
+      "sha256": "e87c02deef09b191acbce618be9d088a3c92958290f5920bf786213360ea8f30"
     },
     "tools/glyph_tracked_worktree_integrity.py": {
       "match_sha256": [
@@ -2396,7 +2403,7 @@
         "99ff99e0f7dd484e37d45e67cffae89006a5b8b562599e63804f5f3283e9f5f8"
       ],
       "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
-      "sha256": "1d42c79e493fb0942d0068803700861575dcb7d76dbee5958242d5e4280080f5"
+      "sha256": "e015ab798ef04a52704eab082f2f2c26adf687de501390a54f3f0fdc80928c99"
     }
   },
   "rules": [

@@ -99,8 +99,14 @@ class ExportTests(unittest.TestCase):
     def test_required_bundled_and_embedded_notices(self):
         p=policy();p['notice_obligations']=[{'material_prefix':'src/','notices':['LICENSE']}]
         self.reject([item()],p)
-        p=policy();p['embedded_notices']={'src/ok.txt':['Copyright']}
+        p=policy();p['embedded_notices']={'src/ok.txt':{'sha256':ex.digest(b'full embedded license')}}
         self.reject([item()],p)
+
+    def test_embedded_notice_cannot_be_truncated_to_keywords(self):
+        full=b'MIT License Copyright Permission is hereby granted FULL BODY source'
+        p=policy();p['embedded_notices']={'src/ok.txt':{'sha256':ex.digest(full)}}
+        self.assertTrue(ex.plan([item(body=full)],p)[1])
+        self.reject([item(body=b'MIT License Copyright Permission is hereby granted source')],p)
 
     def test_notice_mutation(self):
         p=policy();p['notice_obligations']=[{'material_prefix':'src/','notices':['src/LICENSE']}]
@@ -153,9 +159,10 @@ class ExportTests(unittest.TestCase):
         with self.assertRaises(ex.ExportError):ex.scan('src/ok.txt',b,q)
 
     def test_owner_marker_cannot_be_excepted(self):
-        b=b'synthetic.owner';p=policy();p['forbidden_marker_sha256']=[ex.digest(b)]
+        b=b'synthetic.owner';p=policy();p['forbidden_markers']=[{'length':len(b),'sha256':ex.digest(b)}]
         p['privacy_exceptions']['src/ok.txt']={'sha256':ex.digest(b),'match_sha256':[ex.digest(('owner_local:'+b.decode()).encode())],'purpose':'forbidden'}
-        self.reject([item(body=b)],p)
+        for embedded in [b, b + b'.json', b'prefix-' + b, b'machine=' + b + b'-backup', b.upper()]:
+            with self.subTest(body=embedded):self.reject([item(body=embedded)],p)
 
     def test_repository_policy_regular_tracked_paths_and_direct_dependencies(self):
         p=ex.load_policy(ex.ROOT/ex.POLICY)
