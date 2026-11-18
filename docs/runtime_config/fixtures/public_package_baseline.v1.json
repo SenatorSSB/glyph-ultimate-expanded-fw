@@ -1652,8 +1652,8 @@
     }
   ],
   "manifest_path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
-  "manifest_entries_semantic_digest": "43213fe2364e0296a549948b17c630943733aa85fb811d89b714a04835483047",
-  "manifest_semantic_digest": "1ed46b6a266ba0ac7c8ca8e30d7746ce3b6e6f7854e6bd18d36207d2dd870263",
+  "manifest_entries_semantic_digest": "88d646e260525a616f15050a01084bca5554a5f582d9cd246ecdcb16395b7703",
+  "manifest_semantic_digest": "b36ffb49047f0e2b3ed0a3c1aefdb935ce87bf28a30c6883ab4498af644fbf2d",
   "historical_checker_classification": [
     "tools/check_glyph_c021_proof_replay.py",
     "tools/check_glyph_config_menu_invalid_state_characterization.py",
@@ -1711,5 +1711,5 @@
       ]
     }
   ],
-  "receipt_semantic_digest": "c78e6ee62487280b46f080eb46f5ff9e85348e83f2b7f07222e607ad3c64ddb8"
+  "receipt_semantic_digest": "bf9923e7468a8b4cc9980c73c931920c9dfe4a1932149014729cd81eee7b89bb"
 }

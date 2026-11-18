@@ -5735,7 +5735,7 @@
       ],
       "load_bearing": true,
       "historical": false,
-      "reason": "Replay the exact independently reviewed C023 candidate host proof in both ABI modes with sanitizers; authenticate the exact six-source/five-proof inventory and preserve the candidate unbuilt/unmerged until GP-VAL-042 strict DONE."
+      "reason": "Source-bound current C023 host proof checks actual protected production/schema/host bytes, both enum ABIs, sanitizer results, refusal/acceptance and source/host mismatch controls without development Git objects; historical replay remains explicit and no hardware acceptance is claimed."
     },
     {
       "id": "gp_config024_usb_profile_identity",
