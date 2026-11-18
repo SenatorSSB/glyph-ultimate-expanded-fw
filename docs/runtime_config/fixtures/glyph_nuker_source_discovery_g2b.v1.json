@@ -54,5 +54,323 @@
       ],
       "surface": "https://api.github.com/repos/SenatorSSB/glyph-ultimate-expanded-fw/contents?ref=6714aca212ba8dd5bb1c655b344c80f35a582630"
     }
-  ]
+  ],
+  "stage_g2c": {
+    "binary_provenance": {
+      "binary_blob_match": "exact",
+      "binary_bytes_match": "exact",
+      "binary_origin_repository": "LimitLabs/FW-Glyph",
+      "git_author_date_utc": "2026-04-09T04:02:25Z",
+      "git_author_name": "stephen",
+      "git_blob": "d0524944a90503a8881281b6673b1f46e36f9383",
+      "git_mode": "100755",
+      "github_author_login": "GregTurbo",
+      "introduction_commit": "cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd",
+      "introduction_message": "big squash",
+      "introduction_parent": "b38e53a64349bb2263096249813ae14f5ef1a304",
+      "license_blob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "license_limitation": "Repository-wide GPLv3 statement supports provenance; it does not establish source licensing or exact source/build correspondence for the opaque executable.",
+      "observed_branch": "configurator",
+      "observed_head": "9a78c7eeec87527b68644573e4c29fbdfb543239",
+      "path": "glyph_nuker",
+      "readme_blob": "7c66fa5e90b6df92da9e79bb37b7892a4ec723be",
+      "repository_license_context": "GPLv3",
+      "repository_visibility": "public",
+      "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+      "size_bytes": 23336,
+      "upstream_workflow_match": "exact_invocation_block_only",
+      "workflow_blob": "c7efd73b32da7a2d55e4fd0e56ff543c5b13ce7b",
+      "workflow_commands": [
+        "mv glyph_nuker $PIO_ENV/glyph_nuker",
+        "cd $PIO_ENV",
+        "ls *.uf2 | xargs ./glyph_nuker",
+        "rm glyph_nuker"
+      ]
+    },
+    "bounded_build": {
+      "attempts": 2,
+      "classification": "SOURCE_FOUND_BUILD_RECIPE_INCOMPLETE",
+      "command": "zig build -Dtarget=x86_64-linux --cache-dir <empty-local-cache> --global-cache-dir <empty-global-cache>",
+      "command_basis": "Source-evident build entrypoint and standard target option; x86-64 Linux selected from ordinary tracked file-type inspection. Debug default is a probe, not a claimed reproduction recipe.",
+      "error_summary": "Zig host build runner failed to link macOS symbols, including __availability_version_check and _abort, before producing the target executable. This is an observed host/toolchain limitation, not proof the source cannot build elsewhere.",
+      "exact_byte_comparison": "NOT_POSSIBLE_NO_OUTPUT",
+      "exit_codes": [
+        2,
+        2
+      ],
+      "nuker_executables_executed": false,
+      "outcome": "HOST_BUILD_RUNNER_LINK_FAILED",
+      "produced_executable": false,
+      "produced_file_type": null,
+      "produced_sha256": null,
+      "produced_size_bytes": null,
+      "revision": "5c544caa61fe378eb44be4edf74993b7841bf907",
+      "second_attempt": "Same build with SDKROOT set to the installed Command Line Tools SDK and fresh caches, with permitted filesystem access.",
+      "source_modified": false,
+      "toolchain_archive_sha256": "3cc2bab367e185cdfb27501c4b30b1b0653c28d9f73df8dc91488e66ece5fa6b",
+      "toolchain_host": "aarch64-macos",
+      "toolchain_url": "https://ziglang.org/download/0.15.2/zig-aarch64-macos-0.15.2.tar.xz",
+      "toolchain_version": "0.15.2"
+    },
+    "canonical_binary_claims": {
+      "build_recipe": "UNKNOWN",
+      "byte_transformation": "UNKNOWN",
+      "corresponding_source": "UNKNOWN",
+      "license": "UNKNOWN",
+      "purpose": "UNKNOWN",
+      "reproducibility": "UNKNOWN",
+      "source_lineage": "UNKNOWN"
+    },
+    "canonical_start": "07edd5a58964226e01c851f62ca3d2582b619ed6",
+    "export_blocker_status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+    "export_classification": "REVIEW_REQUIRED",
+    "network_capabilities": {
+      "live_github_requires_network_enabled": true
+    },
+    "nonclaims": [
+      "No reverse engineering or execution of tracked/built nuker occurred. Zig compiler/build runner execution is only a bounded build attempt.",
+      "No firmware/controller source, build workflow, executable, invocation, ordering or retained firmware artifact changed.",
+      "No hardware acceptance transfers to any new artifact or changed executable. No device operation, public repository/release, or upstream contact occurred.",
+      "Historical G2B and sealed August lineage receipts above/in the separate fixture remain historical; this follow-up supersedes only current discovery knowledge."
+    ],
+    "public_export": "BLOCKED",
+    "required_external_evidence": [
+      "Applicable license for the author-owned source candidate and permission sufficient to include it.",
+      "Exact source revision/paths corresponding to the identified tracked binary, or an explicit upstream relationship statement.",
+      "Original Zig version, target, optimization/link/strip options and complete reproducible build procedure for the exact binary."
+    ],
+    "schema": "glyph_nuker_g2c_authoritative_discovery.v1",
+    "search_terms": [
+      "glyph_nuker",
+      "nuker",
+      "UF2 postprocess",
+      "UF2 postprocessor",
+      "nuke",
+      "artifact postprocess",
+      "firmware patch",
+      "firmware sanitize",
+      "d0524944a90503a8881281b6673b1f46e36f9383",
+      "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae"
+    ],
+    "searched_on": "2026-11-18",
+    "searches": [
+      {
+        "all_advertised_ref_reachable_commits": 480,
+        "introduction_regular_files": 216,
+        "limitation": "Bounded reachable history; third-party PR refs expand negative search coverage but are not independent source authority. No unreachable/deleted/private history claim.",
+        "method": "Connected metadata, branch/ref/tag/release/commit APIs; mirror of all advertised refs; complete recursive introduction and parent inventories; UTF-8 source-content scan excluding binary interpretation.",
+        "nontext_blobs_not_interpreted": 4,
+        "official_branch_reachable_commits": 368,
+        "parent_regular_files": 191,
+        "path_history_commits": [
+          "cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd"
+        ],
+        "refs": [
+          "refs/heads/configurator 9a78c7eeec87527b68644573e4c29fbdfb543239",
+          "refs/pull/1/head fcadeff9fbdf21097b3319ada018407585ee4c9f",
+          "refs/pull/2/head 4d6912f7b543989d7fc184ca5e3bc2916900e802",
+          "refs/pull/3/head 057590cddeb8ef8bfb3688ab923aec45bfec6946",
+          "refs/pull/4/head fe7e40e192c3096ed65a26e76634147e6686ad7a",
+          "refs/pull/5/head bf2ede236441f39892b96af2f036d31b7b6c6685",
+          "refs/pull/6/head a789c67044c3ce256c82b5c301d369d0131f59b3",
+          "refs/pull/6/merge 30a8ed53a5fc3f2f3d468ff8a648f2dcdbb4054c",
+          "refs/pull/7/head 8aaea1e7dc843be385b41e697c224259a637e4ae",
+          "refs/tags/1.0.6 cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd",
+          "refs/tags/1.0.7 9a78c7eeec87527b68644573e4c29fbdfb543239"
+        ],
+        "result": "Only matching source text is the workflow invocation. No alternate-path corresponding source or recipe identified. The sole host script builder_scripts/arduino_pico.py was read in both trees; it configures Git/firmware version, not nuker compilation.",
+        "submodules_in_introduction_or_parent": 0,
+        "surface": "https://github.com/LimitLabs/FW-Glyph",
+        "unique_blobs": 1653,
+        "utf8_text_blobs_searched": 1649
+      },
+      {
+        "archives": [
+          {
+            "archive_sha256": "f3c827f381d147462f2b746269bb0701bbdf80749d9e90243a8825836e3b30ac",
+            "binary": {
+              "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+              "size": 23336
+            },
+            "files": 216,
+            "matches": [
+              {
+                "lines": [
+                  [
+                    50,
+                    "    - name: nuke"
+                  ],
+                  [
+                    52,
+                    "        mv glyph_nuker $PIO_ENV/glyph_nuker"
+                  ],
+                  [
+                    54,
+                    "        ls *.uf2 | xargs ./glyph_nuker"
+                  ],
+                  [
+                    55,
+                    "        rm glyph_nuker"
+                  ]
+                ],
+                "path": ".github/workflows/build.yml"
+              }
+            ],
+            "resolved_url": "https://codeload.github.com/LimitLabs/FW-Glyph/legacy.tar.gz/refs/tags/1.0.6",
+            "revision": "cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd",
+            "tag": "1.0.6",
+            "url": "https://api.github.com/repos/LimitLabs/FW-Glyph/tarball/1.0.6"
+          },
+          {
+            "archive_sha256": "88aaeca87cf24b9524abf4dc3b455a5a42f06aaec63c9cd3ff609ecf25eb23c6",
+            "binary": {
+              "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+              "size": 23336
+            },
+            "files": 216,
+            "matches": [
+              {
+                "lines": [
+                  [
+                    50,
+                    "    - name: nuke"
+                  ],
+                  [
+                    52,
+                    "        mv glyph_nuker $PIO_ENV/glyph_nuker"
+                  ],
+                  [
+                    54,
+                    "        ls *.uf2 | xargs ./glyph_nuker"
+                  ],
+                  [
+                    55,
+                    "        rm glyph_nuker"
+                  ]
+                ],
+                "path": ".github/workflows/build.yml"
+              }
+            ],
+            "resolved_url": "https://codeload.github.com/LimitLabs/FW-Glyph/legacy.tar.gz/refs/tags/1.0.7",
+            "revision": "9a78c7eeec87527b68644573e4c29fbdfb543239",
+            "tag": "1.0.7",
+            "url": "https://api.github.com/repos/LimitLabs/FW-Glyph/tarball/1.0.7"
+          }
+        ],
+        "limitation": "Generated archive hashes record the downloaded bytes; tags and release lists are mutable. Pinned Git revisions are the source identities.",
+        "method": "Observed releases 1.0.6/1.0.7 and their linked source tarballs; full file inventory and source-text inspection.",
+        "release_asset_names": [
+          "Glyph-cc57c4f.uf2",
+          "Glyph-cc57c4f_with_config_reset.uf2",
+          "Glyph-9a78c7e.uf2",
+          "Glyph-9a78c7e_with_config_reset.uf2"
+        ],
+        "result": "Both source archives contain the exact opaque binary and workflow invocation; no corresponding source/build recipe identified. Firmware assets not executed or used for behavioral inference.",
+        "surface": "https://api.github.com/repos/LimitLabs/FW-Glyph/releases?per_page=100"
+      },
+      {
+        "limitation": "Index coverage is bounded; initially rate-limited queries were retried successfully, not recorded as absence.",
+        "method": "Official resources link plus organization inventory; GitHub code search scoped to LimitLabs for every search term.",
+        "repositories": [
+          "LimitLabs/FW-Glyph",
+          "LimitLabs/HayBox-proto"
+        ],
+        "result": "Name/nuker/nuke match only FW-Glyph workflow; other terms and exact hashes had no indexed text matches.",
+        "surface": "https://github.com/orgs/LimitLabs/repositories"
+      },
+      {
+        "limitation": "Current branch heads only; full historical content not searched for this unrelated protocol repository.",
+        "method": "All three text files at each observed branch head.",
+        "paths": [
+          "config.options",
+          "config.proto",
+          "library.json"
+        ],
+        "result": "No required terms or hashes found.",
+        "revisions": {
+          "main": "cfa00cd9d724f05ce2f42c9e26a9141e3a5de24e",
+          "without_extensions": "e87f4b2c44f5cdb26b3c00d66b525ede1f76255e"
+        },
+        "surface": "https://github.com/LimitLabs/HayBox-proto"
+      },
+      {
+        "download_results": [
+          "GlyphFirmware-1.0.7.uf2",
+          "GlyphFirmware-1.0.7-Clean.uf2"
+        ],
+        "limitation": "Current pages/redirects only; no exhaustive historical website archive claim.",
+        "method": "Official pages and firmware download redirects.",
+        "related_surfaces": [
+          "https://limitlabs.com/pages/glyph-configurator",
+          "https://limitlabs.com/resources/glyph/latest-fw",
+          "https://limitlabs.com/resources/glyph/latest-fw-clean"
+        ],
+        "result": "Official repository links and firmware downloads; no nuker source correspondence. Both download endpoints returned HTTP 200 via Shopify redirects; firmware bodies not fetched.",
+        "surface": "https://limitlabs.com/pages/glyph-resources"
+      },
+      {
+        "limitation": "Does not establish global or historical absence.",
+        "method": "Connected repository metadata request at the historical source-named locator.",
+        "result": "HTTP 404 Not Found.",
+        "surface": "https://api.github.com/repos/GregTurbo/HayBox-Glyph"
+      },
+      {
+        "limitation": "Third-party PR content is not upstream authority and was not adopted; no source or binary equivalence inferred.",
+        "method": "GregTurbo-scoped Glyph repository search; metadata; both commits and complete trees; all build/source text; branches, tags, releases and issue listing.",
+        "result": "Author-owned source candidate found. No exact binary hash/source attestation, license declaration, or original build options found.",
+        "surface": "https://github.com/GregTurbo/glyph-nuker"
+      },
+      {
+        "limitation": "Bounded indexed search only; unrelated sites, mirrors and forks were not treated as authority.",
+        "queries": [
+          "\"Limit Labs\" Glyph firmware official",
+          "site:github.com/LimitLabs \"glyph_nuker\"",
+          "d0524944a90503a8881281b6673b1f46e36f9383",
+          "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+          "site:limitlabs.com (\"glyph_nuker\" OR \"nuker\" OR \"postprocess\" OR \"sanitize\")",
+          "site:github.com/GregTurbo (\"glyph_nuker\" OR \"nuker\")",
+          "\"glyph_nuker\" source build license"
+        ],
+        "result": "No additional authoritative exact source/build/license correspondence found.",
+        "surface": "Web discovery"
+      }
+    ],
+    "source_candidate": {
+      "branches": {
+        "master": "5c544caa61fe378eb44be4edf74993b7841bf907"
+      },
+      "build_entrypoint": "zig build (source-evident from build.zig, not a documented exact-binary recipe)",
+      "classification": "SOURCE_FOUND_BUILD_RECIPE_INCOMPLETE",
+      "declared_dependencies": [],
+      "exact_binary_relationship": "UNKNOWN",
+      "license": "UNKNOWN",
+      "license_evidence": "No LICENSE, README, or source license declaration in either observed commit; repository metadata license is null. No source copied into this repository.",
+      "minimum_zig_version": "0.15.2",
+      "original_optimization_options": "UNKNOWN",
+      "original_target_options": "UNKNOWN",
+      "original_toolchain": "UNKNOWN",
+      "parent_revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+      "paths": [
+        ".gitignore",
+        "build.zig",
+        "build.zig.zon",
+        "src/main.zig",
+        "src/root.zig"
+      ],
+      "provenance": "Public non-fork repository owned by the GitHub account associated with the official binary introduction; credible author-owned source candidate, not a hash-bound source attestation.",
+      "releases": [],
+      "repository": "GregTurbo/glyph-nuker",
+      "revision": "5c544caa61fe378eb44be4edf74993b7841bf907",
+      "revision_difference": "Latest src/root.zig changes block_end from block_start + numBlocks to block_start + payloadSize; which revision, if either, built the tracked binary is UNKNOWN.",
+      "source_blobs": {
+        "build.zig": "82c8cb86d12b4b8e29b5da946f37956af76fc20d",
+        "build.zig.zon": "ada5766f7efde490c502f99e03f35b8e649df11f",
+        "src/main.zig": "278fe2431f1c01507e21bea993a7d0d6c3c2d57c",
+        "src/root.zig": "62b71f7bd38c64e775c8fea3fccbf2b331ba4195"
+      },
+      "source_evident_behavior": "Candidate source reads UF2 and emits a separate _with_config_reset.uf2 containing zero-payload blocks over its declared FS_START/FS_END range. This description applies only to the candidate source, never automatically to the tracked executable.",
+      "tags": []
+    },
+    "stage_result": "SOURCE_FOUND_BINARY_NOT_REPRODUCED"
+  }
 }

@@ -43,7 +43,7 @@ Declarations are in [PlatformIO](platformio.ini) and [Glyph environments](config
 
 ## Unresolved export inputs
 
-`glyph_nuker` is invoked by the retained CI workflow. Its [bounded lineage record](docs/runtime_config/glyph_nuker_source_lineage.md) leaves source, build recipe, license and byte transformation unknown. The export policy marks it **REVIEW_REQUIRED** and excludes it from diagnostic staging. This unresolved required input blocks an approved public export; no executable redistribution or firmware acceptance is implied.
+`glyph_nuker` is invoked by the retained CI workflow. The [lineage record](docs/runtime_config/glyph_nuker_source_lineage.md) verifies the exact binary in official LimitLabs/FW-Glyph and its repository-wide GPLv3 context. It also records author-owned GregTurbo/glyph-nuker source, but its license and relationship to the exact binary remain unknown; a bounded build produced no executable. Repository-level GPL text alone does not clear the missing source/build correspondence. The export policy remains **REVIEW_REQUIRED**, excludes the binary from diagnostic staging, and blocks approved public export. No source license, executable redistribution clearance, or firmware/hardware acceptance is inferred.
 
 The unversioned AVR selector was separately observed as `atmelavr5.3.0` (Apache-2.0) selecting `framework-arduino-avr~5.4.0`. The framework5.4.0 Arduino and built-in Wire headers match ArduinoCore-avr1.8.6 and state LGPL-2.1-or-later. These observations do not lock a future unversioned resolution.
 
