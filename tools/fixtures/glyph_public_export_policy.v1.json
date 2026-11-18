@@ -1,0 +1,2426 @@
+{
+  "baseline": "44ccecb16ff88829952b6dc73a81b287b8187ce2",
+  "binary_records": {
+    "docs/runtime_config/profile_native_ultimate/design_evidence/maximum-native.body": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py; tools/glyph_ci_current_firmware.py",
+      "decoder": "tools/glyph_native_profile_json.py: unwrap/decode native body",
+      "format": "GNP5 native body",
+      "max_bytes": 3336,
+      "purpose": "Maximum native body bounds/capacity negative controls.",
+      "schema": "GNP5 native body",
+      "sha256": "cc0edd079f07687441740bfca2c4416137ade1c9d57f43da4954fff521fba362"
+    },
+    "include/img/remap.png": {
+      "consumer": "config/glyph/common/include/Images.hpp and include/img/*.h source counterparts",
+      "decoder": "PNG chunk/CRC parser and visual inspection",
+      "format": "PNG",
+      "max_bytes": 1024,
+      "purpose": "Firmware UI source artwork, retained alongside generated bitmap headers.",
+      "schema": "PNG",
+      "sha256": "11b0ecd17f556172d315894a7e44f71bbf56781249defbf94bfc0aa425921418"
+    },
+    "include/img/update.png": {
+      "consumer": "config/glyph/common/include/Images.hpp and include/img/*.h source counterparts",
+      "decoder": "PNG chunk/CRC parser and visual inspection",
+      "format": "PNG",
+      "max_bytes": 1024,
+      "purpose": "Firmware UI source artwork, retained alongside generated bitmap headers.",
+      "schema": "PNG",
+      "sha256": "93024b400be941f7c08d5fba07fec56160f1a51212cc7f7f6af42477edf0d026"
+    },
+    "tools/fixtures/glyph_package_v1/historical_config/minimal.pb": {
+      "consumer": "tools/glyph_ci_current_package_tests.py; tools/fixtures/glyph_package_v1/transaction/historical_config_regressions.py",
+      "decoder": "grpc_tools.protoc; historical Config.FromString",
+      "max_bytes": 1024,
+      "purpose": "Synthetic old-descriptor Config fault injection and preservation.",
+      "schema": "tools/fixtures/glyph_package_v1/historical_config/config.proto: Config",
+      "sha256": "191856fe3a60529575e2305f839327d6186e909f35b2acfa52b794132b077de2"
+    },
+    "tools/fixtures/native_profile_json/Ultimate.pb": {
+      "consumer": "tools/test_glyph_native_profile_json.py; tools/test_kazuya_profile_v2.py",
+      "decoder": "grpc_tools.protoc; UltimateProfile.FromString",
+      "max_bytes": 1985,
+      "purpose": "Archival golden consumed by current authoring regression suite.",
+      "schema": "schema/haybox/config.proto: UltimateProfile",
+      "sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5745,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "d2f2ca104a44a9292d0a706042efd68cdcae26afa00d70a705cc8e6e28b10671"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5745,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "d2f2ca104a44a9292d0a706042efd68cdcae26afa00d70a705cc8e6e28b10671"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-2.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5745,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "d2f2ca104a44a9292d0a706042efd68cdcae26afa00d70a705cc8e6e28b10671"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5745,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "d2f2ca104a44a9292d0a706042efd68cdcae26afa00d70a705cc8e6e28b10671"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-2.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-4.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-5.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-6.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode2.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "df3650c45c7450a9c359a367d29199aaf9c89231e11aaf87dd25677a86f186ac"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "2bb2fc075631de24f22c6f1d2eeec83ef167ba36c62e625c9e1363141f00abfc"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode4.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6339,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "9505921b7f64755528836f7f82de4c1107b7f1c56bf9aaf63a2cf9238bafff43"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "0cde148ee7d738cfdeb5121134738d0f4c1563aa75c0d204cf1ef9687fd0a973"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode2.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "b85b2c62a8bdc378ddf2cf6ab3f313d058a967fa457a0c06f4701bbcf0efb57f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "ae4be03093f70a2749dfb8c9f342e92611545216f5e400a542339d8b2b0de779"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode4.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6339,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "b4b2ceb3e5cb7469822f0306719c45e55940741f38970650fa202135f7860fd6"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "8742688b4a0f517bd2a074a5b17ee77561d08ca4849d84886c000fb5b52ab3d9"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode2.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "adf25f0f5527d082521e9538426f8c24072e4a1b63ad1411063586490f347207"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "314476b5f09421d951d038deaf9b7c23b1cf446afd886d6b78ab7b2836c59a31"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode4.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6339,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "0ce0cbc401ea267f40830240d8d38f2caee0aca71a0442c5da6523a7b496b382"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "db63922d5d38144e9ce51fac311eb2fb7bfb978e851425a5bb233fe4b3bb2d46"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode2.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "9288ed5c436e69426f89de5f823c2fb037a22c50b2ce4ab811c4dea06ae18cae"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "5dbcb8d612743feaf2d0d3cade9bddb6706c0f6c2c78c56bf1c96d34f06b6a12"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode4.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6339,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "8a0740cba36a078ac11450adfecacc6e9cddf73ee6a64d12529611ed6e52a2de"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-table-Mode.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "df3650c45c7450a9c359a367d29199aaf9c89231e11aaf87dd25677a86f186ac"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-table-nonMode.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6322,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "df3650c45c7450a9c359a367d29199aaf9c89231e11aaf87dd25677a86f186ac"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DIGITAL-mask.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6324,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "f19740759986d1171468bafcfef61a02cff0a89e5d1749dc2bccdbf89c8d519c"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6316,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "4e6aeb0ebd9f2413ba2fdc98ca2099b5f586659f9f95363830239e6729440498"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "6cf26814c11eda9ee2bb7d54d9131420179ff5e6c707d0e845de1050973761b7"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-2.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "67a847886731c24795614ef34d3eda5efb1538a3070cf7bfb7d0fd372cdfdc5e"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "3ab95b051431e79cea6c6eb5e2b1f28c8dddeb0a193ceb6d0e8cc95e0c8d2f31"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-4.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "38b3f31eed8d529d06107c8472d706a1c3bee378d8d60a7efe46807fc64720c3"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-5.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "e0e13c541aaec957246e80a49c3d1fe471633333328e803b88afb7372ab7fb0d"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-6.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "314550633e09ecec866ea0bb43774d312b50dfb4e323d0fed34e881e51475209"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-7.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-0-inv0-intrinsic0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5707,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "4c51592b748b92ae93b4942097fa264bbe765faf06e0432b79f674d25c849442"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-0-inv0-intrinsic1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5707,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "4c51592b748b92ae93b4942097fa264bbe765faf06e0432b79f674d25c849442"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv0-intrinsic0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5709,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "ced7598e2a3c3aaa97f326d66c123adb7e4f21308b49a53ac7555652ea5a78d9"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv0-intrinsic1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5709,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "ced7598e2a3c3aaa97f326d66c123adb7e4f21308b49a53ac7555652ea5a78d9"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv1-intrinsic0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5711,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "6bfd65953f69ab0887916fa0a4c18af9eb313e8be8db63b3c6df903daaf8d36d"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv1-intrinsic1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5711,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "6bfd65953f69ab0887916fa0a4c18af9eb313e8be8db63b3c6df903daaf8d36d"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv0-intrinsic0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5709,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "495ea7a47e71808f5ea06377510d71f2ec99ecd78faa309b69bd8046f4bd4752"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv0-intrinsic1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5709,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "495ea7a47e71808f5ea06377510d71f2ec99ecd78faa309b69bd8046f4bd4752"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv1-intrinsic0.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5711,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "6895ac4cbf457427ded95006b73a92653b666ca7a9d13921ab202b64704ab500"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv1-intrinsic1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5711,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "6895ac4cbf457427ded95006b73a92653b666ca7a9d13921ab202b64704ab500"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v1-ModeX1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5236,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "23eebac422a840182fead691f5d68484335a32e8958a49dc767891e819a34c05"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v1-default.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5236,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "23eebac422a840182fead691f5d68484335a32e8958a49dc767891e819a34c05"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v1-forcedUp.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5236,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "23eebac422a840182fead691f5d68484335a32e8958a49dc767891e819a34c05"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v2-ModeX1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6055,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "221d27e0f0d475751bb244b551077d3e3072bb40eb2dbf74898e91cb93920d87"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v2-default.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6055,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "221d27e0f0d475751bb244b551077d3e3072bb40eb2dbf74898e91cb93920d87"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v2-forcedUp.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6055,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "221d27e0f0d475751bb244b551077d3e3072bb40eb2dbf74898e91cb93920d87"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v3-ModeX1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v3-default.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v3-forcedUp.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "c5b7d938e2e7bc6f72c4d2464d8fc2d492a9811d4d5f93cf507b941c857d2b2f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v2-RF6.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6055,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "d187aa56411c3d79ac9fb28cb817812ec7345cd224836380ef4fc67f944cf517"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v2-RF7.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6055,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "d187aa56411c3d79ac9fb28cb817812ec7345cd224836380ef4fc67f944cf517"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v3-RF6.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "6a64fa7f7fb04d1620c6f3990009a9d6683de9bf9b0f7aa85a2a6c40113332f6"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v3-RF7.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6318,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "6a64fa7f7fb04d1620c6f3990009a9d6683de9bf9b0f7aa85a2a6c40113332f6"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTED-gate32-physical1.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5742,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "fbda941ca00df2b5b63e93e5b43800d64934bc5e7f1441f6ce1b74daca1d9624"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTED-gate32-physical3.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5742,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "fbda941ca00df2b5b63e93e5b43800d64934bc5e7f1441f6ce1b74daca1d9624"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SPARSE32-negative.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5738,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "5fcaa33b294c1954ac41e7502c096ae94bc208682b620951bea26439cced6b29"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SPARSE32-positive.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5738,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "5fcaa33b294c1954ac41e7502c096ae94bc208682b620951bea26439cced6b29"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SPARSE32-reordered.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 5738,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "b6188099048dfb60a8755694c73bc05e84205820fd758d7dcc14d0c85956179f"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-10.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6320,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "440e072d79263652847cc79de5926bdd582ca58ce5d163c6bedc55b9ba56ddb3"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-4.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6320,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "3833992249df6d92e2ce0dfee989e531125d41a5ef034c8c12d8fead14255dce"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-5.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6320,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "e34500d797ba739d4bae73cd63f7dc742a9c92f09e4646e094fe3563220db2fe"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-8.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6320,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "023a4bfdafebe30a287b3e73a0ca15ed2cf70cc67ec6789c79f39e26ffa39ebf"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-9.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6320,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "38bc92b283e4359ec7c8997c3fd6173b4ab9161c24c092f10f1a0ebadbd27bac"
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/TRIGGERS-0-255.pb": {
+      "consumer": "tools/check_glyph_profile_native_ultimate.py: independent_legacy_cases; tools/glyph_ci_current_firmware.py",
+      "decoder": "grpc_tools.protoc and Config.FromString; byte-exact canonical roundtrip verified",
+      "max_bytes": 6315,
+      "purpose": "Current host independent legacy/native parity corpus.",
+      "schema": "schema/haybox/config.proto: Config",
+      "sha256": "52b0312a6d345553f765b54f422480ba3d0edad06e9d0cc42a81af13403fa3f7"
+    }
+  },
+  "dependencies": [
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": true,
+      "declared_selector": "nanopb/Nanopb@^0.4.8",
+      "evidence_sha256": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d",
+      "license": "Zlib",
+      "license_evidence": "https://raw.githubusercontent.com/nanopb/nanopb/0.4.8/LICENSE.txt",
+      "name": "Nanopb",
+      "scope_note": "Version/range evidence is for the named inspected version, not a lock of future resolution.",
+      "selector_kind": "version_range",
+      "source": "https://github.com/nanopb/nanopb"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "https://github.com/JonnyHaystack/HayBox-proto#5b2bb5d",
+      "evidence_sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+      "license": "GPL-3.0-only (package metadata)",
+      "license_evidence": "https://raw.githubusercontent.com/JonnyHaystack/HayBox-proto/5b2bb5d2c2a212647d5aaef7d5dc794be5197ecb/library.json",
+      "name": "HayBox-proto-J",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "immutable_commit",
+      "source": "https://github.com/JonnyHaystack/HayBox-proto"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "https://github.com/GregTurbo/HayBox-proto#db4e2f6",
+      "evidence_sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+      "license": "GPL-3.0-only (package metadata)",
+      "license_evidence": "https://raw.githubusercontent.com/GregTurbo/HayBox-proto/db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8/library.json",
+      "name": "HayBox-proto-G",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "immutable_commit",
+      "source": "https://github.com/GregTurbo/HayBox-proto"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "nicohood/Nintendo@^1.4.0",
+      "evidence_sha256": "3ea4bd2c9f088dade3340a5e83d7c61814360e8ed48483d104678a8afb7d6b24",
+      "license": "MIT",
+      "license_evidence": "https://raw.githubusercontent.com/NicoHood/Nintendo/1.4.0/LICENSE",
+      "name": "Nintendo",
+      "scope_note": "Version/range evidence is for the named inspected version, not a lock of future resolution.",
+      "selector_kind": "version_range",
+      "source": "https://github.com/NicoHood/Nintendo"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "JonnyHaystack/arduino-nunchuk v1.0.1",
+      "evidence_sha256": "1458e0f7c80b06c20c3bc7dd033d60238977b86fec915d2669e84625daab5c7b",
+      "license": "BSD-3-Clause",
+      "license_evidence": "https://raw.githubusercontent.com/JonnyHaystack/arduino-nunchuk/v1.0.1/LICENSE.md",
+      "name": "nunchuk",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "version_or_tag",
+      "source": "https://github.com/JonnyHaystack/arduino-nunchuk"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "JonnyHaystack/ArduinoJoystickLibrary v0.0.1",
+      "evidence_sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+      "license": "LGPL-3.0 license text",
+      "license_evidence": "https://raw.githubusercontent.com/JonnyHaystack/ArduinoJoystickLibrary/v0.0.1/LICENSE",
+      "name": "Joystick",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "version_or_tag",
+      "source": "https://github.com/JonnyHaystack/ArduinoJoystickLibrary"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "JonnyHaystack/ArduinoKeyboard 1.0.5",
+      "evidence_sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "license": "LGPL-3.0 license text",
+      "license_evidence": "https://raw.githubusercontent.com/JonnyHaystack/ArduinoKeyboard/1.0.5/LICENSE",
+      "name": "Keyboard",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "version_or_tag",
+      "source": "https://github.com/JonnyHaystack/ArduinoKeyboard"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "maxgerhardt/platform-raspberrypi#5e87ae34ca025274df25b3303e9e9cb6c120123c",
+      "evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "license": "Apache-2.0",
+      "license_evidence": "https://raw.githubusercontent.com/maxgerhardt/platform-raspberrypi/5e87ae34ca025274df25b3303e9e9cb6c120123c/LICENSE",
+      "name": "platform",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "immutable_commit",
+      "source": "https://github.com/maxgerhardt/platform-raspberrypi"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "earlephilhower/arduino-pico#3.6.3",
+      "evidence_sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331",
+      "license": "LGPL-2.1 license text; bundled components have separate notices",
+      "license_evidence": "https://raw.githubusercontent.com/earlephilhower/arduino-pico/3.6.3/LICENSE",
+      "name": "arduino-pico",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "version_or_tag",
+      "source": "https://github.com/earlephilhower/arduino-pico"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": true,
+      "declared_selector": "GregTurbo/nes-pio#422f16f",
+      "evidence_sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "license": "LGPL-3.0 license text",
+      "license_evidence": "https://raw.githubusercontent.com/GregTurbo/nes-pio/422f16f/LICENSE",
+      "name": "nes-pio",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "immutable_commit",
+      "source": "https://github.com/GregTurbo/nes-pio"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "JonnyHaystack/Adafruit_TinyUSB_XInput#4b5617b",
+      "evidence_sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c",
+      "license": "MIT (actual XInput source/header notices)",
+      "license_evidence": "https://raw.githubusercontent.com/JonnyHaystack/Adafruit_TinyUSB_XInput/4b5617b19294e808ce1d950a69e6e5cc96f4ec06/include/Adafruit_USBD_XInput.hpp",
+      "name": "TinyUSB-XInput",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "immutable_commit",
+      "source": "https://github.com/JonnyHaystack/Adafruit_TinyUSB_XInput"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "FastLED/FastLED#6daa782",
+      "evidence_sha256": "4358d4c37f1305b43a3117a6a12780f666bf285538de0b28991613c0ccacecd8",
+      "license": "MIT",
+      "license_evidence": "https://raw.githubusercontent.com/FastLED/FastLED/6daa782/LICENSE",
+      "name": "FastLED",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "immutable_commit",
+      "source": "https://github.com/FastLED/FastLED"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": true,
+      "declared_selector": "nanopb-arduino v1.1.1",
+      "evidence_sha256": "7921e2464098e0d08c15147df7dd0a131b49812be2739ed37c02c550bf08f4a8",
+      "license": "MIT (package metadata)",
+      "license_evidence": "https://raw.githubusercontent.com/JonnyHaystack/nanopb-arduino/v1.1.1/library.json",
+      "name": "nanopb-arduino",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "version_or_tag",
+      "source": "https://github.com/JonnyHaystack/nanopb-arduino"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "Adafruit GFX 1.12.6",
+      "evidence_sha256": "3e7bede50526352926c2283e640f2823d9f9f2165d1852044c4fb1bbac283106",
+      "license": "BSD-3-Clause",
+      "license_evidence": "https://raw.githubusercontent.com/adafruit/Adafruit-GFX-Library/1.12.6/license.txt",
+      "name": "GFX",
+      "scope_note": "Exact selected source/package evidence inspected.",
+      "selector_kind": "version_or_tag",
+      "source": "https://github.com/adafruit/Adafruit-GFX-Library"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "Adafruit SSD1306 ^2.5.9",
+      "evidence_sha256": "4b6bb6d827e9da638841bf575c6068b83aaaf0d9508e892d3ea27e2525b070e8",
+      "license": "BSD-3-Clause",
+      "license_evidence": "https://raw.githubusercontent.com/adafruit/Adafruit_SSD1306/2.5.9/license.txt",
+      "name": "SSD1306",
+      "scope_note": "Version/range evidence is for the named inspected version, not a lock of future resolution.",
+      "selector_kind": "version_range",
+      "source": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "PacketIO ^0.3.0",
+      "evidence_sha256": "d25be87dc29c51b541f6151e7364caad9c786b3c5d127474d251e9d2bb2f713e",
+      "license": "MIT",
+      "license_evidence": "https://raw.githubusercontent.com/eric-wieser/packet-io/0.3.0/LICENSE.txt",
+      "name": "PacketIO",
+      "scope_note": "Version/range evidence is for the named inspected version, not a lock of future resolution.",
+      "selector_kind": "version_range",
+      "source": "https://github.com/eric-wieser/packet-io"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": true,
+      "declared_selector": "CRC32 ^2.0.0",
+      "evidence_sha256": "7041a7de46488bca009b0d82317c9e7bb6634749ed0cd3956a5ef8041664b36e",
+      "license": "MIT",
+      "license_evidence": "https://raw.githubusercontent.com/bakercp/CRC32/2.0.0/LICENSE.md",
+      "name": "CRC32",
+      "scope_note": "Version/range evidence is for the named inspected version, not a lock of future resolution.",
+      "selector_kind": "version_range",
+      "source": "https://github.com/bakercp/CRC32"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "PCF8575 ^0.2.2",
+      "evidence_sha256": "0ab9c55eff0ddf393233192cc60b52ef5d5f7aa9eda93f0c5460292a1ee58fce",
+      "license": "MIT",
+      "license_evidence": "https://raw.githubusercontent.com/RobTillaart/PCF8575/0.2.2/LICENSE",
+      "name": "PCF8575",
+      "scope_note": "Version/range evidence is for the named inspected version, not a lock of future resolution.",
+      "selector_kind": "version_range",
+      "source": "https://github.com/RobTillaart/PCF8575"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": false,
+      "declared_selector": "Adafruit BusIO (transitive from display libraries; observed version 1.17.4)",
+      "evidence_sha256": "86e9fafdb50d2a85d8fef369b4635b5a1b89160603e5b1f95484df0804b49508",
+      "license": "MIT",
+      "license_evidence": "https://raw.githubusercontent.com/adafruit/Adafruit_BusIO/1.17.4/LICENSE",
+      "name": "BusIO",
+      "scope_note": "Version/range evidence is for the named inspected version, not a lock of future resolution.",
+      "selector_kind": "transitive_observation_not_lock",
+      "source": "https://github.com/adafruit/Adafruit_BusIO"
+    },
+    {
+      "action": "upstream attribution and source locator",
+      "bundled_notice": true,
+      "declared_selector": "config/glyph/meta.yaml: GregTurbo/Haybox-Glyph revision 05a7d2b",
+      "evidence_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "license": "GPLv3 context retained in config/glyph/LICENSE; upstream selector unavailable",
+      "license_evidence": "config/glyph/LICENSE",
+      "name": "Glyph",
+      "scope_note": "Exact metadata upstream unavailable (HTTP404); local root/config GPLv3 license remains authoritative for retained material.",
+      "selector_kind": "immutable_commit",
+      "source": "https://github.com/GregTurbo/Haybox-Glyph"
+    },
+    {
+      "action": "bundled notice",
+      "bundled_notice": true,
+      "declared_selector": "TUCompositeHID; local lib/TUCompositeHID",
+      "license": "MIT (TUGamepad source/header embedded notices)",
+      "license_evidence": "lib/TUCompositeHID/include/TUGamepad.hpp",
+      "name": "TUCompositeHID",
+      "scope_note": "Original third-party copyright preserved.",
+      "selector_kind": "repository_local",
+      "source": "lib/TUCompositeHID"
+    },
+    {
+      "action": "bundled notice",
+      "bundled_notice": true,
+      "declared_selector": "local; GregTurbo/joybus-pio#f2f59c0aee07aea58cdd03616439bc3c6a8cbd8a",
+      "license": "LGPL-3.0 license text",
+      "license_evidence": "lib/glyph-joybus-pio/LICENSE",
+      "name": "glyph-joybus-pio",
+      "selector_kind": "vendored_commit_with_local_changes",
+      "source": "lib/glyph-joybus-pio/UPSTREAM.md"
+    },
+    {
+      "action": "REVIEW_REQUIRED",
+      "bundled_notice": false,
+      "declared_selector": "tracked glyph_nuker; .github/workflows/build.yml",
+      "license": "UNKNOWN",
+      "license_evidence": "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json",
+      "name": "glyph_nuker",
+      "selector_kind": "tracked_blob_without_source_recipe",
+      "source": "docs/runtime_config/glyph_nuker_source_lineage.md"
+    },
+    {
+      "action": "REVIEW_REQUIRED",
+      "bundled_notice": false,
+      "declared_selector": "platform = atmelavr",
+      "license": "UNVERIFIED for unversioned AVR selection",
+      "license_evidence": null,
+      "name": "atmelavr",
+      "scope_note": "Exported AVR declaration requires an exact resolved platform/framework source inventory; Mk6 Arduino-Pico evidence does not establish AVR license closure.",
+      "selector_kind": "unresolved_framework_or_platform_selection",
+      "source": "https://github.com/platformio/platform-atmelavr"
+    },
+    {
+      "action": "REVIEW_REQUIRED",
+      "bundled_notice": false,
+      "declared_selector": "framework = arduino under avr_base",
+      "license": "UNVERIFIED for unversioned AVR selection",
+      "license_evidence": null,
+      "name": "arduino-avr",
+      "scope_note": "Exported AVR declaration requires an exact resolved platform/framework source inventory; Mk6 Arduino-Pico evidence does not establish AVR license closure.",
+      "selector_kind": "unresolved_framework_or_platform_selection",
+      "source": "https://github.com/arduino/ArduinoCore-avr"
+    },
+    {
+      "action": "REVIEW_REQUIRED",
+      "bundled_notice": false,
+      "declared_selector": "avr_base lib_deps = Wire",
+      "license": "UNVERIFIED for unversioned AVR selection",
+      "license_evidence": null,
+      "name": "Wire",
+      "scope_note": "Exported AVR declaration requires an exact resolved platform/framework source inventory; Mk6 Arduino-Pico evidence does not establish AVR license closure.",
+      "selector_kind": "unresolved_framework_or_platform_selection",
+      "source": "https://github.com/arduino/ArduinoCore-avr/tree/master/libraries/Wire"
+    }
+  ],
+  "embedded_notices": {
+    "lib/TUCompositeHID/include/TUGamepad.hpp": [
+      "MIT License",
+      "Copyright (c) 2021",
+      "Permission is hereby granted"
+    ],
+    "lib/TUCompositeHID/src/TUGamepad.cpp": [
+      "MIT License",
+      "Copyright (c) 2021",
+      "Permission is hereby granted"
+    ]
+  },
+  "exceptions": {
+    ".clang-format": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    ".gitattributes": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    ".gitignore": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    "AGENTS.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    "LICENSE": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    "README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    "docs/ARCHITECTURE.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/CAPABILITIES.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/CURRENT_STATE.md": {
+      "classification": "PUBLIC_INCLUDE_TRANSFORMED",
+      "purpose": "Title and exact bounded current-v1 section only; legacy body remains in development fork."
+    },
+    "docs/DEVELOPMENT.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/PROFILE_SYSTEM.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/ROADMAP.md": {
+      "classification": "PUBLIC_INCLUDE_TRANSFORMED",
+      "purpose": "Title and exact bounded current-v1 section only; legacy body remains in development fork."
+    },
+    "docs/USAGE.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/evidence/HARDWARE_EVIDENCE.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/evidence/README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/history/DECISIONS.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/history/HARDWARE_ACCEPTANCE.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/history/HISTORY.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/history/SOURCE_LINEAGE.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/accepted_character_profiles/ACCEPTED_KAZUYA.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/build_input_non_selector_configuration.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/build_input_provenance_inventory.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/config_menu_invalid_state_characterization.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/controller_profile_selector/integration_20261023/README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/current_config_persistence_recovery_research.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/custom_modifier_cache_characterization.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/build_input_non_selector_configuration.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/build_input_provenance_inventory.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/build_input_resolution_observations.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/config_menu_invalid_state_characterization.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/configurator_setconfig_transaction.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/current_baseline_runtime_config_interpreter_source_baseline.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/current_config_persistence_recovery_research.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/custom_modifier_cache_characterization.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/generated_source_owned_generator_contract.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/generated_source_owned_layout_spec.example.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/getconfig_raw_load_characterization.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/glyph_checker_census.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config013_usb_default_characterization.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config014_modifier_capacity.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config020_abi_repair.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config021_persisted_recovery.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json": {
+      "classification": "REVIEW_REQUIRED",
+      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+    },
+    "docs/runtime_config/fixtures/gp_config_010_integration_semantic_correspondence.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config_010_mode_activation_capacity.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val034_accepted_transitions.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val034_c014_transition.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val035_c017_transition.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val037_accepted_transitions.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val038_accepted_transitions.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val038_c021_consumer_replay.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val038_c021_transition.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val039_accepted_transitions.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val039_c022_consumer_replay.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val039_c022_transition.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val042_accepted_transitions.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val042_c023_transition.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/runtime_config_validation_health.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/runtime_config_validation_manifest.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/setconfig_runtime_rebinding_characterization.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/source_owned_source_authority_intake.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/fixtures/source_owned_x1_authority_receipt.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/generated_source_owned_artifact_install.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/generated_source_owned_baseline_artifact.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/generated_source_owned_generator_contract.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/generated_source_owned_layout_spec.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/generated_source_owned_overlay_preserve_proof_2026-07-19.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/getconfig_raw_load_characterization.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/glyph_nuker_source_lineage.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/glyph_package_v1/README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config013_usb_default_characterization.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config014_modifier_capacity.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config020_abi_repair.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config021_persisted_recovery.md": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "docs/runtime_config/gp_config022_owner_config_compatibility.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config022_rgb_target_validation.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config023_usb_index_validation.md": {
+      "classification": "REVIEW_REQUIRED",
+      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+    },
+    "docs/runtime_config/gp_config_007_transaction_stage_schema.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config_010_mode_activation_capacity.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config_012_button_mask_characterization.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_config_017_neopixel_repaired_current.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_prov_014_decoder_closure.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_val041_usb_name_current_acceptance.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/gp_val045_usb_identity_correspondence.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/latest_y2_layout_source_owned_port.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/neopixel_null_sendreport_characterization.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/package_active_profile_display/integration_20261113/README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/package_active_profile_display/integration_20261113/verify_correspondence.py": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/package_lifecycle_v2/README.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/profile_native_ultimate/design_evidence/maximum-native.body": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Maximum native body bounds/capacity negative controls."
+    },
+    "docs/runtime_config/profile_native_ultimate/legacy_oracle_hashes.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/runtime_config_activation_alternatives_a_f.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/runtime_config_storage_fallback_architecture.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/runtime_config_storage_fallback_source_authority.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/runtime_config_validation_health.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/runtime_config_webserial_device_write_source_authority.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/setconfig_runtime_rebinding_characterization.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/source_authority_intake_workflow.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "docs/runtime_config/source_owned_candidate_generation_diff_diagnosis.md": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current manifest/import/literal dependency or curated public route; see reproducible private dependency ledger."
+    },
+    "glyph_nuker": {
+      "classification": "REVIEW_REQUIRED",
+      "purpose": "Current workflow input; existing bounded lineage packet leaves source/build/license correspondence UNKNOWN. Never execute or redistribute on this evidence."
+    },
+    "include/img/remap.png": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Firmware UI source artwork, retained alongside generated bitmap headers."
+    },
+    "include/img/update.png": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Firmware UI source artwork, retained alongside generated bitmap headers."
+    },
+    "platformio.ini": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Root source/build/public contract or attribution."
+    },
+    "profiles/authoring-v1/INDEPENDENT_REVIEW.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "profiles/authoring-v1/KAZUYA_PROFILE_DESIGN_HANDOFF.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/authoring-v1/VALIDATION.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "profiles/kazuya/README.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/README.v1.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v1/README.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v2/GAMEPLAY_TEST.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v2/README.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v3/GAMEPLAY_TEST.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v3/README.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v4/CROUCH_JAB_DEFERRED.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v4/GAMEPLAY_TEST.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/kazuya/v4/README.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "profiles/ultimate/CHAPTER.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "profiles/ultimate/README.md": {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "purpose": "Historical profile proof/journal; human source JSON remains separately classified."
+    },
+    "tools/check_glyph_profile_store_read_storage.py": {
+      "classification": "REVIEW_REQUIRED",
+      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+    },
+    "tools/check_glyph_real_predecessor_config.py": {
+      "classification": "REVIEW_REQUIRED",
+      "purpose": "Concrete private development locator in original source/evidence; no source transform authorized. Preserve original privately. Current census/C023 file dependency requires a separately scoped privacy-safe derivative decision."
+    },
+    "tools/fixtures/glyph_package_v1/historical_config/minimal.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Synthetic old-descriptor Config fault injection and preservation."
+    },
+    "tools/fixtures/kazuya/verification.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "tools/fixtures/native_profile_json/Ultimate.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Archival golden consumed by current authoring regression suite."
+    },
+    "tools/fixtures/native_profile_json/recovery.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/REPORT.md": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/commands.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-2.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONDITION-3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-2.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-4.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-5.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/CONFLICT-6.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode2.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src1-mode4.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode2.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src2-mode4.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode2.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src3-mode4.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode2.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-src4-mode4.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-table-Mode.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/COORD-table-nonMode.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DIGITAL-mask.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-2.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-4.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-5.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-6.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/DPAD-7.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-0-inv0-intrinsic0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-0-inv0-intrinsic1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv0-intrinsic0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv0-intrinsic1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv1-intrinsic0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-1-inv1-intrinsic1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv0-intrinsic0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv0-intrinsic1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv1-intrinsic0.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/GATE-96-inv1-intrinsic1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v1-ModeX1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v1-default.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v1-forcedUp.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v2-ModeX1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v2-default.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v2-forcedUp.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v3-ModeX1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v3-default.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/LT6-v3-forcedUp.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v2-RF6.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v2-RF7.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v3-RF6.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTE-v3-RF7.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTED-gate32-physical1.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/ROUTED-gate32-physical3.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SPARSE32-negative.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SPARSE32-positive.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SPARSE32-reordered.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-10.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-4.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-5.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-8.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/SUPPRESS-9.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/corpus/TRIGGERS-0-255.pb": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current host independent legacy/native parity corpus."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/input-hashes.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "tools/fixtures/profile_native_ultimate/independent_legacy/run.py": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical private capture/command/report, not a required current source input."
+    },
+    "tools/fixtures/profile_store_cdc_progress/physical-id1-response.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_cdc_progress/physical-id22-response.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_cdc_progress/physical-id3-response.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_cdc_progress/physical-id4-response.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_cdc_rx_progress/physical-arm.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_cdc_rx_progress/physical-request-manifest.json": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_cdc_rx_progress/physical-status.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_cdc_rx_progress/physical-ticketed-update.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_rx_host/physical-update.cobs": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    },
+    "tools/fixtures/profile_store_rx_host/physical-update.pb": {
+      "classification": "PRIVATE_ARCHIVE_ONLY",
+      "purpose": "Historical device capture; no current public necessity established."
+    }
+  },
+  "notice_obligations": [
+    {
+      "material_prefix": "config/glyph/",
+      "notices": [
+        "config/glyph/LICENSE"
+      ]
+    },
+    {
+      "material_prefix": "lib/glyph-joybus-pio/",
+      "notices": [
+        "lib/glyph-joybus-pio/LICENSE",
+        "lib/glyph-joybus-pio/UPSTREAM.md"
+      ]
+    },
+    {
+      "material_prefix": "tools/fixtures/custom_modifier_cache_host/schema/",
+      "notices": [
+        "tools/fixtures/custom_modifier_cache_host/schema/LICENSE.nanopb.txt"
+      ]
+    },
+    {
+      "material_prefix": "tools/fixtures/gp_config012_button_host/",
+      "notices": [
+        "tools/fixtures/gp_config012_button_host/LICENSE.nanopb.txt"
+      ]
+    },
+    {
+      "material_prefix": "tools/fixtures/mode_selection_host/generated/",
+      "notices": [
+        "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt"
+      ]
+    },
+    {
+      "material_prefix": "tools/fixtures/gp_config021_persisted_recovery/dependencies/",
+      "notices": [
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE"
+      ]
+    },
+    {
+      "material_prefix": "tools/fixtures/gamecube_selector_liveness/failed_dependency/",
+      "notices": [
+        "tools/fixtures/gamecube_selector_liveness/failed_dependency/LICENSE"
+      ]
+    },
+    {
+      "material_prefix": "",
+      "notices": [
+        "LICENSE",
+        "THIRD_PARTY_NOTICES.md"
+      ]
+    }
+  ],
+  "notice_sha256": {
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "THIRD_PARTY_NOTICES.md": "0546304bd1471d3ad4ddb30cd028f13de1855e9d35239fdd03eeb7aaf7c955d2",
+    "config/glyph/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "lib/glyph-joybus-pio/LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+    "lib/glyph-joybus-pio/UPSTREAM.md": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6",
+    "tools/fixtures/custom_modifier_cache_host/schema/LICENSE.nanopb.txt": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d",
+    "tools/fixtures/gamecube_selector_liveness/failed_dependency/LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+    "tools/fixtures/gp_config012_button_host/LICENSE.nanopb.txt": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d",
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md": "7041a7de46488bca009b0d82317c9e7bb6634749ed0cd3956a5ef8041664b36e",
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt": "f48cb755a19ac13aca731273a99da22383debe9bd892ac037819bea742b1babe",
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+    "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d"
+  },
+  "privacy_exceptions": {
+    ".gitignore": {
+      "match_sha256": [
+        "ee08b60758e15dc4a7a7088cd6833d619a8399eea857a78c2983b8ae57b15d74"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "f3b81db3e67be7f8266462abe25a60b0e4bc232ad4c3dbe70b95b53a50ab9228"
+    },
+    "docs/evidence/HARDWARE_EVIDENCE.md": {
+      "match_sha256": [
+        "fd17fc67afbbe16c96993d0bbd3821e64558f131f8aff1978494bc73181f5ef5"
+      ],
+      "purpose": "The single permitted generic public hardware custody contract template.",
+      "sha256": "68b918359656cfbba7874a18feef53d9f0255b8528aac7d9f421ef8815893430"
+    },
+    "lib/TUCompositeHID/include/TUGamepad.hpp": {
+      "match_sha256": [
+        "49a53fca5c06a05789576cec2673efaeff3c97a37194548b00eb15cb480dd8e5"
+      ],
+      "purpose": "Required third-party copyright/author contact; retain original source notice.",
+      "sha256": "4e8b6b3ad56bfa5506a5febb5a4c018b7ac68fc9d35ae926b7ade55fd2a61c06"
+    },
+    "lib/TUCompositeHID/src/TUGamepad.cpp": {
+      "match_sha256": [
+        "49a53fca5c06a05789576cec2673efaeff3c97a37194548b00eb15cb480dd8e5"
+      ],
+      "purpose": "Required third-party copyright/author contact; retain original source notice.",
+      "sha256": "b43911537a77fde06fb1a2c13482f30f59869b15470367c2b47c0ae16c6b2b0e"
+    },
+    "tools/audit_glyph_documentation.py": {
+      "match_sha256": [
+        "0136117d30cd89fd570a6000d2e05cd78eda62277612cda7995ab53d9e80d14f",
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991",
+        "380acfa5d80e46feb91e5fdbfc8c8cc143aa986cfb7c1a3572911ec42a422acd",
+        "8a4cfce477926ec388ae57e6ef4ef13cba7881386b2927e7b94750c584a09384",
+        "e698b3f39df9978ce75022fda576a1c993ac1e881954a6a842b25259c2da16f8",
+        "ee08b60758e15dc4a7a7088cd6833d619a8399eea857a78c2983b8ae57b15d74"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "d1335e577226e8d6b09fe4e05a49ca12963cb3b4a565f6081be033ac054f1c57"
+    },
+    "tools/check_glyph_agent_framework_docs.py": {
+      "match_sha256": [
+        "05019175af13cfcdd762225a39e600828e03201202bedbdf25b763e081f3e225",
+        "29224b321c762c52a6b270b4696b3ad556b57c8527b44d2856113c7bb28de72d",
+        "9b2d41eef7796f2243a55198ab7dbb23d2119bd64cc33563883d83bf59f5af67",
+        "9fa6a34a34e1c151c531f457e29b6ea4bcd753c6c507f1225ff91d0e58a5bf81"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "fc1b2e3f7f233dc3e4a6877936e8c4fe0417ac43f17fdffe8d2f16e19a47c202"
+    },
+    "tools/check_glyph_artifact_postprocessor_provenance.py": {
+      "match_sha256": [
+        "c360099b3dd6c2990c42c5b3514fdc015b65d60b6e40e306af971c2bafebd17a"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "af617014ef54b76bb06cb95b365a61a12a87430c157ae41868c783f8490b732a"
+    },
+    "tools/check_glyph_c021_proof_replay.py": {
+      "match_sha256": [
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991"
+      ],
+      "purpose": "Reviewed generic OS temporary-directory default; no owner-specific capture locator.",
+      "sha256": "c1e9cc339471f2d0e80439ccab8159cc78d5c660b9136eefa86ad174ab12446f"
+    },
+    "tools/check_glyph_c022_proof_replay.py": {
+      "match_sha256": [
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991"
+      ],
+      "purpose": "Reviewed generic OS temporary-directory default; no owner-specific capture locator.",
+      "sha256": "75cedba39849e2d3c3f0ed2dfdf6393f9c1b080ac9c596aa4e873bac3fff8459"
+    },
+    "tools/check_glyph_checker_context.py": {
+      "match_sha256": [
+        "38befe7575540d8c56bc79e72f3a161096d5b6fdca30960e4017634c5726a755",
+        "a9a617f0f9029dc1202a36fb1f5fc4693bb9336118b04791df8cbbbaa9a889d6",
+        "f8d43d5220f9321b2a939639de7bfd766adbc61ed9970d3eb278cfd5ae7863a3"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "e988926a99d88a1d1ba4b924e7780d7c77f19711c0b856681e8a63b57f9753be"
+    },
+    "tools/check_glyph_docs_navigation.py": {
+      "match_sha256": [
+        "0136117d30cd89fd570a6000d2e05cd78eda62277612cda7995ab53d9e80d14f",
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991",
+        "2a396c383d3749dec773b02f3c02c7f393958b3183eb4fa53c2733772d8117f6",
+        "78999353812f85b286691f2b53c9ce3dbfa391f235d69d55a043ec96ce8fd101",
+        "8a4cfce477926ec388ae57e6ef4ef13cba7881386b2927e7b94750c584a09384",
+        "e698b3f39df9978ce75022fda576a1c993ac1e881954a6a842b25259c2da16f8",
+        "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c",
+        "fd17fc67afbbe16c96993d0bbd3821e64558f131f8aff1978494bc73181f5ef5"
+      ],
+      "purpose": "Reviewed safety-pattern code and synthetic negative controls, not concrete owner evidence; exact bytes and tokens bound.",
+      "sha256": "c80b3cd104760820893d00694616f8520258d33aacf93a4e33337081ef977c15"
+    },
+    "tools/check_glyph_generated_source_owned_generator_contract.py": {
+      "match_sha256": [
+        "f9b50bf1a2bc9dccd0885c52e6f00985e77f5a15ce785dea61979ee37fab651d"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "3635a92b16aa922fd295e6b7c8e2d71a909f8d6be76bcd7ee1f707caf82d8cd0"
+    },
+    "tools/check_glyph_gp_config021_persisted_recovery.py": {
+      "match_sha256": [
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991",
+        "d046f600ffc15e4153b97bd989f39d7e352a1ca3c82dfc275aa7211e2384b476"
+      ],
+      "purpose": "Reviewed generic OS temporary-directory default; no owner-specific capture locator.",
+      "sha256": "2dc78d118dd2936ad9544a297ef00a66a140f90dc58152c87c2abbe423ef556d"
+    },
+    "tools/check_glyph_hardware_artifact_custody.py": {
+      "match_sha256": [
+        "8dec0644005be053d3f2006d3fa8c017f4b3b229860e92a8d3bd2e63e490c944",
+        "fd17fc67afbbe16c96993d0bbd3821e64558f131f8aff1978494bc73181f5ef5"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "4599b499c6dd8511079b37f0a9a24cb4225a402614094bb07585a452a79ee92d"
+    },
+    "tools/check_glyph_neopixel_historical_replay.py": {
+      "match_sha256": [
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991"
+      ],
+      "purpose": "Reviewed generic OS temporary-directory default; no owner-specific capture locator.",
+      "sha256": "2a9d3c8eef434d890dc1cf9eeec8fe3ca5f37235de68417a6146dcd6d621c9da"
+    },
+    "tools/check_glyph_prebuild_git_identity.py": {
+      "match_sha256": [
+        "c360099b3dd6c2990c42c5b3514fdc015b65d60b6e40e306af971c2bafebd17a"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "154cea8bf6abbb666b42f518796b36188655d9eea7d23d5a36cb7fb60da3c619"
+    },
+    "tools/check_glyph_runtime_config_validation_aggregate.py": {
+      "match_sha256": [
+        "e68b161548121ea821208a4fc59ba82f10cd638b27143043d9db1fa9b8f27d6d"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "5daf0828dfaffb5b0ff0baf8255ea3476335d4ca589ff9d6447cb28159a79b91"
+    },
+    "tools/check_glyph_source_owned_candidate_generation.py": {
+      "match_sha256": [
+        "0136117d30cd89fd570a6000d2e05cd78eda62277612cda7995ab53d9e80d14f",
+        "221e8fa5aa1dac7585ae0274d492bc1a357e1eae710aca6a861564a4a782c149"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "2e479fb23ec9fee3588333a0d6b51965ace22b0cf09324b251b5957edc2f9459"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c": {
+      "match_sha256": [
+        "b4a0b121c33a15f971b1319553e9ba2bb25f53f0a917df1e1a653e9333be6d7c"
+      ],
+      "purpose": "Required third-party copyright/author contact; retain original source notice.",
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c": {
+      "match_sha256": [
+        "b4a0b121c33a15f971b1319553e9ba2bb25f53f0a917df1e1a653e9333be6d7c"
+      ],
+      "purpose": "Required third-party copyright/author contact; retain original source notice.",
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c": {
+      "match_sha256": [
+        "b4a0b121c33a15f971b1319553e9ba2bb25f53f0a917df1e1a653e9333be6d7c"
+      ],
+      "purpose": "Required third-party copyright/author contact; retain original source notice.",
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed"
+    },
+    "tools/fixtures/mode_selection_host/generated/nanopb.library.json": {
+      "match_sha256": [
+        "9cf3c9f918ac2514b8a89f27896b91c713de47eec8a8c44166e66b49a307e2ba"
+      ],
+      "purpose": "Required third-party copyright/author contact; retain original source notice.",
+      "sha256": "01f2027fcd3c19b304581c0bba7a9f0096a16842874e6686a38d168a69d952fe"
+    },
+    "tools/glyph_c014_campaign_transition.py": {
+      "match_sha256": [
+        "9b2d41eef7796f2243a55198ab7dbb23d2119bd64cc33563883d83bf59f5af67",
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "993fe6a364131b1259e6361581f78aea4e956d8b4d4943814365cafce78c6a6b"
+    },
+    "tools/glyph_c017_campaign_transition.py": {
+      "match_sha256": [
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a"
+    },
+    "tools/glyph_c020_abi_repair_transition.py": {
+      "match_sha256": [
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423",
+        "f8f9c8a567b8b8fb5b4a0d7a571b7b6fe91db6e7d54cda9961da67f419ee2df1"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "377af2b08cba70e65947a70b3c24b4eafafff3b56dec212208f261b0f9c6f321"
+    },
+    "tools/glyph_c021_campaign_transition.py": {
+      "match_sha256": [
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "d689ae76cd105c65366393f5da96955b544a235c09e080ca623466fcd91ec36e"
+    },
+    "tools/glyph_c022_campaign_transition.py": {
+      "match_sha256": [
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "a7d04ffc2d0f633163fa89521167348f35457117e2bb79b1229f2d39cffd0763"
+    },
+    "tools/glyph_c023_campaign_transition.py": {
+      "match_sha256": [
+        "9b2d41eef7796f2243a55198ab7dbb23d2119bd64cc33563883d83bf59f5af67"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "e6e9d76538ab3505ca5a862b51756cabcf2a0ef4b6ba7b668d97d35f4d2f8285"
+    },
+    "tools/glyph_campaign_transition.py": {
+      "match_sha256": [
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "dd8cd84eec58d7c2d06bda4300ed5818ad640c80d18b7b4fb5d732d2c34596b9"
+    },
+    "tools/glyph_public_export.py": {
+      "match_sha256": [
+        "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
+      ],
+      "purpose": "Reviewed safety-pattern code and synthetic negative controls, not concrete owner evidence; exact bytes and tokens bound.",
+      "sha256": "9e1de2adcee6d6ebb60b2615ddb1825ae0dbc69c69d50147dfba8ac6b7d01e3d"
+    },
+    "tools/glyph_tracked_worktree_integrity.py": {
+      "match_sha256": [
+        "1a4d6b4a83fd9d3da04f2386940ed3ee1d3a65cdb01ee27945fdfa609e33e761"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "604bea90c4b3cb2cbb0fdf023918da7ba45d1be7d128c2b40050e09e5a220fc7"
+    },
+    "tools/gp_config_005_hw_test.py": {
+      "match_sha256": [
+        "8ec7f44ce0e9d5a1bbd84c67024bc6d51607ec264f851158d13e2db033d34931"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "d32ec19727ca64a0394b9ccff408a17fd9d5c9c3d54747a7832fd4deb3ba39a3"
+    },
+    "tools/replay_legacy_root_writer.py": {
+      "match_sha256": [
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991"
+      ],
+      "purpose": "Reviewed generic OS temporary-directory default; no owner-specific capture locator.",
+      "sha256": "5f4eee125edfeed33fd2fed2093b02855858b24c26a767c68f41816abf5167c7"
+    },
+    "tools/test_glyph_c014_campaign_transition.py": {
+      "match_sha256": [
+        "135a409381358fff971a30d5a10d59d5e89b53c883975a7e8358d9adffab0b9f",
+        "41c72f129e7d57752b7db7d7a19484e245acca1cab3001c181d0374beeb1fc4e",
+        "899b1f6f1e5b9e6e1e68d6550d45b164d3e3a362ca0f331ec1a6df237f60bff3",
+        "9b2d41eef7796f2243a55198ab7dbb23d2119bd64cc33563883d83bf59f5af67",
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "c9e413321639f2d86fd3ad20be2b5315331f0deb18adafb6daf988082aff31c2"
+    },
+    "tools/test_glyph_c021_campaign_transition.py": {
+      "match_sha256": [
+        "372b678b6e35e6e2501c5063f79052d76150ab4a6e9edb04944d79beef72d8dc",
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "57e823da370af57e311d05c01921fd6d69ad624c1ba8a7480e409c83d07e1355"
+    },
+    "tools/test_glyph_c022_campaign_transition.py": {
+      "match_sha256": [
+        "372b678b6e35e6e2501c5063f79052d76150ab4a6e9edb04944d79beef72d8dc",
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "738f22877def384b361b86397416e2293a13895c1be125eec372044c97411024"
+    },
+    "tools/test_glyph_ci_build_inputs.py": {
+      "match_sha256": [
+        "a7e949b9328317dd320a56cae822118ffc1341d535e30dfb7948b455a7e25693"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "f7a1c0fff953c0a0d6f863464cfc097016468dd27ba48513dc1361434570636f"
+    },
+    "tools/test_glyph_config_010_semantic_applicability.py": {
+      "match_sha256": [
+        "234e2d33f1f6a3cc6e93359ba1fd26cd38d3a2cf055e2714ed5f4b22d0d3de7c",
+        "2eed2a18b43a10946d3376e82755ec5cebc853b60c7ce1872cdee4d5bd7cca98",
+        "528f3feb521d90a518260adbda46a52f02ca32a3a77ae31910cf53f8084ba859",
+        "6240e88dc40a5f518102e9c4dec425559f0ce0f8975b9fe0ecc9966adc66ac40",
+        "643cddb479a68c55ae77f52d584034753eead5c9a27ea45be5da457bfabbc9ef",
+        "bf23a9ed1c2d081dbabb3453d458bd1f1e7fdb39467eb7d06ebc81cd4ee6f979",
+        "d046f600ffc15e4153b97bd989f39d7e352a1ca3c82dfc275aa7211e2384b476",
+        "ee4a8de0df17a9474dcf4e2438ca225b992868f655c37a4d543b71fbf2b0a423"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "05ded131d7149b822d80352ef847d4d5fcc19c9de5f0f926084b2a5a2eb1b8e4"
+    },
+    "tools/test_glyph_docs_agent_surface_integration.py": {
+      "match_sha256": [
+        "d046f600ffc15e4153b97bd989f39d7e352a1ca3c82dfc275aa7211e2384b476"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "89826497ac5385f6350e37f335e4c4bcc8bafcb9441a67de67a0b013fa3dd44a"
+    },
+    "tools/test_glyph_docs_navigation.py": {
+      "match_sha256": [
+        "0136117d30cd89fd570a6000d2e05cd78eda62277612cda7995ab53d9e80d14f",
+        "12309b8a24169f739f97fdbdaf759dbb07c65c784d3661d0a84795ba0a329991",
+        "4669b17956f9914fb2fb9f1a928f593d6f7ffb5286b7a03d652c90459374c05f",
+        "8a4cfce477926ec388ae57e6ef4ef13cba7881386b2927e7b94750c584a09384",
+        "90dfa00d2f5c2b55a53fe15a283cfa552be21d63051c1f6576e6fbe06f49eff8",
+        "9b2d41eef7796f2243a55198ab7dbb23d2119bd64cc33563883d83bf59f5af67",
+        "a213b1a0b3443c044017c7819f5263923858d41d54e83b516b297e7f379ec3c0",
+        "a862861993c52b7217304c9512f87123e7f696feee9e35e379c64da66b3a1054",
+        "b60b27c934395d8189a4bd8ff6a9ce549d1105077663274d5b80eb237ccd8a22",
+        "dfb5e07016293d223946c2ee437c7b561060ee0ca6b846ad395fcaeb5f86b19e",
+        "e698b3f39df9978ce75022fda576a1c993ac1e881954a6a842b25259c2da16f8",
+        "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
+      ],
+      "purpose": "Reviewed safety-pattern code and synthetic negative controls, not concrete owner evidence; exact bytes and tokens bound.",
+      "sha256": "19d233df3f76681b203a163436491a2374b1f4e48ca9548b8f1f06f29b17af64"
+    },
+    "tools/test_glyph_documentation_audit.py": {
+      "match_sha256": [
+        "1d4b3842d6c4cf0c39d9d13c176884f5519ddbf00df485229f1380d9e4f94985",
+        "8a4cfce477926ec388ae57e6ef4ef13cba7881386b2927e7b94750c584a09384",
+        "ac227e725290a3702754663aebcb046b036a1ad79ad1aad4dd51def87b0a541a",
+        "d046f600ffc15e4153b97bd989f39d7e352a1ca3c82dfc275aa7211e2384b476"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "e7179b29226e092c6ea93a083f434b697cdcf1dfd694abbbd622c4376b5944d2"
+    },
+    "tools/test_glyph_gp_prov_014_decoder_closure.py": {
+      "match_sha256": [
+        "2d5a3f4b4c8e5640da83a86080cb42abc41baf9db3453d19ee04e58f0158405b"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "858db20eb782909d314b550ea46a1a4b0ee53b68e8f2163ef1aaf0b94aee704a"
+    },
+    "tools/test_glyph_hardware_correspondence.py": {
+      "match_sha256": [
+        "01bda71cc5544674b4c461ce9ac7e580b301940e80f91b46ce8494380747f6fb",
+        "3e51344b76bf930a9824a3a851c987309ef19590b30216e63cc73516450994e0",
+        "a5a554e404d8c0cc7143e7cc5aa307a9739282e7e000fd16e38993d557cb2953",
+        "f3fd452c745d35dc7ba462aaf34ca749f483f8c4ad8af8daf6f9d18682dd05d4"
+      ],
+      "purpose": "Reviewed source safety-pattern/ignore-root or synthetic negative control, not an owner/private evidence locator. Exact source bytes and matched-token hashes bind this exception.",
+      "sha256": "994da75b5ef9b0f5f13e54732d1fb15c928ad7c0510cafd174bfe7ea12cf7c24"
+    },
+    "tools/test_glyph_public_export.py": {
+      "match_sha256": [
+        "3e51344b76bf930a9824a3a851c987309ef19590b30216e63cc73516450994e0",
+        "8a4cfce477926ec388ae57e6ef4ef13cba7881386b2927e7b94750c584a09384",
+        "90dfa00d2f5c2b55a53fe15a283cfa552be21d63051c1f6576e6fbe06f49eff8",
+        "98b412c212237491aeddce6ac2a322349ee62fe3346f332a631d2acd5810672c"
+      ],
+      "purpose": "Reviewed safety-pattern code and synthetic negative controls, not concrete owner evidence; exact bytes and tokens bound.",
+      "sha256": "2d475b48af878a91a4769358c30f1b7c2e147b3bb0018bdcfd5449bd9a6323d4"
+    }
+  },
+  "rules": [
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "src/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "include/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "HAL/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "config/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "schema/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "lib/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "builder_scripts/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "scripts/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": ".github/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "tools/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "dolphin/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": "profiles/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": ".devcontainer/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_INCLUDE",
+      "prefix": ".vscode/",
+      "purpose": "Source/build/host test/authoring family; byte/privacy scan and explicit binary evidence required."
+    },
+    {
+      "classification": "PUBLIC_EXCLUDE_HISTORICAL",
+      "prefix": "docs/",
+      "purpose": "Historical/mixed evidence by default; only exact current technical dependencies/routes are selected."
+    }
+  ],
+  "schema": "glyph_public_export_policy.v1",
+  "scope": "Tracked source tree only. Does not clear Git history, publication, binary distribution or hardware acceptance. Exact exceptions override disjoint prefix classes; binary/compressed default deny. New root families fail closed."
+}

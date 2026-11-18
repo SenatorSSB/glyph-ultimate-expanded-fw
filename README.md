@@ -67,4 +67,5 @@ Glyph firmware builds on [HayBox by JonnyHaystack](https://github.com/JonnyHayst
 and the upstream Glyph work by Limit Labs and contributors. This community fork
 is not presented as an official Limit Labs release. Please consider supporting
 HayBox upstream. Licensed under [GNU GPL version 3](LICENSE); retain upstream
-copyright and license notices.
+copyright and license notices. See [third-party notices](THIRD_PARTY_NOTICES.md)
+for bundled attribution and declared build dependencies.

@@ -11,7 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 CURATED_PATHS = ("docs/history/HISTORY.md", "docs/history/DECISIONS.md",
                  "docs/history/HARDWARE_ACCEPTANCE.md", "docs/history/SOURCE_LINEAGE.md",
                  "docs/evidence/README.md")
-PUBLIC_PATHS = ("AGENTS.md", "README.md", "docs/README.md", "docs/CURRENT_STATE.md",
+PUBLIC_PATHS = ("THIRD_PARTY_NOTICES.md", "AGENTS.md", "README.md", "docs/README.md", "docs/CURRENT_STATE.md",
                 "docs/ROADMAP.md", "docs/CAPABILITIES.md", "docs/USAGE.md",
                 "docs/PROFILE_SYSTEM.md", "profiles/README.md",
                 "docs/ARCHITECTURE.md", "docs/DEVELOPMENT.md",
@@ -35,9 +35,15 @@ def current_section(text: str, kind: str) -> str:
     legacy = {"current-state": "legacy-current-state-journal",
               "current-roadmap": "legacy-roadmap-journal"}[kind]
     boundary = f"<!-- {legacy}:start -->"
-    if (text.count(start) != 1 or text.count(end) != 1 or text.count(boundary) != 1
-            or not text.index(start) < text.index(end) < text.index(boundary)):
-        fail(f"{kind}: missing, duplicate or misordered current/legacy boundaries")
+    if (text.count(start) != 1 or text.count(end) != 1 or text.index(start) >= text.index(end)):
+        fail(f"{kind}: missing, duplicate or misordered current boundaries")
+    if boundary in text:
+        if text.count(boundary) != 1 or text.index(end) >= text.index(boundary):
+            fail(f"{kind}: duplicate or misordered legacy boundary")
+    elif text.split(end, 1)[1].strip():
+        # A current-only export ends exactly at the current boundary. Arbitrary
+        # unbounded prose cannot masquerade as the bounded export form.
+        fail(f"{kind}: unbounded content after current-only section")
     # No unvalidated prose can precede the current section except the document title.
     if not re.fullmatch(r"# [^\n]+\s*", text.split(start)[0]):
         fail(f"{kind}: current prose outside bounded section")
@@ -482,7 +488,7 @@ def validate_docs(root: Path = REPO_ROOT, overrides: dict[str, str] | None = Non
     docs["docs/ROADMAP.md"] = validate_roadmap(docs["docs/ROADMAP.md"])
     check_public_agent_routes(docs["docs/README.md"], docs["docs/CURRENT_STATE.md"])
     require_links("README", docs["README.md"], ("docs/USAGE.md", "docs/CAPABILITIES.md",
-        "docs/CURRENT_STATE.md", "profiles/README.md", "docs/README.md", "docs/ROADMAP.md", "AGENTS.md"))
+        "docs/CURRENT_STATE.md", "profiles/README.md", "docs/README.md", "docs/ROADMAP.md", "AGENTS.md", "THIRD_PARTY_NOTICES.md"))
     if "profiles/ultimate/README.md" in links(docs["README.md"]):
         fail("README: historical v0 golden must not be the primary authoring route")
     for path in ("README.md", "docs/USAGE.md", "docs/CAPABILITIES.md"):

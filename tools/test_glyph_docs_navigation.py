@@ -14,6 +14,17 @@ class PublicDocsTests(unittest.TestCase):
     def setUp(self):
         self.docs = {p: (nav.REPO_ROOT / p).read_text(encoding='utf-8') for p in nav.PUBLIC_PATHS}
 
+    def test_current_only_export_form_and_notice_route(self):
+        for path,kind in (("docs/CURRENT_STATE.md","current-state"),("docs/ROADMAP.md","current-roadmap")):
+            end=f"<!-- {kind}-v1:end -->"
+            self.docs[path]=self.docs[path].split(end)[0]+end+"\n"
+        nav.validate_docs(overrides=self.docs)
+        bad=dict(self.docs)
+        bad["docs/CURRENT_STATE.md"] += "Unbounded legacy prose\n"
+        with self.assertRaises(nav.DocsNavigationError):nav.validate_docs(overrides=bad)
+        self.docs["README.md"]=self.docs["README.md"].replace("(THIRD_PARTY_NOTICES.md)","(LICENSE)")
+        with self.assertRaises(nav.DocsNavigationError):nav.validate_docs(overrides=self.docs)
+
     def reject(self, path, before, after):
         self.assertIn(before, self.docs[path])
         self.docs[path] = self.docs[path].replace(before, after)
