@@ -7918,7 +7918,7 @@
       },
       "checker_id": "gp_config023_usb_index_public_current",
       "defines_main": true,
-      "file_size_bytes": 15172,
+      "file_size_bytes": 15058,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -7954,13 +7954,16 @@
         "src/core/config_validation.cpp",
         "src/glyph_config_validation.cpp",
         "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/gp_config012_button_host/nanopb",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies",
+        "tools/fixtures/gp_config023_usb_public_current/generated",
         "tools/fixtures/gp_config023_usb_public_current/host_stubs.hpp",
         "tools/fixtures/gp_config023_usb_public_current/usb_index_harness.cpp"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "1d21d1d127f563701c1cc8cf96346cc2ab07a2a8de89cedf4e5c7bd2bcd6553f",
+      "sha256": "381534d1821fda28527e7ccdc612e8f6dd53a0904574d30faa01a4dcaaf6b7a0",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

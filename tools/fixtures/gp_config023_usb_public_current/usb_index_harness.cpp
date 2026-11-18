@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <type_traits>
 
 #include "core/config_validation.hpp"
 
@@ -363,6 +364,9 @@ static void executable_recovery_refusal() {
 int main() {
     try {
         static_assert(sizeof(GameModeConfig::name) > 0);
+        static_assert(PB_PROTO_HEADER_VERSION == 40);
+        static_assert(std::is_same<decltype(Config::default_usb_backend_config), uint8_t>::value,
+                      "current Config index must retain IS_8 representation");
         index_matrix();
         invalid_start_and_post_selector();
         valid_routes();

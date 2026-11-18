@@ -492,7 +492,7 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
         # Extracted classification only. These paths are not replayed and do
         # not provide current safety proof or historical PASS in this mode.
         replay_paths = frozenset(package_scope.public_contract(ROOT)["historical_checker_classification"])
-    if any(entry['id'] == 'gp_config023_usb_index_validation' and c023_replay_arguments(entry)
+    if any(entry['applicability'] == 'current' and entry['id'] == 'gp_config023_usb_index_validation' and c023_replay_arguments(entry)
            for entry in entries):
         from glyph_c023_campaign_transition import replay_covered_checker_paths
         if package_scope.package_lineage(ROOT):
@@ -502,11 +502,11 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
             replay_paths = frozenset(proof["covered"])
         else:
             replay_paths = replay_covered_checker_paths(ROOT)
-    elif any(entry['id'] == 'gp_config022_rgb_target_validation' and c022_replay_arguments(entry)
+    elif any(entry['applicability'] == 'current' and entry['id'] == 'gp_config022_rgb_target_validation' and c022_replay_arguments(entry)
            for entry in entries):
         from glyph_c022_campaign_transition import replay_covered_checker_paths
         replay_paths = replay_covered_checker_paths(ROOT)
-    elif any(entry['id'] == 'gp_config021_persisted_recovery' and c021_replay_arguments(entry)
+    elif any(entry['applicability'] == 'current' and entry['id'] == 'gp_config021_persisted_recovery' and c021_replay_arguments(entry)
            for entry in entries):
         from glyph_c021_campaign_transition import replay_covered_checker_paths
         replay_paths = replay_covered_checker_paths(ROOT)

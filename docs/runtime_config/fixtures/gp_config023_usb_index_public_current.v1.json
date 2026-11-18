@@ -123,12 +123,48 @@
   ],
   "host_sources": [
     {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+      "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+      "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+      "sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87"
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed"
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+      "sha256": "9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf"
+    },
+    {
+      "path": "tools/fixtures/gp_config023_usb_public_current/generated/config.pb.c",
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    },
+    {
+      "path": "tools/fixtures/gp_config023_usb_public_current/generated/config.pb.h",
+      "sha256": "a8f66c0aa251c412a9e5ec9c20cb98e025885d76422159676ee36146d72d2cb0"
+    },
+    {
       "path": "tools/fixtures/gp_config023_usb_public_current/host_stubs.hpp",
       "sha256": "e657cc1a1110d1696d78f74ef1f31adcbba996974e98d2c3120ed90b86e53c54"
     },
     {
       "path": "tools/fixtures/gp_config023_usb_public_current/usb_index_harness.cpp",
-      "sha256": "eff8599d5048bc97cdae4c36209cf4737fcf23ee809dd09081aa4ce8ca60046a"
+      "sha256": "d94e99218854dd9ed751577666812e74e2da271a8134966f90b91d4e97c320ca"
     }
   ],
   "production_fragments": {
@@ -182,7 +218,7 @@
   "coverage_limits": [
     "Host-only source-bound proof; no firmware build or hardware claim.",
     "Peripheral backend constructors and physical device behavior are callback stubs; actual current backend phase/default selector bodies execute.",
-    "Current full semantic validator, USB-index predicate, button validator and native admission source compile against freshly generated current schema.",
+    "Current full semantic validator, USB-index predicate, button validator and native admission source compile against the exact checked-in current-schema snapshot extracted with the recorded generator and bound schema/options bytes.",
     "Current persistence load pipeline executes with a host file/header and filename selection double. CheckSavedConfig returns accepted; CRC/header authenticity, actual filesystem I/O and recovery-file selection are not proven by this C023 checker.",
     "Current SET consumer ordering is source-checked across the accepted split phase functions; ConfiguratorBackend transport is not executed by this checker.",
     "Startup draw/refuse bodies execute with a display recorder; current setup/InitializeBootBackends/setup1 and recovery configurator ordering are source-checked. Full hardware setup, OLED driver, second-core scheduling and physical display are not executed.",
@@ -191,5 +227,35 @@
   "hardware_acceptance": "NOT_CLAIMED",
   "nunchuk": "NOT_TESTED",
   "root_cause": "UNPROVEN",
-  "semantic_digest": "00c96541b50262839d0eaa68d00ab788c404e8da8cd089178807012a66e55cd9"
+  "schema_generation": {
+    "generator_repository": "https://github.com/nanopb/nanopb",
+    "generator_commit": "160d4f09e5fabb2b66aa2dea32d4f38ace2c4b3f",
+    "generator_version": "nanopb-0.4.9.2",
+    "generator_source_sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+    "protoc_version": "libprotoc 31.1",
+    "descriptor_command": [
+      "python3",
+      "-m",
+      "grpc_tools.protoc",
+      "-Ischema/haybox",
+      "--descriptor_set_out=<scratch>/config.pb",
+      "schema/haybox/config.proto"
+    ],
+    "generation_command": [
+      "python3",
+      "<nanopb>/generator/nanopb_generator.py",
+      "-Ischema/haybox",
+      "-D<scratch>",
+      "--no-timestamp",
+      "--error-on-unmatched",
+      "<scratch>/config.pb"
+    ],
+    "repeat_generation_byte_identical": true,
+    "runtime_version": "nanopb-0.4.9.2",
+    "header_abi": 40,
+    "runtime_files_match_generator_commit_byte_exact": true,
+    "current_checker_uses_checked_in_snapshot_only": true,
+    "nonclaim": "One-time generated-schema extraction correspondence; no firmware reproducible-build or hardware claim; no current external generator dependency."
+  },
+  "semantic_digest": "c4510fbd1f608c930b4798b663166eadb0cfe2e3085f7dc3ed374bb129964f9a"
 }

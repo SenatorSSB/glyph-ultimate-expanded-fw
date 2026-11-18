@@ -4055,7 +4055,8 @@
         "tools/glyph_c022_campaign_transition.py",
         "tools/glyph_campaign_transition.py",
         "tools/glyph_hardware_correspondence.py",
-        "tools/run_glyph_runtime_config_validation.py"
+        "tools/run_glyph_runtime_config_validation.py",
+        "tools/glyph_ci_package_scope.py"
       ],
       "load_bearing": true,
       "historical": false,
@@ -5720,6 +5721,15 @@
         "src/core/config_usb_default_validation.cpp",
         "src/core/config_validation.cpp",
         "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+        "tools/fixtures/gp_config023_usb_public_current/generated/config.pb.c",
+        "tools/fixtures/gp_config023_usb_public_current/generated/config.pb.h",
         "tools/fixtures/gp_config023_usb_public_current/host_stubs.hpp",
         "tools/fixtures/gp_config023_usb_public_current/usb_index_harness.cpp"
       ],

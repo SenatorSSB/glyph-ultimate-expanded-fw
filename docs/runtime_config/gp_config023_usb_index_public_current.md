@@ -8,7 +8,12 @@ Run `python3 tools/check_glyph_gp_config023_usb_index_public_current.py`.
 It does not read Git history, use historical refs, fetch project commits or
 interpret a missing historical object as authorization.
 
-The current schema is generated from checked source with Nanopb and grpcio-tools.
+The exact current generated schema snapshot is checked in and bound to checked
+schema/options bytes. Its extraction used official Nanopb 0.4.9.2 with libprotoc
+31.1; the existing checked-in Nanopb decoder/common and encoder files match that
+exact generator commit byte-for-byte. Two independent generation outputs matched.
+The current checker uses only checked-in inputs and a C/C++ compiler; no external
+Python package, dependency cache or development Git object is required.
 The checker executes 4,096 count/index cases (120 accepted; extent 15), oversized
 count rejection, five pre-selector refusals and one selector-created refusal,
 GameCube/XInput/Keyboard-DInput/watchdog routes, current semantic validation,

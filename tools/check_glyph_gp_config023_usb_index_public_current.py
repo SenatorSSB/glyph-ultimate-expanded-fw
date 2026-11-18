@@ -15,9 +15,11 @@ FIXTURE = "docs/runtime_config/fixtures/gp_config023_usb_index_public_current.v1
 REPORT = "docs/runtime_config/gp_config023_usb_index_public_current.md"
 HOST = "tools/fixtures/gp_config023_usb_public_current/usb_index_harness.cpp"
 STUBS = "tools/fixtures/gp_config023_usb_public_current/host_stubs.hpp"
-RECEIPT_SHA256 = '00c96541b50262839d0eaa68d00ab788c404e8da8cd089178807012a66e55cd9'
+RECEIPT_SHA256 = 'c4510fbd1f608c930b4798b663166eadb0cfe2e3085f7dc3ed374bb129964f9a'
 COMPILED_SOURCES = ["src/core/config_usb_default_validation.cpp", "src/core/config_button_validation.cpp", "src/core/config_validation.cpp", "src/modes/UltimateNativeProfile.cpp"]
-NANOPB = ROOT / ".pio/libdeps/glyph_mk6/Nanopb"
+NANOPB_PATH = "tools/fixtures/gp_config012_button_host/nanopb"
+ENCODER_PATH = "tools/fixtures/gp_config021_persisted_recovery/dependencies"
+GENERATED_PATH = "tools/fixtures/gp_config023_usb_public_current/generated"
 
 
 class ProofError(AssertionError):
@@ -148,24 +150,22 @@ def run(command: list[str]) -> subprocess.CompletedProcess[str]:
 
 
 def compile_and_run(temp:Path, fragments:dict[str,str], short_enum:bool) -> tuple[str,set[str]]:
-    import sys
-    gen=temp/"generated";gen.mkdir(exist_ok=True)
-    schema=ROOT/"schema/haybox"
-    run([sys.executable,"-m","grpc_tools.protoc","-I"+str(schema),"--descriptor_set_out="+str(gen/"config.pb"),str(schema/"config.proto")])
-    run([sys.executable,str(NANOPB/"generator/nanopb_generator.py"),"-I"+str(schema),"-D"+str(gen),str(gen/"config.pb")])
+    gen=ROOT/GENERATED_PATH
+    nanopb=ROOT/NANOPB_PATH
+    encoder=ROOT/ENCODER_PATH
     output_names={"initialize_backends":"backend_init","selectors":"backend_selectors","persistence":"persistence","recovery":"recovery"}
     for name,body in fragments.items():(temp/("production_"+output_names[name]+".inc")).write_text(body)
-    includes=[ROOT/Path(HOST).parent,gen,NANOPB,ROOT/"include",ROOT/"HAL/pico/include",ROOT/"config/glyph/common/include",ROOT/"config/glyph/glyph_mk6/include",temp]
+    includes=[ROOT/Path(HOST).parent,gen,nanopb,encoder,ROOT/"include",ROOT/"HAL/pico/include",ROOT/"config/glyph/common/include",ROOT/"config/glyph/glyph_mk6/include",temp]
     flags=["-O0","-g","-DGLYPH_PACKAGE_V1=1","-fsanitize=address,undefined","-fno-sanitize-recover=all","-fno-omit-frame-pointer"]
     if short_enum:flags.append("-fshort-enums")
     flags += ["-I"+str(p) for p in includes]
     objects=[];closure=set()
-    for i,(source,compiler,standard) in enumerate([(ROOT/p,"c++","gnu++20") for p in [*COMPILED_SOURCES,HOST]]+[(NANOPB/p,"cc","c99") for p in ["pb_common.c","pb_decode.c","pb_encode.c"]]+[(gen/"config.pb.c","cc","c99")]):
+    for i,(source,compiler,standard) in enumerate([(ROOT/p,"c++","gnu++20") for p in [*COMPILED_SOURCES,HOST]]+[(nanopb/p,"cc","c99") for p in ["pb_common.c","pb_decode.c"]]+[(encoder/"pb_encode.c","cc","c99"),(gen/"config.pb.c","cc","c99")]):
         obj=temp/f"{i}.o";dep=temp/f"{i}.d"
         run([compiler,"-std="+standard,*flags,"-MMD","-MF",str(dep),"-c",str(source),"-o",str(obj)])
         for name in shlex.split(dep.read_text().replace("\\\n", " ").split(":",1)[1]):
             p=Path(name)
-            if p.is_relative_to(ROOT) and not p.is_relative_to(ROOT/".pio"):closure.add(str(p.relative_to(ROOT)))
+            if p.is_relative_to(ROOT):closure.add(str(p.relative_to(ROOT)))
         objects.append(str(obj))
     binary=temp/"current-c023";run(["c++",*flags,*objects,"-o",str(binary)])
     result=run([str(binary)]);require(not result.stderr,"sanitizer stderr")

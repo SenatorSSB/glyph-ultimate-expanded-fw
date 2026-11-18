@@ -5,3 +5,6 @@ tools/fixtures/custom_modifier_cache_host/schema/config.pb.h -text -whitespace
 tools/fixtures/custom_modifier_cache_host/schema/pb.h -text -whitespace
 tools/fixtures/custom_modifier_cache_host/schema/LICENSE.nanopb.txt -text -whitespace
 tools/fixtures/custom_modifier_cache_host/schema/haybox-proto.library.json -text -whitespace
+
+# Keep the reviewed Nanopb-generated snapshot byte-identical to its generator.
+tools/fixtures/gp_config023_usb_public_current/generated/config.pb.c -text -whitespace
