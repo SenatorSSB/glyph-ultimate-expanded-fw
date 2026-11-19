@@ -2579,7 +2579,7 @@
         "99ff99e0f7dd484e37d45e67cffae89006a5b8b562599e63804f5f3283e9f5f8"
       ],
       "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
-      "sha256": "756e33406718f080cd9777cf432249d5bfca44f84a10438c2ccb4684afd3ae2d"
+      "sha256": "1a26c82721327504055b5f5604aa5af4bc545582e69effb225106c556ffe4af6"
     }
   },
   "rules": [
