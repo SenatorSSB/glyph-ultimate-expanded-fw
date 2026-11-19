@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from contextvars import ContextVar
+from contextlib import ExitStack
 import ast
 import hashlib
 import json
@@ -46,8 +47,11 @@ LEGACY_CURRENT_HARDWARE_CONTRACT_DEPENDENCIES = frozenset({
 EXCLUSION_REQUIRED = {"id", "path", "reason", "detail"}
 EXCLUSION_REASONS = {"HISTORICAL_BRANCH_EVIDENCE", "HARDWARE_RESULT_EVIDENCE", "SUPERSEDED_CONTRACT", "REQUIRES_NONCANONICAL_ARGUMENT", "UNSAFE_OR_MUTATING", "DUPLICATE_COVERAGE", "NOT_CURRENT_RUNTIME_CONFIG_LANE"}
 CHECKER_TIMEOUT_SECONDS = 140.0
+ADVERSARIAL_TIMEOUT_SECONDS = 210.0
 AGGREGATE_TIMEOUT_SECONDS = 450.0
 TERM_GRACE_SECONDS = 2.0
+CHILD_SETUP_TIMEOUT_SECONDS = 10.0
+CLEANUP_REAP_SECONDS = 2.0
 
 
 def pairs(items: list[tuple[str, object]]) -> dict[str, object]:
@@ -538,6 +542,69 @@ class AggregateTimeout(RuntimeError):
     pass
 
 
+class DeadlineAlarm:
+    """Own a one-shot operational alarm, including its non-throwing retirement.
+
+    Cleanup has its own bounded TERM/reap clocks. Retiring this alarm never
+    grants further operational budget: main checks the absolute deadline too.
+    """
+    def __init__(self, phase):
+        self.phase = phase
+        self.interrupt = True
+        self.expired = False
+        self.previous_handler = None
+        self.previous_timer = (0., 0.)
+        self.started = monotonic()
+
+    def handler(self, signum, frame):
+        self.expired = True
+        if self.interrupt:
+            self.interrupt = False  # One-shot delivery; retirement cannot raise it twice.
+            raise AggregateTimeout("AGGREGATE_TIMEOUT during " + str(self.phase()))
+
+    def start(self, seconds):
+        # Install and arm atomically with respect to SIGALRM delivery.
+        mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGALRM})
+        try:
+            self.previous_handler = signal.signal(signal.SIGALRM, self.handler)
+            self.previous_timer = signal.setitimer(signal.ITIMER_REAL, seconds)
+        finally:
+            signal.pthread_sigmask(signal.SIG_SETMASK, mask)
+
+    def stop(self):
+        # A one-shot alarm can arrive before the first assignment executes.
+        # Catch that boundary once, then make all remaining retirement steps
+        # non-throwing for our handler, including an already queued callback.
+        try:
+            self.interrupt = False
+        except AggregateTimeout:
+            self.interrupt = False
+            self.expired = True
+        mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGALRM})
+        try:
+            signal.setitimer(signal.ITIMER_REAL, 0)
+            if signal.SIGALRM in signal.sigpending():
+                signal.sigwait({signal.SIGALRM})
+                self.expired = True
+            if self.previous_handler is not None:
+                signal.signal(signal.SIGALRM, self.previous_handler)
+                if self.previous_timer[0] > 0:
+                    remaining = self.previous_timer[0] - (monotonic() - self.started)
+                    signal.setitimer(signal.ITIMER_REAL, max(.000001, remaining), self.previous_timer[1])
+        finally:
+            signal.pthread_sigmask(signal.SIG_SETMASK, mask)
+        return self.expired
+
+
+# None outside an aggregate invocation; each main owns a fresh lifecycle scope.
+_CLEANUP_UNPROVEN = ContextVar("glyph_cleanup_unproven", default=None)
+
+
+def record_cleanup_failure(failure: str | None) -> None:
+    if failure == "PROCESS_CLEANUP_FAILURE" and _CLEANUP_UNPROVEN.get() is not None:
+        _CLEANUP_UNPROVEN.set(True)
+
+
 DEADLINE: float | None = None
 EXECUTION_ENV: dict[str, str] | None = None
 SELF_TEST_COMMANDS = {
@@ -557,6 +624,18 @@ def require_budget(label: str) -> float:
     if remaining <= 0:
         raise AggregateTimeout(f"AGGREGATE_TIMEOUT during {label}")
     return remaining
+
+
+def restore_operational_alarm(timer, suspended_at: float) -> bool:
+    """Restore remaining time, never granting the time spent in cleanup again."""
+    if not timer[0]:
+        return False
+    target = DEADLINE if DEADLINE is not None else suspended_at + timer[0]
+    remaining = target - monotonic()
+    if remaining <= 0:
+        return True
+    signal.setitimer(signal.ITIMER_REAL, remaining, timer[1] if DEADLINE is None else 0)
+    return False
 
 
 def base_environment() -> dict[str, str]:
@@ -585,6 +664,19 @@ def checker_environment(entry: dict[str, object], env: dict[str, str]) -> dict[s
         result.pop("GLYPH_CHECKER_BASE", None)
         result.pop("GLYPH_CHECKER_EXPECTED_MERGE_BASE", None)
     return result
+
+
+def checker_time_budget(entry: dict[str, object]) -> float:
+    # This baseline self-test now includes over 100 controls. Its measured
+    # standalone runtime approaches the ordinary 140s cap; isolated aggregate
+    # dispatch has exceeded it. Give only this exact suite scheduling margin.
+    # Individual deadline/cleanup controls and the aggregate's 450s bound stay
+    # unchanged, and dispatch still clips this allowance to remaining time.
+    identity = "validation_aggregate_adversarial"
+    command = SELF_TEST_COMMANDS[identity]
+    if entry["id"] == identity and entry["path"] == command[1] and entry["command"] == command:
+        return ADVERSARIAL_TIMEOUT_SECONDS
+    return CHECKER_TIMEOUT_SECONDS
 
 
 def group_exists(pid: int) -> bool:
@@ -624,21 +716,52 @@ def execution_command(command: list[str]) -> list[str]:
     return [str(executable), *command[1:]]
 
 
-def run_checker(command: list[str], cwd: Path, env: dict[str, str], timeout: float,
-                *, input_text: str | None = None, input_file=None, output_file=None) -> tuple[int, str, str, str | None, float]:
-    """Own the child before exec/setup; drain pipes and reap within bounded clocks."""
+def child_setup_status(fd: int, message: dict[str, object]) -> None:
+    """One bounded setup record; this descriptor closes atomically on exec."""
+    data = (json.dumps(message, sort_keys=True) + "\n").encode()
+    if len(data) > 4096 or os.write(fd, data) != len(data):
+        raise ValueError("child setup status write incomplete")
+
+
+def run_process(command: list[str], cwd: Path, env: dict[str, str], timeout: float,
+                *, input_text: str | None = None, input_file=None, output_file=None) -> tuple[int | None, bytes, bytes, str | None, float]:
+    """Return raw byte streams; acquire before exec and finish bounded cleanup.
+
+    Until the parent validates READY and releases the gate, only the owned
+    direct child may run. EOF after release proves the trusted exec path closed
+    its CLOEXEC status pipe; errors before exec carry their phase and errno.
+    Descendants that deliberately leave the managed group are outside this
+    POSIX group contract, as before. No session-less fallback is permitted.
+    """
+    if _CLEANUP_UNPROVEN.get():
+        return None, b"", b"managed lifecycle closure unproved; dispatch refused", "PROCESS_CLEANUP_FAILURE", 0.
     started = monotonic()
     pid = None
     exit_code = None
     failure = None
+    phase = "pipes"
+    ready = False
+    acquired = False
+    cleaned = False
+    cleanup_finished = False
+    completed = False
+    cleanup_errors = []
+    group_denials = []
     streams = {"stdout": bytearray(), "stderr": bytearray()}
+    status_bytes = bytearray()
     descriptors: set[int] = set()
-    selector = selectors.DefaultSelector()
+    selector = None
     input_bytes = (input_text or "").encode()
     input_offset = 0
 
+    def diagnostic(kind, where, exc=None, **details):
+        row = dict(kind=kind, phase=where, pid=pid, managed_pgid=pid if ready else None, **details)
+        if exc is not None:
+            row.update(error=str(exc), errno=getattr(exc, "errno", None))
+        streams["stderr"].extend((json.dumps(row, sort_keys=True) + "\n").encode())
+
     def pipe():
-        pair = os.pipe()
+        pair = os.pipe()  # Python's pipes are non-inheritable (CLOEXEC).
         descriptors.update(pair)
         return pair
 
@@ -659,9 +782,40 @@ def run_checker(command: list[str], cwd: Path, env: dict[str, str], timeout: flo
                 signal.pthread_sigmask(signal.SIG_SETMASK, mask)
         return exit_code is not None
 
+    def setup_record(record):
+        nonlocal ready, failure
+        try:
+            message = json.loads(record)
+        except (ValueError, UnicodeError):
+            raise ValueError("malformed child setup record") from None
+        if not isinstance(message, dict):
+            raise ValueError("child setup record must be an object")
+        if message.get("status") == "ERROR":
+            if set(message) != {"status", "phase", "errno", "error"}:
+                raise ValueError("malformed child setup error")
+            failure = "CHILD_SETUP_FAILURE"
+            diagnostic(failure, "child:" + str(message["phase"]),
+                       reported_errno=message["errno"], error=message["error"])
+        elif (not ready and message == {"status": "READY", "pid": pid, "pgid": pid, "sid": pid}
+              and os.getpgid(pid) == pid and os.getsid(pid) == pid):
+            ready = True
+            if cleaned:
+                close(release_write)
+                return
+            if os.write(release_write, b"G") != 1:
+                raise ValueError("child release incomplete")
+            close(release_write)
+        else:
+            raise ValueError("invalid child setup identity or sequence")
+
     def drain(duration: float) -> None:
-        nonlocal input_offset
-        for key, _ in selector.select(max(0, duration)):
+        nonlocal input_offset, acquired, failure
+        wait = max(0, duration)
+        if not selector.get_map():
+            # EOF can precede waitpid readiness by a scheduler tick. Do not
+            # impose a full I/O poll on every already-closed Git process.
+            wait = min(wait, .001)
+        for key, _ in selector.select(wait):
             fd, label = key.fd, key.data
             if label == "stdin":
                 try:
@@ -673,130 +827,296 @@ def run_checker(command: list[str], cwd: Path, env: dict[str, str], timeout: flo
                     close(fd)
             else:
                 block = os.read(fd, 65536)
-                if block:
+                if label == "setup" and not cleaned:
+                    status_bytes.extend(block)
+                    if len(status_bytes) > 4096:
+                        raise ValueError("child setup record exceeds bound")
+                    while b"\n" in status_bytes:
+                        record, _, rest = status_bytes.partition(b"\n")
+                        status_bytes[:] = rest
+                        setup_record(record)
+                    if not block:
+                        if status_bytes or not ready:
+                            raise ValueError("child setup EOF before success")
+                        acquired = failure is None
+                elif block and label != "setup":
                     streams[label].extend(block)
-                else:
+                if not block:
                     selector.unregister(fd)
                     close(fd)
 
-    def terminate() -> None:
-        """The operational alarm must never interrupt its separately bounded cleanup."""
-        timer = signal.setitimer(signal.ITIMER_REAL, 0)
+    def managed_group(signum: int = 0) -> bool:
+        # Darwin can return EPERM for a group containing only an unreaped
+        # zombie leader. Reap our child first. Resolve a racing EPERM only by
+        # proving group absence afterwards; an extant/denied group fails closed.
+        reap()
         try:
-            signal_group(pid, signal.SIGTERM)
-            if exit_code is None:
-                try: os.kill(pid, signal.SIGTERM)  # Also covers a child not yet in setsid().
-                except ProcessLookupError: pass
+            os.killpg(pid, signum)
+            return True
+        except ProcessLookupError:
+            return False
+        except PermissionError as exc:
+            reap()
+            if not group_exists(pid):
+                diagnostic("GROUP_ABSENT_AFTER_REAP", "killpg", exc, signal=signum)
+                return False
+            raise
+
+    def terminate() -> None:
+        nonlocal cleaned, cleanup_finished, failure
+        if cleanup_finished or pid is None:
+            return
+        suspended_at = monotonic()
+        timer = signal.setitimer(signal.ITIMER_REAL, 0)
+        cleaned = True
+        def attempt(where, action):
+            try:
+                return action()
+            except (OSError, ValueError) as exc:
+                if isinstance(exc, PermissionError) and ("killpg" in where or "group_probe" in where):
+                    if where not in group_denials:
+                        group_denials.append(where)
+                        diagnostic("GROUP_OPERATION_DENIED", where, exc)
+                    return None
+                if where not in cleanup_errors:
+                    cleanup_errors.append(where)
+                    diagnostic("PROCESS_CLEANUP_FAILURE", where, exc)
+                return None
+        def send(signum):
+            # A failed group operation must never skip direct-child escalation.
+            attempt("cleanup.waitpid", reap)
+            attempt("cleanup.killpg." + signal.Signals(signum).name,
+                    lambda: signal_group(pid, signum))
+            if exit_code is None:  # Never signal a reaped/reusable numeric PID.
+                def direct():
+                    try: os.kill(pid, signum)
+                    except ProcessLookupError: pass
+                attempt("cleanup.kill." + signal.Signals(signum).name, direct)
+        try:
+            send(signal.SIGTERM)
             grace_end = monotonic() + TERM_GRACE_SECONDS
             while monotonic() < grace_end:
-                drain(min(.01, max(0, grace_end - monotonic())))
-                if reap() and not group_exists(pid):
-                    break
-            if group_exists(pid):
-                signal_group(pid, signal.SIGKILL)
-            if exit_code is None:
-                try: os.kill(pid, signal.SIGKILL)
-                except ProcessLookupError: pass
-            # Reaping uses nonblocking waitpid, never an unbounded wait/communicate.
-            reap_end = monotonic() + .1
-            while (exit_code is None or selector.get_map()) and monotonic() < reap_end:
-                drain(min(.005, max(0, reap_end - monotonic())))
-                reap()
-            if exit_code is None:
-                raise ValueError("process cleanup proof unavailable after KILL")
+                if selector is not None:
+                    attempt("cleanup.drain", lambda: drain(min(.01, max(0, grace_end - monotonic()))))
+                else:
+                    sleep(.005)
+                done = attempt("cleanup.waitpid", reap)
+                exists = attempt("cleanup.group_probe", lambda: managed_group())
+                if done and exists is False:
+                    if group_denials:
+                        diagnostic("GROUP_ABSENT_AFTER_REAP", "cleanup.proof",
+                                   resolved_group_denials=group_denials, leader_reaped=True)
+                    cleanup_finished = True
+                    return
+            # Always try KILL, including when group probes were denied.
+            send(signal.SIGKILL)
+            reap_end = monotonic() + CLEANUP_REAP_SECONDS
+            while monotonic() < reap_end:
+                done = attempt("cleanup.waitpid", reap)
+                exists = attempt("cleanup.group_probe", lambda: managed_group())
+                if done and exists is False:
+                    if group_denials:
+                        diagnostic("GROUP_ABSENT_AFTER_REAP", "cleanup.proof",
+                                   resolved_group_denials=group_denials, leader_reaped=True)
+                    cleanup_finished = True
+                    return
+                if selector is not None:
+                    attempt("cleanup.drain", lambda: drain(min(.01, max(0, reap_end - monotonic()))))
+                else:
+                    sleep(.005)
+            cleanup_errors.append("cleanup.proof")
+            diagnostic("PROCESS_CLEANUP_FAILURE", "cleanup.proof",
+                       leader_reaped=exit_code is not None, group_absence_proven=False)
+            cleanup_finished = True
         finally:
-            if timer[0] and DEADLINE is not None and DEADLINE > monotonic():
-                signal.setitimer(signal.ITIMER_REAL, DEADLINE - monotonic())
-            elif timer[0] and DEADLINE is None:
-                signal.setitimer(signal.ITIMER_REAL, timer[0], timer[1])
+            if restore_operational_alarm(timer, suspended_at):
+                failure = failure or "AGGREGATE_TIMEOUT"
+                diagnostic("AGGREGATE_TIMEOUT", "cleanup.suspended_alarm")
 
     try:
-        stdout_read, stdout_write = pipe() if output_file is None else (None, output_file.fileno())
-        stderr_read, stderr_write = pipe()
-        if input_file is not None:
-            stdin_read, stdin_write = input_file.fileno(), None
-        elif input_text is not None:
-            stdin_read, stdin_write = pipe()
-        else:
-            stdin_read, stdin_write = os.open(os.devnull, os.O_RDONLY), None
-            descriptors.add(stdin_read)
-        # Only native fork and PID registration are masked, never Popen, exec,
-        # a Python callback, a wait, or file/pipe I/O. Any delayed child setup
-        # happens after this parent has a PID it can terminate and reap.
-        old_mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGALRM})
         try:
-            pid = os.fork()
-        finally:
-            if pid != 0:
-                signal.pthread_sigmask(signal.SIG_SETMASK, old_mask)
-        if pid == 0:
+            selector = selectors.DefaultSelector()
+            stdout_read, stdout_write = pipe() if output_file is None else (None, output_file.fileno())
+            stderr_read, stderr_write = pipe()
+            setup_read, setup_write = pipe()
+            release_read, release_write = pipe()
+            if input_file is not None:
+                stdin_read, stdin_write = input_file.fileno(), None
+            elif input_text is not None:
+                stdin_read, stdin_write = pipe()
+            else:
+                stdin_read, stdin_write = os.open(os.devnull, os.O_RDONLY), None
+                descriptors.add(stdin_read)
+            phase = "fork"
+            old_mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGALRM})
             try:
-                os.setsid()
-                os.dup2(stdin_read, 0)
-                os.dup2(stdout_write, 1)
-                os.dup2(stderr_write, 2)
-                # /dev/fd lists this process's actual descriptors on POSIX;
-                # avoid scanning a million unused descriptor numbers on macOS.
+                pid = os.fork()
+            finally:
+                if pid != 0:
+                    signal.pthread_sigmask(signal.SIG_SETMASK, old_mask)
+            if pid == 0:
+                child_phase = "setsid"
                 try:
-                    inherited_fds = [int(name) for name in os.listdir("/dev/fd")]
-                except OSError:
-                    os.closerange(3, os.sysconf("SC_OPEN_MAX"))
-                else:
-                    for descriptor in inherited_fds:
-                        if descriptor > 2:
-                            try: os.close(descriptor)
-                            except OSError: pass
-                signal.signal(signal.SIGALRM, signal.SIG_DFL)
-                signal.pthread_sigmask(signal.SIG_SETMASK, old_mask)
-                child_exec(command, cwd, env)
-            except BaseException as exc:
-                os.write(2, ("command launch failed: " + str(exc)).encode())
-            os._exit(127)
-        close(stdin_read)
-        close(stdout_write)
-        close(stderr_write)
-        for fd, label, event in ((stdout_read, "stdout", selectors.EVENT_READ), (stderr_read, "stderr", selectors.EVENT_READ),
-                                 (stdin_write, "stdin", selectors.EVENT_WRITE)):
-            if fd is not None:
-                os.set_blocking(fd, False)
-                selector.register(fd, event, label)
-        end = started + timeout
-        try:
+                    os.setsid()
+                    child_phase = "stdio"
+                    os.dup2(stdin_read, 0)
+                    os.dup2(stdout_write, 1)
+                    os.dup2(stderr_write, 2)
+                    child_phase = "descriptors"
+                    # Retain only the two setup channels in addition to stdio.
+                    try:
+                        inherited_fds = [int(name) for name in os.listdir("/dev/fd")]
+                    except OSError:
+                        for low, high in zip([3, *[fd + 1 for fd in sorted((setup_write, release_read))]],
+                                             [*sorted((setup_write, release_read)), os.sysconf("SC_OPEN_MAX")]):
+                            os.closerange(low, high)
+                    else:
+                        for descriptor in inherited_fds:
+                            if descriptor > 2 and descriptor not in (setup_write, release_read):
+                                try: os.close(descriptor)
+                                except OSError: pass
+                    child_phase = "signals"
+                    signal.signal(signal.SIGALRM, signal.SIG_DFL)
+                    signal.pthread_sigmask(signal.SIG_SETMASK, old_mask)
+                    child_phase = "ready"
+                    child_setup_status(setup_write, dict(status="READY", pid=os.getpid(), pgid=os.getpgrp(), sid=os.getsid(0)))
+                    child_phase = "release"
+                    if os.read(release_read, 1) != b"G":
+                        raise ValueError("parent did not release child")
+                    os.close(release_read)
+                    child_phase = "exec"
+                    child_exec(command, cwd, env)
+                    raise ValueError("child exec returned")
+                except BaseException as exc:
+                    try:
+                        child_setup_status(setup_write, dict(status="ERROR", phase=child_phase,
+                            errno=getattr(exc, "errno", None), error=str(exc)[:250]))
+                    except BaseException:
+                        pass  # EOF without READY is a protocol failure, never success.
+                os._exit(127)
+            phase = "parent_descriptors"
+            for fd in (stdin_read, stdout_write, stderr_write, setup_write, release_read):
+                close(fd)
+            for fd, label, event in ((stdout_read, "stdout", selectors.EVENT_READ), (stderr_read, "stderr", selectors.EVENT_READ),
+                                     (setup_read, "setup", selectors.EVENT_READ), (stdin_write, "stdin", selectors.EVENT_WRITE)):
+                if fd is not None:
+                    os.set_blocking(fd, False)
+                    selector.register(fd, event, label)
+            end = started + timeout
+            setup_end = min(end, started + CHILD_SETUP_TIMEOUT_SECONDS)
             while selector.get_map() or exit_code is None:
-                remaining = end - monotonic()
+                phase = "checker_execution" if acquired else "child_setup"
+                remaining = (end if acquired else setup_end) - monotonic()
                 if remaining <= 0:
-                    failure = "CHECKER_TIMEOUT"
+                    failure = "CHECKER_TIMEOUT" if acquired else "CHILD_SETUP_TIMEOUT"
+                    diagnostic(failure, phase)
                     break
                 drain(min(.01, remaining))
+                if failure:
+                    break
                 reap()
-            if failure is None and group_exists(pid):
-                failure = "PROCESS_GROUP_REMAINS"
-        except AggregateTimeout:
+            if failure is None and exit_code == 127:
+                # A failed exec-error report must still stop aggregate dispatch.
+                # A real checker may also return 127; keep that ambiguity honest.
+                failure = "UNREPORTED_LAUNCH_OR_EXIT_127"
+                diagnostic(failure, "exec_or_checker_exit")
+            if failure is None:
+                if managed_group():
+                    failure = "PROCESS_GROUP_REMAINS"
+                else:
+                    completed = True
+        except AggregateTimeout as exc:
+            failure = failure or "AGGREGATE_TIMEOUT"
+            diagnostic("AGGREGATE_TIMEOUT", phase, exc)
+        except (OSError, ValueError) as exc:
+            failure = failure or ("CHILD_SETUP_PROTOCOL_FAILURE" if phase == "child_setup" else "PROCESS_CONTROL_FAILURE")
+            diagnostic(failure, phase, exc)
+        finally:
+            if pid not in (None, 0) and not completed:
+                terminate()
+    except AggregateTimeout as exc:
+        # A one-shot operational alarm can arrive just as cleanup begins.
+        # Resume the unfinished bounded cleanup, never discard child ownership.
+        if failure in (None, "CHECKER_TIMEOUT", "CHILD_SETUP_TIMEOUT"):
             failure = "AGGREGATE_TIMEOUT"
-        if failure:
+        diagnostic("AGGREGATE_TIMEOUT", "cleanup_entry", exc)
+        if pid not in (None, 0) and not cleanup_finished:
             terminate()
-            if DEADLINE is not None and monotonic() >= DEADLINE:
-                failure = "AGGREGATE_TIMEOUT"
-        return exit_code, streams["stdout"].decode(), streams["stderr"].decode(), failure, monotonic() - started
     finally:
-        if pid not in (None, 0) and (exit_code is None or group_exists(pid)):
-            terminate()
-        selector.close()
+        if selector is not None:
+            selector.close()
         for fd in list(descriptors):
             close(fd)
+    if cleanup_errors:
+        diagnostic("PROCESS_CLEANUP_FAILURE", "cleanup", primary_failure=failure, failed_operations=cleanup_errors)
+        failure = "PROCESS_CLEANUP_FAILURE"
+    record_cleanup_failure(failure)
+    return exit_code, bytes(streams["stdout"]), bytes(streams["stderr"]), failure, monotonic() - started
+
+
+def run_checker(command: list[str], cwd: Path, env: dict[str, str], timeout: float,
+                *, input_text: str | None = None, input_file=None, output_file=None) -> tuple[int | None, str, str, str | None, float]:
+    """Strict text boundary. Malformed checker text is a dispatch-stopping failure."""
+    code, stdout, stderr, failure, duration = run_process(command, cwd, env, timeout,
+        input_text=input_text, input_file=input_file, output_file=output_file)
+    record_cleanup_failure(failure)
+    decoded = []
+    errors = []
+    for label, raw in (("stdout", stdout), ("stderr", stderr)):
+        try:
+            decoded.append(raw.decode("utf-8", errors="strict"))
+        except UnicodeDecodeError as exc:
+            decoded.append("")
+            errors.append(json.dumps(dict(kind="MALFORMED_TEXT_OUTPUT", stream=label,
+                encoding="utf-8", start=exc.start, end=exc.end, prefix_hex=raw[:128].hex()), sort_keys=True))
+    if errors:
+        failure = failure or "MALFORMED_TEXT_OUTPUT"
+        decoded[1] += "\n".join(errors) + "\n"
+    return code, decoded[0], decoded[1], failure, duration
+
+
+def git_bytes(*args: str, cwd: Path | None = None, env: dict[str, str] | None = None,
+              timeout: float | None = None) -> subprocess.CompletedProcess[bytes]:
+    """Git transport for byte-oriented evidence. Never decode a successful probe."""
+    remaining = require_budget("git " + " ".join(args[:2]))
+    command = ["git", "-c", "protocol.allow=never", *args]
+    code, stdout, stderr, failure, _ = run_process(command, cwd or ROOT,
+        env if env is not None else EXECUTION_ENV or base_environment(), min(remaining, timeout) if timeout is not None else remaining)
+    record_cleanup_failure(failure)
+    if failure:
+        if failure in {"CHECKER_TIMEOUT", "AGGREGATE_TIMEOUT"}:
+            raise AggregateTimeout("AGGREGATE_TIMEOUT during git " + " ".join(args[:2]))
+        raise ValueError(f"Git process control failed: {failure}: {stderr!r}")
+    return subprocess.CompletedProcess(command, code, stdout, stderr)
 
 
 def git(*args: str, cwd: Path | None = None, env: dict[str, str] | None = None,
         timeout: float | None = None) -> subprocess.CompletedProcess[str]:
-    remaining = require_budget("git " + " ".join(args[:2]))
-    command = ["git", "-c", "protocol.allow=never", *args]
-    code, stdout, stderr, failure, _ = run_checker(command, cwd or ROOT,
-        env if env is not None else EXECUTION_ENV or base_environment(), min(remaining, timeout) if timeout is not None else remaining)
-    if failure:
-        if failure in {"CHECKER_TIMEOUT", "AGGREGATE_TIMEOUT"}:
-            raise AggregateTimeout("AGGREGATE_TIMEOUT during git " + " ".join(args[:2]))
-        raise ValueError("Git process-group cleanup failed: " + failure)
-    return subprocess.CompletedProcess(command, code, stdout, stderr)
+    """Explicit strict UTF-8 contract for textual Git consumers."""
+    result = git_bytes(*args, cwd=cwd, env=env, timeout=timeout)
+    try:
+        stdout = result.stdout.decode("utf-8", errors="strict")
+        stderr = result.stderr.decode("utf-8", errors="strict")
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"MALFORMED_GIT_TEXT_OUTPUT: git {args!r}: {exc}") from exc
+    return subprocess.CompletedProcess(result.args, result.returncode, stdout, stderr)
+
+
+def repository_path(root: Path, relative: bytes) -> bytes:
+    """Keep raw Git path identity through POSIX filesystem access."""
+    if (not relative or os.path.isabs(relative) or b"\0" in relative
+            or b".." in relative.split(b"/")):
+        raise ValueError(f"invalid raw repository path: {relative!r}")
+    return os.path.join(os.fsencode(root), relative)
+
+
+def nul_paths(raw: bytes) -> list[bytes]:
+    """NUL framing and raw-byte ordering, without stripping any path bytes."""
+    if not raw:
+        return []
+    if not raw.endswith(b"\0") or any(not path for path in raw[:-1].split(b"\0")):
+        raise ValueError("malformed NUL-separated repository path enumeration")
+    return sorted(raw[:-1].split(b"\0"))
 
 
 def git_value(*args: str, cwd: Path | None = None) -> str:
@@ -815,34 +1135,35 @@ def reject_partial_repository() -> None:
 
 
 def require_clean_source() -> None:
-    status = git_value("status", "--porcelain=v1", "--untracked-files=all")
+    status = git_bytes("status", "--porcelain=v1", "--untracked-files=all", "-z").stdout
     if status:
         raise ValueError("source worktree must be clean; staged, unstaged, and untracked paths are refused")
     # Index stat shortcuts (assume-unchanged/skip-worktree/core.filemode) may
     # suppress git status. Compare the physical committed content directly.
-    tree = git("ls-tree", "-r", "-z", "HEAD")
+    tree = git_bytes("ls-tree", "-r", "-z", "HEAD")
     if tree.returncode:
         raise ValueError("could not enumerate committed source tree")
-    for record in tree.stdout.split("\0"):
+    for record in tree.stdout.split(b"\0"):
         if not record: continue
-        header, relative = record.split("\t", 1)
+        header, relative = record.split(b"\t", 1)
         mode, kind, identity = header.split()
-        path = ROOT / relative
+        path = repository_path(ROOT, relative)
         try:
-            physical = path.lstat()
-            if mode == "120000" and stat.S_ISLNK(physical.st_mode):
-                data = os.fsencode(os.readlink(path))
-            elif mode in {"100644", "100755"} and stat.S_ISREG(physical.st_mode):
-                actual_mode = "100755" if physical.st_mode & stat.S_IXUSR else "100644"
+            physical = os.lstat(path)
+            if mode == b"120000" and stat.S_ISLNK(physical.st_mode):
+                data = os.readlink(path)
+            elif mode in {b"100644", b"100755"} and stat.S_ISREG(physical.st_mode):
+                actual_mode = b"100755" if physical.st_mode & stat.S_IXUSR else b"100644"
                 if actual_mode != mode: raise ValueError("tracked executable mode differs")
-                data = path.read_bytes()
+                with open(path, "rb") as stream:
+                    data = stream.read()
             else:
                 raise ValueError("tracked path type differs or is unsupported")
             digest = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
-            if kind != "blob" or digest != identity:
+            if kind != b"blob" or digest.encode("ascii") != identity:
                 raise ValueError("tracked bytes or symlink target differ")
         except (OSError, ValueError) as exc:
-            raise ValueError(f"source worktree must be clean: {relative}: {exc}") from exc
+            raise ValueError(f"source worktree must be clean: {relative!r}: {exc}") from exc
         require_budget("direct committed-source correspondence")
 
 
@@ -1020,55 +1341,356 @@ def immutable_source_context(selected: list[dict[str, object]]) -> dict[str, obj
             "comparison_ref": comparison_ref, "required_refs": required_refs, "object_roots": sorted(roots)}
 
 
+LOCATOR_LIMIT = 4096
+
+
+def admitted_regular(path: bytes, *, optional: bool = False) -> os.stat_result | None:
+    """Safety admission only: never open a nonregular fixed Git control file."""
+    require_budget("Git-free metadata admission")
+    try:
+        info = os.lstat(path)
+    except FileNotFoundError:
+        if optional:
+            return None
+        raise ValueError(f"MISSING_REQUIRED_GIT_CONTROL: {path!r}") from None
+    if not stat.S_ISREG(info.st_mode):
+        raise ValueError(f"UNSAFE_GIT_CONTROL: {path!r} mode={info.st_mode:o}")
+    return info
+
+
+def locator_bytes(path: bytes, info: os.stat_result) -> bytes:
+    """Bounded regular locator read, separately from payload serialization."""
+    if info.st_size > LOCATOR_LIMIT:
+        raise ValueError(f"OVERSIZED_GIT_LOCATOR: {path!r}")
+    fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW)
+    with os.fdopen(fd, "rb") as stream:
+        actual = os.fstat(stream.fileno())
+        if (not stat.S_ISREG(actual.st_mode) or
+                (actual.st_dev, actual.st_ino, actual.st_mode) != (info.st_dev, info.st_ino, info.st_mode)):
+            raise ValueError(f"GIT_LOCATOR_CHANGED_DURING_OPEN: {path!r}")
+        raw = stream.read(LOCATOR_LIMIT + 1)
+    if len(raw) > LOCATOR_LIMIT:
+        raise ValueError(f"OVERSIZED_GIT_LOCATOR: {path!r}")
+    return raw
+
+
+def locator_record(raw: bytes, *, gitfile: bool) -> bytes:
+    record = raw[:-1] if raw.endswith(b"\n") else raw
+    if gitfile:
+        if not record.startswith(b"gitdir: "):
+            raise ValueError("MALFORMED_GITFILE: expected gitdir locator")
+        record = record[len(b"gitdir: "):]
+    if not record or any(value in record for value in (b"\0", b"\n", b"\r")):
+        raise ValueError("MALFORMED_GIT_LOCATOR: empty, NUL or multiple records")
+    return record
+
+
+def directory_identity(info: os.stat_result) -> tuple[int, int, int]:
+    # Transient acquisition evidence only; never part of the persistent digest.
+    return info.st_dev, info.st_ino, info.st_mode
+
+
+def walk_directory(raw: bytes, *, base_fd: int | None = None,
+                   base_path: bytes | None = None) -> tuple[int, bytes]:
+    """Open every raw component with kernel no-follow directory traversal.
+
+    Dot is an explicit no-op. Dot-dot is opened against the currently owned
+    directory FD BEFORE deriving its display spelling. Empty internal/trailing
+    components refuse. Neither lexical normalization nor realpath has admission
+    authority. The caller owns the returned descriptor, including on root /.
+    """
+    if not raw or b"\0" in raw:
+        raise ValueError("MALFORMED_LOCATOR_TOPOLOGY")
+    absolute = raw.startswith(b"/")
+    components = raw.split(b"/")[1:] if absolute else raw.split(b"/")
+    if raw == b"/":
+        components = []
+    if any(not part for part in components):
+        raise ValueError("MALFORMED_LOCATOR_TOPOLOGY: empty component")
+    flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_NONBLOCK
+    if absolute:
+        fd, path = os.open(b"/", flags), b"/"
+    elif base_fd is not None and base_path is not None:
+        fd, path = os.dup(base_fd), base_path
+    else:
+        raise ValueError("RELATIVE_LOCATOR_WITHOUT_ADMITTED_BASE")
+    try:
+        for component in components:
+            require_budget("descriptor locator traversal")
+            if component == b".":
+                continue
+            try:
+                next_fd = os.open(component, flags, dir_fd=fd)
+            except OSError as exc:
+                raise ValueError(f"UNSAFE_LOCATOR_TOPOLOGY: component={component!r} errno={exc.errno}") from exc
+            os.close(fd)
+            fd = next_fd
+            if not stat.S_ISDIR(os.fstat(fd).st_mode):
+                raise ValueError("UNSAFE_LOCATOR_TOPOLOGY: nondirectory")
+            # This spelling is derived only AFTER successful physical traversal.
+            path = os.path.dirname(path) if component == b".." else os.path.join(path, component)
+        if directory_identity(os.lstat(path)) != directory_identity(os.fstat(fd)):
+            raise ValueError("LOCATOR_DIRECTORY_CHANGED_DURING_TRAVERSAL")
+        return fd, path
+    except BaseException:
+        os.close(fd)
+        raise
+
+
+def admitted_directory(path: bytes, *, optional: bool = False) -> None:
+    require_budget("Git-free directory admission")
+    try:
+        info = os.lstat(path)
+    except FileNotFoundError:
+        if optional:
+            return
+        raise ValueError(f"MISSING_GIT_DIRECTORY: {path!r}") from None
+    if not stat.S_ISDIR(info.st_mode):
+        raise ValueError(f"UNSAFE_GIT_DIRECTORY: {path!r} mode={info.st_mode:o}")
+
+
+def preflight_repository_safety(root: Path) -> dict[str, object]:
+    """Git-free, fresh admission; never a token reusable across checker code.
+
+    FIXED_PRECHECK_REQUIRED: .git/gitfile, commondir, HEAD, index, config.worktree,
+    config, packed-refs, info/exclude and their final directory containers.
+    ALREADY_COVERED: these raw objects/topology plus worktree bytes/modes/links
+    and Git semantic index/ref/config/status outputs enter the fingerprint.
+    BOUNDED_GIT_FAILURE_ACCEPTABLE: loose refs/ref-backend storage, object and
+    worktree administration internals, config include targets and configuration-
+    selected helpers. These dynamic Git-owned graphs are not recursively modeled.
+    Fingerprint Git probes remain owned, deadline-bounded and fail closed on failure;
+    success fingerprints semantic output. This is not an OS access sandbox or
+    protection against concurrent malicious replacement during an admitted Git
+    call. Arbitrary checker execution always requires a new admission afterward.
+    """
+    # The root itself is traversed without aliases too. Callers using macOS
+    # /var aliases must supply the physical path; no-follow is never relaxed.
+    raw_root = os.fsencode(root)
+    if not raw_root.startswith(b"/"):
+        raw_root = os.getcwdb() + b"/" + raw_root
+    with ExitStack() as owned:
+        root_fd, root_bytes = walk_directory(raw_root)
+        owned.callback(os.close, root_fd)
+        dot_git = os.path.join(root_bytes, b".git")
+        try:
+            dot_info = os.stat(b".git", dir_fd=root_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            raise ValueError("MISSING_DOT_GIT") from None
+        gitfile_raw = b""
+        if stat.S_ISDIR(dot_info.st_mode):
+            git_fd, git_dir = walk_directory(b".git", base_fd=root_fd, base_path=root_bytes)
+            kind = b"DIRECTORY"
+        elif stat.S_ISREG(dot_info.st_mode):
+            gitfile_raw = locator_bytes(dot_git, dot_info)
+            git_fd, git_dir = walk_directory(locator_record(gitfile_raw, gitfile=True),
+                                            base_fd=root_fd, base_path=root_bytes)
+            kind = b"GITFILE"
+        else:
+            raise ValueError(f"UNSAFE_DOT_GIT: mode={dot_info.st_mode:o}")
+        owned.callback(os.close, git_fd)
+        common_record = os.path.join(git_dir, b"commondir")
+        common_info = admitted_regular(common_record, optional=True)
+        common_raw = locator_bytes(common_record, common_info) if common_info is not None else b""
+        if common_info is not None:
+            common_fd, common = walk_directory(locator_record(common_raw, gitfile=False),
+                                               base_fd=git_fd, base_path=git_dir)
+        else:
+            common_fd, common = os.dup(git_fd), git_dir
+        owned.callback(os.close, common_fd)
+        for directory in (os.path.join(common, b"info"), os.path.join(common, b"refs"),
+                          os.path.join(common, b"objects")):
+            admitted_directory(directory, optional=True)
+        metadata = [(b"WORKTREE/" + name, os.path.join(git_dir, name))
+                    for name in (b"HEAD", b"index", b"config.worktree")]
+        metadata.extend((b"COMMON/" + name, os.path.join(common, name))
+                        for name in (b"config", b"packed-refs", b"info/exclude"))
+        for role, path in metadata:
+            admitted_regular(path, optional=role != b"WORKTREE/HEAD")
+        identities = tuple(directory_identity(os.fstat(fd)) for fd in (root_fd, git_fd, common_fd))
+        for path, identity in zip((root_bytes, git_dir, common), identities):
+            if directory_identity(os.lstat(path)) != identity:
+                raise ValueError("GIT_LAYOUT_CHANGED_DURING_ADMISSION")
+        return {"root": root_bytes, "dot_git": dot_git, "kind": kind,
+                "gitfile_raw": gitfile_raw, "git_dir": git_dir, "common_dir": common,
+                "commondir": common_record, "commondir_raw": common_raw, "metadata": metadata,
+                "transient_directory_identities": identities}
+
+
+def verify_layout_unchanged(root: Path, layout: dict[str, object]) -> None:
+    # A fresh admission immediately before Git detects changed locators/targets.
+    # This is not a defense against a privileged unrelated syscall-level racer.
+    if preflight_repository_safety(root) != layout:
+        raise ValueError("GIT_LAYOUT_CHANGED_BEFORE_PROBE")
+
+
+def metadata_object(path: bytes) -> tuple[bytes, ...]:
+    """Serialize one selected Git entry without following its final symlink.
+
+    Only ENOENT at lstat means ABSENT. Nonblocking/no-follow open plus fstat
+    prevents a regular-file inspection racing into a blocking FIFO/link read.
+    Inode identity is checked for acquisition races, never fingerprinted.
+    """
+    require_budget("repository metadata object")
+    try:
+        info = os.lstat(path)
+    except FileNotFoundError:
+        return (b"ABSENT",)
+    mode = str(info.st_mode).encode("ascii")
+    if stat.S_ISLNK(info.st_mode):
+        target = os.readlink(path)
+        if not isinstance(target, bytes):
+            raise ValueError("METADATA_TARGET_NOT_BYTES")
+        return (b"PRESENT", mode, b"SYMLINK", target)
+    if not stat.S_ISREG(info.st_mode):
+        raise ValueError(f"UNSUPPORTED_METADATA_OBJECT: {path!r} mode={info.st_mode:o}")
+    fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW)
+    with os.fdopen(fd, "rb") as stream:
+        opened = os.fstat(stream.fileno())
+        if (not stat.S_ISREG(opened.st_mode) or
+                (opened.st_dev, opened.st_ino, opened.st_mode) != (info.st_dev, info.st_ino, info.st_mode)):
+            raise ValueError(f"METADATA_OBJECT_CHANGED_DURING_OPEN: {path!r}")
+        contents = stream.read()
+    return (b"PRESENT", mode, b"REGULAR", contents)
+
+
+def metadata_topology(path: bytes) -> tuple[bytes, ...]:
+    """Prove lexical directory/link topology, without inode/time identity.
+
+    Git may canonicalize directory discovery through a symlink. Include lexical
+    components (also the source .git locator) so that an equal-byte directory
+    replacement cannot hide behind the same resolved Git discovery output.
+    Ordinary directory contents are covered by selected entries/Git probes;
+    unrelated parent inode or permission changes are not repository evidence.
+    """
+    parts = []
+    current = os.path.abspath(path)
+    while current != os.path.dirname(current):
+        parts.append(current)
+        current = os.path.dirname(current)
+    result = []
+    for component in reversed(parts):
+        require_budget("repository metadata topology")
+        info = os.lstat(component)
+        result.extend((component,))
+        if stat.S_ISDIR(info.st_mode):
+            result.append(b"DIRECTORY")
+        elif stat.S_ISLNK(info.st_mode):
+            result.extend(metadata_object(component))
+        elif component == os.path.abspath(path) and stat.S_ISREG(info.st_mode):
+            # Linked worktrees use a regular .git locator file.
+            result.extend(metadata_object(component))
+        else:
+            raise ValueError(f"UNSUPPORTED_METADATA_TOPOLOGY: {component!r}")
+    return tuple(result)
+
+
 def canonical_fingerprint(root: Path | None = None) -> str:
-    """Read only; include tracked, untracked, and ignored file bytes plus repository metadata."""
+    """Byte-exact files, paths, symlink targets and Git/index/ref/config evidence.
+
+    Git paths and readlink targets never cross a Unicode text boundary. Text
+    APIs elsewhere either decode strictly or refuse; they cannot normalize this
+    proof. Explicit presence/type tags also distinguish missing metadata files
+    from files whose literal contents happen to spell the absence marker.
+    """
+    if _CLEANUP_UNPROVEN.get():
+        raise ValueError("PROCESS_CLEANUP_FAILURE: repository proof refused while lifecycle closure is unproved")
     root = root or ROOT
+    layout = preflight_repository_safety(root)
+    root_bytes = layout["root"]
     digest = hashlib.sha256()
     def add(value: bytes) -> None:
         digest.update(len(value).to_bytes(8, "big"))
         digest.update(value)
-    git_dir = Path(git_value("rev-parse", "--absolute-git-dir", cwd=root))
-    common = Path(git_value("rev-parse", "--git-common-dir", cwd=root))
-    if not common.is_absolute():
-        common = root / common
-    metadata = {git_dir / "index", git_dir / "HEAD", git_dir / "config.worktree", common / "config", common / "packed-refs"}
-    for path in sorted(metadata):
-        require_budget("repository metadata fingerprint")
-        add(str(path).encode() + b"\0")
-        add(path.read_bytes() if path.exists() else b"<absent>")
+    def probe(*args: str):
+        verify_layout_unchanged(root, layout)
+        result = git_bytes(*args, cwd=root)
+        if result.returncode and not (args[0] == "symbolic-ref" and result.returncode == 1):
+            raise ValueError(f"canonical fingerprint probe failed: git {args!r}")
+        add(b"GIT")
+        add(str(len(args)).encode("ascii"))
+        for argument in args:
+            add(os.fsencode(argument))
+        add(str(result.returncode).encode("ascii"))
+        add(result.stdout)
+        add(result.stderr)
+        return result.stdout
+    def git_path(*args: str) -> bytes:
+        raw = probe(*args)
+        # Git appends exactly one LF. Preserve any whitespace in the path itself.
+        if not raw.endswith(b"\n") or not raw[:-1] or b"\0" in raw:
+            raise ValueError("malformed Git metadata directory path")
+        return raw[:-1]
+    # Serialize admitted topology and raw fixed objects BEFORE invoking Git.
+    git_dir, common = layout["git_dir"], layout["common_dir"]
+    add(b"GIT_LAYOUT")
+    add(layout["kind"])
+    add(layout["gitfile_raw"])
+    add(layout["commondir_raw"])
+    for locator in sorted({layout["dot_git"], git_dir, common}):
+        add(b"METADATA_TOPOLOGY")
+        for value in metadata_topology(locator):
+            add(value)
+    metadata = [*layout["metadata"], (b"LOCATOR/commondir", layout["commondir"])]
+    for role, path in metadata:
+        add(b"METADATA_OBJECT")
+        add(role)
+        add(path)
+        for value in metadata_object(path):
+            add(value)
+    # No admission is reused across arbitrary checker code. Git remains the
+    # semantic authority; equivalent lexical spellings compare by safe admitted
+    # filesystem topology, while original locator bytes remain hash evidence.
+    discovered_git = git_path("rev-parse", "--absolute-git-dir")
+    discovered_common = git_path("rev-parse", "--git-common-dir")
+    if not os.path.isabs(discovered_git):
+        raise ValueError("Git metadata directory must be absolute")
+    if not os.path.isabs(discovered_common):
+        discovered_common = os.path.join(root_bytes, discovered_common)
+    # Git output is also traversed physically; no normalization decides identity.
+    git_fd = common_fd = None
+    try:
+        git_fd, git_path_proof = walk_directory(discovered_git)
+        common_fd, common_path_proof = walk_directory(discovered_common)
+        if (git_path_proof != git_dir or common_path_proof != common
+                or directory_identity(os.fstat(git_fd)) != layout["transient_directory_identities"][1]
+                or directory_identity(os.fstat(common_fd)) != layout["transient_directory_identities"][2]):
+            raise ValueError("GIT_LAYOUT_DISAGREEMENT: preflight versus Git discovery")
+    finally:
+        if git_fd is not None: os.close(git_fd)
+        if common_fd is not None: os.close(common_fd)
     for args in (("rev-parse", "HEAD"), ("symbolic-ref", "--quiet", "HEAD"),
                  ("ls-files", "--stage", "-z"), ("for-each-ref", "--format=%(refname) %(objectname)"),
                  ("config", "--local", "--null", "--list"),
                  ("status", "--porcelain=v2", "--ignored=matching", "--untracked-files=all", "-z")):
-        result = git(*args, cwd=root)
-        if result.returncode and not (args[0] == "symbolic-ref" and result.returncode == 1):
-            raise ValueError(f"canonical fingerprint probe failed: git {' '.join(args)}")
-        add(repr(args).encode() + str(result.returncode).encode() + result.stdout.encode() + result.stderr.encode())
-    for label, args in (("TRACKED", ("ls-files", "-z")),
-                        ("UNTRACKED", ("ls-files", "--others", "--exclude-standard", "-z")),
-                        ("IGNORED", ("ls-files", "--others", "--ignored", "--exclude-standard", "-z"))):
-        path_result = git(*args, cwd=root)
-        if path_result.returncode:
-            raise ValueError("repository path enumeration failed")
-        paths = path_result.stdout.split("\0")
-        for relative in sorted(path for path in paths if path):
+        probe(*args)
+    for label, args in ((b"TRACKED", ("ls-files", "-z")),
+                        (b"UNTRACKED", ("ls-files", "--others", "--exclude-standard", "-z")),
+                        (b"IGNORED", ("ls-files", "--others", "--ignored", "--exclude-standard", "-z"))):
+        for relative in nul_paths(probe(*args)):
             require_budget("repository file fingerprint")
-            path = root / relative
-            add(label.encode() + b"\0" + relative.encode() + b"\0")
+            path = repository_path(root, relative)
+            add(label)
+            add(relative)
             try:
-                stat = path.lstat()
-                add(str(stat.st_mode).encode() + b"\0")
-                if path.is_symlink():
-                    add(os.readlink(path).encode())
-                elif path.is_file():
-                    with path.open("rb") as stream:
+                info = os.lstat(path)
+                add(str(info.st_mode).encode("ascii"))
+                if stat.S_ISLNK(info.st_mode):
+                    target = os.readlink(path)  # bytes input gives bytes on POSIX.
+                    if not isinstance(target, bytes):
+                        raise ValueError("symlink target lost its byte representation")
+                    add(b"SYMLINK")
+                    add(target)
+                elif stat.S_ISREG(info.st_mode):
+                    add(b"REGULAR")
+                    with open(path, "rb") as stream:
                         while block := stream.read(1024 * 1024):
                             require_budget("repository file bytes fingerprint")
                             add(block)
                 else:
-                    raise ValueError(f"unsupported repository path type: {relative}")
+                    raise ValueError(f"unsupported repository path type: {relative!r}")
             except FileNotFoundError:
-                add(b"<absent>")
+                add(b"MISSING")
     require_budget("completed repository fingerprint")
     return digest.hexdigest()
 
@@ -1093,14 +1715,18 @@ def clone_snapshot(context_data: dict[str, object], parent: Path) -> Path:
                 ROOT, EXECUTION_ENV or base_environment(), require_budget("local immutable object packing"),
                 input_text="\n".join(roots) + "\n", output_file=output)
         if failure:
-            raise AggregateTimeout("AGGREGATE_TIMEOUT during local immutable object packing")
+            if failure in {"CHECKER_TIMEOUT", "AGGREGATE_TIMEOUT"}:
+                raise AggregateTimeout("AGGREGATE_TIMEOUT during local immutable object packing")
+            raise ValueError("local immutable object packing: " + failure + ": " + error.strip())
         if code:
             raise ValueError("local immutable object packing failed: " + error.strip())
         with pack.open("rb") as source:
             code, _, error, failure, _ = run_checker(["git", "-c", "protocol.allow=never", "index-pack", "--stdin"],
                 clone, EXECUTION_ENV or base_environment(), require_budget("local immutable object import"), input_file=source)
         if failure:
-            raise AggregateTimeout("AGGREGATE_TIMEOUT during local immutable object import")
+            if failure in {"CHECKER_TIMEOUT", "AGGREGATE_TIMEOUT"}:
+                raise AggregateTimeout("AGGREGATE_TIMEOUT during local immutable object import")
+            raise ValueError("local immutable object import: " + failure + ": " + error.strip())
         if code:
             raise ValueError("local immutable object import failed: " + error.strip())
     for identity in roots:
@@ -1143,6 +1769,7 @@ def main() -> int:
                         help="require exact accepted package inputs outside reviewed CI files")
     args = parser.parse_args()
     proof_context = _C023_RESULT.set(None)
+    cleanup_context = _CLEANUP_UNPROVEN.set(False)
     previous_deadline, previous_env = DEADLINE, EXECUTION_ENV
     started = monotonic()
     DEADLINE = started + AGGREGATE_TIMEOUT_SECONDS
@@ -1151,136 +1778,181 @@ def main() -> int:
               "aggregate_timeout_seconds": AGGREGATE_TIMEOUT_SECONDS,
               "canonical_proof": "UNAVAILABLE", "results": [], "excluded": []}
     parent = None
-    def deadline_alarm(signum, frame):
-        raise AggregateTimeout("AGGREGATE_TIMEOUT during " + str(output["phase"]))
-    previous_handler = signal.signal(signal.SIGALRM, deadline_alarm)
-    previous_timer = signal.setitimer(signal.ITIMER_REAL, AGGREGATE_TIMEOUT_SECONDS)
-    try:
-        parent = Path(tempfile.mkdtemp(prefix="glyph-runtime-config-validation-"))
-        EXECUTION_ENV = isolated_environment(parent)
-        try:
-            reject_partial_repository()
-            before = canonical_fingerprint()
-            freshness = census_freshness()
-            output["census_freshness"] = freshness
-            if freshness["status"] != "PASS":
-                raise ValueError("checker census is stale; run tools/generate_glyph_checker_census.py")
-            entries, exclusions, categories = load()
-            output["excluded"] = [{"id": entry["id"], "applicability": entry["applicability"], "reason": entry["reason"]} for entry in entries if entry["applicability"] != "current"] + [{"id": exclusion["id"], "applicability": "excluded", "reason": exclusion["reason"]} for exclusion in exclusions]
-            output["manifest_entries"] = len(entries)
-            output["strong_signal_exclusions"] = len(exclusions)
-            if args.category and any(category not in categories for category in args.category):
-                raise ValueError("unknown category: " + ", ".join(sorted(set(args.category) - categories)))
-            selected = [entry for entry in entries if entry["applicability"] == "current" and (not args.category or entry["category"] in args.category)]
-            if args.category:
-                empty = sorted(set(args.category) - {str(entry["category"]) for entry in selected})
-                if empty:
-                    raise ValueError("requested category selects zero current checks: " + ", ".join(empty))
-            require_clean_source()
-            if package_scope.package_lineage(ROOT):
-                output["phase"] = "accepted_and_current_package_comparison"
-                output["package_evidence"] = package_scope.package_evidence(
-                    ROOT, parent, strict=args.require_ci_maintenance)
-            elif args.require_ci_maintenance:
-                raise ValueError("CI maintenance requires the accepted package baseline ancestry")
-            if not args.check_manifest:
-                output["phase"] = "source_context"
-                context_data = immutable_source_context(selected)
-                output["context"] = context_data
-                output["phase"] = "snapshot_setup"
-                clone = clone_snapshot(context_data, parent)
-                env = isolated_environment(parent, context_data)
-                isolated_before = canonical_fingerprint(clone)
-                for entry in selected:
-                    output["phase"] = "checker:" + str(entry["id"])
-                    remaining = require_budget(output["phase"])
-                    timeout = min(CHECKER_TIMEOUT_SECONDS, remaining)
-                    active = clone
-                    checker_env = checker_environment(entry, env)
-                    is_c023 = (entry["id"] == "gp_config023_usb_index_validation"
-                               and entry["path"] == "tools/check_glyph_c023_proof_replay.py"
-                               and package_scope.package_lineage(ROOT))
-                    if is_c023:
-                        active = package_scope.materialize(clone, package_scope.C023_DONE, parent)
-                        checker_env.update(GLYPH_CHECKER_BASE=package_scope.C023_DONE,
-                                           GLYPH_CHECKER_EXPECTED_MERGE_BASE=package_scope.C023_DONE)
-                        replay_before = canonical_fingerprint(active)
-                    code, stdout, stderr, failure, duration = run_checker(
-                        execution_command(entry["command"]), active, checker_env, timeout
-                    )
-                    if failure == "CHECKER_TIMEOUT" and remaining <= CHECKER_TIMEOUT_SECONDS:
-                        failure = "AGGREGATE_TIMEOUT"
-                    result = {"id": entry["id"], "command": entry["command"], "category": entry["category"],
-                              "applicability": entry["applicability"], "exit_code": code, "status": "FAIL",
-                              "failure_kind": failure, "timeout_seconds": timeout,
-                              "stdout_summary": stdout.strip().splitlines()[-1:], "stderr_summary": stderr.strip().splitlines()[-1:],
-                              "duration_seconds": round(duration, 3), "isolated_proof": "UNAVAILABLE"}
-                    if is_c023:
-                        result["historical_execution_source"] = package_scope.C023_DONE
-                    output["results"].append(result)
-                    try:
-                        if canonical_fingerprint(clone) != isolated_before or (is_c023 and canonical_fingerprint(active) != replay_before):
-                            result["isolated_proof"] = "MISMATCH"
-                            failure = failure or "ISOLATED_REPOSITORY_MUTATION"
-                        else:
-                            result["isolated_proof"] = "MATCH"
-                    except (AggregateTimeout, OSError, ValueError, subprocess.SubprocessError) as exc:
-                        failure = failure or ("AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "ISOLATED_PROOF_FAILURE")
-                        result["proof_error"] = str(exc)
-                    result["failure_kind"] = failure
-                    result["status"] = "PASS" if code == 0 and not failure else "FAIL"
-                    if failure:
-                        output["failure_kind"] = failure
-                        break
-                    if code and args.fail_fast:
-                        break
-            output["status"] = "PASS" if not output["failure_kind"] and all(result["status"] == "PASS" for result in output["results"]) else "FAIL"
-        except (AggregateTimeout, OSError, ValueError, TypeError, subprocess.SubprocessError) as exc:
-            output["failure_kind"] = "AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "SETUP_FAILURE"
-            output["message"] = str(exc)
-            output["status"] = "FAIL"
-        finally:
-            if before is not None:
-                try:
-                    if canonical_fingerprint() == before:
-                        output["canonical_proof"] = "MATCH"
-                    else:
-                        output["canonical_proof"] = "MISMATCH"
-                        output["failure_kind"] = "CANONICAL_REPOSITORY_MUTATION"
-                        output["status"] = "FAIL"
-                except (AggregateTimeout, OSError, ValueError, subprocess.SubprocessError) as exc:
-                    output["canonical_proof"] = "UNAVAILABLE"
-                    output["final_proof_error"] = str(exc)
-                    output["failure_kind"] = output["failure_kind"] or ("AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "FINAL_PROOF_FAILURE")
-                    output["status"] = "FAIL"
-            else:
-                output["status"] = "FAIL"
-    except (AggregateTimeout, OSError, ValueError, subprocess.SubprocessError) as exc:
+    alarm = DeadlineAlarm(lambda: output["phase"])
+    def refuse_unclosed_proofs():
         output["status"] = "FAIL"
-        output["failure_kind"] = "AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "SETUP_FAILURE"
-        output["message"] = str(exc)
-    finally:
-        # No atexit/context-manager recursive deletion may overrun the deadline.
-        # A timed-out run can retain only its disposable scratch tree, reported explicitly.
+        if output["failure_kind"] not in (None, "PROCESS_CLEANUP_FAILURE"):
+            output["failure_before_cleanup"] = output["failure_kind"]
+        output["failure_kind"] = "PROCESS_CLEANUP_FAILURE"
+        if output["canonical_proof"] != "MISMATCH":
+            output["canonical_proof"] = "UNAVAILABLE"
+        reason = "managed lifecycle closure unproved; repository proof withheld"
+        output["final_proof_error"] = reason
+        for row in output["results"]:
+            if row["isolated_proof"] != "MISMATCH":
+                row["isolated_proof"] = "UNAVAILABLE"
+                row["proof_error"] = reason
+    try:
         try:
-            if parent is not None:
-                output["phase_before_cleanup"] = output["phase"]
-                code, _, error, failure, _ = run_checker(["rm", "-rf", str(parent)], parent.parent,
-                    EXECUTION_ENV or base_environment(), require_budget("disposable cleanup"))
-                if code or failure:
-                    raise AggregateTimeout("disposable cleanup did not finish within the operational deadline")
+            alarm.start(AGGREGATE_TIMEOUT_SECONDS)
+            parent = Path(tempfile.mkdtemp(prefix="glyph-runtime-config-validation-")).resolve()
+            EXECUTION_ENV = isolated_environment(parent)
+            try:
+                preflight_repository_safety(ROOT)
+                before = canonical_fingerprint()
+                reject_partial_repository()
+                freshness = census_freshness()
+                output["census_freshness"] = freshness
+                if freshness["status"] != "PASS":
+                    raise ValueError("checker census is stale; run tools/generate_glyph_checker_census.py")
+                entries, exclusions, categories = load()
+                output["excluded"] = [{"id": entry["id"], "applicability": entry["applicability"], "reason": entry["reason"]} for entry in entries if entry["applicability"] != "current"] + [{"id": exclusion["id"], "applicability": "excluded", "reason": exclusion["reason"]} for exclusion in exclusions]
+                output["manifest_entries"] = len(entries)
+                output["strong_signal_exclusions"] = len(exclusions)
+                if args.category and any(category not in categories for category in args.category):
+                    raise ValueError("unknown category: " + ", ".join(sorted(set(args.category) - categories)))
+                selected = [entry for entry in entries if entry["applicability"] == "current" and (not args.category or entry["category"] in args.category)]
+                if args.category:
+                    empty = sorted(set(args.category) - {str(entry["category"]) for entry in selected})
+                    if empty:
+                        raise ValueError("requested category selects zero current checks: " + ", ".join(empty))
+                require_clean_source()
+                if package_scope.package_lineage(ROOT):
+                    output["phase"] = "accepted_and_current_package_comparison"
+                    output["package_evidence"] = package_scope.package_evidence(
+                        ROOT, parent, strict=args.require_ci_maintenance)
+                elif args.require_ci_maintenance:
+                    raise ValueError("CI maintenance requires the accepted package baseline ancestry")
+                if not args.check_manifest:
+                    output["phase"] = "source_context"
+                    context_data = immutable_source_context(selected)
+                    output["context"] = context_data
+                    output["phase"] = "snapshot_setup"
+                    clone = clone_snapshot(context_data, parent)
+                    env = isolated_environment(parent, context_data)
+                    isolated_before = canonical_fingerprint(clone)
+                    for entry in selected:
+                        output["phase"] = "checker:" + str(entry["id"])
+                        remaining = require_budget(output["phase"])
+                        configured_timeout = checker_time_budget(entry)
+                        timeout = min(configured_timeout, remaining)
+                        active = clone
+                        checker_env = checker_environment(entry, env)
+                        is_c023 = (entry["id"] == "gp_config023_usb_index_validation"
+                                   and entry["path"] == "tools/check_glyph_c023_proof_replay.py"
+                                   and package_scope.package_lineage(ROOT))
+                        if is_c023:
+                            active = package_scope.materialize(clone, package_scope.C023_DONE, parent)
+                            checker_env.update(GLYPH_CHECKER_BASE=package_scope.C023_DONE,
+                                               GLYPH_CHECKER_EXPECTED_MERGE_BASE=package_scope.C023_DONE)
+                            replay_before = canonical_fingerprint(active)
+                        code, stdout, stderr, failure, duration = run_checker(
+                            execution_command(entry["command"]), active, checker_env, timeout
+                        )
+                        if failure == "CHECKER_TIMEOUT" and remaining <= configured_timeout:
+                            failure = "AGGREGATE_TIMEOUT"
+                        result = {"id": entry["id"], "command": entry["command"], "category": entry["category"],
+                                  "applicability": entry["applicability"], "exit_code": code, "status": "FAIL",
+                                  "failure_kind": failure, "timeout_seconds": timeout,
+                                  "stdout_summary": stdout.strip().splitlines()[-1:], "stderr_summary": stderr.strip().splitlines()[-1:],
+                                  "duration_seconds": round(duration, 3), "isolated_proof": "UNAVAILABLE"}
+                        if is_c023:
+                            result["historical_execution_source"] = package_scope.C023_DONE
+                        output["results"].append(result)
+                        record_cleanup_failure(failure)
+                        if _CLEANUP_UNPROVEN.get():
+                            refuse_unclosed_proofs()
+                        else:
+                            try:
+                                if canonical_fingerprint(clone) != isolated_before or (is_c023 and canonical_fingerprint(active) != replay_before):
+                                    result["isolated_proof"] = "MISMATCH"
+                                    failure = failure or "ISOLATED_REPOSITORY_MUTATION"
+                                else:
+                                    result["isolated_proof"] = "MATCH"
+                            except (AggregateTimeout, OSError, ValueError, subprocess.SubprocessError) as exc:
+                                failure = failure or ("AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "ISOLATED_PROOF_FAILURE")
+                                result["proof_error"] = str(exc)
+                        result["failure_kind"] = failure
+                        result["status"] = "PASS" if code == 0 and not failure else "FAIL"
+                        if failure:
+                            output["failure_kind"] = failure
+                            break
+                        if code and args.fail_fast:
+                            break
+                output["status"] = "PASS" if not output["failure_kind"] and all(result["status"] == "PASS" for result in output["results"]) else "FAIL"
+            except (AggregateTimeout, OSError, ValueError, TypeError, subprocess.SubprocessError) as exc:
+                output["failure_kind"] = "AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "SETUP_FAILURE"
+                output["message"] = str(exc)
+                output["status"] = "FAIL"
+            finally:
+                if _CLEANUP_UNPROVEN.get():
+                    refuse_unclosed_proofs()
+                elif before is not None:
+                    try:
+                        if canonical_fingerprint() == before:
+                            output["canonical_proof"] = "MATCH"
+                        else:
+                            output["canonical_proof"] = "MISMATCH"
+                            output["failure_kind"] = "CANONICAL_REPOSITORY_MUTATION"
+                            output["status"] = "FAIL"
+                    except (AggregateTimeout, OSError, ValueError, subprocess.SubprocessError) as exc:
+                        output["canonical_proof"] = "UNAVAILABLE"
+                        output["final_proof_error"] = str(exc)
+                        output["failure_kind"] = output["failure_kind"] or ("AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "FINAL_PROOF_FAILURE")
+                        output["status"] = "FAIL"
+                else:
+                    output["status"] = "FAIL"
         except (AggregateTimeout, OSError, ValueError, subprocess.SubprocessError) as exc:
             output["status"] = "FAIL"
-            output["failure_kind"] = output["failure_kind"] or "AGGREGATE_TIMEOUT"
-            output["cleanup_error"] = str(exc)
-            output["retained_temporary_directory"] = str(parent) if parent is not None else None
+            output["failure_kind"] = "AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "SETUP_FAILURE"
+            output["message"] = str(exc)
         finally:
-            signal.setitimer(signal.ITIMER_REAL, 0)
-            signal.signal(signal.SIGALRM, previous_handler)
-            if previous_timer[0] > 0:
-                signal.setitimer(signal.ITIMER_REAL, max(.001, previous_timer[0] - (monotonic() - started)), previous_timer[1])
-            DEADLINE, EXECUTION_ENV = previous_deadline, previous_env
-            _C023_RESULT.reset(proof_context)
+            # No atexit/context-manager recursive deletion may overrun the deadline.
+            # A timed-out run can retain only its disposable scratch tree, reported explicitly.
+            try:
+                if _CLEANUP_UNPROVEN.get():
+                    refuse_unclosed_proofs()
+                    output["retained_temporary_directory"] = str(parent) if parent is not None else None
+                elif parent is not None:
+                    output["phase_before_cleanup"] = output["phase"]
+                    code, _, error, failure, _ = run_checker(["rm", "-rf", str(parent)], parent.parent,
+                        EXECUTION_ENV or base_environment(), require_budget("disposable cleanup"))
+                    record_cleanup_failure(failure)
+                    if _CLEANUP_UNPROVEN.get():
+                        refuse_unclosed_proofs()
+                    if failure in {"CHECKER_TIMEOUT", "AGGREGATE_TIMEOUT"}:
+                        raise AggregateTimeout("disposable cleanup did not finish within the operational deadline")
+                    if code or failure:
+                        raise ValueError("disposable cleanup failed: " + str(failure or code) + ": " + error.strip())
+            except (AggregateTimeout, OSError, ValueError, subprocess.SubprocessError) as exc:
+                output["status"] = "FAIL"
+                output["failure_kind"] = output["failure_kind"] or ("AGGREGATE_TIMEOUT" if isinstance(exc, AggregateTimeout) else "DISPOSABLE_CLEANUP_FAILURE")
+                output["cleanup_error"] = str(exc)
+                output["retained_temporary_directory"] = str(parent) if parent is not None else None
+            finally:
+                expired = alarm.stop()
+                if _CLEANUP_UNPROVEN.get():
+                    refuse_unclosed_proofs()
+                if expired or monotonic() >= DEADLINE:
+                    output["status"] = "FAIL"
+                    output["failure_kind"] = output["failure_kind"] or "AGGREGATE_TIMEOUT"
+                    output["message"] = output["message"] or "AGGREGATE_TIMEOUT during timer finalization"
+                DEADLINE, EXECUTION_ENV = previous_deadline, previous_env
+                _C023_RESULT.reset(proof_context)
+                _CLEANUP_UNPROVEN.reset(cleanup_context)
+    except AggregateTimeout as exc:
+        # Covers delivery at the boundary of the inner finalizer itself. The
+        # one-shot handler retires its raising mode before throwing, so this
+        # recovery cannot be interrupted by the same operational deadline.
+        output["status"] = "FAIL"
+        output["failure_kind"] = output["failure_kind"] or "AGGREGATE_TIMEOUT"
+        output["message"] = str(exc)
+        alarm.stop()
+        if _CLEANUP_UNPROVEN.get():
+            refuse_unclosed_proofs()
+        DEADLINE, EXECUTION_ENV = previous_deadline, previous_env
+        _C023_RESULT.reset(proof_context)
+        _CLEANUP_UNPROVEN.reset(cleanup_context)
     if args.json:
         print(json.dumps(output, sort_keys=True))
     elif args.check_manifest and output["status"] == "PASS":

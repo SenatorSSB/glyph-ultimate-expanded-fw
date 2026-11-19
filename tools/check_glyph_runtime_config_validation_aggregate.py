@@ -48,7 +48,7 @@ def run_git(root: Path, *args: str) -> None:
 
 
 def fresh_root(parent: Path) -> Path:
-    root = parent / "repo"
+    root = parent.resolve() / "repo"
     root.mkdir()
     run_git(root, "init", "-b", "configurator")
     run_git(root, "config", "user.name", "aggregate adversarial test")
@@ -309,7 +309,11 @@ def isolation_contract_cases(module: Any) -> list[str]:
             report = execute(manifest)
             if report["failure_kind"] != "ISOLATED_REPOSITORY_MUTATION" or len(report["results"]) != 1 or report["results"][0]["isolated_proof"] != "MISMATCH":
                 raise AssertionError(f"isolated {label} mutation accepted or continued: {report}")
-        passed.append("ISO-03-all-isolated-mutation-dimensions-stop")
+        if not {"tracked-bytes", "tracked-mode", "tracked-symlink", "index", "head", "ref", "config", "staged", "untracked", "ignored"}.issubset(mutations):
+            raise AssertionError("byte-integrity mutation coverage was removed")
+        passed.extend(["ISO-03-all-isolated-mutation-dimensions-stop",
+                       "BYTE-06-tracked-mode-symlink-index-HEAD-ref-config-staged-untracked-ignored-mutations"])
+
 
         manifest = install("raise SystemExit(0)\n")
         for branch in ("feature-context", None, "configurator"):
@@ -391,47 +395,80 @@ def isolation_contract_cases(module: Any) -> list[str]:
             module.X1_CANDIDATE, module.X1_OBJECTS = original_candidate, original_objects
         passed.append("ISO-07-closed-historical-ref-and-object-failures")
 
+        # Dispatch failures are tested at the actual selected checker boundary;
+        # repository setup/fingerprints retain their ordinary operational budget.
+        import signal
         sentinel = parent / "late-sentinel"
-        child = "import signal,time; from pathlib import Path; signal.signal(signal.SIGTERM, signal.SIG_IGN); time.sleep(0.5); Path(" + repr(str(sentinel)) + ").write_text('escaped')"
-        source = "import subprocess,sys,time,signal\nsignal.signal(signal.SIGTERM, signal.SIG_IGN)\nsubprocess.Popen([sys.executable,'-c'," + repr(child) + "])\ntime.sleep(5)\n"
+        source = "from pathlib import Path;Path(" + repr(str(sentinel)) + ").touch()\n"
         manifest = install(source, [probe, next_checker])
         old_budgets = module.CHECKER_TIMEOUT_SECONDS, module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS
-        module.CHECKER_TIMEOUT_SECONDS, module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS = .1, 10., .05
-        try:
-            report = execute(manifest)
-            if report["failure_kind"] != "CHECKER_TIMEOUT" or len(report["results"]) != 1:
-                raise AssertionError("process-tree timeout did not stop later checkers")
-            time.sleep(.55)
-            if sentinel.exists(): raise AssertionError("TERM-resistant child survived timeout KILL")
-            module.CHECKER_TIMEOUT_SECONDS = 10.
-            module.AGGREGATE_TIMEOUT_SECONDS = .7
-            report = execute(manifest)
-            if report["failure_kind"] != "AGGREGATE_TIMEOUT" or report["canonical_proof"] != "UNAVAILABLE":
-                raise AssertionError(f"whole deadline claimed complete proof: {report}")
-            time.sleep(.55)
-            if sentinel.exists(): raise AssertionError("whole deadline left a child alive")
-            module.AGGREGATE_TIMEOUT_SECONDS = .001
-            report = execute(manifest)
-            if report["failure_kind"] != "AGGREGATE_TIMEOUT" or report["status"] != "FAIL":
-                raise AssertionError("preflight deadline accepted")
-        finally:
-            module.CHECKER_TIMEOUT_SECONDS, module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS = old_budgets
-        # A real child delayed before exec is already owned and remains killable.
-        original_exec = module.child_exec
+        original_run, original_exec = module.run_checker, module.child_exec
+        module.TERM_GRACE_SECONDS = .03
         def delayed_exec(command, cwd, env):
-            time.sleep(2)
-            sentinel.write_text("unowned launch child survived", encoding="utf-8")
+            if len(command) > 1 and command[1] == probe["path"]:
+                time.sleep(30)
             original_exec(command, cwd, env)
-        module.child_exec = delayed_exec
+        def selected_timeout(command, *args, **kwargs):
+            if len(command) > 1 and command[1] == probe["path"]:
+                # This deliberately stalled acquisition must be interrupted.
+                return original_run(command, *args[:2], .2, **kwargs)
+            return original_run(command, *args, **kwargs)
         try:
-            code, _, _, failure, elapsed = module.run_checker(["python3", "-c", "print(0)"], root, module.base_environment(), .05)
-            if failure != "CHECKER_TIMEOUT" or elapsed > 1.0:
-                raise AssertionError("delayed child setup escaped acquisition timeout")
+            module.child_exec, module.run_checker = delayed_exec, selected_timeout
+            report = execute(manifest)
+            if report["failure_kind"] != "CHILD_SETUP_TIMEOUT" or len(report["results"]) != 1 or sentinel.exists():
+                raise AssertionError("acquisition timeout did not stop later checkers")
+            def selected_launch_error(command, cwd, env):
+                if len(command) > 1 and command[1] == probe["path"]:
+                    raise PermissionError(1, "injected checker exec EPERM " + "🧪" * 1000)
+                original_exec(command, cwd, env)
+            module.child_exec, module.run_checker = selected_launch_error, original_run
+            report = execute(manifest)
+            if report["failure_kind"] != "CHILD_SETUP_FAILURE" or len(report["results"]) != 1 or sentinel.exists():
+                raise AssertionError("launch failure did not stop later checkers")
+            # Arm the aggregate clock at the selected launch, not a few hundred
+            # milliseconds before a complete Git snapshot must have finished.
+            def selected_deadline(command, *args, **kwargs):
+                if len(command) > 1 and command[1] == probe["path"]:
+                    module.DEADLINE = module.monotonic() + 1.
+                    signal.setitimer(signal.ITIMER_REAL, 1.)
+                return original_run(command, *args, **kwargs)
+            module.child_exec, module.run_checker = delayed_exec, selected_deadline
+            report = execute(manifest)
+            if (report["failure_kind"] != "AGGREGATE_TIMEOUT" or report["canonical_proof"] != "UNAVAILABLE"
+                    or len(report["results"]) != 1 or sentinel.exists()):
+                raise AssertionError(f"whole deadline at launch not enforced: {report}")
+            module.run_checker, module.child_exec = original_run, original_exec
+            # Exhaust the actual absolute budget at the exact preflight entry.
+            # The removed 1 ms alarm tested scheduler coincidence, not semantics.
+            def exhausted_preflight(*args):
+                module.DEADLINE = module.monotonic() - 1
+                module.require_budget("deterministic preflight exhaustion")
+            with mock.patch.object(module, "preflight_repository_safety", exhausted_preflight):
+                code, text = invoke(module, root, manifest, "--json")
+                report = payload(text)
+            if (report["failure_kind"] != "AGGREGATE_TIMEOUT" or report["status"] != "FAIL"
+                    or report["canonical_proof"] != "UNAVAILABLE" or report["results"] or sentinel.exists()):
+                raise AssertionError("preflight deadline accepted or unproved state mislabeled")
+            # Inject delivery at timer cancellation: the historical escaping
+            # callback must instead produce a structured timeout and no dispatch.
+            real_timer = signal.setitimer
+            injected = []
+            def retirement_alarm(which, seconds, interval=0):
+                if seconds == 0 and not injected:
+                    injected.append(True)
+                    os.kill(os.getpid(), signal.SIGALRM)
+                return real_timer(which, seconds, interval)
+            with mock.patch.object(module, "preflight_repository_safety", exhausted_preflight), \
+                    mock.patch.object(module.signal, "setitimer", retirement_alarm):
+                code, text = invoke(module, root, manifest, "--json")
+                report = payload(text)
+            if not injected or report["failure_kind"] != "AGGREGATE_TIMEOUT" or report["status"] != "FAIL" or report["results"]:
+                raise AssertionError("timer retirement escaped structured timeout")
         finally:
-            module.child_exec = original_exec
-        time.sleep(.05)
-        if sentinel.exists(): raise AssertionError("delayed child setup survived termination")
-        passed.append("ISO-08-child-kill-whole-preflight-deadline-and-owned-acquisition")
+            module.run_checker, module.child_exec = original_run, original_exec
+            module.CHECKER_TIMEOUT_SECONDS, module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS = old_budgets
+        passed.append("ISO-08-launch-failure-timeout-whole-and-preflight-deadlines-stop-dispatch")
 
         manifest = install("raise SystemExit(0)\n")
         original_clone = module.clone_snapshot
@@ -458,18 +495,27 @@ def isolation_contract_cases(module: Any) -> list[str]:
         old_census, old_fingerprint, old_clone = module.census_freshness, module.canonical_fingerprint, module.clone_snapshot
         old_budget, old_grace = module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS
         try:
-            module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS = .5, .03
+            module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS = 30., .03
             for stalled_phase in ("census", "setup", "final_proof"):
                 calls = [0]
+                entered = []
+                def enter_stall():
+                    entered.append(stalled_phase)
+                    module.DEADLINE = module.monotonic() + 1.
+                    signal.setitimer(signal.ITIMER_REAL, 1.)
                 def stalled_census():
-                    time.sleep(2)
+                    enter_stall()
+                    time.sleep(30)
                     return old_census()
                 def stalled_fingerprint(*args):
                     calls[0] += 1
-                    if calls[0] == 2: time.sleep(2)
+                    if calls[0] == 2:
+                        enter_stall()
+                        time.sleep(30)
                     return old_fingerprint(*args)
                 def stalled_setup(*args):
-                    result = module.run_checker([sys.executable, "-c", "import time; time.sleep(2)"], root,
+                    enter_stall()
+                    result = module.run_checker([sys.executable, "-c", "import time; time.sleep(30)"], root,
                         module.EXECUTION_ENV, module.require_budget("injected setup"))
                     if result[3]: raise module.AggregateTimeout("injected setup command timeout")
                     raise AssertionError("stalled setup did not time out")
@@ -479,7 +525,8 @@ def isolation_contract_cases(module: Any) -> list[str]:
                 started = time.monotonic()
                 code, text = invoke(module, root, manifest, "--json", *( ["--check-manifest"] if stalled_phase == "final_proof" else []))
                 report = payload(text)
-                if code != 1 or report["failure_kind"] != "AGGREGATE_TIMEOUT" or time.monotonic() - started > 1.2:
+                if (code != 1 or report["failure_kind"] != "AGGREGATE_TIMEOUT"
+                        or entered != [stalled_phase] or time.monotonic() - started > 15):
                     raise AssertionError(f"stalled {stalled_phase} was not interrupted boundedly: {report}")
                 if report["canonical_proof"] != "UNAVAILABLE":
                     raise AssertionError("deadline exhaustion claimed complete final proof")
@@ -545,6 +592,675 @@ def isolation_contract_cases(module: Any) -> list[str]:
         finally:
             module.sys.executable = original_executable
         passed.append("ISO-12-invoking-python-binding-and-unusable-identity-failure")
+    return passed
+
+
+def process_control_cases(module: Any) -> list[str]:
+    """Real children plus deterministic faults, independent of host startup speed."""
+    import errno
+    import signal
+    passed = []
+    with tempfile.TemporaryDirectory(prefix="glyph-process-contract-") as directory:
+        root = Path(directory)
+        sentinel = root / "executed"
+        command = [sys.executable, "-c", "from pathlib import Path;Path(" + repr(str(sentinel)) + ").touch()"]
+        old_grace = module.TERM_GRACE_SECONDS
+        module.TERM_GRACE_SECONDS = .03
+        def run(cmd=command, timeout=20.):
+            return module.run_checker(cmd, root, module.base_environment(), timeout)
+        def reject(expected, result):
+            if result[3] != expected or sentinel.exists():
+                raise AssertionError(f"setup/cleanup false success or wrong classification: {result}")
+        try:
+            result = run([sys.executable, "-c", "import os,json;print(json.dumps([os.getpid(),os.getpgrp(),os.getsid(0)]))"])
+            identity = json.loads(result[1])
+            if result[0] or result[3] or len(set(identity)) != 1:
+                raise AssertionError(f"session acquisition failed: {result}")
+            passed.append("PROC-01-session-handshake-success")
+
+            def setup_error(): raise PermissionError(errno.EPERM, "injected setsid denial")
+            with mock.patch.object(module.os, "setsid", setup_error):
+                result = run()
+            reject("CHILD_SETUP_FAILURE", result)
+            record = next(json.loads(line) for line in result[2].splitlines() if json.loads(line)["kind"] == "CHILD_SETUP_FAILURE")
+            if record["phase"] != "child:setsid" or record["reported_errno"] != errno.EPERM:
+                raise AssertionError("child setup syscall/errno lost")
+            def exec_error(*args): raise OSError(errno.EIO, "injected before exec")
+            with mock.patch.object(module, "child_exec", exec_error):
+                reject("CHILD_SETUP_FAILURE", run())
+            def unicode_exec_error(*args): raise OSError(errno.ENOENT, "injected launch " + "🧪" * 1000)
+            with mock.patch.object(module, "child_exec", unicode_exec_error):
+                reject("CHILD_SETUP_FAILURE", run())
+            passed.append("PROC-02-pre-exec-setsid-EPERM-and-bounded-Unicode-errors")
+
+            original_status = module.child_setup_status
+            def malformed(fd, message):
+                if message["status"] == "READY": os.write(fd, b"not-json\n")
+                else: original_status(fd, message)
+            def premature_eof(fd, message): os._exit(0)
+            for writer in (malformed, premature_eof):
+                with mock.patch.object(module, "child_setup_status", writer):
+                    reject("CHILD_SETUP_PROTOCOL_FAILURE", run())
+            def lost_error(fd, message):
+                if message["status"] == "ERROR": raise OSError(errno.EIO, "injected lost error report")
+                original_status(fd, message)
+            with mock.patch.object(module, "child_setup_status", lost_error), mock.patch.object(module, "child_exec", exec_error):
+                reject("UNREPORTED_LAUNCH_OR_EXIT_127", run())
+            passed.append("PROC-03-malformed-EOF-and-lost-error-handshake-refusal")
+
+            original_setsid = module.os.setsid
+            def delayed_session():
+                time.sleep(30)
+                original_setsid()
+            start = time.monotonic()
+            with mock.patch.object(module.os, "setsid", delayed_session), mock.patch.object(module, "CHILD_SETUP_TIMEOUT_SECONDS", .2):
+                reject("CHILD_SETUP_TIMEOUT", run())
+            if time.monotonic() - start > 5:
+                raise AssertionError("acquisition cleanup exceeded bound")
+            passed.append("PROC-04-delayed-session-acquisition-bounded")
+
+            # Prove actual child AND descendant readiness before arming the real
+            # aggregate alarm. Startup has 20s; the deliberate stall is 30s.
+            ready = root / "tree-ready"
+            child = ("import os,signal,time;from pathlib import Path;"
+                     "signal.signal(signal.SIGTERM,signal.SIG_IGN);"
+                     "Path(" + repr(str(ready)) + ").write_text(str(os.getpid()));time.sleep(30)")
+            source = ("import subprocess,sys,signal,time\n"
+                      "signal.signal(signal.SIGTERM,signal.SIG_IGN)\n"
+                      "subprocess.Popen([sys.executable,'-c'," + repr(child) + "])\n"
+                      "time.sleep(30)\n")
+            real_clock = module.monotonic
+            armed = []
+            old_deadline = module.DEADLINE
+            def arm_when_ready():
+                now = real_clock()
+                if not armed and ready.exists():
+                    armed.append(now)
+                    module.DEADLINE = now + .2
+                    signal.setitimer(signal.ITIMER_REAL, .2)
+                return now
+            def alarm(*args): raise module.AggregateTimeout("real ready-tree deadline")
+            old_handler = signal.signal(signal.SIGALRM, alarm)
+            old_timer = signal.setitimer(signal.ITIMER_REAL, 0)
+            signals = []
+            real_killpg = module.os.killpg
+            def record_signals(pid, signum):
+                if signum: signals.append((pid, signum))
+                return real_killpg(pid, signum)
+            try:
+                with mock.patch.object(module, "monotonic", arm_when_ready), mock.patch.object(module.os, "killpg", record_signals):
+                    result = run([sys.executable, "-c", source])
+            finally:
+                signal.setitimer(signal.ITIMER_REAL, 0)
+                signal.signal(signal.SIGALRM, old_handler)
+                module.DEADLINE = old_deadline
+                if old_timer[0]: signal.setitimer(signal.ITIMER_REAL, *old_timer)
+            if not armed or result[3] != "AGGREGATE_TIMEOUT" or result[0] != -signal.SIGKILL or not any(s == signal.SIGKILL for _, s in signals):
+                raise AssertionError(f"ready TERM-resistant tree not killed: {result}; signals={signals}")
+            for pgid, _ in signals:
+                if module.group_exists(pgid):
+                    raise AssertionError("managed descendant group survived KILL")
+            if real_clock() - armed[0] > 5:
+                raise AssertionError("real tree cleanup exceeded bound")
+            passed.append("PROC-05-ready-TERM-resistant-child-and-descendant-real-KILL")
+
+            # Deterministically cross the checker clock only after Python has
+            # entered the checker. No assumption that startup fits in .1s.
+            ready.unlink()
+            def checker_clock(): return real_clock() + (25 if ready.exists() else 0)
+            with mock.patch.object(module, "monotonic", checker_clock):
+                result = run([sys.executable, "-c", "from pathlib import Path;import time;Path(" + repr(str(ready)) + ").touch();time.sleep(30)"])
+            if not ready.exists() or result[3] != "CHECKER_TIMEOUT":
+                raise AssertionError("entered checker timeout was not enforced")
+            passed.append("PROC-06-checker-timeout-after-proven-entry")
+
+            # EPERM is not an automatic success. A transient group denial may
+            # resolve only with a reaped leader AND proven absent group.
+            def deny_term(pid, signum):
+                if signum == signal.SIGTERM: raise PermissionError(errno.EPERM, "injected group TERM denial")
+                return real_killpg(pid, signum)
+            with mock.patch.object(module.os, "killpg", deny_term), mock.patch.object(module, "child_exec", exec_error):
+                result = run()
+            reject("CHILD_SETUP_FAILURE", result)
+            if "GROUP_ABSENT_AFTER_REAP" not in result[2]:
+                raise AssertionError("denied group operation not resolved by absence proof")
+            passed.append("PROC-07-group-EPERM-requires-reap-and-absence-proof")
+
+            real_fork, real_waitpid = module.os.fork, module.os.waitpid
+            owned = []
+            def record_fork():
+                pid = real_fork()
+                if pid: owned.append(pid)
+                return pid
+            def broken_wait(*args): raise OSError(errno.EIO, "injected waitpid failure")
+            def deny_group(pid, signum): raise PermissionError(errno.EPERM, "injected persistent group denial")
+            for target, replacement in (("waitpid", broken_wait), ("killpg", deny_group)):
+                owned.clear()
+                try:
+                    with mock.patch.object(module.os, "fork", record_fork), mock.patch.object(module.os, target, replacement), mock.patch.object(module, "child_exec", exec_error), mock.patch.object(module, "CLEANUP_REAP_SECONDS", .1):
+                        result = run()
+                    reject("PROCESS_CLEANUP_FAILURE", result)
+                    if "cleanup.proof" not in result[2] or result[4] > 5:
+                        raise AssertionError("unproved KILL/reap was hidden or unbounded")
+                finally:
+                    for pid in owned:
+                        try: os.killpg(pid, signal.SIGKILL)
+                        except (ProcessLookupError, PermissionError): pass
+                        try:
+                            found, _ = real_waitpid(pid, os.WNOHANG)
+                            if not found:
+                                os.kill(pid, signal.SIGKILL)
+                                real_waitpid(pid, 0)
+                        except (ChildProcessError, ProcessLookupError): pass
+            passed.append("PROC-08-KILL-reap-and-permission-proof-failures")
+
+            # Review regressions: a timer at cleanup entry must not discard
+            # ownership, and a failed reap must never suppress group KILL.
+            for defect in ("alarm_at_cleanup_entry", "reap_failure_with_descendant"):
+                if ready.exists(): ready.unlink()
+                owned.clear()
+                signals.clear()
+                alarm_sent = []
+                real_timer = signal.setitimer
+                real_clock = module.monotonic
+                def entered_clock(): return real_clock() + (25 if ready.exists() else 0)
+                def entry_alarm(which, value, interval=0):
+                    if value == 0 and not alarm_sent:
+                        alarm_sent.append(True)
+                        os.kill(os.getpid(), signal.SIGALRM)
+                    return real_timer(which, value, interval)
+                def late_reap_error(*args):
+                    if ready.exists(): raise OSError(errno.EIO, "injected reap failure after descendant readiness")
+                    return real_waitpid(*args)
+                old_handler = signal.signal(signal.SIGALRM, alarm)
+                try:
+                    with mock.patch.object(module.os, "fork", record_fork), mock.patch.object(module, "monotonic", entered_clock), mock.patch.object(module.os, "killpg", record_signals), mock.patch.object(module, "CLEANUP_REAP_SECONDS", .1):
+                        if defect == "alarm_at_cleanup_entry":
+                            with mock.patch.object(module.signal, "setitimer", entry_alarm):
+                                result = run([sys.executable, "-c", source])
+                        else:
+                            with mock.patch.object(module.os, "waitpid", late_reap_error):
+                                result = run([sys.executable, "-c", source])
+                    expected = "AGGREGATE_TIMEOUT" if alarm_sent else "PROCESS_CLEANUP_FAILURE"
+                    if result[3] != expected or not ready.exists() or not any(sig == signal.SIGKILL for _, sig in signals):
+                        raise AssertionError(f"review cleanup regression {defect}: {result}; signals={signals}")
+                    if defect == "alarm_at_cleanup_entry":
+                        try: real_waitpid(owned[0], os.WNOHANG)
+                        except ChildProcessError: pass
+                        else: raise AssertionError("cleanup-entry alarm left owned leader unreaped")
+                    else:
+                        # Only the injected waitpid prevented proof. Restore it
+                        # and verify that group KILL actually happened anyway.
+                        found, _ = real_waitpid(owned[0], os.WNOHANG)
+                        if found != owned[0]: raise AssertionError("failed reap also suppressed leader KILL")
+                    end = time.monotonic() + 2
+                    while module.group_exists(owned[0]) and time.monotonic() < end:
+                        time.sleep(.01)
+                    if module.group_exists(owned[0]):
+                        raise AssertionError("review regression left descendant group alive")
+                finally:
+                    real_timer(signal.ITIMER_REAL, 0)
+                    signal.signal(signal.SIGALRM, old_handler)
+                    for pid in owned:
+                        try: os.killpg(pid, signal.SIGKILL)
+                        except (ProcessLookupError, PermissionError): pass
+                        try:
+                            found, _ = real_waitpid(pid, os.WNOHANG)
+                            if not found:
+                                os.killpg(pid, signal.SIGKILL)
+                                os.kill(pid, signal.SIGKILL)
+                                real_waitpid(pid, 0)
+                        except (ChildProcessError, ProcessLookupError): pass
+            passed.append("PROC-09-cleanup-entry-alarm-retains-ownership")
+            passed.append("PROC-10-reap-error-cannot-suppress-descendant-KILL")
+        finally:
+            module.TERM_GRACE_SECONDS = old_grace
+    return passed
+
+
+def byte_integrity_cases(module: Any) -> list[str]:
+    """Separate raw repository evidence from strict checker text contracts."""
+    import errno
+    passed = []
+    with tempfile.TemporaryDirectory(prefix="glyph-byte-contract-") as directory:
+        parent = Path(directory)
+        root = fresh_root(parent)
+        original_root = module.ROOT
+        module.ROOT = root
+        try:
+            result = module.run_process([sys.executable, "-c", "import os;os.write(1,b'\\xff');os.write(2,b'\\xfe')"],
+                root, module.base_environment(), 20.)
+            if result[:4] != (0, b"\xff", b"\xfe", None):
+                raise AssertionError(f"raw process evidence changed bytes: {result!r}")
+            passed.append("BYTE-01-distinct-malformed-bytes-preserved-by-real-process")
+
+            # Hold every filesystem byte fixed; vary only malformed raw Git
+            # metadata so a different digest cannot be credited to file changes.
+            original_git = module.git_bytes
+            def altered_metadata(raw, stream):
+                def probe(*args, **kwargs):
+                    result = original_git(*args, **kwargs)
+                    if args == ("for-each-ref", "--format=%(refname) %(objectname)"):
+                        return subprocess.CompletedProcess(result.args, result.returncode,
+                            raw if stream == "stdout" else result.stdout,
+                            raw if stream == "stderr" else result.stderr)
+                    return result
+                return probe
+            for stream in ("stdout", "stderr"):
+                fingerprints = []
+                for raw in (b"ref-\xff\n", b"ref-\xfe\n"):
+                    with mock.patch.object(module, "git_bytes", altered_metadata(raw, stream)):
+                        fingerprints.append(module.canonical_fingerprint(root))
+                if fingerprints[0] == fingerprints[1]:
+                    raise AssertionError("malformed Git metadata admitted a byte collision")
+            passed.append("BYTE-02-raw-Git-stdout-and-stderr-affect-fingerprint")
+
+            names = [b" leading", b"line\nbreak", "unicode-λ".encode("utf-8"), b"raw-\xff", b"raw-\xfe"]
+            enumeration = b"\0".join(reversed(names)) + b"\0"
+            if module.nul_paths(enumeration) != sorted(names):
+                raise AssertionError("raw NUL path identity/order changed")
+            for raw in names:
+                path = module.repository_path(root, raw)
+                if not isinstance(path, bytes) or os.fsencode(os.fsdecode(path)) != path or not path.endswith(b"/" + raw):
+                    raise AssertionError("filesystem path conversion is not reversible")
+            for malformed in (b"missing-NUL", b"one\0\0two\0"):
+                try: module.nul_paths(malformed)
+                except ValueError: pass
+                else: raise AssertionError("malformed path framing accepted")
+            native_nontext = True
+            for raw in names:
+                path = module.repository_path(root, raw)
+                try:
+                    with open(path, "wb") as stream: stream.write(b"before")
+                except OSError as exc:
+                    if sys.platform != "darwin" or exc.errno not in (errno.EILSEQ, errno.EPERM) or raw not in names[-2:]:
+                        raise
+                    native_nontext = False
+                    continue  # APFS/host permission layer refuses these names; raw roundtrip is tested.
+                before = module.canonical_fingerprint(root)
+                with open(path, "wb") as stream: stream.write(b"after")
+                if module.canonical_fingerprint(root) == before:
+                    raise AssertionError(f"path bytes omitted from actual file mutation: {raw!r}")
+            passed.append("BYTE-03-raw-NUL-paths-roundtrip-and-" + ("native-nontext-files" if native_nontext else "macOS-nontext-name-refusal-with-raw-roundtrip"))
+
+            link = module.repository_path(root, b"byte-link")
+            fingerprints = []
+            native_targets = True
+            for target in (b"README.md", b"other-target", b"\xff", b"\xfe"):
+                try: os.unlink(link)
+                except FileNotFoundError: pass
+                try: os.symlink(target, link)
+                except OSError as exc:
+                    if sys.platform != "darwin" or exc.errno not in (errno.EILSEQ, errno.EPERM) or target not in (b"\xff", b"\xfe"):
+                        raise
+                    native_targets = False
+                    break
+                if os.readlink(link) != target:
+                    raise AssertionError("symlink bytes changed in filesystem transport")
+                fingerprints.append(module.canonical_fingerprint(root))
+            if len(set(fingerprints)) != len(fingerprints):
+                raise AssertionError("different symlink targets collapsed")
+            if not native_targets:
+                os.symlink(b"README.md", link)
+                original_readlink = module.os.readlink
+                def changed_target(raw):
+                    return lambda path, *args, **kwargs: raw if path == link else original_readlink(path, *args, **kwargs)
+                fingerprints = []
+                for raw in (b"\xff", b"\xfe"):
+                    with mock.patch.object(module.os, "readlink", changed_target(raw)):
+                        fingerprints.append(module.canonical_fingerprint(root))
+                if fingerprints[0] == fingerprints[1]:
+                    raise AssertionError("raw symlink target evidence collapsed")
+            passed.append("BYTE-04-byte-symlink-targets-affect-fingerprint")
+
+            # A true text checker emits invalid stdout/stderr, exits zero, and
+            # must still stop dispatch before its successor in the real aggregate.
+            text_parent = parent / "text"
+            text_parent.mkdir()
+            text_root = fresh_root(text_parent)
+            probe, next_checker = entry("bad_text"), entry("must_not_run_after_bad_text")
+            write_checker(text_root, next_checker, 0)
+            for descriptor in (1, 2):
+                write_checker(text_root, probe, 0)
+                (text_root / probe["path"]).write_text(f"import os\nos.write({descriptor},b'\\xff')\n", encoding="utf-8")
+                run_git(text_root, "add", probe["path"])
+                manifest = write_manifest(text_root, [probe, next_checker], ["baseline"])
+                before = module.canonical_fingerprint(text_root)
+                code, text = invoke(module, text_root, manifest, "--json")
+                report = payload(text)
+                if (code != 1 or report["failure_kind"] != "MALFORMED_TEXT_OUTPUT" or len(report["results"]) != 1
+                        or report["results"][0]["exit_code"] != 0 or report["canonical_proof"] != "MATCH"
+                        or module.canonical_fingerprint(text_root) != before):
+                    raise AssertionError(f"malformed text passed or continued dispatch: {report}")
+            with mock.patch.object(module, "git_bytes", return_value=subprocess.CompletedProcess(["git"], 0, b"\xff", b"")):
+                try: module.git("text-probe")
+                except ValueError as exc:
+                    if "MALFORMED_GIT_TEXT_OUTPUT" not in str(exc): raise
+                else: raise AssertionError("strict Git text boundary accepted malformed UTF-8")
+            passed.append("BYTE-05-malformed-checker-text-fails-and-stops-dispatch")
+        finally:
+            module.ROOT = original_root
+    return passed
+
+
+def pre_git_metadata_cases(module: Any) -> list[str]:
+    """Prove unsafe fixed objects never reach even the first Git wrapper call."""
+    passed = []
+    with tempfile.TemporaryDirectory(prefix="glyph-pre-git-contract-") as directory:
+        parent = Path(directory).resolve()
+        def refused(root, needle):
+            with mock.patch.object(module, "git_bytes", side_effect=AssertionError("Git invoked before admission")) as git_probe:
+                for operation in (lambda: module.preflight_repository_safety(root),
+                                  lambda: module.canonical_fingerprint(root)):
+                    try: operation()
+                    except ValueError as exc:
+                        if needle not in str(exc): raise
+                    else: raise AssertionError("unsafe fixed metadata admitted")
+                code, text = invoke(module, root, root / "unused-manifest", "--json")
+                report = payload(text)
+                if code != 1 or report["failure_kind"] != "SETUP_FAILURE" or needle not in report["message"]:
+                    raise AssertionError(f"unsafe main startup classification: {report}")
+                if git_probe.call_count: raise AssertionError("Git called on unsafe metadata")
+        cases = [("PREMETA-01-config-FIFO", "config", "fifo"),
+                 ("PREMETA-02-HEAD-FIFO", "HEAD", "fifo"),
+                 ("PREMETA-03-config-directory", "config", "directory"),
+                 ("PREMETA-04-config-equal-byte-symlink", "config", "symlink"),
+                 ("PREMETA-05-config-broken-symlink", "config", "broken"),
+                 ("PREMETA-06-commondir-FIFO", "commondir", "fifo")]
+        for label, name, kind in cases:
+            fixture = parent / label
+            fixture.mkdir()
+            root = fresh_root(fixture)
+            path = root / ".git" / name
+            target = fixture / "equal-bytes"
+            if path.is_file():
+                target.write_bytes(path.read_bytes())
+                path.unlink()
+            if kind == "fifo": os.mkfifo(path)
+            elif kind == "directory": path.mkdir()
+            else: path.symlink_to(target if kind == "symlink" else fixture / "missing")
+            refused(root, "UNSAFE_GIT_CONTROL")
+            passed.append(label + "-no-Git")
+        fixture = parent / "gitfile-refusals"
+        fixture.mkdir()
+        root = fresh_root(fixture)
+        (root / ".git").rename(root / "metadata")
+        for raw in (b"wrong locator", b"gitdir: ", b"gitdir: metadata\0", b"gitdir: metadata\nsecond\n",
+                    b"gitdir: " + b"x" * (module.LOCATOR_LIMIT + 1)):
+            (root / ".git").write_bytes(raw)
+            refused(root, "GIT")
+        passed.append("PREMETA-07-malformed-NUL-multirecord-oversized-gitfile-no-Git")
+        (root / ".git").unlink()
+        os.mkfifo(root / ".git")
+        refused(root, "UNSAFE_DOT_GIT")
+        passed.append("PREMETA-08-dot-git-FIFO-no-read-no-Git")
+        (root / ".git").unlink()
+        (root / "metadata").rename(root / ".git")
+        admitted = module.preflight_repository_safety(root)
+        if admitted["kind"] != b"DIRECTORY": raise AssertionError("ordinary layout refused")
+        module.canonical_fingerprint(root)
+        passed.append("PREMETA-09-ordinary-directory-admitted-and-crosschecked")
+        linked = fixture / "linked"
+        run_git(root, "worktree", "add", "--detach", str(linked), "HEAD")
+        layout = module.preflight_repository_safety(linked)
+        if layout["kind"] != b"GITFILE" or layout["git_dir"] == layout["common_dir"]:
+            raise AssertionError("linked-worktree common layout not discovered")
+        original = module.canonical_fingerprint(linked)
+        # Both relative and absolute gitfile forms must agree with Git discovery.
+        relative = os.path.relpath(layout["git_dir"], os.fsencode(linked))
+        (linked / ".git").write_bytes(b"gitdir: " + relative + b"\n")
+        if module.canonical_fingerprint(linked) == original:
+            raise AssertionError("raw gitfile locator spelling was not fingerprinted")
+        passed.append("PREMETA-10-relative-absolute-gitfile-and-commondir-crosschecked")
+        # Actual arbitrary checker mutations: intercept the Git wrapper if it
+        # ever sees the unsafe post-state, rather than relying on a short clock.
+        normal = parent / "post-state"
+        normal.mkdir()
+        root = fresh_root(normal)
+        probe, successor = entry("unsafe_metadata_post"), entry("after_unsafe_metadata")
+        write_checker(root, successor, 0)
+        for kind in ("fifo", "symlink"):
+            write_checker(root, probe, 0)
+            action = "os.mkfifo(p)" if kind == "fifo" else "p.symlink_to('config-copy')"
+            (root / probe["path"]).write_text(
+                "import os\nfrom pathlib import Path\np=Path('.git/config')\n"
+                "Path('.git/config-copy').write_bytes(p.read_bytes())\np.unlink()\n" + action + "\n", encoding="utf-8")
+            run_git(root, "add", probe["path"])
+            manifest = write_manifest(root, [probe, successor], ["baseline"])
+            before = module.canonical_fingerprint(root)
+            old_git = module.git_bytes
+            def guarded_git(*args, **kwargs):
+                active = kwargs.get("cwd") or module.ROOT
+                # A Git wrapper call on a mutated config is itself a failure.
+                try: module.preflight_repository_safety(active)
+                except ValueError as exc:
+                    raise AssertionError("Git wrapper reached unsafe post-state") from exc
+                return old_git(*args, **kwargs)
+            with mock.patch.object(module, "git_bytes", side_effect=guarded_git):
+                code, text = invoke(module, root, manifest, "--json")
+            report = payload(text)
+            if (code != 1 or report["failure_kind"] != "ISOLATED_PROOF_FAILURE" or len(report["results"]) != 1
+                    or report["results"][0]["isolated_proof"] == "MATCH"
+                    or "UNSAFE_GIT_CONTROL" not in report["results"][0].get("proof_error", "")
+                    or report["canonical_proof"] != "MATCH" or module.canonical_fingerprint(root) != before):
+                raise AssertionError(f"unsafe post-check metadata accepted: {report}")
+        passed.append("PREMETA-11-post-check-FIFO-and-symlink-proof-refusal-stops-next")
+    return passed
+
+
+def locator_traversal_cases(module: Any) -> list[str]:
+    """Descriptor traversal regressions, never accepting timeout as admission."""
+    import shutil
+    passed = []
+    with tempfile.TemporaryDirectory(prefix="glyph-descriptor-contract-") as directory:
+        parent = Path(directory).resolve()
+        root = fresh_root(parent)
+        original = root / ".git"
+        safe = root / "safe"
+        original.rename(safe)
+        attacker = parent / "attacker"
+        (attacker / "intermediate").mkdir(parents=True)
+        shutil.copytree(safe, attacker / "safe")
+        (attacker / "safe/config").unlink()
+        os.mkfifo(attacker / "safe/config")
+        (root / "link").symlink_to(attacker / "intermediate", target_is_directory=True)
+        original.write_bytes(b"gitdir: link/../safe\n")
+        def refused():
+            with mock.patch.object(module, "git_bytes", side_effect=AssertionError("Git reached unsafe locator")) as git_probe:
+                try: module.canonical_fingerprint(root)
+                except ValueError as exc:
+                    if "UNSAFE_LOCATOR_TOPOLOGY" not in str(exc): raise
+                else: raise AssertionError("symlink locator admitted")
+                if git_probe.call_count: raise AssertionError("unsafe locator invoked Git")
+        refused()
+        passed.append("PREMETA-12-link-dotdot-FIFO-bypass-refused-at-component-no-Git")
+        (root / "link").unlink()
+        (root / "real/subdir").mkdir(parents=True)
+        target = root / "real/gitdir"
+        safe.rename(target)
+        original.write_bytes(b"gitdir: real/subdir/../gitdir\n")
+        layout = module.preflight_repository_safety(root)
+        if layout["git_dir"] != os.fsencode(target): raise AssertionError("physical dotdot target differs")
+        module.canonical_fingerprint(root)
+        # Dot is an explicit no-op, including raw-byte distinction in the proof.
+        before = module.canonical_fingerprint(root)
+        original.write_bytes(b"gitdir: ./real/subdir/../gitdir\n")
+        if module.canonical_fingerprint(root) == before: raise AssertionError("raw dot locator spelling omitted")
+        passed.append("PREMETA-13-real-directory-dotdot-and-explicit-dot-admitted")
+        linked = parent / "linked"
+        run_git(root, "worktree", "add", "--detach", str(linked), "HEAD")
+        linked_layout = module.preflight_repository_safety(linked)
+        if linked_layout["commondir_raw"] != b"../..\n" or linked_layout["common_dir"] != os.fsencode(target):
+            raise AssertionError("linked-worktree parent traversal differs")
+        module.canonical_fingerprint(linked)
+        passed.append("PREMETA-14-commondir-dotdot-dotdot-physical-parent-admitted")
+        # Symlink components before AND after dotdot in a commondir locator.
+        common_record = target / "commondir"
+        (target / "link").symlink_to(attacker / "intermediate", target_is_directory=True)
+        common_record.write_bytes(b"link/../safe\n")
+        refused()
+        passed.append("PREMETA-15-commondir-symlink-before-dotdot-no-Git")
+        (root / "real/link").symlink_to(attacker / "safe", target_is_directory=True)
+        common_record.write_bytes(b"../link\n")
+        refused()
+        passed.append("PREMETA-16-commondir-symlink-after-dotdot-no-Git")
+        common_record.unlink()
+        original.write_bytes(b"gitdir: " + os.fsencode(target) + b"\n")
+        module.canonical_fingerprint(root)
+        passed.append("PREMETA-17-absolute-no-symlink-locator-admitted")
+        (root / "alias").symlink_to(root / "real", target_is_directory=True)
+        original.write_bytes(b"gitdir: " + os.fsencode(root / "alias/gitdir") + b"\n")
+        refused()
+        passed.append("PREMETA-18-absolute-symlink-locator-no-Git")
+        original.write_bytes(b"gitdir: real/gitdir\n")
+        old_object = module.metadata_object
+        changed = False
+        def replace_locator(path):
+            nonlocal changed
+            result = old_object(path)
+            if path == os.fsencode(original) and not changed:
+                changed = True
+                original.write_bytes(b"gitdir: ./real/gitdir\n")
+            return result
+        with mock.patch.object(module, "metadata_object", side_effect=replace_locator), mock.patch.object(
+                module, "git_bytes", side_effect=AssertionError("Git used stale locator admission")):
+            try: module.canonical_fingerprint(root)
+            except ValueError as exc:
+                if "GIT_LAYOUT_CHANGED_BEFORE_PROBE" not in str(exc): raise
+            else: raise AssertionError("changed raw locator reused stale admission")
+        if not changed: raise AssertionError("locator mutation did not execute")
+        # Replace the admitted directory itself between traversal and probe.
+        changed = False
+        def replace_directory(path):
+            nonlocal changed
+            result = old_object(path)
+            if path == os.fsencode(original) and not changed:
+                changed = True
+                target.rename(target.with_name("saved-gitdir"))
+                shutil.copytree(target.with_name("saved-gitdir"), target)
+            return result
+        with mock.patch.object(module, "metadata_object", side_effect=replace_directory), mock.patch.object(
+                module, "git_bytes", side_effect=AssertionError("Git used stale directory admission")):
+            try: module.canonical_fingerprint(root)
+            except ValueError as exc:
+                if "GIT_LAYOUT_CHANGED_BEFORE_PROBE" not in str(exc): raise
+            else: raise AssertionError("changed directory reused stale admission")
+        passed.append("PREMETA-19-locator-and-directory-replacement-refuse-before-Git")
+        for malformed in (b"real//gitdir", b"real/gitdir/"):
+            original.write_bytes(b"gitdir: " + malformed + b"\n")
+            with mock.patch.object(module, "git_bytes", side_effect=AssertionError("Git used malformed component")):
+                try: module.canonical_fingerprint(root)
+                except ValueError as exc:
+                    if "MALFORMED_LOCATOR_TOPOLOGY" not in str(exc): raise
+                else: raise AssertionError("empty locator component admitted")
+    return passed
+
+
+def metadata_object_cases(module: Any) -> list[str]:
+    """Object identity controls share the serializer used by every metadata role."""
+    import hashlib
+    passed = []
+    with tempfile.TemporaryDirectory(prefix="glyph-metadata-contract-") as directory:
+        parent = Path(directory)
+        path = os.fsencode(parent / "metadata")
+        target_a, target_b = os.fsencode(parent / "target-a"), os.fsencode(parent / "target-b")
+        for target in (target_a, target_b):
+            with open(target, "wb") as stream: stream.write(b"same bytes")
+        def evidence():
+            digest = hashlib.sha256()
+            for value in module.metadata_object(path):
+                digest.update(len(value).to_bytes(8, "big"))
+                digest.update(value)
+            return digest.digest()
+        absent = evidence()
+        os.symlink(b"missing-target", path)
+        broken = evidence()
+        if broken == absent: raise AssertionError("ABSENT collided with broken metadata symlink")
+        os.unlink(path)
+        with open(path, "wb") as stream: stream.write(b"same bytes")
+        regular = evidence()
+        original_mode = os.lstat(path).st_mode
+        os.chmod(path, 0o700)
+        if evidence() == regular: raise AssertionError("metadata permission mutation invisible")
+        os.chmod(path, original_mode)
+        with open(path, "wb") as stream: stream.write(b"changed bytes")
+        if evidence() == regular: raise AssertionError("metadata regular bytes invisible")
+        os.unlink(path)
+        os.symlink(target_a, path)
+        link_a = evidence()
+        if link_a == regular: raise AssertionError("metadata regular/symlink collision")
+        os.unlink(path)
+        os.symlink(target_b, path)
+        if evidence() == link_a: raise AssertionError("equal-content symlink targets collided")
+        os.unlink(path)
+        os.symlink(b"raw-\xff", path)
+        raw_a = evidence()
+        os.unlink(path)
+        os.symlink(b"raw-\xfe", path)
+        if evidence() == raw_a: raise AssertionError("raw metadata link targets collided")
+        os.unlink(path)
+        passed.extend(["META-01-absent-versus-broken-symlink", "META-02-regular-mode-and-byte-mutations",
+                       "META-03-regular-versus-symlink-and-equal-content-targets", "META-04-raw-symlink-target-bytes"])
+        for kind in ("directory", "FIFO"):
+            if kind == "directory": os.mkdir(path)
+            else: os.mkfifo(path)
+            # Any attempt to open an unsupported object is itself a test failure;
+            # the FIFO control cannot hang even if the implementation regresses.
+            with mock.patch.object(module.os, "open", side_effect=AssertionError("unsupported metadata object opened")):
+                try: module.metadata_object(path)
+                except ValueError as exc:
+                    if "UNSUPPORTED_METADATA_OBJECT" not in str(exc): raise
+                else: raise AssertionError(f"unsupported metadata {kind} accepted")
+            if kind == "directory": os.rmdir(path)
+            else: os.unlink(path)
+        passed.append("META-05-directory-and-FIFO-refused-before-open")
+
+        # Discovery can resolve an identical-content directory through a new
+        # symlink. Its lexical locator must retain that substitution evidence.
+        location = parent / "locator"
+        destination = parent / "directory"
+        location.mkdir()
+        before_topology = module.metadata_topology(os.fsencode(location))
+        location.rename(destination)
+        location.symlink_to(destination, target_is_directory=True)
+        if module.metadata_topology(os.fsencode(location)) == before_topology:
+            raise AssertionError("metadata directory/symlink topology substitution invisible")
+        passed.append("META-06-directory-locator-symlink-topology")
+
+        root = fresh_root(parent)
+        original_root = module.ROOT
+        module.ROOT = root
+        try:
+            probe, successor = entry("metadata_object_mutation"), entry("after_metadata_must_not_run")
+            write_checker(root, successor, 0)
+            write_checker(root, probe, 0)
+            (root / probe["path"]).write_text(
+                "from pathlib import Path\np=Path('.git/config')\n"
+                "target=Path('.git/config-copy')\ntarget.write_bytes(p.read_bytes())\n"
+                "p.unlink()\np.symlink_to('config-copy')\n", encoding="utf-8")
+            run_git(root, "add", probe["path"])
+            manifest = write_manifest(root, [probe, successor], ["baseline"])
+            before = module.canonical_fingerprint(root)
+            code, text = invoke(module, root, manifest, "--json")
+            report = payload(text)
+            if (code != 1 or report["failure_kind"] != "ISOLATED_PROOF_FAILURE"
+                    or len(report["results"]) != 1 or report["results"][0]["isolated_proof"] == "MATCH"
+                    or "UNSAFE_GIT_CONTROL" not in report["results"][0].get("proof_error", "")
+                    or report["canonical_proof"] != "MATCH" or module.canonical_fingerprint(root) != before):
+                raise AssertionError(f"equal-byte config symlink mutation accepted or continued: {report}")
+            config = root / ".git/config"
+            contents = config.read_bytes()
+            copy = parent / "config-copy"
+            copy.write_bytes(contents)
+            config.unlink()
+            config.symlink_to(copy)
+            try: module.canonical_fingerprint(root)
+            except ValueError as exc:
+                if "UNSAFE_GIT_CONTROL" not in str(exc): raise
+            else: raise AssertionError("config symlink passed fresh safety admission")
+            passed.append("META-07-config-equal-byte-symlink-fingerprint-and-aggregate-stop")
+        finally:
+            module.ROOT = original_root
     return passed
 
 
@@ -1675,9 +2391,179 @@ def gp_val039_runner_cases(module: Any) -> list[str]:
             'ISO-27-039-malformed-roots-catalog-self-authority-and-inert-dispatch']
 
 
+def deadline_control_cases(module: Any) -> list[str]:
+    """Deterministic deadline dataflow; real process clocks live in ISO/PROC."""
+    import signal
+    root = RUNNER_PATH.parents[1]
+    manifest = root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
+    def exhausted(*args):
+        module.DEADLINE = module.monotonic() - 1
+        module.require_budget("deterministic preflight exhaustion")
+    for kind in ("before_stop_entry", "pending_at_stop", "pending_at_start"):
+        original_stop = module.DeadlineAlarm.stop
+        original_timer = signal.setitimer
+        injected = []
+        def stop(alarm):
+            if kind == "before_stop_entry" and not injected:
+                injected.append(True)
+                alarm.handler(signal.SIGALRM, None)
+            return original_stop(alarm)
+        def timer(which, seconds, interval=0):
+            if ((kind == "pending_at_stop" and seconds == 0
+                    or kind == "pending_at_start" and seconds > 0) and not injected):
+                injected.append(True)
+                os.kill(os.getpid(), signal.SIGALRM)
+            return original_timer(which, seconds, interval)
+        with mock.patch.object(module, "preflight_repository_safety", exhausted), \
+                mock.patch.object(module.DeadlineAlarm, "stop", stop), \
+                mock.patch.object(module.signal, "setitimer", timer):
+            code, text = invoke(module, root, manifest, "--json")
+        report = payload(text)
+        if (not injected or code != 1 or report["status"] != "FAIL"
+                or report["failure_kind"] != "AGGREGATE_TIMEOUT"
+                or report["canonical_proof"] != "UNAVAILABLE" or report["results"]):
+            raise AssertionError("timer transition escaped or accepted: " + kind + ": " + text)
+    # An inherited alarm loses elapsed cleanup time too, even without a global
+    # aggregate deadline. An expired clock is reported, never re-armed afresh.
+    for deadline in (None, 15.):
+        for now, expected in ((12., 3.), (16., None)):
+            with mock.patch.object(module, "DEADLINE", deadline), \
+                    mock.patch.object(module, "monotonic", return_value=now), \
+                    mock.patch.object(module.signal, "setitimer") as timer:
+                expired = module.restore_operational_alarm((5., 0.), 10.)
+            if expired != (expected is None):
+                raise AssertionError("suspended alarm expiration lost")
+            if expected is None:
+                timer.assert_not_called()
+            else:
+                timer.assert_called_once_with(signal.ITIMER_REAL, expected, 0.)
+    return ["TIMER-01-start-stop-pending-and-entry-delivery-structured-timeout",
+            "TIMER-02-suspended-alarm-accounts-elapsed-time-and-expiration"]
+
+
+def cleanup_proof_control_cases(module: Any) -> list[str]:
+    """No repository MATCH or further work after uncertain lifecycle cleanup."""
+    import signal
+    with tempfile.TemporaryDirectory(prefix="glyph-cleanup-proof-controls-") as directory:
+        root = fresh_root(Path(directory))
+        first, later = entry("cleanup_probe"), entry("later_probe")
+        write_checker(root, first, 0)
+        write_checker(root, later, 0)
+        manifest = write_manifest(root, [first, later], ["baseline"])
+        before = module.canonical_fingerprint(root)
+        for defect in ("checker", "scratch", "Git", "final_Git_alarm"):
+            injected, later_calls, post_proofs, scratch_calls = [], [], [], []
+            caller_proofs, final_stage, alarm_sent = [], [], []
+            context = module._CLEANUP_UNPROVEN
+            class LifecycleContext:
+                def get(self):
+                    value = context.get()
+                    if defect == "final_Git_alarm" and value and injected and not alarm_sent:
+                        alarm_sent.append(True)
+                        os.kill(os.getpid(), signal.SIGALRM)
+                    return value
+                def set(self, value): return context.set(value)
+                def reset(self, token): return context.reset(token)
+            original_run, original_raw = module.run_checker, module.run_process
+            original_fingerprint = module.canonical_fingerprint
+            def run(command, *args, **kwargs):
+                if len(command) > 1 and command[1] == later["path"]:
+                    later_calls.append(command)
+                if command[:2] == ["rm", "-rf"]:
+                    scratch_calls.append(command)
+                if (defect == "checker" and len(command) > 1 and command[1] == first["path"]
+                        or defect == "scratch" and command[:2] == ["rm", "-rf"]):
+                    injected.append(command)
+                    return None, "", "injected lifecycle uncertainty", "PROCESS_CLEANUP_FAILURE", 0.
+                return original_run(command, *args, **kwargs)
+            def raw(command, *args, **kwargs):
+                if (defect == "Git" or defect == "final_Git_alarm" and final_stage) and command[0] == "git" and not injected:
+                    injected.append(command)
+                    return None, b"", b"injected Git lifecycle uncertainty", "PROCESS_CLEANUP_FAILURE", 0.
+                if injected:
+                    raise AssertionError("new process dispatched after cleanup uncertainty")
+                return original_raw(command, *args, **kwargs)
+            def fingerprint(*args):
+                if not args:
+                    caller_proofs.append(True)
+                    if len(caller_proofs) == 2: final_stage.append(True)
+                if injected:
+                    post_proofs.append(args)
+                return original_fingerprint(*args)
+            with mock.patch.object(module, "run_checker", run), \
+                    mock.patch.object(module, "run_process", raw), \
+                    mock.patch.object(module, "canonical_fingerprint", fingerprint), \
+                    mock.patch.object(module, "_CLEANUP_UNPROVEN", LifecycleContext()):
+                code, text = invoke(module, root, manifest, "--json")
+            report = payload(text)
+            if (code != 1 or report["status"] != "FAIL" or report["failure_kind"] != "PROCESS_CLEANUP_FAILURE"
+                    or report["canonical_proof"] != "UNAVAILABLE" or not injected or post_proofs
+                    or any(row["isolated_proof"] == "MATCH" for row in report["results"])):
+                raise AssertionError("cleanup uncertainty accepted proof: " + defect + ": " + text)
+            if defect == "final_Git_alarm" and not alarm_sent:
+                raise AssertionError("final cleanup classification boundary not exercised")
+            if defect in ("checker", "Git") and (later_calls or scratch_calls):
+                raise AssertionError("unclosed lifecycle permitted later checker or scratch deletion")
+            if before != module.canonical_fingerprint(root):
+                raise AssertionError("cleanup uncertainty control changed caller")
+        token = module._CLEANUP_UNPROVEN.set(True)
+        try:
+            with mock.patch.object(module.os, "fork", side_effect=AssertionError("unclosed dispatch")):
+                result = module.run_checker([sys.executable, "-c", "pass"], root, module.base_environment(), 10.)
+                if result[3] != "PROCESS_CLEANUP_FAILURE":
+                    raise AssertionError("lower process layer accepted unclosed scope")
+                try:
+                    module.canonical_fingerprint(root)
+                except ValueError as exc:
+                    if "PROCESS_CLEANUP_FAILURE" not in str(exc): raise
+                else:
+                    raise AssertionError("unclosed scope permitted repository proof")
+        finally:
+            module._CLEANUP_UNPROVEN.reset(token)
+    return ["PROC-11-checker-Git-and-scratch-cleanup-uncertainty-never-MATCH",
+            "PROC-12-unclosed-lifecycle-suppresses-proof-dispatch-and-deletion"]
+
+
+def selftest_budget_contract_cases(module: Any) -> list[str]:
+    # The expanded suite gets margin, never a larger budget for other commands.
+    selected = entry("validation_aggregate_adversarial")
+    selected["path"] = "tools/check_glyph_runtime_config_validation_aggregate.py"
+    selected["command"] = ["python3", selected["path"]]
+    if module.checker_time_budget(selected) != 210. or module.CHECKER_TIMEOUT_SECONDS != 140.:
+        raise AssertionError("self-test allowance or ordinary default drifted")
+    for key, value in (("id", "other_checker"), ("path", "tools/other.py"),
+                       ("command", ["python3", selected["path"], "--other"])):
+        near_miss = dict(selected)
+        near_miss[key] = value
+        if module.checker_time_budget(near_miss) != 140.:
+            raise AssertionError("self-test allowance broadened: " + key)
+    # Aggregate remaining time always dominates the suite allowance. Exercise
+    # actual main dispatch below a mocked remaining budget without wall races.
+    with tempfile.TemporaryDirectory(prefix="glyph-selftest-budget-control-") as directory:
+        root = fresh_root(Path(directory))
+        write_checker(root, selected, 0)
+        manifest = write_manifest(root, [selected], ["baseline"])
+        original_run, original_budget = module.run_checker, module.require_budget
+        observed = []
+        def remaining(label):
+            return 3. if label == "checker:" + selected["id"] else original_budget(label)
+        def dispatch(command, cwd, env, timeout, **kwargs):
+            if len(command) > 1 and command[1] == selected["path"]:
+                observed.append(timeout)
+                return None, "", "injected remaining-budget exhaustion", "CHECKER_TIMEOUT", 0.
+            return original_run(command, cwd, env, timeout, **kwargs)
+        with mock.patch.object(module, "require_budget", remaining), mock.patch.object(module, "run_checker", dispatch):
+            code, text = invoke(module, root, manifest, "--json")
+        report = payload(text)
+        if (code != 1 or observed != [3.] or report["status"] != "FAIL"
+                or report["failure_kind"] != "AGGREGATE_TIMEOUT" or len(report["results"]) != 1):
+            raise AssertionError("self-test allowance escaped aggregate remaining budget: " + text)
+    return ["AGG-26-exact-selftest-allowance-and-aggregate-budget-clipping"]
+
+
 def main() -> int:
     module = load_runner()
-    passed: list[str] = []
+    passed: list[str] = deadline_control_cases(module) + cleanup_proof_control_cases(module) + selftest_budget_contract_cases(module)
     actual_root = RUNNER_PATH.parents[1]
     module.ROOT = actual_root
     probe = entry("probe")
@@ -2068,6 +2954,11 @@ def main() -> int:
     passed.extend(gp_val034_catalog_cases(module))
     passed.extend(gp_val039_runner_cases(module))
     passed.extend(isolation_contract_cases(module))
+    passed.extend(process_control_cases(module))
+    passed.extend(byte_integrity_cases(module))
+    passed.extend(metadata_object_cases(module))
+    passed.extend(pre_git_metadata_cases(module))
+    passed.extend(locator_traversal_cases(module))
     # The old synthetic repositories exercise only the pre-campaign catalog.
     # They contain no adopted campaign authority and must not impersonate it.
     import glyph_campaign_transition as campaign

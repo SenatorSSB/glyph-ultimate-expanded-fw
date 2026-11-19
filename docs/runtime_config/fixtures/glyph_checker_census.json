@@ -14914,7 +14914,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 131516,
+      "file_size_bytes": 185089,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "G2B-historical-evidence-admissible-without-current-authority",
@@ -14927,6 +14927,7 @@
         "carrying_candidate",
         "configurator",
         "evidence",
+        "evidence.",
         "evidence/HARDWARE_EVIDENCE.md",
         "evidence_commit",
         "evidence_root",
@@ -14947,7 +14948,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 2144,
+      "line_count": 3035,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -14962,6 +14963,7 @@
         "carrying_candidate",
         "configurator",
         "evidence",
+        "evidence.",
         "evidence/HARDWARE_EVIDENCE.md",
         "evidence_commit",
         "evidence_root",
@@ -15044,7 +15046,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "883ed8a2a6c730eddc579e071f6f1c38a3772d7b933124001bb83ef179f9e257",
+      "sha256": "e8d585dab557720ac85ddfa63a7afe400b34a7b936f02bb755a538734582294b",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
