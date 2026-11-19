@@ -2117,6 +2117,10 @@
     {
       "length": 17,
       "sha256": "8523eb161c8e9e06f206f6bbda28d21d990944fd443f7d2e170346c75e2739bb"
+    },
+    {
+      "length": 6,
+      "sha256": "579d20bd77eb9b41c6a90134bac8beb118576c11030bf9544d38688f60553276"
     }
   ],
   "glyph_nuker_obligation": {

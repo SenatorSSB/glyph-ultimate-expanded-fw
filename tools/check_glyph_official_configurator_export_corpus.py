@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -70,8 +71,12 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
 
     if manifest.get("captured_at") not in {"2026-06-06", "UNKNOWN_EXACT_TIMESTAMP"}:
         fail("manifest.captured_at must be 2026-06-06 or UNKNOWN_EXACT_TIMESTAMP")
-    if manifest.get("captured_by") != "Rasmus / user-provided":
-        fail("manifest.captured_by must be Rasmus / user-provided")
+    # Preserve the exact historical identity contract without publishing its label.
+    captured_by = manifest.get("captured_by")
+    if (not isinstance(captured_by, str)
+            or hashlib.sha256(captured_by.encode("utf-8")).hexdigest()
+            != "c0087117eb24cd53a0931b4e0d36651a1f8d919811ffef0f2b20d9fbcf381aad"):
+        fail("manifest.captured_by must match the sealed historical identity")
     glyph_repo_commit = require_commit_in_current_history(manifest.get("glyph_repo_commit"))
     if manifest.get("firmware_source_commit") != glyph_repo_commit:
         fail("manifest.firmware_source_commit must match glyph_repo_commit for this corpus")

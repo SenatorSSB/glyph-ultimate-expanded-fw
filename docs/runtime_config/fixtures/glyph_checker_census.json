@@ -10034,7 +10034,7 @@
       },
       "checker_id": "official_configurator_export_corpus",
       "defines_main": true,
-      "file_size_bytes": 6427,
+      "file_size_bytes": 6715,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence"
@@ -10044,7 +10044,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 167,
+      "line_count": 172,
       "parse_error": null,
       "path": "tools/check_glyph_official_configurator_export_corpus.py",
       "potential_branch_identity_signals": [
@@ -10057,7 +10057,7 @@
       "python_module": "tools.check_glyph_official_configurator_export_corpus",
       "referenced_repository_path_prefixes": [],
       "runtime_config_relevance_signals": [],
-      "sha256": "f41e36f9caeec59d5a85b16b6672b8229b36b91193e5def1f07dd1bd41f4de04",
+      "sha256": "3c3072ee2e7d956922f29b71b0cd118658840aa9144c315e49b14f77c252fcef",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -16742,7 +16742,7 @@
       },
       "checker_id": "ultimate_preservation_hardware_result",
       "defines_main": true,
-      "file_size_bytes": 22718,
+      "file_size_bytes": 23104,
       "hard_coded_branch_like_strings": [
         "branch_tested",
         "configurator"
@@ -16752,7 +16752,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 546,
+      "line_count": 552,
       "parse_error": null,
       "path": "tools/check_glyph_ultimate_preservation_hardware_result.py",
       "potential_branch_identity_signals": [
@@ -16770,7 +16770,7 @@
       "runtime_config_relevance_signals": [
         "artifact_custody_provenance"
       ],
-      "sha256": "1929a7aae077d6818d150cf80fb22188bb1bff29676fa4190de1a2c493950ffe",
+      "sha256": "4a359414d793090217e78b18c1bf9c3e38744739f702657d2fa0dea2014470cc",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

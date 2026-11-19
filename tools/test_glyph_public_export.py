@@ -164,6 +164,18 @@ class ExportTests(unittest.TestCase):
         for embedded in [b, b + b'.json', b'prefix-' + b, b'machine=' + b + b'-backup', b.upper()]:
             with self.subTest(body=embedded):self.reject([item(body=embedded)],p)
 
+    def test_short_private_word_in_historical_checker_source(self):
+        # Synthetic values only; a first-name-sized word must fail even in code.
+        marker = b'nelora'
+        p = policy()
+        p['forbidden_markers'] = [{'length': len(marker), 'sha256': ex.digest(marker)}]
+        for body in [b'Tester = "Nelora (user-reported)"',
+                     b'captured_by = "NELORA / user-provided"',
+                     b'prefix_nelora_backup', b'"\\u006e\\u0065lora"']:
+            with self.subTest(body=body):
+                self.reject([item(body=body)], p)
+        ex.plan([item(body=b'Tester identity is sealed by fingerprint')], p)
+
     def nuker_policy(self):
         return ex.load_policy(ex.ROOT / ex.POLICY)
 

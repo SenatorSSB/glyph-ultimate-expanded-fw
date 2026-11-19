@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -307,8 +308,13 @@ def _validate_identity_fields(text: str, errors: list[str]) -> None:
 
 
 def _validate_result_doc_fields(text: str, errors: list[str]) -> None:
+    # Keep private tester identity byte-exact while exposing only its fingerprint.
+    tester = _extract_table_field(text, "Tester")
+    if (tester is None
+            or hashlib.sha256(_normalize_table_value(tester).encode("utf-8")).hexdigest()
+            != "1f20591a5a41d575de68370cc3b96b8f8483055d0766c7fa78a8c79f726fd8a0"):
+        errors.append("result doc Tester must match the sealed historical identity")
     field_expectations = {
-        "Tester": "Rasmus (user-reported)",
         "Test date (YYYY-MM-DD)": "2026-06-06",
         "Branch tested": "configurator",
         "Commit SHA tested": "UNKNOWN_NOT_PROVIDED",
