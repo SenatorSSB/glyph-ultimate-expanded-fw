@@ -25,6 +25,10 @@ import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = 'tools/fixtures/glyph_public_export_policy.v1.json'
+NUKER_OBLIGATION = 'GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED'
+G2F_RECEIPT = 'docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json'
+G2F_SHA256 = '66890d4b2cd8c8065ba480e145af365ad3864b785e83eb15fb517f39bfc84f79'
+NUKER_POLICY = {'status': 'GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED', 'receipt': 'docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json', 'receipt_sha256': '66890d4b2cd8c8065ba480e145af365ad3864b785e83eb15fb517f39bfc84f79', 'source_prefix': 'third_party/glyph-nuker/', 'source_revision': 'b583d53ea71347f2721d40bf3b55933190bdc87a', 'required_notices': ['LICENSE', 'THIRD_PARTY_NOTICES.md']}
 CLASSES = {'PUBLIC_INCLUDE', 'PUBLIC_INCLUDE_TRANSFORMED',
            'PUBLIC_EXCLUDE_HISTORICAL', 'PRIVATE_ARCHIVE_ONLY', 'REVIEW_REQUIRED'}
 PUBLIC = {'PUBLIC_INCLUDE', 'PUBLIC_INCLUDE_TRANSFORMED'}
@@ -306,6 +310,8 @@ def plan(entries, policy):
     for path, mode, data in entries:
         if path in seen: fail('duplicate source path')
         seen.add(path)
+        if path == 'glyph_nuker' or (path.endswith(('.yml', '.yaml')) and b'glyph_nuker' in data):
+            validate_nuker_policy(policy)
         classification = classify(path, data, policy)
         row = {'path': path, 'classification': classification, 'bytes': len(data), 'git_mode': mode, 'sha256': digest(data)}
         group = summary[classification]; group['files'] += 1; group['bytes'] += len(data)
@@ -319,6 +325,8 @@ def plan(entries, policy):
             else: row['privacy'] = scan(path, body, policy)
             destination = policy['exceptions'].get(path, {}).get('output', path)
             path_ok(destination)
+            if path == 'glyph_nuker' and destination != path:
+                fail(NUKER_OBLIGATION + ': executable relocation forbidden')
             if destination.startswith(HISTORICAL) and not (policy['exceptions'].get(path, {}).get('historical_exception') and destination == path):
                 fail('historical output relocation: ' + destination)
             if destination in output: fail('output collision: ' + destination)
@@ -338,17 +346,62 @@ def plan(entries, policy):
         # bytes. A shortened license keeping only its opening keywords fails.
         if path in output and digest(output[path][1]) != required['sha256']:
             fail('embedded notice/source altered: ' + path)
+    if 'glyph_nuker' in output and not nuker_packaging_complete(output, policy):
+        fail(NUKER_OBLIGATION + ': executable lacks exact Corresponding Source/provenance/notices')
     return rows, output, summary
 
-def workflow_publication_blockers(output):
-    """Omitted opaque inputs cannot leave an apparently publishable workflow."""
-    blockers = []
-    for path, (_, body) in sorted(output.items()):
-        if path.endswith(('.yml', '.yaml')) and b'glyph_nuker' in body:
-            # No public source/license/build correspondence is established by
-            # retaining a workflow or by succeeding at preprocessor compilation.
-            blockers.append(path + ':GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED')
-    return blockers
+def validate_nuker_policy(policy):
+    """One bounded component obligation, using existing export classifications."""
+    if policy.get('glyph_nuker_obligation') != NUKER_POLICY:
+        fail(NUKER_OBLIGATION + ': mandatory source/provenance obligation missing or drifted')
+
+
+def nuker_packaging_complete(output, policy):
+    """A declaration or source URL alone cannot authorize binary distribution.
+
+    G2F admits only the simple included-tree arrangement. H-stage must separately
+    review any other delivery form or change of the pinned source layout.
+    """
+    validate_nuker_policy(policy)
+    receipt = output.get(G2F_RECEIPT)
+    if not receipt or digest(receipt[1]) != G2F_SHA256:
+        return False
+    evidence = json.loads(receipt[1], object_pairs_hook=pairs)
+    binary_input = output.get('glyph_nuker')
+    if (not binary_input or binary_input[0] != '100755'
+            or digest(binary_input[1]) != evidence['official_repository']['binary']['sha256']):
+        return False
+    prefix = NUKER_POLICY['source_prefix']
+    expected = evidence['source']['files_sha256']
+    if {path[len(prefix):] for path in output if path.startswith(prefix)} != set(expected):
+        return False
+    for path, wanted in expected.items():
+        mode, body = output[prefix + path]
+        if mode != '100644' or digest(body) != wanted:
+            return False
+    # Retain the recorded recipe and sealed G2D evidence alongside the source.
+    g2d = output.get(evidence['source']['evidence'])
+    if not g2d or digest(g2d[1]) != evidence['source']['evidence_sha256']:
+        return False
+    for path in NUKER_POLICY['required_notices']:
+        notice = output.get(path)
+        wanted = policy.get('notice_sha256', {}).get(path)
+        if not notice or not wanted or digest(notice[1]) != wanted:
+            return False
+    if digest(output['LICENSE'][1]) != evidence['official_repository']['project_license']['license_sha256']:
+        return False
+    return True
+
+
+def workflow_publication_blockers(output, policy):
+    """Keep workflows blocked until exact source and notice packaging is complete."""
+    workflows = [path for path, (_, body) in sorted(output.items())
+                 if path.endswith(('.yml', '.yaml')) and b'glyph_nuker' in body]
+    if not workflows:
+        return []
+    if nuker_packaging_complete(output, policy):
+        return []
+    return [path + ':' + NUKER_OBLIGATION for path in workflows]
 
 
 def validate_staging(root, expected):
@@ -391,7 +444,7 @@ def main():
         rows, output, summary = plan(tracked_tree(args.root, args.revision), policy)
         blockers = [r['path'] for r in rows if r['classification'] == 'REVIEW_REQUIRED']
         blockers += ['license:' + r['name'] for r in policy['dependencies'] if r['action'] == 'REVIEW_REQUIRED']
-        blocked_workflows = workflow_publication_blockers(output)
+        blocked_workflows = workflow_publication_blockers(output, policy)
         blockers += blocked_workflows
         report = {'schema': 'glyph_public_export_inventory.v1', 'source_commit': subprocess.check_output(
             ['git', 'rev-parse', args.revision + '^{commit}'], cwd=args.root, text=True).strip(),

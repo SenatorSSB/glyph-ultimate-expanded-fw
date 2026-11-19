@@ -887,11 +887,12 @@
       "action": "REVIEW_REQUIRED",
       "bundled_notice": false,
       "declared_selector": "tracked glyph_nuker; .github/workflows/build.yml",
-      "license": "UNKNOWN",
-      "license_evidence": "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json",
+      "license": "Official FW-Glyph project GPLv3 declaration; standalone source declaration absent; combined G2F engineering policy",
+      "license_evidence": "docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json",
       "name": "glyph_nuker",
-      "selector_kind": "tracked_blob_without_source_recipe",
-      "source": "docs/runtime_config/glyph_nuker_source_lineage.md"
+      "selector_kind": "tracked_blob_with_exact_reproduced_corresponding_source",
+      "source": "docs/runtime_config/glyph_nuker_source_lineage.md",
+      "purpose": "Corresponding Source and applicable attribution/notice packaging remains required; external source is identified, not missing."
     },
     {
       "action": "source locator",
@@ -1485,7 +1486,7 @@
     },
     "glyph_nuker": {
       "classification": "REVIEW_REQUIRED",
-      "purpose": "Current workflow input; existing bounded lineage packet leaves source/build/license correspondence UNKNOWN. Never execute or redistribute on this evidence."
+      "purpose": "Exact official GPLv3 project binary with reproduced corresponding source; excluded until matching Corresponding Source, recipe/provenance and notice packaging is complete."
     },
     "include/img/remap.png": {
       "classification": "PUBLIC_INCLUDE",
@@ -2069,7 +2070,11 @@
     },
     "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json": {
       "classification": "PUBLIC_INCLUDE",
-      "purpose": "Owner-approved G2D reproduction receipt required by current offline lineage checker; license and public-export refusal remain unresolved."
+      "purpose": "Owner-approved sealed historical G2D reproduction receipt required by the current offline lineage checker; its unresolved-license/export conclusion records G2D/G2E knowledge and is superseded by current G2F policy."
+    },
+    "docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json": {
+      "classification": "PUBLIC_INCLUDE",
+      "purpose": "Current owner-directed G2F provenance, exact source/build identities and mandatory Corresponding Source/notice packaging; no overall release clearance."
     }
   },
   "forbidden_markers": [
@@ -2143,7 +2148,7 @@
   ],
   "notice_sha256": {
     "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
-    "THIRD_PARTY_NOTICES.md": "bacb2efc08ff288884cf6da893b02505123f8d7f5daf25bb278763d8fbf203f3",
+    "THIRD_PARTY_NOTICES.md": "6c54735f3650d01f720fd90e7c6e7596367cbcb21ef9ecdd0c0ce717867050c4",
     "config/glyph/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
     "lib/glyph-joybus-pio/LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
     "lib/glyph-joybus-pio/UPSTREAM.md": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6",
@@ -2394,7 +2399,7 @@
         "eefd8937bc091f478d84ce7eb78f8283506fd5a9aab1d401b6bbe840dece8a6c"
       ],
       "purpose": "Reviewed privacy-recognizer code or explicit synthetic forbidden-device-write negative controls; exact source and token fingerprints.",
-      "sha256": "8621338165f890252df7ddc97b1eacafe5cc4b15c1584d99b8b1bb00607338b7"
+      "sha256": "27217dd0b159ba036770928632d01c98dd3152bb87e0b17622f4b338152c68ef"
     },
     "tools/glyph_tracked_worktree_integrity.py": {
       "match_sha256": [
@@ -2531,7 +2536,7 @@
         "99ff99e0f7dd484e37d45e67cffae89006a5b8b562599e63804f5f3283e9f5f8"
       ],
       "purpose": "Reviewed source privacy recognizers and synthetic negative controls; exact source/token fingerprints, no owner-specific locator exception.",
-      "sha256": "3e132118639e4629b679f4a283ba5bd8c1044f80df125e35c11a9a58ad848830"
+      "sha256": "d3430cfad95e96ee41c887354aa8b97372882b1ef0fb2b4a06d584cff84a239c"
     }
   },
   "rules": [
@@ -2612,5 +2617,16 @@
     }
   ],
   "schema": "glyph_public_export_policy.v1",
-  "scope": "Tracked source tree only. Does not clear Git history, publication, binary distribution or hardware acceptance. Exact exceptions override disjoint prefix classes; binary/compressed default deny. New root families fail closed."
+  "scope": "Tracked source tree only. Does not clear Git history, publication, binary distribution or hardware acceptance. Exact exceptions override disjoint prefix classes; binary/compressed default deny. New root families fail closed.",
+  "glyph_nuker_obligation": {
+    "status": "GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED",
+    "receipt": "docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json",
+    "receipt_sha256": "66890d4b2cd8c8065ba480e145af365ad3864b785e83eb15fb517f39bfc84f79",
+    "source_prefix": "third_party/glyph-nuker/",
+    "source_revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+    "required_notices": [
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md"
+    ]
+  }
 }

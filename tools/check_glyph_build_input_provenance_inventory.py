@@ -167,7 +167,7 @@ def omitted_postprocessor_record(root: Path) -> dict[str, str]:
     postprocessor = public_contract(root)["opaque_postprocessor"]
     if postprocessor != {"path": "glyph_nuker",
                          "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
-                         "status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+                         "status": "GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED",
                          "public_action": "OMIT_AND_BLOCK_PUBLICATION"}:
         raise ValueError("omitted postprocessor lacks explicit public blocking contract")
     return {"path": "glyph_nuker", "git_mode": "100755", "sha256": postprocessor["sha256"]}

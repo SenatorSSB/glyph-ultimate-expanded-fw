@@ -43,7 +43,35 @@ Declarations are in [PlatformIO](platformio.ini) and [Glyph environments](config
 
 ## Unresolved export inputs
 
-`glyph_nuker` is invoked by the retained CI workflow. The [lineage record](docs/runtime_config/glyph_nuker_source_lineage.md) verifies its official LimitLabs/FW-Glyph binary origin and records exact byte-for-byte reproduction from GregTurbo/glyph-nuker revision `b583d53ea71347f2721d40bf3b55933190bdc87a`, using Zig 0.15.2 and `zig build -Dtarget=x86_64-linux -Doptimize=ReleaseSmall` (baseline CPU) in Debian 12 x86-64 Linux. This tested recipe is not historical maintainer attestation. The separate source repository has no explicit license declaration in the inspected revisions; applicable source and executable licensing, permission to distribute Corresponding Source with firmware, and required notices remain unresolved. Official FW-Glyph's repository-wide GPLv3 statement alone does not resolve that applicability. The export policy remains **REVIEW_REQUIRED**, excludes the binary from diagnostic staging, and blocks approved public export under **GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED**. No release input, source/executable redistribution clearance, replacement, or firmware/hardware acceptance is inferred.
+`glyph_nuker` is invoked by the retained CI workflow. Its exact executable was
+distributed in official LimitLabs/FW-Glyph, whose [pinned README line 15](https://github.com/LimitLabs/FW-Glyph/blob/9a78c7eeec87527b68644573e4c29fbdfb543239/README.md#L15)
+declares the project GPL Version 3 and links its root GPLv3 LICENSE. GitHub
+identifies this repository as a direct fork of that project. The
+[lineage record](docs/runtime_config/glyph_nuker_source_lineage.md) and
+[G2F receipt](docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json)
+record official binary identity, account-associated authorship and the combined
+engineering release-policy assessment.
+
+Exact corresponding source is GregTurbo/glyph-nuker revision
+`b583d53ea71347f2721d40bf3b55933190bdc87a`. G2D reproduced the 23,336-byte
+executable byte-for-byte with Zig 0.15.2 and
+`zig build -Dtarget=x86_64-linux -Doptimize=ReleaseSmall` (x86-64 baseline CPU)
+in Debian 12 amd64 Linux. This tested recipe is not historical maintainer
+attestation. Both inspected standalone source revisions lack a separate LICENSE
+or explicit source-license declaration. That fact remains a provenance caveat;
+the owner-directed engineering policy considers the official GPLv3 project
+distribution, direct fork, authorship linkage and exact source correspondence
+together. It does not assert a standalone source-license file or a final legal
+opinion.
+
+The missing-external-source blocker is retired. The remaining obligation is
+**GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED**: provide the exact matching
+Corresponding Source and build instructions and preserve applicable GPLv3,
+copyright, upstream notices and attribution. The existing **REVIEW_REQUIRED**
+classification remains until that packaging is satisfied; public export is still
+blocked and diagnostic staging omits the executable. Source incorporation is
+deferred to H-stage release preparation. No overall release clearance, executable
+replacement or hardware acceptance follows.
 
 The unversioned AVR selector was separately observed as `atmelavr5.3.0` (Apache-2.0) selecting `framework-arduino-avr~5.4.0`. The framework5.4.0 Arduino and built-in Wire headers match ArduinoCore-avr1.8.6 and state LGPL-2.1-or-later. These observations do not lock a future unversioned resolution.
 

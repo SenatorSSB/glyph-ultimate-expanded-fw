@@ -18,7 +18,7 @@ MAINTENANCE_BRANCH = "codex/ci-productization-20261113"
 
 PUBLIC_BASELINE = "docs/runtime_config/fixtures/public_package_baseline.v1.json"
 # Reviewed extraction digest; updated only with a reviewed contract migration.
-PUBLIC_BASELINE_SHA256 = "5f396ecd51cdd36e412fe8fc4bdee3e9b4dd93e558915c0e7cbadd9d43bd7db5"
+PUBLIC_BASELINE_SHA256 = "178bf237d46c4cb00401f40767c57631168a9a670be8b35e68ca524f737593ed"
 PROTECTED_PREFIXES = ("HAL/", "include/", "src/", "config/", "schema/", "lib/", "builder_scripts/", "scripts/")
 PROTECTED_FILES = ("platformio.ini",)
 

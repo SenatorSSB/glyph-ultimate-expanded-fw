@@ -1039,7 +1039,7 @@
       },
       "checker_id": "build_input_provenance_inventory",
       "defines_main": true,
-      "file_size_bytes": 41786,
+      "file_size_bytes": 41801,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -1074,7 +1074,7 @@
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "b00d9fea289bc299bee66628027c95e54c8f40a571852afb4e41e425dc70958f",
+      "sha256": "62a3b253d330db14fc72a7523c46c3d7ef0161ac286bd6ff1a557eb8fa54040d",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -9834,13 +9834,14 @@
       },
       "checker_id": "nuker_source_lineage",
       "defines_main": true,
-      "file_size_bytes": 16138,
+      "file_size_bytes": 22260,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
         "evidence",
         "evidence/limitations/release",
         "immutable_evidence_identity",
+        "license_evidence",
         "source_candidate"
       ],
       "imported_local_modules": [],
@@ -9848,7 +9849,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 290,
+      "line_count": 385,
       "parse_error": null,
       "path": "tools/check_glyph_nuker_source_lineage.py",
       "potential_branch_identity_signals": [
@@ -9857,6 +9858,7 @@
         "evidence",
         "evidence/limitations/release",
         "immutable_evidence_identity",
+        "license_evidence",
         "source_candidate"
       ],
       "potential_mutation_signals": [
@@ -9864,16 +9866,18 @@
       ],
       "python_module": "tools.check_glyph_nuker_source_lineage",
       "referenced_repository_path_prefixes": [
+        "docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json",
         "docs/runtime_config/fixtures/glyph_nuker_source_discovery_g2b.v1.json",
         "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json",
         "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json",
-        "docs/runtime_config/glyph_nuker_source_lineage.md"
+        "docs/runtime_config/glyph_nuker_source_lineage.md",
+        "tools/fixtures/glyph_public_export_policy.v1.json"
       ],
       "runtime_config_relevance_signals": [
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "9d566793057dd22241ff3d10597228f6b994fb40d0072c23960235c170818e9b",
+      "sha256": "2d235eb397a51dab671b97660c1c394502da9bf5b14b24d36a4c6bd9c4e9b3df",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

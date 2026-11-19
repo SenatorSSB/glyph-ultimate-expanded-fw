@@ -16,6 +16,8 @@ DISCOVERY = ROOT / "docs/runtime_config/fixtures/glyph_nuker_source_discovery_g2
 REPRODUCTION = ROOT / "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json"
 G2D_RAW_SHA256 = "3ff7af9ab670029c8a3c8e8118349cfc44b3c80ac163528c31537bb35fccca73"
 G2D_SEMANTIC_SHA256 = "a76bc6670d85f5b7615be3158e4fee66c64072120be93063e9a70edc21563284"
+G2F = ROOT / "docs/runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json"
+G2F_SEMANTIC_SHA256 = "df7ded8a19e9d781cdbc7dc056384511c41930828ae4529c72a3d25717d8de11"
 NUKER = ROOT / "glyph_nuker"
 EXPECTED_SHA256 = "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae"
 EXPECTED_BLOB = "d0524944a90503a8881281b6673b1f46e36f9383"
@@ -105,7 +107,7 @@ def validate_current_receipt() -> None:
         contract = public_contract(ROOT)
         if contract["opaque_postprocessor"] != {
                 "path": "glyph_nuker", "sha256": EXPECTED_SHA256,
-                "status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+                "status": "GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED",
                 "public_action": "OMIT_AND_BLOCK_PUBLICATION"}:
             fail("omitted postprocessor lacks explicit public blocking contract")
 
@@ -259,6 +261,96 @@ def validate_g2d_receipt() -> list[str]:
     return rejected
 
 
+
+def validate_g2f(value: dict) -> None:
+    # Closed reviewed engineering interpretation. This seal includes every
+    # evidence locator, standalone-license caveat, OWNER_SUPPLIED label,
+    # packaging obligation and limitation. New findings require explicit review.
+    semantic = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    if hashlib.sha256(semantic).hexdigest() != G2F_SEMANTIC_SHA256:
+        fail("G2F provenance/source/recipe/obligation/limitation drifted")
+
+
+def validate_g2f_receipt() -> list[str]:
+    # Keep this offline evidence checker independent of the exporter module;
+    # the existing manifest's direct-helper boundary remains unchanged.
+    NUKER_OBLIGATION = "GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED"
+    G2F_SHA256 = "66890d4b2cd8c8065ba480e145af365ad3864b785e83eb15fb517f39bfc84f79"
+    value = json.loads(sealed_receipt(G2F, G2F_SHA256), object_pairs_hook=unique_pairs)
+    validate_g2f(value)
+    for path, wanted in value["historical_receipts_sha256"].items():
+        sealed_receipt(ROOT / path, wanted)
+    policy = json.loads((ROOT / "tools/fixtures/glyph_public_export_policy.v1.json").read_text(), object_pairs_hook=unique_pairs)
+    if policy.get("glyph_nuker_obligation") != {
+            "status": NUKER_OBLIGATION,
+            "receipt": G2F.relative_to(ROOT).as_posix(), "receipt_sha256": G2F_SHA256,
+            "source_prefix": "third_party/glyph-nuker/",
+            "source_revision": value["source"]["matching_revision"],
+            "required_notices": ["LICENSE", "THIRD_PARTY_NOTICES.md"]}:
+        fail("current mandatory source/provenance obligation missing or drifted")
+    binary_record = policy["exceptions"]["glyph_nuker"]
+    dependency = next(row for row in policy["dependencies"] if row["name"] == "glyph_nuker")
+    if (binary_record["classification"] != "REVIEW_REQUIRED"
+            or dependency["action"] != "REVIEW_REQUIRED"
+            or dependency["license_evidence"] != G2F.relative_to(ROOT).as_posix()
+            or dependency["selector_kind"] != "tracked_blob_with_exact_reproduced_corresponding_source"):
+        fail("G2F pending source packaging/known correspondence policy drifted")
+    if "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED" in json.dumps(policy):
+        fail("retired missing-source blocker returned in current policy")
+    if policy["notice_sha256"]["THIRD_PARTY_NOTICES.md"] != hashlib.sha256((ROOT / "THIRD_PARTY_NOTICES.md").read_bytes()).hexdigest():
+        fail("current third-party notices hash drifted")
+    from glyph_ci_package_scope import public_contract
+    if public_contract(ROOT)["opaque_postprocessor"] != {
+            "path": "glyph_nuker", "sha256": EXPECTED_SHA256,
+            "status": NUKER_OBLIGATION, "public_action": "OMIT_AND_BLOCK_PUBLICATION"}:
+        fail("current public omission obligation drifted")
+    current = DOC.read_text().split("## Historical G2D", 1)[0]
+    for phrase in ("Current G2F", NUKER_OBLIGATION, "OWNER_SUPPLIED", "not release-ready"):
+        if phrase not in current:
+            fail("current lineage wording missing: " + phrase)
+    changes = [
+        ("official_binary_identity", ("official_repository", "binary", "sha256"), "0" * 64),
+        ("matching_revision", ("source", "matching_revision"), "0" * 40),
+        ("reproduced_command", ("reproduced_recipe", "command"), "zig build"),
+        ("reproduced_zig", ("reproduced_recipe", "zig"), "0.15.1"),
+        ("reproduced_target", ("reproduced_recipe", "target"), "aarch64-linux"),
+        ("reproduced_cpu", ("reproduced_recipe", "cpu"), "native"),
+        ("reproduced_optimization", ("reproduced_recipe", "optimization"), "ReleaseFast"),
+        ("fabricated_standalone_license", ("source", "standalone_license_file"), True),
+        ("lost_gpl_declaration", ("official_repository", "project_license", "declaration"), "UNKNOWN"),
+        ("source_downgrade", ("source", "correspondence"), "UNKNOWN"),
+        ("source_promotion", ("source", "correspondence"), "ALL_REVISIONS_REPRODUCED"),
+        ("lost_packaging_obligation", ("release", "current_obligation"), None),
+        ("historical_attestation", ("limitations", "historical_maintainer_build_attestation"), True),
+        ("hardware_transfer", ("limitations", "hardware_acceptance_transfer"), True),
+        ("release_ready", ("release", "export_classification"), "PASS"),
+        ("overall_release_ready", ("release", "overall_release_ready"), True),
+        ("public_export_pass", ("release", "public_export"), "PASS"),
+        ("lost_source_notice_obligations", ("release", "required_obligations"), []),
+        ("old_blocker_reactivated", ("release", "current_obligation"), "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED"),
+        ("owner_relationship_promotion", ("owner_relationship", "source_kind"), "INDEPENDENTLY_VERIFIED"),
+        ("sealed_history_mutation", ("historical_receipts_sha256", "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json"), "0" * 64),
+    ]
+    rejected = []
+    for label, path, replacement in changes:
+        tampered = copy.deepcopy(value)
+        parent = tampered
+        for key in path[:-1]:
+            parent = parent[key]
+        parent[path[-1]] = replacement
+        try:
+            validate_g2f(tampered)
+        except LineageError:
+            rejected.append(label)
+        else:
+            fail("unsupported G2F claim accepted: " + label)
+    # ABSENT is the valid positive control, not a missing-source conclusion.
+    if value["source"]["standalone_license_file"] is not False:
+        fail("standalone-license absence documentation lost")
+    validate_g2f(value)
+    return rejected
+
+
 def main() -> int:
     try:
         validate(load())
@@ -269,6 +361,7 @@ def main() -> int:
         validate_current_receipt()
         validate_g2c_receipt()
         rejected = validate_g2d_receipt()
+        g2f_rejected = validate_g2f_receipt()
         if not DOC.is_file() or "BOUNDED_SOURCE_LINEAGE_NOT_FOUND" not in DOC.read_text(encoding="utf-8"):
             fail("lineage document missing bounded status")
         tampered = copy.deepcopy(load())
@@ -279,10 +372,12 @@ def main() -> int:
             pass
         else:
             fail("unsupported purpose claim accepted")
-        print("glyph_nuker_source_lineage: PASS; sealed historical/G2C receipts unchanged; G2D exact source-build correspondence; SOURCE_REPRODUCED_LICENSE_UNRESOLVED; PUBLIC_EXPORT BLOCKED; GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED")
+        print("glyph_nuker_source_lineage: PASS; sealed historical/G2C receipts unchanged; G2D exact source-build correspondence; G2F combined GPLv3 provenance reconciled; missing-source blocker RETIRED; GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED; PUBLIC_EXPORT BLOCKED")
         print("G2D negative controls rejected: " + ", ".join(rejected))
+        print("G2F negative controls rejected: " + ", ".join(g2f_rejected))
+        print("G2F positive control: standalone LICENSE absent; exact source correspondence retained; no missing-source blocker")
         return 0
-    except (OSError, subprocess.CalledProcessError, json.JSONDecodeError, KeyError, TypeError, LineageError) as exc:
+    except (OSError, subprocess.CalledProcessError, json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
         print(f"glyph_nuker_source_lineage: FAIL: {exc}")
         return 1
 

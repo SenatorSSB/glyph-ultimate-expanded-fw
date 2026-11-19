@@ -164,12 +164,78 @@ class ExportTests(unittest.TestCase):
         for embedded in [b, b + b'.json', b'prefix-' + b, b'machine=' + b + b'-backup', b.upper()]:
             with self.subTest(body=embedded):self.reject([item(body=embedded)],p)
 
-    def test_opaque_workflow_remains_nonpublishable(self):
+    def nuker_policy(self):
+        return ex.load_policy(ex.ROOT / ex.POLICY)
+
+    def test_nuker_workflow_requires_source_packaging(self):
         output = {'.github/workflows/build.yml': ('100644', b'ls *.uf2 | xargs ./glyph_nuker')}
-        self.assertEqual(ex.workflow_publication_blockers(output),
-                         ['.github/workflows/build.yml:GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED'])
-        output['glyph_nuker'] = ('100755', b'opaque')
-        self.assertTrue(ex.workflow_publication_blockers(output))
+        p = self.nuker_policy()
+        self.assertEqual(ex.workflow_publication_blockers(output, p),
+                         ['.github/workflows/build.yml:' + ex.NUKER_OBLIGATION])
+        output['glyph_nuker'] = ('100755', b'synthetic executable for packaging tests')
+        self.assertTrue(ex.workflow_publication_blockers(output, p))
+        self.assertNotIn('GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED', str(ex.workflow_publication_blockers(output, p)))
+
+    def test_nuker_obligation_cannot_be_dropped_or_reverted(self):
+        for field, value in [('glyph_nuker_obligation', None),
+                             ('glyph_nuker_obligation', {'status': 'GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED'})]:
+            p = self.nuker_policy(); p[field] = value
+            with self.subTest(value=value), self.assertRaisesRegex(ex.ExportError, 'mandatory source/provenance'):
+                ex.plan([('glyph_nuker', '100755', b'synthetic executable for packaging tests')], p)
+
+    def test_nuker_executable_inclusion_without_source_fails(self):
+        p = self.nuker_policy()
+        p['exceptions']['glyph_nuker']['classification'] = 'PUBLIC_INCLUDE'
+        data = b'synthetic executable for packaging tests'
+        # Inspection admission is separately guarded by the existing binary
+        # scanner. Isolate the packaging gate, without admitting/executing ELF.
+        from unittest.mock import patch
+        p['binary_records']['glyph_nuker'] = {'sha256': ex.digest(data)}
+        p['notice_obligations'] = []
+        with patch.object(ex, 'inspect_binary', return_value={}):
+            with self.assertRaisesRegex(ex.ExportError, 'executable lacks exact Corresponding Source'):
+                ex.plan([('glyph_nuker', '100755', data)], p)
+
+    def test_nuker_relocation_cannot_bypass_packaging(self):
+        p = self.nuker_policy()
+        p['exceptions']['glyph_nuker'].update(classification='PUBLIC_INCLUDE', output='tools/renamed_nuker')
+        p['notice_obligations'] = []
+        with self.assertRaisesRegex(ex.ExportError, 'executable relocation forbidden'):
+            ex.plan([('glyph_nuker', '100755', b'synthetic executable for packaging tests')], p)
+
+    def test_nuker_positive_packaging_and_individual_omissions(self):
+        # Exercise the complete gate with synthetic source bytes in memory. No
+        # external source is imported into this repository or a release tree.
+        from unittest.mock import patch
+        p = self.nuker_policy()
+        receipt = json.loads((ex.ROOT / ex.G2F_RECEIPT).read_bytes())
+        receipt['official_repository']['binary']['sha256'] = ex.digest(b'synthetic executable for packaging tests')
+        synthetic = {name: ('synthetic preferred source: ' + name).encode()
+                     for name in receipt['source']['files_sha256']}
+        receipt['source']['files_sha256'] = {name: ex.digest(body) for name, body in synthetic.items()}
+        raw = json.dumps(receipt).encode()
+        output = {'.github/workflows/build.yml': ('100644', b'./glyph_nuker'),
+                  'glyph_nuker': ('100755', b'synthetic executable for packaging tests'),
+                  ex.G2F_RECEIPT: ('100644', raw)}
+        for path in p['glyph_nuker_obligation']['required_notices'] + [receipt['source']['evidence']]:
+            output[path] = ('100644', (ex.ROOT / path).read_bytes())
+        output.update({ex.NUKER_POLICY['source_prefix'] + name: ('100644', body)
+                       for name, body in synthetic.items()})
+        with patch.object(ex, 'G2F_SHA256', ex.digest(raw)):
+            self.assertTrue(ex.nuker_packaging_complete(output, p))
+            self.assertEqual(ex.workflow_publication_blockers(output, p), [])
+            # No standalone LICENSE exists in this valid source fixture.
+            self.assertFalse(receipt['source']['standalone_license_file'])
+            for path in set(output) - {'.github/workflows/build.yml'}:
+                with self.subTest(missing=path):
+                    q = dict(output); q.pop(path)
+                    self.assertFalse(ex.nuker_packaging_complete(q, p))
+            for path in [ex.NUKER_POLICY['source_prefix'] + 'src/root.zig', ex.G2F_RECEIPT, 'LICENSE', 'THIRD_PARTY_NOTICES.md']:
+                with self.subTest(altered=path):
+                    q = dict(output); q[path] = (q[path][0], q[path][1] + b'altered')
+                    self.assertFalse(ex.nuker_packaging_complete(q, p))
+            q = dict(output); q[ex.NUKER_POLICY['source_prefix'] + 'extra.zig'] = ('100644', b'extra')
+            self.assertFalse(ex.nuker_packaging_complete(q, p))
 
     def test_current_package_offline_fixture_closure(self):
         import check_glyph_coordinate_native_runtime_profile_contract as contract

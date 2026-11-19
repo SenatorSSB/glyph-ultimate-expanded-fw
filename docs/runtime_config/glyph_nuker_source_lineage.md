@@ -1,13 +1,90 @@
 # `glyph_nuker` Source Lineage
 
-## Current G2D finding — 2026-11-18
+## Current G2F reconciliation — 2026-11-19
+
+Exact corresponding source is identified and reproduced. The current release
+requirement is **`GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED`**,
+using the existing **`REVIEW_REQUIRED`** export classification while packaging is
+incomplete. **Public export remains BLOCKED; the repository is not release-ready.**
+`GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED` is retired as a current missing-source
+blocker. Its appearances in sealed receipts and historical sections describe
+the conclusions at those checkpoints.
+
+The [G2F reconciliation receipt](fixtures/glyph_nuker_release_rights_g2f.v1.json)
+separates these propositions:
+
+| Proposition | Current evidence / assessment |
+| --- | --- |
+| A. Official binary origin | YES: tracked bytes equal official LimitLabs/FW-Glyph at `9a78c7eeec87527b68644573e4c29fbdfb543239`; 23,336 bytes, SHA-256 `8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae`, blob `d0524944a90503a8881281b6673b1f46e36f9383`. |
+| B. Project GPLv3 declaration | YES: [official README line 15](https://github.com/LimitLabs/FW-Glyph/blob/9a78c7eeec87527b68644573e4c29fbdfb543239/README.md#L15) declares the project GPL Version 3 and links the root [GPLv3 LICENSE](https://github.com/LimitLabs/FW-Glyph/blob/9a78c7eeec87527b68644573e4c29fbdfb543239/LICENSE). Exact blobs are recorded in G2F. This is project distribution evidence, not a blanket license claim about unrelated works. |
+| C. Source correspondence | YES: unmodified GregTurbo/glyph-nuker root `b583d53ea71347f2721d40bf3b55933190bdc87a` reproduces the exact executable under the G2D recipe. |
+| D. Authorship/provenance linkage | GitHub associates both the official binary introduction `cc57c4fc…` (Git name `stephen`) and matching source commit (Git name `Stephen`) with `GregTurbo`, whose account owns the source repository. The exact source/binary relationship is proved by reproduction, not account association alone. |
+| E. Standalone source license | ABSENT in both inspected revisions: no separate LICENSE or explicit source-license declaration. This documentation fact alone does not establish that no applicable license exists. |
+| F. Release obligation | Provide the matching Corresponding Source and recipe, retain GPLv3 project licensing and applicable upstream notices/attribution, and verify packaging before distributing the executable. |
+| Direct fork | GitHub identifies this repository as a direct fork of LimitLabs/FW-Glyph (parent and source), reverified for G2F. |
+
+The owner states that GregTurbo is one of the founders/owners of Limit Labs.
+This is **OWNER_SUPPLIED** provenance. Independent public corroboration is not
+recorded; it is not presented as independently verified public fact.
+
+The engineering policy assesses the combined chain: author-associated source →
+exact binary correspondence → official FW-Glyph distribution and project-level
+GPLv3 declaration → direct fork. The standalone declaration's absence is retained
+as a provenance caveat rather than an unresolved-source blocker. An explicit
+component license clarification remains an optional improvement. This is the
+owner-directed release-policy treatment, not a final legal opinion. It supersedes
+the earlier mandatory upstream-contact proposal; no external contact is authorized
+or performed.
+
+### Corresponding Source packaging for H stage
+
+The preferred engineering direction is to include the exact pinned source tree
+under `third_party/glyph-nuker/`, preserve upstream attribution and applicable
+notices, and retain this receipt and build instructions in a self-contained clean
+source snapshot where practical. Required recipe: **Zig 0.15.2**, target
+**x86_64-linux**, **ReleaseSmall**, **x86-64 baseline CPU**:
+
+```sh
+zig build -Dtarget=x86_64-linux -Doptimize=ReleaseSmall
+```
+
+The G2D receipt preserves full output/cache/verbosity arguments and the original
+evidence. This is a reproduced recipe, **not historical maintainer build-command
+attestation**. It grants no executable replacement, execution-safety or hardware
+acceptance. Nunchuk remains NOT_TESTED; root cause remains unproven.
+
+Actual source incorporation and packaging verification are deferred to H-stage
+release staging. Another durable GPL-compliant source-delivery arrangement would
+require a separate staging decision; the current exporter admits only exact
+included source bytes, recipe/provenance and notices, not a source URL alone.
+Normal export remains refused while packaging is incomplete. Diagnostic
+validation omits the executable and reports the new packaging blocker for the
+retained workflow. Including the executable without the required obligation or
+complete matching source/provenance/notices is rejected even in diagnostic mode.
+No firmware, workflow, executable, tested UF2 identity, qualification, freeze or
+release state changes in G2F. Other campaign gates remain independent.
+
+### Evidence progression
+
+- G2B: bounded search did not find source at that time.
+- G2C: author-owned candidate found; tested macOS environment produced no target.
+- G2D: exact source/build correspondence established on Linux.
+- G2E: evidence preserved and reviewed; licensing/export conservatively blocked.
+- G2F: combined provenance reconciled; missing-source blocker retired, with
+  Corresponding Source and notice packaging still required.
+
+All following sections retain historical knowledge and policy at their own dates.
+Their unresolved-source/contact requirements do not override current G2F policy.
+
+## Historical G2D finding and G2E preservation — 2026-11-18
 
 Stage result: `SOURCE_REPRODUCED_LICENSE_UNRESOLVED`.
 Engineering export gate: **`REVIEW_REQUIRED` / PUBLIC EXPORT BLOCKED**.
 
 The [G2D reproduction receipt](fixtures/glyph_nuker_source_reproduction_g2d.v1.json)
 supersedes G2C's earlier **current-state** conclusion about source-build
-correspondence. G2C and the sealed August/G2B evidence remain unchanged historical
+correspondence at that checkpoint. G2F above supersedes its licensing/export policy.
+G2C and the sealed August/G2B evidence remain unchanged historical
 observations: the earlier macOS host-runner link failures produced no target
 executable and do not contradict the later Linux result.
 

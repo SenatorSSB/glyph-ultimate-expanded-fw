@@ -1685,7 +1685,7 @@
   "opaque_postprocessor": {
     "path": "glyph_nuker",
     "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
-    "status": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+    "status": "GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED",
     "public_action": "OMIT_AND_BLOCK_PUBLICATION"
   },
   "extraction_provenance": {
@@ -1711,5 +1711,5 @@
       ]
     }
   ],
-  "receipt_semantic_digest": "bf9923e7468a8b4cc9980c73c931920c9dfe4a1932149014729cd81eee7b89bb"
+  "receipt_semantic_digest": "d2903474db26e2ccefc4c00d8091c5dd79a97f8afc229bc359972ca5c353829e"
 }

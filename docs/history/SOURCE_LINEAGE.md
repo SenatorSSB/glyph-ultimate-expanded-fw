@@ -88,6 +88,25 @@ canonical source. Wrapper identities and acceptance limits belong in
 [hardware acceptance](HARDWARE_ACCEPTANCE.md), with detailed authoring lineage
 remaining under `profiles/kazuya/`.
 
+## glyph_nuker provenance and release packaging
+
+The [current G2F lineage assessment](../runtime_config/glyph_nuker_source_lineage.md)
+and [receipt](../runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json)
+record official LimitLabs/FW-Glyph binary identity and project GPLv3 declaration,
+the direct fork, account-associated source authorship, and exact reproduction from
+GregTurbo/glyph-nuker `b583d53ea71347f2721d40bf3b55933190bdc87a` with
+Zig 0.15.2 / x86_64-linux / ReleaseSmall / baseline CPU. The standalone source
+revisions lack their own explicit license declaration; the combined provenance
+supports the owner-directed engineering policy, not a final legal opinion.
+The GregTurbo/Limit Labs founder/owner relationship remains OWNER_SUPPLIED.
+
+The former missing-source blocker is retired. Corresponding Source, build
+instructions and applicable GPL/upstream attribution and notice packaging remain
+required before distributing the executable. Exact source inclusion is the
+preferred H-stage direction; G2F imports no source and clears no overall release.
+G2B/G2C/G2D/G2E evidence retains its historical findings. A reproduced recipe is
+not historical author attestation and transfers no hardware acceptance.
+
 ## Future clean release repository
 
 The reviewed release preparation calls for:

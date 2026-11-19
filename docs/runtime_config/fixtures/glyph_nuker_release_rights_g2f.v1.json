@@ -1,0 +1,134 @@
+{
+  "schema": "glyph_nuker_release_rights_g2f.v1",
+  "observed_on": "2026-11-19",
+  "canonical_start": "bd74e896bd7e0be1f127daba8ca03080b22f77fa",
+  "official_repository": {
+    "repository": "LimitLabs/FW-Glyph",
+    "revision": "9a78c7eeec87527b68644573e4c29fbdfb543239",
+    "binary": {
+      "path": "glyph_nuker",
+      "git_mode": "100755",
+      "git_blob": "d0524944a90503a8881281b6673b1f46e36f9383",
+      "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+      "size_bytes": 23336,
+      "tracked_bytes_equal": true
+    },
+    "project_license": {
+      "declaration": "This project is licensed under the GNU GPL Version 3",
+      "readme_path": "README.md",
+      "readme_line": 15,
+      "readme_blob": "7c66fa5e90b6df92da9e79bb37b7892a4ec723be",
+      "license_path": "LICENSE",
+      "license_blob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "license_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "scope": "Official FW-Glyph project declaration; no blanket claim about unrelated works."
+    },
+    "workflow": {
+      "path": ".github/workflows/build.yml",
+      "git_blob": "c7efd73b32da7a2d55e4fd0e56ff543c5b13ce7b",
+      "invocation": "ls *.uf2 | xargs ./glyph_nuker"
+    },
+    "evidence_url": "https://github.com/LimitLabs/FW-Glyph/tree/9a78c7eeec87527b68644573e4c29fbdfb543239"
+  },
+  "direct_fork": {
+    "repository": "SenatorSSB/glyph-ultimate-expanded-fw",
+    "fork": true,
+    "parent": "LimitLabs/FW-Glyph",
+    "source": "LimitLabs/FW-Glyph",
+    "evidence_url": "https://api.github.com/repos/SenatorSSB/glyph-ultimate-expanded-fw",
+    "verification": "GitHub API observed 2026-11-19"
+  },
+  "authorship": {
+    "binary_introduction": "cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd",
+    "binary_git_author_name": "stephen",
+    "source_git_author_name": "Stephen",
+    "github_author_login": "GregTurbo",
+    "source_repository_owner": "GregTurbo",
+    "evidence_urls": [
+      "https://api.github.com/repos/LimitLabs/FW-Glyph/commits/cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd",
+      "https://api.github.com/repos/GregTurbo/glyph-nuker/commits/b583d53ea71347f2721d40bf3b55933190bdc87a"
+    ],
+    "assessment": "Account-associated source and official binary introduction; exact byte reproduction supplies correspondence, not historical build attestation."
+  },
+  "owner_relationship": {
+    "statement": "GregTurbo is one of the founders/owners of Limit Labs.",
+    "source_kind": "OWNER_SUPPLIED",
+    "independent_public_evidence": []
+  },
+  "source": {
+    "repository": "GregTurbo/glyph-nuker",
+    "matching_revision": "b583d53ea71347f2721d40bf3b55933190bdc87a",
+    "git_tree": "7f91222014fcbf11b3420068832a56ba9e37958e",
+    "archive_sha256": "0490f02bfa0970d94ad07b99e1ea34ada7fa0f13ec8d2106c31196cb17306142",
+    "inspected_revisions": [
+      "b583d53ea71347f2721d40bf3b55933190bdc87a",
+      "5c544caa61fe378eb44be4edf74993b7841bf907"
+    ],
+    "standalone_license_declaration": "ABSENT",
+    "standalone_license_file": false,
+    "files_sha256": {
+      ".gitignore": "2a0acd760ffd6bef0a5dd77c9f1b600c52407ed5f67022c7a59200e46a3a57be",
+      "build.zig": "a859ac30418ed7648983d97892c5f8d488ecee1c2a34a40c11ab6caa6ccf3e0a",
+      "build.zig.zon": "5b277172c92caa913e5cd0f16d0c2e41c6b535cd8ca626c795c90fe5803fbaa3",
+      "src/main.zig": "ba3484e09885c64fba88505016f99f37ab0461672b52890324012783e3cc0ec7",
+      "src/root.zig": "af72817e78c91a9e6f3a9a77be3aba581b3ec2efa6a2a3ab57616ddd6f63e99c"
+    },
+    "correspondence": "EXACT_BINARY_REPRODUCED",
+    "evidence": "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json",
+    "evidence_sha256": "3ff7af9ab670029c8a3c8e8118349cfc44b3c80ac163528c31537bb35fccca73"
+  },
+  "reproduced_recipe": {
+    "zig": "0.15.2",
+    "command": "zig build -Dtarget=x86_64-linux -Doptimize=ReleaseSmall",
+    "target": "x86_64-linux",
+    "optimization": "ReleaseSmall",
+    "cpu": "baseline",
+    "environment": "Debian 12 amd64 Linux; architecture translation on macOS arm64; exact translation backend unknown",
+    "additional_strip_libc_linker_flags": [],
+    "full_argv_evidence": "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json#build"
+  },
+  "release": {
+    "interpretation": "Owner-directed engineering release policy based on author-associated source, exact binary correspondence, official GPLv3 project distribution and direct-fork provenance; not a final legal opinion or a standalone source-license declaration.",
+    "retired_blocker": "GLYPH_NUKER_EXTERNAL_SOURCE_REQUIRED",
+    "retired_reason": "Exact preferred-form source identified and reproduced; standalone LICENSE absence alone does not make source unavailable.",
+    "current_obligation": "GLYPH_NUKER_CORRESPONDING_SOURCE_PACKAGING_REQUIRED",
+    "export_classification": "REVIEW_REQUIRED",
+    "packaging_satisfied": false,
+    "public_export": "BLOCKED",
+    "overall_release_ready": false,
+    "required_obligations": [
+      "Provide the exact matching Corresponding Source needed to generate the distributed executable.",
+      "Retain matching revision, source identities, Zig 0.15.2, x86_64-linux, ReleaseSmall, baseline CPU and full G2D recipe provenance.",
+      "Preserve GPLv3 project licensing and applicable upstream copyright, attribution and notices.",
+      "Preserve reproduced-recipe versus historical-maintainer-attestation distinction."
+    ],
+    "h_stage_plan": {
+      "preferred_delivery": "Include the exact pinned source tree and build instructions in a self-contained clean source snapshot where practical.",
+      "source_prefix": "third_party/glyph-nuker/",
+      "required_notices": [
+        "LICENSE",
+        "THIRD_PARTY_NOTICES.md"
+      ],
+      "alternative_delivery": "Any other durable GPL-compliant source-delivery arrangement requires separate release-staging review; a remote URL alone is not admitted by this checker.",
+      "execution": "DEFERRED_TO_H_STAGE; no source import or release export in G2F"
+    },
+    "component_license_clarification": "OPTIONAL_PROVENANCE_IMPROVEMENT; external contact neither required nor authorized",
+    "other_campaign_gates": "Independent export review, fresh-history/source correspondence, product/qualification gates, freeze and owner publication decisions remain separate."
+  },
+  "limitations": {
+    "historical_maintainer_build_attestation": false,
+    "hardware_acceptance_transfer": false,
+    "firmware_behavior_changed": false,
+    "build_workflow_changed": false,
+    "source_imported": false,
+    "freeze_activated": false,
+    "release_created": false,
+    "external_contact": false,
+    "legal_opinion": false
+  },
+  "historical_receipts_sha256": {
+    "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json": "292728ec8d9f78d2bb1a3dd5dc9cf52dc07a273af57a9e3561a2b8e4b44c4fe1",
+    "docs/runtime_config/fixtures/glyph_nuker_source_discovery_g2b.v1.json": "15c4846e0182a671a0ad59d54b62b4ca250293848cbfb74c0e2df53ccf8e9c5d",
+    "docs/runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json": "3ff7af9ab670029c8a3c8e8118349cfc44b3c80ac163528c31537bb35fccca73"
+  }
+}
