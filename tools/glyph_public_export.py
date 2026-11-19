@@ -4,7 +4,9 @@
 Use --report outside --output for the private, complete inventory. Normal export
 fails on REVIEW_REQUIRED or unresolved licenses. --diagnostic-stage produces only
 cleared files for fresh-root experiments, retaining those blockers in the report.
-No tests, builds, Git initialization or device operations are run by this tool.
+Use --glyph-nuker-source for the exact G2F source directory; it is read only
+and is never imported into the working checkout. No tests, builds, Git
+initialization or device operations are run by this tool.
 """
 from __future__ import annotations
 import argparse
@@ -304,8 +306,43 @@ def tracked_tree(root, revision):
     finally:
         reader.stdin.close(); reader.stdout.close(); reader.wait()
 
+def corresponding_source_entries(root):
+    """Read only an exact, regular upstream source set, without Git history."""
+    root = Path(root)
+    if root.is_symlink() or not root.is_dir(): fail('invalid Corresponding Source root')
+    receipt = (ROOT / G2F_RECEIPT).read_bytes()
+    if digest(receipt) != G2F_SHA256: fail('G2F receipt drift')
+    expected = json.loads(receipt, object_pairs_hook=pairs)['source']['files_sha256']
+    found = {}
+    for base, dirs, files in os.walk(root, followlinks=False):
+        for name in dirs + files:
+            item = Path(base) / name
+            path_ok(item.relative_to(root).as_posix())
+            if item.is_symlink(): fail('Corresponding Source symlink')
+        for name in files:
+            item = Path(base) / name
+            relative = item.relative_to(root).as_posix()
+            if (not item.is_file() or relative not in expected
+                    or item.stat().st_mode & 0o111): fail('unexpected Corresponding Source entry')
+            body = item.read_bytes()
+            if digest(body) != expected[relative]: fail('Corresponding Source bytes drift: ' + relative)
+            found[relative] = body
+    if set(found) != set(expected): fail('incomplete Corresponding Source set')
+    return [(NUKER_POLICY['source_prefix'] + path, '100644', body)
+            for path, body in sorted(found.items())]
+
+
+def release_blockers(rows, output, policy):
+    complete = nuker_packaging_complete(output, policy) if 'glyph_nuker' in output else False
+    blockers = [r['path'] for r in rows if r['classification'] == 'REVIEW_REQUIRED']
+    blockers += ['license:' + r['name'] for r in policy['dependencies']
+                 if r['action'] == 'REVIEW_REQUIRED' and not (r['name'] == 'glyph_nuker' and complete)]
+    return blockers + workflow_publication_blockers(output, policy)
+
+
 def plan(entries, policy):
     rows, output, seen = [], {}, set()
+    pending_nuker = None
     summary = {c: {'files': 0, 'bytes': 0, 'extensions': {}} for c in sorted(CLASSES)}
     for path, mode, data in entries:
         if path in seen: fail('duplicate source path')
@@ -333,6 +370,8 @@ def plan(entries, policy):
             if path in JOURNALS and destination != path: fail('journal relocation forbidden')
             output[destination] = (mode, body)
             row.update(output=destination, output_bytes=len(body), output_sha256=digest(body))
+        if path == 'glyph_nuker' and classification == 'REVIEW_REQUIRED':
+            pending_nuker = (mode, data, row)
         rows.append(row)
     for obligation in policy['notice_obligations']:
         if any(p.startswith(obligation['material_prefix']) for p in output):
@@ -346,6 +385,25 @@ def plan(entries, policy):
         # bytes. A shortened license keeping only its opening keywords fails.
         if path in output and digest(output[path][1]) != required['sha256']:
             fail('embedded notice/source altered: ' + path)
+    # The only conditional admission resolves the existing component review
+    # from actual output bytes. Source URLs/declarations never satisfy it.
+    if pending_nuker:
+        if 'glyph_nuker' in output: fail('output collision: glyph_nuker')
+        mode, body, row = pending_nuker
+        if policy['exceptions']['glyph_nuker'].get('output', 'glyph_nuker') != 'glyph_nuker':
+            fail(NUKER_OBLIGATION + ': executable relocation forbidden')
+        candidate = dict(output, glyph_nuker=(mode, body))
+        if nuker_packaging_complete(candidate, policy):
+            row['binary_inspection'] = inspect_binary('glyph_nuker', body, policy)
+            old = summary['REVIEW_REQUIRED']; old['files'] -= 1; old['bytes'] -= len(body)
+            old['extensions']['(none)']['files'] -= 1; old['extensions']['(none)']['bytes'] -= len(body)
+            new = summary['PUBLIC_INCLUDE']; new['files'] += 1; new['bytes'] += len(body)
+            ext = new['extensions'].setdefault('(none)', {'files': 0, 'bytes': 0})
+            ext['files'] += 1; ext['bytes'] += len(body)
+            row.update(classification='PUBLIC_INCLUDE', output='glyph_nuker',
+                       output_bytes=len(body), output_sha256=digest(body),
+                       resolved_obligation=NUKER_OBLIGATION)
+            output['glyph_nuker'] = (mode, body)
     if 'glyph_nuker' in output and not nuker_packaging_complete(output, policy):
         fail(NUKER_OBLIGATION + ': executable lacks exact Corresponding Source/provenance/notices')
     return rows, output, summary
@@ -438,14 +496,16 @@ def main():
     parser.add_argument('--report', type=Path, required=True)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--diagnostic-stage', action='store_true')
+    parser.add_argument('--glyph-nuker-source', type=Path, help='Exact unpacked G2F source; no .git or extra files')
     args = parser.parse_args()
     try:
         policy = load_policy(args.policy or args.root / POLICY)
-        rows, output, summary = plan(tracked_tree(args.root, args.revision), policy)
-        blockers = [r['path'] for r in rows if r['classification'] == 'REVIEW_REQUIRED']
-        blockers += ['license:' + r['name'] for r in policy['dependencies'] if r['action'] == 'REVIEW_REQUIRED']
+        entries = list(tracked_tree(args.root, args.revision))
+        if args.glyph_nuker_source:
+            entries += corresponding_source_entries(args.glyph_nuker_source)
+        rows, output, summary = plan(entries, policy)
+        blockers = release_blockers(rows, output, policy)
         blocked_workflows = workflow_publication_blockers(output, policy)
-        blockers += blocked_workflows
         report = {'schema': 'glyph_public_export_inventory.v1', 'source_commit': subprocess.check_output(
             ['git', 'rev-parse', args.revision + '^{commit}'], cwd=args.root, text=True).strip(),
             'policy_sha256': digest((args.policy or args.root / POLICY).read_bytes()),

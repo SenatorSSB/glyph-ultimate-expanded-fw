@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-"""Offline guards for the production acceptance operator; never opens a port."""
+"""Offline guards for the production acceptance operator; never opens a port.
+
+The current_host job in .github/workflows/build.yml runs this checker separately
+from the runtime-config aggregate. Requests and port operations use test doubles.
+"""
 import contextlib, io, json, sys, tempfile
 from pathlib import Path
 from unittest.mock import patch
+from glyph_native_profile_json import load_json, profile_to_protobuf_json
 import glyph_profile_store_production_tool as tool
 import glyph_profile_store_candidate_tool as candidate
 import glyph_serial_config_tool as transport
@@ -126,17 +131,37 @@ def main():
       for row in original.game_mode_configs:row.ultimate_profile_config=0
       original.profile_reference_token=11
       raw=original.SerializeToString(deterministic=True)
-      packet=ROOT/'docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins'
-      context=json.loads((packet/'context.json').read_text());native=json.loads((packet/'profile.json').read_text())
+      # The public synthetic example supplies a valid native body with empty
+      # Ultimate preprocessing. The explicit context is a separate input to
+      # admission, so the compiler and transport must agree on its digest.
+      source = load_json(ROOT / 'profiles/examples/SyntheticSingle.v1.profile.json')
+      native = profile_to_protobuf_json(source)
+      context = {'mode_id': 'MODE_ULTIMATE'}
+      yes(bool(original.game_mode_configs[0].button_remapping), 'fixture must exercise remap removal')
       payload=transport.prepare_native_context(raw,0,context,native,pb,jf)
       changed=pb.Config();changed.ParseFromString(payload)
-      yes(not changed.game_mode_configs[0].button_remapping and not changed.game_mode_configs[0].socd_pairs,'empty forced native context admitted')
+      yes(not changed.game_mode_configs[0].button_remapping and not changed.game_mode_configs[0].socd_pairs,'empty native context admitted')
       yes(changed.game_mode_configs[0].ultimate_profile_id==original.game_mode_configs[0].ultimate_profile_id and changed.game_mode_configs[0].ultimate_profile_engine==original.game_mode_configs[0].ultimate_profile_engine,'context does not select ID/engine')
       yes(bool(transport.verify_required_bindings(changed,pb)),'historical legacy binding policy unchanged')
-      for bad in ({**context,'ultimateProfileId':99},{**context,'mode_id':'MODE_MELEE'},{**context,'button_remapping':[{'physical_button':61,'activates':1}]}):
-        try:transport.prepare_native_context(raw,0,bad,native,pb,jf)
-        except Exception:pass
-        else:raise AssertionError('native context whitelist/domain/digest negative')
+      for bad_context, bad_native, expected_error, message in (
+          ({**context, 'ultimateProfileId': 99}, native, transport.ToolError, 'context permits only'),
+          ({**context, 'modeId': 'MODE_ULTIMATE'}, native, transport.ToolError, 'duplicate context field alias'),
+          ({**context, 'mode_id': 'MODE_MELEE'}, native, transport.ToolError, 'context must be MODE_ULTIMATE'),
+          ({**context, 'button_remapping': 'invalid'}, native, jf.ParseError, 'button_remapping'),
+          ({**context, 'button_remapping': [{'physical_button': 61, 'activates': 1}]},
+           native, transport.ToolError, 'remap ID'),
+          ({**context, 'button_remapping': [{'physical_button': 1, 'activates': 2}]},
+           native, transport.ToolError, 'profile preprocessing digest mismatch'),
+          (context, {**native, 'schemaVersion': 3}, transport.ToolError, 'requires native schema5 profile'),
+          (context, {**native, 'nativePayload': 'AA=='}, transport.ToolError, 'invalid native body extent'),
+      ):
+        try:
+          transport.prepare_native_context(raw, 0, bad_context, bad_native, pb, jf)
+        except expected_error as error:
+          yes(message in str(error), f'expected {message!r}, got {error}')
+        else:
+          raise AssertionError(f'native context/profile accepted despite {message}')
+      print('native_context_whitelist_domain_digest_and_profile_rejections=PASS')
       changed.profile_reference_token=99;changed.profile_reference_result_id=15
       current=changed.SerializeToString(deterministic=True)
       restored=pb.Config();restored.ParseFromString(transport.prepare_native_restore(current,raw,pb))

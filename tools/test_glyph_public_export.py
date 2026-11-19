@@ -223,6 +223,25 @@ class ExportTests(unittest.TestCase):
                        for name, body in synthetic.items()})
         with patch.object(ex, 'G2F_SHA256', ex.digest(raw)):
             self.assertTrue(ex.nuker_packaging_complete(output, p))
+            q = copy.deepcopy(p)
+            q['privacy_exceptions'].pop(ex.G2F_RECEIPT, None)
+            q['binary_records']['glyph_nuker']['sha256'] = ex.digest(output['glyph_nuker'][1])
+            q['dependencies'].append({'name': 'unrelated', 'action': 'REVIEW_REQUIRED'})
+            with patch.object(ex, 'inspect_binary', return_value={}):
+                rows, admitted, totals = ex.plan([(path, mode, body) for path, (mode, body) in output.items()], q)
+                self.assertIn('glyph_nuker', admitted)
+                self.assertEqual(ex.release_blockers(rows, admitted, q), ['license:unrelated'])
+                self.assertEqual(sum(group['files'] for group in totals.values()), len(output))
+                # Every omitted required byte set keeps normal export refused.
+                for missing in set(output) - {'.github/workflows/build.yml', 'glyph_nuker'}:
+                    with self.subTest(plan_missing=missing):
+                        subset = {path: value for path, value in output.items() if path != missing}
+                        try:
+                            rr, oo, _ = ex.plan([(path, mode, body) for path, (mode, body) in subset.items()], q)
+                        except ex.ExportError:
+                            continue
+                        self.assertNotIn('glyph_nuker', oo)
+                        self.assertTrue(ex.release_blockers(rr, oo, q))
             self.assertEqual(ex.workflow_publication_blockers(output, p), [])
             # No standalone LICENSE exists in this valid source fixture.
             self.assertFalse(receipt['source']['standalone_license_file'])
@@ -236,6 +255,48 @@ class ExportTests(unittest.TestCase):
                     self.assertFalse(ex.nuker_packaging_complete(q, p))
             q = dict(output); q[ex.NUKER_POLICY['source_prefix'] + 'extra.zig'] = ('100644', b'extra')
             self.assertFalse(ex.nuker_packaging_complete(q, p))
+
+    def test_source_ingestion_exact_set_hash_modes_and_no_git(self):
+        from unittest.mock import patch
+        import os
+        receipt = json.loads((ex.ROOT / ex.G2F_RECEIPT).read_bytes())
+        synthetic = {name: ('synthetic source ' + name).encode()
+                     for name in receipt['source']['files_sha256']}
+        receipt['source']['files_sha256'] = {name: ex.digest(body) for name, body in synthetic.items()}
+        raw = json.dumps(receipt).encode()
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp); source = root / 'source'; source.mkdir()
+            record = root / ex.G2F_RECEIPT; record.parent.mkdir(parents=True); record.write_bytes(raw)
+            for name, body in synthetic.items():
+                target = source / name; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(body)
+            with patch.object(ex, 'ROOT', root), patch.object(ex, 'G2F_SHA256', ex.digest(raw)):
+                self.assertEqual(len(ex.corresponding_source_entries(source)), 5)
+                target = source / 'src/root.zig'; original = target.read_bytes()
+                for change in ('missing', 'bytes', 'executable', 'symlink', 'extra', 'git'):
+                    with self.subTest(change=change):
+                        extra = None
+                        if change == 'missing': target.unlink()
+                        elif change == 'bytes': target.write_bytes(b'drift')
+                        elif change == 'executable': target.chmod(0o755)
+                        elif change == 'symlink': target.unlink(); target.symlink_to(source / 'src/main.zig')
+                        elif change == 'extra': extra = source / 'README.md'; extra.write_bytes(b'extra')
+                        elif change == 'git': extra = source / '.git'; extra.mkdir(); (extra / 'config').write_bytes(b'private')
+                        with self.assertRaises(ex.ExportError): ex.corresponding_source_entries(source)
+                        if extra:
+                            if extra.is_dir(): (extra / 'config').unlink(); extra.rmdir()
+                            else: extra.unlink()
+                        if target.is_symlink(): target.unlink()
+                        target.write_bytes(original); target.chmod(0o644)
+                link = root / 'link'; link.symlink_to(source, target_is_directory=True)
+                with self.assertRaises(ex.ExportError): ex.corresponding_source_entries(link)
+
+    def test_actual_policy_keeps_unstaged_source_blocked(self):
+        p = self.nuker_policy()
+        data = (ex.ROOT / 'glyph_nuker').read_bytes()
+        rows, out, _ = ex.plan([('glyph_nuker', '100755', data)], p)
+        self.assertEqual(rows[0]['classification'], 'REVIEW_REQUIRED')
+        self.assertNotIn('glyph_nuker', out)
+        self.assertIn('license:glyph_nuker', ex.release_blockers(rows, out, p))
 
     def test_current_package_offline_fixture_closure(self):
         import check_glyph_coordinate_native_runtime_profile_contract as contract

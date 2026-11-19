@@ -64,6 +64,50 @@ and artifact-copy block; the workflow uses the existing postprocessor and an
 observed-only provenance sidecar. Its unknown transformation is not documented
 as understood or reproducible. A CI build is not physical hardware acceptance.
 
+## Local clean-source export rehearsal
+
+The public exporter reads a committed tree and never imports its Git history.
+Choose a new isolated destination outside the checkout and keep its inventory
+report outside the exported tree. Normal export refuses unresolved path,
+privacy, dependency and notice obligations; diagnostic staging is not clearance.
+
+```sh
+python3 tools/glyph_public_export.py --revision HEAD \
+  --glyph-nuker-source <verified-unpacked-source> \
+  --report <private-inventory.json> --output <new-isolated-directory>
+```
+
+The optional source directory must contain exactly the five regular, non-executable
+files sealed by the [G2F receipt](runtime_config/fixtures/glyph_nuker_release_rights_g2f.v1.json),
+with no Git directory, extra files or symlinks. Acquire the archive from its pinned
+GregTurbo/glyph-nuker revision and verify its archive, Git tree and file hashes
+before use. The exporter copies those bytes only into `third_party/glyph-nuker/`
+in the destination. Do not add the external source to this working repository as
+part of an ordinary export. No upstream LICENSE or README is fabricated.
+
+The unchanged packaging gate requires the exact executable, all five source
+files/modes, sealed G2F/G2D receipts and byte-protected root notices. Only that
+complete output resolves the executable and its dependency packaging review;
+other blockers remain independent. Without source, the working tree still
+refuses normal export. A committed standalone tree already containing the exact
+source can be exported with the same command without `--glyph-nuker-source`.
+Normal public validation uses the included source and requires no source fetch.
+
+To reproduce the postprocessor, use verified Zig 0.15.2 from the staged source
+directory: `zig build -Dtarget=x86_64-linux -Doptimize=ReleaseSmall` (x86-64
+baseline CPU). Compare the output with the packaged executable without running
+it. Full reproduced environment/arguments are in the
+[G2D receipt](runtime_config/fixtures/glyph_nuker_source_reproduction_g2d.v1.json).
+This is a reproduced recipe, not historical maintainer attestation. The standalone
+source has no separate license declaration; retain the project's GPLv3 LICENSE,
+[third-party notices](../THIRD_PARTY_NOTICES.md) and G2F's scoped engineering policy.
+
+An export or fresh local Git commit supplies no hardware acceptance, freeze,
+tag, hosted repository or release. Preserve correspondence to the original
+[tested source and retained artifact](history/SOURCE_LINEAGE.md), inspect all
+exported bytes and local Git metadata, run public validation and a clean build,
+and obtain independent review before a separate owner publication decision.
+
 ## Change classification and required evidence
 
 | Change | Focused tests / inspection | Aggregate and CI | Firmware build | Hardware and separate authority |

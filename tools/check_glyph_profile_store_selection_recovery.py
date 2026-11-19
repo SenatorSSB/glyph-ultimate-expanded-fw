@@ -17,6 +17,32 @@ def run(args: list[str], expected: int = 0) -> str:
         raise AssertionError(' '.join(args) + '\n' + result.stdout + result.stderr)
     return result.stdout + result.stderr
 
+def replace_once(source: str, anchor: str, replacement: str) -> str:
+    if source.count(anchor) != 1:
+        raise AssertionError(f'expected one mutation anchor: {anchor.splitlines()[0]}')
+    return source.replace(anchor, replacement, 1)
+
+def without_final_usb(phases: str) -> str:
+    guard = '#if defined(GLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION) && GLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION\n'
+    if phases.count(guard) != 1:
+        raise AssertionError('expected one final USB re-enumeration guard in boot phases')
+    block, end, _ = phases.split(guard, 1)[1].partition('\n#endif\n')
+    sequence = '        tud_disconnect();\n        delay(10);\n        tud_connect();'
+    if not end or '\n#' in block or block.count(sequence) != 1:
+        raise AssertionError('expected one guarded final USB detach/wait/attach sequence')
+    return replace_once(phases, guard + block + end + '\n', '')
+
+def with_two_boot_reads(loop: str) -> str:
+    loop = replace_once(loop,
+        '    BootOutcome outcome = read_boot_state().outcome;\n'
+        '    if (outcome == BootOutcome::RecoveryConfigurator) {',
+        '    if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator) {')
+    return replace_once(loop,
+        '    // Only Pending can change between the recovery and normal-service gates.\n'
+        '    if (outcome == BootOutcome::Pending) outcome = read_boot_state().outcome;\n'
+        '    if (outcome != BootOutcome::Normal) return;',
+        '    if (read_boot_state().outcome != BootOutcome::Normal) return;')
+
 def main() -> int:
     nanopb = Path(os.environ.get('GLYPH_PROFILE_STORE_NANOPB', str(NANOPB)))
     with tempfile.TemporaryDirectory(prefix='glyph-selection-recovery-') as directory:
@@ -89,7 +115,8 @@ def main() -> int:
             return '\n'.join(function_body(source, name, 'bool') for name in (
                 'PrepareBootDisplay', 'MigrateBootLegacyConfiguration', 'InitializeBootBackends'))
         loop = function_body(app,'loop')
-        def app_case(name: str, old_manual: bool=False, old_auto: bool=False, loop_source: str=loop, phase_source: str=app) -> Path:
+        phases = boot_phases(app)
+        def app_case(name: str, old_manual: bool=False, old_auto: bool=False, loop_source: str=loop, phase_source: str=phases) -> Path:
             directory = temp/name; directory.mkdir()
             rec = recovery
             boot = setup
@@ -106,7 +133,7 @@ def main() -> int:
             (directory/'extracted_boot_state.inc').write_text(
                 function_body(app, 'read_boot_state', 'BootSnapshot') + '\n' +
                 function_body(app, 'publish_boot_state') + '\n')
-            (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+boot_phases(phase_source)+'\n'+boot+'\n'+loop_source+'\n')
+            (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+phase_source+'\n'+boot+'\n'+loop_source+'\n')
             exe = directory/'routes'
             run(['c++','-std=c++17','-DGLYPH_MK6_SWITCH_USB_REENUMERATION=1','-DGLYPH_MK6_FINAL_USB_GAMEPAD_REENUMERATION=1','-fshort-enums','-Wall','-Wextra','-Werror',
                  '-Wno-missing-field-initializers','-fsanitize=address,undefined','-fno-omit-frame-pointer',
@@ -118,28 +145,27 @@ def main() -> int:
         routes = app_case('actual_routes')
         for route in ('ordinary','rt2_deferred','automatic','filesystem','mb1','loop_gate','usb_enumeration'):
             print(run([str(routes),route]),end='')
-        parent = subprocess.check_output([
-            'git', 'show', '79475873f2c5f4b84e77bf9f94ab39779ffc69a5:config/glyph/common/src/config.cpp'
-        ], cwd=ROOT, text=True)
-        original_usb = app_case('original_usb', phase_source=parent)
+        # Recreate startup before final USB gamepad publication, then run the
+        # route harness against the real boot phases with that block removed.
+        original_usb = app_case('missing_final_usb', phase_source=without_final_usb(phases))
         assert 'USB gamepad enumeration sequence' in run([str(original_usb), 'usb_enumeration'], expected=1)
-        baseline = subprocess.check_output([
-            'git', 'show', '2bcb5104054f64d8b9c1af9dd1be4a974112f8ec:config/glyph/common/src/config.cpp'
-        ], cwd=ROOT, text=True)
-        old_loop = app_case('original_loop', loop_source=function_body(baseline, 'loop'))
+        print('negative_control_missing_final_usb=PASS')
+        # The old loop reads the boot state at both gates even after a terminal
+        # outcome. It still services the same routes, but takes an extra lock.
+        old_loop = app_case('two_boot_reads', loop_source=with_two_boot_reads(loop))
         print(run([str(old_loop), 'baseline_loop_gate']), end='')
         assert 'boot snapshot lock count' in run([str(old_loop), 'loop_gate'], expected=1)
         pending = 'if (outcome == BootOutcome::Pending) outcome = read_boot_state().outcome;'
-        assert loop.count(pending) == 1
-        missed_transition = app_case('missed_transition', loop_source=loop.replace(pending, ''))
+        missed_transition = app_case('missed_transition', loop_source=replace_once(loop, pending, ''))
         assert 'boot gate service trace' in run([str(missed_transition), 'loop_gate'], expected=1)
+        print('negative_controls_extra_boot_lock_and_missed_pending_transition=PASS')
         old_routes = app_case('old_auto_routes',old_auto=True)
         failure = run([str(old_routes),'automatic'],expected=1)
         assert 'automatic failures must run recovery transport' in failure
         # Restore the removed physical branch as an executable negative control.
         matrix = '    matrix_input.UpdateInputs(inputs);'
-        assert matrix in boot_phases(app)
-        retired_manual = app.replace(matrix, matrix + '\n    if(inputs.rt2&&!inputs.mb1){enter_recovery_configurator();return false;}', 1)
+        retired_manual = replace_once(phases, matrix,
+            matrix + '\n    if(inputs.rt2&&!inputs.mb1){enter_recovery_configurator();return false;}')
         retired_routes = app_case('retired_manual_route', phase_source=retired_manual)
         failure = run([str(retired_routes),'rt2_deferred'],expected=1)
         assert 'ordinary startup including RT2 alone' in failure
