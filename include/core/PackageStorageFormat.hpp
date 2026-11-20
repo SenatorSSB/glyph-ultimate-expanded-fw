@@ -11,7 +11,8 @@ constexpr size_t kIntentBytes = 512;
 constexpr size_t kRootBytes = 4420;
 constexpr size_t kControlBytes = 4436;
 constexpr size_t kRecordHeaderBytes = 128;
-constexpr size_t kRecordMaxBytes = 3469;
+constexpr size_t kLegacyRecordMaxBytes = 3469;
+constexpr size_t kRecordMaxBytes = 3840;
 constexpr size_t kConfigBodyMaxBytes = 8191;
 struct RootView {
     const uint8_t *prefix; // exactly 3904 existing root-prefix owner bytes
@@ -51,10 +52,19 @@ bool LifecycleRootChange(const uint8_t *baseline, const uint8_t *next, uint32_t 
                          uint32_t id, uint32_t old_revision, uint32_t old_row,
                          uint32_t old_rgb, uint32_t new_rgb);
 bool RecordSlotsMatch(const uint8_t *record, uint8_t row1, uint8_t rgb1, uint32_t compaction_sequence);
+struct RecordPayloadView {
+    const uint8_t *wrapper = nullptr, *metadata = nullptr;
+    size_t wrapper_bytes = 0, metadata_bytes = 0;
+};
+// Envelope split only. Integrity/identity must also pass RecordValid before use.
+bool SplitRecordPayload(const uint8_t *record, size_t bytes, RecordPayloadView &);
 bool RecordValid(const uint8_t *record, size_t bytes);
 bool RecordMatchesIntent(const uint8_t *record, size_t bytes, const uint8_t intent[kIntentBytes]);
 bool MakeRecordHeader(uint8_t header[kRecordHeaderBytes], const uint8_t *body,
                       size_t body_bytes, const RecordIdentity &);
+// Payload must already be contiguous wrapper + opaque stored metadata.
+bool MakeRichRecordHeader(uint8_t header[kRecordHeaderBytes], const uint8_t *payload,
+                          size_t wrapper_bytes, size_t metadata_bytes, const RecordIdentity &);
 bool RecordPath(char *out, size_t capacity, uint32_t id, uint32_t revision, bool temporary);
 
 struct AdmissionArithmetic {

@@ -28,6 +28,9 @@
 #include "core/CommunicationBackend.hpp"
 
 #include <config.pb.h>
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+#include "core/ProfileStore.hpp"
+#endif
 
 class ConfiguratorBackend : public CommunicationBackend {
   public:
@@ -83,6 +86,10 @@ class ConfiguratorBackend : public CommunicationBackend {
     unsigned PrepareStoreMutation();
     void PerformCheckedReference();
     bool ReadStoreProfile();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    bool HandleRichProfileRead();
+    bool PrepareRichProfileRead(ProfileStore::RichReadView &);
+#endif
     bool RespondProfileStore();
     bool HandleRuntimeIdentity();
 #if GLYPH_STRICT_HARDENING_CANDIDATE

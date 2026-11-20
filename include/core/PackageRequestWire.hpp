@@ -6,12 +6,17 @@
 #include <pb_decode.h>
 #include <pb_encode.h>
 #include "core/Sha256.hpp"
+#include "core/AuthoringManifest.hpp"
 
 // No storage, transport, global workspace or allocation. These objects must live
 // in the B1-R2 request/initialization owner unions, never in new static storage.
 // A successful wire decode is not admission: source Config/native/context
 // validation and materialization remain mandatory before persistent mutation.
 namespace glyph_package {
+constexpr size_t SafeFrameCap(size_t raw) { return raw+3+(raw+1)/254; }
+static_assert(SafeFrameCap(4938)==4960 && SafeFrameCap(4954)==4976 &&
+              SafeFrameCap(57)==60 && SafeFrameCap(250)==253 && SafeFrameCap(262)==266 &&
+              SafeFrameCap(49)==52 && SafeFrameCap(3816)==3834, "rich wire framing contract");
 struct BorrowedSpan {
     const uint8_t *bytes = nullptr;
     size_t size = 0;
@@ -20,10 +25,10 @@ struct BorrowedSpan {
 };
 struct EnvelopePhase {
     PackageEnvelope request;
-    BorrowedSpan package, native;
+    BorrowedSpan package, native, metadata;
     void Release() {
         request.package_body = {};
-        package = {}; native = {};
+        package = {}; native = {}; metadata = {};
     }
 };
 static_assert(sizeof(EnvelopePhase) <= sizeof(ProfileStoreRequest), "package request exceeds owner");
@@ -45,18 +50,19 @@ inline bool RuleFor(Message message, unsigned tag, Rule &r) {
         case 27: case 28: case 30: return true;
         case 29: r = {Kind::String, 17, 1, {}}; return true;
         case 2: return true; // only full-width uint64 field in requests
-        case 24: r = {Kind::Child, 4491, 1, Message::Body}; return true;
+        case 24: r = {Kind::Child, 4865, 1, Message::Body}; return true;
         case 25: case 26: r = {Kind::Bytes, 32, 1, {}}; return true;
         default: return false;
         }
     case Message::Body:
         switch (tag) {
-        case 1: r.maximum = 1; return true;
+        case 1: r.maximum = 2; return true;
         case 2: r = {Kind::String, 32, 1, {}}; return true;
         case 3: return true;
         case 4: r = {Kind::Child, 493, 1, Message::Mode}; return true;
         case 5: r = {Kind::Bytes, 3336, 1, {}}; return true;
         case 6: r = {Kind::Child, 611, 1, Message::Rgb}; return true;
+        case 7: r = {Kind::Bytes, 371, 1, {}}; return true;
         default: return false;
         }
     case Message::Mode:
@@ -126,7 +132,7 @@ inline bool PhysicalRgb(uint64_t v) {
 // It runs before nanopb and therefore before any callback or admission helper.
 inline bool Scan(const uint8_t *b, size_t size, Message message, unsigned depth = 0) {
     if ((!b && size) || depth > 3) return false;
-    size_t i = 0; unsigned previous = 0, count = 0; uint32_t seen = 0;
+    size_t i = 0; unsigned previous = 0, count = 0; uint32_t seen = 0; uint64_t body_version = 0;
     while (i < size) {
         uint64_t key, v;
         if (!Varint(b, size, i, key) || key > UINT32_MAX) return false;
@@ -144,6 +150,7 @@ inline bool Scan(const uint8_t *b, size_t size, Message message, unsigned depth 
             if (!(message == Message::Envelope && tag == 2) && v > r.maximum) return false;
             if (message == Message::Envelope && tag == 3 && v != 1 && (v < 15 || v > 20)) return false;
             if (message == Message::Color && tag == 1 && !PhysicalRgb(v)) return false;
+            if (message == Message::Body && tag == 1) body_version = v;
             continue;
         }
         if (type != 2 || !Varint(b, size, i, v) || v > size - i) return false;
@@ -162,9 +169,11 @@ inline bool Scan(const uint8_t *b, size_t size, Message message, unsigned depth 
             else if (r.kind == Kind::String && !Text(part, n)) return false;
             if (message == Message::Envelope && (tag == 25 || tag == 26) && n != 32) return false;
             if (message == Message::Body && tag == 5 && n < 608) return false;
+            if (message == Message::Body && tag == 7 && !glyph_authoring::Validate(part,n)) return false;
         }
     }
     if (message == Message::Body && (seen & 0x32) != 0x32) return false; // version,row,native
+    if (message == Message::Body && (body_version==2 ? !(seen&128) : ((seen&128) || size>4491))) return false;
     if (message == Message::Socd && (seen & 6) != 6) return false;
     if (message == Message::Remap && !(seen & 2)) return false;
     if (message == Message::Color && !(seen & 2)) return false;
@@ -256,11 +265,12 @@ inline ProtocolRoute RouteProtocol(const uint8_t *b, size_t size) {
 
 inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePhase &phase) {
     phase.Release(); phase.request = PackageEnvelope_init_zero;
-    if (!size || size > 4580 || !wire::Scan(bytes, size, wire::Message::Envelope)) return false;
-    phase.package.maximum = 4491; phase.native.maximum = 3336;
+    if (!size || size > 4954 || !wire::Scan(bytes, size, wire::Message::Envelope)) return false;
+    phase.package.maximum = 4865; phase.native.maximum = 3336; phase.metadata.maximum = 371;
     if (!wire::FindSpan(bytes, size, 24, phase.package)) return false;
     if (phase.package.bytes) {
-        if (!wire::FindSpan(phase.package.bytes, phase.package.size, 5, phase.native)) return false;
+        if (!wire::FindSpan(phase.package.bytes, phase.package.size, 5, phase.native) ||
+            !wire::FindSpan(phase.package.bytes, phase.package.size, 7, phase.metadata)) { phase.Release(); return false; }
         phase.request.package_body.funcs.decode = wire::DecodeSpan;
         phase.request.package_body.arg = &phase.package;
     }
@@ -271,7 +281,7 @@ inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePh
         (r.operation != PackageOperation_PACKAGE_STATUS && !r.expected_store_incarnation)) { phase.Release(); return false; }
     const bool target = r.target_id && r.expected_revision;
     const bool extras = r.target_id || r.expected_revision || r.replacement_name[0] || r.has_replacement_rank;
-    if ((r.protocol_version == 3 && (extras || size > 4564)) ||
+    if ((r.protocol_version == 3 && (extras || size > 4938)) ||
         (!LifecycleOperation(r.operation) && extras)) { phase.Release(); return false; }
     bool valid = false;
     if (r.operation == PackageOperation_PACKAGE_STATUS) valid = size <= 15 && !r.expected_store_generation &&
@@ -289,7 +299,12 @@ inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePh
             r.has_replacement_rank == (r.operation == PackageOperation_REORDER_PACKAGE);
     }
     if (!valid) { phase.Release(); return false; }
-    if (phase.package.seen) phase.request.package_body.funcs.encode = wire::EncodeSpan;
+    if (phase.package.seen) {
+        // Body1 retains its historical raw envelope limits.
+        const bool rich=phase.metadata.bytes!=nullptr;
+        if (!rich && size>(r.protocol_version==3?4564u:4580u)) { phase.Release(); return false; }
+        phase.request.package_body.funcs.encode = wire::EncodeSpan;
+    }
     if (!wire::RoundTrip(bytes, size, PackageEnvelope_fields, &phase.request)) { phase.Release(); return false; }
     return true;
 }
@@ -298,7 +313,7 @@ inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePh
 // This does not admit a request or expose a decode callback.
 inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &phase) {
     phase.Release(); phase.request=PackageEnvelope_init_zero;
-    if(!bytes||!size||size>4580)return false;
+    if(!bytes||!size||size>4954)return false;
     size_t at=0; unsigned previous=0;
     while(at<size) {
         uint64_t key,value;
@@ -324,7 +339,7 @@ inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &p
             at+=size_t(value);
         }
     }
-    if(phase.request.protocol_version==3 && size>4564)return false;
+    if(phase.request.protocol_version==3 && size>4938)return false;
     return (phase.request.protocol_version==3||phase.request.protocol_version==4)&&phase.request.request_token&&
         (phase.request.operation==PackageOperation_PACKAGE_STATUS||
          ((phase.request.operation==PackageOperation_CREATE_PACKAGE||phase.request.operation==PackageOperation_QUERY_PACKAGE||LifecycleOperation(phase.request.operation))&&
@@ -334,13 +349,16 @@ inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &p
 inline bool DecodeCanonicalBody(EnvelopePhase &phase, PackageBody &body) {
     body = PackageBody_init_zero;
     if ((phase.request.operation != PackageOperation_CREATE_PACKAGE && phase.request.operation != PackageOperation_UPDATE_PACKAGE) || !phase.package.seen || !phase.native.bytes) return false;
-    phase.native.seen = false;
+    phase.native.seen = false; phase.metadata.seen = false;
+    if (phase.metadata.bytes) { body.authoring_metadata.funcs.decode=wire::DecodeSpan; body.authoring_metadata.arg=&phase.metadata; }
     body.native_body.funcs.decode = wire::DecodeSpan; body.native_body.arg = &phase.native;
     auto input = pb_istream_from_buffer(phase.package.bytes, phase.package.size);
-    if (!pb_decode(&input, PackageBody_fields, &body) || input.bytes_left || !phase.native.seen) { body.native_body = {}; return false; }
+    if (!pb_decode(&input, PackageBody_fields, &body) || input.bytes_left || !phase.native.seen) { body.native_body = {}; body.authoring_metadata = {}; return false; }
     body.native_body.funcs.encode = wire::EncodeSpan;
-    if (!wire::RoundTrip(phase.package.bytes, phase.package.size, PackageBody_fields, &body)) { body.native_body = {}; return false; }
-    return body.version == 1 && body.has_row;
+    if (phase.metadata.bytes) body.authoring_metadata.funcs.encode=wire::EncodeSpan;
+    if (!wire::RoundTrip(phase.package.bytes, phase.package.size, PackageBody_fields, &body)) { body.native_body = {}; body.authoring_metadata = {}; return false; }
+    return body.has_row && ((body.version==1 && !phase.metadata.bytes && phase.package.size<=4491) ||
+        (body.version==2 && phase.metadata.seen && glyph_authoring::Validate(phase.metadata.bytes,phase.metadata.size)));
 }
 // Requires the exact immutable bytes accepted by DecodeCanonicalRequest. No
 // re-encoding buffer: deleting the canonical token2 field is byte-identical to

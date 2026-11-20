@@ -1,6 +1,6 @@
 {
   "schema": "glyph_public_package_baseline.v1",
-  "accepted_source_contract": "GLYPH_G2B_CURRENT_SOURCE_6714aca_V1",
+  "accepted_source_contract": "GLYPH_AUTHORING_METADATA_F772CAA_CANDIDATE_V1",
   "protected_prefixes": [
     "HAL/",
     "include/",
@@ -163,7 +163,7 @@
     {
       "path": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
       "git_mode": "100644",
-      "sha256": "477c44312ea772f82a9a6ed7de71bacbe14f2a337766ffd4607529e8d1aa5a12"
+      "sha256": "39111b9f7c8c2874b20938bb3eb260d31617614a4c573f74270c2667c1aaaf06"
     },
     {
       "path": "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
@@ -358,7 +358,7 @@
     {
       "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "git_mode": "100644",
-      "sha256": "673db9dbe9736059c03c65dcae1c98cee3a15b638a170b3faff7046b97b5deb5"
+      "sha256": "c7b23aac56f7370c2e81b8eb3734d133fb99d86cbfe78d41d318f211bf95078a"
     },
     {
       "path": "HAL/pico/src/comms/DInputBackend.cpp",
@@ -413,7 +413,7 @@
     {
       "path": "HAL/pico/src/core/GlyphPackageSourceReader.cpp",
       "git_mode": "100644",
-      "sha256": "75caec42f7b87e06ad512fc5ee6f584f051853d86fc2ed99ca4a5472e31cdf9f"
+      "sha256": "6df12b0e236c7df9ec1fbed2deb63863034a57b0036d0de039ff16d95eba36e7"
     },
     {
       "path": "HAL/pico/src/core/KeyboardMode.cpp",
@@ -438,17 +438,17 @@
     {
       "path": "HAL/pico/src/core/ProfileStore.cpp",
       "git_mode": "100644",
-      "sha256": "ce1594d85e1ef588b126b4cbfa989ba93847b5a356d36a88f884fc88e6a59220"
+      "sha256": "c1866b8295df38665e9aa96fb92b02680718512ffbda98af5f0cbe747c80407a"
     },
     {
       "path": "HAL/pico/src/core/ProfileStoreLifecycle.inc",
       "git_mode": "100644",
-      "sha256": "5e6c14fefda867076915368d362279970fd7675137ae1a1fa87ab071d0a03474"
+      "sha256": "2921553fde566bca495e8caaa7408674685f309e7f418ad085d3d29f0b2cd134"
     },
     {
       "path": "HAL/pico/src/core/ProfileStorePackage.inc",
       "git_mode": "100644",
-      "sha256": "622aa1a48c7e3b79da4f55adf5a1aff2d0b32d8953de6b8503d843d2a0b81c78"
+      "sha256": "a41dccafde20902982acfcffa773d3cd0fa70078decf922b4df666d60f418f9b"
     },
     {
       "path": "HAL/pico/src/core/ResourceDiagnostics.cpp",
@@ -741,6 +741,11 @@
       "sha256": "3399447101a74e7c9eaf49ced98e3a31ef77e1f35ae79ebb3c0cf09ed8f2d184"
     },
     {
+      "path": "include/core/AuthoringManifest.hpp",
+      "git_mode": "100644",
+      "sha256": "f6747f99700d420af02c5dc2063eb1184aa30b35dbdbfa52e55f3494d57a92b5"
+    },
+    {
       "path": "include/core/BootDiagnostics.hpp",
       "git_mode": "100644",
       "sha256": "ae4cb7f85ee6c83919eacaf4610b1437e5cc1dcf7e05cd99f9bbc33319529b98"
@@ -818,7 +823,7 @@
     {
       "path": "include/core/PackageRequestWire.hpp",
       "git_mode": "100644",
-      "sha256": "ebc3ee6afc057819ad2e2379df9f51469841d913c3aa6955bf0fbfe5ae402fc5"
+      "sha256": "45327a1bbdcde6b057c58c2452457c3e8ac22f8a6230563043eaefb56ce7025c"
     },
     {
       "path": "include/core/PackageStorageFence.hpp",
@@ -828,7 +833,7 @@
     {
       "path": "include/core/PackageStorageFormat.hpp",
       "git_mode": "100644",
-      "sha256": "2b148a3bc7b80a0b600c044020432aea5a67494a14630ccc057ff1f616f58e9e"
+      "sha256": "d9a3dc48fab89bd68ce9f8fa2683a19a2dba00a0549d7e9cb516f95dde0f53dd"
     },
     {
       "path": "include/core/ProfileSelection.hpp",
@@ -838,7 +843,7 @@
     {
       "path": "include/core/ProfileStore.hpp",
       "git_mode": "100644",
-      "sha256": "3a538d5486e6c435149f2249aad0684c12e93d2f10a9c0b007be0040414c7cdd"
+      "sha256": "022d7b7e801080fa9b9a316d2c517e600c3f098be53d8b04f35ebc3baf2f1734"
     },
     {
       "path": "include/core/ProfileStoreAtomicCommit.hpp",
@@ -904,6 +909,11 @@
       "path": "include/core/ResourceDiagnostics.hpp",
       "git_mode": "100644",
       "sha256": "00cddf0ce9bd9a34c0f3daa54fd3f909946ce9c17f0a9ce9dbe3dfa28e8715ad"
+    },
+    {
+      "path": "include/core/RichProfileReadWire.hpp",
+      "git_mode": "100644",
+      "sha256": "023058d4137184363b0b1b5db7912efab1244f21a0258c40459063000ae0f1bb"
     },
     {
       "path": "include/core/RuntimeIdentity.hpp",
@@ -1323,22 +1333,22 @@
     {
       "path": "schema/haybox/config.options",
       "git_mode": "100644",
-      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+      "sha256": "e385a461e2690b263c22c5522df34b90be8198e2e4e4cc2cf2505f3d3be5af5e"
     },
     {
       "path": "schema/haybox/config.proto",
       "git_mode": "100644",
-      "sha256": "1b781f97e8a93c8840d26698e8c802b366feb812afb7ad45f06c5d3d9ad5ee33"
+      "sha256": "5a15c45a42fe5adaeaea2121836ee9e411f4e92086a5d3ad1947f5ea71b66081"
     },
     {
       "path": "schema/haybox/package.options",
       "git_mode": "100644",
-      "sha256": "0b271ee8767333f4d77530ea76605fce4d65e8b4d5b4db6208b74257f0453197"
+      "sha256": "9195a4c8b11849b9203264c6fd2f4c1abd101e387d1ffff798acb77b69f6ff07"
     },
     {
       "path": "schema/haybox/package.proto",
       "git_mode": "100644",
-      "sha256": "36b18aaef58317101d6266eae9b3a822a2eb4ee19cd8f81a2e70876f3d422ae3"
+      "sha256": "720f38dbd0a09856fafd203ae4ea1d213e6448ecfbe720378df8bed6f7b064e3"
     },
     {
       "path": "scripts/build-glyph-mk6-quiet.sh",
@@ -1398,7 +1408,7 @@
     {
       "path": "src/core/PackageNamespaceClassifier.cpp",
       "git_mode": "100644",
-      "sha256": "8d2c52cb0728cbae076bb2b6d266860cb8f2b8eeccbc2131f208cb778d9f5a30"
+      "sha256": "7346066d432876dc5f86e086f1dd08dc6f52fca8f00c38d1b8f308b5c3f33abe"
     },
     {
       "path": "src/core/PackageStorageFence.cpp",
@@ -1408,7 +1418,7 @@
     {
       "path": "src/core/PackageStorageFormat.cpp",
       "git_mode": "100644",
-      "sha256": "13c012a881a1db6a91dfaf155c96d9877ca76b7be090d217a0d05b5f8efe253e"
+      "sha256": "f784eb0efdfae24812b8f62edec90b07c89ccf4542932c087530f83fa63e1b12"
     },
     {
       "path": "src/core/ProfileStore_stub.cpp",
@@ -1700,7 +1710,7 @@
     "No hardware acceptance for exported or rebuilt artifacts.",
     "No glyph_nuker source, license, purpose, byte transformation or reproducibility proof.",
     "No requirement for provenance commit objects in a public repository.",
-    "No firmware semantics, protocol, schema or persistent format changes."
+    "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge."
   ],
   "flashing_guard_existing_declarations": [
     {
@@ -1711,5 +1721,13 @@
       ]
     }
   ],
-  "receipt_semantic_digest": "d2903474db26e2ccefc4c00d8091c5dd79a97f8afc229bc359972ca5c353829e"
+  "implementation_authority": {
+    "repository": "SenatorSSB/senscope",
+    "architecture_commit": "f772caa106647ea445f96cd15e116efc36d4689b",
+    "document": "docs/project/GLYPH_AUTHORING_METADATA_ARCHITECTURE.md",
+    "glyph_base": "83fdfa763e5504e7ada57bf6f414fb9349590f8f",
+    "hardware_acceptance": false,
+    "publication_scope": "candidate branch only"
+  },
+  "receipt_semantic_digest": "df2f4d070fa3d19d049012ddd05bdbc6b7c052232608e20c6396d962758361e2"
 }

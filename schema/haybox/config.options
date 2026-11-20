@@ -146,3 +146,7 @@ Config.ultimate_profile_root_format int_size:IS_8
 
 UltimateProfile.native_payload type:FT_CALLBACK
 GameModeConfig.ultimate_profile_engine int_size:IS_8
+ProfileStoreResponse.authoring_state type:FT_IGNORE
+ProfileStoreResponse.authoring_metadata type:FT_IGNORE
+ProfileStoreResponse.record_sha256 type:FT_IGNORE
+ProfileStoreResponse.record_format type:FT_IGNORE

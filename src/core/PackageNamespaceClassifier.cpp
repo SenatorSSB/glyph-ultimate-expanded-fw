@@ -102,8 +102,8 @@ class Classifier {
    }
    if(Starts(w.object.path,"/ultpkg-"))w.managed_observed=true;
    if((Starts(w.object.path,"/ultpkg-")||(Starts(w.object.path,"/ultimate-")&&(Ends(w.object.path,".bin")||Ends(w.object.path,".tmp"))))&&n>=8&&Get32(p)==0x31525055u){
-    const auto v=Get16(p+4);w.unsupported|=v>2||(v==2&&n>=120&&(Get16(p+116)>2 || (Get16(p+116)==2 && Get16(p+118)>19)));
-    if(v==2){w.managed_observed=true;if(!Starts(w.object.path,"/ultpkg-"))Corrupt("managed record namespace");}
+    const auto v=Get16(p+4);w.unsupported|=v>3||((v==2||v==3)&&n>=120&&(Get16(p+116)>2 || (Get16(p+116)==2 && Get16(p+118)>19)));
+    if(v==2||v==3){w.managed_observed=true;if(!Starts(w.object.path,"/ultpkg-"))Corrupt("managed record namespace");}
    }
   }
   return true;
@@ -485,7 +485,7 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   if(n>4128||!reader.Read(path,0,owners.record,n)||!RecordValid(owners.record,n)){result.diagnostic="managed record invalid";return result;}
   const auto *record=owners.record;
   Hash(record,n,w.record_sha);Hash(record,128,w.digest);
-  if(n<130||Get32(record+16)!=intent.revision||(Get16(record+116)==2&&Get16(record+118)!=intent.operation)||n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||Get32(record+8)!=intent.incarnation||Get32(record+12)!=intent.id||Get64(record+32)!=intent.token||!Eq(record+40,intent.digest)||Get32(record+72)!=intent.row||Get32(record+76)!=intent.rgb||!Eq(record+80,intent.baseline_config)||Get32(record+120)!=intent.generation||Get32(record+124)!=intent.sequence||record[128]!=8||record[129]!=5||!reader.LegacyProfile(record+128,n-128)){result.diagnostic="managed receipt/native mismatch";return result;}
+  if(n<130||Get32(record+16)!=intent.revision||(Get16(record+116)==2&&Get16(record+118)!=intent.operation)||n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||Get32(record+8)!=intent.incarnation||Get32(record+12)!=intent.id||Get64(record+32)!=intent.token||!Eq(record+40,intent.digest)||Get32(record+72)!=intent.row||Get32(record+76)!=intent.rgb||!Eq(record+80,intent.baseline_config)||Get32(record+120)!=intent.generation||Get32(record+124)!=intent.sequence||record[128]!=8||record[129]!=5||!reader.LegacyProfile(record+128,Get32(record+20))){result.diagnostic="managed receipt/native mismatch";return result;}
    if(intent.operation==18||intent.operation==19){
     Hash(record+128,n-128,w.digest);
     if(!Eq(w.digest,w.old_wrapper_sha))return result;

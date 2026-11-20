@@ -79,6 +79,13 @@ class ProfileStore {
     bool IsOrdinaryStoreWriteActive() const;
     bool BeginOrdinaryConfigWrite(const Config &);
     void EndOrdinaryConfigWrite();
+    struct RichReadView {
+        const uint8_t *metadata = nullptr, *sha = nullptr;
+        size_t metadata_bytes = 0;
+        uint32_t format = 0;
+    };
+    Status ReadRich(uint32_t id, uint32_t revision, UltimateProfile &, RichReadView &) const;
+    void ReleaseRichRead() const;
     bool DispatchPackage(glyph_package::EnvelopePhase &, PackageResponse &response);
 #endif
 
@@ -282,6 +289,9 @@ class ProfileStore {
         uint32_t revision,
         UltimateProfile &into,
         bool *unsupported = nullptr
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        , RichReadView *rich = nullptr
+#endif
     ) const;
     enum class ReconcileAction : uint8_t { Refused, Complete, WriteCompleted, PublishAborted };
     ReconcileAction PrepareReconciliation();

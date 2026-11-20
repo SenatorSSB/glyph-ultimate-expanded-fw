@@ -81,6 +81,7 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     const auto &state=work.classification;
     const auto selected=SelectedObservedRoot(work);
     const auto &request=phase.request;
+    PackageBodyScope body_scope;
     auto refuse=[&](ProfileStoreStatus status) {
         if(reader.ObservationFailed())UnavailablePackageResponse(response);
         else { ClearPackageReceipt(response);response.status=status; }
@@ -115,6 +116,8 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     if(!ReadLifecycleRecord(reader,old,state.incarnation,work.old_record_sha))
         return refuse(ProfileStoreStatus_PROFILE_STORE_IO_FAILURE);
     HashBytes(prepared_record.record+128,prepared_record.n-128,work.old_wrapper_sha);
+    size_t wrapper_bytes=Get32(prepared_record.record+20);
+    const bool was_rich=Get16(prepared_record.record+4)==3;
     std::memcpy(response.semantic_digest,work.digest,32);
     if(removing) {
         if(!DeleteOwnedRow(candidate,*_next,index,_active_id))return refuse(ProfileStoreStatus_PROFILE_STORE_CONFLICT);
@@ -122,10 +125,11 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     } else {
         ++target.revision;
         if(updating) {
-            auto &body=*::new(&initialization_owner.body)PackageBody;
+            auto &body=body_scope.Begin();
             if(!glyph_package::DecodeCanonicalBody(phase,body) || !LifecycleName(body.name) ||
                std::strcmp(body.row.name,body.name) || body.row.layout_plate<1 || body.row.layout_plate>4)
                 return refuse(ProfileStoreStatus_PROFILE_STORE_INVALID);
+            if(was_rich && body.version==1) { body.native_body={};body.authoring_metadata={}; return refuse(ProfileStoreStatus_PROFILE_STORE_UNSUPPORTED); }
             SetPackageRow(mode,body,old.id);
             if(body.has_rgb) {
                 if(!old.owned_rgb1 && candidate.rgb_configs_count>=30)return refuse(ProfileStoreStatus_PROFILE_STORE_FULL);
@@ -148,8 +152,9 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
                 ultimate_native::ContextMatches(ultimate_native::CandidateView(),mode) &&
                 pb_encode(&prepared_record.stream,UltimateProfile_fields,&_candidate_profile);
             prepared_record.n=128+prepared_record.stream.bytes_written;
-            _candidate_profile.native_payload={};lease.Release();body.native_body={};
-            if(!valid)return refuse(ProfileStoreStatus_PROFILE_STORE_INVALID);
+            _candidate_profile.native_payload={};lease.Release();body.native_body={};body.authoring_metadata={};
+            if(!valid || !AppendAuthoringPayload(phase))return refuse(ProfileStoreStatus_PROFILE_STORE_INVALID);
+            wrapper_bytes=prepared_record.stream.bytes_written;
         } else if(operation==18) {
             if(!LifecycleName(request.replacement_name))return refuse(ProfileStoreStatus_PROFILE_STORE_INVALID);
             std::memset(target.name,0,sizeof(target.name));
@@ -171,7 +176,7 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
         auto &identity=PackagePreparation().identity;
         identity={state.incarnation,old.id,row,target.owned_rgb1,_next->generation,_next->package_sequence,
             request.request_token,response.semantic_digest,work.current.sha,old.revision+1,2,operation};
-        if(!MakeRecordHeader(prepared_record.record,prepared_record.record+128,prepared_record.n-128,identity) ||
+        if(!FormatPreparedRecord(identity,wrapper_bytes) ||
            !RecordPath(prepared_record.path,sizeof(prepared_record.path),old.id,old.revision+1,false) ||
            !RecordPath(prepared_record.temp,sizeof(prepared_record.temp),old.id,old.revision+1,true) ||
            !HashMessage(GameModeConfig_fields,&mode,work.row_sha) ||
@@ -197,7 +202,7 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     if(!reader.Config(kPackageCurrent,8191,work.prior)||!work.prior.source_valid||
        std::memcmp(work.prior.sha,work.current.sha,32)||!RecheckPackageBaselineRoots(reader,work))
         return refuse(ProfileStoreStatus_PROFILE_STORE_CONFLICT);
-    if(updating)initialization_owner.body.~PackageBody();
+    body_scope.End();
     ConstructPackageIntent(work,state,response,work.roots[selected].sha,_directory->high_water_id);
     auto *intent=initialization_owner.intent;
     Put16(intent+4,2);Put32(intent+8,operation);Put32(intent+72,old.revision+1);

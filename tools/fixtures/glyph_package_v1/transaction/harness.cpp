@@ -57,7 +57,7 @@ CheckedStorage::Fault hook(CheckedStorage::Kind kind,CheckedStorage::Operation o
 }
 void response(const PackageResponse &r,const std::string &name){size_t bytes=0;need(pb_get_encoded_size(&bytes,PackageResponse_fields,&r),"response size");Bytes out(bytes);auto stream=pb_ostream_from_buffer(out.data(),out.size());need(pb_encode(&stream,PackageResponse_fields,&r),"response encode");output(path(name+".pb"),out);}
 bool dispatch(const Bytes &bytes,PackageResponse &response){glyph_package::EnvelopePhase phase{};if(!glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),phase))return false;const bool result=profile_store.DispatchPackage(phase,response);
- need(!phase.package.bytes&&!phase.native.bytes&&!phase.request.package_body.funcs.decode,"dispatch releases borrowed request callbacks");no_handles();return result;}
+ need(!phase.package.bytes&&!phase.native.bytes&&!phase.metadata.bytes&&!phase.request.package_body.funcs.decode,"dispatch releases borrowed request callbacks");no_handles();return result;}
 Bytes encoded_envelope(const PackageEnvelope &request){size_t n=0;need(pb_get_encoded_size(&n,PackageEnvelope_fields,&request),"request encode size");Bytes out(n);auto stream=pb_ostream_from_buffer(out.data(),out.size());need(pb_encode(&stream,PackageEnvelope_fields,&request),"request encode");return out;}
 void hidden_id(uint32_t id){if(!id)return;for(size_t i=0;i<profile_store.Count();++i)need(profile_store.EntryAt(i)->id!=id,"pending absent from LIST");UltimateProfile scratch=UltimateProfile_init_default;need(profile_store.Read(id,scratch)!=ProfileStore::Status::Ok,"pending absent from READ");ProfileStore::Status state;need(!profile_store.Activate(id,&state),"pending cannot activate");++hidden_checks;}
 // Geometry contradiction injection at the existing ProfileStoreStorage seam.
@@ -139,10 +139,10 @@ if(!std::strcmp(argv[1],"wire-requests")){
    body_attempted=true;
    ::new(&initialization_owner.body)PackageBody;
    body_valid=glyph_package::DecodeCanonicalBody(phase,initialization_owner.body);
-   initialization_owner.body.native_body={};initialization_owner.body.~PackageBody();
+   initialization_owner.body.native_body={};initialization_owner.body.authoring_metadata={};initialization_owner.body.~PackageBody();
   }
   phase.Release();
-  need(!phase.package.bytes&&!phase.native.bytes&&!phase.request.package_body.funcs.decode,"wire probe ends borrowed callbacks");
+  need(!phase.package.bytes&&!phase.native.bytes&&!phase.metadata.bytes&&!phase.request.package_body.funcs.decode,"wire probe ends borrowed callbacks");
   if(!first)report<<",";first=false;
   report<<"{\"index\":"<<i<<",\"route\":"<<unsigned(route)
    <<",\"canonical_request\":"<<(canonical?"true":"false")

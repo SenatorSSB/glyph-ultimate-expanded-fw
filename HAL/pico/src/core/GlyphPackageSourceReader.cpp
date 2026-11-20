@@ -358,9 +358,9 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::ValidateMaterializedNat
     if(index>=config.game_mode_configs_count||index>=sizeof(config.game_mode_configs)/sizeof(config.game_mode_configs[0]))return false;
     const auto &row=config.game_mode_configs[index];
     if(!ProfileStoreNameValid(row.name,sizeof(row.name))||row.mode_id!=MODE_ULTIMATE||row.ultimate_profile_id!=Get32(record+12)||row.ultimate_profile_engine!=1||row.managed_format!=1||row.ultimate_profile_config||row.custom_mode_config||row.keyboard_mode_config)return false;
-    const bool valid=ultimate_native::DecodeProfile(record+128,bytes-128,_store._candidate_profile,_profile_lease)&&
+    const bool valid=ultimate_native::DecodeProfile(record+128,Get32(record+20),_store._candidate_profile,_profile_lease)&&
         _store._candidate_profile.schema_version==ultimate_native::kSchema&&ValidateCandidateProfile()&&
-        ultimate_native::ContextMatches(ultimate_native::CandidateView(),row)&&CanonicalCandidateProfile(record+128,bytes-128);
+        ultimate_native::ContextMatches(ultimate_native::CandidateView(),row)&&CanonicalCandidateProfile(record+128,Get32(record+20));
     ClearProfileLease();return valid;
 }
 

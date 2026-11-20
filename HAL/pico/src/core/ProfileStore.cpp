@@ -1279,6 +1279,9 @@ bool ProfileStore::ReadProfile(
     uint32_t rev,
     UltimateProfile &out,
     bool *unsupported
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    , RichReadView *rich
+#endif
 ) const {
     if (unsupported)
         *unsupported = false;
@@ -1313,7 +1316,15 @@ bool ProfileStore::ReadProfile(
             !package_storage::RecordSlotsMatch(wire, entry.owned_row1, entry.owned_rgb1,
                                               _directory->compaction_sequence)) return false;
         out = UltimateProfile_init_default;
-        return ultimate_native::DecodeProfile(wire + 128, n - 128, out, read_lease) && ValidateProfile(out);
+        const bool valid=ultimate_native::DecodeProfile(wire + 128, Get32(wire + 20), out, read_lease) && ValidateProfile(out);
+        if(valid && rich) {
+            package_storage::RecordPayloadView payload;
+            if(!package_storage::SplitRecordPayload(wire,n,payload))return false;
+            Sha256 hash;hash.Update(wire,n);hash.Final(wire+4096);
+            rich->format=Get16(wire+4);rich->metadata=payload.metadata;
+            rich->metadata_bytes=payload.metadata_bytes;rich->sha=wire+4096;
+        }
+        return valid;
     }
 #endif
     if (Get32(wire) != kRecordMagic || Get32(wire + 8) != Incarnation() || Get32(wire + 12) != id ||
@@ -1339,6 +1350,16 @@ bool ProfileStore::ReadProfile(
     return ProfileStoreReadTrace::Mark(18, valid) && valid;
 }
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+ProfileStore::Status ProfileStore::ReadRich(uint32_t id,uint32_t revision,UltimateProfile &out,RichReadView &view) const {
+    view={};
+    if(!_ready || !_package_visible || PackageStorageFence::MutationFenced())return Status::ReadOnlyRecovery;
+    const int index=Find(id);
+    if(index<0 || !_directory->entries[index].managed_format || _directory->entries[index].revision!=revision)return Status::Conflict;
+    return ReadProfile(id,revision,out,nullptr,&view)?Status::Ok:Status::Invalid;
+}
+void ProfileStore::ReleaseRichRead() const { ProfileReadLease().Release(); }
+#endif
 ProfileStore::Status ProfileStore::Read(uint32_t id, UltimateProfile &out, uint32_t *rev) const {
     if (!_ready)
         return Status::IoFailure;

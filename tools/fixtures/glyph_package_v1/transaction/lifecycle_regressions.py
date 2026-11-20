@@ -31,6 +31,7 @@ def main():
     p.add_argument("--binary", type=Path, required=True)
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--all-cuts", action="store_true", help="inject every observed checked operation")
+    p.add_argument("--rich", action="store_true", help="exercise body2/record3 with maximum metadata")
     args = p.parse_args()
     repo = Path(__file__).resolve().parents[4]
     schema = repo / "schema/haybox"
@@ -67,6 +68,9 @@ def main():
 
     def make_body(name, rgb=True):
         package = body(rgb=rgb)
+        if args.rich:
+            package.version=2
+            package.authoring_metadata=b'\1'+struct.pack('<I',(1<<28)-1)+b''.join(bytes([len(n)])+n for n in [b'x'*12]*26+[b'y'*13]*2)
         package.row.name = package.name = name
         package.row.layout_plate = cfg.LAYOUT_PLATE_SPLIT_FGC if name == "Wren" else cfg.LAYOUT_PLATE_FGC
         package.display_rank = 111 if name == "Wren" else 17
@@ -242,7 +246,7 @@ def main():
             record = disk[record_name(key, rev+1)]
             assert u32(record, 16) == rev+1 and u32(record, 116) == (op << 16 | 2)
             assert res.record_sha == hashlib.sha256(record).digest()
-            actual_program = cfg.UltimateProfile.FromString(record[128:]).native_payload
+            actual_program = cfg.UltimateProfile.FromString(record[128:128+u32(record,20)]).native_payload
             if op in (18, 19):
                 assert record[128:] == before[record_name(key, rev)][128:]
             else:

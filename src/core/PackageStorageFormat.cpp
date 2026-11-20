@@ -1,4 +1,5 @@
 #include "core/PackageStorageFormat.hpp"
+#include "core/AuthoringManifest.hpp"
 #include "core/ProfileStoreName.hpp"
 #include "core/Sha256.hpp"
 #include <climits>
@@ -246,10 +247,26 @@ bool RecordSlotsMatch(const uint8_t *record, uint8_t row1, uint8_t rgb1, uint32_
     // removals can only move existing slots left, never create or drop its RGB.
     return row1 && row1 <= original_row1 && rgb1 <= original_rgb1 && bool(rgb1) == bool(original_rgb1);
 }
+bool SplitRecordPayload(const uint8_t *p, size_t n, RecordPayloadView &view) {
+    view = {};
+    if (!p || n <= kRecordHeaderBytes || n > kRecordMaxBytes) return false;
+    const size_t payload = n-kRecordHeaderBytes, wrapper = Get32(p+20);
+    const auto format = Get16(p+4);
+    if (!wrapper || wrapper>3341 || wrapper>payload) return false;
+    if (format==2) { if (n>kLegacyRecordMaxBytes || wrapper!=payload) return false; }
+    else if (format==3) {
+        if (!glyph_authoring::StoredEnvelope(p+kRecordHeaderBytes+wrapper,payload-wrapper)) return false;
+    } else return false;
+    view.wrapper=p+kRecordHeaderBytes; view.wrapper_bytes=wrapper;
+    if (format==3) { view.metadata=view.wrapper+wrapper; view.metadata_bytes=payload-wrapper; }
+    return true;
+}
 bool RecordValid(const uint8_t *p, size_t n) {
+    RecordPayloadView view;
+    if (!SplitRecordPayload(p,n,view)) return false;
     if (!p || n <= kRecordHeaderBytes || n > kRecordMaxBytes || Get32(p) != 0x31525055u ||
-        Get16(p + 4) != 2 || Get16(p + 6) != 2 || !Get32(p + 8) || !Get32(p + 12) ||
-        !Get32(p + 16) || Get32(p + 20) != n - kRecordHeaderBytes || !Get64(p + 32) ||
+        Get16(p + 6) != 2 || !Get32(p + 8) || !Get32(p + 12) ||
+        !Get32(p + 16) || !Get64(p + 32) ||
         Get32(p + 72) >= 30 || Get32(p + 76) > 30 ||
         (Get32(p + 16) == 1 ? Get32(p + 116) != 1 :
          (Get16(p + 116) != 2 || Get16(p + 118) < 17 || Get16(p + 118) > 19)) ||
@@ -286,6 +303,17 @@ bool MakeRecordHeader(uint8_t *p, const uint8_t *body, size_t n, const RecordIde
     std::memcpy(p + 40, v.digest, 32); Put32(p + 72, v.row); Put32(p + 76, v.rgb);
     std::memcpy(p + 80, v.baseline_config_sha, 32); Put16(p + 116, v.receipt_format); Put16(p + 118, v.receipt_format == 2 ? v.operation : 0);
     Put32(p + 120, v.generation); Put32(p + 124, v.sequence); Put32(p + 112, Crc32(p, kRecordHeaderBytes));
+    return true;
+}
+bool MakeRichRecordHeader(uint8_t *p, const uint8_t *payload, size_t wrapper,
+                          size_t metadata, const RecordIdentity &v) {
+    if (!payload || !wrapper || wrapper>3341 || !metadata || metadata>371 ||
+        wrapper>kRecordMaxBytes-kRecordHeaderBytes-metadata ||
+        !glyph_authoring::StoredEnvelope(payload+wrapper,metadata) ||
+        !MakeRecordHeader(p,payload,wrapper,v)) return false;
+    Put16(p+4,3); Put32(p+24,Crc32(p,24));
+    Put32(p+28,Crc32(payload,wrapper+metadata)); Put32(p+112,0);
+    Put32(p+112,Crc32(p,kRecordHeaderBytes));
     return true;
 }
 bool RecordPath(char *out, size_t capacity, uint32_t id, uint32_t rev, bool temporary) {

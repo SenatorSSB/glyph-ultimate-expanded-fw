@@ -23,3 +23,4 @@ PackageResponse.record_sha fixed_length:true
 PackageEnvelope.expected_config_sha256 max_size:32
 PackageEnvelope.expected_config_sha256 fixed_length:true
 PackageEnvelope.replacement_name max_length:17
+PackageBody.authoring_metadata type:FT_CALLBACK

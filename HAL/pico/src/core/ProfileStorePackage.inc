@@ -137,15 +137,18 @@ void InitPackageResponse(PackageResponse &r, uint64_t token) {
     r = PackageResponse_init_zero;
     r.protocol_version=3; r.request_token=token;
     r.status=ProfileStoreStatus_PROFILE_STORE_COMMIT_UNKNOWN;
-    r.capability_version=1; r.logical=PackageLogicalDisposition_UNRESOLVED;
+    r.capability_version=3; r.logical=PackageLogicalDisposition_UNRESOLVED;
     r.write_fenced=true;
     r.storage_floor=PackageStorageFloor_FLOOR_UNRESOLVED;
-    r.supported_package_format=1; r.supported_root_format=3;
-    r.supported_record_format=2; r.supported_receipt_format=1;
-    r.package_schema_version=1; r.max_create_request_bytes=4564;
-    r.max_create_frame_bytes=4580; r.max_query_request_bytes=57;
-    r.max_response_bytes=228; r.max_response_frame_bytes=231;
-    r.max_query_frame_bytes=60; r.capability_bits=31; r.max_package_body_bytes=4491;
+    r.supported_package_format=2; r.supported_root_format=3;
+    r.supported_record_format=3; r.supported_receipt_format=1;
+    r.package_schema_version=2; r.max_create_request_bytes=4938;
+    r.max_create_frame_bytes=4960; r.max_query_request_bytes=57;
+    r.max_response_bytes=250; r.max_response_frame_bytes=253;
+    r.max_query_frame_bytes=60; r.capability_bits=1023; r.max_package_body_bytes=4865;
+    r.max_authoring_metadata_bytes=371; r.authoring_manifest_version=1; r.rich_readback_version=1;
+    r.max_rich_read_request_bytes=49; r.max_rich_read_response_bytes=3816;
+    r.max_rich_read_response_frame_bytes=3834;
 }
 void ClearPackageReceipt(PackageResponse &r) {
     r.profile_id=0; r.profile_revision=0; r.transaction_operation=0;
@@ -244,7 +247,7 @@ __attribute__((noinline)) bool QueryObservedPackage(NamespaceReader &reader,cons
         if(!reader.ObjectAt(index,object,eof))return false;
         if(eof)break;
         if(!PackageRecordName(object.path))continue;
-        if(object.bytes<=128||object.bytes>3469||
+        if(object.bytes<=128||object.bytes>package_storage::kRecordMaxBytes||
            !reader.Read(object.path,0,prepared_record.record,object.bytes)||
            !RecordValid(prepared_record.record,object.bytes))return false;
         const auto *record=prepared_record.record;
@@ -662,13 +665,13 @@ __attribute__((noinline)) bool ProfileStore::PreparePackageDispatch() {
     in.respond=true; InitPackageResponse(*in.response,in.phase->request.request_token);
     if(in.phase->request.protocol_version==4) {
         in.response->protocol_version=4;
-        in.response->capability_version=2;
+        in.response->capability_version=3;
         in.response->supported_receipt_format=2;
-        in.response->capability_bits=511;
-        in.response->max_lifecycle_request_bytes=4580;
-        in.response->max_lifecycle_frame_bytes=4601;
-        in.response->max_response_bytes=241;
-        in.response->max_response_frame_bytes=244;
+        in.response->capability_bits=1023;
+        in.response->max_lifecycle_request_bytes=4954;
+        in.response->max_lifecycle_frame_bytes=4976;
+        in.response->max_response_bytes=262;
+        in.response->max_response_frame_bytes=266;
     }
     if(package_owner_live)return false;
     package_owner_live=true;
@@ -740,6 +743,30 @@ __attribute__((noinline)) bool ProfileStore::ObservePackageTransaction(glyph_pac
     ReleasePackageReader();
     return true;
 }
+namespace {
+struct PackageBodyScope {
+    bool live=false;
+    PackageBody &Begin() { live=true;return *::new(&initialization_owner.body)PackageBody; }
+    void End() { if(live) { initialization_owner.body.native_body={};initialization_owner.body.authoring_metadata={};initialization_owner.body.~PackageBody();live=false; } }
+    ~PackageBodyScope(){End();}
+};
+// Existing prepared record owns both spans before RX callbacks are released.
+bool AppendAuthoringPayload(const glyph_package::EnvelopePhase &phase) {
+    if (!phase.metadata.bytes) return true;
+    if (!glyph_authoring::Validate(phase.metadata.bytes,phase.metadata.size) ||
+        prepared_record.n>package_storage::kRecordMaxBytes-phase.metadata.size) return false;
+    std::memcpy(prepared_record.record+prepared_record.n,phase.metadata.bytes,phase.metadata.size);
+    prepared_record.n+=phase.metadata.size;
+    return true;
+}
+bool FormatPreparedRecord(const package_storage::RecordIdentity &identity, size_t wrapper_bytes) {
+    const size_t payload=prepared_record.n-128;
+    return payload==wrapper_bytes
+        ? MakeRecordHeader(prepared_record.record,prepared_record.record+128,wrapper_bytes,identity)
+        : package_storage::MakeRichRecordHeader(prepared_record.record,prepared_record.record+128,
+                                               wrapper_bytes,payload-wrapper_bytes,identity);
+}
+}
 #include "ProfileStoreLifecycle.inc"
 bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
     auto &reader=PackageReader(*this,persistence);
@@ -753,33 +780,33 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
         EndClassifierOwner(); return false;
     }
     // Decoded body replaces only the no-longer-needed borrowed intent bytes.
-    ::new(&initialization_owner.body)PackageBody;
-    auto &body=initialization_owner.body;
+    PackageBodyScope body_scope;
+    auto &body=body_scope.Begin();
     response.status=ProfileStoreStatus_PROFILE_STORE_INVALID;
     if(!glyph_package::DecodeCanonicalBody(phase,body)||!ValidName(body.name)) {
-        body.native_body={}; EndClassifierOwner(); return false;
+        body.native_body={}; body.authoring_metadata={}; EndClassifierOwner(); return false;
     }
     if(body.has_rgb&&work.current.rgbs>=30) {
         response.status=ProfileStoreStatus_PROFILE_STORE_FULL;
-        body.native_body={}; EndClassifierOwner(); return false;
+        body.native_body={}; body.authoring_metadata={}; EndClassifierOwner(); return false;
     }
     // Reload the exact baseline into Persistence's existing scratch, then copy
     // it once into the approved third Config owner before append-only derivation.
     if(!reader.Config(kPackageCurrent,8191,work.scan_config)||
        !work.scan_config.source_valid||std::memcmp(work.scan_config.sha,work.current.sha,32)) {
-        body.native_body={}; UnavailablePackageResponse(response); EndClassifierOwner(); return false;
+        body.native_body={}; body.authoring_metadata={}; UnavailablePackageResponse(response); EndClassifierOwner(); return false;
     }
     Config &candidate=ConfigWriteCandidate(); candidate=persistence.PackageConfigScratch();
     const uint32_t id=_directory->high_water_id+1;
     for(size_t i=0;i<candidate.game_mode_configs_count;++i) {
         const auto &old=candidate.game_mode_configs[i];
         if(old.ultimate_profile_id==id||(body.has_rgb&&old.rgb_config==work.current.rgbs+1)) {
-            body.native_body={}; EndClassifierOwner(); return false;
+            body.native_body={}; body.authoring_metadata={}; EndClassifierOwner(); return false;
         }
     }
     AppendPackageRow(candidate,body,id);
     if(!reader.DescribeConfig(candidate,work.scan_config)||!work.scan_config.source_valid) {
-        body.native_body={}; EndClassifierOwner(); return false;
+        body.native_body={}; body.authoring_metadata={}; EndClassifierOwner(); return false;
     }
     // Source Prepare/semantic/context validation uses the existing native
     // candidate owner. The borrowed RX lease ends before any storage writes.
@@ -792,15 +819,15 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     prepared_record.stream=pb_ostream_from_buffer(prepared_record.record+128,3341);
     const bool encoded=native_ok&&pb_encode(&prepared_record.stream,UltimateProfile_fields,&_candidate_profile);
     prepared_record.n=128+prepared_record.stream.bytes_written;
-    _candidate_profile.native_payload={}; native_lease.Release(); body.native_body={};
-    if(!encoded) { EndClassifierOwner(); return false; }
+    _candidate_profile.native_payload={}; native_lease.Release(); body.native_body={}; body.authoring_metadata={};
+    if(!encoded || !AppendAuthoringPayload(phase)) { EndClassifierOwner(); return false; }
     response.profile_id=id; response.profile_revision=1;
     response.row_index=work.current.rows; response.rgb_index=body.has_rgb?work.current.rgbs+1:0;
     std::memcpy(response.semantic_digest,work.digest,32);
     auto &identity=PackagePreparation().identity; identity={classification.incarnation,id,response.row_index,response.rgb_index,
         classification.generation+1,classification.package_sequence+1,phase.request.request_token,
         response.semantic_digest,work.current.sha};
-    if(!MakeRecordHeader(prepared_record.record,prepared_record.record+128,prepared_record.n-128,identity)||
+    if(!FormatPreparedRecord(identity,prepared_record.stream.bytes_written)||
        !HashMessage(GameModeConfig_fields,&candidate.game_mode_configs[work.current.rows],work.row_sha)||
        (body.has_rgb&&!HashMessage(RgbConfig_fields,&candidate.rgb_configs[work.current.rgbs],work.rgb_sha))||
        !RecordPath(prepared_record.path,sizeof(prepared_record.path),id,1,false)||
@@ -851,7 +878,7 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     }
     // Body is fully materialized and no longer needed; construct the immutable
     // intent in precisely its shared initialization owner before first mutation.
-    initialization_owner.body.~PackageBody();
+    body_scope.End();
     ConstructPackageIntent(work,classification,response,work.roots[selected].sha,_directory->high_water_id);
     if(!IntentValid(initialization_owner.intent)) {
         ClearPackageReceipt(response); UnavailablePackageResponse(response); EndClassifierOwner(); return false;

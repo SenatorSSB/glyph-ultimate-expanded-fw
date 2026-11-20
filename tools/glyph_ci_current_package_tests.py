@@ -376,6 +376,8 @@ def run_package(temp):
         status = decode_status((boot / "status.cobs").read_bytes(), cfg.ProfileStoreResponse)
         assert status.status == cfg.PROFILE_STORE_IO_FAILURE and status.recovery_flags, status
     positive_create(temp, invoke, messages)
+    subprocess.run([sys.executable, str(ROOT / "tools/fixtures/glyph_authoring_metadata/regressions.py"),
+                    "--binary", str(binary), "--out", str(temp / "authoring-metadata")], check=True)
     print("Current package wire, historical Config fault injection, startup/STATUS and intact LittleFS recovery passed")
 
 

@@ -620,6 +620,7 @@ message ProfileStoreRequest {
   uint32 fault_ticket = 22;
   // Candidate-only progress frames; stage zero is the final response.
   bool liveness_trace = 23;
+  bool include_authoring_metadata = 24;
 }
 message ProfileStoreResponse {
   // Historical candidate-only root/RT2 telemetry tags. Never reuse in production.
@@ -680,6 +681,10 @@ message ProfileStoreResponse {
   uint32 rx_last_progress_ms = 49;
   uint32 rx_fetched_bytes = 50;
   uint32 rx_flags = 51;
+  uint32 authoring_state = 218;
+  bytes authoring_metadata = 219;
+  bytes record_sha256 = 220;
+  uint32 record_format = 221;
 }
 /**
  * Button to HID keyboard keycode mapping.

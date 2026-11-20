@@ -24,6 +24,7 @@
 #include "core/PackageOwnership.hpp"
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
 #include "core/PackageRequestWire.hpp"
+#include "core/RichProfileReadWire.hpp"
 #endif
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/ProfileStoreRequestIdentity.hpp"
@@ -562,6 +563,9 @@ __attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileSto
     if (package_received_bytes) return HandlePackageRequest(package_received_bytes);
 #endif
     if (!profile_received) return received;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(request.include_authoring_metadata)return HandleRichProfileRead();
+#endif
     {
         struct DispatchReset {
             ~DispatchReset() { dispatch_handled = dispatch_pending = false; dispatch_loaded=Persistence::LoadResult::Absent; }
@@ -624,6 +628,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
     }
 #endif
     request = ProfileStoreRequest_init_default;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(glyph_package::HasRichReadField(frame,length) && !glyph_package::ScanRichRead(frame,length))
+        return WriteProfilePacket(CMD_ERROR,(const uint8_t *)"Invalid rich READ request",25);
+#endif
     if (!ultimate_native::PrepareRequest(frame, length, request, incoming_native))
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
 #if GLYPH_STRICT_HARDENING_CANDIDATE
@@ -740,10 +748,8 @@ __attribute__((noinline)) bool ConfiguratorBackend::RefreshPackageConfig() {
 // Encoding scratch is not retained through any persistent writer call.
 __attribute__((noinline)) bool ConfiguratorBackend::RespondPackage() {
     auto &package_response = response_owner.package;
-    // v4 adds at most four revision bytes, one capability byte and two
-    // four-byte bounds to the v3 proof. Both raw response sizes fit one
-    // COBS block, including command 9.
-    const size_t kPackageResponseLimit = package_response.protocol_version==4 ? 241 : 228;
+    // Conservative protobuf caps; safe COBS model includes command+delimiter.
+    const size_t kPackageResponseLimit = package_response.protocol_version==4 ? 262 : 250;
     auto output = pb_ostream_from_buffer(frame, kPackageResponseLimit);
     if (!pb_encode(&output, PackageResponse_fields, &package_response)) return false;
     return WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
@@ -863,6 +869,55 @@ __attribute__((noinline)) void ConfiguratorBackend::PerformCheckedReference() {
         }
     }
 }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+// No normal dispatch, prior-record substitution, mutation reconciliation or
+// telemetry enters the explicitly guarded rich observation.
+__attribute__((noinline)) bool ConfiguratorBackend::PrepareRichProfileRead(ProfileStore::RichReadView &view) {
+    auto &request=request_owner.legacy;auto &response=response_owner.legacy;
+    response=ProfileStoreResponse_init_default;
+    response.protocol_version=2;response.request_token=request.request_token;
+    response.mutation_protocol_version=2;response.status=PROFILE_STORE_CONFLICT;
+    response.store_generation=profile_store.Generation();response.store_incarnation=profile_store.Incarnation();
+    response.profile_id=request.profile_id;response.profile_revision=request.expected_profile_revision;
+    if(!_recovery_storage_available || _recovery_config_invalid || _reference_unknown || persistence.IsMutationFenced())return false;
+    if(request.expected_store_generation!=profile_store.Generation() || request.expected_store_incarnation!=profile_store.Incarnation())return false;
+    Persistence::PackageConfigFacts before;bool valid=false;
+    auto &config=ConfigWriteCandidate();
+    if(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,config,before,valid)!=Persistence::LoadResult::Loaded || !valid)return false;
+    response.config_generation=before.crc;
+    if(request.expected_config_generation!=before.crc)return false;
+    const ProfileStore::Entry *entry=nullptr;
+    for(size_t i=0;i<profile_store.Count();++i)if(profile_store.EntryAt(i)->id==request.profile_id)entry=profile_store.EntryAt(i);
+    if(!entry || !entry->managed_format || entry->revision!=request.expected_profile_revision ||
+       !entry->owned_row1 || entry->owned_row1>config.game_mode_configs_count)return false;
+    const auto &row=config.game_mode_configs[entry->owned_row1-1];
+    if(row.managed_format!=1 || row.mode_id!=MODE_ULTIMATE || row.ultimate_profile_id!=entry->id ||
+       row.ultimate_profile_engine!=1 || row.rgb_config!=entry->owned_rgb1)return false;
+    if(profile_store.ReadRich(request.profile_id,uint32_t(request.expected_profile_revision),response.profile,view)!=ProfileStore::Status::Ok ||
+       !ultimate_native::ContextMatches(ultimate_native::CandidateView(),row))return false;
+    Persistence::PackageConfigFacts after;valid=false;
+    if(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,config,after,valid)!=Persistence::LoadResult::Loaded || !valid ||
+       before.crc!=after.crc || before.bytes!=after.bytes || std::memcmp(before.sha,after.sha,32) ||
+       request.expected_store_generation!=profile_store.Generation() || request.expected_store_incarnation!=profile_store.Incarnation() ||
+       entry->revision!=request.expected_profile_revision)return false;
+    response.has_profile=true;response.status=PROFILE_STORE_OK;
+    return true;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::HandleRichProfileRead() {
+    auto &response=response_owner.legacy;
+    ProfileStore::RichReadView view;
+    struct LeaseScope {
+        ProfileStore::RichReadView &view;
+        ~LeaseScope(){response_owner.legacy.profile.native_payload={};profile_store.ReleaseRichRead();view={};}
+    } lease{view};
+    const bool success=PrepareRichProfileRead(view);
+    if(!success){response.has_profile=false;response.profile.native_payload={};view={};}
+    auto output=pb_ostream_from_buffer(frame,3816);
+    if(!pb_encode(&output,ProfileStoreResponse_fields,&response) ||
+       (success&&!glyph_package::AppendRichReadTail(output,view.format,view.metadata,view.metadata_bytes,view.sha)))return false;
+    return WriteProfilePacket(CMD_PROFILE_STORE,frame,output.bytes_written);
+}
+#endif
 __attribute__((noinline)) bool ConfiguratorBackend::ReadStoreProfile() {
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
     auto &request = request_owner.legacy;
