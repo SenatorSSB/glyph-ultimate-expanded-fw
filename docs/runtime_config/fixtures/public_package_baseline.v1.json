@@ -358,7 +358,7 @@
     {
       "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "git_mode": "100644",
-      "sha256": "c7b23aac56f7370c2e81b8eb3734d133fb99d86cbfe78d41d318f211bf95078a"
+      "sha256": "d06cfb939a3bd5674fe0897a7fb0bd1f87ffc99f6e1942fdaaa7fe5a75e0e97a"
     },
     {
       "path": "HAL/pico/src/comms/DInputBackend.cpp",
@@ -438,7 +438,7 @@
     {
       "path": "HAL/pico/src/core/ProfileStore.cpp",
       "git_mode": "100644",
-      "sha256": "c1866b8295df38665e9aa96fb92b02680718512ffbda98af5f0cbe747c80407a"
+      "sha256": "0d5e9b8d8f64e7e82028f01d965eb9769ad0f1cc75152cce0f2b079d191d1c3e"
     },
     {
       "path": "HAL/pico/src/core/ProfileStoreLifecycle.inc",
@@ -1710,6 +1710,9 @@
     "No hardware acceptance for exported or rebuilt artifacts.",
     "No glyph_nuker source, license, purpose, byte transformation or reproducibility proof.",
     "No requirement for provenance commit objects in a public repository.",
+    "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge.",
+    "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge.",
+    "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge.",
     "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge."
   ],
   "flashing_guard_existing_declarations": [
@@ -1729,5 +1732,5 @@
     "hardware_acceptance": false,
     "publication_scope": "candidate branch only"
   },
-  "receipt_semantic_digest": "df2f4d070fa3d19d049012ddd05bdbc6b7c052232608e20c6396d962758361e2"
+  "receipt_semantic_digest": "444709b6f3669d00fcb1a07c787114f965bb8aeaba9ae57a77d3af605ab307d9"
 }

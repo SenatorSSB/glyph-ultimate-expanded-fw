@@ -45,7 +45,7 @@ def frames(raw):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--out',type=Path,required=True);ap.add_argument('--binary',type=Path,required=True)
-    ap.add_argument('--all-cuts',action='store_true');a=ap.parse_args()
+    ap.add_argument('--all-cuts',action='store_true',help='exercise every checked rich CREATE publication cut');a=ap.parse_args()
     out=a.out.resolve();out.mkdir(parents=True,exist_ok=True)
     counts={}
     env={**os.environ,'ASAN_OPTIONS':'detect_leaks=0','UBSAN_OPTIONS':'halt_on_error=1'}
@@ -83,9 +83,27 @@ def main():
         assert not codec.record_valid(bytes(b),len(b))
     assert codec.charge(3469)==codec.charge(3840)==4096 and codec.charge(3841)==8192
     counts['record_and_capacity']=16
+    codec.admission_probe.argtypes=[ctypes.c_uint64,ctypes.c_uint64,ctypes.c_uint32,ctypes.c_uint32,ctypes.c_uint32,ctypes.POINTER(ctypes.c_uint64)]
+    comparisons=0
+    for used in (0,327680,393216,524288):
+        for protected in (0,327680,524288):
+            for files in (4,69,256):
+                for rows in (0,20,29,30):
+                    old_need=ctypes.c_uint64();rich_need=ctypes.c_uint64()
+                    old=codec.admission_probe(used,protected,files,rows,3469,ctypes.byref(old_need))
+                    rich=codec.admission_probe(used,protected,files,rows,3840,ctypes.byref(rich_need))
+                    assert (old,old_need.value)==(rich,rich_need.value)
+                    comparisons+=1
+    counts['admission_boundary_comparisons']=comparisons
     gen=out/'generated';gen.mkdir(exist_ok=True)
     run(sys.executable,'-m','grpc_tools.protoc','-I'+str(ROOT/'schema/haybox'),'--python_out='+str(gen),ROOT/'schema/haybox/config.proto',ROOT/'schema/haybox/package.proto')
     sys.path.insert(0,str(gen));import config_pb2 as cfg;import package_pb2 as pb
+    nanopb=ROOT/'.pio/libdeps/glyph_mk6/Nanopb';generated=a.binary.resolve().parent/'generated'
+    wire_test=out/'wire-bounds'
+    run('c++','-std=c++17','-fshort-enums','-I',ROOT/'include','-I',generated,'-I',nanopb,
+        ROOT/'tools/fixtures/glyph_authoring_metadata/wire_bounds.cpp',nanopb/'pb_common.c',nanopb/'pb_encode.c',generated/'config.pb.c','-o',wire_test)
+    run(wire_test,out/'maximum-rich-response.pb')
+    counts['rich_wire_bounds_and_refusals']=8
     pack=lambda x:x.SerializeToString(deterministic=True)
     source=cfg.Config(ultimate_profile_root_format=2,ultimate_profile_store_format=1,ultimate_profile_store_incarnation=42,default_usb_backend_config=1,profile_reference_digest=bytes(32),ultimate_profile_migration_receipt=bytes(32))
     source.communication_backend_configs.add(backend_id=cfg.COMMS_BACKEND_XINPUT)
@@ -143,7 +161,28 @@ def main():
     counts['package_wire']=len(wire_cases)
     legacy,_=execute(req(15,100,package_body=pack(body('Legacy',False))),'legacy-create')
     legacy_nor=nor;legacy_disk=dict(disk)
-    rich,_=execute(req(15,200,package_body=pack(body('Rich'))),'rich-create')
+    create_request=req(15,200,package_body=pack(body('Rich')))
+    rich,create_work=execute(create_request,'rich-create')
+    if a.all_cuts:
+        create_events=json.loads((create_work/'trace.json').read_text())
+        for event in create_events:
+            cutdir=out/('create-cut-%04d'%event['index']);cutdir.mkdir(exist_ok=True)
+            (cutdir/'request').write_bytes(pack(create_request));invoke('execute',legacy_nor,cutdir/'request',cutdir,event['index'])
+            info=json.loads((cutdir/'summary.json').read_text());assert info['fault_hit'] and info['unchanged']
+            assert (cutdir/'cut.nor').read_bytes()==(cutdir/'unwound.nor').read_bytes()
+            query=pb.PackageEnvelope(protocol_version=3,request_token=200,operation=16,expected_store_incarnation=42,expected_digest=rich.semantic_digest)
+            (cutdir/'queries').write_bytes(batch([pack(query)]));restart=cutdir/'restart';restart.mkdir(exist_ok=True)
+            invoke('inspect',cutdir/'cut.nor',cutdir/'queries',restart)
+            after=pb.PackageResponse.FromString((restart/'query-0.pb').read_bytes())
+            observed=load_namespace(restart/'namespace.bin')
+            assert (restart/'after.nor').read_bytes()==(cutdir/'cut.nor').read_bytes()
+            if after.logical==pb.COMMITTED:
+                assert observed==disk and after.record_sha==rich.record_sha
+            elif not after.write_fenced:
+                assert observed==legacy_disk
+            # Keep bounded evidence rather than multi-gigabyte duplicate NORs.
+            for path in [cutdir/'cut.nor',cutdir/'unwound.nor',restart/'after.nor']:path.unlink()
+        counts['create_cuts']=len(create_events)
     record_path=lambda key,rev:f'/ultpkg-{key:08x}-{rev:08x}.bin'
     rich_bytes=disk[record_path(2,1)];assert struct.unpack_from('<H',rich_bytes,4)[0]==3 and rich_bytes.endswith(maximum)
     legacy_bytes=disk[record_path(1,1)];assert struct.unpack_from('<H',legacy_bytes,4)[0]==2
@@ -186,8 +225,8 @@ def main():
     def rich_request(key,rev):
         root=max([disk[f'/ultimate-v2-{i}.bin'] for i in (0,1)],key=lambda b:struct.unpack_from('<I',b,8)[0])
         return cfg.ProfileStoreRequest(protocol_version=2,request_token=999,operation=cfg.PROFILE_STORE_READ,expected_store_generation=struct.unpack_from('<I',root,8)[0],profile_id=key,expected_profile_revision=rev,expected_config_generation=zlib.crc32(disk['/config-v2.bin'][8:]),expected_store_incarnation=42,include_authoring_metadata=True)
-    def transport(items,label):
-        work=out/label;work.mkdir(exist_ok=True);(work/'batch').write_bytes(batch(items));invoke('transport',nor,work/'batch',work)
+    def transport(items,label,mode='transport'):
+        work=out/label;work.mkdir(exist_ok=True);(work/'batch').write_bytes(batch(items));invoke(mode,nor,work/'batch',work)
         info=json.loads((work/'transport.json').read_text());assert info['unchanged'] and info['programs']==info['erases']==0 and info['no_handles']
         return frames((work/'responses.cobs').read_bytes())
     request=rich_request(2,3)
@@ -211,7 +250,10 @@ def main():
     assert response.status==1 and response.authoring_state==1 and response.record_format==2 and not response.authoring_metadata
     assert response.record_sha256==hashlib.sha256(disk[record_path(1,1)]).digest()
     nor,disk=saved_nor,saved_disk
-    counts['rich_read']=11
+    command,raw=transport([pack(request)],'rich-config-read-fault','status-read-failure-transport')[0]
+    failure=cfg.ProfileStoreResponse.FromString(raw)
+    assert command==9 and failure.status==cfg.PROFILE_STORE_IO_FAILURE and not failure.HasField('profile') and not failure.authoring_state
+    counts['rich_read']=12
     # The maximum actual native body is admitted under the same finite context.
     for i in range(3,21):
         execute(req(15,1000+i,package_body=pack(body('Max%02d'%i,maximum_native=True))),'capacity-%02d'%i)

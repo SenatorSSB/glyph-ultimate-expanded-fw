@@ -879,11 +879,16 @@ __attribute__((noinline)) bool ConfiguratorBackend::PrepareRichProfileRead(Profi
     response.mutation_protocol_version=2;response.status=PROFILE_STORE_CONFLICT;
     response.store_generation=profile_store.Generation();response.store_incarnation=profile_store.Incarnation();
     response.profile_id=request.profile_id;response.profile_revision=request.expected_profile_revision;
-    if(!_recovery_storage_available || _recovery_config_invalid || _reference_unknown || persistence.IsMutationFenced())return false;
+    if(!_recovery_storage_available || _recovery_config_invalid || _reference_unknown || persistence.IsMutationFenced()) {
+        response.status=PROFILE_STORE_IO_FAILURE;return false;
+    }
     if(request.expected_store_generation!=profile_store.Generation() || request.expected_store_incarnation!=profile_store.Incarnation())return false;
     Persistence::PackageConfigFacts before;bool valid=false;
     auto &config=ConfigWriteCandidate();
-    if(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,config,before,valid)!=Persistence::LoadResult::Loaded || !valid)return false;
+    const auto observed=persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,config,before,valid);
+    if(observed!=Persistence::LoadResult::Loaded || !valid) {
+        response.status=observed==Persistence::LoadResult::StorageFailure?PROFILE_STORE_IO_FAILURE:PROFILE_STORE_INVALID;return false;
+    }
     response.config_generation=before.crc;
     if(request.expected_config_generation!=before.crc)return false;
     const ProfileStore::Entry *entry=nullptr;
@@ -893,11 +898,19 @@ __attribute__((noinline)) bool ConfiguratorBackend::PrepareRichProfileRead(Profi
     const auto &row=config.game_mode_configs[entry->owned_row1-1];
     if(row.managed_format!=1 || row.mode_id!=MODE_ULTIMATE || row.ultimate_profile_id!=entry->id ||
        row.ultimate_profile_engine!=1 || row.rgb_config!=entry->owned_rgb1)return false;
-    if(profile_store.ReadRich(request.profile_id,uint32_t(request.expected_profile_revision),response.profile,view)!=ProfileStore::Status::Ok ||
-       !ultimate_native::ContextMatches(ultimate_native::CandidateView(),row))return false;
+    const auto read=profile_store.ReadRich(request.profile_id,uint32_t(request.expected_profile_revision),response.profile,view);
+    if(read!=ProfileStore::Status::Ok) {
+        response.status=read==ProfileStore::Status::Conflict?PROFILE_STORE_CONFLICT:
+            read==ProfileStore::Status::ReadOnlyRecovery?PROFILE_STORE_IO_FAILURE:PROFILE_STORE_INVALID;
+        return false;
+    }
+    if(!ultimate_native::ContextMatches(ultimate_native::CandidateView(),row)){response.status=PROFILE_STORE_INVALID;return false;}
     Persistence::PackageConfigFacts after;valid=false;
-    if(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,config,after,valid)!=Persistence::LoadResult::Loaded || !valid ||
-       before.crc!=after.crc || before.bytes!=after.bytes || std::memcmp(before.sha,after.sha,32) ||
+    const auto reobserved=persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,config,after,valid);
+    if(reobserved!=Persistence::LoadResult::Loaded || !valid) {
+        response.status=reobserved==Persistence::LoadResult::StorageFailure?PROFILE_STORE_IO_FAILURE:PROFILE_STORE_INVALID;return false;
+    }
+    if(before.crc!=after.crc || before.bytes!=after.bytes || std::memcmp(before.sha,after.sha,32) ||
        request.expected_store_generation!=profile_store.Generation() || request.expected_store_incarnation!=profile_store.Incarnation() ||
        entry->revision!=request.expected_profile_revision)return false;
     response.has_profile=true;response.status=PROFILE_STORE_OK;

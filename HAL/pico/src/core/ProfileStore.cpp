@@ -339,6 +339,10 @@ namespace {
 #define initialize_root_wire initialization_owner.v2
     uint8_t *RootReadWire() { static uint8_t wire[kDirectoryWireBytes]; return wire; }
     ultimate_native::PayloadLease &ProfileReadLease() { static ultimate_native::PayloadLease lease; return lease; }
+    // Hash compression is a sibling of checked file I/O, never retained on its stack.
+    __attribute__((noinline)) void HashRichReadRecord(const uint8_t *wire,size_t bytes,uint8_t *out) {
+        Sha256 hash;hash.Update(wire,bytes);hash.Final(out);
+    }
     uint8_t *ProfileReadWire() {
         ProfileReadLease().Release();
         static uint8_t wire[kMaxRecordWireBytes]; return wire;
@@ -1320,7 +1324,7 @@ bool ProfileStore::ReadProfile(
         if(valid && rich) {
             package_storage::RecordPayloadView payload;
             if(!package_storage::SplitRecordPayload(wire,n,payload))return false;
-            Sha256 hash;hash.Update(wire,n);hash.Final(wire+4096);
+            HashRichReadRecord(wire,n,wire+4096);
             rich->format=Get16(wire+4);rich->metadata=payload.metadata;
             rich->metadata_bytes=payload.metadata_bytes;rich->sha=wire+4096;
         }
