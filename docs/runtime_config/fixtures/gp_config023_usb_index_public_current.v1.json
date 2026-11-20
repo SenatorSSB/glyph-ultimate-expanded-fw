@@ -1,6 +1,6 @@
 {
   "schema": "glyph_gp_config023_usb_index_public_current.v1",
-  "source_contract_id": "C023_PUBLIC_CURRENT_1",
+  "source_contract_id": "C023_PUBLIC_CURRENT_AUTHORING_METADATA_1",
   "extraction_provenance": {
     "extraction_commit": "6714aca212ba8dd5bb1c655b344c80f35a582630",
     "source_tree": "de8b8385c6b68425553a94024e710adaabf1a260",
@@ -22,7 +22,7 @@
   "production_sources": [
     {
       "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
-      "sha256": "673db9dbe9736059c03c65dcae1c98cee3a15b638a170b3faff7046b97b5deb5"
+      "sha256": "d06cfb939a3bd5674fe0897a7fb0bd1f87ffc99f6e1942fdaaa7fe5a75e0e97a"
     },
     {
       "path": "HAL/pico/src/comms/backend_init.cpp",
@@ -58,7 +58,7 @@
     },
     {
       "path": "include/core/ProfileStore.hpp",
-      "sha256": "3a538d5486e6c435149f2249aad0684c12e93d2f10a9c0b007be0040414c7cdd"
+      "sha256": "022d7b7e801080fa9b9a316d2c517e600c3f098be53d8b04f35ebc3baf2f1734"
     },
     {
       "path": "include/core/ProfileStoreStorage.hpp",
@@ -98,11 +98,11 @@
     },
     {
       "path": "schema/haybox/config.options",
-      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+      "sha256": "e385a461e2690b263c22c5522df34b90be8198e2e4e4cc2cf2505f3d3be5af5e"
     },
     {
       "path": "schema/haybox/config.proto",
-      "sha256": "1b781f97e8a93c8840d26698e8c802b366feb812afb7ad45f06c5d3d9ad5ee33"
+      "sha256": "5a15c45a42fe5adaeaea2121836ee9e411f4e92086a5d3ad1947f5ea71b66081"
     },
     {
       "path": "src/core/config_button_validation.cpp",
@@ -156,7 +156,7 @@
     },
     {
       "path": "tools/fixtures/gp_config023_usb_public_current/generated/config.pb.h",
-      "sha256": "a8f66c0aa251c412a9e5ec9c20cb98e025885d76422159676ee36146d72d2cb0"
+      "sha256": "92973431280a6404bbf89b44795281d0bc148edd6ca47ba89c7c8a768d5debaa"
     },
     {
       "path": "tools/fixtures/gp_config023_usb_public_current/host_stubs.hpp",
@@ -257,5 +257,10 @@
     "current_checker_uses_checked_in_snapshot_only": true,
     "nonclaim": "One-time generated-schema extraction correspondence; no firmware reproducible-build or hardware claim; no current external generator dependency."
   },
-  "semantic_digest": "c4510fbd1f608c930b4798b663166eadb0cfe2e3085f7dc3ed374bb129964f9a"
+  "source_contract_migration": {
+    "authority": "Senscope f772caa106647ea445f96cd15e116efc36d4689b authoring metadata candidate",
+    "reason": "Additive ProfileStore request24/ignored response218-221 and independent backend package/read handlers; USB index semantics and all four production fragment hashes unchanged.",
+    "hardware_acceptance": "NOT_CLAIMED"
+  },
+  "semantic_digest": "6a45698953a2857c741681215f68c2fd32e8a83b1909b26b699bfcf342e58c3d"
 }

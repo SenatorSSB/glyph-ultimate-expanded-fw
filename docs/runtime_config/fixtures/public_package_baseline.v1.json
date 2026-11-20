@@ -1713,6 +1713,7 @@
     "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge.",
     "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge.",
     "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge.",
+    "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge.",
     "Bounded authoring metadata protocol/persistent-format candidate only; no evaluator or game semantic change, no hardware acceptance or canonical merge."
   ],
   "flashing_guard_existing_declarations": [
@@ -1732,5 +1733,5 @@
     "hardware_acceptance": false,
     "publication_scope": "candidate branch only"
   },
-  "receipt_semantic_digest": "444709b6f3669d00fcb1a07c787114f965bb8aeaba9ae57a77d3af605ab307d9"
+  "receipt_semantic_digest": "51bd629709a203fd41e91fa6bf2c5579308bc1b89e3c478d6ca023a98bbf6016"
 }

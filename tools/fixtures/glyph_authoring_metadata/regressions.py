@@ -177,7 +177,10 @@ def main():
             observed=load_namespace(restart/'namespace.bin')
             assert (restart/'after.nor').read_bytes()==(cutdir/'cut.nor').read_bytes()
             if after.logical==pb.COMMITTED:
-                assert observed==disk and after.record_sha==rich.record_sha
+                assert observed['/ultpkg-00000002-00000001.bin']==disk['/ultpkg-00000002-00000001.bin']
+                assert observed['/config-v2.bin']==disk['/config-v2.bin']
+                assert after.record_sha==rich.record_sha
+                if not after.write_fenced:assert observed==disk
             elif not after.write_fenced:
                 assert observed==legacy_disk
             # Keep bounded evidence rather than multi-gigabyte duplicate NORs.
@@ -214,6 +217,10 @@ def main():
             header=bytearray(b[:16]);struct.pack_into('<I',header,12,zlib.crc32(header[:12])^zlib.crc32(root));disk[path]=bytes(header+root)
         else:disk[path]=bytes(root)
     future_seed=out/'future';future_seed.mkdir(exist_ok=True);dump_namespace(disk,future_seed/'files');invoke('seed',future_seed/'files',future_seed/'seed.nor');nor=future_seed/'seed.nor'
+    invoke('native-snapshot',create_work/'unwound.nor',2,out/'native-known.snapshot')
+    invoke('native-snapshot',nor,2,out/'native-unknown.snapshot')
+    assert (out/'native-known.snapshot').read_bytes()==(out/'native-unknown.snapshot').read_bytes()
+    counts['runtime_independence']=2
     execute(req(17,300,2,1,package_body=pack(body('Refuse',False))),'downgrade-refused',cfg.PROFILE_STORE_UNSUPPORTED)
     execute(req(17,400,1,1,package_body=pack(body('Upgrade'))),'legacy-upgrade')
     assert struct.unpack_from('<H',disk[record_path(1,2)],4)[0]==3

@@ -451,6 +451,33 @@ if(!std::strcmp(argv[1],"historical-classifier-faults")){
  std::ofstream out(path("historical-classifier-faults.json"));out<<"{\"seams\":"<<seams<<",\"unchanged\":true,\"programs\":0,\"erases\":0}\n";
  shutdown();return 0;
 }
+// Snapshot actual activation and copied prepared runtime facts. Metadata is not
+// decoded here; production storage must split it before native activation.
+if(!std::strcmp(argv[1],"native-snapshot")) {
+ need(argc==5,"native-snapshot NOR ID OUTPUT");
+ Config saved=Config_init_default;
+ need(persistence.LoadConfigChecked(saved)==Persistence::LoadResult::Loaded,"runtime snapshot Config");
+ const auto before=nor;const auto p=programs,e=erases;
+ need(profile_store.Begin(saved.ultimate_profile_store_incarnation,saved.ultimate_profile_root_format),"runtime snapshot boot");
+ ProfileStore::Status status;
+ need(profile_store.Activate(uint32_t(std::stoul(argv[3])),&status)&&status==ProfileStore::Status::Ok,"runtime snapshot activate");
+ const auto *view=profile_store.ActiveNativeView();need(view&&view->valid,"runtime snapshot native view");
+ ultimate_native::OwnedProgram copied;
+ need(ultimate_native::CopyProgram(*view,copied,1),"actual prepared program copy");
+ Bytes snapshot(copied.body,copied.body+copied.view.body_length);
+ const auto &v=copied.view;
+ for(auto x:v.condition_token_offsets)append_word(snapshot,x);
+ for(auto x:v.all_counts)append_word(snapshot,x);
+ for(auto x:v.any_counts)append_word(snapshot,x);
+ for(auto x:v.none_counts)append_word(snapshot,x);
+ const uint32_t fields[]={v.body_length,v.table_offset,v.source_offset,v.rule_offset,v.binding_offset,v.effect_offset,v.mask_offset,
+  v.mode_gate,v.ls_digital_gate,v.rs_digital_gate,v.dpad_gate,v.condition_count,v.early_condition_count,v.source_count,
+  v.rule_count,v.binding_count,v.effect_count,v.default_table,v.ls_source,v.rs_source,v.dpad_flags,v.engine_abi,uint32_t(v.valid)};
+ for(auto x:fields)append_word(snapshot,x);
+ snapshot.insert(snapshot.end(),v.body_digest,v.body_digest+32);
+ output(argv[4],snapshot);need(nor==before&&programs==p&&erases==e,"activation metadata observation is read-only");
+ no_handles();shutdown();return 0;
+}
 // Real package transport over the existing mounted NOR fixture.
 // Uses real ConfiguratorBackend, PacketIO, Persistence, ProfileStore and mounted NOR.
 if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")||!std::strcmp(argv[1],"runtime-transport")||!std::strcmp(argv[1],"local-fence-transport")||!std::strcmp(argv[1],"status-read-failure-transport")){
